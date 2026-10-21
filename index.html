@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Académico | Clases Particulares</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(23, 32, 54, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+    }
+    .container { width: 100%; max-width: 900px; }
+    header { text-align: center; margin-bottom: 40px; }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #f8fafc 30%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    header p { color: var(--text-muted); font-size: 1.05rem; }
+    .search-box {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      color: var(--text-main);
+      font-size: 1rem;
+      margin-bottom: 35px;
+      outline: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+    .search-box:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
+    }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+    .card h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; }
+    .card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Repositorio de Clases</h1>
+      <p>Material de estudio, apuntes y presentaciones interactivas</p>
+    </header>
+
+    <input type="text" id="filter" class="search-box" placeholder="Buscar materia o tema...">
+
+    <div class="grid" id="cards-container">
+      <a href="matematica/index.html" class="card" data-title="matematica calculo logaritmos analisis">
+        <div>
+          <span class="card-icon">📐</span>
+          <h2>Matemática</h2>
+          <p>Cálculo, funciones, análisis matemático y álgebra aplicada.</p>
+        </div>
+        <div class="card-footer">
+          <span>1 Presentación</span>
+          <span>Explorar →</span>
+        </div>
+      </a>
+
+      <a href="fisica/index.html" class="card" data-title="fisica mecanica cinematica">
+        <div>
+          <span class="card-icon">⚡</span>
+          <h2>Física</h2>
+          <p>Mecánica clásica, cinemática, dinámica y electromagnetismo.</p>
+        </div>
+        <div class="card-footer">
+          <span>Próximamente</span>
+          <span>Explorar →</span>
+        </div>
+      </a>
+
+      <a href="programacion/index.html" class="card" data-title="programacion algoritmos estructuras codigo">
+        <div>
+          <span class="card-icon">💻</span>
+          <h2>Programación</h2>
+          <p>Estructuras de datos, desarrollo de software y paradigmas.</p>
+        </div>
+        <div class="card-footer">
+          <span>Próximamente</span>
+          <span>Explorar →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const filterInput = document.getElementById('filter');
+    const cards = document.querySelectorAll('.card');
+
+    filterInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title');
+        const text = card.innerText.toLowerCase();
+        if (title.includes(query) || text.includes(query)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

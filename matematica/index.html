@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matemática | Clases Particulares</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(23, 32, 54, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --badge-bg: rgba(56, 189, 248, 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: var(--bg);
+      background-image: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.06) 0%, transparent 40%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 50px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container { width: 100%; max-width: 800px; }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+      transition: color 0.2s ease;
+    }
+    .nav-back:hover { color: var(--accent); }
+    header { margin-bottom: 36px; }
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    header p { color: var(--text-muted); font-size: 1rem; }
+    .lesson-list { display: flex; flex-direction: column; gap: 14px; }
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 18px 22px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: inherit;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
+    }
+    .lesson-item:hover {
+      transform: translateX(4px);
+      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(30, 41, 69, 0.85);
+    }
+    .lesson-info { display: flex; align-items: center; gap: 16px; }
+    .lesson-num {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--badge-bg);
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+    .lesson-text h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 2px; }
+    .lesson-text p { font-size: 0.85rem; color: var(--text-muted); }
+    .play-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="nav-back">← Volver al portal principal</a>
+    <header>
+      <h1>📐 Matemática</h1>
+      <p>Unidades temáticas y diapositivas de soporte teórico</p>
+    </header>
+
+    <div class="lesson-list">
+      <a href="01-funcion-logaritmica.html" class="lesson-item">
+        <div class="lesson-info">
+          <span class="lesson-num">01</span>
+          <div class="lesson-text">
+            <h3>Función Logarítmica</h3>
+            <p>Definición analítica, propiedades algebraicas y cálculo de derivadas</p>
+          </div>
+        </div>
+        <div class="play-badge">
+          <span>Ver clase</span> →
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
