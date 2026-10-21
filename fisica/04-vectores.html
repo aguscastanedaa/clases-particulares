@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Física 04: Vectores en el Plano Cartesiano | Clases Particulares</title>
+  
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <a href="index.html">← Volver al temario de Física</a>
+    <span class="plan-tag">Módulo 04 • Nivel Secundario</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-purple">Física Fundamental • Módulo 4</span>
+          <h1 style="font-size: 2.8rem; margin-bottom: 12px;">Vectores en el Plano</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Componentes cartesianas, cuadrantes, módulo por Pitágoras y operaciones analíticas y gráficas
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">Escalares vs Vectores</span>
+            <span class="badge badge-emerald">Módulo • Dirección • Sentido</span>
+            <span class="badge badge-indigo">Los 4 Cuadrantes</span>
+            <span class="badge badge-amber">Suma, Resta & Punta-Cola</span>
+          </div>
+
+          <div class="box box-purple" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Presentación del Tema y Objetivos</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué no alcanza con los números comunes?</h4>
+            <p>Si te dicen que un avión vuela a $800\text{ km/h}$, sabés su rapidez, pero <b>no sabés hacia dónde se dirige</b> (¿hacia el norte, hacia el sur o hacia una montaña?).</p>
+            <p class="subtext">
+              Para describir magnitudes orientadas en el espacio (desplazamientos, velocidades, fuerzas, aceleraciones) necesitamos una herramienta matemática que contenga <b>magnitud y dirección simultáneamente</b>: los <b>vectores</b>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Objetivos de Aprendizaje</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+              <li>Distinguir claramente entre <b>magnitud escalar</b> y <b>magnitud vectorial</b>.</li>
+              <li>Identificar los tres elementos: <b>módulo</b>, <b>dirección</b> y <b>sentido</b>.</li>
+              <li>Representar vectores en el plano cartesiano a partir de sus <b>componentes $(x, y)$</b>.</li>
+              <li>Calcular el <b>módulo</b> de un vector utilizando el Teorema de Pitágoras.</li>
+              <li>Resolver operaciones vectoriales de forma <b>analítica</b> (por componentes) y <b>gráfica</b> (métodos punta-cola y paralelogramo).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: ESCALARES VS VECTORES -->
+      <section>
+        <h2><span class="section-num">02</span> Magnitudes Escalares vs Vectoriales</h2>
+        <div class="grid-2">
+          <!-- Escalares -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Magnitudes Escalares</h4>
+            <p style="font-size: 0.88rem;">
+              Quedan <b>completamente definidas</b> conociendo únicamente un <b>número real y su correspondiente unidad</b>. No tienen dirección ni sentido en el espacio.
+            </p>
+            <div class="step-list" style="margin-top: 10px;">
+              <div class="step-item">
+                <span class="step-num">🌡️</span>
+                <div class="step-content"><b>Temperatura:</b> $24^\circ\text{C}$ (no apunta hacia ningún lado).</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">⚖️</span>
+                <div class="step-content"><b>Masa:</b> $70\text{ kg}$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">⏱️</span>
+                <div class="step-content"><b>Tiempo:</b> $45\text{ s}$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">⚡</span>
+                <div class="step-content"><b>Energía y Trabajo:</b> $500\text{ Joules}$.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vectoriales -->
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">Magnitudes Vectoriales</h4>
+            <p style="font-size: 0.88rem;">
+              Para definirlas por completo se necesita especificar su <b>módulo</b> (cuánto vale), su <b>dirección</b> (recta en el espacio) y su <b>sentido</b> (hacia dónde apunta).
+            </p>
+            <div class="step-list" style="margin-top: 10px;">
+              <div class="step-item">
+                <span class="step-num" style="color:#c084fc; border-color:#c084fc;">🧭</span>
+                <div class="step-content"><b>Desplazamiento ($\vec{\Delta r}$):</b> $50\text{ m}$ hacia el Este.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num" style="color:#c084fc; border-color:#c084fc;">🚗</span>
+                <div class="step-content"><b>Velocidad ($\vec{v}$):</b> $90\text{ km/h}$ con ángulo de $30^\circ$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num" style="color:#c084fc; border-color:#c084fc;">🏋️</span>
+                <div class="step-content"><b>Fuerza ($\vec{F}$):</b> $200\text{ N}$ empujando hacia arriba.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num" style="color:#c084fc; border-color:#c084fc;">🚀</span>
+                <div class="step-content"><b>Aceleración ($\vec{a}$):</b> $9{,}8\text{ m/s}^2$ hacia el centro terrestre.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: ANATOMÍA DE UN VECTOR -->
+      <section>
+        <h2><span class="section-num">03</span> Anatomía de un Vector: Los 3 Elementos</h2>
+        <p class="subtext">Gráficamente un vector se representa como un <b>segmento de recta orientado (flecha)</b>:</p>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Módulo o Magnitud ($|\vec{v}|$)</h4>
+            <p style="font-size: 0.86rem;">
+              Es la <b>longitud o tamaño de la flecha</b>, dibujada a una escala determinada.
+            </p>
+            <div class="card-definition" style="padding: 10px; border-radius: 8px; font-size: 0.82rem; margin-top: 8px;">
+              <b>Propiedad matemática fundamental:</b> El módulo de un vector es <b>siempre un número positivo o cero</b> ($|\vec{v}| \ge 0$). ¡No existen módulos negativos!
+            </div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">2. Dirección</h4>
+            <p style="font-size: 0.86rem;">
+              Es la <b>orientación de la recta infinita</b> (línea de acción) sobre la que se apoya el vector.
+            </p>
+            <div class="card-theory" style="padding: 10px; border-radius: 8px; font-size: 0.82rem; margin-top: 8px;">
+              En el plano se especifica mediante el <b>ángulo de inclinación $\theta$</b> medido en sentido antihorario desde el semieje positivo de las abscisas ($x$).
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Sentido</h4>
+            <p style="font-size: 0.86rem;">
+              Indicado por la <b>punta de la flecha</b>. Una misma recta de dirección tiene dos sentidos opuestos posibles.
+            </p>
+            <div class="card-example" style="padding: 10px; border-radius: 8px; font-size: 0.82rem; margin-top: 8px;">
+              <i>Ejemplo:</i> La calle es la dirección (horizontal); hacia la izquierda o hacia la derecha es el sentido.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: EL PLANO CARTESIANO Y CUADRANTES -->
+      <section>
+        <h2><span class="section-num">04</span> El Plano Cartesiano y los Cuatro Cuadrantes</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Estructura de Signos por Cuadrante</h4>
+            <p style="font-size: 0.88rem;">
+              Todo vector con origen en $(0,0)$ termina en un punto $(v_x, v_y)$. Los signos de sus componentes determinan en qué cuadrante se ubica:
+            </p>
+            <table class="math-table" style="font-size: 0.82rem; margin-top: 8px;">
+              <thead>
+                <tr>
+                  <th>Cuadrante</th>
+                  <th>Signo x</th>
+                  <th>Signo y</th>
+                  <th>Vector de Ejemplo (TP1)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>I Cuadrante</b></td>
+                  <td>Positivo ($+$)</td>
+                  <td>Positivo ($+$)</td>
+                  <td>$\vec{a} = (1, 2)$</td>
+                </tr>
+                <tr>
+                  <td><b>II Cuadrante</b></td>
+                  <td>Negativo ($-$)</td>
+                  <td>Positivo ($+$)</td>
+                  <td>$\vec{b} = (-2, 3)$</td>
+                </tr>
+                <tr>
+                  <td><b>III Cuadrante</b></td>
+                  <td>Negativo ($-$)</td>
+                  <td>Negativo ($-$)</td>
+                  <td>$\vec{c} = (-1, -2)$</td>
+                </tr>
+                <tr>
+                  <td><b>IV Cuadrante</b></td>
+                  <td>Positivo ($+$)</td>
+                  <td>Negativo ($-$)</td>
+                  <td>$\vec{d} = (3, -2)$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- SVG Visual de los 4 Cuadrantes -->
+          <div class="svg-container">
+            <svg class="svg-plot" viewBox="-60 -60 120 120" style="max-width: 320px;">
+              <!-- Grid lines -->
+              <defs>
+                <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                </pattern>
+              </defs>
+              <rect x="-55" y="-55" width="110" height="110" fill="url(#grid)" />
+              
+              <!-- Ejes -->
+              <line x1="-55" y1="0" x2="55" y2="0" stroke="#94a3b8" stroke-width="1.2" />
+              <line x1="0" y1="55" x2="0" y2="-55" stroke="#94a3b8" stroke-width="1.2" />
+              
+              <!-- Cuadrantes Labels -->
+              <text x="25" y="-28" fill="#38bdf8" font-size="7" font-weight="bold">I (+,+)</text>
+              <text x="-48" y="-28" fill="#818cf8" font-size="7" font-weight="bold">II (-,+)</text>
+              <text x="-48" y="38" fill="#f87171" font-size="7" font-weight="bold">III (-,-)</text>
+              <text x="25" y="38" fill="#34d399" font-size="7" font-weight="bold">IV (+,-)</text>
+              
+              <!-- Axis names -->
+              <text x="48" y="-3" fill="#cbd5e1" font-size="6">X</text>
+              <text x="3" y="-48" fill="#cbd5e1" font-size="6">Y</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: MÓDULO POR TEOREMA DE PITÁGORAS -->
+      <section>
+        <h2><span class="section-num">05</span> Módulo de un Vector: Teorema de Pitágoras</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Fundamento Geométrico</h4>
+            <p style="font-size: 0.88rem;">
+              Las componentes $v_x$ y $v_y$ forman los catetos de un triángulo rectángulo perpendicular, donde el vector $\vec{v}$ es la <b>hipotenusa</b>:
+            </p>
+            <div class="card-formula" style="padding: 14px; border-radius: 10px; text-align: center; margin: 12px 0;">
+              <span style="color: #94a3b8; font-size: 0.82rem;">FÓRMULA DEL MÓDULO</span>
+              <p style="font-size: 1.8rem; font-weight: 700; color: #38bdf8; margin: 6px 0;">
+                $$|\vec{v}| = \sqrt{v_x^2 + v_y^2}$$
+              </p>
+            </div>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Como cualquier número elevado al cuadrado da positivo ($(-2)^2 = +4$), los signos negativos de las componentes no afectan al módulo.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Cálculo de Módulos del TP 1</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">a</span>
+                <div class="step-content">
+                  $\vec{a} = (1, 2) \implies |\vec{a}| = \sqrt{1^2 + 2^2} = \sqrt{1 + 4} = \mathbf{\sqrt{5} \approx 2{,}24}$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">b</span>
+                <div class="step-content">
+                  $\vec{b} = (-2, 3) \implies |\vec{b}| = \sqrt{(-2)^2 + 3^2} = \sqrt{4 + 9} = \mathbf{\sqrt{13} \approx 3{,}61}$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">c</span>
+                <div class="step-content">
+                  $\vec{c} = (-1, -2) \implies |\vec{c}| = \sqrt{(-1)^2 + (-2)^2} = \sqrt{1 + 4} = \mathbf{\sqrt{5} \approx 2{,}24}$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">d</span>
+                <div class="step-content">
+                  $\vec{d} = (3, -2) \implies |\vec{d}| = \sqrt{3^2 + (-2)^2} = \sqrt{9 + 4} = \mathbf{\sqrt{13} \approx 3{,}61}$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: GRÁFICA DE LOS 4 VECTORES (TP1 Ej 8.a) -->
+      <section>
+        <h2><span class="section-num">06</span> Representación Gráfica: Los 4 Vectores del TP1</h2>
+        <p class="subtext">Graficados en un mismo sistema cartesiano desde el origen $(0,0)$ con escala $1\text{ cuadrícula} = 1\text{ unidad}$:</p>
+
+        <div class="grid-2-1">
+          <!-- Gráfico SVG Preciso -->
+          <div class="svg-container">
+            <svg class="svg-plot" viewBox="-50 -50 100 100" style="max-width: 440px;">
+              <!-- Grid lines -->
+              <defs>
+                <pattern id="grid8" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+                </pattern>
+                <!-- Arrow markers -->
+                <marker id="arr-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8" />
+                </marker>
+                <marker id="arr-indigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 1 L 8 5 L 0 9 z" fill="#818cf8" />
+                </marker>
+                <marker id="arr-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 1 L 8 5 L 0 9 z" fill="#f87171" />
+                </marker>
+                <marker id="arr-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399" />
+                </marker>
+              </defs>
+              <rect x="-48" y="-48" width="96" height="96" fill="url(#grid8)" />
+
+              <!-- Ejes Principales -->
+              <line x1="-48" y1="0" x2="48" y2="0" stroke="#94a3b8" stroke-width="1.2" />
+              <line x1="0" y1="48" x2="0" y2="-48" stroke="#94a3b8" stroke-width="1.2" />
+              <text x="44" y="-2" fill="#cbd5e1" font-size="5">X</text>
+              <text x="2" y="-44" fill="#cbd5e1" font-size="5">Y</text>
+
+              <!-- Vector a = (1, 2) -> (10, -20) in SVG -->
+              <line x1="0" y1="0" x2="10" y2="-20" stroke="#38bdf8" stroke-width="2.2" marker-end="url(#arr-cyan)" />
+              <text x="12" y="-21" fill="#38bdf8" font-size="6" font-weight="bold">a (1, 2)</text>
+
+              <!-- Vector b = (-2, 3) -> (-20, -30) in SVG -->
+              <line x1="0" y1="0" x2="-20" y2="-30" stroke="#818cf8" stroke-width="2.2" marker-end="url(#arr-indigo)" />
+              <text x="-38" y="-32" fill="#818cf8" font-size="6" font-weight="bold">b (-2, 3)</text>
+
+              <!-- Vector c = (-1, -2) -> (-10, 20) in SVG -->
+              <line x1="0" y1="0" x2="-10" y2="20" stroke="#f87171" stroke-width="2.2" marker-end="url(#arr-rose)" />
+              <text x="-32" y="24" fill="#f87171" font-size="6" font-weight="bold">c (-1, -2)</text>
+
+              <!-- Vector d = (3, -2) -> (30, 20) in SVG -->
+              <line x1="0" y1="0" x2="30" y2="20" stroke="#34d399" stroke-width="2.2" marker-end="url(#arr-emerald)" />
+              <text x="32" y="24" fill="#34d399" font-size="6" font-weight="bold">d (3, -2)</text>
+            </svg>
+          </div>
+
+          <!-- Cuadro de Identificación -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Identificación y Posición</h4>
+            <div class="step-list">
+              <div class="step-item" style="border-left: 3px solid #38bdf8;">
+                <div class="step-content">
+                  <b style="color:#38bdf8;">Vector a = (1, 2):</b><br>
+                  $1$ unidad a la derecha, $2$ hacia arriba. (Cuadrante I).
+                </div>
+              </div>
+              <div class="step-item" style="border-left: 3px solid #818cf8;">
+                <div class="step-content">
+                  <b style="color:#818cf8;">Vector b = (-2, 3):</b><br>
+                  $2$ a la izquierda, $3$ hacia arriba. (Cuadrante II).
+                </div>
+              </div>
+              <div class="step-item" style="border-left: 3px solid #f87171;">
+                <div class="step-content">
+                  <b style="color:#f87171;">Vector c = (-1, -2):</b><br>
+                  $1$ a la izquierda, $2$ hacia abajo. (Cuadrante III).
+                </div>
+              </div>
+              <div class="step-item" style="border-left: 3px solid #34d399;">
+                <div class="step-content">
+                  <b style="color:#34d399;">Vector d = (3, -2):</b><br>
+                  $3$ a la derecha, $2$ hacia abajo. (Cuadrante IV).
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: SUMA DE VECTORES (TP1 Ej 8.b.i) -->
+      <section>
+        <h2><span class="section-num">07</span> Operación 1: Suma Vectorial $\vec{a} + \vec{b}$</h2>
+        <div class="grid-2">
+          <!-- Analítica -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Método Analítico (Por Componentes)</h4>
+            <p style="font-size: 0.86rem;">Se suman algebraicamente las componentes $x$ entre sí y las componentes $y$ entre sí:</p>
+            <div class="card-formula" style="padding: 10px; border-radius: 8px; font-size: 0.95rem; margin: 10px 0;">
+              $$\vec{S} = \vec{a} + \vec{b} = (1 + (-2) \,,\, 2 + 3)$$
+              $$\mathbf{\vec{S} = (-1 \,,\, 5)}$$
+            </div>
+            <p style="font-size: 0.86rem; line-height: 1.5;">
+              <b>Módulo del vector suma:</b>
+              $$|\vec{S}| = \sqrt{(-1)^2 + 5^2} = \sqrt{1 + 25} = \mathbf{\sqrt{26} \approx 5{,}10}$$
+            </p>
+          </div>
+
+          <!-- Gráfica -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Método Gráfico (Punta-Cola / Polígono)</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">Dibujar $\vec{a} = (1, 2)$ desde el origen $(0,0)$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">En la punta de $\vec{a}$, trasladar el origen de $\vec{b} = (-2, 3)$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">El vector resultante une el origen $(0,0)$ con la punta final de $\vec{b}$.</div>
+              </div>
+            </div>
+            <div class="card-example" style="padding: 10px; border-radius: 8px; text-align: center; margin-top: 8px;">
+              <i>Punto de llegada:</i> $(1 - 2 \,,\, 2 + 3) = \mathbf{(-1, 5)}$. ¡Coincidencia gráfica y analítica perfecta!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: RESTA DE VECTORES (TP1 Ej 8.b.ii) -->
+      <section>
+        <h2><span class="section-num">08</span> Operación 2: Resta Vectorial $\vec{a} - \vec{c}$</h2>
+        <div class="grid-2">
+          <!-- Analítica -->
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">1. Método Analítico</h4>
+            <p style="font-size: 0.86rem;">Restar un vector es equivalente a <b>sumar su vector opuesto</b> $\vec{a} + (-\vec{c})$:</p>
+            <div class="card-formula" style="padding: 10px; border-radius: 8px; font-size: 0.95rem; margin: 10px 0;">
+              $$\vec{c} = (-1, -2) \implies -\vec{c} = (1, 2)$$
+              $$\vec{R} = \vec{a} - \vec{c} = (1 - (-1) \,,\, 2 - (-2))$$
+              $$\mathbf{\vec{R} = (2 \,,\, 4)}$$
+            </div>
+            <p style="font-size: 0.86rem; line-height: 1.5;">
+              <b>Módulo de la resta:</b>
+              $$|\vec{R}| = \sqrt{2^2 + 4^2} = \sqrt{4 + 16} = \mathbf{\sqrt{20} \approx 4{,}47}$$
+            </p>
+          </div>
+
+          <!-- Gráfica -->
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">2. Interpretación Geométrica</h4>
+            <p style="font-size: 0.86rem; line-height: 1.5;">
+              <b>El vector opuesto:</b><br>
+              Como $\vec{c}$ apunta hacia el Cuadrante III ($(-1, -2)$), su opuesto $-\vec{c}$ tiene la misma longitud y dirección, pero apunta en <b>sentido exactamente contrario</b> ($180^\circ$), hacia $(1, 2)$.
+            </p>
+            <div class="card-definition" style="padding: 10px; border-radius: 8px; margin-top: 8px; font-size: 0.84rem;">
+              Notá un detalle hermoso:<br>
+              $\vec{a} = (1, 2)$ y $-\vec{c} = (1, 2)$ son vectores idénticos.<br>
+              Por ende: $\vec{a} - \vec{c} = \vec{a} + \vec{a} = 2\vec{a} = \mathbf{(2, 4)}$.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: COMBINACIÓN LINEAL (TP1 Ej 8.b.iii) -->
+      <section>
+        <h2><span class="section-num">09</span> Operación 3: Escalar y Suma $2\vec{a} + \vec{d}$</h2>
+        <div class="grid-2">
+          <!-- Analítica -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. Procedimiento Analítico</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Producto por escalar:</b> Multiplicar cada componente de $\vec{a}$ por $2$:
+                  $$2\vec{a} = 2(1, 2) = (2 \times 1 \,,\, 2 \times 2) = \mathbf{(2, 4)}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Sumar el vector $\vec{d} = (3, -2)$:</b>
+                  $$\vec{T} = 2\vec{a} + \vec{d} = (2 + 3 \,,\, 4 + (-2))$$
+                  $$\mathbf{\vec{T} = (5 \,,\, 2)}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Módulo resultante:</b>
+                  $$|\vec{T}| = \sqrt{5^2 + 2^2} = \sqrt{25 + 4} = \mathbf{\sqrt{29} \approx 5{,}39}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gráfica -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Construcción Gráfica</h4>
+            <p style="font-size: 0.86rem; line-height: 1.5;">
+              1. Dibujamos el vector $\vec{a}$ y lo <b>duplicamos en su misma dirección</b> hasta $(2, 4)$.<br>
+              2. Desde $(2, 4)$, avanzamos según las componentes de $\vec{d}$: $3$ unidades a la derecha y $2$ unidades hacia abajo.<br>
+              3. Llegamos al punto final $(2 + 3 \,,\, 4 - 2) = \mathbf{(5, 2)}$.
+            </p>
+            <div class="card-formula" style="padding: 12px; border-radius: 8px; text-align: center; margin-top: 10px;">
+              <span style="font-size: 0.8rem; color: #94a3b8;">RESULTANTE FINAL</span>
+              <p style="font-size: 1.35rem; font-weight: 700; color: #34d399; margin: 4px 0;">
+                T = (5, 2) • |T| ≈ 5,39
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: ERRORES FRECUENTES -->
+      <section>
+        <h2><span class="section-num">10</span> Errores Frecuentes al Trabajar con Vectores</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 1: Sumar Módulos Directamente</div>
+            <p style="font-size: 0.86rem; color: #fca5a5;">
+              Creer que $|\vec{a} + \vec{b}| = |\vec{a}| + |\vec{b}|$.
+            </p>
+            <p style="font-size: 0.82rem; color: #94a3b8;">
+              <b>Por qué es un error grave:</b> La desigualdad triangular demuestra que la hipotenusa de un triángulo es siempre menor que la suma de sus lados (salvo que sean vectores colineales con el mismo sentido).
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✓ Procedimiento Correcto</div>
+            <p style="font-size: 0.86rem; color: #a7f3d0;">
+              Primero sumar las componentes cartesianas y luego calcular el módulo:
+            </p>
+            <p style="font-size: 0.88rem; font-family: monospace; color: #34d399;">
+              Sx = ax + bx ; Sy = ay + by ; |S| = √(Sx² + Sy²)
+            </p>
+          </div>
+        </div>
+
+        <div class="comparison-box" style="margin-top: 8px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 2: Confundir Sentido con Dirección</div>
+            <p style="font-size: 0.86rem; color: #fca5a5;">
+              Decir que dos vectores que apuntan hacia arriba y hacia abajo "tienen distinta dirección".
+            </p>
+            <p style="font-size: 0.82rem; color: #94a3b8;">
+              <b>Corrección:</b> Tienen la <b>misma dirección</b> (la recta vertical), pero <b>sentidos opuestos</b>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✓ Procedimiento Correcto</div>
+            <p style="font-size: 0.86rem; color: #a7f3d0;">
+              Distinguir: <b>Dirección</b> = inclinación de la recta; <b>Sentido</b> = punta de la flecha ($+$ o $-$).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: RESUMEN Y CHECKLIST -->
+      <section>
+        <h2><span class="section-num">11</span> Resumen y Checklist de Cierre</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Síntesis Conceptual</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
+              <li>Un vector tiene <b>módulo ($|\vec{v}| \ge 0$)</b>, <b>dirección</b> y <b>sentido</b>.</li>
+              <li>En el plano cartesiano se expresa como par ordenado $\vec{v} = (v_x, v_y)$.</li>
+              <li>El módulo se obtiene mediante Pitágoras: $|\vec{v}| = \sqrt{v_x^2 + v_y^2}$.</li>
+              <li>La suma y resta se operan componente a componente.</li>
+              <li>El método punta-cola traslada vectores conservando módulo, dirección y sentido.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Reconozco en qué cuadrante cae un vector según los signos de $(x, y)$?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé calcular el módulo sin equivocarme en los signos negativos al elevar al cuadrado?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé graficar la suma por el método del polígono / punta-cola?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Comprendo que restar un vector es sumar su opuesto invertido $180^\circ$?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Verifico que el resultado analítico concuerde con el dibujo gráfico?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="index.html" class="badge badge-purple" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Volver al Menú de Física
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Scripts Reveal.js + KaTeX -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [ RevealMath.KaTeX ],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+  </script>
+</body>
+</html>

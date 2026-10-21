@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resolución Completa: Trabajo Práctico N.º 1 | Física</title>
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <a href="index.html">← Volver al temario de Física</a>
+    <span class="plan-tag">Resolución Oficial • TP N° 1</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 25px auto 0;">
+          <span class="badge badge-emerald">Guía de Trabajos Prácticos • Nivel Secundario</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 10px;">Resolución Oficial del TP N° 1</h1>
+          <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin-bottom: 20px;">
+            Unidades, Notación Científica, Teoría de Error y Vectores
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">Ejercicios 1 al 8 Completos</span>
+            <span class="badge badge-indigo">Justificación Exhaustiva de Opciones</span>
+            <span class="badge badge-amber">Desarrollo Matemático Sin Omisiones</span>
+            <span class="badge badge-purple">Gráficos Vectoriales a Escala</span>
+          </div>
+
+          <div class="box box-emerald" style="max-width: 820px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.92rem; color: #cbd5e1;">
+              💡 <b>Metodología didáctica de 8 pasos:</b> Enunciado original fiel al PDF, datos, concepto físico,
+              estrategia analítica, cuentas completas, justificación de todas las opciones, interpretación física y
+              comprobación.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: ÍNDICE GENERAL DEL TP 1 -->
+      <section>
+        <h2><span class="section-num">00</span> Índice del Trabajo Práctico N.º 1</h2>
+        <div class="grid-2">
+          <div class="step-list">
+            <div class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-content">
+                <b>Ejercicio N°1:</b> Conversión de Unidades al SI (Incisos I, II, III, IV y V analizados opción por
+                opción).
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-content">
+                <b>Ejercicio N°2:</b> Operaciones en Notación Científica (Galaxias, Bacterias y Microchip con
+                igualación).
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-content">
+                <b>Ejercicio N°3:</b> Medición de Lapicero y Discusión de Precisión Instrumental.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-content">
+                <b>Ejercicio N°4:</b> Mediciones Repetidas entre Columnas (Promedio, Desviación Media e Incertidumbre).
+              </div>
+            </div>
+          </div>
+
+          <div class="step-list">
+            <div class="step-item">
+              <span class="step-num">5</span>
+              <div class="step-content">
+                <b>Ejercicio N°5:</b> Intervalo de Tiempo Estimado vs Real ($15\text{ min}$ vs $16{,}5\text{ min}$).
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">6</span>
+              <div class="step-content">
+                <b>Ejercicio N°6:</b> Longitud de Mesa y Márgenes del Intervalo Real $[L_{inf} \,,\, L_{sup}]$.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">7</span>
+              <div class="step-content">
+                <b>Ejercicio N°7:</b> Comparación de Errores Relativos en Distintas Escalas ($1\text{ m}$ vs $300\text{
+                km}$).
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">8</span>
+              <div class="step-content">
+                <b>Ejercicio N°8:</b> Vectores en el Plano (Gráfica en los 4 cuadrantes y operaciones $\vec{a}+\vec{b}$,
+                $\vec{a}-\vec{c}$, $2\vec{a}+\vec{d}$).
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: EJERCICIO 1 - INCISO I -->
+      <section>
+        <h2><span class="section-num">Ej 1.I</span> Ejercicio 1 — Inciso I: Distancia del Atleta</h2>
+        <div class="box box-cyan">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            <b>I.</b> Un atleta corre una distancia de $5{,}4\text{ kilómetros}$. ¿Cuál es esta distancia expresada en
+            la unidad fundamental de longitud del Sistema Internacional?<br>
+            <span style="color: #94a3b8;">Opciones originales:</span> a) 5400m; b) 54000m; c) 0,0054m; d) 540m.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <!-- Desarrollo analítico -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Procedimiento y Cálculos Paso a Paso</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Identificación:</b> En el Sistema Internacional (SI), la unidad fundamental de longitud es el
+                  <b>metro ($\text{m}$)</b>.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Equivalencia:</b> El prefijo "kilo" ($\text{k}$) significa $10^3 = 1.000$. Por ende: $1\text{ km} =
+                  1.000\text{ m}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Factor de conversión:</b>
+                  $$d = 5{,}4\cancel{\text{km}} \times \frac{1.000\text{ m}}{1\cancel{\text{km}}} = 5{,}4 \times
+                  1.000\text{ m} = \mathbf{5.400\text{ m}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Justificación de Opciones -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Justificación Exhaustiva de Cada Opción</h4>
+            <div class="opt-choice correct">
+              <span><b>a) 5400m — CORRECTA:</b> Resulta de multiplicar exactamente los $5{,}4\text{ km}$ por los
+                $1.000\text{ m}$ que contiene cada kilómetro.</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>b) 54000m — INCORRECTA:</b> Multiplicó por $10.000$ (un factor diez veces mayor al
+                correcto).</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>c) 0,0054m — INCORRECTA:</b> Dividió por $1.000$ en vez de multiplicar. Correspondería a pasar de
+                metros a kilómetros ($5{,}4\text{ m} = 0{,}0054\text{ km}$).</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>d) 540m — INCORRECTA:</b> Multiplicó por $100$, confundiendo el prefijo kilo con hecto.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EJERCICIO 1 - INCISO II -->
+      <section>
+        <h2><span class="section-num">Ej 1.II</span> Ejercicio 1 — Inciso II: Masa de 850 gramos</h2>
+        <div class="box box-amber">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            <b>II.</b> Una masa de $850\text{ gramos}$ debe ser convertida a la unidad base de masa del SI. ¿Cuál es el
+            valor correcto?<br>
+            <span style="color: #94a3b8;">Opciones originales:</span> a) 8,5kg; b) 850000kg; c) 85kg; d) 0,85kg.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <!-- Desarrollo analítico -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Procedimiento y Cálculos Paso a Paso</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Identificación:</b> En el SI, la unidad fundamental de masa es el <b>kilogramo ($\text{kg}$)</b>
+                  (es la única unidad base con prefijo incorporado).
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Equivalencia:</b> $1\text{ kg} = 1.000\text{ g} \implies 1\text{ g} = \frac{1}{1.000}\text{ kg} =
+                  10^{-3}\text{ kg}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Factor de conversión:</b>
+                  $$m = 850\cancel{\text{g}} \times \frac{1\text{ kg}}{1.000\cancel{\text{g}}} = \frac{850}{1.000}\text{
+                  kg} = \mathbf{0{,}85\text{ kg}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Justificación de Opciones -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Justificación Exhaustiva de Cada Opción</h4>
+            <div class="opt-choice correct">
+              <span><b>d) 0,85kg — CORRECTA:</b> Como $850\text{ g}$ es menor a $1.000\text{ g}$, el resultado debe ser
+                obligatoriamente un número decimal inferior a $1\text{ kg}$.</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>a) 8,5kg — INCORRECTA:</b> Dividió únicamente por $100$ en lugar de dividir por $1.000$.</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>b) 850000kg — INCORRECTA:</b> Multiplicó por $1.000$ invirtiendo el factor; $850.000\text{ kg}$
+                son $850\text{ toneladas}$, físicamente absurdo para $850\text{ g}$.</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>c) 85kg — INCORRECTA:</b> Dividió por $10$, lo que equivaldría a hectogramos.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: EJERCICIO 1 - INCISO III -->
+      <section>
+        <h2><span class="section-num">Ej 1.III</span> Ejercicio 1 — Inciso III: Proceso Químico de 2 horas</h2>
+        <div class="box box-indigo">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            <b>III.</b> Un proceso químico tiene una duración de $2\text{ h}$, expresarlo en el SI.<br>
+            <span style="color: #94a3b8;">Opciones originales:</span> a) 720s; b) 3600s; c) 120s; d) 7200s.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <!-- Desarrollo analítico -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Procedimiento y Cálculos Paso a Paso</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Identificación:</b> En el SI, la unidad fundamental de tiempo es el <b>segundo ($\text{s}$)</b>.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Equivalencia temporal sexagesimal:</b><br>
+                  $1\text{ hora} = 60\text{ minutos}$ y $1\text{ minuto} = 60\text{ segundos}$.<br>
+                  $$1\text{ h} = 60 \times 60\text{ s} = 3.600\text{ s}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Factor de conversión:</b>
+                  $$t = 2\cancel{\text{h}} \times \frac{3.600\text{ s}}{1\cancel{\text{h}}} = 2 \times 3.600\text{ s} =
+                  \mathbf{7.200\text{ s}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Justificación de Opciones -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Justificación Exhaustiva de Cada Opción</h4>
+            <div class="opt-choice correct">
+              <span><b>d) 7200s — CORRECTA:</b> Resulta de multiplicar las $2\text{ horas}$ por los $3.600\text{ s}$ que
+                tiene cada hora.</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>a) 720s — INCORRECTA:</b> Multiplicó por $360$ (omitió un cero en el factor de segundos).</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>b) 3600s — INCORRECTA:</b> Corresponde al tiempo de $1\text{ hora}$, no a las $2\text{ horas}$
+                que indica el problema.</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>c) 120s — INCORRECTA:</b> Multiplicó solo por $60$, obteniendo la cantidad de minutos ($120\text{
+                min}$), pero le faltó pasar esos minutos a segundos.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: EJERCICIO 1 - INCISO IV -->
+      <section>
+        <h2><span class="section-num">Ej 1.IV</span> Ejercicio 1 — Inciso IV: Lámina de 25 milímetros</h2>
+        <div class="box box-purple">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            <b>IV.</b> Si el grosor de una lámina es de $25\text{ milímetros}$, ¿cuánto mide en metros?<br>
+            <span style="color: #94a3b8;">Opciones originales:</span> a) 25000m; b) 0,0025m; c) 0,025m; d) 2,5m.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <!-- Desarrollo analítico -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Procedimiento y Cálculos Paso a Paso</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Identificación:</b> El prefijo "mili" ($\text{m}$) representa la milésima parte de la unidad
+                  ($10^{-3} = 1/1.000$).
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Equivalencia:</b> $1\text{ metro} = 1.000\text{ milímetros} \implies 1\text{ mm} = 10^{-3}\text{
+                  m}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Factor de conversión:</b>
+                  $$e = 25\cancel{\text{mm}} \times \frac{1\text{ m}}{1.000\cancel{\text{mm}}} = \frac{25}{1.000}\text{
+                  m} = \mathbf{0{,}025\text{ m}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Justificación de Opciones -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Justificación Exhaustiva de Cada Opción</h4>
+            <div class="opt-choice correct">
+              <span><b>c) 0,025m — CORRECTA:</b> División por $1.000$, desplazando la coma 3 posiciones a la izquierda
+                ($25 \rightarrow 0{,}025$).</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>a) 25000m — INCORRECTA:</b> Multiplicó por $1.000$ invirtiendo el factor; transformaría una
+                lámina delgada en $25\text{ kilómetros}$.</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>b) 0,0025m — INCORRECTA:</b> Dividió por $10.000$, agregando un cero decimal innecesario.</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>d) 2,5m — INCORRECTA:</b> Dividió únicamente por $10$ (equivaldría a centímetros).</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: EJERCICIO 1 - INCISO V -->
+      <section>
+        <h2><span class="section-num">Ej 1.V</span> Ejercicio 1 — Inciso V: Evento de 0,5 días</h2>
+        <div class="box box-cyan">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            <b>V.</b> Si un evento dura $0{,}5\text{ días}$, ¿cuántos segundos ha durado según el SI?<br>
+            <span style="color: #94a3b8;">Opciones originales:</span> a) 21600s; b) 43200s; c) 1200s; d) 86400s.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <!-- Desarrollo analítico -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Procedimiento y Cálculos Paso a Paso</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Equivalencia de 1 día:</b><br>
+                  $1\text{ día} = 24\text{ h} = 24 \times 3.600\text{ s} = 86.400\text{ s}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Método de factores encadenados:</b>
+                  $$t = 0{,}5\cancel{\text{días}} \times \frac{24\cancel{\text{h}}}{1\cancel{\text{día}}} \times
+                  \frac{3.600\text{ s}}{1\cancel{\text{h}}} = 12 \times 3.600\text{ s} = \mathbf{43.200\text{ s}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Justificación de Opciones -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Justificación Exhaustiva de Cada Opción</h4>
+            <div class="opt-choice correct">
+              <span><b>b) 43200s — CORRECTA:</b> Medio día son exactamente $12\text{ horas}$, y $12 \times 3.600\text{
+                s} = 43.200\text{ s}$.</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>a) 21600s — INCORRECTA:</b> Corresponde a $6\text{ horas}$ (un cuarto de día: $0{,}25\text{
+                días}$).</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>c) 1200s — INCORRECTA:</b> Son apenas $20\text{ minutos}$ ($1.200 / 60$).</span>
+            </div>
+            <div class="opt-choice incorrect">
+              <span><b>d) 86400s — INCORRECTA:</b> Corresponde a un día completo ($24\text{ horas}$), no a medio día
+                ($0{,}5$).</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: EJERCICIO 2 - NOTACIÓN CIENTÍFICA (a) -->
+      <section>
+        <h2><span class="section-num">Ej 2.a</span> Ejercicio 2.a: Masa Combinada de Galaxias</h2>
+        <div class="box box-cyan">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            <b>a)</b> Dos galaxias están siendo estudiadas. La Galaxia A tiene una masa estimada de $3{,}2 \times
+            10^{11}$ masas solares, mientras que la Galaxia B tiene una masa de $4{,}5 \times 10^{11}$ masas solares.
+            ¿Cuál es la masa combinada de ambas galaxias?<br>
+            <span style="font-size: 0.82rem; color: #cbd5e1;">(Condición: "Resolver usando notación científica en todo
+              el proceso. Exponente 10¹¹ confirmado pedagógicamente").</span>
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Estrategia y Desarrollo Matemático</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Datos:</b> $M_A = 3{,}2 \times 10^{11}\text{ M}_\odot$ • $M_B = 4{,}5 \times 10^{11}\text{
+                  M}_\odot$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Regla de Oro:</b> Como ambos términos tienen exactamente el <b>mismo exponente ($11$)</b>, se
+                  extrae la potencia de $10$ como factor común y se suman los coeficientes:
+                  $$M_{total} = (3{,}2 + 4{,}5) \times 10^{11}\text{ masas solares}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Suma de coeficientes:</b> $3{,}2 + 4{,}5 = 7{,}7$.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Resultado y Normalización</h4>
+            <div class="card-formula"
+              style="padding: 14px; border-radius: 8px; text-align: center; margin-bottom: 10px;">
+              <span style="font-size: 0.8rem; color: #94a3b8;">MASA COMBINADA</span>
+              <p style="font-size: 1.6rem; font-weight: 700; color: #38bdf8; margin: 4px 0;">
+                7,7 × 10¹¹ masas solares
+              </p>
+            </div>
+            <p style="font-size: 0.86rem; line-height: 1.5;">
+              <b>Justificación de la normalización:</b><br>
+              El coeficiente $7{,}7$ cumple estrictamente la condición $1 \le 7{,}7 < 10$. El resultado ya está
+                canónicamente normalizado y no requiere modificaciones adicionales. </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: EJERCICIO 2 - NOTACIÓN CIENTÍFICA (b) -->
+      <section>
+        <h2><span class="section-num">Ej 2.b</span> Ejercicio 2.b: Muestra de Cultivo de Bacterias</h2>
+        <div class="box box-amber">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            <b>b)</b> En un experimento de laboratorio, una muestra de cultivo contenía inicialmente $8{,}6 \times 10^7$
+            bacterias. Después de aplicar un antibiótico, murieron $2{,}9 \times 10^7$ bacterias. ¿Cuántas bacterias
+            sobrevivieron en la muestra?
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Estrategia y Desarrollo Matemático</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Datos:</b> Población inicial $N_0 = 8{,}6 \times 10^7$ • Bacterias muertas $N_m = 2{,}9 \times
+                  10^7$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Operación:</b> Resta $N_{sob} = N_0 - N_m$. Ambos términos comparten el mismo exponente ($7$):
+                  $$N_{sob} = (8{,}6 - 2{,}9) \times 10^7\text{ bacterias}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Resta de coeficientes:</b> $8{,}6 - 2{,}9 = 5{,}7$.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Resultado y Comprobación</h4>
+            <div class="card-formula"
+              style="padding: 14px; border-radius: 8px; text-align: center; margin-bottom: 10px;">
+              <span style="font-size: 0.8rem; color: #94a3b8;">BACTERIAS SOBREVIVIENTES</span>
+              <p style="font-size: 1.6rem; font-weight: 700; color: #34d399; margin: 4px 0;">
+                5,7 × 10⁷ bacterias
+              </p>
+            </div>
+            <p style="font-size: 0.86rem; line-height: 1.5;">
+              <b>Comprobación por adición:</b><br>
+              $5{,}7 \times 10^7 + 2{,}9 \times 10^7 = (5{,}7 + 2{,}9) \times 10^7 = 8{,}6 \times 10^7$. Coincide
+              exactamente con la población original.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: EJERCICIO 2 - NOTACIÓN CIENTÍFICA (c) -->
+      <section>
+        <h2><span class="section-num">Ej 2.c</span> Ejercicio 2.c: Transistores en un Microchip</h2>
+        <div class="box box-purple">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            <b>c)</b> Un chip de computadora tiene dos secciones de transistores. La sección de procesamiento tiene
+            $1{,}25 \times 10^9$ transistores y la sección de memoria tiene $7{,}5 \times 10^8$ transistores. ¿Cuál es
+            el número total de transistores en el chip?
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Paso Crucial: Igualación de Exponentes</h4>
+            <p style="font-size: 0.86rem;">
+              Los exponentes son $9$ y $8$. <b>¡No se pueden sumar los coeficientes directamente!</b> Convertimos $7{,}5
+              \times 10^8$ al exponente mayor ($10^9$):
+            </p>
+            <div class="card-formula" style="padding: 10px; border-radius: 8px; text-align: center; margin: 8px 0;">
+              $$7{,}5 \times 10^8 = 0{,}75 \times 10^9$$
+            </div>
+            <p style="font-size: 0.84rem;">
+              Ahora sumamos con factor común $10^9$:
+              $$T = (1{,}25 + 0{,}75) \times 10^9 = \mathbf{2{,}00 \times 10^9\text{ transistores}}$$
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Camino Alternativo y Normalización</h4>
+            <p style="font-size: 0.86rem;">
+              Si hubiésemos igualado al exponente menor ($10^8$):
+            </p>
+            <div class="card-formula" style="padding: 10px; border-radius: 8px; text-align: center; margin: 8px 0;">
+              $$1{,}25 \times 10^9 = 12{,}5 \times 10^8$$
+              $$T = (12{,}5 + 7{,}5) \times 10^8 = 20{,}0 \times 10^8$$
+            </div>
+            <p style="font-size: 0.85rem; line-height: 1.5;">
+              Al normalizar ($20{,}0 \rightarrow 2{,}00$ corriendo la coma $1$ lugar y sumando $+1$ al exponente):
+              $$\mathbf{2{,}0 \times 10^9\text{ transistores}}$$
+              ¡Ambos métodos demuestran la misma verdad matemática!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: EJERCICIO 3 - EL LAPICERO Y LA PRECISIÓN -->
+      <section>
+        <h2><span class="section-num">Ej 3</span> Ejercicio 3: Medición de un Lapicero</h2>
+        <div class="box box-amber">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            Se ha medido con una regla que tiene precisión de milímetros un lapicero, y el resultado de la medición ha
+            sido $145{,}37\text{ mm}$. La longitud exacta del lapicero es de $145\text{ mm}$. ¿Qué error absoluto y qué
+            error relativo hemos cometido?
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <!-- Cálculos Matemáticos -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Resolución Analítica Paso a Paso</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Datos:</b> Valor medido $x_{med} = 145{,}37\text{ mm}$ • Valor exacto $x_{ref} = 145\text{ mm}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Error Absoluto ($E_a$):</b>
+                  $$E_a = |x_{med} - x_{ref}| = |145{,}37 - 145|\text{ mm} = \mathbf{0{,}37\text{ mm}}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Error Relativo ($E_r$) y Porcentual:</b>
+                  $$E_r = \frac{E_a}{x_{ref}} = \frac{0{,}37\text{ mm}}{145\text{ mm}} \approx \mathbf{0{,}0025517}$$
+                  $$E_r(\%) = 0{,}0025517 \times 100\% \approx \mathbf{0{,}255\%}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Discusión Crítica del Instrumento -->
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">Observación Crítica sobre la Precisión Instrumental</h4>
+            <p style="font-size: 0.85rem; line-height: 1.5; margin-bottom: 8px;">
+              <b>Inconsistencia física detectada:</b><br>
+              El enunciado señala que la regla tiene una <b>apreciación/precisión de milímetros</b> ($1\text{ mm}$).
+            </p>
+            <div class="card-warning" style="padding: 10px; border-radius: 8px; font-size: 0.82rem;">
+              Una regla graduada en milímetros jamás puede proporcionar lectura confiable de centésimas de milímetro
+              ($0{,}37\text{ mm}$) a ojo humano. Para ello se necesitaría un micrómetro o calibre de laboratorio.
+            </div>
+            <p style="font-size: 0.84rem; margin-top: 6px; color: #cbd5e1;">
+              El cálculo matemático de $0{,}37\text{ mm}$ y $0{,}255\%$ es exacto, pero experimentalmente la medida
+              carece de sentido sin un instrumento de resolución centesimal.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: EJERCICIO 4 - DISTANCIA ENTRE COLUMNAS (PARTE 1) -->
+      <section>
+        <h2><span class="section-num">Ej 4</span> Ejercicio 4: Distancia entre Columnas (Tabla y Media)</h2>
+        <div class="box box-cyan">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.90rem; margin: 0;">
+            Queremos determinar la distancia que hay entre dos columnas. Con una cinta métrica que aprecia milímetros.
+            Realizamos cinco medidas y obtenemos los siguientes valores: $80{,}3\text{ cm}$; $79{,}4\text{ cm}$;
+            $80{,}2\text{ cm}$; $79{,}7\text{ cm}$; y $80{,}0\text{ cm}$. ¿Cuál es el resultado de esta medida? ¿Cuál es
+            el error absoluto y relativo de esta medida?
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <!-- Tabla de Datos y Desviaciones -->
+          <div>
+            <table class="math-table" style="font-size: 0.82rem;">
+              <thead>
+                <tr>
+                  <th>Medición ($i$)</th>
+                  <th>Valor ($x_i$)</th>
+                  <th>Desviación $|x_i - \bar{x}|$</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>$80{,}3\text{ cm}$</td>
+                  <td>$|80{,}3 - 79{,}92| = 0{,}38\text{ cm}$</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>$79{,}4\text{ cm}$</td>
+                  <td>$|79{,}4 - 79{,}92| = 0{,}52\text{ cm}$</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>$80{,}2\text{ cm}$</td>
+                  <td>$|80{,}2 - 79{,}92| = 0{,}28\text{ cm}$</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>$79{,}7\text{ cm}$</td>
+                  <td>$|79{,}7 - 79{,}92| = 0{,}22\text{ cm}$</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>$80{,}0\text{ cm}$</td>
+                  <td>$|80{,}0 - 79{,}92| = 0{,}08\text{ cm}$</td>
+                </tr>
+                <tr style="background: rgba(56,189,248,0.1); font-weight: 700;">
+                  <td>Suma Total</td>
+                  <td>$\sum = 399{,}6\text{ cm}$</td>
+                  <td>$\sum |d_i| = 1{,}48\text{ cm}$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Cálculo del Promedio -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Paso 1: Promedio (Valor Más Probable)</h4>
+            <p style="font-size: 0.86rem; line-height: 1.5;">
+              La media aritmética compensa las fluctuaciones aleatorias:
+            </p>
+            <div class="card-formula" style="padding: 10px; border-radius: 8px; text-align: center; margin: 8px 0;">
+              $$\bar{x} = \frac{\sum_{i=1}^5 x_i}{5} = \frac{399{,}6\text{ cm}}{5} = \mathbf{79{,}92\text{ cm}}$$
+            </div>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Como el instrumento aprecia milímetros ($0{,}1\text{ cm}$), el promedio se redondea coherentemente a
+              <b>$79{,}9\text{ cm}$</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: EJERCICIO 4 - INCERTIDUMBRES Y RESULTADO (PARTE 2) -->
+      <section>
+        <h2><span class="section-num">Ej 4</span> Ejercicio 4: Criterios de Error y Expresión Formal</h2>
+        <div class="grid-2">
+          <!-- Criterios de Error Absoluto -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Paso 2: Criterios para el Error Absoluto</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">A</span>
+                <div class="step-content">
+                  <b>Criterio de la Desviación Media:</b><br>
+                  $$\overline{\Delta x} = \frac{\sum |x_i - \bar{x}|}{5} = \frac{1{,}48\text{ cm}}{5} = 0{,}296\text{
+                  cm} \approx \mathbf{0{,}3\text{ cm}}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">B</span>
+                <div class="step-content">
+                  <b>Criterio de la Semidispersión (Rango/2):</b><br>
+                  $$\Delta x_{semi} = \frac{x_{max} - x_{min}}{2} = \frac{80{,}3 - 79{,}4}{2} = \mathbf{0{,}45\text{
+                  cm}} \approx \mathbf{0{,}5\text{ cm}}$$
+                </div>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; color: #94a3b8; margin-top: 6px;">
+              Adoptamos preferentemente la <b>desviación media ($0{,}3\text{ cm}$)</b> por ser más representativa de
+              todas las mediciones.
+            </p>
+          </div>
+
+          <!-- Error Relativo y Expresión de la Medida -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Paso 3: Error Relativo y Resultado Final</h4>
+            <p style="font-size: 0.86rem;">
+              Calculamos el error relativo dividiendo por el promedio:
+            </p>
+            <div class="card-formula" style="padding: 10px; border-radius: 8px; text-align: center; margin: 8px 0;">
+              $$E_r = \frac{0{,}296\text{ cm}}{79{,}92\text{ cm}} \approx \mathbf{0{,}0037} \implies \mathbf{0{,}37\%}$$
+              <span style="font-size: 0.8rem; color: #94a3b8;">(Con semidispersión: $0{,}45 / 79{,}92 \approx
+                0{,}56\%$)</span>
+            </div>
+            <div class="card-example" style="padding: 12px; border-radius: 8px; text-align: center; margin-top: 8px;">
+              <span style="font-size: 0.82rem; color: #94a3b8;">EXPRESIÓN FINAL DE LA MEDIDA</span>
+              <p style="font-size: 1.5rem; font-weight: 700; color: #38bdf8; margin: 2px 0;">
+                (79,9 ± 0,3) cm
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: EJERCICIO 5 - TIEMPO ESTIMADO VS REAL -->
+      <section>
+        <h2><span class="section-num">Ej 5</span> Ejercicio 5: Intervalo de Tiempo Estimado vs Real</h2>
+        <div class="box box-indigo">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            Calcula el error absoluto y el error relativo que se comete al estimar en $15\text{ minutos}$ un intervalo
+            de tiempo que dura realmente $16\text{ minutos y medio}$.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <!-- Cuentas -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Procedimiento y Operaciones</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Datos:</b> Valor estimado $t_{est} = 15\text{ min}$ • Valor real $t_{real} = 16{,}5\text{ min}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Error Absoluto ($E_a$):</b>
+                  $$E_a = |t_{est} - t_{real}| = |15 - 16{,}5|\text{ min} = \mathbf{1{,}5\text{ min}}$$
+                  <i>En segundos:</i> $1{,}5 \times 60\text{ s} = \mathbf{90\text{ s}}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Error Relativo ($E_r$):</b>
+                  $$E_r = \frac{1{,}5\text{ min}}{16{,}5\text{ min}} = \frac{1}{11} \approx \mathbf{0{,}09091}$$
+                  $$E_r(\%) = 0{,}09091 \times 100\% \approx \mathbf{9{,}09\%}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interpretación -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Resultados e Interpretación Física</h4>
+            <div class="card-formula"
+              style="padding: 14px; border-radius: 8px; text-align: center; margin-bottom: 12px;">
+              <span style="font-size: 0.8rem; color: #94a3b8;">ERROR ABSOLUTO</span>
+              <p style="font-size: 1.4rem; font-weight: 700; color: #38bdf8; margin: 2px 0;">1,5 min (90 s)</p>
+              <span style="font-size: 0.8rem; color: #94a3b8;">ERROR RELATIVO PORCENTUAL</span>
+              <p style="font-size: 1.4rem; font-weight: 700; color: #34d399; margin: 2px 0;">9,09%</p>
+            </div>
+            <p style="font-size: 0.86rem; line-height: 1.5;">
+              <b>Interpretación:</b> La estimación humana se desvió en $1\text{ minuto y medio}$ respecto al
+              cronometraje real. Ese desvío representa un $9{,}09\%$ de error relativo frente a la duración total del
+              evento.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: EJERCICIO 6 - LONGITUD DE LA MESA Y MÁRGENES -->
+      <section>
+        <h2><span class="section-num">Ej 6</span> Ejercicio 6: Medición de la Mesa y Márgenes Reales</h2>
+        <div class="box box-emerald">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.90rem; margin: 0;">
+            Para determinar la longitud de una mesa se han realizado cuatro mediciones con una cinta métrica. Los
+            valores obtenidos son los siguientes: $75{,}2\text{ cm}$; $74{,}8\text{ cm}$; $75{,}1\text{ cm}$; y
+            $74{,}9\text{ cm}$. Expresa el resultado de la medida acompañado del error absoluto. ¿Entre qué márgenes se
+            encuentra el valor real de la longitud de la mesa?
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <!-- Cálculos de media y error -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Resolución Paso a Paso</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Promedio:</b>
+                  $$\bar{L} = \frac{75{,}2 + 74{,}8 + 75{,}1 + 74{,}9}{4} = \frac{300{,}0}{4} = \mathbf{75{,}0\text{
+                  cm}}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Desviaciones respecto al promedio:</b><br>
+                  $|75{,}2 - 75{,}0| = 0{,}2$ • $|74{,}8 - 75{,}0| = 0{,}2$<br>
+                  $|75{,}1 - 75{,}0| = 0{,}1$ • $|74{,}9 - 75{,}0| = 0{,}1$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Desviación media:</b> $\Delta L = \frac{0{,}2 + 0{,}2 + 0{,}1 + 0{,}1}{4} = \mathbf{0{,}15\text{
+                  cm}} \approx \mathbf{0{,}2\text{ cm}}$.<br>
+                  <i>(Semidispersión: $\frac{75{,}2 - 74{,}8}{2} = \mathbf{0{,}2\text{ cm}}$).</i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Márgenes -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Expresión Formal e Intervalo de Márgenes</h4>
+            <div class="card-formula"
+              style="padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 10px;">
+              <span style="font-size: 0.8rem; color: #94a3b8;">RESULTADO CON INCERTIDUMBRE</span>
+              <p style="font-size: 1.45rem; font-weight: 700; color: #34d399; margin: 4px 0;">
+                L = (75,0 ± 0,2) cm
+              </p>
+              <span style="font-size: 0.8rem; color: #cbd5e1;">(o L = 75,00 ± 0,15 cm)</span>
+            </div>
+            <p style="font-size: 0.85rem; line-height: 1.5;">
+              <b>¿Entre qué márgenes se encuentra el valor real?</b><br>
+              • <b>Límite inferior:</b> $L_{inf} = 75{,}0 - 0{,}2 = \mathbf{74{,}8\text{ cm}}$.<br>
+              • <b>Límite superior:</b> $L_{sup} = 75{,}0 + 0{,}2 = \mathbf{75{,}2\text{ cm}}$.<br>
+              <b>Intervalo de confianza:</b> $[74{,}8\text{ cm} \,;\, 75{,}2\text{ cm}]$.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: EJERCICIO 7 - COMPARACIÓN DE ERRORES RELATIVOS -->
+      <section>
+        <h2><span class="section-num">Ej 7</span> Ejercicio 7: Comparación de Errores Relativos</h2>
+        <div class="box box-purple">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            En la medida de $1\text{ m}$ se ha cometido un error de $1\text{ mm}$, y en $300\text{ Km}$, $300\text{ m}$.
+            ¿Qué error relativo es mayor?
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <!-- Medida 1 -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Medida 1: Escala Cotidiana ($1\text{ m}$)</h4>
+            <p style="font-size: 0.86rem;">
+              • Medida: $L_1 = 1\text{ m} = 1.000\text{ mm}$.<br>
+              • Error absoluto: $E_{a1} = 1\text{ mm}$.
+            </p>
+            <div class="card-formula" style="padding: 10px; border-radius: 8px; text-align: center; margin: 10px 0;">
+              $$E_{r1} = \frac{1\text{ mm}}{1.000\text{ mm}} = \frac{1}{1.000} = \mathbf{0{,}001} \implies
+              \mathbf{0{,}1\%}$$
+            </div>
+          </div>
+
+          <!-- Medida 2 -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Medida 2: Escala Geográfica ($300\text{ km}$)</h4>
+            <p style="font-size: 0.86rem;">
+              • Medida: $L_2 = 300\text{ km} = 300.000\text{ m}$.<br>
+              • Error absoluto: $E_{a2} = 300\text{ m}$.
+            </p>
+            <div class="card-formula" style="padding: 10px; border-radius: 8px; text-align: center; margin: 10px 0;">
+              $$E_{r2} = \frac{300\text{ m}}{300.000\text{ m}} = \frac{1}{1.000} = \mathbf{0{,}001} \implies
+              \mathbf{0{,}1\%}$$
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 10px; text-align: center;">
+          <p style="margin: 0; font-size: 0.98rem; font-weight: 700; color: #fbbf24;">
+            Respuesta: Ninguno es mayor, ¡ambos errores relativos son EXACTAMENTE IGUALES ($0{,}1\%$)!
+          </p>
+          <p style="margin: 4px 0 0; font-size: 0.84rem; color: #cbd5e1;">
+            <b>Justificación conceptual:</b> Aunque errar $300\text{ m}$ parece $300.000$ veces peor que errar $1\text{
+            mm}$, en relación con la longitud total medida ambas representan 1 parte en 1.000. Ambas mediciones poseen
+            idéntica precisión relativa.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: EJERCICIO 8.a - VECTORES Y GRÁFICA -->
+      <section>
+        <h2><span class="section-num">Ej 8.a</span> Ejercicio 8.a: Representación Gráfica de Vectores</h2>
+        <div class="box box-indigo">
+          <h4 style="margin-bottom: 4px;">Enunciado Original Fiel al PDF</h4>
+          <p style="font-size: 0.90rem; margin: 0;">
+            Dados los siguientes vectores: $\vec{a} = (1, 2)$; $\vec{b} = (-2, 3)$; $\vec{c} = (-1, -2)$; $\vec{d} = (3,
+            -2)$.<br>
+            a) Graficarlos en un mismo par de ejes cartesianos.<br>
+            b) Resolver en forma analítica y gráfica: i. $\vec{a} + \vec{b}$ • ii. $\vec{a} - \vec{c}$ • iii. $2\vec{a}
+            + \vec{d}$.
+          </p>
+        </div>
+
+        <div class="grid-2-1" style="margin-top: 10px;">
+          <!-- SVG -->
+          <div class="svg-container">
+            <svg class="svg-plot" viewBox="-45 -45 90 90" style="max-width: 420px;">
+              <defs>
+                <pattern id="gridtp8" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5" />
+                </pattern>
+                <marker id="m-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6"
+                  orient="auto">
+                  <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8" />
+                </marker>
+                <marker id="m-indigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6"
+                  orient="auto">
+                  <path d="M 0 1 L 8 5 L 0 9 z" fill="#818cf8" />
+                </marker>
+                <marker id="m-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6"
+                  orient="auto">
+                  <path d="M 0 1 L 8 5 L 0 9 z" fill="#f87171" />
+                </marker>
+                <marker id="m-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6"
+                  orient="auto">
+                  <path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399" />
+                </marker>
+              </defs>
+              <rect x="-42" y="-42" width="84" height="84" fill="url(#gridtp8)" />
+              <line x1="-42" y1="0" x2="42" y2="0" stroke="#94a3b8" stroke-width="1.2" />
+              <line x1="0" y1="42" x2="0" y2="-42" stroke="#94a3b8" stroke-width="1.2" />
+              <text x="38" y="-2" fill="#cbd5e1" font-size="4.5">X</text>
+              <text x="2" y="-38" fill="#cbd5e1" font-size="4.5">Y</text>
+
+              <!-- a = (1, 2) -->
+              <line x1="0" y1="0" x2="10" y2="-20" stroke="#38bdf8" stroke-width="2.2" marker-end="url(#m-cyan)" />
+              <text x="12" y="-21" fill="#38bdf8" font-size="5" font-weight="bold">a (1, 2)</text>
+
+              <!-- b = (-2, 3) -->
+              <line x1="0" y1="0" x2="-20" y2="-30" stroke="#818cf8" stroke-width="2.2" marker-end="url(#m-indigo)" />
+              <text x="-36" y="-31" fill="#818cf8" font-size="5" font-weight="bold">b (-2, 3)</text>
+
+              <!-- c = (-1, -2) -->
+              <line x1="0" y1="0" x2="-10" y2="20" stroke="#f87171" stroke-width="2.2" marker-end="url(#m-rose)" />
+              <text x="-30" y="24" fill="#f87171" font-size="5" font-weight="bold">c (-1, -2)</text>
+
+              <!-- d = (3, -2) -->
+              <line x1="0" y1="0" x2="30" y2="20" stroke="#34d399" stroke-width="2.2" marker-end="url(#m-emerald)" />
+              <text x="32" y="24" fill="#34d399" font-size="5" font-weight="bold">d (3, -2)</text>
+            </svg>
+          </div>
+
+          <!-- Módulos -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8; font-size: 0.95rem;">Módulos Individuales</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num" style="background:rgba(56,189,248,0.15); color:#38bdf8;">a</span>
+                <div class="step-content">
+                  $|\vec{a}| = \sqrt{1^2 + 2^2} = \mathbf{\sqrt{5} \approx 2{,}24}$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num" style="background:rgba(129,140,248,0.15); color:#818cf8;">b</span>
+                <div class="step-content">
+                  $|\vec{b}| = \sqrt{(-2)^2 + 3^2} = \mathbf{\sqrt{13} \approx 3{,}61}$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num" style="background:rgba(248,113,113,0.15); color:#f87171;">c</span>
+                <div class="step-content">
+                  $|\vec{c}| = \sqrt{(-1)^2 + (-2)^2} = \mathbf{\sqrt{5} \approx 2{,}24}$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num" style="background:rgba(52,211,153,0.15); color:#34d399;">d</span>
+                <div class="step-content">
+                  $|\vec{d}| = \sqrt{3^2 + (-2)^2} = \mathbf{\sqrt{13} \approx 3{,}61}$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: EJERCICIO 8.b.i - SUMA VECTORIAL a + b -->
+      <section>
+        <h2><span class="section-num">Ej 8.b.i</span> Ejercicio 8.b.i: Suma Vectorial $\vec{a} + \vec{b}$</h2>
+        <div class="grid-2">
+          <!-- Analítica -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Resolución Analítica</h4>
+            <p style="font-size: 0.86rem;">
+              Sumamos algebraicamente componente a componente:
+            </p>
+            <div class="card-formula" style="padding: 12px; border-radius: 8px; font-size: 1rem; margin: 10px 0;">
+              $$\vec{S} = \vec{a} + \vec{b} = (1 + (-2) \,,\, 2 + 3)$$
+              $$\mathbf{\vec{S} = (-1 \,,\, 5)}$$
+            </div>
+            <p style="font-size: 0.86rem; line-height: 1.6;">
+              <b>Módulo del vector suma:</b>
+              $$|\vec{S}| = \sqrt{(-1)^2 + 5^2} = \sqrt{1 + 25} = \mathbf{\sqrt{26} \approx 5{,}10}$$
+            </p>
+            <p style="font-size: 0.82rem; color: #cbd5e1; margin-top: 6px;">
+              El vector resultante pertenece al <b>Cuadrante II</b> ($x<0, y>0$).
+            </p>
+          </div>
+
+          <!-- Gráfica -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Resolución Gráfica (Punta-Cola)</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">Dibujamos $\vec{a} = (1, 2)$ con origen en $(0,0)$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">En el extremo de $\vec{a}$, colocamos el origen de $\vec{b}$: avanzamos $2$ a
+                  la izquierda y $3$ hacia arriba.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">El vector resultante une $(0,0)$ con el punto final $\mathbf{(-1, 5)}$.</div>
+              </div>
+            </div>
+            <div class="card-example" style="padding: 10px; border-radius: 8px; text-align: center; margin-top: 10px;">
+              ✓ Concordancia absoluta entre el método gráfico del polígono y las componentes algebraicas.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: EJERCICIO 8.b.ii - RESTA VECTORIAL a - c -->
+      <section>
+        <h2><span class="section-num">Ej 8.b.ii</span> Ejercicio 8.b.ii: Resta Vectorial $\vec{a} - \vec{c}$</h2>
+        <div class="grid-2">
+          <!-- Analítica -->
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">1. Resolución Analítica</h4>
+            <p style="font-size: 0.86rem;">
+              Restamos las componentes de $\vec{c}=(-1,-2)$ a las de $\vec{a}=(1,2)$:
+            </p>
+            <div class="card-formula" style="padding: 12px; border-radius: 8px; font-size: 1rem; margin: 10px 0;">
+              $$\vec{R} = \vec{a} - \vec{c} = (1 - (-1) \,,\, 2 - (-2))$$
+              $$\mathbf{\vec{R} = (2 \,,\, 4)}$$
+            </div>
+            <p style="font-size: 0.86rem; line-height: 1.6;">
+              <b>Módulo de la resta:</b>
+              $$|\vec{R}| = \sqrt{2^2 + 4^2} = \sqrt{4 + 16} = \mathbf{\sqrt{20} = 2\sqrt{5} \approx 4{,}47}$$
+            </p>
+          </div>
+
+          <!-- Gráfica -->
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">2. Interpretación Gráfica con Vector Opuesto</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">El vector opuesto es $-\vec{c} = -(-1, -2) = \mathbf{(1, 2)}$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">Sumar $\vec{a} + (-\vec{c})$ equivale a encadenar dos vectores idénticos:
+                  $\vec{a} = (1, 2)$ y $-\vec{c} = (1, 2)$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">Punto final de llegada: $(1 + 1 \,,\, 2 + 2) = \mathbf{(2, 4)}$.</div>
+              </div>
+            </div>
+            <div class="card-definition"
+              style="padding: 10px; border-radius: 8px; text-align: center; margin-top: 10px;">
+              $\vec{a} - \vec{c} = 2\vec{a} = (2, 4)$ en el Cuadrante I.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: EJERCICIO 8.b.iii - COMBINACIÓN 2a + d -->
+      <section>
+        <h2><span class="section-num">Ej 8.b.iii</span> Ejercicio 8.b.iii: Combinación $2\vec{a} + \vec{d}$</h2>
+        <div class="grid-2">
+          <!-- Analítica -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. Procedimiento Analítico</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Multiplicación por escalar:</b><br>
+                  $$2\vec{a} = 2(1, 2) = \mathbf{(2 \,,\, 4)}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Sumar $\vec{d} = (3, -2)$:</b><br>
+                  $$\vec{T} = 2\vec{a} + \vec{d} = (2 + 3 \,,\, 4 + (-2)) = \mathbf{(5 \,,\, 2)}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Módulo de la resultante:</b><br>
+                  $$|\vec{T}| = \sqrt{5^2 + 2^2} = \sqrt{25 + 4} = \mathbf{\sqrt{29} \approx 5{,}39}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gráfica -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Construcción Gráfica</h4>
+            <p style="font-size: 0.86rem; line-height: 1.5;">
+              1. Trazamos el vector $2\vec{a}$ duplicando la flecha de $\vec{a}$ hasta $(2, 4)$.<br>
+              2. Desde $(2, 4)$, trasladamos $\vec{d}$: avanzamos $3$ unidades a la derecha y bajamos $2$ unidades.<br>
+              3. El extremo final de la flecha alcanza las coordenadas $(2 + 3 \,,\, 4 - 2) = \mathbf{(5, 2)}$.
+            </p>
+            <div class="card-formula" style="padding: 12px; border-radius: 8px; text-align: center; margin-top: 10px;">
+              <span style="font-size: 0.8rem; color: #94a3b8;">VECTOR RESULTANTE</span>
+              <p style="font-size: 1.4rem; font-weight: 700; color: #34d399; margin: 4px 0;">
+                T = (5, 2) • Cuadrante I
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: TABLA RESUMEN DE FÓRMULAS DEL TP 1 -->
+      <section>
+        <h2><span class="section-num">09</span> Tabla Resumen de Fórmulas y Criterios</h2>
+        <table class="math-table">
+          <thead>
+            <tr>
+              <th>Tema</th>
+              <th>Fórmula o Concepto</th>
+              <th>Símbolos y Unidades</th>
+              <th>Aplicación en el TP 1</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Conversión SI</b></td>
+              <td>$$\text{Valor} \times \frac{\text{Unidad deseada}}{\text{Unidad inicial}}$$</td>
+              <td>$\text{m, kg, s}$ (unidades base)</td>
+              <td>Ej. 1 (I a V): Longitud, masa y tiempo</td>
+            </tr>
+            <tr>
+              <td><b>Notación Científica</b></td>
+              <td>$$a \times 10^n \quad (1 \le |a| < 10)$$</td>
+              <td>$a \in \mathbb{R}$, $n \in \mathbb{Z}$</td>
+              <td>Ej. 2: Galaxias, bacterias y microchip</td>
+            </tr>
+            <tr>
+              <td><b>Error Absoluto</b></td>
+              <td>$$E_a = |x_{med} - x_{ref}|$$</td>
+              <td>Mismas unidades que la magnitud</td>
+              <td>Ej. 3 (Lapicero) y Ej. 5 (Tiempo)</td>
+            </tr>
+            <tr>
+              <td><b>Error Relativo</b></td>
+              <td>$$E_r = \frac{E_a}{|x_{ref}|} \,;\, E_r(\%) = E_r \times 100\%$$</td>
+              <td>Adimensional</td>
+              <td>Ej. 7: $1\text{ mm}$ en $1\text{ m}$ vs $300\text{ m}$ en $300\text{ km}$</td>
+            </tr>
+            <tr>
+              <td><b>Promedio y Márgenes</b></td>
+              <td>$$\bar{x} = \frac{\sum x_i}{n} \,;\, [\bar{x} - \Delta x \,,\, \bar{x} + \Delta x]$$</td>
+              <td>$\Delta x = \text{desviación media}$</td>
+              <td>Ej. 4 (Columnas) y Ej. 6 (Mesa)</td>
+            </tr>
+            <tr>
+              <td><b>Módulo Vectorial</b></td>
+              <td>$$|\vec{v}| = \sqrt{v_x^2 + v_y^2}$$</td>
+              <td>Pitágoras en el plano</td>
+              <td>Ej. 8: Módulos de $\vec{a}, \vec{b}, \vec{c}, \vec{d}$</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 22: CIERRE Y RETORNO -->
+      <section>
+        <h2><span class="section-num">10</span> Conclusiones y Cierre del TP 1</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Consejos de Oro para el Examen</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
+              <li>Nunca olvides escribir la <b>unidad</b> al lado de cada número.</li>
+              <li>Antes de sumar potencias de diez, revisá siempre si los <b>exponentes son idénticos</b>.</li>
+              <li>El error absoluto tiene unidades; el error relativo es un <b>porcentaje sin unidad</b>.</li>
+              <li>En vectores, sumá <b>componentes con componentes</b>, ¡nunca sumes módulos directamente!</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Estado del Trabajo Práctico</h4>
+            <div class="checklist-item"><span class="icon">✓</span> Ejercicio 1 (I, II, III, IV, V): 100% justificado
+              opción por opción.</div>
+            <div class="checklist-item"><span class="icon">✓</span> Ejercicio 2 (a, b, c): Notación científica y
+              normalización completas.</div>
+            <div class="checklist-item"><span class="icon">✓</span> Ejercicio 3: Lapicero y análisis de precisión
+              instrumental.</div>
+            <div class="checklist-item"><span class="icon">✓</span> Ejercicios 4, 5, 6 y 7: Errores, promedios y
+              márgenes reales.</div>
+            <div class="checklist-item"><span class="icon">✓</span> Ejercicio 8: 4 vectores y operaciones
+              analítico-gráficas completas.</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="index.html" class="badge badge-cyan"
+            style="font-size: 0.95rem; text-decoration: none; padding: 10px 26px;">
+            ← Volver al Portal de Física
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Scripts Reveal.js + KaTeX -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+  </script>
+</body>
+
+</html>

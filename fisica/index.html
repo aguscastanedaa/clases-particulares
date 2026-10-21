@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Física | Clases Particulares</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(23, 32, 54, 0.72);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --accent-emerald: #34d399;
+      --accent-purple: #c084fc;
+      --badge-bg: rgba(56, 189, 248, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(56, 189, 248, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(129, 140, 248, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(192, 132, 252, 0.04) 0%, transparent 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 50px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container { width: 100%; max-width: 860px; }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+      transition: all 0.2s ease;
+    }
+    .nav-back:hover { 
+      color: var(--accent); 
+      transform: translateX(-3px);
+    }
+    header { margin-bottom: 30px; }
+    header h1 { 
+      font-size: 2.3rem; 
+      font-weight: 700; 
+      letter-spacing: -0.02em;
+      margin-bottom: 8px; 
+      background: linear-gradient(135deg, #ffffff 40%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    header p { color: var(--text-muted); font-size: 1.02rem; }
+    
+    .search-box {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      color: var(--text-main);
+      font-size: 0.98rem;
+      margin-bottom: 32px;
+      outline: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+    .search-box:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 28px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .lesson-list { display: flex; flex-direction: column; gap: 14px; }
+    
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 20px 24px;
+      border-radius: 14px;
+      text-decoration: none;
+      color: inherit;
+      backdrop-filter: blur(10px);
+      transition: all 0.22s ease;
+      position: relative;
+    }
+    .lesson-item:hover {
+      transform: translateX(5px);
+      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(30, 41, 69, 0.88);
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.4), 0 0 15px var(--accent-glow);
+    }
+    .lesson-item.featured {
+      background: linear-gradient(135deg, rgba(23, 37, 64, 0.85) 0%, rgba(20, 36, 33, 0.85) 100%);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+    .lesson-item.featured:hover {
+      border-color: rgba(52, 211, 153, 0.6);
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.5), 0 0 20px rgba(52, 211, 153, 0.2);
+    }
+
+    .lesson-info { display: flex; align-items: center; gap: 18px; }
+    .lesson-num {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--badge-bg);
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      white-space: nowrap;
+    }
+    .lesson-num.tp {
+      color: var(--accent-emerald);
+      background: rgba(52, 211, 153, 0.12);
+      border-color: rgba(52, 211, 153, 0.25);
+    }
+    .lesson-text h3 { font-size: 1.08rem; font-weight: 600; margin-bottom: 4px; }
+    .lesson-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.45; }
+    
+    .play-badge {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .play-badge.emerald {
+      color: var(--accent-emerald);
+    }
+
+    @media (max-width: 600px) {
+      .lesson-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .play-badge { align-self: flex-end; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="nav-back">← Volver al portal general</a>
+    
+    <header>
+      <h1>⚡ Física</h1>
+      <p>Material didáctico interactivo, fundamentos teóricos y resolución paso a paso de trabajos prácticos</p>
+    </header>
+
+    <input type="text" id="filter" class="search-box" placeholder="Buscar módulo, concepto o ejercicio (ej: vectores, notación, errores, unidades)...">
+
+    <!-- SECCIÓN 1: CONTENIDOS TEÓRICOS -->
+    <div class="section-title">📘 Módulos Teóricos Fundamentales</div>
+    <div class="lesson-list" id="lessons-theory">
+      
+      <!-- Presentación 1 -->
+      <a href="01-unidades-si.html" class="lesson-item" data-keywords="sistema internacional unidades metro kilogramo segundo prefijos factores conversion longitud masa tiempo">
+        <div class="lesson-info">
+          <span class="lesson-num">Módulo 01</span>
+          <div class="lesson-text">
+            <h3>Sistema Internacional y Conversión de Unidades</h3>
+            <p>Magnitudes fundamentales y derivadas • Prefijos métricos (kilo, mili) • Factores de conversión y análisis dimensional</p>
+          </div>
+        </div>
+        <span class="play-badge">Iniciar clase →</span>
+      </a>
+
+      <!-- Presentación 2 -->
+      <a href="02-notacion-cientifica.html" class="lesson-item" data-keywords="notacion cientifica potencias de 10 suma resta multiplicacion division normalizacion ordenes magnitud galaxias bacterias transistores">
+        <div class="lesson-info">
+          <span class="lesson-num">Módulo 02</span>
+          <div class="lesson-text">
+            <h3>Notación Científica y Órdenes de Magnitud</h3>
+            <p>Forma general a × 10ⁿ • Operaciones algebraicas con potencias • Igualación de exponentes en sumas y restas • Normalización</p>
+          </div>
+        </div>
+        <span class="play-badge">Iniciar clase →</span>
+      </a>
+
+      <!-- Presentación 3 -->
+      <a href="03-errores-medicion.html" class="lesson-item" data-keywords="teoria errores mediciones error absoluto relativo porcentual exactitud precision apreciacion incertidumbre promedio desviacion margenes intervalo">
+        <div class="lesson-info">
+          <span class="lesson-num">Módulo 03</span>
+          <div class="lesson-text">
+            <h3>Teoría de Errores y Mediciones Experimentales</h3>
+            <p>Error absoluto y relativo (%) • Exactitud vs precisión • Tratamiento de series repetidas, promedio, desviación y márgenes reales</p>
+          </div>
+        </div>
+        <span class="play-badge">Iniciar clase →</span>
+      </a>
+
+      <!-- Presentación 4 -->
+      <a href="04-vectores.html" class="lesson-item" data-keywords="vectores plano cartesiano modulo direccion sentido componentes pitagoras cuadrantes suma resta punta cola paralelogramo escalar">
+        <div class="lesson-info">
+          <span class="lesson-num">Módulo 04</span>
+          <div class="lesson-text">
+            <h3>Vectores en el Plano Cartesiano</h3>
+            <p>Escalares vs vectores • Módulo por Pitágoras • Componentes en los 4 cuadrantes • Métodos analítico y gráfico (punta-cola)</p>
+          </div>
+        </div>
+        <span class="play-badge">Iniciar clase →</span>
+      </a>
+
+    </div>
+
+    <!-- SECCIÓN 2: TRABAJOS PRÁCTICOS -->
+    <div class="section-title">📝 Trabajos Prácticos y Resoluciones</div>
+    <div class="lesson-list" id="lessons-tp">
+
+      <!-- Resolución TP 1 -->
+      <a href="resolucion-tp1.html" class="lesson-item featured" data-keywords="resolucion tp1 trabajo practico 1 ejercicios 1 al 8 atletas masas galaxias chip lapicero columnas mesa vectores guia">
+        <div class="lesson-info">
+          <span class="lesson-num tp">TP N° 1</span>
+          <div class="lesson-text">
+            <h3>Resolución Completa: Trabajo Práctico N.º 1</h3>
+            <p>Unidades, Notación Científica, Error y Vectores • Todos los ejercicios del 1 al 8 desarrollados rigurosamente paso a paso</p>
+          </div>
+        </div>
+        <span class="play-badge emerald">Ver resolución completa →</span>
+      </a>
+
+    </div>
+  </div>
+
+  <script>
+    const filterInput = document.getElementById('filter');
+    const lessonItems = document.querySelectorAll('.lesson-item');
+
+    filterInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      lessonItems.forEach(item => {
+        const keywords = item.getAttribute('data-keywords') || '';
+        const text = item.innerText.toLowerCase();
+        if (keywords.includes(query) || text.includes(query)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

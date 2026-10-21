@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Física 01: Sistema Internacional y Conversión de Unidades | Clases Particulares</title>
+  
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <a href="index.html">← Volver al temario de Física</a>
+    <span class="plan-tag">Módulo 01 • Nivel Secundario</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-cyan">Física Fundamental • Módulo 1</span>
+          <h1 style="font-size: 2.8rem; margin-bottom: 12px;">Sistema Internacional de Unidades</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Magnitudes físicas, prefijos métricos y el método sistemático de conversión
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-indigo">Magnitud • Unidad • Medida</span>
+            <span class="badge badge-emerald">Unidades Fundamentales: m, kg, s</span>
+            <span class="badge badge-amber">Prefijos: kilo a mili</span>
+            <span class="badge badge-purple">Factores de Conversión</span>
+          </div>
+
+          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué este tema es crucial?</h4>
+            <p>La Física es una <b>ciencia cuantitativa y experimental</b>. Toda ley física relaciona cantidades que pueden medirse en la realidad.</p>
+            <p class="subtext">
+              Un valor numérico sin unidad carece de sentido físico. No es lo mismo una distancia de $5\text{ mm}$ que una de $5\text{ km}$. El Sistema Internacional (SI) garantiza un lenguaje universal para científicos e ingenieros en todo el planeta.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Metas que vas a dominar hoy</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+              <li>Distinguir entre <b>magnitud</b>, <b>unidad</b> y <b>valor numérico</b>.</li>
+              <li>Reconocer las <b>magnitudes fundamentales</b> y sus patrones en el SI.</li>
+              <li>Comprender la escala de <b>múltiplos y submúltiplos</b> decimales.</li>
+              <li>Aplicar el método riguroso de <b>factores de conversión</b> fraccionarios.</li>
+              <li>Detectar si un resultado es coherente mediante el <b>análisis dimensional</b>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: MAGNITUD, UNIDAD Y VALOR NUMÉRICO -->
+      <section>
+        <h2><span class="section-num">02</span> ¿Qué es una Magnitud Física?</h2>
+        <p class="subtext">Para describir el universo material, necesitamos acordar qué propiedades podemos cuantificar.</p>
+        
+        <div class="box box-cyan" style="margin-bottom: 16px;">
+          <h4 style="margin-bottom: 4px;">Definición</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Una <b>magnitud física</b> es toda propiedad o cualidad de un cuerpo, sustancia o fenómeno natural que <b>puede ser medida objetivamente</b> y expresada mediante un número y una unidad.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. Valor Numérico</h4>
+            <p style="font-size: 0.88rem;">Indica <b>cuántas veces</b> está contenida la unidad patrón en la cantidad medida.</p>
+            <p class="math-key" style="display: inline-block; font-size: 1.1rem;">5,4</p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Unidad de Medida</h4>
+            <p style="font-size: 0.88rem;">Patrón de referencia estándar adoptado por convención legal y científica.</p>
+            <p class="math-key" style="display: inline-block; font-size: 1.1rem; color: #34d399; background: rgba(52,211,153,0.15);">kilómetro (km)</p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">3. Magnitud Física</h4>
+            <p style="font-size: 0.88rem;">La propiedad medida en sí misma (la distancia recorrida por el corredor).</p>
+            <p class="math-key" style="display: inline-block; font-size: 1.1rem; color: #fbbf24; background: rgba(251,191,36,0.15);">Longitud ($L$)</p>
+          </div>
+        </div>
+
+        <div class="box box-rose" style="margin-top: 10px;">
+          <p style="font-size: 0.85rem; margin: 0; color: #fca5a5;">
+            ⚠️ <b>¡Cuidado!</b> La belleza, la felicidad o el dolor no son magnitudes físicas porque no existe un patrón objetivo universal para medirlas. La longitud, la masa y la temperatura sí lo son.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: FUNDAMENTALES VS DERIVADAS -->
+      <section>
+        <h2><span class="section-num">03</span> Magnitudes Fundamentales y Derivadas</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4>Magnitudes Fundamentales</h4>
+            <p style="font-size: 0.88rem;">Son aquellas que se definen <b>por sí mismas</b>, de manera independiente, y sirven de base para construir todo el sistema físico.</p>
+            <p style="font-size: 0.85rem; color: #38bdf8;">En el Sistema Internacional existen exactamente <b>7 magnitudes fundamentales</b>.</p>
+            <ul style="font-size: 0.82rem; line-height: 1.5; margin-left: 16px; margin-top: 8px;">
+              <li><b>Longitud:</b> metro ($\text{m}$)</li>
+              <li><b>Masa:</b> kilogramo ($\text{kg}$)</li>
+              <li><b>Tiempo:</b> segundo ($\text{s}$)</li>
+              <li><b>Temperatura:</b> kelvin ($\text{K}$)</li>
+              <li><b>Corriente eléctrica:</b> amperio ($\text{A}$)</li>
+              <li><b>Cantidad de sustancia:</b> mol ($\text{mol}$)</li>
+              <li><b>Intensidad luminosa:</b> candela ($\text{cd}$)</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <h4>Magnitudes Derivadas</h4>
+            <p style="font-size: 0.88rem;">Se definen a partir de <b>combinaciones algebraicas</b> (productos o cocientes) de las magnitudes fundamentales.</p>
+            <div class="step-list" style="margin-top: 10px;">
+              <div class="step-item">
+                <span class="step-num">A</span>
+                <div class="step-content">
+                  <b>Velocidad:</b> $\text{Longitud} / \text{Tiempo} \rightarrow \text{m/s}$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">B</span>
+                <div class="step-content">
+                  <b>Superficie / Área:</b> $\text{Longitud} \times \text{Longitud} \rightarrow \text{m}^2$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">C</span>
+                <div class="step-content">
+                  <b>Fuerza (Newton):</b> $\text{Masa} \times \text{Aceleración} \rightarrow \text{kg}\cdot\text{m/s}^2 = \text{N}$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">D</span>
+                <div class="step-content">
+                  <b>Densidad:</b> $\text{Masa} / \text{Volumen} \rightarrow \text{kg/m}^3$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: LAS TRES REINAS DE LA MECÁNICA -->
+      <section>
+        <h2><span class="section-num">04</span> Las Tres Magnitudes Clave del TP 1</h2>
+        <p class="subtext">En este primer trabajo práctico trabajamos intensamente con las unidades fundamentales de la Mecánica:</p>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <div style="font-size: 2rem; margin-bottom: 6px;">📏</div>
+            <h4 style="color: #38bdf8;">Longitud</h4>
+            <p style="font-size: 0.86rem; margin-bottom: 8px;">Mide la separación espacial entre dos puntos.</p>
+            <div class="card-definition" style="padding: 10px; border-radius: 8px; font-size: 0.85rem;">
+              <b>Unidad SI:</b> Metro ($\text{m}$)<br>
+              <i>Histórico:</i> 1 diezmillonésima del cuadrante del meridiano terrestre.<br>
+              <i>Actual:</i> distancia que recorre la luz en el vacío en $1/299.792.458\text{ s}$.
+            </div>
+          </div>
+
+          <div class="box box-amber">
+            <div style="font-size: 2rem; margin-bottom: 6px;">⚖️</div>
+            <h4 style="color: #fbbf24;">Masa</h4>
+            <p style="font-size: 0.86rem; margin-bottom: 8px;">Mide la inercia y cantidad de materia de un cuerpo.</p>
+            <div class="card-warning" style="padding: 10px; border-radius: 8px; font-size: 0.85rem;">
+              <b>Unidad SI:</b> Kilogramo ($\text{kg}$)<br>
+              <i>¡Ojo!</i> Es la <b>única unidad base</b> que lleva un prefijo en su nombre oficial ("kilo"). El gramo ($\text{g}$) NO es la unidad base del SI.
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <div style="font-size: 2rem; margin-bottom: 6px;">⏱️</div>
+            <h4 style="color: #34d399;">Tiempo</h4>
+            <p style="font-size: 0.86rem; margin-bottom: 8px;">Mide la duración y secuencia de eventos sucesivos.</p>
+            <div class="card-example" style="padding: 10px; border-radius: 8px; font-size: 0.85rem;">
+              <b>Unidad SI:</b> Segundo ($\text{s}$)<br>
+              <i>Definición moderna:</i> basado en $9.192.631.770$ oscilaciones de la radiación del átomo de Cesio-133.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: PREFIJOS DEL SI -->
+      <section>
+        <h2><span class="section-num">05</span> Prefijos del SI: Múltiplos y Submúltiplos</h2>
+        <p class="subtext">Para no escribir números con demasiados ceros, el SI utiliza prefijos que multiplican a la unidad por potencias de diez:</p>
+
+        <table class="math-table">
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Prefijo</th>
+              <th>Símbolo</th>
+              <th>Factor Numérico</th>
+              <th>Potencia de 10</th>
+              <th>Ejemplo de Aplicación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-indigo" style="margin:0; padding:2px 8px; font-size:0.7rem;">Múltiplo</span></td>
+              <td><b>mega</b></td>
+              <td>$\text{M}$</td>
+              <td>$1.000.000$</td>
+              <td>$10^6$</td>
+              <td>$1\text{ MHz} = 10^6\text{ Hz}$</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-indigo" style="margin:0; padding:2px 8px; font-size:0.7rem;">Múltiplo</span></td>
+              <td><b>kilo</b></td>
+              <td>$\text{k}$</td>
+              <td>$1.000$</td>
+              <td>$10^3$</td>
+              <td>$1\text{ km} = 1.000\text{ m}$ • $1\text{ kg} = 1.000\text{ g}$</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-indigo" style="margin:0; padding:2px 8px; font-size:0.7rem;">Múltiplo</span></td>
+              <td><b>hecto</b></td>
+              <td>$\text{h}$</td>
+              <td>$100$</td>
+              <td>$10^2$</td>
+              <td>$1\text{ hPa} = 100\text{ Pa}$</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-indigo" style="margin:0; padding:2px 8px; font-size:0.7rem;">Múltiplo</span></td>
+              <td><b>deca</b></td>
+              <td>$\text{da}$</td>
+              <td>$10$</td>
+              <td>$10^1$</td>
+              <td>$1\text{ dam} = 10\text{ m}$</td>
+            </tr>
+            <tr style="background: rgba(56,189,248,0.08);">
+              <td><b>Base</b></td>
+              <td><b>(Unidad)</b></td>
+              <td>—</td>
+              <td><b>$1$</b></td>
+              <td><b>$10^0$</b></td>
+              <td><b>$\text{metro, segundo, gramo}$</b></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-amber" style="margin:0; padding:2px 8px; font-size:0.7rem;">Submúltiplo</span></td>
+              <td><b>deci</b></td>
+              <td>$\text{d}$</td>
+              <td>$0,1$</td>
+              <td>$10^{-1}$</td>
+              <td>$1\text{ dm} = 0,1\text{ m}$ ($10\text{ dm} = 1\text{ m}$)</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-amber" style="margin:0; padding:2px 8px; font-size:0.7rem;">Submúltiplo</span></td>
+              <td><b>centi</b></td>
+              <td>$\text{c}$</td>
+              <td>$0,01$</td>
+              <td>$10^{-2}$</td>
+              <td>$1\text{ cm} = 0,01\text{ m}$ ($100\text{ cm} = 1\text{ m}$)</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-amber" style="margin:0; padding:2px 8px; font-size:0.7rem;">Submúltiplo</span></td>
+              <td><b>mili</b></td>
+              <td>$\text{m}$</td>
+              <td>$0,001$</td>
+              <td>$10^{-3}$</td>
+              <td>$1\text{ mm} = 0,001\text{ m}$ ($1.000\text{ mm} = 1\text{ m}$)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 7: TABLA DE EQUIVALENCIAS ESENCIALES -->
+      <section>
+        <h2><span class="section-num">06</span> Tablas de Equivalencias Prácticas</h2>
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Longitud</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.8; margin-left: 16px;">
+              <li>$1\text{ km} = 1.000\text{ m} = 10^3\text{ m}$</li>
+              <li>$1\text{ m} = 100\text{ cm} = 10^2\text{ cm}$</li>
+              <li>$1\text{ m} = 1.000\text{ mm} = 10^3\text{ mm}$</li>
+              <li>$1\text{ cm} = 10\text{ mm}$</li>
+              <li>$1\text{ mm} = 0,001\text{ m} = 10^{-3}\text{ m}$</li>
+            </ul>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Masa</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.8; margin-left: 16px;">
+              <li>$1\text{ kg} = 1.000\text{ g} = 10^3\text{ g}$</li>
+              <li>$1\text{ g} = 0,001\text{ kg} = 10^{-3}\text{ kg}$</li>
+              <li>$1\text{ g} = 1.000\text{ mg}$</li>
+              <li>$1\text{ tonelada (t)} = 1.000\text{ kg}$</li>
+              <li>$1\text{ mg} = 10^{-6}\text{ kg}$</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Tiempo (Sexagesimal)</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.8; margin-left: 16px;">
+              <li>$1\text{ min} = 60\text{ s}$</li>
+              <li>$1\text{ h} = 60\text{ min} = 3.600\text{ s}$</li>
+              <li>$1\text{ día} = 24\text{ h}$</li>
+              <li>$1\text{ día} = 24 \times 3.600\text{ s} = 86.400\text{ s}$</li>
+              <li>$0,5\text{ días} = 12\text{ h} = 43.200\text{ s}$</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="box box-purple" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.88rem;">
+            💡 <b>Aviso clave:</b> A diferencia de la longitud y la masa que son <b>decimales</b> (potencias de 10), el tiempo combina una escala <b>sexagesimal</b> (base 60: $1\text{ h} = 60\text{ min}$, $1\text{ min} = 60\text{ s}$) con días de 24 horas. ¡Jamás asumas que $1\text{ hora} = 100\text{ minutos}$!
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: MÉTODO DEL FACTOR DE CONVERSIÓN -->
+      <section>
+        <h2><span class="section-num">07</span> El Método del Factor de Conversión</h2>
+        <p class="subtext">El método más seguro, riguroso y profesional de la Física y la Ingeniería:</p>
+
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8;">¿En qué consiste el principio matemático?</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 6px;">
+            Si dos cantidades son equivalentes, por ejemplo $1\text{ km} = 1.000\text{ m}$, su cociente es igual a <b>1</b>:
+          </p>
+          <p style="text-align: center; font-size: 1.15rem; margin: 10px 0;">
+            $$\frac{1.000\text{ m}}{1\text{ km}} = 1 \quad \text{y} \quad \frac{1\text{ km}}{1.000\text{ m}} = 1$$
+          </p>
+          <p style="font-size: 0.88rem; color: #cbd5e1;">
+            Multiplicar cualquier cantidad física por una fracción unitaria <b>no altera su valor real</b>, solo cambia la unidad en la que se expresa.
+          </p>
+        </div>
+
+        <div class="step-list" style="margin-top: 12px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Escribir la cantidad inicial</b> con su unidad explícita: $\text{Dato inicial}$.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Identificar la equivalencia</b> entre la unidad actual y la buscada.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>Armar el factor:</b> colocar la unidad a eliminar en el <b>denominador</b> (para que se cancele) y la unidad deseada en el <b>numerador</b>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b>Simplificar unidades algebraicamente</b> y realizar el cálculo numérico.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: EJEMPLO 1 (TP1 Ej 1.I) -->
+      <section>
+        <h2><span class="section-num">08</span> Ejemplo 1: Kilómetros a Metros</h2>
+        <div class="box box-cyan">
+          <h4>Problema (TP1 - Ejercicio 1.I)</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            Un atleta corre una distancia de $5{,}4\text{ kilómetros}$. ¿Cuál es esta distancia expresada en la unidad fundamental de longitud del Sistema Internacional?
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Procedimiento Paso a Paso</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Identificar unidad SI:</b> la unidad base de longitud es el <b>metro ($\text{m}$)</b>.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Equivalencia:</b> $1\text{ km} = 1.000\text{ m}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Multiplicación por factor:</b>
+                  $$d = 5{,}4\cancel{\text{km}} \times \frac{1.000\text{ m}}{1\cancel{\text{km}}} = 5.400\text{ m}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">4</span>
+                <div class="step-content">
+                  <b>Operación:</b> $5{,}4 \times 1.000\text{ m} = 5.400\text{ m}$.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Resultado y Análisis Crítico</h4>
+            <div class="card-formula" style="padding: 14px; border-radius: 10px; text-align: center; margin-bottom: 12px;">
+              <span style="color: #94a3b8; font-size: 0.85rem;">DISTANCIA EN EL SI</span>
+              <p style="font-size: 1.8rem; font-weight: 700; color: #38bdf8; margin: 4px 0;">5.400 m</p>
+            </div>
+            <p style="font-size: 0.88rem; line-height: 1.5;">
+              <b>¿Tiene sentido físico?</b><br>
+              Como el metro es una unidad $1.000$ veces más pequeña que el kilómetro, el valor numérico debe resultar <b>$1.000$ veces mayor</b>. Pasar de una unidad grande a una chica aumenta el número.
+            </p>
+            <div class="opt-choice correct" style="margin-top: 8px;">
+              <span>✓ Opción correcta: <b>a) 5400m</b></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: EJEMPLO 2 (TP1 Ej 1.II) -->
+      <section>
+        <h2><span class="section-num">09</span> Ejemplo 2: Gramos a Kilogramos</h2>
+        <div class="box box-amber">
+          <h4>Problema (TP1 - Ejercicio 1.II)</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            Una masa de $850\text{ gramos}$ debe ser convertida a la unidad base de masa del SI. ¿Cuál es el valor correcto?
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Procedimiento Paso a Paso</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Identificar unidad SI:</b> la unidad base de masa es el <b>kilogramo ($\text{kg}$)</b>.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Equivalencia:</b> $1\text{ kg} = 1.000\text{ g}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Factor de conversión:</b>
+                  $$m = 850\cancel{\text{g}} \times \frac{1\text{ kg}}{1.000\cancel{\text{g}}} = 0{,}85\text{ kg}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">4</span>
+                <div class="step-content">
+                  <b>Operación:</b> $\frac{850}{1.000}\text{ kg} = 0{,}85\text{ kg}$.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Resultado y Análisis Crítico</h4>
+            <div class="card-formula" style="padding: 14px; border-radius: 10px; text-align: center; margin-bottom: 12px;">
+              <span style="color: #94a3b8; font-size: 0.85rem;">MASA EN EL SI</span>
+              <p style="font-size: 1.8rem; font-weight: 700; color: #34d399; margin: 4px 0;">0,85 kg</p>
+            </div>
+            <p style="font-size: 0.88rem; line-height: 1.5;">
+              <b>¿Tiene sentido físico?</b><br>
+              Un paquete de $850\text{ g}$ es menos de un kilo completo ($1.000\text{ g}$). Por lo tanto, el resultado debe ser obligatoriamente un número decimal menor a $1$.
+            </p>
+            <div class="opt-choice correct" style="margin-top: 8px;">
+              <span>✓ Opción correcta: <b>d) 0,85kg</b></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: EJEMPLO 3 (TP1 Ej 1.III y 1.IV) -->
+      <section>
+        <h2><span class="section-num">10</span> Ejemplos 3 y 4: Milímetros y Horas al SI</h2>
+        <div class="grid-2">
+          <!-- Milímetros a Metros -->
+          <div class="box box-cyan">
+            <h4>Lámina de 25 mm a metros (Ej 1.IV)</h4>
+            <p style="font-size: 0.88rem; color: #94a3b8;">
+              El grosor de una lámina metálica mide $25\text{ mm}$.
+            </p>
+            <div class="step-list" style="margin: 8px 0;">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  Equivalencia: $1\text{ m} = 1.000\text{ mm}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  $$e = 25\cancel{\text{mm}} \times \frac{1\text{ m}}{1.000\cancel{\text{mm}}} = \frac{25}{1.000}\text{ m} = 0{,}025\text{ m}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Resultado:</b> <span class="math-key">0,025 m</span>
+                </div>
+              </div>
+            </div>
+            <div class="opt-choice correct">
+              <span>✓ Opción correcta: <b>c) 0,025m</b></span>
+            </div>
+          </div>
+
+          <!-- Horas a Segundos -->
+          <div class="box box-amber">
+            <h4>Proceso de 2 horas al SI (Ej 1.III)</h4>
+            <p style="font-size: 0.88rem; color: #94a3b8;">
+              Un proceso químico dura $2\text{ h}$. En el SI el tiempo se mide en segundos.
+            </p>
+            <div class="step-list" style="margin: 8px 0;">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  $1\text{ h} = 60\text{ min} = 3.600\text{ s}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  $$t = 2\cancel{\text{h}} \times \frac{3.600\text{ s}}{1\cancel{\text{h}}} = 2 \times 3.600\text{ s} = 7.200\text{ s}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Resultado:</b> <span class="math-key" style="color:#fbbf24; background:rgba(251,191,36,0.15);">7.200 s</span>
+                </div>
+              </div>
+            </div>
+            <div class="opt-choice correct">
+              <span>✓ Opción correcta: <b>d) 7200s</b></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: EJEMPLO 5 (Días a Segundos) -->
+      <section>
+        <h2><span class="section-num">11</span> Ejemplo 5: Conversiones en Cadena (Días a Segundos)</h2>
+        <div class="box box-purple">
+          <h4>Problema (TP1 - Ejercicio 1.V)</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            Si un evento dura $0{,}5\text{ días}$, ¿cuántos segundos ha durado según el SI?
+          </p>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 14px;">
+          <h4 style="color: #818cf8;">Método en Cadena con Factores Sucesivos</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 10px;">
+            Cuando no recordás de memoria cuántos segundos tiene un día completo, podés encadenar factores elementales:
+          </p>
+          <p style="text-align: center; font-size: 1.15rem; margin: 12px 0;">
+            $$t = 0{,}5\cancel{\text{días}} \times \frac{24\cancel{\text{h}}}{1\cancel{\text{día}}} \times \frac{60\cancel{\text{min}}}{1\cancel{\text{h}}} \times \frac{60\text{ s}}{1\cancel{\text{min}}}$$
+          </p>
+          <div class="step-list">
+            <div class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-content">
+                <b>Cancelación de unidades:</b> los días se cancelan con días, las horas con horas, y los minutos con minutos. Solo sobrevive el <b>segundo ($\text{s}$)</b>.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-content">
+                <b>Cálculo aritmético:</b> $t = 0{,}5 \times 24 \times 60 \times 60\text{ s} = 12 \times 3.600\text{ s} = \mathbf{43.200\text{ s}}$.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="opt-choice correct">
+            <span>✓ Opción correcta: <b>b) 43200s</b></span>
+          </div>
+          <div class="box box-cyan" style="padding: 10px 14px; margin: 0;">
+            <p style="margin: 0; font-size: 0.85rem;">
+              💡 <b>Comprobación mental:</b> $1\text{ día} = 86.400\text{ s} \implies \text{Medio día} = \frac{86.400}{2} = 43.200\text{ s}$. ¡Coincide perfectamente!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: VELOCIDAD COMPUESTA (km/h a m/s) -->
+      <section>
+        <h2><span class="section-num">12</span> Conversión Compuesta: km/h a m/s</h2>
+        <p class="subtext">Una conversión clásica e indispensable en todos los problemas de Cinemática:</p>
+
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Doble Factor de Conversión</h4>
+            <p style="font-size: 0.88rem;">Queremos convertir la velocidad de un auto de $72\text{ km/h}$ a unidades del SI ($\text{m/s}$):</p>
+            <p style="text-align: center; font-size: 1.05rem; margin: 12px 0;">
+              $$v = 72\,\frac{\cancel{\text{km}}}{\cancel{\text{h}}} \times \frac{1.000\text{ m}}{1\cancel{\text{km}}} \times \frac{1\cancel{\text{h}}}{3.600\text{ s}}$$
+            </p>
+            <p style="font-size: 0.88rem; line-height: 1.5;">
+              $$v = \frac{72 \times 1.000}{3.600}\text{ m/s} = \frac{72.000}{3.600}\text{ m/s} = \mathbf{20\text{ m/s}}$$
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">La Regla Rápida del $3{,}6$</h4>
+            <p style="font-size: 0.88rem; margin-bottom: 8px;">
+              Notá que $\frac{1.000}{3.600} = \frac{1}{3{,}6}$. Por lo tanto:
+            </p>
+            <div class="card-formula" style="padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 10px;">
+              <p style="margin: 0; font-size: 1rem; color: #38bdf8;">
+                $$\text{km/h} \xrightarrow{\div 3{,}6} \text{m/s}$$
+                $$\text{m/s} \xrightarrow{\times 3{,}6} \text{km/h}$$
+              </p>
+            </div>
+            <p style="font-size: 0.84rem; color: #94a3b8;">
+              <b>Ejemplos rápidos:</b><br>
+              • $36\text{ km/h} \div 3{,}6 = 10\text{ m/s}$<br>
+              • $108\text{ km/h} \div 3{,}6 = 30\text{ m/s}$
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: ERRORES FRECUENTES -->
+      <section>
+        <h2><span class="section-num">13</span> Errores Frecuentes al Convertir Unidades</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error Típico 1: Invertir el Factor</div>
+            <p style="font-size: 0.86rem; color: #fca5a5;">
+              Querer pasar $500\text{ g}$ a $\text{kg}$ y multiplicar por $1.000$:
+            </p>
+            <p style="font-size: 0.88rem; font-family: monospace; color: #f87171;">
+              500 g × (1000 kg / 1 g) = 500.000 kg (¡Absurdo!)
+            </p>
+            <p style="font-size: 0.82rem; color: #94a3b8;">
+              <b>Por qué pasa:</b> Se memoriza "el número mil" sin verificar qué unidad va arriba y cuál abajo.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✓ Procedimiento Correcto</div>
+            <p style="font-size: 0.86rem; color: #a7f3d0;">
+              La unidad que querés eliminar ($\text{g}$) debe colocarse en el denominador:
+            </p>
+            <p style="font-size: 0.88rem; font-family: monospace; color: #34d399;">
+              500 g × (1 kg / 1000 g) = 0,5 kg
+            </p>
+            <p style="font-size: 0.82rem; color: #94a3b8;">
+              <b>Control mental:</b> Medio kilo debe ser menos de un kilogramo.
+            </p>
+          </div>
+        </div>
+
+        <div class="comparison-box" style="margin-top: 8px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error Típico 2: Pensar que 1 h = 100 min</div>
+            <p style="font-size: 0.86rem; color: #fca5a5;">
+              Decir que $1{,}5\text{ h}$ equivale a $1\text{ hora y } 50\text{ minutos}$.
+            </p>
+            <p style="font-size: 0.82rem; color: #94a3b8;">
+              <b>Por qué es un error grave:</b> La hora tiene 60 minutos, no 100. $0{,}5\text{ h} = 0{,}5 \times 60\text{ min} = \mathbf{30\text{ minutos}}$.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✓ Procedimiento Correcto</div>
+            <p style="font-size: 0.86rem; color: #a7f3d0;">
+              Convertir siempre la parte decimal multiplicando por 60:
+            </p>
+            <p style="font-size: 0.88rem; font-family: monospace; color: #34d399;">
+              1,5 h = 1 h + 0,5 × 60 min = 1 h 30 min (90 min)
+            </p>
+            <p style="font-size: 0.82rem; color: #94a3b8;">
+              $90\text{ min} \times 60\text{ s} = 5.400\text{ s}$.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: ACTIVIDAD DE PRÁCTICA GUIADA -->
+      <section>
+        <h2><span class="section-num">14</span> Actividades Prácticas Guiadas</h2>
+        <p class="subtext">Probá resolver estos tres ejercicios antes de desplegar la solución para comprobar tu aprendizaje:</p>
+
+        <details class="math-solution">
+          <summary><b>Ejercicio A:</b> Una pista de atletismo tiene una longitud de $400\text{ m}$. ¿Cuántos kilómetros mide?</summary>
+          <div class="solution-body">
+            <b>Factor:</b> $1\text{ km} = 1.000\text{ m}$.<br>
+            $$L = 400\text{ m} \times \frac{1\text{ km}}{1.000\text{ m}} = \frac{400}{1.000}\text{ km} = \mathbf{0{,}4\text{ km}}$$
+          </div>
+        </details>
+
+        <details class="math-solution">
+          <summary><b>Ejercicio B:</b> La masa de una manzana es de $0{,}18\text{ kg}$. ¿Cuántos gramos son?</summary>
+          <div class="solution-body">
+            <b>Factor:</b> $1\text{ kg} = 1.000\text{ g}$.<br>
+            $$m = 0{,}18\text{ kg} \times \frac{1.000\text{ g}}{1\text{ kg}} = 0{,}18 \times 1.000\text{ g} = \mathbf{180\text{ g}}$$
+          </div>
+        </details>
+
+        <details class="math-solution">
+          <summary><b>Ejercicio C:</b> Un tren viaja a $90\text{ km/h}$. ¿A cuántos metros por segundo se desplaza?</summary>
+          <div class="solution-body">
+            <b>Método rápido:</b> $90 \div 3{,}6 = \mathbf{25\text{ m/s}}$.<br>
+            <b>Factor completo:</b> $90\,\frac{\text{km}}{\text{h}} \times \frac{1.000\text{ m}}{1\text{ km}} \times \frac{1\text{ h}}{3.600\text{ s}} = \frac{90.000}{3.600}\text{ m/s} = \mathbf{25\text{ m/s}}$.
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 16: PREGUNTAS PARA DEBATE EN CLASE -->
+      <section>
+        <h2><span class="section-num">15</span> Preguntas de Debate para la Clase</h2>
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Pregunta 1</h4>
+            <p style="font-size: 0.88rem;">
+              ¿Por qué creés que la masa tiene como unidad base el <b>kilogramo</b> y no el gramo, a pesar de que el kilogramo contiene el prefijo "kilo"?
+            </p>
+            <p class="subtext">
+              <i>Pista:</i> Pensá en el tamaño de los objetos cotidianos y la estabilidad del cilindro de platino-iridio que servía de patrón.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Pregunta 2</h4>
+            <p style="font-size: 0.88rem;">
+              Un astronauta afirma: <i>"Mi masa en la Tierra es de 70 kg y en la Luna sigue siendo de 70 kg, pero mi peso es distinto"</i>. ¿Es correcto?
+            </p>
+            <p class="subtext">
+              <i>Pista:</i> Diferencia entre masa (inercia, escalar) y peso (fuerza gravitatoria, vectorial en Newtons).
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Pregunta 3</h4>
+            <p style="font-size: 0.88rem;">
+              En 1999, la sonda espacial Mars Climate Orbiter se estrelló en Marte por un error de unidades entre libras y Newtons. ¿Qué lección nos deja?
+            </p>
+            <p class="subtext">
+              <i>Pista:</i> La estandarización en el SI no es un capricho teórico: salva misiones millonarias y vidas humanas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: CHECKLIST Y CIERRE -->
+      <section>
+        <h2><span class="section-num">16</span> Resumen y Checklist de Cierre</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Síntesis de Conceptos Clave</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
+              <li>Toda medida física consta de un <b>valor numérico</b> y una <b>unidad</b>.</li>
+              <li>Las 3 unidades fundamentales de la mecánica en el SI son: <b>metro ($\text{m}$)</b>, <b>kilogramo ($\text{kg}$)</b> y <b>segundo ($\text{s}$)</b>.</li>
+              <li>Los prefijos métricos permiten escribir órdenes de magnitud sin ceros superfluos.</li>
+              <li>El <b>factor de conversión</b> es una fracción equivalente a $1$ que simplifica unidades algebraicamente.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé convertir kilómetros a metros multiplicando por $1.000$?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé pasar gramos a kilogramos dividiendo por $1.000$?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo que $1\text{ h} = 3.600\text{ s}$ y $1\text{ día} = 86.400\text{ s}$?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Ubico la unidad a cancelar en la posición opuesta de la fracción?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Verifico que el tamaño numérico final sea coherente con la escala?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Volver al Menú de Física
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Scripts Reveal.js + KaTeX -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [ RevealMath.KaTeX ],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+  </script>
+</body>
+</html>
