@@ -15,20 +15,20 @@
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --accent: #38bdf8;
-      --badge-bg: rgba(56, 189, 248, 0.1);
+      --badge-bg: rgba(56, 189, 248, 0.12);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
       background: var(--bg);
-      background-image: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.06) 0%, transparent 40%);
+      background-image: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 45%);
       color: var(--text-main);
       min-height: 100vh;
       padding: 50px 20px;
       display: flex;
       justify-content: center;
     }
-    .container { width: 100%; max-width: 800px; }
+    .container { width: 100%; max-width: 820px; }
     .nav-back {
       display: inline-flex;
       align-items: center;
@@ -41,12 +41,7 @@
     }
     .nav-back:hover { color: var(--accent); }
     header { margin-bottom: 36px; }
-    header h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
+    header h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; }
     header p { color: var(--text-muted); font-size: 1rem; }
     .lesson-list { display: flex; flex-direction: column; gap: 14px; }
     .lesson-item {
@@ -55,59 +50,77 @@
       justify-content: space-between;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      padding: 18px 22px;
-      border-radius: 12px;
+      padding: 20px 24px;
+      border-radius: 14px;
       text-decoration: none;
       color: inherit;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       transition: all 0.2s ease;
     }
     .lesson-item:hover {
-      transform: translateX(4px);
+      transform: translateX(5px);
       border-color: rgba(56, 189, 248, 0.4);
       background: rgba(30, 41, 69, 0.85);
     }
-    .lesson-info { display: flex; align-items: center; gap: 16px; }
+    .lesson-info { display: flex; align-items: center; gap: 18px; }
     .lesson-num {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--accent);
       background: var(--badge-bg);
-      padding: 6px 12px;
-      border-radius: 8px;
+      padding: 8px 14px;
+      border-radius: 10px;
     }
-    .lesson-text h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 2px; }
-    .lesson-text p { font-size: 0.85rem; color: var(--text-muted); }
+    .lesson-text h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
+    .lesson-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
     .play-badge {
-      display: flex;
-      align-items: center;
-      gap: 6px;
       font-size: 0.85rem;
       font-weight: 600;
       color: var(--accent);
+      white-space: nowrap;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <a href="../index.html" class="nav-back">← Volver al portal principal</a>
+    <a href="../index.html" class="nav-back">← Volver al portal</a>
     <header>
       <h1>📐 Matemática</h1>
-      <p>Unidades temáticas y diapositivas de soporte teórico</p>
+      <p>Planes de aprendizaje, explicaciones y material interactivo</p>
     </header>
 
     <div class="lesson-list">
-      <a href="01-funcion-logaritmica.html" class="lesson-item">
+      <a href="01-funcion-cuadratica.html" class="lesson-item">
         <div class="lesson-info">
-          <span class="lesson-num">01</span>
+          <span class="lesson-num">PA 1</span>
           <div class="lesson-text">
-            <h3>Función Logarítmica</h3>
-            <p>Definición analítica, propiedades algebraicas y cálculo de derivadas</p>
+            <h3>Función Cuadrática</h3>
+            <p>Formas polinómica, canónica y factorizada • Vértice, raíces y análisis gráfico</p>
           </div>
         </div>
-        <div class="play-badge">
-          <span>Ver clase</span> →
+        <div class="play-badge">Ver clase →</div>
+      </a>
+
+      <a href="02-polinomios.html" class="lesson-item">
+        <div class="lesson-info">
+          <span class="lesson-num">PA 2</span>
+          <div class="lesson-text">
+            <h3>Polinomios y Factoreo</h3>
+            <p>Casos de factoreo clásicos • Regla de Ruffini, Teorema del Resto y Gauss</p>
+          </div>
         </div>
+        <div class="play-badge">Ver clase →</div>
+      </a>
+
+      <a href="03-exponencial-y-logaritmica.html" class="lesson-item">
+        <div class="lesson-info">
+          <span class="lesson-num">PA 3</span>
+          <div class="lesson-text">
+            <h3>Exponenciales y Logaritmos</h3>
+            <p>Propiedades operativas • Ecuaciones, asíntotas e inversas</p>
+          </div>
+        </div>
+        <div class="play-badge">Ver clase →</div>
       </a>
     </div>
   </div>

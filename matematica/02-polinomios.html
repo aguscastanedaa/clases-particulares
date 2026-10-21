@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PA 2: Polinomios y Factoreo | Clases Particulares</title>
+  
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <a href="index.html">← Volver al temario de Matemática</a>
+    <span class="plan-tag">Plan de Aprendizaje N° 2 • Nivel Secundario</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ==========================================
+           SLIDE 1: PORTADA
+           ========================================== -->
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-indigo">Plan de Aprendizaje N° 2</span>
+          <h1 style="font-size: 3rem; margin-bottom: 12px;">Polinomios y Factoreo</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Estructura algebraica, operaciones, métodos de descomposición factorial y teoremas fundamentales
+          </p>
+
+          <div style="display: inline-flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">Casos Clásicos de Factoreo</span>
+            <span class="badge badge-emerald">Regla de Ruffini & Teorema del Resto</span>
+            <span class="badge badge-amber">Teorema de Gauss & Raíces</span>
+          </div>
+
+          <div class="box box-indigo" style="max-width: 700px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar o retroceder diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 2: PRESENTACIÓN DEL TEMA Y OBJETIVOS
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">01</span> Presentación del Tema y Objetivos</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué es indispensable el Factoreo?</h4>
+            <p>El <b>factoreo</b> es el proceso inverso al desarrollo distributivo: transformar una suma algebraica de términos en una <b>multiplicación de factores primos</b>.</p>
+            <p class="subtext">
+              Es una de las herramientas más poderosas del álgebra: permite simplificar fracciones racionales complejas, calcular asíntotas y límites, y resolver ecuaciones de grado superior a 1 encontrando sus raíces de forma exacta.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Objetivos de Aprendizaje</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+              <li>Identificar los elementos de un polinomio (grado, coeficientes, términos).</li>
+              <li>Operar con soltura: suma, resta, producto y división entera.</li>
+              <li>Reconocer y aplicar con precisión los <b>casos de factoreo clásicos</b>.</li>
+              <li>Dominar el algoritmo de la <b>Regla de Ruffini</b> y el <b>Teorema del Resto</b>.</li>
+              <li>Usar el <b>Teorema de Gauss</b> para hallar raíces racionales y descomponer totalmente polinomios.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 3: RECUPERACIÓN DE CONOCIMIENTOS PREVIOS
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">02</span> Recuperación de Conocimientos Previos</h2>
+        <p class="subtext">Aseguremos estas tres reglas elementales del álgebra antes de empezar:</p>
+
+        <div class="grid-3" style="margin-top: 15px;">
+          <div class="box box-cyan">
+            <h4>1. Términos Semejantes</h4>
+            <p style="font-size: 0.88rem;">Solo se pueden sumar o restar monomios que tengan la <b>misma parte literal y mismo exponente</b>:</p>
+            <p style="text-align: center; font-size: 0.95rem; color: #38bdf8;">
+              $4x^3 + 5x^3 = 9x^3$
+            </p>
+            <p class="subtext">¡$4x^3 + 5x^2$ NO se puede sumar en un solo término!</p>
+          </div>
+
+          <div class="box box-amber">
+            <h4>2. Leyes de Exponentes</h4>
+            <p style="font-size: 0.88rem;">Al multiplicar potencias de igual base, los exponentes <b>se suman</b>:</p>
+            <p style="text-align: center; font-size: 0.95rem; color: #fbbf24;">
+              $x^a \cdot x^b = x^{a+b}$
+            </p>
+            <p class="subtext">Ej: $3x^2 \cdot 2x^4 = 6x^{2+4} = 6x^6$.</p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4>3. Propiedad Distributiva</h4>
+            <p style="font-size: 0.88rem;">Multiplica el factor exterior por cada término del paréntesis:</p>
+            <p style="text-align: center; font-size: 0.92rem; color: #34d399;">
+              $a(b + c) = a \cdot b + a \cdot c$
+            </p>
+            <p class="subtext">El factoreo recorre este camino exactamente al revés.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 4: CONCEPTOS FUNDAMENTALES DE POLINOMIOS
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">03</span> Anatomía y Elementos de un Polinomio</h2>
+        <div class="box card-definition">
+          <h4 style="color: #38bdf8;">Forma General de un Polinomio en una Variable</h4>
+          <div style="text-align: center; margin: 10px 0;">
+            <span style="font-size: 1.3rem; font-weight: 700; color: #ffffff; background: rgba(56, 189, 248, 0.15); padding: 6px 18px; border-radius: 10px; border: 1px solid rgba(56, 189, 248, 0.3);">
+              $$P(x) = a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0$$
+            </span>
+          </div>
+          <p style="font-size: 0.88rem; margin-top: 6px;">
+            donde $n \in \mathbb{N}_0$ (los exponentes son enteros no negativos) y los $a_i \in \mathbb{R}$ son los <b>coeficientes</b>.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box">
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 16px;">
+              <li><b>Grado del polinomio ($\mathbf{n}$):</b> Es el mayor exponente de la variable cuyo coeficiente no sea cero ($a_n \neq 0$).</li>
+              <li><b>Coeficiente principal ($\mathbf{a_n}$):</b> El número real que multiplica a la potencia de mayor grado. Si $a_n = 1$, el polinomio se llama <i>mónico</i>.</li>
+              <li><b>Término independiente ($\mathbf{a_0}$):</b> Término sin variable ($x^0 = 1$). Corresponde al valor numérico $P(0)$.</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 16px;">
+              <li><b>Polinomio Ordenado:</b> Cuando los términos están dispuestos en orden decreciente de sus exponentes (de mayor a menor).</li>
+              <li><b>Polinomio Completo:</b> Cuando contiene todas las potencias desde el grado $n$ hasta el grado $0$. Si falta alguna potencia, se completa sumando $0x^k$.</li>
+              <li><b>Valor Numérico $P(c)$:</b> Resultado de reemplazar la variable $x$ por el número real $c$.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 5: OPERACIONES CON POLINOMIOS
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">04</span> Operaciones Fundamentales</h2>
+        
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Suma y Resta</h4>
+            <p style="font-size: 0.85rem;">Se asocian y reducen únicamente los términos semejantes:</p>
+            <div style="font-size: 0.85rem; background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 8px; margin: 6px 0;">
+              $P(x) = 3x^3 - 2x^2 + 5$<br>
+              $Q(x) = x^3 + 4x^2 - 3x - 1$<br>
+              <b style="color: #38bdf8;">$P(x) + Q(x) = 4x^3 + 2x^2 - 3x + 4$</b>
+            </div>
+            <p class="subtext">⚠️ En la resta $P(x) - Q(x)$, el signo menos cambia el signo de <b>todos</b> los términos de $Q(x)$.</p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">2. Multiplicación</h4>
+            <p style="font-size: 0.85rem;">Se aplica distributiva generalizada multiplicando coeficientes y sumando exponentes:</p>
+            <div style="font-size: 0.85rem; background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 8px; margin: 6px 0;">
+              $(2x^2 - 3)(x^2 + 4x) =$<br>
+              $= 2x^2(x^2) + 2x^2(4x) - 3(x^2) - 3(4x)$<br>
+              $= \mathbf{2x^4 + 8x^3 - 3x^2 - 12x}$
+            </div>
+            <p class="subtext">El grado del producto es la suma de los grados: $\mathrm{gr}(P \cdot Q) = \mathrm{gr}(P) + \mathrm{gr}(Q)$.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 6: PRODUCTOS NOTABLES
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">05</span> Productos Notables Clave</h2>
+        <p class="subtext">Identidades algebraicas inmediatas que ahorran tiempo de cálculo y son la base del factoreo:</p>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Cuadrado de un Binomio</h4>
+            <p style="text-align: center; font-size: 1.05rem; margin: 8px 0;">
+              $$(a \pm b)^2 = a^2 \pm 2ab + b^2$$
+            </p>
+            <p style="font-size: 0.85rem;">Produce un <b>Trinomio Cuadrado Perfecto</b>.</p>
+            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 6px;">
+              <b>Ejemplo:</b><br>
+              $(2x + 3)^2 = (2x)^2 + 2(2x)(3) + 3^2$<br>
+              $= \mathbf{4x^2 + 12x + 9}$
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Suma por Diferencia</h4>
+            <p style="text-align: center; font-size: 1.05rem; margin: 8px 0;">
+              $$(a + b)(a - b) = a^2 - b^2$$
+            </p>
+            <p style="font-size: 0.85rem;">Produce una <b>Diferencia de Cuadrados</b>.</p>
+            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 6px;">
+              <b>Ejemplo:</b><br>
+              $(3x + 5)(3x - 5) = (3x)^2 - (5)^2$<br>
+              $= \mathbf{9x^2 - 25}$
+            </div>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">Cubo de un Binomio</h4>
+            <p style="text-align: center; font-size: 0.95rem; margin: 8px 0;">
+              $$(a \pm b)^3 = a^3 \pm 3a^2b + 3ab^2 \pm b^3$$
+            </p>
+            <p style="font-size: 0.85rem;">Produce un <b>Cuatrinomio Cubo Perfecto</b>.</p>
+            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 6px;">
+              <b>Ejemplo:</b><br>
+              $(x - 2)^3 = x^3 - 3x^2(2) + 3x(4) - 8$<br>
+              $= \mathbf{x^3 - 6x^2 + 12x - 8}$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 7: CASOS DE FACTOREO: FACTOR COMÚN
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">06</span> Caso 1: Factor Común</h2>
+        <div class="box card-definition">
+          <p>
+            Se aplica cuando <b>todos los términos</b> del polinomio comparten un divisor común numérico (máximo común divisor de los coeficientes) y/o factores literales (variables comunes elevadas al <b>menor exponente</b> con el que aparecen).
+          </p>
+          <div style="text-align: center; margin: 10px 0;">
+            <span class="math-key" style="font-size: 1.25rem;">$$k \cdot A + k \cdot B - k \cdot C = k(A + B - C)$$</span>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Ejemplo Paso a Paso</h4>
+            <p style="font-size: 0.88rem;">Factorizar el polinomio: $\mathbf{P(x) = 6x^5 - 9x^3 + 12x^2}$</p>
+            <ol style="font-size: 0.85rem; line-height: 1.5; margin-left: 16px;">
+              <li>MCD numérico entre $6, 9, 12$: es <b>$3$</b>.</li>
+              <li>Variable común con menor exponente: es <b>$x^2$</b>.</li>
+              <li>El factor común global es: <b>$3x^2$</b>.</li>
+              <li>Dividimos cada término por $3x^2$:
+                $$\frac{6x^5}{3x^2} = 2x^3, \quad \frac{-9x^3}{3x^2} = -3x, \quad \frac{12x^2}{3x^2} = 4$$
+              </li>
+              <li>Resultado: $\mathbf{P(x) = 3x^2(2x^3 - 3x + 4)}$</li>
+            </ol>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Verificación y Recomendación</h4>
+            <p style="font-size: 0.85rem;">
+              Para verificar, siempre podés aplicar propiedad distributiva mentalmente:<br>
+              $3x^2 \cdot 2x^3 = 6x^5$<br>
+              $3x^2 \cdot (-3x) = -9x^3$<br>
+              $3x^2 \cdot 4 = 12x^2$ ✔️
+            </p>
+            <p class="subtext" style="margin-top: 10px;">
+              💡 <b>Consejo didáctico:</b> Siempre es el <b>primer caso</b> que se debe inspeccionar. Si hay factor común, simplifica enormemente cualquier paso posterior.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 8: FACTOR COMÚN POR GRUPOS
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">07</span> Caso 2: Factor Común por Grupos</h2>
+        <div class="box card-definition">
+          <p>
+            Se utiliza cuando no hay un factor común a <i>todos</i> los términos, pero sí es posible agruparlos en <b>bloques con igual cantidad de términos</b> (ej. 4 términos agrupados en dos pares; o 6 en tres pares o dos tríos) de modo que cada grupo comparta un factor común y resulte un <b>paréntesis idéntico</b>.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Ejemplo Resuelto</h4>
+            <p style="font-size: 0.88rem;">Factorizar: $\mathbf{P(x) = x^3 + 2x^2 - 4x - 8}$</p>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content"><b>Agrupar en dos pares:</b><br>$(x^3 + 2x^2) + (-4x - 8)$</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content"><b>Extraer factor común en cada par:</b><br>En el primero $x^2$: $x^2(x + 2)$<br>En el segundo $-4$: $-4(x + 2)$</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content"><b>Extraer el paréntesis común $(x + 2)$:</b><br>$\mathbf{(x + 2)(x^2 - 4)}$</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¡Atención: Factoreo Completo!</h4>
+            <p style="font-size: 0.88rem;">
+              Observemos el segundo factor: $(x^2 - 4)$ es una <b>Diferencia de Cuadrados</b>:
+            </p>
+            <p style="text-align: center; font-size: 0.95rem; color: #34d399;">
+              $x^2 - 4 = (x - 2)(x + 2)$
+            </p>
+            <p style="font-size: 0.85rem;">Sustituyendo obtenemos la factorización total:</p>
+            <div style="text-align: center; margin: 8px 0;">
+              <span class="math-key" style="font-size: 1.15rem;">
+                $$P(x) = (x + 2)(x + 2)(x - 2) = (x + 2)^2(x - 2)$$
+              </span>
+            </div>
+            <p class="subtext">Raíces: $x = -2$ (raíz doble) y $x = 2$ (raíz simple).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 9: DIFERENCIA DE CUADRADOS
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">08</span> Caso 3: Diferencia de Cuadrados</h2>
+        <div class="box card-definition">
+          <p>
+            Binomio compuesto por <b>dos términos con signos opuestos</b>, ambos cuadrados perfectos:
+          </p>
+          <div style="text-align: center; margin: 8px 0;">
+            <span style="font-size: 1.35rem; color: #ffffff; background: rgba(56, 189, 248, 0.15); padding: 6px 18px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3);">
+              $$a^2 - b^2 = (a - b)(a + b)$$
+            </span>
+          </div>
+          <p style="font-size: 0.85rem; margin-top: 6px;">Se identifican las bases $a = \sqrt{a^2}$ y $b = \sqrt{b^2}$, escribiendo su producto de suma por resta.</p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Ejemplos Directos</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 16px;">
+              <li><b>$x^2 - 25$:</b> Bases $x$ y $5$ $\implies \mathbf{(x - 5)(x + 5)}$.</li>
+              <li><b>$4x^2 - 81$:</b> Bases $\sqrt{4x^2} = 2x$ y $\sqrt{81} = 9$ $\implies \mathbf{(2x - 9)(2x + 9)}$.</li>
+              <li><b>$x^4 - 16$:</b> Bases $x^2$ y $4$:<br>
+                $(x^2 - 4)(x^2 + 4) = \mathbf{(x - 2)(x + 2)(x^2 + 4)}$.
+              </li>
+            </ul>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">⚠️ Contraejemplo: La Suma de Cuadrados</h4>
+            <p style="font-size: 0.85rem;">
+              La expresión $x^2 + 9$ o $x^2 + 4$ <b>NO es factorizable en el conjunto de los números reales ($\mathbb{R}$)</b>.
+            </p>
+            <p style="font-size: 0.85rem; color: #f87171; text-align: center;">
+              $x^2 + 9 \neq (x + 3)(x + 3) = x^2 + 6x + 9$
+            </p>
+            <p class="subtext">
+              Para anularse necesitaría $x^2 = -9$, lo cual no tiene solución real. Es un polinomio irreducible en $\mathbb{R}$.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 10: TRINOMIO CUADRADO PERFECTO (TCP)
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">09</span> Caso 4: Trinomio Cuadrado Perfecto (TCP)</h2>
+        <div class="box card-definition">
+          <p>
+            Es el resultado de desarrollar el cuadrado de un binomio. Para que un trinomio sea un TCP, debe poseer <b>dos términos que sean cuadrados perfectos</b> y un tercer término que coincida exactamente con el <b>doble producto de sus bases</b>:
+          </p>
+          <div style="text-align: center; margin: 8px 0;">
+            <span class="math-key" style="font-size: 1.25rem;">$$a^2 \pm 2ab + b^2 = (a \pm b)^2$$</span>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Algoritmo de Verificación</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">Identificar dos términos cuadrados: $\sqrt{x^2} = x$ y $\sqrt{9} = 3$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">Calcular el doble producto: $2 \cdot x \cdot 3 = 6x$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">Si coincide con el término restante, es TCP. El signo del binomio es el signo del término del doble producto.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Ejemplos Resueltos</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 16px;">
+              <li><b>$x^2 + 6x + 9$:</b><br>
+                Bases $x$ y $3$; doble producto $2(x)(3) = 6x$ ✔️<br>
+                Resultado: $\mathbf{(x + 3)^2}$.
+              </li>
+              <li><b>$4x^2 - 20x + 25$:</b><br>
+                Bases $\sqrt{4x^2} = 2x$ y $\sqrt{25} = 5$;<br>
+                doble producto $2(2x)(5) = 20x$ con signo menos ✔️<br>
+                Resultado: $\mathbf{(2x - 5)^2}$.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 11: SUMA Y DIFERENCIA DE CUBOS
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">10</span> Suma y Diferencia de Cubos</h2>
+        <div class="box card-theory">
+          <p>Son binomios de la forma $a^3 \pm b^3$. A diferencia de los cuadrados, <b>tanto la diferencia como la suma de cubos son factorizables en $\mathbb{R}$</b>:</p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Diferencia de Cubos</h4>
+            <div style="text-align: center; margin: 8px 0;">
+              <span class="math-key" style="font-size: 1.1rem;">$$a^3 - b^3 = (a - b)(a^2 + ab + b^2)$$</span>
+            </div>
+            <p style="font-size: 0.85rem; margin-top: 6px;"><b>Ejemplo:</b> Factorizar $x^3 - 8$ (bases $x$ y $2$):</p>
+            <div style="font-size: 0.85rem; background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 8px;">
+              $x^3 - 8 = (x - 2)(x^2 + x(2) + 2^2)$<br>
+              $= \mathbf{(x - 2)(x^2 + 2x + 4)}$
+            </div>
+            <p class="subtext">El trinomio resultante siempre tiene $\Delta < 0$ (no se puede seguir factorizando en $\mathbb{R}$).</p>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">2. Suma de Cubos</h4>
+            <div style="text-align: center; margin: 8px 0;">
+              <span class="math-key" style="font-size: 1.1rem;">$$a^3 + b^3 = (a + b)(a^2 - ab + b^2)$$</span>
+            </div>
+            <p style="font-size: 0.85rem; margin-top: 6px;"><b>Ejemplo:</b> Factorizar $x^3 + 27$ (bases $x$ y $3$):</p>
+            <div style="font-size: 0.85rem; background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 8px;">
+              $x^3 + 27 = (x + 3)(x^2 - x(3) + 3^2)$<br>
+              $= \mathbf{(x + 3)(x^2 - 3x + 9)}$
+            </div>
+            <p class="subtext">Notar la alternancia de signos: el binomio lleva $+$, pero el término central del trinomio lleva $-$.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 12: DIVISIÓN DE POLINOMIOS Y ALGORITMO
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">11</span> División Entera de Polinomios</h2>
+        <div class="box card-definition">
+          <p>
+            Dados dos polinomios $P(x)$ (dividendo) y $D(x)$ (divisor con $D(x) \neq 0$), existen únicos polinomios $Q(x)$ (cociente) y $R(x)$ (resto) tales que:
+          </p>
+          <div style="text-align: center; margin: 8px 0;">
+            <span style="font-size: 1.35rem; color: #ffffff; background: rgba(56, 189, 248, 0.15); padding: 6px 18px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3);">
+              $$P(x) = D(x) \cdot Q(x) + R(x)$$
+            </span>
+          </div>
+          <p style="font-size: 0.85rem; margin-top: 6px;">
+            con la condición fundamental sobre el resto: <b>$\mathrm{gr}(R) < \mathrm{gr}(D)$ o bien $R(x) = 0$</b>.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Divisibilidad Exacta ($R = 0$)</h4>
+            <p style="font-size: 0.88rem;">
+              Si el resto es nulo ($R = 0$), decimos que $P(x)$ es <b>divisible</b> por $D(x)$ y se cumple:
+            </p>
+            <p style="text-align: center; font-size: 1rem; color: #34d399;">
+              $P(x) = D(x) \cdot Q(x)$
+            </p>
+            <p class="subtext">
+              ¡Dividir exactamente un polinomio es una forma directa de <b>factorizarlo</b> en el producto de dos polinomios de menor grado!
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">División por $(x - c)$</h4>
+            <p style="font-size: 0.88rem;">
+              Cuando el divisor es de grado 1 de la forma $D(x) = x - c$, el grado del resto debe ser estrictamente menor a 1: por lo tanto, <b>el resto $R$ es una constante numérica</b>.
+            </p>
+            <p class="subtext">
+              Para este caso particular existe un método abreviado extraordinariamente rápido: la <b>Regla de Ruffini</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 13: REGLA DE RUFFINI (DISPOSICIÓN TABULAR)
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">12</span> Regla de Ruffini Paso a Paso</h2>
+        <div class="box box-cyan">
+          <p style="font-size: 0.9rem;">
+            Dividamos $P(x) = 2x^3 - 3x^2 + 4$ por $D(x) = x - 2$.<br>
+            <b>Paso indispensable:</b> Ordenar y completar $P(x) \implies \mathbf{2x^3 - 3x^2 + 0x + 4}$. Divisor: $c = \mathbf{2}$.
+          </p>
+        </div>
+
+        <div class="grid-2-1" style="margin-top: 10px;">
+          <!-- Tabla Ruffini Diseñada -->
+          <div class="box" style="text-align: center; background: rgba(15, 23, 42, 0.9);">
+            <table style="margin: 0 auto; border-collapse: collapse; font-size: 1.1rem; font-family: monospace;">
+              <tr>
+                <td style="padding: 8px 16px; border-right: 2px solid #38bdf8;"></td>
+                <td style="padding: 8px 16px; color: #f8fafc;"><b>2</b></td>
+                <td style="padding: 8px 16px; color: #f8fafc;"><b>-3</b></td>
+                <td style="padding: 8px 16px; color: #fbbf24;"><b>0</b></td>
+                <td style="padding: 8px 16px; color: #f8fafc; border-left: 2px dashed rgba(255,255,255,0.2);"><b>4</b></td>
+              </tr>
+              <tr style="border-bottom: 2px solid #38bdf8;">
+                <td style="padding: 8px 16px; border-right: 2px solid #38bdf8; color: #38bdf8; font-weight: bold;">c = 2</td>
+                <td style="padding: 8px 16px; color: #64748b;">↓</td>
+                <td style="padding: 8px 16px; color: #34d399;">+4</td>
+                <td style="padding: 8px 16px; color: #34d399;">+2</td>
+                <td style="padding: 8px 16px; color: #34d399; border-left: 2px dashed rgba(255,255,255,0.2);">+4</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 16px; border-right: 2px solid #38bdf8;"></td>
+                <td style="padding: 8px 16px; color: #38bdf8; font-weight: bold;">2</td>
+                <td style="padding: 8px 16px; color: #38bdf8; font-weight: bold;">1</td>
+                <td style="padding: 8px 16px; color: #38bdf8; font-weight: bold;">2</td>
+                <td style="padding: 8px 16px; color: #f87171; font-weight: bold; border-left: 2px dashed rgba(255,255,255,0.2); background: rgba(248,113,113,0.15);">R = 8</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Interpretación</h4>
+            <p style="font-size: 0.85rem;">
+              • Bajamos el primer coeficiente ($2$).<br>
+              • Multiplicamos por $c = 2$ ($2 \times 2 = 4$) y sumamos con $-3$ $\implies \mathbf{1}$.<br>
+              • Multiplicamos $1 \times 2 = 2$ y sumamos con $0$ $\implies \mathbf{2}$.<br>
+              • Multiplicamos $2 \times 2 = 4$ y sumamos con $4$ $\implies \mathbf{8}$.
+            </p>
+            <div style="font-size: 0.85rem; margin-top: 8px; color: #38bdf8;">
+              <b>Cociente (un grado menos):</b><br>
+              $Q(x) = 2x^2 + 1x + 2 = \mathbf{2x^2 + x + 2}$<br>
+              <b>Resto:</b> $\mathbf{R = 8}$.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 14: TEOREMA DEL RESTO
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">13</span> Teorema del Resto</h2>
+        <div class="box card-definition">
+          <h4 style="color: #38bdf8;">Enunciado del Teorema</h4>
+          <p>
+            El resto de la división de un polinomio $P(x)$ por un binomio de la forma $(x - a)$ es igual al <b>valor numérico del polinomio evaluado en $x = a$</b>:
+          </p>
+          <div style="text-align: center; margin: 10px 0;">
+            <span class="math-key" style="font-size: 1.4rem;">$$R = P(a)$$</span>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Demostración Algebraica (Muy Simple)</h4>
+            <p style="font-size: 0.85rem;">Por la definición de la división entera:</p>
+            <p style="text-align: center; font-size: 0.9rem;">$P(x) = (x - a) \cdot Q(x) + R$</p>
+            <p style="font-size: 0.85rem;">Si evaluamos la igualdad en $x = a$:</p>
+            <div style="text-align: center; font-size: 0.9rem; color: #38bdf8;">
+              $P(a) = (a - a) \cdot Q(a) + R$<br>
+              $P(a) = 0 \cdot Q(a) + R \implies \mathbf{P(a) = R}$ ∎
+            </div>
+            <p class="subtext">¡Permite conocer el resto sin necesidad de hacer toda la división!</p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Corolario: Raíz y Factor</h4>
+            <p style="font-size: 0.88rem;">
+              <b>$a$ es raíz de $P(x) \iff P(a) = 0 \iff R = 0$</b>
+            </p>
+            <p style="font-size: 0.85rem; margin-top: 6px;">
+              Si el resto es cero, el polinomio es divisible exactamente por $(x - a)$. Por lo tanto:
+            </p>
+            <p style="text-align: center; font-size: 0.95rem; color: #34d399; font-weight: bold;">
+              $P(x) = (x - a) \cdot Q(x)$
+            </p>
+            <p class="subtext">
+              Cada raíz que encontramos nos regala un factor lineal $(x - a)$ para descomponer el polinomio.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 15: TEOREMA DE GAUSS (RAÍCES RACIONALES)
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">14</span> Teorema de Gauss (Raíces Racionales)</h2>
+        <div class="box card-definition">
+          <h4 style="color: #38bdf8;">Búsqueda de Raíces Racionales</h4>
+          <p>
+            Si un polinomio $P(x) = a_n x^n + \dots + a_0$ con <b>coeficientes enteros</b> posee alguna raíz racional de la forma $\frac{p}{q}$ (fracción irreducible), entonces obligatoriamente:
+          </p>
+          <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 20px;">
+            <li><b>$p$</b> es un <b>divisor del término independiente</b> ($a_0$).</li>
+            <li><b>$q$</b> es un <b>divisor del coeficiente principal</b> ($a_n$).</li>
+          </ul>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Ejemplo de Candidatos</h4>
+            <p style="font-size: 0.85rem;">Sea $P(x) = 2x^3 - 3x^2 - 8x - 3$ ($a_3 = 2, a_0 = -3$):</p>
+            <ul style="font-size: 0.85rem; margin-left: 16px;">
+              <li>Divisores de $a_0 = -3$: $p \in \{\pm 1, \pm 3\}$</li>
+              <li>Divisores de $a_n = 2$: $q \in \{\pm 1, \pm 2\}$</li>
+              <li><b>Posibles raíces ($\pm \frac{p}{q}$):</b><br>
+                $\left\{\pm 1, \pm 3, \pm \frac{1}{2}, \pm \frac{3}{2}\right\}$
+              </li>
+            </ul>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Distinción Fundamental</h4>
+            <p style="font-size: 0.85rem;">
+              ⚠️ <b>Candidatos $\neq$ Raíces:</b> La lista anterior solo indica <i>dónde buscar</i>. Para saber cuáles son raíces verdaderas, debemos evaluar $P(\frac{p}{q})$ usando el Teorema del Resto hasta encontrar que dé cero.
+            </p>
+            <p class="subtext" style="margin-top: 8px;">
+              En el ejemplo: evaluamos $P(-1) = 2(-1) - 3(1) + 8 - 3 = 0$ ✔️ ¡$x = -1$ es raíz real confirmada!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 16: ESTRATEGIA INTEGRADORA DE FACTORIZACIÓN
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">15</span> Estrategia Integradora: Factorización Total</h2>
+        <div class="box card-example">
+          <p>Factorizar completamente el polinomio: $\mathbf{P(x) = 2x^3 - 6x^2 - 2x + 6}$</p>
+        </div>
+
+        <div class="step-list" style="margin-top: 10px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Extraer Factor Común Global:</b> Todos los coeficientes son múltiplos de $2$:
+              $$P(x) = 2(x^3 - 3x^2 - x + 3)$$
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Factorizar el paréntesis por Grupos:</b>
+              Agrupamos de a dos: $[x^2(x - 3) - 1(x - 3)] = (x - 3)(x^2 - 1)$.<br>
+              Nos queda: $P(x) = 2(x - 3)(x^2 - 1)$.
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>Aplicar Diferencia de Cuadrados:</b> El factor $(x^2 - 1)$ se descompone en $(x - 1)(x + 1)$.
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b>Expresión Totalmente Factorizada:</b>
+              <div style="margin-top: 4px;">
+                <span class="math-key" style="font-size: 1.15rem;">$$\mathbf{P(x) = 2(x - 3)(x - 1)(x + 1)}$$</span>
+              </div>
+              <small style="color: #34d399;">Raíces reales de $P(x)$: $x_1 = 3, \quad x_2 = 1, \quad x_3 = -1$.</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 17: RAÍCES, MULTIPLICIDAD Y GRÁFICO
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">16</span> Multiplicidad y Comportamiento Gráfico</h2>
+        <div class="grid-2-1">
+          <div>
+            <div class="box box-indigo">
+              <p style="font-size: 0.88rem;">
+                Al factorizar completamente: $P(x) = a_n(x - x_1)^{m_1}(x - x_2)^{m_2}\dots$<br>
+                El exponente $\mathbf{m}$ es la <b>multiplicidad</b> de la raíz $x_i$:
+              </p>
+              <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 16px; margin-top: 8px;">
+                <li>
+                  <b style="color: #38bdf8;">Multiplicidad Impar ($m = 1, 3, 5\dots$):</b><br>
+                  La función cambia de signo. La curva <b>atraviesa / cruza</b> el eje $x$.
+                </li>
+                <li>
+                  <b style="color: #f87171;">Multiplicidad Par ($m = 2, 4, 6\dots$):</b><br>
+                  La función conserva su signo. La curva es tangente y <b>rebota</b> en el eje $x$.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- SVG Diagram of Bounce vs Cross -->
+          <div class="svg-container">
+            <svg class="svg-plot" viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg">
+              <rect width="280" height="220" fill="#0b101b" rx="8" />
+              <!-- Axis x -->
+              <line x1="20" y1="110" x2="260" y2="110" stroke="#94a3b8" stroke-width="2" />
+              <text x="252" y="104" fill="#94a3b8" font-size="11">x</text>
+
+              <!-- Crossing curve (odd multiplicity, e.g. x=70) -->
+              <path d="M 30 170 Q 70 110 110 50" fill="none" stroke="#38bdf8" stroke-width="2.5" />
+              <circle cx="70" cy="110" r="4.5" fill="#38bdf8" />
+              <text x="35" y="40" fill="#38bdf8" font-size="10" font-weight="bold">Multiplicidad 1</text>
+              <text x="45" y="128" fill="#38bdf8" font-size="9">Cruza</text>
+
+              <!-- Bouncing curve (even multiplicity, e.g. x=200) -->
+              <path d="M 150 50 Q 200 110 250 50" fill="none" stroke="#f87171" stroke-width="2.5" />
+              <circle cx="200" cy="110" r="4.5" fill="#f87171" />
+              <text x="170" y="40" fill="#f87171" font-size="10" font-weight="bold">Multiplicidad 2</text>
+              <text x="180" y="128" fill="#f87171" font-size="9">Rebota</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 18: ERRORES FRECUENTES
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">17</span> Errores Frecuentes en Factoreo</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 1: Olvidar ceros en Ruffini</div>
+            <p style="font-size: 0.85rem;">Para dividir $x^3 - 8$ por $(x - 2)$, colocar los coeficientes:</p>
+            <p style="color: #f87171; text-align: center;">$[1, -8]$</p>
+            <p class="subtext">Ignoran las potencias intermedias $x^2$ y $x$.</p>
+          </div>
+          <div class="correct-card">
+            <div class="correct-title">✔️ Procedimiento Correcto</div>
+            <p style="font-size: 0.85rem;">Siempre completar con ceros las potencias ausentes:</p>
+            <p style="color: #34d399; text-align: center;">$x^3 + 0x^2 + 0x - 8 \implies \mathbf{[1, 0, 0, -8]}$</p>
+            <p class="subtext">Si no se completa, el resultado del cociente es completamente erróneo.</p>
+          </div>
+        </div>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 2: Signo del valor $c$ en Ruffini</div>
+            <p style="font-size: 0.85rem;">Al dividir un polinomio por $(x + 3)$, poner en la esquina izquierda:</p>
+            <p style="color: #f87171; text-align: center;">$c = 3$</p>
+            <p class="subtext">Confunden el signo del binomio con la raíz.</p>
+          </div>
+          <div class="correct-card">
+            <div class="correct-title">✔️ Procedimiento Correcto</div>
+            <p style="font-size: 0.85rem;">El divisor es $(x - c)$. Igualando a cero: $x + 3 = 0 \implies \mathbf{c = -3}$:</p>
+            <p style="color: #34d399; text-align: center;">En la regla va siempre el opuesto: $\mathbf{-3}$</p>
+            <p class="subtext">El divisor $x - 2$ lleva $+2$, pero $x + 3$ lleva $-3$.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 19: EJERCITACIÓN GUIADA EN CLASE
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">18</span> Ejercitación Guiada en Clase</h2>
+
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8;">Desafío Colectivo: Factorización Completa</h4>
+          <p style="font-size: 0.9rem;">
+            Descomponer completamente en factores primos reales el polinomio:
+            $$\mathbf{P(x) = x^3 + 2x^2 - 9x - 18}$$
+          </p>
+        </div>
+
+        <details class="math-solution">
+          <summary>🔍 Ver Resolución Paso a Paso</summary>
+          <div class="solution-body">
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Agrupación por pares:</b><br>
+                  $(x^3 + 2x^2) - (9x + 18)$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Factor común en cada término:</b><br>
+                  $x^2(x + 2) - 9(x + 2)$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Extraer el factor $(x + 2)$:</b><br>
+                  $(x + 2)(x^2 - 9)$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">4</span>
+                <div class="step-content">
+                  <b>Diferencia de cuadrados en $(x^2 - 9)$:</b> $(x - 3)(x + 3)$.<br>
+                  <b style="color: #34d399;">Resultado final:</b> $\mathbf{P(x) = (x + 2)(x - 3)(x + 3)}$.<br>
+                  Raíces: $x_1 = -2, \quad x_2 = 3, \quad x_3 = -3$ (todas de multiplicidad 1, cruzan el eje $x$).
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 20: PRÁCTICA AUTÓNOMA GRADUADA
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">19</span> Práctica Autónoma Graduada</h2>
+        <p class="subtext">Resolvé estos ejercicios en tu carpeta antes de consultar la solución verificada:</p>
+
+        <div class="grid-3">
+          <div class="box box-emerald">
+            <span class="badge badge-emerald">Nivel 1 • Básico</span>
+            <p style="font-size: 0.85rem; margin-top: 8px;"><b>Factor Común & Dif. Cuadrados:</b></p>
+            <p style="font-size: 0.85rem;">Factorizar totalmente:</p>
+            <p style="text-align: center; color: #34d399;">$A(x) = 5x^3 - 20x$</p>
+            <details class="math-solution" style="margin-top: 10px;">
+              <summary>Solución N1</summary>
+              <div class="solution-body" style="font-size: 0.8rem;">
+                1. Factor común $5x$: $5x(x^2 - 4)$<br>
+                2. Dif. de cuadrados: $(x^2 - 4) = (x - 2)(x + 2)$<br>
+                <b>$\mathbf{A(x) = 5x(x - 2)(x + 2)}$</b><br>
+                Raíces: $x = 0, 2, -2$.
+              </div>
+            </details>
+          </div>
+
+          <div class="box box-indigo">
+            <span class="badge badge-indigo">Nivel 2 • Intermedio</span>
+            <p style="font-size: 0.85rem; margin-top: 8px;"><b>Gauss & Ruffini:</b></p>
+            <p style="font-size: 0.85rem;">Factorizar:</p>
+            <p style="text-align: center; color: #818cf8;">$B(x) = x^3 - 4x^2 + x + 6$</p>
+            <details class="math-solution" style="margin-top: 10px;">
+              <summary>Solución N2</summary>
+              <div class="solution-body" style="font-size: 0.8rem;">
+                1. Candidatos Gauss: $\pm 1, \pm 2, \pm 3, \pm 6$.<br>
+                2. Probamos $x = -1$: $B(-1) = -1 - 4 - 1 + 6 = 0$ ✔️<br>
+                3. Ruffini con $c = -1$: cociente $x^2 - 5x + 6$.<br>
+                4. Trinomio: $(x - 2)(x - 3)$.<br>
+                <b>$\mathbf{B(x) = (x + 1)(x - 2)(x - 3)}$</b>
+              </div>
+            </details>
+          </div>
+
+          <div class="box box-amber">
+            <span class="badge badge-amber">Nivel 3 • Desafío</span>
+            <p style="font-size: 0.85rem; margin-top: 8px;"><b>Multiplicidad y Grado 4:</b></p>
+            <p style="font-size: 0.85rem;">Dada $C(x) = 3x^4 - 12x^2$:</p>
+            <ol style="font-size: 0.8rem; margin-left: 14px; line-height: 1.4;">
+              <li>Factorizar al máximo.</li>
+              <li>Indicar raíces y multiplicidad.</li>
+            </ol>
+            <details class="math-solution" style="margin-top: 10px;">
+              <summary>Solución N3</summary>
+              <div class="solution-body" style="font-size: 0.8rem;">
+                1. Factor común $3x^2$: $3x^2(x^2 - 4)$<br>
+                2. Dif. de cuadrados: $\mathbf{3x^2(x - 2)(x + 2)}$<br>
+                • $x = 0$ (mult. 2: <b>rebota</b> en el eje $x$).<br>
+                • $x = 2$ y $x = -2$ (mult. 1: <b>cruzan</b> el eje $x$).
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 21: SÍNTESIS FINAL Y CHECKLIST
+           ========================================== -->
+      <section>
+        <h2><span class="section-num">20</span> Síntesis Final y Árbol de Decisión</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Árbol de Decisión de Factoreo</h4>
+            <ol style="font-size: 0.85rem; line-height: 1.6; margin-left: 16px;">
+              <li><b>¿Hay factor común a todos los términos?</b> Si hay, sacalo primero.</li>
+              <li><b>¿Tiene 2 términos (binomio)?</b> Buscar Diferencia de Cuadrados ($a^2 - b^2$) o Cubos ($a^3 \pm b^3$).</li>
+              <li><b>¿Tiene 3 términos (trinomio)?</b> Verificar si es Trinomio Cuadrado Perfecto o resolver con resolvente cuadrática.</li>
+              <li><b>¿Tiene 4 términos?</b> Probar Factor Común por Grupos.</li>
+              <li><b>¿Grado $\ge 3$ sin patrón evidente?</b> Aplicar Teorema de Gauss (candidatos $p/q$) y Regla de Ruffini.</li>
+            </ol>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé extraer el máximo factor común numérico y literal?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Reconozco al instante una diferencia de cuadrados?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Verifico el doble producto antes de afirmar que es TCP?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo completar con ceros antes de aplicar Ruffini?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé relacionar $P(a) = 0$ con que $(x - a)$ es un factor?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Diferencio si una raíz rebota o cruza en la gráfica?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="index.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
+            ← Volver al Menú de Matemática
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Scripts Reveal.js + Math Plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [ RevealMath.KaTeX ],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+  </script>
+</body>
+</html>
