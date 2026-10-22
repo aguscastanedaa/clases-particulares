@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 09: calloc() y realloc() | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Módulo 09</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-emerald">2do Cuatrimestre • Gestión de Memoria • Unidad 9</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">calloc() y realloc()</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Memoria limpia inicializada a cero y redimensionamiento dinámico seguro en tiempo de ejecución
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">calloc() inicializado a 0</span>
+            <span class="badge badge-amber">realloc() redimensionamiento</span>
+            <span class="badge badge-rose">Patrón puntero temporal</span>
+            <span class="badge badge-indigo">Heap reubicado vs in-place</span>
+          </div>
+
+          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de la Clase</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Flexibilidad Total en Memoria</h4>
+            <p style="font-size: 0.88rem;">
+              En la unidad anterior aprendimos a pedir un bloque de tamaño fijo con <code>malloc()</code>. Pero en el mundo real, los datos no siempre tienen un tamaño previsto y a veces necesitamos arrancar con valores limpios.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              Hoy completamos las 4 funciones maestras de memoria dinámica en C: dominarás <code>calloc()</code> para tener memoria limpia y <code>realloc()</code> para agrandar o achicar arreglos dinámicos según haga falta.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Comprender la diferencia exacta entre <code>malloc()</code> y <code>calloc()</code>.</li>
+              <li>Inicializar memoria limpia a cero automáticamente sin bucles manuales.</li>
+              <li>Aprender por qué y cuándo redimensionar un bloque en el Heap.</li>
+              <li>Dominar el funcionamiento interno de <code>realloc()</code> y sus 3 posibles caminos en memoria.</li>
+              <li>Aplicar el <b>patrón de puntero temporal</b> para evitar la temida fuga de memoria (<i>Memory Leak</i>).</li>
+              <li>Agrandar y reducir memoria eficientemente.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: LA TRAMPA DE LA BASURA EN MALLOC -->
+      <section>
+        <h2><span class="section-num">02</span> La Trampa de la "Basura" en <code>malloc()</code></h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">¿Qué hay dentro de la memoria que te da malloc()?</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <code>malloc()</code> sólo reserva las casillas en el Heap; <b>no las limpia ni modifica sus bits</b>. Queda exactamente lo que el programa anterior o el sistema operativo dejaron guardado ahí ("basura informática").
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="code-window">
+            <div class="code-header"><span class="code-title">con_malloc.c</span></div>
+            <div class="code-body"><span class="c-kw">int</span> *v = (<span class="c-kw">int</span> *)<span class="c-fn">malloc</span>(3 * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+<span class="c-cmt">// ¿Qué valor tiene v[0], v[1], v[2]?</span>
+<span class="c-fn">printf</span>(<span class="c-str">"%d %d %d\n"</span>, v[0], v[1], v[2]);
+<span class="c-cmt">// Salida impredecible:</span>
+<span class="c-cmt">// -19284712 32766 0   &lt;-- ¡Basura!</span></div>
+          </div>
+
+          <div>
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px;">Estado en RAM tras malloc:</div>
+            <div class="array-container">
+              <div class="array-cell">
+                <span class="cell-idx">[0]</span>
+                <span class="cell-val" style="color: #f43f5e; font-size: 0.85rem;">-1928</span>
+              </div>
+              <div class="array-cell">
+                <span class="cell-idx">[1]</span>
+                <span class="cell-val" style="color: #f43f5e; font-size: 0.85rem;">32766</span>
+              </div>
+              <div class="array-cell">
+                <span class="cell-idx">[2]</span>
+                <span class="cell-val" style="color: #f43f5e; font-size: 0.85rem;">4501</span>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 10px;">
+              ⚠️ Si olvidás inicializar una posición e intentás acumular con <code>suma += v[i]</code>, el resultado será una cifra disparatada.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: LA SOLUCIÓN CALLOC -->
+      <section>
+        <h2><span class="section-num">03</span> La Solución: <code>calloc()</code></h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Clear Allocation (o Contiguous Allocation)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <b><code>calloc()</code></b> reserva memoria para un arreglo de elementos en el Heap y <b>escribe ceros (bytes en 0x00) en cada posición</b> antes de entregártela.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 14px;">
+          <div class="code-header"><span class="code-title">Sintaxis de calloc()</span></div>
+          <div class="code-body" style="font-size: 1.05rem; text-align: center;">
+            <span class="c-kw">void</span>* <span class="c-fn">calloc</span>(<span class="c-kw">size_t</span> num_elementos, <span class="c-kw">size_t</span> tamano_cada_uno);
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="code-window">
+            <div class="code-header"><span class="code-title">ejemplo_calloc.c</span></div>
+            <div class="code-body"><span class="c-cmt">// Pide 3 enteros e inicializa a 0</span>
+<span class="c-kw">int</span> *v = (<span class="c-kw">int</span> *)<span class="c-fn">calloc</span>(3, <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+<span class="c-fn">printf</span>(<span class="c-str">"%d %d %d\n"</span>, v[0], v[1], v[2]);
+<span class="c-cmt">// Salida garantizada:</span>
+<span class="c-cmt">// 0 0 0</span></div>
+          </div>
+
+          <div>
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px;">Estado en RAM tras calloc:</div>
+            <div class="array-container">
+              <div class="array-cell" style="border-color: #34d399; background: rgba(52, 211, 153, 0.1);">
+                <span class="cell-idx">[0]</span>
+                <span class="cell-val" style="color: #34d399;">0</span>
+              </div>
+              <div class="array-cell" style="border-color: #34d399; background: rgba(52, 211, 153, 0.1);">
+                <span class="cell-idx">[1]</span>
+                <span class="cell-val" style="color: #34d399;">0</span>
+              </div>
+              <div class="array-cell" style="border-color: #34d399; background: rgba(52, 211, 153, 0.1);">
+                <span class="cell-idx">[2]</span>
+                <span class="cell-val" style="color: #34d399;">0</span>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; color: #34d399; margin-top: 10px;">
+              ✅ Todos los bits quedan en 0: para enteros es <code>0</code>, para flotantes es <code>0.0</code> y para punteros es <code>NULL</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: COMPARATIVA MALLOC VS CALLOC -->
+      <section>
+        <h2><span class="section-num">04</span> Comparativa: <code>malloc()</code> vs <code>calloc()</code></h2>
+        <table style="width: 100%; font-size: 0.85rem; margin-top: 16px; border-collapse: collapse;">
+          <thead>
+            <tr style="background: rgba(255, 255, 255, 0.08); text-align: left;">
+              <th style="padding: 10px; border-bottom: 2px solid var(--card-border);">Característica</th>
+              <th style="padding: 10px; border-bottom: 2px solid var(--card-border); color: #38bdf8;"><code>malloc()</code></th>
+              <th style="padding: 10px; border-bottom: 2px solid var(--card-border); color: #34d399;"><code>calloc()</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border);"><b>Argumentos</b></td>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border);">1 argumento: bytes totales <code>(N * sizeof(T))</code></td>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border);">2 argumentos: cantidad y tamaño <code>(N, sizeof(T))</code></td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border);"><b>Contenido inicial</b></td>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border); color: #f43f5e;">Basura residual</td>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border); color: #34d399;">Garantizado todo en ceros (0x00)</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border);"><b>Rendimiento</b></td>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border);">Más rápido (sólo marca el bloque)</td>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border);">Leve sobrecarga por escribir los ceros</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border);"><b>¿Cuándo conviene?</b></td>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border);">Si vas a sobreescribir todo inmediatamente (ej. <code>scanf</code>)</td>
+              <td style="padding: 8px 10px; border-bottom: 1px solid var(--card-border);">Contadores, tablas de frecuencia, matrices vacías</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 10px;"><b>Liberación</b></td>
+              <td style="padding: 8px 10px;">Ambos se liberan exactamente igual: <code>free(ptr);</code></td>
+              <td style="padding: 8px 10px;">Ambos se liberan exactamente igual: <code>free(ptr);</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 6: EL PROBLEMA DE REDIMENSIONAR -->
+      <section>
+        <h2><span class="section-num">05</span> El Problema del Crecimiento Dinámico</h2>
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">¿Qué pasa si el vector se llena?</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Imaginá que creaste un arreglo para 5 notas. El usuario sigue cargando notas y ahora necesita guardar 10.
+          </p>
+        </div>
+
+        <div class="step-list" style="margin-top: 16px;">
+          <div class="step-item">
+            <span class="step-num">❌</span>
+            <div class="step-content">
+              <b>En vectores estáticos (<code>int v[5];</code>):</b> Imposible. El tamaño está sellado en piedra y el programa colapsará si intentás escribir fuera de rango.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">⚠️</span>
+            <div class="step-content">
+              <b>Hacerlo a mano con malloc:</b> Crear un vector nuevo de 10 elementos, copiar elemento por elemento con un bucle <code>for</code>, liberar el viejo con <code>free()</code> y cambiar el puntero... ¡Muy tedioso y propenso a errores!
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">✅</span>
+            <div class="step-content">
+              <b>La solución de C:</b> La función <b><code>realloc()</code></b> hace todo ese trabajo automáticamente en una sola línea.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: LA FUNCIÓN REALLOC -->
+      <section>
+        <h2><span class="section-num">06</span> La Función <code>realloc()</code> (Re-Allocation)</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Cambiar el tamaño de un bloque en el Heap</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Permite <b>expandir</b> o <b>reducir</b> un bloque de memoria previamente reservado con <code>malloc()</code> o <code>calloc()</code>, <b>preservando intactos todos los datos previos</b>.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 14px;">
+          <div class="code-header"><span class="code-title">Sintaxis de realloc()</span></div>
+          <div class="code-body" style="font-size: 1.05rem; text-align: center;">
+            <span class="c-kw">void</span>* <span class="c-fn">realloc</span>(<span class="c-kw">void</span> *puntero_existente, <span class="c-kw">size_t</span> nuevo_tamano_total_bytes);
+          </div>
+        </div>
+
+        <div class="step-list" style="margin-top: 14px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b><code>puntero_existente</code></b>: Puntero devuelto por <code>malloc</code>, <code>calloc</code> o un <code>realloc</code> previo (o <code>NULL</code>, en cuyo caso actúa exactamente como <code>malloc</code>).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b><code>nuevo_tamano_total_bytes</code></b>: El nuevo tamaño TOTAL en bytes (por ejemplo: <code>10 * sizeof(int)</code>, NO la diferencia).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: CÓMO FUNCIONA REALLOC TRAS BAMBALINAS -->
+      <section>
+        <h2><span class="section-num">07</span> ¿Cómo Trabaja <code>realloc()</code> Tras Bambalinas?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px;">
+          Al pedir agrandar un bloque en el Heap pueden ocurrir tres escenarios:
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">A</span>
+            <div class="step-content">
+              <b style="color: #34d399;">Expansión en el lugar (In-Place):</b> Si el espacio contiguo en la memoria está libre, simplemente corre el límite del bloque hacia la derecha. La dirección de memoria <b>no cambia</b>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">B</span>
+            <div class="step-content">
+              <b style="color: #38bdf8;">Reubicación automática:</b> Si detrás de tu bloque hay datos de otra variable, el Heap busca un nuevo bloque libre más grande en otro lugar, <b>copia automáticamente todos tus datos viejos</b>, libera la memoria vieja y devuelve la <b>nueva dirección</b>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">C</span>
+            <div class="step-content">
+              <b style="color: #f43f5e;">Falla por falta de RAM:</b> Si no hay memoria disponible, devuelve <code>NULL</code> y el bloque viejo se mantiene 100% intacto en su lugar original.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: EL ERROR FATAL CON REALLOC -->
+      <section>
+        <h2><span class="section-num">08</span> 🚨 El Error Fatal de Principiante con <code>realloc()</code></h2>
+        <div class="box box-rose">
+          <h4 style="color: #f43f5e; margin-bottom: 4px;">NUNCA hagas esto:</h4>
+          <p style="font-size: 0.95rem; margin: 0; font-family: 'JetBrains Mono', monospace;">
+            v = (<span style="color: #38bdf8;">int</span> *)<span style="color: #f43f5e; font-weight: bold;">realloc</span>(v, nuevo_tamano); <span style="color: #94a3b8;">// ☠️ ¡PELIGRO MORTAL!</span>
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué es catastrófico?</h4>
+            <p style="font-size: 0.85rem;">
+              Si el sistema operativo no tiene suficiente memoria libre para el nuevo tamaño, <code>realloc()</code> devuelve <b><code>NULL</code></b>.
+            </p>
+            <p style="font-size: 0.85rem; color: #f43f5e; margin-top: 6px;">
+              Al asignar directamente <code>v = NULL</code>, <b>perdiste la dirección de la memoria vieja</b>. ¡No podés leer tus datos ni podés hacer <code>free(v)</code>! Causaste una fuga de memoria irrecuperable y perdiste todos tus datos previos.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">✅ La Solución: Puntero Temporal</h4>
+            <div class="code-window" style="margin-top: 6px;">
+              <div class="code-body" style="font-size: 0.84rem;"><span class="c-kw">int</span> *temp = (<span class="c-kw">int</span> *)<span class="c-fn">realloc</span>(v, nuevo_tam);
+
+<span class="c-kw">if</span> (temp == <span class="c-kw">NULL</span>) {
+    <span class="c-fn">printf</span>(<span class="c-str">"Error: memoria insuficiente\n"</span>);
+    <span class="c-cmt">// 'v' sigue sano con sus datos viejos</span>
+} <span class="c-kw">else</span> {
+    v = temp; <span class="c-cmt">// ¡Reasignación segura!</span>
+}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: EJEMPLO COMPLETO VECTOR EXPANDIBLE -->
+      <section>
+        <h2><span class="section-num">09</span> Ejemplo Completo: Vector Auto-Expansible</h2>
+        <div class="code-window">
+          <div class="code-header"><span class="code-title">vector_dinamico_crece.c</span></div>
+          <div class="code-body" style="font-size: 0.84rem;"><span class="c-pp">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pp">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-kw">void</span>) {
+    <span class="c-kw">int</span> capacidad = 2; <span class="c-cmt">// Empezamos con espacio para sólo 2 elementos</span>
+    <span class="c-kw">int</span> cantidad = 0;
+    <span class="c-kw">int</span> *vector = (<span class="c-kw">int</span> *)<span class="c-fn">malloc</span>(capacidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+    <span class="c-kw">if</span> (vector == <span class="c-kw">NULL</span>) <span class="c-kw">return</span> 1;
+
+    <span class="c-kw">int</span> numero;
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingresá números enteros (-1 para terminar):\n"</span>);
+    <span class="c-kw">while</span> (<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;numero) == 1 &amp;&amp; numero != -1) {
+        <span class="c-kw">if</span> (cantidad == capacidad) { <span class="c-cmt">// ¿Se llenó el vector?</span>
+            capacidad *= 2;          <span class="c-cmt">// Estrategia: duplicar capacidad</span>
+            <span class="c-kw">int</span> *temp = (<span class="c-kw">int</span> *)<span class="c-fn">realloc</span>(vector, capacidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+            <span class="c-kw">if</span> (temp == <span class="c-kw">NULL</span>) {
+                <span class="c-fn">printf</span>(<span class="c-str">"Error al reasignar memoria!\n"</span>);
+                <span class="c-fn">free</span>(vector);
+                <span class="c-kw">return</span> 1;
+            }
+            vector = temp;
+            <span class="c-fn">printf</span>(<span class="c-str">"  [Vector expandido a %d lugares]\n"</span>, capacidad);
+        }
+        vector[cantidad++] = numero;
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"\nIngresaste %d números en total:\n"</span>, cantidad);
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = 0; i &lt; cantidad; i++) <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, vector[i]);
+    <span class="c-fn">printf</span>(<span class="c-str">"\n"</span>);
+
+    <span class="c-fn">free</span>(vector); vector = <span class="c-kw">NULL</span>;
+    <span class="c-kw">return</span> 0;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: REDUCIR MEMORIA CON REALLOC -->
+      <section>
+        <h2><span class="section-num">10</span> Reducir Memoria (Liberar lo que Sobra)</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Ajustar al tamaño exacto</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Imaginá que duplicaste capacidad hasta llegar a 1000 elementos, pero el usuario sólo ingresó 520. Las 480 posiciones sobrantes están ocupando memoria innecesaria en la máquina.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 14px;">
+          <div class="code-header"><span class="code-title">ajuste_exacto.c</span></div>
+          <div class="code-body"><span class="c-cmt">// Reducir el vector a la cantidad exacta de elementos cargados</span>
+<span class="c-kw">int</span> *temp = (<span class="c-kw">int</span> *)<span class="c-fn">realloc</span>(vector, cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+<span class="c-kw">if</span> (temp != <span class="c-kw">NULL</span>) {
+    vector = temp;
+    <span class="c-fn">printf</span>(<span class="c-str">"Memoria optimizada a %d elementos exactos.\n"</span>, cantidad);
+}</div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 14px;">
+          <p style="font-size: 0.88rem; margin: 0;">
+            💡 <b>Nota importante:</b> Al reducir un bloque con <code>realloc()</code>, el sistema operativo libera los bytes excedentes para que otros programas puedan utilizarlos, conservando intactos los primeros <code>cantidad</code> elementos.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: EJERCICIOS PRÁCTICOS -->
+      <section>
+        <h2><span class="section-num">11</span> Desafíos Prácticos en Clase</h2>
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Nivel Básico: Tabla de Frecuencias con calloc()</b><br>
+              <span style="font-size: 0.86rem; color: var(--text-muted);">
+                Pedir al usuario $N$ números entre 0 y 9. Usar <code>calloc(10, sizeof(int))</code> para contar cuántas veces se repitió cada dígito e imprimir los totales.
+              </span>
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Nivel Intermedio: Redimensionamiento Dinámico Seguro</b><br>
+              <span style="font-size: 0.86rem; color: var(--text-muted);">
+                Escribir un programa que reserve memoria para 3 calificaciones con <code>malloc()</code>. Luego, pedir al usuario si desea agregar 2 notas más; redimensionar a 5 usando <code>realloc()</code> con puntero temporal y calcular el promedio final.
+              </span>
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>Nivel Avanzado: Filtrado Dinámico de Números Pares</b><br>
+              <span style="font-size: 0.86rem; color: var(--text-muted);">
+                Dado un vector dinámico original de $N$ números, crear un segundo vector dinámico que comience en tamaño 0 y crezca de a 1 elemento con <code>realloc()</code> cada vez que se encuentre un número par.
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: SOLUCIÓN EJERCICIO 1 -->
+      <section>
+        <h2><span class="section-num">12</span> Solución Desafío 1: Frecuencias con <code>calloc()</code></h2>
+        <div class="code-window">
+          <div class="code-header"><span class="code-title">solucion_frecuencias.c</span></div>
+          <div class="code-body" style="font-size: 0.82rem;"><span class="c-pp">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pp">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-kw">void</span>) {
+    <span class="c-cmt">// calloc inicializa los 10 contadores en 0 automáticamente</span>
+    <span class="c-kw">int</span> *frecuencia = (<span class="c-kw">int</span> *)<span class="c-fn">calloc</span>(10, <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+    <span class="c-kw">if</span> (frecuencia == <span class="c-kw">NULL</span>) <span class="c-kw">return</span> 1;
+
+    <span class="c-kw">int</span> num;
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingresá dígitos del 0 al 9 (-1 para salir):\n"</span>);
+    <span class="c-kw">while</span> (<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;num) == 1 &amp;&amp; num != -1) {
+        <span class="c-kw">if</span> (num &gt;= 0 &amp;&amp; num &lt;= 9) {
+            frecuencia[num]++; <span class="c-cmt">// ¡Seguro porque empezó en 0!</span>
+        }
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"\nFrecuencia de cada dígito:\n"</span>);
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = 0; i &lt; 10; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Dígito %d: %d veces\n"</span>, i, frecuencia[i]);
+    }
+
+    <span class="c-fn">free</span>(frecuencia);
+    frecuencia = <span class="c-kw">NULL</span>;
+    <span class="c-kw">return</span> 0;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: RESUMEN FINAL -->
+      <section>
+        <h2><span class="section-num">13</span> Resumen del Cuarteto de Memoria Dinámica</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. malloc(bytes)</h4>
+            <p style="font-size: 0.85rem;">Reserva memoria rápida en el Heap sin inicializar (deja basura).</p>
+            <h4 style="color: #34d399; margin-top: 10px;">2. calloc(num, size)</h4>
+            <p style="font-size: 0.85rem;">Reserva memoria y pone cada byte en 0x00 (ideal para contadores).</p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">3. realloc(ptr, new_size)</h4>
+            <p style="font-size: 0.85rem;">Agranda o reduce bloques preservando los datos. Usar siempre con puntero auxiliar <code>temp</code>.</p>
+            <h4 style="color: #f43f5e; margin-top: 10px;">4. free(ptr)</h4>
+            <p style="font-size: 0.85rem;">Devuelve la memoria al sistema operativo. Luego hacer <code>ptr = NULL;</code>.</p>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 16px; text-align: center;">
+          <p style="font-size: 0.95rem; margin: 0;">
+            🚀 <b>Próxima Clase (Unidad 10):</b> Vectores dinámicos completos, estructuras y el Proyecto Final Integrador del 2do Cuatrimestre.
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: true,
+      transition: 'slide',
+      transitionSpeed: 'fast'
+    });
+  </script>
+</body>
+</html>

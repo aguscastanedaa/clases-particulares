@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 07: Introducción a la Memoria Dinámica | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Módulo 07</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-cyan">2do Cuatrimestre • Gestión de Memoria • Unidad 7</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Memoria Dinámica y Punteros</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            El verdadero poder de C: la diferencia entre Stack y Heap, direcciones de memoria, punteros y el valor seguro NULL
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-indigo">Stack vs Heap</span>
+            <span class="badge badge-emerald">Direcciones de Memoria</span>
+            <span class="badge badge-amber">Punteros (*ptr)</span>
+            <span class="badge badge-rose">Puntero NULL</span>
+          </div>
+
+          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué la memoria estática no alcanza?</h4>
+            <p style="font-size: 0.88rem;">
+              En los arreglos estáticos estamos obligados a fijar el tamaño de antemano: <code>int alumnos[100];</code>.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              Si el usuario necesita registrar 5 alumnos, desperdiciamos 95 casilleros de RAM. Si vienen 101 alumnos, el programa colapsa. La **memoria dinámica** le permite a tu programa solicitarle al sistema operativo la cantidad exacta de memoria que necesita en tiempo de ejecución.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Comprender la diferencia vital entre el **Stack (Pila)** y el **Heap (Montón)**.</li>
+              <li>Aprender qué es una **dirección de memoria hexadecimal**.</li>
+              <li>Entender qué es un **puntero** con la analogía de la brújula.</li>
+              <li>Dominar el operador <code>&amp;</code> (dirección) y el operador <code>*</code> (desreferenciación).</li>
+              <li>Aprender por qué inicializar siempre con <b><code>NULL</code></b> salva vidas.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: STACK VS HEAP -->
+      <section>
+        <h2><span class="section-num">02</span> Las Dos Zonas de Memoria: Stack vs Heap</h2>
+        <div class="memory-architecture">
+          <div class="memory-zone stack">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 6px;">1. El Stack (Pila)</h4>
+            <ul style="font-size: 0.82rem; line-height: 1.5; margin-left: 16px; color: #cbd5e1;">
+              <li>Memoria **automática** gestionada por C.</li>
+              <li>Aquí viven las variables locales y funciones.</li>
+              <li>Ultrarrápida, pero de **tamaño pequeño y fijo**.</li>
+              <li>Las variables mueren automáticamente al salir de la función.</li>
+            </ul>
+          </div>
+
+          <div class="pointer-arrow">
+            <span>puntero</span>
+            <span style="font-size: 1.5rem;">➔</span>
+            <span>apunta al</span>
+          </div>
+
+          <div class="memory-zone heap">
+            <h4 style="color: var(--accent-emerald); margin-bottom: 6px;">2. El Heap (Montículo)</h4>
+            <ul style="font-size: 0.82rem; line-height: 1.5; margin-left: 16px; color: #cbd5e1;">
+              <li>El gran **depósito de memoria libre** del sistema operativo.</li>
+              <li>Enorme capacidad bajo demanda.</li>
+              <li>El programador decide **cuándo pedir memoria y cuándo liberarla**.</li>
+              <li>Persiste en el tiempo hasta que uses <code>free()</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: QUÉ ES UN PUNTERO -->
+      <section>
+        <h2><span class="section-num">03</span> ¿Qué es un Puntero?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición Sencilla</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Un <b>puntero</b> es una variable común y corriente cuya única misión en la vida es **guardar la dirección de memoria de otra variable**.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">La Analogía del Papel con la Dirección</h4>
+            <p style="font-size: 0.86rem;">
+              Imaginá que tu amigo tiene una caja con dinero guardada en su casa.
+            </p>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Un puntero no es la caja con el dinero: es un **papelito donde anotaste la dirección de la casa de tu amigo** (ej. <i>"Calle Rivadavia 450"</i>). Con ese papelito podés llegar a la casa, mirar qué hay adentro de la caja o cambiar su contenido.
+            </p>
+          </div>
+
+          <div class="memory-diagram">
+            <div class="memory-box">
+              <div class="memory-address">&amp;x = 0x1000</div>
+              <div class="memory-label">int x</div>
+              <div class="memory-value">42</div>
+            </div>
+            <div style="display: flex; align-items: center; color: var(--accent-amber); font-weight: bold;">
+              ▲ apuntado por
+            </div>
+            <div class="memory-box" style="border-color: var(--accent-amber);">
+              <div class="memory-address">&amp;ptr = 0x2000</div>
+              <div class="memory-label">int *ptr</div>
+              <div class="memory-value" style="color: var(--accent-amber); font-size: 0.88rem;">0x1000</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: LOS DOS OPERADORES: & Y * -->
+      <section>
+        <h2><span class="section-num">04</span> Los Dos Operadores Mágicos: <code>&amp;</code> y <code>*</code></h2>
+        <div class="comparison-box">
+          <div class="correct-card" style="background: rgba(18, 30, 52, 0.85); border-color: var(--accent-cyan);">
+            <div class="correct-title" style="color: var(--accent-cyan); font-size: 1rem;">
+              Operador Dirección: &amp; (Address-of)
+            </div>
+            <p style="font-size: 0.86rem; color: #cbd5e1;">
+              Se lee: <b>"la dirección de..."</b>. Averigua en qué celda de la memoria RAM vive una variable.
+            </p>
+            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; color: #38bdf8;">
+              int x = 10;<br>
+              int *ptr = &amp;x; // Guarda la dirección de x
+            </div>
+          </div>
+
+          <div class="correct-card" style="background: rgba(20, 40, 32, 0.85); border-color: var(--accent-emerald);">
+            <div class="correct-title" style="color: var(--accent-emerald); font-size: 1rem;">
+              Operador Desreferencia: * (Indirection)
+            </div>
+            <p style="font-size: 0.86rem; color: #cbd5e1;">
+              Se lee: <b>"el valor que está en la dirección apuntada por..."</b>. Te permite viajar a la celda y cambiarla.
+            </p>
+            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; color: #34d399;">
+              *ptr = 25; // Modifica 'x' indirectamente.<br>
+              // ¡Ahora x vale 25!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: EL PUNTERO SEGURO NULL -->
+      <section>
+        <h2><span class="section-num">05</span> El Puntero Seguro: <code>NULL</code></h2>
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Peligro: Punteros Salvajes (Wild Pointers)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Si declarás un puntero sin inicializar: <code>int *ptr;</code>, la variable contiene **basura**. Apunta a cualquier sector aleatorio de tu computadora. Si intentás escribir <code>*ptr = 5;</code>, podés corromper memoria vital del sistema operativo y congelar tu PC.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 14px;">
+          <div class="code-header">
+            <span class="code-title">puntero_seguro.c</span>
+            <span class="code-badge">Buena Práctica</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-cmt">// Siempre inicializar los punteros a NULL (dirección 0 segura):</span>
+    <span class="c-kw">int</span> *ptr = <span class="c-kw">NULL</span>;
+
+    <span class="c-kw">if</span> (ptr == <span class="c-kw">NULL</span>)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"El puntero está vacío, no apunta a ningún lado todavía.\n"</span>);
+    }
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">06</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Puntos Clave</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Stack:</b> Memoria rápida, automática, para variables locales.</li>
+              <li><b>Heap:</b> Depósito de memoria libre para asignación dinámica.</li>
+              <li><b>Puntero:</b> Variable que guarda la dirección de otra celda.</li>
+              <li><b>&amp; (Ampersand):</b> Averigua la dirección de una variable.</li>
+              <li><b>* (Asterisco):</b> Accede al contenido de la celda apuntada.</li>
+              <li><b>NULL:</b> Dirección nula segura para evitar punteros salvajes.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué diferencia hay entre el Stack y el Heap?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué se almacena adentro de una variable declarada con <code>*</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Para qué sirve el operador <code>&amp;</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué nunca debemos dejar un puntero sin inicializar a <code>NULL</code>?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="06-estructuras-struct.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Estructuras (struct)
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Índice 2do Cuatrimestre
+          </a>
+          <a href="08-reserva-liberacion-malloc-free.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: malloc(), free() y sizeof() →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

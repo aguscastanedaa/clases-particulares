@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 05: Diagonales de una Matriz | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Módulo 05</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-purple">2do Cuatrimestre • Estructuras de Datos • Unidad 5</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Diagonales de una Matriz</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Geometría y relaciones algebraicas de índices: diagonal principal (i == j), secundaria (i + j == N - 1) y algoritmos O(N)
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">Matrices Cuadradas (NxN)</span>
+            <span class="badge badge-emerald">Diagonal Principal [i][i]</span>
+            <span class="badge badge-amber">Secundaria [i][N-1-i]</span>
+            <span class="badge badge-purple">Optimización a 1 Solo Bucle</span>
+          </div>
+
+          <div class="box box-purple" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Condición Previa Obligatoria</h4>
+            <p style="font-size: 0.88rem;">
+              Las diagonales solo tienen sentido geométrico en **matrices cuadradas**, es decir, aquellas que tienen exactamente la misma cantidad de filas que de columnas ($N \times N$).
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              En álgebra lineal, gráficos por computadora (transformaciones 3D) y videojuegos, las operaciones con diagonales son el pan de cada día.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Identificar los elementos de la <b>Diagonal Principal</b>.</li>
+              <li>Comprender la regla matemática de la principal: <b><code>i == j</code></b>.</li>
+              <li>Identificar los elementos de la <b>Diagonal Secundaria</b>.</li>
+              <li>Descubrir la relación algebraica secundaria: <b><code>i + j == N - 1</code></b>.</li>
+              <li>Aprender a procesar diagonales con **un solo bucle eficiente**.</li>
+              <li>Conocer las zonas triangulares (superior e inferior).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: MAPA VISUAL DE AMBAS DIAGONALES -->
+      <section>
+        <h2><span class="section-num">02</span> Mapa Visual: Las Dos Diagonales</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">Observá una matriz cuadrada de 3x3:</p>
+
+        <div style="text-align: center;">
+          <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <!-- Fila 0 -->
+            <div class="matrix-cell diag-main">
+              1
+              <span class="coord">[0][0]</span>
+            </div>
+            <div class="matrix-cell">
+              2
+              <span class="coord">[0][1]</span>
+            </div>
+            <div class="matrix-cell diag-sec">
+              3
+              <span class="coord">[0][2]</span>
+            </div>
+
+            <!-- Fila 1 -->
+            <div class="matrix-cell">
+              4
+              <span class="coord">[1][0]</span>
+            </div>
+            <div class="matrix-cell diag-both">
+              5
+              <span class="coord">[1][1]</span>
+            </div>
+            <div class="matrix-cell">
+              6
+              <span class="coord">[1][2]</span>
+            </div>
+
+            <!-- Fila 2 -->
+            <div class="matrix-cell diag-sec">
+              7
+              <span class="coord">[2][0]</span>
+            </div>
+            <div class="matrix-cell">
+              8
+              <span class="coord">[2][1]</span>
+            </div>
+            <div class="matrix-cell diag-main">
+              9
+              <span class="coord">[2][2]</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; justify-content: center; font-size: 0.82rem; margin-top: 8px;">
+          <span style="color: var(--accent-cyan);">■ Azul: Diagonal Principal</span>
+          <span style="color: var(--accent-amber);">■ Amarillo: Diagonal Secundaria</span>
+          <span style="color: var(--accent-purple);">■ Violeta: Elemento Central (Compartido)</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: DIAGONAL PRINCIPAL -->
+      <section>
+        <h2><span class="section-num">03</span> La Diagonal Principal: <code>i == j</code></h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Regla Matemática</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Un elemento pertenece a la diagonal principal si y solo si su número de fila es **exactamente igual** a su número de columna: <b><code>fila == columna</code></b>.
+          </p>
+        </div>
+
+        <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 10px;">
+          En una matriz de $N=3$, los casilleros son: <code>[0][0]</code>, <code>[1][1]</code> y <code>[2][2]</code>.
+        </p>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Forma Ineficiente (Doble bucle)</div>
+            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #f87171;">
+              for (int i=0; i&lt;N; i++) {<br>
+              &nbsp;&nbsp;for (int j=0; j&lt;N; j++) {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;if (i == j) suma += m[i][j];<br>
+              &nbsp;&nbsp;}<br>
+              }
+            </div>
+            <p style="font-size: 0.76rem; color: #fecaca; margin-top: 4px;">
+              Da $N^2$ vueltas y descarta casi todas.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Forma Eficiente (1 Solo Bucle)</div>
+            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #a7f3d0;">
+              for (int i = 0; i &lt; N; i++) {<br>
+              &nbsp;&nbsp;suma += m[i][i]; // ¡Directo!<br>
+              }
+            </div>
+            <p style="font-size: 0.76rem; color: #a7f3d0; margin-top: 4px;">
+              Va directo al blanco en solo $N$ vueltas ($O(N)$).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: DIAGONAL SECUNDARIA -->
+      <section>
+        <h2><span class="section-num">04</span> La Diagonal Secundaria: <code>i + j == N - 1</code></h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">La Relación Inversa</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            A medida que bajamos una fila (<code>i</code> aumenta), la columna debe retroceder un paso (<code>j</code> disminuye). La suma de ambas coordenadas es siempre constante: <b><code>i + j = N - 1</code></b>.
+          </p>
+        </div>
+
+        <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 12px;">
+          Despejando <code>j</code> obtenemos la fórmula mágica: <b><code>j = N - 1 - i</code></b>.
+        </p>
+
+        <table class="trace-table" style="margin-top: 10px;">
+          <thead>
+            <tr>
+              <th>Fila (i)</th>
+              <th>Cálculo de j: (3 - 1 - i)</th>
+              <th>Coordenada Resultante</th>
+              <th>Valor en el gráfico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>i = 0</code></td>
+              <td><code>j = 2 - 0 = 2</code></td>
+              <td><code>m[0][2]</code></td>
+              <td><b>3</b> (esquina superior derecha)</td>
+            </tr>
+            <tr>
+              <td><code>i = 1</code></td>
+              <td><code>j = 2 - 1 = 1</code></td>
+              <td><code>m[1][1]</code></td>
+              <td><b>5</b> (centro)</td>
+            </tr>
+            <tr>
+              <td><code>i = 2</code></td>
+              <td><code>j = 2 - 2 = 0</code></td>
+              <td><code>m[2][0]</code></td>
+              <td><b>7</b> (esquina inferior izquierda)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 6: CÓDIGO EFICIENTE DE AMBAS DIAGONALES -->
+      <section>
+        <h2><span class="section-num">05</span> Código Profesional: Suma de Diagonales en O(N)</h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">suma_diagonales.c</span>
+            <span class="code-badge">Un Solo Bucle</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#define</span> N <span class="c-num">3</span>
+
+<span class="c-kw">int</span> sumaPrincipal = <span class="c-num">0</span>;
+<span class="c-kw">int</span> sumaSecundaria = <span class="c-num">0</span>;
+
+<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; N; i++)
+{
+    sumaPrincipal  += matriz[i][i];         <span class="c-cmt">// Diagonal Principal</span>
+    sumaSecundaria += matriz[i][N - <span class="c-num">1</span> - i]; <span class="c-cmt">// Diagonal Secundaria</span>
+}
+
+<span class="c-fn">printf</span>(<span class="c-str">"Suma Diagonal Principal:  %d\n"</span>, sumaPrincipal);
+<span class="c-fn">printf</span>(<span class="c-str">"Suma Diagonal Secundaria: %d\n"</span>, sumaSecundaria);</div>
+        </div>
+
+        <div class="box box-emerald">
+          <p style="margin: 0; font-size: 0.85rem;">
+            ⚡ <b>¡Máxima Eficiencia!:</b> Calculamos ambas diagonales en simultáneo en una sola pasada de $N$ ciclos, sin necesidad de anidar bucles ni usar condicionales.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: TRIANGULARES SUPERIOR E INFERIOR -->
+      <section>
+        <h2><span class="section-num">06</span> Zonas Triangulares de una Matriz</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">La diagonal principal divide a toda matriz cuadrada en dos mitades simétricas:</p>
+
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Triangular Superior: i &lt; j</h4>
+            <p style="font-size: 0.85rem;">
+              Son todos los elementos que están estrictamente **por encima** de la diagonal principal.
+            </p>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">
+              La columna es mayor que la fila (ej. <code>[0][1]</code>, <code>[0][2]</code>, <code>[1][2]</code>).
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Triangular Inferior: i &gt; j</h4>
+            <p style="font-size: 0.85rem;">
+              Son todos los elementos que están estrictamente **por debajo** de la diagonal principal.
+            </p>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">
+              La fila es mayor que la columna (ej. <code>[1][0]</code>, <code>[2][0]</code>, <code>[2][1]</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">07</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Fórmulas Clave</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Requisito:</b> La matriz debe ser cuadrada ($N \times N$).</li>
+              <li><b>Diagonal Principal:</b> <code>matriz[i][i]</code> (cuando <code>i == j</code>).</li>
+              <li><b>Diagonal Secundaria:</b> <code>matriz[i][N - 1 - i]</code> (cuando <code>i + j == N - 1</code>).</li>
+              <li><b>Eficiencia:</b> Se resuelven con 1 solo bucle <code>for</code> en $O(N)$.</li>
+              <li><b>Triangulares:</b> <code>i &lt; j</code> (arriba) e <code>i &gt; j</code> (abajo).</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué una matriz de 3x4 no tiene diagonal principal estricta?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Cuál es la coordenada secundaria en la fila 0 de una matriz 4x4?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué es mejor usar <code>matriz[i][i]</code> antes que un doble bucle con <code>if (i==j)</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué celda comparten ambas diagonales en una matriz de orden impar (3x3)?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="04-matrices-bidimensionales.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Matrices Bidimensionales
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Índice 2do Cuatrimestre
+          </a>
+          <a href="06-estructuras-struct.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: Estructuras (struct) →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

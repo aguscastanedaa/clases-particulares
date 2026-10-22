@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2do Cuatrimestre | Programación en C | Clases Particulares</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b12;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #34d399;
+      /* Emerald theme for 2do cuatrimestre */
+      --accent-glow: rgba(52, 211, 153, 0.2);
+      --accent-cyan: #38bdf8;
+      --accent-purple: #c084fc;
+      --accent-amber: #fbbf24;
+      --badge-bg: rgba(52, 211, 153, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 10% 12%, rgba(52, 211, 153, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 90% 88%, rgba(56, 189, 248, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(192, 132, 252, 0.04) 0%, transparent 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 50px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 920px;
+    }
+
+    .breadcrumb-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb-nav a:hover {
+      color: var(--accent);
+    }
+
+    .breadcrumb-sep {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .breadcrumb-current {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--badge-bg);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      padding: 4px 14px;
+      border-radius: 9999px;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.55;
+    }
+
+    .semester-switch-banner {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .switch-text h4 {
+      font-size: 0.98rem;
+      color: #f8fafc;
+      margin-bottom: 3px;
+    }
+
+    .switch-text p {
+      font-size: 0.84rem;
+      color: #94a3b8;
+    }
+
+    .switch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.18);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .switch-btn:hover {
+      background: #38bdf8;
+      color: #041019;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      font-size: 0.82rem;
+    }
+
+    .stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      color: var(--text-muted);
+    }
+
+    .stat-badge b {
+      color: var(--accent);
+    }
+
+    .search-box {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      color: var(--text-main);
+      font-size: 0.98rem;
+      margin-bottom: 26px;
+      outline: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 28px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .lesson-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .lesson-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px 22px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .lesson-card:hover {
+      transform: translateX(4px);
+      border-color: rgba(52, 211, 153, 0.45);
+      background: rgba(16, 44, 38, 0.7);
+      box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.6), 0 0 18px var(--accent-glow);
+    }
+
+    .lesson-info {
+      flex: 1;
+      margin-right: 18px;
+    }
+
+    .lesson-num {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: var(--badge-bg);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+
+    .lesson-info h3 {
+      font-size: 1.12rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #ffffff;
+    }
+
+    .lesson-info p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .tag-list {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag-item {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .lesson-action {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+      transition: gap 0.2s ease;
+    }
+
+    .lesson-card:hover .lesson-action {
+      gap: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .lesson-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .lesson-action {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="breadcrumb-nav">
+      <a href="../../index.html">Portal Académico</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../index.html">Programación en C</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current">2do Cuatrimestre</span>
+    </div>
+
+    <header>
+      <div class="header-badge">Segundo Cuatrimestre • Estructuras de Datos y Memoria</div>
+      <h1>Programación en C: 2do Cuatrimestre</h1>
+      <p>
+        Vectores, ordenamiento, matrices bidimensionales, diagonales, estructuras compuestas (<code>struct</code>) y
+        gestión profesional de la memoria en el Heap (<code>malloc</code>, <code>free</code>, <code>calloc</code>,
+        <code>realloc</code>).
+      </p>
+      <div class="stats-bar">
+        <span class="stat-badge"><b>10</b> Unidades Temáticas</span>
+        <span class="stat-badge"><b>Heap &amp; Punteros</b> Avanzado</span>
+      </div>
+    </header>
+
+    <div class="semester-switch-banner">
+      <div class="switch-text">
+        <h4>¿Necesitás repasar las bases de programación?</h4>
+        <p>El 1er Cuatrimestre cubre desde cero: variables, tipos de datos, printf/scanf, condicionales if/else,
+          funciones y bucles while/for.</p>
+      </div>
+      <a href="../1er-cuatrimestre/index.html" class="switch-btn">Ir al 1er Cuatrimestre →</a>
+    </div>
+
+    <input type="text" id="filter" class="search-box"
+      placeholder="Buscar por tema o concepto (ej. vectores, matrices, diagonales, struct, malloc, realloc, burbuja)...">
+
+    <!-- BLOQUE 1: VECTORES Y ALGORITMOS -->
+    <div class="section-title">Bloque I: Vectores y Algoritmos Fundamentales</div>
+    <div class="lesson-list">
+
+      <!-- UNIDAD 1 -->
+      <a href="presentaciones/01-vectores-estaticos.html" class="lesson-card"
+        data-search="vectores estaticos arreglos arrays indices 0 a n-1 casillas ram contigua corchetes desbordamiento">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 01</span>
+          <h3>¿Qué es un vector? Vectores estáticos</h3>
+          <p>La necesidad de colecciones homogéneas en RAM, declaración con corchetes, indexación de 0 a N-1,
+            inicialización y el peligro del desbordamiento (Out of Bounds).</p>
+          <div class="tag-list">
+            <span class="tag-item">int v[N]</span>
+            <span class="tag-item">Índices 0 a N-1</span>
+            <span class="tag-item">Memoria Contigua</span>
+            <span class="tag-item">Stack RAM</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 2 -->
+      <a href="presentaciones/02-recorridos-busquedas-vectores.html" class="lesson-card"
+        data-search="recorridos for busqueda lineal acumulador suma promedio maximo minimo scanf &v[i]">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 02</span>
+          <h3>Recorridos, búsquedas y procesamiento de vectores</h3>
+          <p>El patrón universal del bucle for, carga desde teclado con scanf(&amp;v[i]), acumuladores de sumatoria y
+            promedio, cálculo de máximo/mínimo y búsqueda lineal secuencial.</p>
+          <div class="tag-list">
+            <span class="tag-item">for (int i = 0; i &lt; N; i++)</span>
+            <span class="tag-item">Búsqueda Lineal</span>
+            <span class="tag-item">Máximo / Mínimo</span>
+            <span class="tag-item">Acumuladores</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 3 -->
+      <a href="presentaciones/03-ordenamiento-vectores.html" class="lesson-card"
+        data-search="ordenamiento vectores metodo burbuja bubble sort swap variable temporal bucles anidados optimizacion bandera">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 03</span>
+          <h3>Ordenamiento de vectores: El Método Burbuja</h3>
+          <p>Mecánica intuitiva de intercambio (swap) con variable auxiliar temporal, pasadas completas con bucles
+            anidados, optimización con bandera huboCambio y complejidad.</p>
+          <div class="tag-list">
+            <span class="tag-item">Bubble Sort</span>
+            <span class="tag-item">Swap con temp</span>
+            <span class="tag-item">Bucles Anidados</span>
+            <span class="tag-item">Optimización Flag</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+    </div>
+
+    <!-- BLOQUE 2: MATRICES Y ESTRUCTURAS -->
+    <div class="section-title">Bloque II: Matrices Bidimensionales y Registros (Struct)</div>
+    <div class="lesson-list">
+
+      <!-- UNIDAD 4 -->
+      <a href="presentaciones/04-matrices-bidimensionales.html" class="lesson-card"
+        data-search="matrices bidimensionales filas columnas m[i][j] bucles anidados coordenadas row-major totales">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 04</span>
+          <h3>Matrices y recorridos bidimensionales</h3>
+          <p>Tablas con filas y columnas [FILAS][COLS], orden Row-Major en RAM física, doble bucle for(i, j), carga
+            interactiva y cálculo de subtotales por fila y columna.</p>
+          <div class="tag-list">
+            <span class="tag-item">m[FILAS][COLS]</span>
+            <span class="tag-item">Row-Major Order</span>
+            <span class="tag-item">Doble bucle (i, j)</span>
+            <span class="tag-item">Subtotales</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 5 -->
+      <a href="presentaciones/05-diagonales-matriz.html" class="lesson-card"
+        data-search="diagonales matriz cuadrada diagonal principal i == j diagonal secundaria i + j == n - 1 optimizacion o(n) triangular">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 05</span>
+          <h3>Diagonales de una matriz: Principal y Secundaria</h3>
+          <p>Matrices cuadradas (N × N), condición de diagonal principal (i == j), deducción matemática de secundaria (j
+            = N - 1 - i), optimización a un solo bucle O(N) y zonas triangulares.</p>
+          <div class="tag-list">
+            <span class="tag-item">Matriz Cuadrada N×N</span>
+            <span class="tag-item">Principal (i == j)</span>
+            <span class="tag-item">Secundaria (i + j = N-1)</span>
+            <span class="tag-item">Bucle Único O(N)</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 6 -->
+      <a href="presentaciones/06-estructuras-struct.html" class="lesson-card"
+        data-search="estructuras struct typedef operador punto . campos heterogeneos registros arreglos de estructuras curso[i]">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 06</span>
+          <h3>Estructuras (struct) y vectores de estructuras</h3>
+          <p>Superando la limitación homogénea: registros con campos de distinto tipo, simplificación con typedef,
+            operador punto (.) y arreglos de registros para bases de datos en memoria.</p>
+          <div class="tag-list">
+            <span class="tag-item">typedef struct</span>
+            <span class="tag-item">Operador Punto (.)</span>
+            <span class="tag-item">Campos Heterogéneos</span>
+            <span class="tag-item">Vector de Structs</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+    </div>
+
+    <!-- BLOQUE 3: MEMORIA DINÁMICA -->
+    <div class="section-title">Bloque III: Gestión Profesional de Memoria Dinámica</div>
+    <div class="lesson-list">
+
+      <!-- UNIDAD 7 -->
+      <a href="presentaciones/07-introduccion-memoria-dinamica.html" class="lesson-card"
+        data-search="introduccion memoria dinamica stack vs heap punteros *ptr direccion & ampersand operador indireccion null">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 07</span>
+          <h3>Introducción a la memoria dinámica y punteros</h3>
+          <p>Por qué los vectores estáticos tienen límites, arquitectura de RAM (Stack automático vs Heap flexible),
+            variables puntero (*), operador dirección (&amp;) y puntero nulo NULL.</p>
+          <div class="tag-list">
+            <span class="tag-item">Stack vs Heap</span>
+            <span class="tag-item">Punteros (*ptr)</span>
+            <span class="tag-item">Dirección (&amp;)</span>
+            <span class="tag-item">Puntero NULL</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 8 -->
+      <a href="presentaciones/08-reserva-liberacion-malloc-free.html" class="lesson-card"
+        data-search="malloc free sizeof reserva liberacion heap validacion ptr == null memory leak fuga memoria dangling pointer">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 08</span>
+          <h3>Reserva y liberación de memoria: malloc(), free() y sizeof()</h3>
+          <p>Cálculo portable con sizeof(), solicitud de bytes en el Heap con malloc(), regla obligatoria de validación
+            contra NULL, liberación con free() y prevención de fugas de memoria.</p>
+          <div class="tag-list">
+            <span class="tag-item">sizeof(tipo)</span>
+            <span class="tag-item">malloc(bytes)</span>
+            <span class="tag-item">free(ptr)</span>
+            <span class="tag-item">Memory Leaks</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 9 -->
+      <a href="presentaciones/09-calloc-realloc.html" class="lesson-card"
+        data-search="calloc realloc memoria limpia ceros redimensionar in-place reubicacion patron puntero temporal temp fugar memoria">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 09</span>
+          <h3>calloc() y realloc(): Memoria limpia y redimensionamiento</h3>
+          <p>Inicialización en ceros con calloc(), expansión y contracción de bloques con realloc(), los 3 caminos en el
+            Heap y el patrón de puntero temporal para evitar pérdidas de datos.</p>
+          <div class="tag-list">
+            <span class="tag-item">calloc(num, size)</span>
+            <span class="tag-item">realloc(ptr, new_size)</span>
+            <span class="tag-item">Puntero temp auxiliar</span>
+            <span class="tag-item">Reubicación en Heap</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 10 -->
+      <a href="presentaciones/10-vectores-dinamicos.html" class="lesson-card"
+        data-search="vectores dinamicos integracion proyecto final estructuras heap ordenamiento busqueda menu interactivo c99">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 10</span>
+          <h3>Vectores dinámicos e integración de conceptos</h3>
+          <p>Estructura tríada (puntero, capacidad y cantidad), arreglos dinámicos de structs, algoritmos sobre Heap y
+            el proyecto final: Sistema interactivo completo de gestión en C.</p>
+          <div class="tag-list">
+            <span class="tag-item">Vector Dinámico</span>
+            <span class="tag-item">Structs en Heap</span>
+            <span class="tag-item">Burbuja Dinámica</span>
+            <span class="tag-item">Proyecto Integrador</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+    </div>
+  </div>
+
+  <script>
+    const filterInput = document.getElementById('filter');
+    const cards = document.querySelectorAll('.lesson-card');
+    const sections = document.querySelectorAll('.section-title');
+
+    filterInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+
+      cards.forEach(card => {
+        const text = (card.textContent + ' ' + (card.getAttribute('data-search') || '')).toLowerCase();
+        if (!q || text.includes(q)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Hide section titles if all cards in the section are hidden
+      sections.forEach(sec => {
+        let sibling = sec.nextElementSibling;
+        if (sibling && sibling.classList.contains('lesson-list')) {
+          const visibleCards = sibling.querySelectorAll('.lesson-card:not([style*="display: none"])');
+          sec.style.display = visibleCards.length > 0 ? 'flex' : 'none';
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

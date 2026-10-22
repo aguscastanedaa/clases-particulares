@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 03: Ordenamiento de Vectores | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Módulo 03</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-amber">2do Cuatrimestre • Estructuras de Datos • Unidad 3</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Ordenamiento de Vectores</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Poniendo orden en el caos: el Método de la Burbuja (Bubble Sort), la operación swap y búsqueda binaria
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">Operación Swap</span>
+            <span class="badge badge-emerald">Método de la Burbuja</span>
+            <span class="badge badge-amber">Optimización con Flags</span>
+            <span class="badge badge-purple">Búsqueda Binaria</span>
+          </div>
+
+          <div class="box box-amber" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué ordenar es tan importante?</h4>
+            <p style="font-size: 0.88rem;">
+              Buscá una palabra en un diccionario de 100.000 términos. Si el diccionario estuviera desordenado, tendrías que leer palabra por palabra (búsqueda lineal). Te llevaría horas.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              Como el diccionario está **ordenado alfabéticamente**, abrís al medio y encontrás la palabra en 5 segundos. Ordenar datos es uno de los problemas más estudiados de las ciencias de la computación.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Comprender la **operación de intercambio (swap)** con variable auxiliar.</li>
+              <li>Entender la intuición física del **Método de la Burbuja**.</li>
+              <li>Dominar los **bucles anidados** necesarios para ordenar.</li>
+              <li>Seguir una simulación paso a paso con traza gráfica.</li>
+              <li>Optimizar el algoritmo con una **bandera booleana** inteligente.</li>
+              <li>Entender por qué un vector ordenado permite la **Búsqueda Binaria**.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: LA OPERACIÓN DE INTERCAMBIO (SWAP) -->
+      <section>
+        <h2><span class="section-num">02</span> El Bloque Fundamental: El Intercambio (Swap)</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Si tenemos dos vasos (uno con jugo y otro con agua) y queremos intercambiarlos, <b>necesitamos un tercer vaso vacío</b>:</p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ El Error Fatal sin Variable Temporal</div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              a = b; // El valor original de 'a' SE PIERDE<br>
+              b = a; // Ahora ambos tienen el valor de 'b'
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px;">
+              ¡Sobreescribiste <code>a</code> antes de guardar una copia de su valor! Ambos quedan iguales.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ La Técnica Swap con 'temp'</div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #a7f3d0; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              int temp = a; // 1. Guardamos copia de 'a'<br>
+              a = b;        // 2. Pasamos 'b' a la caja 'a'<br>
+              b = temp;     // 3. Pasamos la copia vieja a 'b'
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin-top: 6px;">
+              ¡Intercambio 100% perfecto sin perder ningún dato!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EL MÉTODO DE LA BURBUJA -->
+      <section>
+        <h2><span class="section-num">03</span> La Intuición del Método de la Burbuja (Bubble Sort)</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">La Metáfora Física</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Imaginá un tubo con agua. Las burbujas de aire más livianas van subiendo a la superficie, mientras que los elementos más pesados se hunden al fondo.
+          </p>
+        </div>
+
+        <div class="step-list" style="margin-top: 14px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Comparaciones Adyacentes:</b> Recorremos el vector de izquierda a derecha comparando parejas vecinas: <code>vector[j]</code> contra <code>vector[j + 1]</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Intercambio si están desordenados:</b> Si el de la izquierda es mayor que el de la derecha (<code>vector[j] &gt; vector[j + 1]</code>), ¡los intercambiamos con <code>temp</code>!
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>Al final de la primera pasada:</b> El número más grande de todo el vector habrá "burbujeado" inevitablemente hasta la última posición.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b>Repetir:</b> Repetimos el proceso $N - 1$ veces para que todos los elementos encuentren su lugar.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: SIMULACIÓN PASO A PASO -->
+      <section>
+        <h2><span class="section-num">04</span> Simulación Visual: Pasada a Pasada</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">Ordenemos de menor a mayor el vector: <code>{5, 1, 4, 2, 8}</code>:</p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">P1</span>
+            <div class="step-content">
+              <b>Vector inicial:</b> <code>[5, 1, 4, 2, 8]</code><br>
+              • Compara 5 y 1 ➔ ¿5 &gt; 1? Sí ➔ Swap ➔ <code>[1, 5, 4, 2, 8]</code><br>
+              • Compara 5 y 4 ➔ ¿5 &gt; 4? Sí ➔ Swap ➔ <code>[1, 4, 5, 2, 8]</code><br>
+              • Compara 5 y 2 ➔ ¿5 &gt; 2? Sí ➔ Swap ➔ <code>[1, 4, 2, 5, 8]</code><br>
+              • Compara 5 y 8 ➔ ¿5 &gt; 8? No ➔ Queda igual ➔ <code>[1, 4, 2, 5, 8]</code><br>
+              <span style="color: var(--accent-emerald);">✓ El 8 (el mayor) ya está en su lugar final definitivo.</span>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">P2</span>
+            <div class="step-content">
+              <b>Segunda pasada:</b><br>
+              • Compara 1 y 4 (Ok), 4 y 2 (Swap ➔ <code>[1, 2, 4, 5, 8]</code>), 4 y 5 (Ok).<br>
+              <span style="color: var(--accent-emerald);">✓ El 5 y el 8 ya están en su lugar.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: CÓDIGO C DE BUBBLE SORT -->
+      <section>
+        <h2><span class="section-num">05</span> El Código en C de Bubble Sort</h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">bubble_sort.c</span>
+            <span class="code-badge">Doble Bucle</span>
+          </div>
+          <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">ordenarBurbuja</span>(<span class="c-kw">int</span> v[], <span class="c-kw">int</span> n)
+{
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; n - <span class="c-num">1</span>; i++)          <span class="c-cmt">// Bucle de pasadas</span>
+    {
+        <span class="c-kw">for</span> (<span class="c-kw">int</span> j = <span class="c-num">0</span>; j &lt; n - <span class="c-num">1</span> - i; j++)  <span class="c-cmt">// Bucle de comparaciones adyacentes</span>
+        {
+            <span class="c-kw">if</span> (v[j] &gt; v[j + <span class="c-num">1</span>])             <span class="c-cmt">// Si están invertidos...</span>
+            {
+                <span class="c-kw">int</span> temp = v[j];              <span class="c-cmt">// Intercambio</span>
+                v[j] = v[j + <span class="c-num">1</span>];
+                v[j + <span class="c-num">1</span>] = temp;
+            }
+        }
+    }
+}</div>
+        </div>
+
+        <p style="font-size: 0.82rem; color: var(--accent-cyan);">
+          💡 Notá el <code>j &lt; n - 1 - i</code>: como en cada pasada <code>i</code> el elemento mayor ya queda colocado al final, no hace falta volver a compararlo en las pasadas siguientes.
+        </p>
+      </section>
+
+      <!-- SLIDE 7: OPTIMIZACIÓN CON BANDERA -->
+      <section>
+        <h2><span class="section-num">06</span> Optimización con Bandera Booleana</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">¿Qué pasa si el vector ya estaba casi ordenado desde el principio?</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">burbuja_optimizada.c</span>
+            <span class="code-badge">Con Flag stdbool.h</span>
+          </div>
+          <div class="code-body"><span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; n - <span class="c-num">1</span>; i++)
+{
+    <span class="c-kw">bool</span> huboCambio = <span class="c-kw">false</span>; <span class="c-cmt">// Asumimos que ya está ordenado</span>
+
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> j = <span class="c-num">0</span>; j &lt; n - <span class="c-num">1</span> - i; j++)
+    {
+        <span class="c-kw">if</span> (v[j] &gt; v[j + <span class="c-num">1</span>])
+        {
+            <span class="c-kw">int</span> temp = v[j];
+            v[j] = v[j + <span class="c-num">1</span>];
+            v[j + <span class="c-num">1</span>] = temp;
+            huboCambio = <span class="c-kw">true</span>; <span class="c-cmt">// Hubo al menos un swap</span>
+        }
+    }
+
+    <span class="c-cmt">// Si en toda la pasada no hubo ningún cambio, ¡ya terminamos!</span>
+    <span class="c-kw">if</span> (!huboCambio)
+    {
+        <span class="c-kw">break</span>;
+    }
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: INTRODUCCIÓN A LA BÚSQUEDA BINARIA -->
+      <section>
+        <h2><span class="section-num">07</span> El Premio de Ordenar: Búsqueda Binaria</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Dividir y Vencer en O(log N)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Una vez que un vector está ordenado, **no hace falta buscar uno por uno**. Podemos aplicar la <b>Búsqueda Binaria</b>:
+          </p>
+        </div>
+
+        <div class="step-list" style="margin-top: 14px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              Miramos el **elemento del medio**.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              ¿Es el buscado? ¡Golazo, terminamos en 1 solo paso!
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              ¿El buscado es **menor**? Descartamos toda la mitad derecha. Repetimos solo en la mitad izquierda.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              ¿El buscado es **mayor**? Descartamos toda la mitad izquierda. Repetimos solo en la mitad derecha.
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--accent-amber); margin-top: 8px;">
+          ⚡ ¡En un arreglo de 1.000.000 de datos, la búsqueda binaria encuentra cualquier número en como máximo **20 comparaciones**!
+        </p>
+      </section>
+
+      <!-- SLIDE 9: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">08</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Síntesis</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Swap:</b> Requiere variable <code>temp</code> para no perder datos.</li>
+              <li><b>Bubble Sort:</b> Compara parejas adyacentes e intercambia.</li>
+              <li><b>Doble bucle:</b> Uno para las pasadas y otro para las parejas.</li>
+              <li><b>Optimización con Flag:</b> Evita pasadas inútiles si ya está ordenado.</li>
+              <li><b>Búsqueda binaria:</b> Solo funciona en vectores previamente ordenados.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué falla el intercambio si no uso la variable <code>temp</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué elemento queda siempre en su posición final tras la primera pasada?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Cómo ayuda una bandera booleana a acelerar el algoritmo?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué la búsqueda binaria exige que el vector esté ordenado?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="02-recorridos-busquedas-vectores.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Recorridos y Búsquedas
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Índice 2do Cuatrimestre
+          </a>
+          <a href="04-matrices-bidimensionales.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: Matrices Bidimensionales →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

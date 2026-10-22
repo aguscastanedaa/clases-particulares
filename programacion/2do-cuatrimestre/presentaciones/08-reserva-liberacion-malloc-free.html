@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 08: malloc, free y sizeof | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Módulo 08</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-emerald">2do Cuatrimestre • Gestión de Memoria • Unidad 8</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">malloc(), free() y sizeof()</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            El ciclo de vida en el Heap: pedir memoria con precisión, verificar contra NULL y prevenir fugas de memoria
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">sizeof() en bytes</span>
+            <span class="badge badge-emerald">malloc() &amp; Heap</span>
+            <span class="badge badge-rose">Validación ptr == NULL</span>
+            <span class="badge badge-amber">free() &amp; Memory Leaks</span>
+          </div>
+
+          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Gestionar la memoria como un profesional</h4>
+            <p style="font-size: 0.88rem;">
+              En lenguajes de alto nivel como Python o JavaScript hay un "recolector de basura" (*Garbage Collector*) que limpia la memoria automáticamente en segundo plano.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              En <b>C tenés control absoluto sobre la máquina</b>: vos pedís los bytes exactos al sistema operativo y vos sos el responsable de devolverlos cuando ya no se usan. Es un gran poder y una gran responsabilidad.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Utilizar el operador <b><code>sizeof()</code></b> para calcular bytes portables.</li>
+              <li>Reservar memoria dinámica con <b><code>malloc()</code></b>.</li>
+              <li>Aplicar la regla obligatoria de validación contra <b><code>NULL</code></b>.</li>
+              <li>Liberar la memoria devuelta con <b><code>free()</code></b>.</li>
+              <li>Evitar punteros colgantes (*dangling pointers*).</li>
+              <li>Comprender qué es una **Fuga de Memoria (*Memory Leak*)** y cómo evitarla.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: EL OPERADOR SIZEOF -->
+      <section>
+        <h2><span class="section-num">02</span> El Operador <code>sizeof()</code></h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Por qué no escribir "4" a mano?</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            El tamaño de los tipos de datos puede variar entre un procesador de 32 bits, 64 bits o un microcontrolador embebido. El operador <b><code>sizeof()</code></b> calcula en tiempo de compilación el **tamaño exacto en bytes** en la computadora actual.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 14px;">
+          <div class="code-header"><span class="code-title">tamanios.c</span></div>
+          <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"Tamaño de int:    %zu bytes\n"</span>, <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));    <span class="c-cmt">// Típicamente 4</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Tamaño de float:  %zu bytes\n"</span>, <span class="c-kw">sizeof</span>(<span class="c-kw">float</span>));  <span class="c-cmt">// Típicamente 4</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Tamaño de double: %zu bytes\n"</span>, <span class="c-kw">sizeof</span>(<span class="c-kw">double</span>)); <span class="c-cmt">// Típicamente 8</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Tamaño de char:   %zu bytes\n"</span>, <span class="c-kw">sizeof</span>(<span class="c-kw">char</span>));   <span class="c-cmt">// Siempre 1</span></div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: LA FUNCIÓN MALLOC -->
+      <section>
+        <h2><span class="section-num">03</span> La Función <code>malloc()</code> (Memory Allocation)</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Pedir Memoria al Heap</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Pertenece a la biblioteca <b><code>&lt;stdlib.h&gt;</code></b>. Le solicita al sistema operativo un bloque contiguo de memoria en el Heap de la cantidad de bytes que le pidas.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 14px;">
+          <div class="code-body" style="font-size: 1.02rem; text-align: center;">
+            <span class="c-kw">int</span> *ptr = (<span class="c-kw">int</span> *)<span class="c-fn">malloc</span>(<span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+          </div>
+        </div>
+
+        <div class="step-list" style="margin-top: 12px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b><code>sizeof(int)</code></b> ➔ Calcula cuántos bytes se necesitan (4 bytes).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b><code>malloc(...)</code></b> ➔ Busca un bloque libre de 4 bytes en el Heap y devuelve un puntero genérico (<code>void *</code>) a su primer byte.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b><code>(int *)</code></b> ➔ Convierte (castea) el puntero genérico a un puntero a entero para asignarlo a <code>int *ptr</code>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: VALIDACIÓN OBLIGATORIA CONTRA NULL -->
+      <section>
+        <h2><span class="section-num">04</span> La Regla de Oro: Chequear contra <code>NULL</code></h2>
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">La RAM de la computadora no es infinita</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Si el sistema operativo se queda sin memoria o no puede concederte el bloque solicitado, <code>malloc()</code> **devuelve <code>NULL</code>**.
+          </p>
+        </div>
+
+        <div class="comparison-box" style="margin-top: 12px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Código Suicida (Sin validar)</div>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #f87171;">
+              int *ptr = malloc(sizeof(int));<br>
+              *ptr = 42; // Si falló malloc, ptr es NULL ➔ CRASH!
+            </div>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Código Blindado y Seguro</div>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #a7f3d0;">
+              int *ptr = (int *)malloc(sizeof(int));<br>
+              if (ptr == NULL) {<br>
+              &nbsp;&nbsp;printf("Error: Sin memoria\n");<br>
+              &nbsp;&nbsp;return 1; // Terminamos seguro<br>
+              }<br>
+              *ptr = 42; // 100% seguro
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: LIBERACIÓN CON FREE -->
+      <section>
+        <h2><span class="section-num">05</span> Liberación con <code>free()</code></h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Devolver lo que no es tuyo</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            A diferencia de las variables del Stack (que mueren solas), la memoria del Heap **queda ocupada para siempre** hasta que tu programa finalice o la liberes explícitamente con <b><code>free(ptr);</code></b>.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 14px;">
+          <div class="code-header"><span class="code-title">liberacion_correcta.c</span></div>
+          <div class="code-body"><span class="c-cmt">// 1. Liberamos la memoria en el Heap:</span>
+<span class="c-fn">free</span>(ptr);
+
+<span class="c-cmt">// 2. Buena práctica profesional inmediata:</span>
+ptr = <span class="c-kw">NULL</span>;</div>
+        </div>
+
+        <p style="font-size: 0.84rem; color: var(--accent-cyan); margin-top: 8px;">
+          💡 <b>¿Por qué poner ptr = NULL?:</b> Porque después de <code>free</code>, la variable <code>ptr</code> sigue teniendo anotada la dirección vieja en el Heap (puntero colgante / <i>dangling pointer</i>). Poniendo <code>ptr = NULL;</code> neutralizamos el puntero para no usarlo por error.
+        </p>
+      </section>
+
+      <!-- SLIDE 7: QUÉ ES UN MEMORY LEAK -->
+      <section>
+        <h2><span class="section-num">06</span> ¿Qué es una Fuga de Memoria (Memory Leak)?</h2>
+        <div class="box box-purple">
+          <h4 style="color: #c084fc; margin-bottom: 4px;">La Pesadilla de los Servidores</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Una **fuga de memoria (*memory leak*)** ocurre cuando reservás memoria con <code>malloc()</code> y luego perdés el puntero que la apuntaba **sin haber llamado a <code>free()</code>**.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 12px;">
+          <div class="code-header"><span class="code-title">fuga_ejemplo.c</span></div>
+          <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">funcionConFuga</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">int</span> *p = (<span class="c-kw">int</span> *)<span class="c-fn">malloc</span>(<span class="c-num">1000000</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>)); <span class="c-cmt">// 4 MB pedidos</span>
+    <span class="c-cmt">// Hacemos cosas...</span>
+
+    <span class="c-cmt">// ¡FALTA free(p)! Al salir de la función, 'p' se destruye en el Stack,</span>
+    <span class="c-cmt">// pero los 4 MB en el Heap quedan flotando e inaccesibles para siempre.</span>
+}</div>
+        </div>
+
+        <p style="font-size: 0.82rem; color: var(--accent-rose);">
+          ⚠️ Si esta función se ejecuta 1.000 veces (ej. cada vez que un usuario hace clic), el programa consumirá 4 GB de RAM hasta que el sistema operativo lo cierre forzosamente.
+        </p>
+      </section>
+
+      <!-- SLIDE 8: PROGRAMA COMPLETO DE CICLO DE VIDA -->
+      <section>
+        <h2><span class="section-num">07</span> Programa Completo: El Ciclo de Vida Perfecto</h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">ciclo_dinamico.c</span>
+            <span class="code-badge">Estándar Seguro</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-cmt">// 1. Reserva en el Heap</span>
+    <span class="c-kw">int</span> *edad = (<span class="c-kw">int</span> *)<span class="c-fn">malloc</span>(<span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+    <span class="c-cmt">// 2. Validación obligatoria</span>
+    <span class="c-kw">if</span> (edad == <span class="c-kw">NULL</span>)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"Error: No se pudo asignar memoria.\n"</span>);
+        <span class="c-kw">return</span> <span class="c-num">1</span>;
+    }
+
+    <span class="c-cmt">// 3. Uso mediante desreferenciación (*)</span>
+    *edad = <span class="c-num">17</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"La edad guardada en el Heap es: %d\n"</span>, *edad);
+
+    <span class="c-cmt">// 4. Liberación limpia</span>
+    <span class="c-fn">free</span>(edad);
+    edad = <span class="c-kw">NULL</span>;
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">08</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Reglas de Oro</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><code>sizeof(tipo)</code>: Calcula bytes exactos portables.</li>
+              <li><code>malloc(bytes)</code>: Pide memoria contigua en el Heap.</li>
+              <li><b>Siempre verificar:</b> <code>if (ptr == NULL)</code> antes de usar.</li>
+              <li><code>free(ptr)</code>: Devuelve la memoria al sistema.</li>
+              <li><b>Neutralizar:</b> <code>ptr = NULL;</code> tras el free.</li>
+              <li><b>Memory Leak:</b> Olvidar el free y perder el puntero.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué biblioteca debo incluir para poder usar <code>malloc</code> y <code>free</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué valor devuelve <code>malloc</code> cuando no hay memoria libre?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué es peligroso usar <code>*ptr</code> sin chequear si es <code>NULL</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué ocurre si mi programa pide memoria y nunca la libera?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="07-introduccion-memoria-dinamica.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Introducción a Memoria Dinámica
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Índice 2do Cuatrimestre
+          </a>
+          <a href="09-calloc-realloc.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: calloc() y realloc() →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

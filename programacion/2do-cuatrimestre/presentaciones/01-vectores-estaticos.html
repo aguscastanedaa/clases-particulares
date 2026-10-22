@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 01: Vectores y Vectores Estáticos | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Módulo 01</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-cyan">2do Cuatrimestre • Estructuras de Datos • Unidad 1</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Vectores y Vectores Estáticos</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            El salto a las colecciones de datos: cómo almacenar decenas de valores en memoria contigua con arreglos unidimensionales
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-indigo">¿Qué es un Vector?</span>
+            <span class="badge badge-emerald">Índices Base Cero (0 a N-1)</span>
+            <span class="badge badge-amber">Memoria Contigua</span>
+            <span class="badge badge-rose">Peligro Out of Bounds</span>
+          </div>
+
+          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué las variables simples ya no alcanzan?</h4>
+            <p style="font-size: 0.88rem;">
+              En el 1er cuatrimestre trabajamos con variables individuales: <code>int edad;</code>, <code>float precio;</code>.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              Pero imaginá que te piden calcular el promedio de <b>50 alumnos</b>. ¿Declararías <code>nota1, nota2, ..., nota50;</code>? Sería una pesadilla inmanejable. No podrías usar bucles para procesarlas ni ordenarlas.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Comprender qué es un <b>vector (array / arreglo unidimensional)</b>.</li>
+              <li>Declarar e inicializar vectores estáticos en C.</li>
+              <li>Entender la <b>regla de oro de los índices: base cero (0 a N-1)</b>.</li>
+              <li>Visualizar cómo se almacenan las celdas en la memoria RAM.</li>
+              <li>Aprender a acceder y modificar elementos individuales.</li>
+              <li>Evitar el error más grave de C: el <b>desbordamiento de límites (*out of bounds*)</b>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: QUÉ ES UN VECTOR -->
+      <section>
+        <h2><span class="section-num">02</span> ¿Qué es un Vector en C?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición Formal</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Un <b>vector</b> (también llamado <i>array</i> o <i>arreglo unidimensional</i>) es una estructura de datos que permite almacenar una <b>colección ordenada de elementos del mismo tipo</b> en posiciones de memoria contiguas bajo un único nombre identificador.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. Homogéneo</h4>
+            <p style="font-size: 0.85rem;">
+              Todos sus casilleros deben guardar el <b>mismo tipo de dato</b> (todos <code>int</code>, o todos <code>float</code>, o todos <code>char</code>).
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. Tamaño Fijo (Estático)</h4>
+            <p style="font-size: 0.85rem;">
+              En un vector estático, la cantidad de elementos se define al programarlo y <b>no puede crecer ni achicarse</b> en ejecución.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Memoria Contigua</h4>
+            <p style="font-size: 0.85rem;">
+              En la RAM, los elementos están pegados uno al lado del otro en una hilera perfecta, sin huecos intermedios.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: LA ANALOGÍA VISUAL -->
+      <section>
+        <h2><span class="section-num">03</span> Analogía: El Casillero Postal Numerado</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Un vector es como una hilera de casilleros postales en un edificio:</p>
+
+        <div class="array-container">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Índice [0]</span>
+            <div class="array-cell">8</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Índice [1]</span>
+            <div class="array-cell">7</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Índice [2]</span>
+            <div class="array-cell highlight">10</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Índice [3]</span>
+            <div class="array-cell">6</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Índice [4]</span>
+            <div class="array-cell">9</div>
+          </div>
+        </div>
+
+        <div class="box box-purple" style="margin-top: 14px;">
+          <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+            <li>El nombre de todo el mueble es <b><code>notas</code></b>.</li>
+            <li>El número entre corchetes <code>[ ]</code> es el <b>índice o posición</b>.</li>
+            <li>Lo que está adentro de cada casillero es el <b>valor almacenado</b>.</li>
+            <li>Para cambiar o consultar el casillero 2: <code>notas[2] = 10;</code></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: DECLARACIÓN E INICIALIZACIÓN -->
+      <section>
+        <h2><span class="section-num">04</span> Declaración e Inicialización en C</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Las diferentes maneras de dar vida a un vector en código:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">declaracion_vectores.c</span>
+            <span class="code-badge">Sintaxis C</span>
+          </div>
+          <div class="code-body"><span class="c-cmt">// 1. Declarar sin inicializar (los 5 casilleros tienen 'basura'):</span>
+<span class="c-kw">int</span> edades[<span class="c-num">5</span>];
+
+<span class="c-cmt">// 2. Declarar con valores iniciales explícitos usando llaves { }:</span>
+<span class="c-kw">int</span> notas[<span class="c-num">5</span>] = {<span class="c-num">8</span>, <span class="c-num">7</span>, <span class="c-num">10</span>, <span class="c-num">6</span>, <span class="c-num">9</span>};
+
+<span class="c-cmt">// 3. Inicializar TODO el vector a ceros (buena práctica profesional):</span>
+<span class="c-kw">int</span> ceros[<span class="c-num">10</span>] = {<span class="c-num">0</span>};
+
+<span class="c-cmt">// 4. El compilador cuenta los elementos por vos:</span>
+<span class="c-kw">int</span> pares[] = {<span class="c-num">2</span>, <span class="c-num">4</span>, <span class="c-num">6</span>, <span class="c-num">8</span>}; <span class="c-cmt">// Reserva automáticamente 4 elementos</span></div>
+        </div>
+
+        <div class="box box-amber">
+          <p style="margin: 0; font-size: 0.86rem;">
+            ⚠️ <b>¡Cuidado con el tamaño estático!:</b> En C estándar convencional, el número dentro de los corchetes al declarar un vector estático debe ser una constante o valor conocido al compilar (ej: <code>#define TAM 10</code> o un número literal como <code>5</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: LA REGLA DE ORO: BASE CERO -->
+      <section>
+        <h2><span class="section-num">05</span> La Regla de Oro: Índices en Base Cero</h2>
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">¡En C siempre se empieza a contar desde el 0!</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Si un vector tiene <b>5 elementos</b>, sus posiciones válidas son <b>0, 1, 2, 3 y 4</b>. ¡El índice 5 NO pertenece al vector!
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué desde 0 y no desde 1?</h4>
+            <p style="font-size: 0.85rem;">
+              En C, el nombre del vector representa la <b>dirección del primer casillero en RAM</b>. El índice indica el **desplazamiento (offset)**:
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; color: #a5b4fc; margin-top: 6px;">
+              Dirección = Inicio + (índice × 4 bytes)
+            </div>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 6px;">
+              Para el primer elemento nos desplazamos 0 bytes. Por eso es <code>vector[0]</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">El resumen de límites</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Primer elemento: <code>vector[0]</code></li>
+              <li>Segundo elemento: <code>vector[1]</code></li>
+              <li>Tercer elemento: <code>vector[2]</code></li>
+              <li><b>Último elemento de tamaño N: <code>vector[N - 1]</code></b></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: EL ERROR OUT OF BOUNDS -->
+      <section>
+        <h2><span class="section-num">06</span> El Peligro Mortal: Desbordamiento (Out of Bounds)</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Acceso Fuera de Límites</div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              int notas[5] = {8, 7, 10, 6, 9};<br><br>
+              // ¡ERROR GRAVÍSIMO!<br>
+              notas[5] = 10;
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px;">
+              <b>¿Qué hace C?:</b> C <b>NO comprueba los límites</b> para ser ultrarrápido. Intentará escribir en el casillero 6 de la memoria, sobreescribiendo otra variable o destruyendo datos del programa (<i>Buffer Overflow / Crash</i>).
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Rango Correcto y Seguro</div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #a7f3d0; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              int notas[5] = {8, 7, 10, 6, 9};<br><br>
+              // El último es el índice 4:<br>
+              notas[4] = 10;
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin-top: 6px;">
+              Cualquier índice $0 \le i \le 4$ es 100% seguro y válido en un vector de tamaño 5.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: CÓMO SE VE EN LA RAM -->
+      <section>
+        <h2><span class="section-num">07</span> El Vector en la Memoria RAM Física</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">Si declaramos <code>int arr[3] = {15, 20, 25};</code> en una máquina de 32 bits (4 bytes por int):</p>
+
+        <div class="memory-diagram">
+          <div class="memory-box">
+            <div class="memory-address">Dirección: 0x1000</div>
+            <div class="memory-label">arr[0] <span class="memory-type">4B</span></div>
+            <div class="memory-value">15</div>
+          </div>
+          <div class="memory-box">
+            <div class="memory-address">Dirección: 0x1004</div>
+            <div class="memory-label">arr[1] <span class="memory-type">4B</span></div>
+            <div class="memory-value">20</div>
+          </div>
+          <div class="memory-box">
+            <div class="memory-address">Dirección: 0x1008</div>
+            <div class="memory-label">arr[2] <span class="memory-type">4B</span></div>
+            <div class="memory-value">25</div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🔍 <b>Observá las direcciones:</b> <code>0x1000</code>, <code>0x1004</code>, <code>0x1008</code>... ¡Avanzan exactamente de a 4 bytes! Cada elemento se aloja inmediatamente al lado del anterior. El operador <code>sizeof(arr)</code> devolverá $3 \times 4 = 12\text{ bytes}$.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: PROGRAMA COMPLETO DE EJEMPLO -->
+      <section>
+        <h2><span class="section-num">08</span> Programa Completo: Carga y Acceso Manual</h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">vector_basico.c</span>
+            <span class="code-badge">Programa Completo</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-cmt">// Declaramos un vector de 3 temperaturas</span>
+    <span class="c-kw">float</span> temp[<span class="c-num">3</span>];
+
+    temp[<span class="c-num">0</span>] = <span class="c-num">18.5f</span>;
+    temp[<span class="c-num">1</span>] = <span class="c-num">22.0f</span>;
+    temp[<span class="c-num">2</span>] = <span class="c-num">15.3f</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Temperatura inicial: %.1f °C\n"</span>, temp[<span class="c-num">0</span>]);
+    <span class="c-fn">printf</span>(<span class="c-str">"Temperatura final:   %.1f °C\n"</span>, temp[<span class="c-num">2</span>]);
+
+    <span class="c-cmt">// Modificamos el segundo casillero:</span>
+    temp[<span class="c-num">1</span>] = <span class="c-num">25.0f</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Temperatura corregida: %.1f °C\n"</span>, temp[<span class="c-num">1</span>]);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">09</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Puntos Cardinales</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Vector:</b> Colección contigua y homogénea de datos.</li>
+              <li><b>Declaración:</b> <code>tipo nombre[TAMANIO];</code></li>
+              <li><b>Índices:</b> Siempre van desde <code>0</code> hasta <code>TAMANIO - 1</code>.</li>
+              <li><b>Vector estático:</b> Tamaño inmutable tras compilar.</li>
+              <li><b>Out of bounds:</b> Desbordamiento no advertido por C; causa bugs graves.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cuál es el primer y el último índice de un vector de 10 elementos?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué no es posible guardar un float adentro de un vector de enteros?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué peligro tiene intentar acceder a <code>arr[5]</code> si fue declarado de tamaño 5?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Cómo inicializo todos los casilleros de un vector en cero?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Volver al 2do Cuatrimestre
+          </a>
+          <a href="02-recorridos-busquedas-vectores.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 12px;">
+            Siguiente: Recorridos y Búsquedas →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

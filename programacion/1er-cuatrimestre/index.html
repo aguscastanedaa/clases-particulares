@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1er Cuatrimestre | Programación en C | Clases Particulares</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b12;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --accent-emerald: #34d399;
+      --accent-purple: #c084fc;
+      --accent-amber: #fbbf24;
+      --badge-bg: rgba(56, 189, 248, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 10% 12%, rgba(56, 189, 248, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 90% 88%, rgba(99, 102, 241, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(52, 211, 153, 0.04) 0%, transparent 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 50px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 920px;
+    }
+
+    .breadcrumb-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb-nav a:hover {
+      color: var(--accent);
+    }
+
+    .breadcrumb-sep {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .breadcrumb-current {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--badge-bg);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      font-size: 0.82rem;
+    }
+
+    .stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      color: var(--text-muted);
+    }
+
+    .stat-badge b {
+      color: var(--accent);
+    }
+
+    .switch-cuatrimestre-banner {
+      background: rgba(23, 34, 60, 0.75);
+      border: 1px solid rgba(192, 132, 252, 0.25);
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin: 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .switch-cuatrimestre-banner p {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      margin: 0;
+    }
+
+    .switch-cuatrimestre-banner a {
+      color: var(--accent-purple);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.86rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(192, 132, 252, 0.12);
+      border-radius: 8px;
+      border: 1px solid rgba(192, 132, 252, 0.25);
+      transition: all 0.2s ease;
+    }
+
+    .switch-cuatrimestre-banner a:hover {
+      background: rgba(192, 132, 252, 0.2);
+      transform: translateX(3px);
+    }
+
+    .search-box {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      color: var(--text-main);
+      font-size: 0.98rem;
+      margin-bottom: 26px;
+      outline: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 28px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .lesson-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .lesson-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px 22px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .lesson-card:hover {
+      transform: translateX(4px);
+      border-color: rgba(56, 189, 248, 0.35);
+      background: rgba(22, 33, 58, 0.88);
+      box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.6), 0 0 16px var(--accent-glow);
+    }
+
+    .lesson-info {
+      flex: 1;
+      margin-right: 18px;
+    }
+
+    .lesson-num {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: var(--badge-bg);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+
+    .lesson-info h3 {
+      font-size: 1.12rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #ffffff;
+    }
+
+    .lesson-info p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .tag-list {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag-item {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .lesson-action {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+      transition: gap 0.2s ease;
+    }
+
+    .lesson-card:hover .lesson-action {
+      gap: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .lesson-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .lesson-action {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="breadcrumb-nav">
+      <a href="../../index.html">Portal Académico</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../index.html">Programación en C</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current">1er Cuatrimestre</span>
+    </div>
+
+    <header>
+      <span class="header-badge">Semestre Inicial • 13 Unidades</span>
+      <h1>1er Cuatrimestre: Fundamentos de C</h1>
+      <p>Bases conceptuales de la programación: lógica algorítmica, variables, operadores, toma de decisiones, funciones
+        y bucles</p>
+      <div class="stats-bar">
+        <span class="stat-badge">📚 Temas: <b>13 Presentaciones</b></span>
+        <span class="stat-badge">🎯 Enfoque: <b>Aprender desde cero</b></span>
+      </div>
+    </header>
+
+    <div class="switch-cuatrimestre-banner">
+      <p>💡 ¿Buscás los temas avanzados de vectores, matrices, structs y memoria dinámica?</p>
+      <a href="../2do-cuatrimestre/index.html">Ir al 2do Cuatrimestre →</a>
+    </div>
+
+    <input type="text" id="filter" class="search-box"
+      placeholder="Buscar unidad del 1er cuatrimestre por tema, instrucción o palabra clave...">
+
+    <!-- BLOQUE I -->
+    <div class="section-title">Bloque I: Fundamentos y Estructura</div>
+    <div class="lesson-list">
+
+      <!-- UNIDAD 1 -->
+      <a href="presentaciones/01-introduccion-programacion.html" class="lesson-card"
+        data-search="introduccion que es programar algoritmo secuencia instrucciones cpu ram doble numero">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 01</span>
+          <h3>¿Qué es programar?</h3>
+          <p>Definición sencilla, analogía del robot y recetas, hardware de ejecución (CPU/RAM), precisión algorítmica y
+            tu primer código para calcular el doble de un número.</p>
+          <div class="tag-list">
+            <span class="tag-item">Algoritmos</span>
+            <span class="tag-item">Secuencia</span>
+            <span class="tag-item">Bugs vs Sintaxis</span>
+            <span class="tag-item">numero * 2</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 2 -->
+      <a href="presentaciones/02-estructura-programa-c.html" class="lesson-card"
+        data-search="estructura c include stdio stdbool main llaves punto y coma return 0 compilacion errores">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 02</span>
+          <h3>Estructura básica de un programa en C</h3>
+          <p>Anatomía completa del esqueleto en C: qué hace #include &lt;stdio.h&gt;, por qué main() es el punto de
+            entrada, el rol de las llaves {}, el punto y coma ; y return 0.</p>
+          <div class="tag-list">
+            <span class="tag-item">#include &lt;stdio.h&gt;</span>
+            <span class="tag-item">int main(void)</span>
+            <span class="tag-item">return 0;</span>
+            <span class="tag-item">Compilador</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 3 -->
+      <a href="presentaciones/03-variables.html" class="lesson-card"
+        data-search="variables cajas memoria ram declaracion asignacion inicializacion sobreescritura = vs == nombres">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 03</span>
+          <h3>Variables: La memoria de tu programa</h3>
+          <p>La analogía de las cajas con etiqueta en la RAM, los tres momentos (declaración, asignación e
+            inicialización), sobreescritura, la diferencia crucial entre = y == y tablas de traza.</p>
+          <div class="tag-list">
+            <span class="tag-item">int edad</span>
+            <span class="tag-item">Asignación =</span>
+            <span class="tag-item">Comparación ==</span>
+            <span class="tag-item">Memoria RAM</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 4 -->
+      <a href="presentaciones/04-tipos-datos.html" class="lesson-card"
+        data-search="tipos de datos int float char bool stdbool decimales comillas punto coma">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 04</span>
+          <h3>Tipos de datos fundamentales</h3>
+          <p>Por qué C necesita tipado estático: números enteros (int), decimales con punto (float), caracteres entre
+            comillas simples (char) y valores de verdad lógica (bool).</p>
+          <div class="tag-list">
+            <span class="tag-item">int</span>
+            <span class="tag-item">float (punto .)</span>
+            <span class="tag-item">char 'A'</span>
+            <span class="tag-item">bool true/false</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 5 -->
+      <a href="presentaciones/05-entrada-salida.html" class="lesson-card"
+        data-search="entrada salida printf scanf especificadores formato %d %f %c ampersand & teclado">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 05</span>
+          <h3>Entrada y salida de datos (E/S)</h3>
+          <p>Comunicación con el usuario: cómo imprimir con printf(), leer del teclado con scanf(), el rol del operador
+            de dirección &amp; y los comodines %d, %f y %c.</p>
+          <div class="tag-list">
+            <span class="tag-item">printf()</span>
+            <span class="tag-item">scanf()</span>
+            <span class="tag-item">Operador &amp;</span>
+            <span class="tag-item">%d, %f, %c</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+    </div>
+
+    <!-- BLOQUE II -->
+    <div class="section-title">Bloque II: Operadores, Lógica y Decisiones</div>
+    <div class="lesson-list">
+
+      <!-- UNIDAD 6 -->
+      <a href="presentaciones/06-operadores-aritmeticos.html" class="lesson-card"
+        data-search="operadores aritmeticos suma resta multiplicacion division entera modulo resto % par impar divisibilidad">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 06</span>
+          <h3>Operadores aritméticos y el operador módulo %</h3>
+          <p>Las 5 operaciones en C: por qué 7 / 2 da 3, cómo obtener decimales, el cálculo del resto con % y el
+            criterio universal de divisibilidad (numero % divisor == 0).</p>
+          <div class="tag-list">
+            <span class="tag-item">+ - * /</span>
+            <span class="tag-item">Módulo %</span>
+            <span class="tag-item">7 / 2 = 3</span>
+            <span class="tag-item">num % 2 == 0</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 7 -->
+      <a href="presentaciones/07-incremento-variables.html" class="lesson-card"
+        data-search="incremento variables x = x + 1 += ++ -- contadores acumuladores i++ ++i">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 07</span>
+          <h3>Incremento de variables</h3>
+          <p>Hacer crecer datos: cómo funciona x = x + 1, operadores abreviados (+=, -=, *=), el operador ++ y --,
+            contadores, acumuladores y la sutileza de i++ vs ++i.</p>
+          <div class="tag-list">
+            <span class="tag-item">x = x + 1</span>
+            <span class="tag-item">x += 1</span>
+            <span class="tag-item">x++</span>
+            <span class="tag-item">Contadores</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 8 -->
+      <a href="presentaciones/08-operadores-comparacion.html" class="lesson-card"
+        data-search="operadores comparacion relacionales == != > < >= <= verdad falso 1 0 preguntas">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 08</span>
+          <h3>Operadores de comparación</h3>
+          <p>Hacer preguntas lógicas: igualdad (==), desigualdad (!=), mayor (&gt;), menor (&lt;) y límites (&gt;=,
+            &lt;=). Tabla de evaluación para edades de 16, 18 y 20 años.</p>
+          <div class="tag-list">
+            <span class="tag-item">== vs =</span>
+            <span class="tag-item">!=</span>
+            <span class="tag-item">&gt;= &lt;=</span>
+            <span class="tag-item">1 (True) / 0 (False)</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 9 -->
+      <a href="presentaciones/09-condicionales.html" class="lesson-card"
+        data-search="condicionales if else if-else else if diagrama flujo decisiones bifurcacion mayoria par positivo">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 09</span>
+          <h3>Condicionales: if y else</h3>
+          <p>Tomar caminos según las condiciones: estructura if-else, diagramas de flujo SVG, simulación con distintas
+            edades, números positivos/negativos y verificación de paridad.</p>
+          <div class="tag-list">
+            <span class="tag-item">if (condicion)</span>
+            <span class="tag-item">else</span>
+            <span class="tag-item">else if cascada</span>
+            <span class="tag-item">Diagramas de Flujo</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 10 -->
+      <a href="presentaciones/10-operadores-logicos.html" class="lesson-card"
+        data-search="operadores logicos and or not && || ! tablas verdad cortocircuito rangos">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 10</span>
+          <h3>Operadores lógicos: &amp;&amp;, || y !</h3>
+          <p>Combinar múltiples condiciones simultáneas: conjunción AND (&amp;&amp;), disyunción OR (||), negación NOT
+            (!), tablas de verdad completas y la trampa de 10 &lt; x &lt; 20.</p>
+          <div class="tag-list">
+            <span class="tag-item">&amp;&amp; (AND)</span>
+            <span class="tag-item">|| (OR)</span>
+            <span class="tag-item">! (NOT)</span>
+            <span class="tag-item">Tablas de Verdad</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 11 -->
+      <a href="presentaciones/11-booleanos.html" class="lesson-card"
+        data-search="booleanos bool true false stdbool banderas flags interruptores">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 11</span>
+          <h3>Booleanos: bool, true y false</h3>
+          <p>El tipo de dato de Boole en C moderno con &lt;stdbool.h&gt;: guardar el resultado de comparaciones,
+            banderas de estado (flags) y escritura de condiciones limpias.</p>
+          <div class="tag-list">
+            <span class="tag-item">&lt;stdbool.h&gt;</span>
+            <span class="tag-item">bool flag</span>
+            <span class="tag-item">if (activo)</span>
+            <span class="tag-item">Estado del Sistema</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+    </div>
+
+    <!-- BLOQUE III -->
+    <div class="section-title">Bloque III: Funciones y Bucles</div>
+    <div class="lesson-list">
+
+      <!-- UNIDAD 12 -->
+      <a href="presentaciones/12-funciones.html" class="lesson-card"
+        data-search="funciones return printf parametros argumentos void prototipos scope ambito dry modularidad">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 12</span>
+          <h3>Funciones en C: Modularidad y Reutilización</h3>
+          <p>No repetir código: anatomía de una función, parámetros vs argumentos, la diferencia fundamental entre
+            return y printf, funciones void, prototipos y scope local.</p>
+          <div class="tag-list">
+            <span class="tag-item">int doble(int n)</span>
+            <span class="tag-item">return vs printf</span>
+            <span class="tag-item">void</span>
+            <span class="tag-item">Scope Local</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 13 -->
+      <a href="presentaciones/13-bucles-while-for.html" class="lesson-card"
+        data-search="bucles ciclos repeticion while for iteracion infinito traza acumulador contador centinela">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 13</span>
+          <h3>Bucles: while y for</h3>
+          <p>Automatizar tareas repetitivas: los 3 componentes (inicialización, condición y paso), seguimiento de while
+            iteración por iteración, bucle for compacto y comparación lado a lado.</p>
+          <div class="tag-list">
+            <span class="tag-item">while (cond)</span>
+            <span class="tag-item">for (ini; cond; act)</span>
+            <span class="tag-item">Tabla de Traza</span>
+            <span class="tag-item">Bucles Infinitos</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const filterInput = document.getElementById('filter');
+    const cards = document.querySelectorAll('.lesson-card');
+    const sectionTitles = document.querySelectorAll('.section-title');
+
+    filterInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const searchTerms = (card.getAttribute('data-search') || '') + ' ' + card.innerText.toLowerCase();
+        if (searchTerms.includes(query)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      sectionTitles.forEach(title => {
+        let nextElem = title.nextElementSibling;
+        if (nextElem && nextElem.classList.contains('lesson-list')) {
+          const allCards = nextElem.querySelectorAll('.lesson-card');
+          let hasVisible = false;
+          allCards.forEach(c => {
+            if (c.style.display !== 'none') hasVisible = true;
+          });
+          title.style.display = hasVisible ? 'flex' : 'none';
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

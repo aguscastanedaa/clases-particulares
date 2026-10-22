@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 1C - 12: Funciones en C | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 1er Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">1er Cuatrimestre • Módulo 12</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-cyan">1er Cuatrimestre • Funciones • Unidad 12</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Funciones en C</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Divide y vencerás: cómo crear bloques reutilizables de código con parámetros, retorno y ámbito local
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-indigo">Definición &amp; Invocación</span>
+            <span class="badge badge-emerald">Parámetros vs Argumentos</span>
+            <span class="badge badge-amber">return vs printf</span>
+            <span class="badge badge-rose">Funciones void &amp; Scope</span>
+          </div>
+
+          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué las funciones son el pilar del software?</h4>
+            <p style="font-size: 0.88rem;">
+              Si escribiéramos todo nuestro código adentro de un solo bloque gigante de <code>main()</code>, un programa de 1.000 líneas se volvería un laberinto incomprensible e imposible de corregir.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              Las **funciones** nos permiten empaquetar una tarea específica en una pequeña "caja negra" con nombre, resolverla una sola vez y usarla miles de veces (principio **DRY: Don't Repeat Yourself**).
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Distinguir entre **definir** una función y **llamarla**.</li>
+              <li>Entender la anatomía: tipo de retorno, nombre y parámetros.</li>
+              <li>Diferenciar con precisión entre **parámetros** y **argumentos**.</li>
+              <li>Aclarar la gran confusión universal: <b><code>return</code> vs <code>printf</code></b>.</li>
+              <li>Comprender el uso de <code>void</code> para funciones sin retorno.</li>
+              <li>Aprender qué son los **prototipos** y el **ámbito (scope) local**.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: EL EJEMPLO CANÓNICO OBLIGATORIO -->
+      <section>
+        <h2><span class="section-num">02</span> El Ejemplo Canónico: La Función <code>doble()</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Veamos la función requerida en su forma más pura y clara:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <div class="code-dots">
+              <span class="code-dot dot-red"></span>
+              <span class="code-dot dot-yellow"></span>
+              <span class="code-dot dot-green"></span>
+            </div>
+            <span class="code-title">funcion_doble.c</span>
+            <span class="code-badge">Definición y Llamada</span>
+          </div>
+          <div class="code-body"><span class="c-cmt">// 1. DEFINICIÓN de la función</span>
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+}
+
+<span class="c-cmt">// 2. LLAMADA a la función adentro de main:</span>
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(<span class="c-num">5</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"El doble de 5 es %d\n"</span>, resultado);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EL VIAJE DEL ARGUMENTO AL PARÁMETRO Y RETORNO -->
+      <section>
+        <h2><span class="section-num">03</span> El Viaje del Dato Paso a Paso</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">¿Qué ocurre paso a paso cuando la CPU ejecuta <code>int resultado = doble(5);</code>?</p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Paso del Argumento:</b> En <code>main</code>, se envía el valor <b><code>5</code></b> (el <i>argumento</i>) hacia la función <code>doble</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Recepción en el Parámetro:</b> La función <code>doble</code> despierta en memoria RAM y crea su variable local <code>int numero</code>, recibiendo el <b><code>5</code></b>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>Cálculo y Retorno:</b> Calcula <code>5 * 2 = 10</code>. La instrucción <code>return 10;</code> finaliza la función de inmediato y "escupe" el número <b><code>10</code></b> hacia quien la llamó.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b>Almacenamiento:</b> La expresión <code>doble(5)</code> es reemplazada por <code>10</code>, y el operador <code>=</code> lo guarda en la variable <code>resultado</code>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: ANATOMÍA DE UNA FUNCIÓN -->
+      <section>
+        <h2><span class="section-num">04</span> Anatomía Formal de una Función</h2>
+        <div style="background: rgba(18, 27, 46, 0.95); padding: 18px; border-radius: 12px; border: 1px solid var(--card-border); font-family: var(--font-mono); font-size: 1.1rem; text-align: center; margin: 12px 0;">
+          <span style="color: var(--accent-cyan); font-weight: bold;">int</span> 
+          <span style="color: var(--accent-purple); font-weight: bold;">doble</span>( 
+          <span style="color: var(--accent-emerald); font-weight: bold;">int numero</span> )
+        </div>
+
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Tipo de Retorno (int)</h4>
+            <p style="font-size: 0.85rem;">
+              Qué clase de dato le entregará la función al terminar a quien la llamó (<code>int</code>, <code>float</code>, <code>char</code>, <code>bool</code> o <code>void</code> si no entrega nada).
+            </p>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">2. Nombre Identificador (doble)</h4>
+            <p style="font-size: 0.85rem;">
+              El nombre con el que invocaremos a la función. Debe ser un verbo o acción clara (<code>calcularArea</code>, <code>esPar</code>).
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Parámetros (int numero)</h4>
+            <p style="font-size: 0.85rem;">
+              Los datos de entrada que la función necesita recibir para poder hacer su trabajo. Si no necesita nada, se escribe <code>(void)</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: PARÁMETROS VS ARGUMENTOS -->
+      <section>
+        <h2><span class="section-num">05</span> Parámetros vs Argumentos: La Distinción Exacta</h2>
+        <div class="comparison-box">
+          <div class="correct-card" style="background: rgba(22, 33, 56, 0.8); border-color: var(--accent-cyan);">
+            <div class="correct-title" style="color: var(--accent-cyan); font-size: 1rem;">
+              PARÁMETRO (En la Definición)
+            </div>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              Es la **variable receptora vacía** declarada entre los paréntesis de la función. Es como el molde o el casillero en el formulario.
+            </p>
+            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; color: #38bdf8;">
+              int doble(int numero) // 'numero' es el parámetro
+            </div>
+          </div>
+
+          <div class="correct-card" style="background: rgba(20, 36, 40, 0.8); border-color: var(--accent-emerald);">
+            <div class="correct-title" style="color: var(--accent-emerald); font-size: 1rem;">
+              ARGUMENTO (En la Invocación / Llamada)
+            </div>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              Es el **valor real y concreto** que le enviamos a la función cuando la ejecutamos en <code>main()</code>.
+            </p>
+            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; color: #34d399;">
+              int res = doble(5); // '5' es el argumento real
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: LA GRAN CONFUSIÓN: RETURN VS PRINTF -->
+      <section>
+        <h2><span class="section-num">06</span> ¡ALERTA FUNDAMENTAL!: <code>return</code> vs <code>printf</code></h2>
+        <div class="comparison-box">
+          <div class="wrong-card" style="background: rgba(30, 25, 45, 0.85); border-color: var(--accent-purple);">
+            <div class="wrong-title" style="color: var(--accent-purple); font-size: 1rem;">
+              printf(): Es para los OJOS del HUMANO
+            </div>
+            <p style="font-size: 0.84rem; color: #e2e8f0;">
+              <code>printf</code> dibuja letras con luz en la pantalla de la computadora. <b>No le entrega ningún dato a la memoria de tu programa</b>. No podés guardar la salida de un printf en una variable para hacer cálculos posteriores.
+            </p>
+          </div>
+
+          <div class="correct-card" style="background: rgba(18, 36, 48, 0.85); border-color: var(--accent-cyan);">
+            <div class="correct-title" style="color: var(--accent-cyan); font-size: 1rem;">
+              return: Es para la MEMORIA de la COMPUTADORA
+            </div>
+            <p style="font-size: 0.84rem; color: #e2e8f0;">
+              <code>return</code> no muestra nada en pantalla. Devuelve un valor numérico o lógico a la memoria para que otra parte del código pueda sumarlo, guardarlo o usarlo en un <code>if</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: EL TIPO VOID -->
+      <section>
+        <h2><span class="section-num">07</span> Funciones de Tipo <code>void</code> (Sin Retorno)</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Cuando una función realiza una acción pero no necesita entregar ningún número de vuelta:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">funcion_void.c</span>
+            <span class="code-badge">tipo void</span>
+          </div>
+          <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">mostrarCartelBienvenida</span>(<span class="c-type">void</span>)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"====================================\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"   BIENVENIDO AL SISTEMA ESCOLAR    \n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"====================================\n"</span>);
+    <span class="c-cmt">// No lleva 'return valor;' porque es de tipo void</span>
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-fn">mostrarCartelBienvenida</span>(); <span class="c-cmt">// Se llama así de simple</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: PROGRAMAS COMPLETOS DE EJEMPLO -->
+      <section>
+        <h2><span class="section-num">08</span> Galería de Funciones Prácticas Reales</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. Sumar dos números</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body" style="font-size: 0.8rem;"><span class="c-kw">int</span> <span class="c-fn">sumar</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b)
+{
+    <span class="c-kw">return</span> a + b;
+}</div>
+            </div>
+            <p style="font-size: 0.78rem; color: #a5b4fc;">Llamada: <code>int total = sumar(15, 20); // 35</code></p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. Calcular el cuadrado</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body" style="font-size: 0.8rem;"><span class="c-kw">float</span> <span class="c-fn">cuadrado</span>(<span class="c-kw">float</span> x)
+{
+    <span class="c-kw">return</span> x * x;
+}</div>
+            </div>
+            <p style="font-size: 0.78rem; color: #fef08a;">Llamada: <code>float c = cuadrado(4.0f); // 16.0</code></p>
+          </div>
+
+          <div class="box box-emerald" style="grid-column: 1 / -1;">
+            <h4 style="color: #34d399;">3. Función Booleana: Determinar si un número es par</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body" style="font-size: 0.8rem;"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">bool</span> <span class="c-fn">esPar</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> (numero % <span class="c-num">2</span> == <span class="c-num">0</span>);
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0;">
+              ¡Mirá qué belleza cómo se usa en un if!: <code>if (esPar(edad)) { printf("Tu edad es par"); }</code>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: ÁMBITO LOCAL (SCOPE) Y PROTOTIPOS -->
+      <section>
+        <h2><span class="section-num">09</span> Ámbito de Variables (Scope) y Prototipos</h2>
+        <div class="grid-2">
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">El Ámbito Local (Scope)</h4>
+            <p style="font-size: 0.84rem;">
+              Las variables declaradas adentro de una función son **locales y privadas**: nacen cuando la función empieza y mueren cuando termina con el <code>return</code>.
+            </p>
+            <p style="font-size: 0.82rem; color: #fecaca;">
+              <code>main()</code> no puede ver ni modificar las variables internas de <code>doble()</code>, y viceversa. ¡Esto evita que distintas partes de un programa se arruinen variables entre sí por accidente!
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Prototipos de Función</h4>
+            <p style="font-size: 0.84rem;">
+              El compilador lee tu archivo de arriba hacia abajo. Si ponés la definición de tu función **debajo de <code>main()</code>**, tenés que avisarle arriba mediante un **prototipo** (la firma de la función terminada en <code>;</code>):
+            </p>
+            <div style="background: rgba(0,0,0,0.3); padding: 6px 10px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.8rem;">
+              <span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero); <span class="c-cmt">// Prototipo</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">10</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Síntesis Modular</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Función:</b> Bloque autónomo reutilizable con nombre.</li>
+              <li><b>Parámetro:</b> Variable que recibe datos en la definición.</li>
+              <li><b>Argumento:</b> Valor concreto enviado en la invocación.</li>
+              <li><b>return:</b> Entrega el resultado a la memoria y finaliza la función.</li>
+              <li><b>void:</b> Indica ausencia de retorno o de argumentos.</li>
+              <li><b>Scope:</b> Las variables locales solo viven dentro de su función.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar con precisión la diferencia entre <code>return</code> y <code>printf</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Identifico qué es un parámetro y qué es un argumento?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé para qué se utiliza el tipo de retorno <code>void</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué una variable creada dentro de una función no existe en <code>main</code>?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="11-booleanos.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Booleanos
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            1er Cuatrimestre
+          </a>
+          <a href="13-bucles-while-for.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: Bucles while y for →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

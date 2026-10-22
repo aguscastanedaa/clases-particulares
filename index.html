@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portal Académico | Clases Particulares</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --bg: #0b0f19;
@@ -17,11 +19,17 @@
       --accent: #38bdf8;
       --accent-glow: rgba(56, 189, 248, 0.15);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
       background: var(--bg);
-      background-image: 
+      background-image:
         radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
         radial-gradient(circle at 85% 85%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
       color: var(--text-main);
@@ -31,8 +39,17 @@
       align-items: center;
       padding: 60px 20px;
     }
-    .container { width: 100%; max-width: 900px; }
-    header { text-align: center; margin-bottom: 40px; }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
     header h1 {
       font-size: 2.5rem;
       font-weight: 700;
@@ -42,7 +59,12 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 12px;
     }
-    header p { color: var(--text-muted); font-size: 1.05rem; }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
     .search-box {
       width: 100%;
       background: var(--card-bg);
@@ -56,15 +78,18 @@
       backdrop-filter: blur(10px);
       transition: all 0.2s ease;
     }
+
     .search-box:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px var(--accent-glow);
     }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 20px;
     }
+
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -80,18 +105,32 @@
       position: relative;
       overflow: hidden;
     }
+
     .card:hover {
       transform: translateY(-4px);
       border-color: rgba(56, 189, 248, 0.4);
       box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
     }
+
     .card-icon {
       font-size: 2rem;
       margin-bottom: 16px;
       display: inline-block;
     }
-    .card h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; }
-    .card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; }
+
+    .card h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
     .card-footer {
       display: flex;
       align-items: center;
@@ -102,10 +141,11 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <header>
-      <h1>Repositorio de Clases</h1>
+      <h1>Repositorio de Clases Agustin Castaneda </h1>
       <p>Material de estudio, apuntes y presentaciones interactivas</p>
     </header>
 
@@ -136,14 +176,15 @@
         </div>
       </a>
 
-      <a href="programacion/index.html" class="card" data-title="programacion algoritmos estructuras codigo">
+      <a href="programacion/index.html" class="card"
+        data-title="programacion lenguaje c algoritmos variables tipos entrada salida operadores bucles funciones vectores matrices estructuras struct memoria dinamica malloc free heap">
         <div>
           <span class="card-icon">💻</span>
-          <h2>Programación</h2>
-          <p>Estructuras de datos, desarrollo de software y paradigmas.</p>
+          <h2>Programación en C</h2>
+          <p>Organizado en 1er y 2do cuatrimestre: fundamentos algorítmicos, control de flujo, vectores, matrices, estructuras y memoria dinámica en el Heap.</p>
         </div>
         <div class="card-footer">
-          <span>Próximamente</span>
+          <span>23 Presentaciones (2 Cuatrimestres)</span>
           <span>Explorar →</span>
         </div>
       </a>
@@ -168,4 +209,5 @@
     });
   </script>
 </body>
+
 </html>

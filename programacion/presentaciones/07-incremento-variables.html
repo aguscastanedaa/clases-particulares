@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 07: Incremento de Variables | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <a href="../index.html">← Volver al temario de Programación</a>
+    <span class="plan-tag">Módulo 07 • Contadores & Acumuladores</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-indigo">Programación Inicial • Unidad 7</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Incremento de Variables</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Hacer crecer tus datos: de <code>x = x + 1</code> a los operadores abreviados <code>+=</code> y el famoso <code>++</code>
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">edad = edad + 1</span>
+            <span class="badge badge-emerald">edad += 1</span>
+            <span class="badge badge-amber">edad++</span>
+            <span class="badge badge-purple">Contadores & Acumuladores</span>
+          </div>
+
+          <div class="box box-indigo" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué este concepto es un antes y un después?</h4>
+            <p style="font-size: 0.88rem;">
+              En álgebra tradicional de la escuela secundaria, la ecuación $x = x + 1$ es una contradicción imposible (¡un número no puede ser igual a sí mismo más uno!).
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              En programación, el signo <code>=</code> **no es una ecuación de igualdad, sino una orden de asignación**. Comprender cómo una variable se actualiza a partir de su propio valor anterior es la base indispensable para construir contadores y bucles.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Entender la mecánica paso a paso de <code>edad = edad + 1</code>.</li>
+              <li>Manejar los operadores de asignación compuesta: <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>.</li>
+              <li>Aprender el operador de incremento <code>++</code> y decremento <code>--</code>.</li>
+              <li>Demostrar la equivalencia de las tres formas clásicas.</li>
+              <li>Distinguir entre **contar de 1 en 1** y **acumular cantidades arbitrarias**.</li>
+              <li>Conocer (sin confusiones) la diferencia entre pre y post-incremento.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: LOS TRES EJEMPLOS OBLIGATORIOS -->
+      <section>
+        <h2><span class="section-num">02</span> Las Tres Formas de Incrementar en 1</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Estas tres instrucciones producen exactamente el mismo efecto final sobre la variable:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <div class="code-dots">
+              <span class="code-dot dot-red"></span>
+              <span class="code-dot dot-yellow"></span>
+              <span class="code-dot dot-green"></span>
+            </div>
+            <span class="code-title">tres_caminos.c</span>
+            <span class="code-badge">Equivalencia Total</span>
+          </div>
+          <div class="code-body"><span class="c-cmt">// Forma 1: Explícita clásica</span>
+edad = edad + <span class="c-num">1</span>;
+
+<span class="c-cmt">// Forma 2: Operador abreviado compuesto</span>
+edad += <span class="c-num">1</span>;
+
+<span class="c-cmt">// Forma 3: Operador de incremento unitario</span>
+edad++;</div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Explícita</h4>
+            <p style="font-size: 0.82rem;">Lee el valor actual, le suma 1 y guarda el resultado.</p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. Abreviada</h4>
+            <p style="font-size: 0.82rem;">Suma directamente a la variable sin escribir su nombre dos veces.</p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Incremento ++</h4>
+            <p style="font-size: 0.82rem;">La sintaxis más rápida y popular en C para sumar una unidad.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: DESGLOSE DE EDAD = EDAD + 1 -->
+      <section>
+        <h2><span class="section-num">03</span> La Mecánica de <code>edad = edad + 1</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">¿Qué hace la CPU internamente? <b>Siempre se resuelve primero la derecha</b>:</p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Lectura:</b> La CPU viaja a la caja <code>edad</code> en la RAM y lee su contenido actual (supongamos <code>16</code>).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Cálculo en la ALU:</b> La Unidad Aritmética calcula la suma: <code>16 + 1 = 17</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>Escritura (Sobreescritura):</b> El operador <code>=</code> toma el <code>17</code> y lo deposita en la caja <code>edad</code>. El 16 se borra y la caja ahora guarda 17.
+            </div>
+          </div>
+        </div>
+
+        <div class="memory-diagram" style="margin-top: 14px;">
+          <div class="memory-box">
+            <div class="memory-address">Antes</div>
+            <div class="memory-label">edad</div>
+            <div class="memory-value" style="color: var(--text-dim);">16</div>
+          </div>
+          <div style="display: flex; align-items: center; font-size: 1.5rem; color: var(--accent-cyan);">
+            + 1 ➔
+          </div>
+          <div class="memory-box">
+            <div class="memory-address">Después</div>
+            <div class="memory-label">edad</div>
+            <div class="memory-value">17</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: OPERADORES ABREVIADOS -->
+      <section>
+        <h2><span class="section-num">04</span> Los Operadores Abreviados (Compuestos)</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">C ofrece atajos para combinar cualquier operador aritmético con la asignación:</p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Operador</th>
+              <th>Sintaxis Abreviada</th>
+              <th>Equivale exactamente a...</th>
+              <th>Ejemplo de Uso Real</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>+=</code></td>
+              <td><code>puntos += 50;</code></td>
+              <td><code>puntos = puntos + 50;</code></td>
+              <td>Sumar puntos a un marcador</td>
+            </tr>
+            <tr>
+              <td><code>-=</code></td>
+              <td><code>vidas -= 1;</code></td>
+              <td><code>vidas = vidas - 1;</code></td>
+              <td>Restar vida al recibir daño</td>
+            </tr>
+            <tr>
+              <td><code>*=</code></td>
+              <td><code>saldo *= 2;</code></td>
+              <td><code>saldo = saldo * 2;</code></td>
+              <td>Duplicar un valor</td>
+            </tr>
+            <tr>
+              <td><code>/=</code></td>
+              <td><code>energia /= 2;</code></td>
+              <td><code>energia = energia / 2;</code></td>
+              <td>Reducir a la mitad</td>
+            </tr>
+            <tr>
+              <td><code>%=</code></td>
+              <td><code>num %= 10;</code></td>
+              <td><code>num = num % 10;</code></td>
+              <td>Quedarse con el último dígito</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 6: INCREMENTO ++ Y DECREMENTO -- -->
+      <section>
+        <h2><span class="section-num">05</span> El Operador <code>++</code> y <code>--</code></h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Incremento: variable++</h4>
+            <p style="font-size: 0.88rem;">
+              Suma exactamente <b>1 unidad</b> a la variable y guarda el nuevo valor inmediatamente en la RAM.
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> contador = <span class="c-num">0</span>;
+contador++; <span class="c-cmt">// Ahora vale 1</span>
+contador++; <span class="c-cmt">// Ahora vale 2</span></div>
+            </div>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">Decremento: variable--</h4>
+            <p style="font-size: 0.88rem;">
+              Resta exactamente <b>1 unidad</b> a la variable y la actualiza en memoria.
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> vidas = <span class="c-num">3</span>;
+vidas--; <span class="c-cmt">// Ahora vale 2</span>
+vidas--; <span class="c-cmt">// Ahora vale 1</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            ⚡ <b>¡C++ se llama así por este operador!:</b> Bjarne Stroustrup nombró a su lenguaje <b>C++</b> como un juego de palabras para indicar que era <i>"el lenguaje C incrementado y evolucionado al siguiente nivel"</i>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: TABLA DE SEGUIMIENTO EN UN BUCLE MENTAL -->
+      <section>
+        <h2><span class="section-num">06</span> Tabla de Seguimiento: Contador vs Acumulador</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">Rastreemos la evolución de dos variables trabajando juntas:</p>
+
+        <div class="code-window" style="margin-bottom: 10px;">
+          <div class="code-body"><span class="c-kw">int</span> contador = <span class="c-num">1</span>;
+<span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+
+suma += contador;  <span class="c-cmt">// Paso 1</span>
+contador++;        <span class="c-cmt">// Paso 2</span>
+
+suma += contador;  <span class="c-cmt">// Paso 3</span>
+contador++;        <span class="c-cmt">// Paso 4</span></div>
+        </div>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Paso</th>
+              <th>Instrucción</th>
+              <th>Valor de contador</th>
+              <th>Valor de suma</th>
+              <th>Explicación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Inicio</td>
+              <td>Declaración</td>
+              <td><code>1</code></td>
+              <td><code>0</code></td>
+              <td>Estado inicial</td>
+            </tr>
+            <tr>
+              <td>Paso 1</td>
+              <td><code>suma += contador;</code></td>
+              <td><code>1</code></td>
+              <td><code>1</code></td>
+              <td>Suma 0 + 1 = 1</td>
+            </tr>
+            <tr>
+              <td>Paso 2</td>
+              <td><code>contador++;</code></td>
+              <td><code>2</code> (subió)</td>
+              <td><code>1</code></td>
+              <td>El contador avanzó a 2</td>
+            </tr>
+            <tr>
+              <td>Paso 3</td>
+              <td><code>suma += contador;</code></td>
+              <td><code>2</code></td>
+              <td><code>3</code> (subió)</td>
+              <td>Suma 1 + 2 = 3</td>
+            </tr>
+            <tr>
+              <td>Paso 4</td>
+              <td><code>contador++;</code></td>
+              <td><code>3</code> (subió)</td>
+              <td><code>3</code></td>
+              <td>El contador avanzó a 3</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 8: CONTENIDO COMPLEMENTARIO i++ VS ++i -->
+      <section>
+        <h2><span class="section-num">07</span> Complemento: <code>i++</code> vs <code>++i</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">¿Qué diferencia hay entre poner el <code>++</code> adelante o atrás?</p>
+
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Post-incremento: i++</h4>
+            <p style="font-size: 0.85rem;">
+              <b>Usa primero el valor actual</b> en la expresión en la que está metido, y <b>LUEGO</b> incrementa la variable en 1.
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> i = <span class="c-num">5</span>;
+<span class="c-kw">int</span> a = i++; 
+<span class="c-cmt">// 'a' recibe 5, y luego 'i' pasa a 6</span></div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Pre-incremento: ++i</h4>
+            <p style="font-size: 0.85rem;">
+              <b>Incrementa PRIMERO</b> la variable en 1, y <b>LUEGO entrega el nuevo valor</b> a la expresión.
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> i = <span class="c-num">5</span>;
+<span class="c-kw">int</span> a = ++i; 
+<span class="c-cmt">// 'i' pasa a 6 primero, y 'a' recibe 6</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            💡 <b>Consejo para principiantes:</b> Cuando uses <code>i++;</code> en una línea sola independiente, <code>i++</code> y <code>++i</code> hacen exactamente lo mismo. Acostumbrate a escribirlo en su propia línea para mantener tu código claro y sin ambigüedades.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: ERRORES FRECUENTES -->
+      <section>
+        <h2><span class="section-num">08</span> Errores Frecuentes al Incrementar</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ El Error Fantasma: edad + 1;</div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              int edad = 16;<br>
+              edad + 1; // ¡NO HACE NADA!
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin-top: 6px;">
+              <b>¿Por qué?</b> La computadora calcula 16 + 1 = 17, pero como no pusiste un <code>=</code> ni un <code>++</code>, el 17 se evapora y <code>edad</code> sigue valiendo 16.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Forma Correcta con Asignación</div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #a7f3d0; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              int edad = 16;<br>
+              edad++; // O edad += 1; O edad = edad + 1;
+            </div>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin-top: 6px;">
+              Cualquiera de estas tres formas sí actualiza la memoria RAM de manera definitiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">09</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Resumen Práctico</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><code>x = x + 1</code>: Lee x, suma 1 y guarda en x.</li>
+              <li><code>x += 5</code>: Suma 5 a x de forma compacta.</li>
+              <li><code>x++</code>: Suma 1 a x y modifica la variable en RAM.</li>
+              <li><code>x--</code>: Resta 1 a x.</li>
+              <li><b>Contador:</b> Crece de 1 en 1 (<code>c++</code>).</li>
+              <li><b>Acumulador:</b> Suma valores variables (<code>total += precio</code>).</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué <code>x = x + 1</code> tiene sentido en computación?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo escribir las 3 formas equivalentes de sumar 1?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cómo restar 10 usando un operador abreviado?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo que <code>i++</code> altera el contenido en memoria?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="06-operadores-aritmeticos.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Operadores Aritméticos
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Temario
+          </a>
+          <a href="08-operadores-comparacion.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: Operadores de Comparación →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

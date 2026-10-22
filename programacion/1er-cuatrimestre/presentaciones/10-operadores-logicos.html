@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 1C - 10: Operadores Lógicos | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 1er Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">1er Cuatrimestre • Módulo 10</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-purple">1er Cuatrimestre • Lógica Booleana • Unidad 10</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Operadores Lógicos</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Combinando condiciones complejas: el poder de AND (&amp;&amp;), OR (||) y NOT (!) con tablas de verdad
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">&amp;&amp; (AND / Y)</span>
+            <span class="badge badge-amber">|| (OR / O)</span>
+            <span class="badge badge-rose">! (NOT / NO)</span>
+            <span class="badge badge-emerald">Tablas de Verdad</span>
+          </div>
+
+          <div class="box box-purple" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué necesitamos operadores lógicos?</h4>
+            <p style="font-size: 0.88rem;">
+              En el mundo real casi ninguna decisión depende de una sola condición aislada. Decimos:
+            </p>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              • <i>"Para subir a la montaña rusa tenés que <b>medir más de 1.40 m Y tener más de 12 años</b>"</i>.<br>
+              • <i>"El descuento aplica si sos <b>estudiante O jubilado</b>"</i>.
+            </p>
+            <p style="font-size: 0.84rem; color: var(--text-muted);">
+              Los <b>operadores lógicos</b> nos permiten unir múltiples comparaciones en una sola expresión coherente y precisa.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Comprender el operador AND <b><code>&amp;&amp;</code></b> (ambas deben cumplirse).</li>
+              <li>Comprender el operador OR <b><code>||</code></b> (al menos una debe cumplirse).</li>
+              <li>Comprender el operador NOT <b><code>!</code></b> (invierte el valor de verdad).</li>
+              <li>Construir e interpretar **tablas de verdad completas**.</li>
+              <li>Aprender qué es la **evaluación en cortocircuito**.</li>
+              <li>Evitar el error clásico de rangos: <code>10 &lt; x &lt; 20</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: LOS EJEMPLOS OBLIGATORIOS -->
+      <section>
+        <h2><span class="section-num">02</span> Los 3 Ejemplos Obligatorios</h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">operadores_logicos.c</span>
+            <span class="code-badge">&amp;&amp;, ||, !</span>
+          </div>
+          <div class="code-body"><span class="c-cmt">// 1. AND (&amp;&amp;): Ambas deben ser verdaderas</span>
+<span class="c-kw">if</span> (edad &gt;= <span class="c-num">18</span> &amp;&amp; estado == <span class="c-kw">true</span>)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Se cumplen ambas condiciones\n"</span>);
+}
+
+<span class="c-cmt">// 2. OR (||): Al menos una debe ser verdadera</span>
+<span class="c-kw">if</span> (categoria == <span class="c-num">2</span> || categoria == <span class="c-num">7</span>)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"La categoría es válida\n"</span>);
+}
+
+<span class="c-cmt">// 3. NOT (!): Invierte el valor</span>
+<span class="c-kw">bool</span> resultado = !<span class="c-kw">true</span>; <span class="c-cmt">// Produce false</span></div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EL OPERADOR AND && -->
+      <section>
+        <h2><span class="section-num">03</span> El Operador AND <code>&amp;&amp;</code> (Y Lógico)</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">La Regla de Oro de &amp;&amp;</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Una expresión con <b><code>&amp;&amp;</code></b> es VERDADERA **únicamente si AMBAS partes son verdaderas**. Si tan solo una de ellas es falsa, toda la expresión colapsa y se vuelve FALSA.
+          </p>
+        </div>
+
+        <table class="trace-table" style="margin-top: 14px;">
+          <thead>
+            <tr>
+              <th>Condición A</th>
+              <th>Condición B</th>
+              <th>Expresión: (A &amp;&amp; B)</th>
+              <th>Resultado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FALSO (0)</td>
+              <td>FALSO (0)</td>
+              <td>0 &amp;&amp; 0</td>
+              <td style="color: var(--accent-rose); font-weight: 700;">FALSO (0)</td>
+            </tr>
+            <tr>
+              <td>VERDADERO (1)</td>
+              <td>FALSO (0)</td>
+              <td>1 &amp;&amp; 0</td>
+              <td style="color: var(--accent-rose); font-weight: 700;">FALSO (0)</td>
+            </tr>
+            <tr>
+              <td>FALSO (0)</td>
+              <td>VERDADERO (1)</td>
+              <td>0 &amp;&amp; 1</td>
+              <td style="color: var(--accent-rose); font-weight: 700;">FALSO (0)</td>
+            </tr>
+            <tr>
+              <td>VERDADERO (1)</td>
+              <td>VERDADERO (1)</td>
+              <td>1 &amp;&amp; 1</td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1) ✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 5: EL OPERADOR OR || -->
+      <section>
+        <h2><span class="section-num">04</span> El Operador OR <code>||</code> (O Lógico)</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">La Regla de Oro de ||</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Una expresión con <b><code>||</code></b> (barra vertical doble) es VERDADERA **si AL MENOS UNA de las partes es verdadera**. Solo será falsa en el caso extremo donde ambas partes sean falsas.
+          </p>
+        </div>
+
+        <table class="trace-table" style="margin-top: 14px;">
+          <thead>
+            <tr>
+              <th>Condición A</th>
+              <th>Condición B</th>
+              <th>Expresión: (A || B)</th>
+              <th>Resultado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FALSO (0)</td>
+              <td>FALSO (0)</td>
+              <td>0 || 0</td>
+              <td style="color: var(--accent-rose); font-weight: 700;">FALSO (0)</td>
+            </tr>
+            <tr>
+              <td>VERDADERO (1)</td>
+              <td>FALSO (0)</td>
+              <td>1 || 0</td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1) ✓</td>
+            </tr>
+            <tr>
+              <td>FALSO (0)</td>
+              <td>VERDADERO (1)</td>
+              <td>0 || 1</td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1) ✓</td>
+            </tr>
+            <tr>
+              <td>VERDADERO (1)</td>
+              <td>VERDADERO (1)</td>
+              <td>1 || 1</td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1) ✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 6: EL OPERADOR NOT ! -->
+      <section>
+        <h2><span class="section-num">05</span> El Operador NOT <code>!</code> (Negación Lógica)</h2>
+        <div class="grid-2">
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">El Inversor de Verdad</h4>
+            <p style="font-size: 0.88rem;">
+              El operador <b><code>!</code></b> actúa sobre una sola condición a su derecha. Simplemente da vuelta su estado:
+            </p>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px; margin-top: 6px;">
+              <li><code>!true</code> se convierte en <b><code>false</code> (0)</b>.</li>
+              <li><code>!false</code> se convierte en <b><code>true</code> (1)</b>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Ejemplo Práctico en Código</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">bool</span> lloviendo = <span class="c-kw">false</span>;
+<span class="c-kw">if</span> (!lloviendo)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Podemos salir al patio\n"</span>);
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #cbd5e1;">
+              Se lee naturalmente: <i>"Si NO está lloviendo, salimos al patio"</i>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: EVALUACIÓN EN CORTOCIRCUITO -->
+      <section>
+        <h2><span class="section-num">06</span> Evaluación en Cortocircuito (Short-Circuit)</h2>
+        <div class="box box-purple">
+          <h4 style="color: #c084fc; margin-bottom: 4px;">Optimización Inteligente del Compilador C</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            C evalúa las expresiones lógicas de izquierda a derecha. Si el resultado final ya es **matemáticamente inevitable** con solo leer la primera condición, C **no pierde tiempo en evaluar la segunda**:
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">En el AND (&amp;&amp;)</h4>
+            <p style="font-size: 0.85rem;">Si la primera condición es <b>FALSA</b>, toda la expresión ya es falsa seguro. C no evalúa la segunda.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #7dd3fc; margin-top: 6px;">
+              false &amp;&amp; (x / 0 == 1) // ¡No crashea!
+            </div>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">En el OR (||)</h4>
+            <p style="font-size: 0.85rem;">Si la primera condición es <b>VERDADERA</b>, toda la expresión ya es verdadera seguro. C no evalúa la segunda.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #fef08a; margin-top: 6px;">
+              true || (cualquierCosa) // Salta directo
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: LA TRAMPA MATEMÁTICA 10 < X < 20 -->
+      <section>
+        <h2><span class="section-num">07</span> La Gran Trampa de Rangos: <code>10 &lt; x &lt; 20</code></h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Lo que nunca funciona en C</div>
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              if (10 &lt; nota &lt; 20) // ¡GRAVE ERROR!
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px;">
+              <b>¿Por qué falla?:</b> C evalúa de izquierda a derecha: <code>10 &lt; nota</code> produce un <b>0 o un 1</b>. Luego evalúa <code>(0 o 1) &lt; 20</code>, ¡lo cual es SIEMPRE VERDADERO! No importa qué nota pongas, siempre dará verdadero.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ La forma correcta con &amp;&amp;</div>
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #a7f3d0; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              if (nota &gt; 10 &amp;&amp; nota &lt; 20) // ¡IMPECABLE!
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin-top: 6px;">
+              Comprueba explícitamente: ¿Es la nota mayor a 10? Y ADEMÁS, ¿es la nota menor a 20? Ambas condiciones deben cumplirse.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: DESAFÍO DE PREDICCIÓN CON TABLAS -->
+      <section>
+        <h2><span class="section-num">08</span> Desafío de Predicción: ¿Se ejecuta el bloque?</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Dadas las variables <code>int edad = 17; bool tieneBoleto = true; int categoria = 5;</code>:</p>
+
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <b>Caso 1:</b><br>
+            <code>(edad &gt;= 18 &amp;&amp; tieneBoleto)</code>
+          </div>
+          <div class="box box-amber">
+            <b>Caso 2:</b><br>
+            <code>(categoria == 2 || categoria == 5)</code>
+          </div>
+          <div class="box box-purple">
+            <b>Caso 3:</b><br>
+            <code>(!tieneBoleto || edad &lt; 18)</code>
+          </div>
+          <div class="box box-emerald">
+            <b>Caso 4:</b><br>
+            <code>!(edad == 17)</code>
+          </div>
+        </div>
+
+        <details class="code-solution">
+          <summary>👉 Clic acá para ver las soluciones paso a paso</summary>
+          <div class="solution-content">
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px; color: #cbd5e1;">
+              <li><b>Caso 1:</b> <code>17 &gt;= 18 (Falso) &amp;&amp; true</code> ➔ <b style="color: var(--accent-rose);">FALSO (0)</b> (por ser AND, uno falso arruina todo).</li>
+              <li><b>Caso 2:</b> <code>5 == 2 (Falso) || 5 == 5 (Verdadero)</code> ➔ <b style="color: var(--accent-emerald);">VERDADERO (1)</b> (por ser OR, alcanza con uno verdadero).</li>
+              <li><b>Caso 3:</b> <code>!true (Falso) || 17 &lt; 18 (Verdadero)</code> ➔ <b style="color: var(--accent-emerald);">VERDADERO (1)</b>.</li>
+              <li><b>Caso 4:</b> <code>!(17 == 17) ➔ !(Verdadero)</code> ➔ <b style="color: var(--accent-rose);">FALSO (0)</b>.</li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 10: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">09</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Leyes Lógicas</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>&amp;&amp; (AND):</b> Exige que ambas sean 1.</li>
+              <li><b>|| (OR):</b> Exige que al menos una sea 1.</li>
+              <li><b>! (NOT):</b> Invierte el valor (1 pasa a 0, 0 a 1).</li>
+              <li><b>Cortocircuito:</b> C no evalúa de más si el resultado es seguro.</li>
+              <li><b>Rangos:</b> Siempre usar <code>x &gt;= min &amp;&amp; x &lt;= max</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cuándo una expresión con <code>&amp;&amp;</code> da verdadero?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cuándo una expresión con <code>||</code> da falso?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué <code>10 &lt; x &lt; 20</code> es un error en C?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo armar la tabla de verdad de <code>!true</code> y <code>!false</code>?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="09-condicionales.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Condicionales
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            1er Cuatrimestre
+          </a>
+          <a href="11-booleanos.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: Booleanos (bool, true, false) →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

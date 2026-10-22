@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 1C - 01: ¿Qué es Programar? | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 1er Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">1er Cuatrimestre • Módulo 01</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-cyan">1er Cuatrimestre • Fundamentos • Unidad 1</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">¿Qué es Programar?</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            El arte de transformar ideas y problemas cotidianos en instrucciones precisas para una computadora
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-indigo">Algoritmos</span>
+            <span class="badge badge-emerald">Secuencia de Pasos</span>
+            <span class="badge badge-amber">Precisión y Lógica</span>
+            <span class="badge badge-purple">Primer Código C</span>
+          </div>
+
+          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué aprender a programar hoy?</h4>
+            <p>Una computadora es la máquina más poderosa que inventó la humanidad, pero por sí sola <b>no tiene iniciativa ni inteligencia propia</b>. Solo hace exactamente lo que un ser humano le indica.</p>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
+              Aprender a programar no es memorizar comandos raros: es entrenar tu cerebro para <b>pensar de forma estructurada, descomponer problemas complejos y crear soluciones automáticas</b>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+              <li>Comprender con exactitud <b>qué significa programar</b>.</li>
+              <li>Entender cómo la computadora ejecuta instrucciones a nivel físico.</li>
+              <li>Distinguir entre una <b>instrucción aislada</b> y una <b>secuencia ordenada</b>.</li>
+              <li>Reconocer por qué las instrucciones deben ser 100% precisas.</li>
+              <li>Identificar qué ocurre ante un error de sintaxis y ante un "bug" de lógica.</li>
+              <li>Leer y analizar tu <b>primer fragmento de código real en C</b> línea por línea.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: DEFINICIÓN DE PROGRAMAR -->
+      <section>
+        <h2><span class="section-num">02</span> ¿Qué significa realmente programar?</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Desmitifiquemos la programación con palabras sencillas y cotidianas.</p>
+
+        <div class="box box-cyan" style="margin-bottom: 16px;">
+          <h4 style="margin-bottom: 4px;">Definición Pedagógica</h4>
+          <p style="font-size: 0.94rem; margin: 0;">
+            <b>Programar</b> es el proceso de diseñar, escribir y estructurar un conjunto de <b>instrucciones detalladas y ordenadas</b> (llamado <i>algoritmo</i> o <i>programa</i>) en un lenguaje que una computadora pueda interpretar y ejecutar para resolver un problema o realizar una tarea específica.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. El Problema</h4>
+            <p style="font-size: 0.86rem;">
+              Una necesidad real: calcular un promedio, controlar un semáforo, enviar un mensaje o mover un personaje de videojuego.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. El Algoritmo</h4>
+            <p style="font-size: 0.86rem;">
+              El plan mental paso a paso: definir qué pasos hacer primero, cuáles después y qué condiciones verificar.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. El Código</h4>
+            <p style="font-size: 0.86rem;">
+              Traducir ese plan a un lenguaje de programación formal (como <b>C</b>) para que el procesador lo ejecute a miles de millones de operaciones por segundo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: LA ANALOGÍA DEL ROBOT Y LA RECETA -->
+      <section>
+        <h2><span class="section-num">03</span> La analogía del robot y la receta</h2>
+        <div class="grid-2">
+          <div>
+            <div class="box box-purple">
+              <h4 style="color: #c084fc;">Analogía 1: La Receta de Cocina</h4>
+              <p style="font-size: 0.88rem;">
+                Imaginá que estás cocinando una torta. Si la receta dice:
+              </p>
+              <ol style="font-size: 0.84rem; line-height: 1.5; margin-left: 18px; margin-top: 6px;">
+                <li>1. Mezclar harina y azúcar.</li>
+                <li>2. Agregar huevos y leche.</li>
+                <li>3. Hornear durante 40 minutos a 180°C.</li>
+              </ol>
+              <p style="font-size: 0.84rem; color: #cbd5e1; margin-top: 8px;">
+                Si horneás antes de mezclar los ingredientes, ¡el resultado es un desastre! En programación, el <b>orden cronológico</b> es inquebrantable.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div class="box box-rose">
+              <h4 style="color: #f87171;">Analogía 2: El Robot Hiper-Literal</h4>
+              <p style="font-size: 0.88rem;">
+                Las personas deducimos intenciones por sentido común. Si a un amigo le decís <i>"pasame la sal"</i>, él estira el brazo y te da el salero.
+              </p>
+              <p style="font-size: 0.88rem; color: #cbd5e1;">
+                Un robot o una computadora <b>no tiene sentido común</b>. Si solo le decís "pasame la sal", no sabrá qué sal, cuánta fuerza usar, en qué dirección mover el brazo ni si debe soltarla. Necesita cada micro-paso detallado explícitamente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: CÓMO EJECUTA INSTRUCCIONES LA COMPUTADORA -->
+      <section>
+        <h2><span class="section-num">04</span> ¿Cómo ejecuta instrucciones una computadora?</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Un vistazo simplificado al interior del hardware que hace la magia:</p>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Memoria RAM</h4>
+            <p style="font-size: 0.85rem;">
+              Es la <b>mesa de trabajo rápida</b>. Aquí se cargan temporalmente las instrucciones de tu programa y los datos (variables) que están en uso en este instante. Al apagar la PC, se vacía.
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">2. CPU (Procesador)</h4>
+            <p style="font-size: 0.85rem;">
+              Es el <b>motor ejecutor</b>. Funciona con un ciclo incansable:
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #a5b4fc; background: rgba(0,0,0,0.3); padding: 6px; border-radius: 6px; margin-top: 6px;">
+              Fetch (Buscar) → Decode (Entender) → Execute (Ejecutar)
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Dispositivos E/S</h4>
+            <p style="font-size: 0.85rem;">
+              Entrada: teclado, mouse (capturan datos del usuario).<br>
+              Salida: monitor, terminal (muestran los resultados calculados).
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.88rem;">
+            ⚡ <b>Velocidad asombrosa:</b> Un procesador actual ejecuta más de <b>3.000 millones de instrucciones por segundo</b> (3 GHz). Por eso, si tus instrucciones son correctas, el resultado es instantáneo; pero si tu lógica está equivocada, cometerá millones de errores por segundo.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: INSTRUCCIÓN VS SECUENCIA -->
+      <section>
+        <h2><span class="section-num">05</span> Instrucción individual vs Secuencia</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Instrucción Individual</h4>
+            <p style="font-size: 0.88rem;">
+              Es la <b>unidad mínima de acción</b> ejecutable. Una sola orden atómica que la computadora sabe llevar a cabo.
+            </p>
+            <div class="code-window">
+              <div class="code-header">
+                <span class="code-title">ejemplo_instruccion.c</span>
+                <span class="code-badge">Instrucción</span>
+              </div>
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              "Reservá una caja de memoria llamada <code>numero</code> y guardale el valor <code>5</code>".
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Secuencia de Instrucciones</h4>
+            <p style="font-size: 0.88rem;">
+              Es una <b>cadena ordenada de instrucciones</b> que colaboran para lograr un objetivo mayor. La computadora las ejecuta estrictamente de arriba hacia abajo.
+            </p>
+            <div class="code-window">
+              <div class="code-header">
+                <span class="code-title">ejemplo_secuencia.c</span>
+                <span class="code-badge">Secuencia</span>
+              </div>
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+<span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              La segunda línea depende del valor creado en la primera. Si invirtiéramos el orden, la computadora fallaría.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: PRIMER CÓDIGO C EN DETALLE -->
+      <section>
+        <h2><span class="section-num">06</span> Análisis línea por línea: El doble de un número</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Veamos el ejemplo canónico propuesto para calcular el doble de 5:</p>
+
+        <div class="code-window" style="margin-bottom: 14px;">
+          <div class="code-header">
+            <div class="code-dots">
+              <span class="code-dot dot-red"></span>
+              <span class="code-dot dot-yellow"></span>
+              <span class="code-dot dot-green"></span>
+            </div>
+            <span class="code-title">calculo_doble.c</span>
+            <span class="code-badge">C99</span>
+          </div>
+          <div class="code-body"><span class="c-cmt">// Línea 1: Creamos la primera variable</span>
+<span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+
+<span class="c-cmt">// Línea 2: Realizamos el cálculo y guardamos el resultado</span>
+<span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;</div>
+        </div>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b><code>int numero = 5;</code></b><br>
+              • <code>int</code> le avisa al compilador que la caja guardará un <b>número entero</b>.<br>
+              • <code>numero</code> es el nombre identificador para encontrar esa caja en memoria.<br>
+              • <code>=</code> (asignación) coloca el número <code>5</code> dentro de la caja.<br>
+              • <code>;</code> finaliza la instrucción obligatoriamente.
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b><code>int resultado = numero * 2;</code></b><br>
+              • Se reserva otra caja entera llamada <code>resultado</code>.<br>
+              • La CPU busca qué hay dentro de <code>numero</code> (encuentra un 5).<br>
+              • Multiplica <code>5 * 2</code> obteniendo <code>10</code>.<br>
+              • El valor <code>10</code> se almacena en la caja <code>resultado</code>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: REPRESENTACIÓN DE MEMORIA RAM -->
+      <section>
+        <h2><span class="section-num">07</span> ¿Cómo se ve en la Memoria RAM?</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">Visualicemos las "cajas con etiqueta" en la memoria de la computadora:</p>
+
+        <div class="memory-diagram">
+          <div class="memory-box">
+            <div class="memory-address">Dirección: 0x7ffd01</div>
+            <div class="memory-label">
+              numero <span class="memory-type">int</span>
+            </div>
+            <div class="memory-value">5</div>
+          </div>
+
+          <div style="display: flex; align-items: center; font-size: 1.5rem; color: var(--accent-cyan);">
+            * 2 ➔
+          </div>
+
+          <div class="memory-box">
+            <div class="memory-address">Dirección: 0x7ffd05</div>
+            <div class="memory-label">
+              resultado <span class="memory-type">int</span>
+            </div>
+            <div class="memory-value">10</div>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 14px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Punto clave de comprensión</h4>
+          <p style="margin: 0; font-size: 0.88rem;">
+            Nota que la variable <code>numero</code> <b>no se destruye ni se modifica</b> al multiplicar. Sigue valiendo 5. La computadora simplemente leyó su contenido para calcular el 10 que depositó en la nueva variable <code>resultado</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: MÁS PROBLEMAS RESUELTOS CON INSTRUCCIONES -->
+      <section>
+        <h2><span class="section-num">08</span> Problemas cotidianos traducidos a pasos</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Problema 1: Sumar Dos Números</h4>
+            <p style="font-size: 0.84rem; color: var(--text-muted);">Calcular el total a pagar sumando un producto y su envío:</p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> precioProducto = <span class="c-num">1200</span>;
+<span class="c-kw">int</span> costoEnvio = <span class="c-num">350</span>;
+<span class="c-kw">int</span> totalAPagar = precioProducto + costoEnvio;</div>
+            </div>
+            <p style="font-size: 0.82rem; color: #a5b4fc;">
+              Resultado en memoria: <code>totalAPagar = 1550</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Problema 2: Calcular una Edad Futura</h4>
+            <p style="font-size: 0.84rem; color: var(--text-muted);">Calcular cuántos años tendrá un alumno dentro de 5 años:</p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> edadActual = <span class="c-num">16</span>;
+<span class="c-kw">int</span> aniosAdelante = <span class="c-num">5</span>;
+<span class="c-kw">int</span> edadFutura = edadActual + aniosAdelante;</div>
+            </div>
+            <p style="font-size: 0.82rem; color: #a7f3d0;">
+              Resultado en memoria: <code>edadFutura = 21</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: QUÉ OCURRE ANTE UN ERROR -->
+      <section>
+        <h2><span class="section-num">09</span> ¿Qué ocurre cuando una instrucción es incorrecta?</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Los programadores conviven a diario con errores. Hay dos grandes familias:</p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">⚠️ 1. Error de Sintaxis (Gramática)</div>
+            <p style="font-size: 0.85rem; color: #fecaca;">
+              Escribiste mal una palabra del lenguaje o te olvidaste un símbolo obligatorio (como un punto y coma <code>;</code>).
+            </p>
+            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.78rem; color: #f87171; margin-top: 6px;">
+              int x = 5   // ¡Falta el punto y coma!
+            </div>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 6px;">
+              <b>Efecto:</b> El programa <b>no compila</b>. La computadora avisa antes de ejecutarse y se niega a arrancar.
+            </p>
+          </div>
+
+          <div class="wrong-card" style="border-color: rgba(251, 191, 36, 0.4); background: rgba(45, 35, 18, 0.7);">
+            <div class="wrong-title" style="color: var(--accent-amber);">🐛 2. Error de Lógica ("Bug")</div>
+            <p style="font-size: 0.85rem; color: #fef08a;">
+              El código está perfectamente escrito según las reglas, pero el razonamiento matemático o lógico es erróneo.
+            </p>
+            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.78rem; color: #fbbf24; margin-top: 6px;">
+              // Querías el doble y pusiste suma:<br>
+              int resultado = numero + 2;
+            </div>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 6px;">
+              <b>Efecto:</b> Compila y ejecuta, pero el resultado <b>es incorrecto</b>. ¡Son los más difíciles y divertidos de cazar!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: PREGUNTA DE PREDICCIÓN INTERACTIVA -->
+      <section>
+        <h2><span class="section-num">10</span> Desafío de Predicción: Pensá como la CPU</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Mirá el siguiente fragmento de código sin mirar la respuesta:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">desafio_secuencia.c</span>
+            <span class="code-badge">¿Qué valor queda?</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> puntos = <span class="c-num">10</span>;
+<span class="c-kw">int</span> bonus = <span class="c-num">5</span>;
+<span class="c-kw">int</span> total = puntos + bonus;
+puntos = <span class="c-num">20</span>;</div>
+        </div>
+
+        <p style="font-weight: 600; color: #ffffff; font-size: 0.95rem; margin-top: 10px;">
+          🔮 Pregunta: Al terminar de ejecutarse la última línea, ¿cuánto vale la variable <code>total</code>? ¿15 o 25?
+        </p>
+
+        <details class="code-solution">
+          <summary>👉 Clic acá para ver la solución y la explicación</summary>
+          <div class="solution-content">
+            <p style="font-size: 0.92rem; color: var(--accent-emerald); font-weight: 700; margin-bottom: 6px;">
+              ¡Respuesta correcta: 15!
+            </p>
+            <p style="font-size: 0.86rem; color: #cbd5e1; margin: 0;">
+              <b>¿Por qué?</b> Porque cuando se ejecutó la línea <code>int total = puntos + bonus;</code>, la variable <code>puntos</code> valía 10 y <code>bonus</code> valía 5. La computadora calculó <code>10 + 5 = 15</code> y lo guardó en <code>total</code>.
+              Cambiar <code>puntos = 20</code> en la línea posterior <b>no actualiza mágicamente las variables calculadas en el pasado</b>, a menos que volvamos a indicarlo explícitamente. Las instrucciones se ejecutan paso a paso en el tiempo.
+            </p>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 12: RESUMEN Y AUTOEVALUACIÓN -->
+      <section>
+        <h2><span class="section-num">11</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Conceptos Fundamentales</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Programar:</b> Comunicar un algoritmo a la máquina mediante código.</li>
+              <li><b>Computadora:</b> Ejecutor hiper-rápido, pero 100% literal y sin iniciativa.</li>
+              <li><b>Orden secuencial:</b> El procesador ejecuta de arriba a abajo.</li>
+              <li><b>Instrucción:</b> Orden mínima que termina con punto y coma <code>;</code>.</li>
+              <li><b>Memoria RAM:</b> Cajas nombradas donde se guardan los datos.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar con mis palabras qué es un algoritmo?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué <code>numero * 2</code> no altera el valor de <code>numero</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Distingo entre un error de sintaxis y un error de lógica (bug)?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Comprendo por qué el orden de las instrucciones cambia el resultado?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Volver al 1er Cuatrimestre
+          </a>
+          <a href="02-estructura-programa-c.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 12px;">
+            Siguiente: Estructura de un Programa en C →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

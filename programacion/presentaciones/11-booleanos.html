@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 11: Booleanos: bool, true y false | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <a href="../index.html">← Volver al temario de Programación</a>
+    <span class="plan-tag">Módulo 11 • Banderas y Estados</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-emerald">Programación Inicial • Unidad 11</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Booleanos: bool, true y false</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            El tipo lógico por excelencia en C moderno: banderas de estado, interruptores y condiciones elegantes
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">&lt;stdbool.h&gt;</span>
+            <span class="badge badge-emerald">true (1) &amp; false (0)</span>
+            <span class="badge badge-amber">Banderas (Flags)</span>
+            <span class="badge badge-purple">if (activo) vs if (activo == true)</span>
+          </div>
+
+          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">De la comparación a la variable</h4>
+            <p style="font-size: 0.88rem;">
+              En las dos unidades anteriores aprendimos que las comparaciones como <code>edad &gt;= 18</code> producen una respuesta de verdad.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              En esta clase aprenderemos a **guardar esas respuestas lógicas en variables dedicadas** (llamadas <b>booleanos</b> o <b>banderas</b>) para usarlas como interruptores que controlan el flujo de nuestro programa de manera limpia y profesional.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Utilizar la biblioteca estándar <code>&lt;stdbool.h&gt;</code>.</li>
+              <li>Declarar e inicializar variables de tipo <code>bool</code>.</li>
+              <li>Entender la representación interna de <code>true</code> (1) y <code>false</code> (0).</li>
+              <li>Almacenar el resultado de comparaciones complejas.</li>
+              <li>Escribir condiciones directas y limpias sin redundancias.</li>
+              <li>Implementar el patrón de **Banderas de Estado (Flags)**.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: EL EJEMPLO CANÓNICO OBLIGATORIO -->
+      <section>
+        <h2><span class="section-num">02</span> El Ejemplo Canónico con <code>stdbool.h</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Declaración moderna de una variable booleana:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <div class="code-dots">
+              <span class="code-dot dot-red"></span>
+              <span class="code-dot dot-yellow"></span>
+              <span class="code-dot dot-green"></span>
+            </div>
+            <span class="code-title">booleano_basico.c</span>
+            <span class="code-badge">C99 / C11</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">bool</span> aprobado = <span class="c-kw">true</span>;
+
+    <span class="c-kw">if</span> (aprobado)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"¡Felicitaciones, aprobaste la materia!\n"</span>);
+    }
+    <span class="c-kw">else</span>
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"Debes rendir el examen recuperatorio.\n"</span>);
+    }
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: HISTORIA Y STDBOOL.H -->
+      <section>
+        <h2><span class="section-num">03</span> ¿Por qué hace falta <code>&lt;stdbool.h&gt;</code>?</h2>
+        <div class="grid-2">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">El Pasado: C89/C90</h4>
+            <p style="font-size: 0.86rem;">
+              En los primeros 30 años de C no existía el tipo booleano oficial. Los programadores usaban números enteros normales (<code>int</code>):
+            </p>
+            <ul style="font-size: 0.82rem; line-height: 1.5; margin-left: 18px; margin-top: 6px;">
+              <li>El número <b>0</b> significaba FALSO.</li>
+              <li>Cualquier número **distinto de 0** (como 1, 42 o -5) significaba VERDADERO.</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 6px;">
+              Aunque funcionaba, el código era poco legible y se prestaba a confusiones.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">El Presente: C99 en adelante</h4>
+            <p style="font-size: 0.86rem;">
+              Con la llegada del estándar internacional C99, se añadió la cabecera <code>&lt;stdbool.h&gt;</code>, que nos permite escribir:
+            </p>
+            <div style="background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; margin-top: 8px;">
+              <span class="c-kw">bool</span> (como tipo de dato oficial)<br>
+              <span class="c-kw">true</span> (con valor interno 1)<br>
+              <span class="c-kw">false</span> (con valor interno 0)
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin-top: 6px;">
+              El código se volvió mucho más claro, profesional y fácil de leer.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: GUARDAR COMPARACIONES EN BOOLEANOS -->
+      <section>
+        <h2><span class="section-num">04</span> Guardar una Comparación en un <code>bool</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Podés separar el cálculo lógico de la decisión:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">separacion_logica.c</span>
+            <span class="code-badge">Código Limpio</span>
+          </div>
+          <div class="code-body"><span class="c-kw">float</span> notaFinal = <span class="c-num">8.5f</span>;
+<span class="c-kw">int</span> asistencia = <span class="c-num">85</span>;
+
+<span class="c-cmt">// Evaluamos la regla una sola vez y la guardamos con un nombre descriptivo:</span>
+<span class="c-kw">bool</span> cumpleRequisitos = (notaFinal &gt;= <span class="c-num">6.0f</span> &amp;&amp; asistencia &gt;= <span class="c-num">75</span>);
+
+<span class="c-cmt">// La condición del if queda hermosamente legible:</span>
+<span class="c-kw">if</span> (cumpleRequisitos)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Alumno promovido directamente.\n"</span>);
+}</div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🎯 <b>Ventaja enorme:</b> Si la regla del colegio cambia a 80% de asistencia, solo modificás la línea donde calculás <code>cumpleRequisitos</code>, y todo el resto del programa sigue funcionando sin tocarlo.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: LA REDUNDANCIA BOLEANA Y CÓDIGO ELEGANTE -->
+      <section>
+        <h2><span class="section-num">05</span> El Vicio del Principiante: Comparar con <code>true</code></h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">⚠️ Redundante y poco profesional</div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              if (aprobado == true)  // ¡REDUNDANTE!<br>
+              if (aprobado == false) // ¡POCO ELEGANTE!
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px;">
+              Es como decir: <i>"Si es verdad que es verdad que aprobaste"</i>. Como <code>aprobado</code> ya es un booleano por sí mismo, no hace falta compararlo contra <code>true</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ La forma limpia y profesional</div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #a7f3d0; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              if (aprobado)   // Directo y conciso<br>
+              if (!aprobado)  // Con operador NOT
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin-top: 6px;">
+              Se lee con la fluidez de una oración en español: <i>"Si está aprobado..."</i> o <i>"Si NO está aprobado..."</i>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: EL PATRÓN BANDERA (FLAG) -->
+      <section>
+        <h2><span class="section-num">06</span> Banderas de Estado (Flags) en Videojuegos</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Un uso real y cotidiano de los booleanos: controlar estados del juego:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">estado_juego.c</span>
+            <span class="code-badge">Game Logic</span>
+          </div>
+          <div class="code-body"><span class="c-kw">bool</span> tieneLlaveDorada = <span class="c-kw">false</span>;
+<span class="c-kw">bool</span> puertaAbierta = <span class="c-kw">false</span>;
+
+<span class="c-cmt">// El jugador encuentra la llave en el calabozo:</span>
+tieneLlaveDorada = <span class="c-kw">true</span>;
+
+<span class="c-cmt">// El jugador llega al portón del jefe final:</span>
+<span class="c-kw">if</span> (tieneLlaveDorada)
+{
+    puertaAbierta = <span class="c-kw">true</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"¡El portón se abre lentamente!\n"</span>);
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: ERRORES FRECUENTES -->
+      <section>
+        <h2><span class="section-num">07</span> Errores Frecuentes con Booleanos</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Olvidar el include</div>
+            <p style="font-size: 0.82rem; color: #fecaca;">
+              Escribir <code>bool x = true;</code> sin poner <code>#include &lt;stdbool.h&gt;</code> arriba del todo.<br>
+              El compilador te arrojará: <i>unknown type name 'bool'</i>.
+            </p>
+          </div>
+
+          <div class="wrong-card" style="border-color: rgba(251, 191, 36, 0.4); background: rgba(45, 35, 18, 0.7);">
+            <div class="wrong-title" style="color: var(--accent-amber);">⚠️ Escribir con Mayúsculas</div>
+            <p style="font-size: 0.82rem; color: #fef08a;">
+              Escribir <code>True</code>, <code>TRUE</code>, <code>False</code> o <code>FALSE</code>.<br>
+              En C los identificadores oficiales en minúscula son estrictamente <code>true</code> y <code>false</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">08</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Síntesis Booleana</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>#include &lt;stdbool.h&gt;:</b> Obligatorio en C moderno.</li>
+              <li><b>bool:</b> Tipo de dato con 2 estados: <code>true</code> o <code>false</code>.</li>
+              <li><b>true:</b> Internamente equivale a 1.</li>
+              <li><b>false:</b> Internamente equivale a 0.</li>
+              <li><b>if (x):</b> La forma más elegante y concisa de evaluar.</li>
+              <li><b>Banderas (Flags):</b> Recuerdan estados del sistema.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué biblioteca incluir para usar <code>bool</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué <code>if (activo)</code> es mejor que <code>if (activo == true)</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cómo guardar el resultado de una comparación en un <code>bool</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué número entero representa <code>false</code> en memoria?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="10-operadores-logicos.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Operadores Lógicos
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Temario
+          </a>
+          <a href="12-funciones.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: Funciones en C →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

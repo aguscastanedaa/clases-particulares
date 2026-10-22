@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 05: Entrada y Salida de Datos | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <a href="../index.html">← Volver al temario de Programación</a>
+    <span class="plan-tag">Módulo 05 • Interacción Usuario</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-amber">Programación Inicial • Unidad 5</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Entrada y Salida de Datos</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Haciendo programas interactivos: comunicación entre el usuario humano y el código mediante printf y scanf
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">printf() & Formatos</span>
+            <span class="badge badge-emerald">scanf() & Operador &</span>
+            <span class="badge badge-indigo">%d, %f, %c</span>
+            <span class="badge badge-rose">Flujo Completo de Datos</span>
+          </div>
+
+          <div class="box box-amber" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué este salto es emocionante?</h4>
+            <p style="font-size: 0.88rem;">
+              Hasta ahora nuestros programas tenían datos fijos escritos en el código. Para cambiar un número teníamos que editar el archivo y recompilar.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              Con la <b>Entrada y Salida (E/S)</b> tus programas cobran vida: le preguntan datos al usuario en vivo, esperan su respuesta por teclado, procesan la información y devuelven respuestas personalizadas en pantalla.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Metas de hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Distinguir con claridad entre <b>Input</b> (Entrada) y <b>Output</b> (Salida).</li>
+              <li>Dominar <code>printf()</code> para mostrar texto y variables combinadas.</li>
+              <li>Comprender los <b>especificadores de formato</b>: <code>%d</code>, <code>%f</code>, <code>%c</code>.</li>
+              <li>Entender qué significa el operador ampersand <b><code>&amp;</code></b> en <code>scanf()</code>.</li>
+              <li>Seguir el <b>viaje completo del dato</b> desde el teclado a la RAM y al monitor.</li>
+              <li>Detectar y evitar los errores más peligrosos de lectura.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: EL PROGRAMA CANÓNICO COMPLETO -->
+      <section>
+        <h2><span class="section-num">02</span> El Programa Canónico Interactivo</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Leé con atención este programa completo y probalo mentalmente:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <div class="code-dots">
+              <span class="code-dot dot-red"></span>
+              <span class="code-dot dot-yellow"></span>
+              <span class="code-dot dot-green"></span>
+            </div>
+            <span class="code-title">pedir_edad.c</span>
+            <span class="code-badge">C99 con stdio.h</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">int</span> edad;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingresa tu edad: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Tu edad es %d\n"</span>, edad);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-header">Simulación en Terminal</div>
+          <div class="terminal-body"><span class="terminal-prompt">$ ./pedir_edad</span>
+Ingresa tu edad: <span class="terminal-user-input">16</span>
+Tu edad es 16</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EL VIAJE COMPLETO DEL DATO -->
+      <section>
+        <h2><span class="section-num">03</span> El Viaje Completo de la Información</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">¿Qué pasa exactamente milisegundo a milisegundo al ejecutar este programa?</p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b><code>int edad;</code></b> ➔ El sistema operativo reserva 4 bytes en la RAM (ej. dirección <code>0x7ffd10</code>) etiquetados como <code>edad</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b><code>printf("Ingresa tu edad: ");</code></b> ➔ Envía los caracteres a la pantalla y deja el cursor titilando esperando al usuario.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b><code>scanf("%d", &amp;edad);</code></b> ➔ El programa se <b>pausa por completo</b>. El usuario escribe <code>16</code> y presiona Enter. <code>scanf</code> traduce los caracteres '1' y '6' al número binario entero 16 y lo guarda en la dirección dada por <code>&amp;edad</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b><code>printf("Tu edad es %d\n", edad);</code></b> ➔ La CPU lee el 16 de la caja <code>edad</code>, lo reemplaza donde estaba el comodín <code>%d</code> y lo proyecta en la terminal.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: ESPECIFICADORES DE FORMATO -->
+      <section>
+        <h2><span class="section-num">04</span> Especificadores de Formato</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Qué es un especificador de formato?</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Es un <b>comodín o marcador de posición</b> que empieza con el símbolo porcentaje <code>%</code>. Le indica a <code>printf</code> y a <code>scanf</code> qué tipo de dato debe esperar y cómo debe transformarlo.
+          </p>
+        </div>
+
+        <table class="trace-table" style="margin-top: 14px;">
+          <thead>
+            <tr>
+              <th>Especificador</th>
+              <th>Tipo de Dato</th>
+              <th>Uso en printf()</th>
+              <th>Uso en scanf()</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>%d</code> (o <code>%i</code>)</td>
+              <td><code>int</code> (Entero con signo)</td>
+              <td><code>printf("%d", edad);</code></td>
+              <td><code>scanf("%d", &amp;edad);</code></td>
+            </tr>
+            <tr>
+              <td><code>%f</code></td>
+              <td><code>float</code> (Decimal)</td>
+              <td><code>printf("%.2f", precio);</code></td>
+              <td><code>scanf("%f", &amp;precio);</code></td>
+            </tr>
+            <tr>
+              <td><code>%c</code></td>
+              <td><code>char</code> (Carácter único)</td>
+              <td><code>printf("%c", letra);</code></td>
+              <td><code>scanf(" %c", &amp;letra);</code></td>
+            </tr>
+            <tr>
+              <td><code>%lf</code> <i>(complemento)</i></td>
+              <td><code>double</code> (Decimal doble precisión)</td>
+              <td><code>printf("%f", d);</code></td>
+              <td><code>scanf("%lf", &amp;d);</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 6px;">
+          💡 <b>Nota pedagógica sobre %f y %lf:</b> Para variables de tipo <code>float</code>, se utiliza siempre <code>%f</code> tanto al leer con <code>scanf</code> como al imprimir con <code>printf</code>. La mención de <code>%lf</code> (*long float*) aplica solo para variables de tipo <code>double</code> al momento de leer.
+        </p>
+      </section>
+
+      <!-- SLIDE 6: EL OPERADOR & EN SCANF -->
+      <section>
+        <h2><span class="section-num">05</span> El Misterio del Operador <code>&amp;</code> en scanf</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Analogía del Cartero</h4>
+            <p style="font-size: 0.88rem;">
+              Imaginá que le pedís al cartero que te entregue un paquete:
+            </p>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              • Si le das <code>edad</code>: le estás dando una foto de lo que hay adentro de tu casa en este momento.<br>
+              • Si le das <code>&amp;edad</code>: le estás dando la <b>dirección postal exacta de tu casa</b> para que vaya y deposite el paquete adentro.
+            </p>
+            <p style="font-size: 0.84rem; color: var(--accent-emerald); font-weight: 600;">
+              <code>scanf</code> necesita guardar un dato nuevo, por lo tanto <b>necesita saber la dirección de memoria dónde guardarlo</b>.
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">El Operador de Dirección (Address-of)</h4>
+            <p style="font-size: 0.88rem;">
+              El símbolo <code>&amp;</code> se llama formalmente <b>operador de dirección</b>.
+            </p>
+            <div class="memory-diagram" style="margin: 8px 0;">
+              <div class="memory-box">
+                <div class="memory-address">&amp;edad = 0x7ffd10</div>
+                <div class="memory-label">edad (int)</div>
+                <div class="memory-value">16</div>
+              </div>
+            </div>
+            <p style="font-size: 0.8rem; color: #cbd5e1;">
+              <code>&amp;edad</code> le entrega a <code>scanf</code> el puntero <code>0x7ffd10</code> para que escriba directamente en esa celda de memoria RAM.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: PRINTF CON ESTILO Y DECIMALES -->
+      <section>
+        <h2><span class="section-num">06</span> Dominando <code>printf()</code>: Múltiples Datos</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Podés imprimir varias variables en una misma línea manteniendo el orden exacto:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">multiples_variables.c</span>
+            <span class="code-badge">Interpolación</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> dia = <span class="c-num">25</span>;
+<span class="c-kw">char</span> mesInicial = <span class="c-char">'M'</span>;
+<span class="c-kw">float</span> temp = <span class="c-num">22.458f</span>;
+
+<span class="c-cmt">// Los comodines se reemplazan en orden estricto de izquierda a derecha:</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Fecha: %d - Mes: %c - Temperatura: %.1f °C\n"</span>, dia, mesInicial, temp);</div>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-body"><span class="terminal-prompt">Salida:</span>
+Fecha: 25 - Mes: M - Temperatura: 22.5 °C</div>
+        </div>
+
+        <div class="box box-amber">
+          <p style="margin: 0; font-size: 0.88rem;">
+            🎯 <b>Control de decimales:</b> Con <code>%.1f</code> mostramos solo 1 decimal (redondea visualmente a 22.5). Con <code>%.2f</code> mostramos 2 decimales (22.46). Si ponés <code>%f</code> a secas, C mostrará 6 decimales por defecto (<code>22.458000</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: ERRORES FRECUENTES EN ENTRADA Y SALIDA -->
+      <section>
+        <h2><span class="section-num">07</span> Errores Clásicos con scanf y printf</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ El Error Más Grave: Olvidar el &amp;</div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              scanf("%d", edad); // ¡FALTA EL &amp;!
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin-top: 6px;">
+              <b>Consecuencia:</b> <code>scanf</code> interpretará el valor actual de <code>edad</code> como una dirección de memoria y tratará de escribir en un lugar prohibido. Tu programa colapsará con un <b>Segmentation Fault (Crash)</b> instantáneo.
+            </p>
+          </div>
+
+          <div class="wrong-card" style="border-color: rgba(251, 191, 36, 0.4); background: rgba(45, 35, 18, 0.7);">
+            <div class="wrong-title" style="color: var(--accent-amber);">⚠️ Poner \n dentro de scanf</div>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #fbbf24; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              scanf("%d\n", &amp;edad); // ¡NO PONGAS \n ACÁ!
+            </div>
+            <p style="font-size: 0.82rem; color: #fef08a; margin-top: 6px;">
+              <b>Consecuencia:</b> El <code>\n</code> dentro del texto de <code>scanf</code> hace que el programa quede esperando infinitamente otro espacio o número adicional antes de continuar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: EJERCICIO COMPLETO GUIADO -->
+      <section>
+        <h2><span class="section-num">08</span> Programa Completo: Calculadora de Promedio</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Un programa real que solicita dos notas y calcula el promedio con decimales:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">promedio.c</span>
+            <span class="code-badge">Programa Completo</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">float</span> nota1, nota2;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingresa la primera nota: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;nota1);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingresa la segunda nota: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;nota2);
+
+    <span class="c-kw">float</span> promedio = (nota1 + nota2) / <span class="c-num">2.0f</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"El promedio final es: %.2f\n"</span>, promedio);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">09</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Puntos Esenciales</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>printf():</b> Muestra texto y valores formateados en pantalla.</li>
+              <li><b>scanf():</b> Lee datos del teclado y pausa la ejecución.</li>
+              <li><b>%d, %f, %c:</b> Especificadores para entero, float y char.</li>
+              <li><b>&amp; (ampersand):</b> Operador de dirección obligatorio en variables numéricas con <code>scanf</code>.</li>
+              <li><b>%.2f:</b> Formatea la salida a 2 lugares decimales.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar por qué <code>scanf</code> necesita el <code>&amp;</code> y <code>printf</code> no?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo cuál especificador corresponde a cada tipo?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cómo limitar la cantidad de decimales en <code>printf</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo escribir un programa que pida dos números y muestre la suma?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="04-tipos-datos.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Tipos de Datos
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Temario
+          </a>
+          <a href="06-operadores-aritmeticos.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: Operadores Aritméticos →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 1C - 03: Variables | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 1er Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">1er Cuatrimestre • Módulo 03</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-cyan">1er Cuatrimestre • Variables • Unidad 3</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Variables en C</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            La memoria de tus programas: cómo almacenar, modificar y manipular información en tiempo de ejecución
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-indigo">Cajas de Memoria</span>
+            <span class="badge badge-emerald">Declaración &amp; Asignación</span>
+            <span class="badge badge-amber">Inicialización</span>
+            <span class="badge badge-rose">= vs ==</span>
+          </div>
+
+          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Para qué sirve una variable?</h4>
+            <p style="font-size: 0.88rem;">
+              Un programa que no recuerda datos no puede hacer nada útil. Necesita recordar vidas restantes, puntajes, nombres, precios, resultados matemáticos intermedios y mediciones.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              Las <b>variables</b> son el mecanismo que nos brinda el lenguaje para darle nombre a espacios de la memoria RAM y trabajar con datos dinámicos que cambian con el tiempo.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Metas que vas a dominar hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Comprender la <b>analogía de las cajas etiquetadas</b> en RAM.</li>
+              <li>Identificar los 3 atributos de toda variable: <b>Nombre, Tipo y Valor</b>.</li>
+              <li>Diferenciar <b>declaración</b>, <b>asignación</b> e <b>inicialización</b>.</li>
+              <li>Entender cómo se sobrescribe un valor en memoria.</li>
+              <li>Dominar la diferencia fundamental entre <b><code>=</code></b> y <b><code>==</code></b>.</li>
+              <li>Aplicar las reglas correctas para nombrar variables en C.</li>
+              <li>Interpretar <b>tablas de seguimiento paso a paso</b>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: LA ANALOGÍA DE LAS CAJAS CON NOMBRE -->
+      <section>
+        <h2><span class="section-num">02</span> La Analogía de las Cajas con Nombre</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Imaginate una estantería infinita llena de cajas organizadas:</p>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. El Nombre (Identificador)</h4>
+            <p style="font-size: 0.85rem;">
+              Es la <b>etiqueta pegada al frente de la caja</b>. Te permite referirte a ella sin tener que memorizar su compleja dirección numérica hexadecimal de memoria.
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #7dd3fc; margin-top: 6px;">
+              Ej: <code>edad</code>, <code>precio</code>
+            </div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">2. El Tipo de Dato</h4>
+            <p style="font-size: 0.85rem;">
+              Es el <b>tamaño y compartimento interno de la caja</b>. Le dice a la computadora qué clase de cosas entran allí (números enteros, decimales, letras).
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #a5b4fc; margin-top: 6px;">
+              Ej: <code>int</code>, <code>float</code>, <code>char</code>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. El Valor</h4>
+            <p style="font-size: 0.85rem;">
+              Es el <b>objeto real guardado dentro de la caja</b> en este momento. Este contenido puede cambiar tantas veces como quieras.
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #a7f3d0; margin-top: 6px;">
+              Ej: <code>16</code>, <code>1.75</code>, <code>'A'</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: LOS EJEMPLOS OBLIGATORIOS -->
+      <section>
+        <h2><span class="section-num">03</span> Declaración: Creando las Cajas</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Veamos los ejemplos obligatorios de declaración en C:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">declaraciones.c</span>
+            <span class="code-badge">Declaración</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> edad;
+<span class="c-kw">float</span> altura;
+<span class="c-kw">char</span> inicial;
+
+<span class="c-kw">int</span> otraEdad = <span class="c-num">16</span>;</div>
+        </div>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b><code>int edad;</code></b> ➔ Reserva memoria para un número entero llamado <code>edad</code>. Aún no tiene un valor asignado por nosotros (contiene "basura" de memoria).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b><code>float altura;</code></b> ➔ Reserva memoria para un número decimal con coma flotante llamado <code>altura</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b><code>char inicial;</code></b> ➔ Reserva memoria de 1 byte para un único carácter alfanumérico llamado <code>inicial</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b><code>int otraEdad = 16;</code></b> ➔ <b>Declaración con inicialización:</b> Crea la caja y deposita inmediatamente el número <code>16</code> en el mismo acto.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: DECLARACIÓN VS ASIGNACIÓN VS INICIALIZACIÓN -->
+      <section>
+        <h2><span class="section-num">04</span> Los 3 Momentos de una Variable</h2>
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Declaración</h4>
+            <p style="font-size: 0.85rem;">Crear la variable avisándole al compilador su nombre y tipo.</p>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body" style="font-size: 0.82rem;"><span class="c-kw">int</span> vidas;</div>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-dim);">La caja existe, pero su contenido es indefinido.</p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. Asignación</h4>
+            <p style="font-size: 0.85rem;">Guardar un dato dentro de una variable ya existente mediante el signo <code>=</code>.</p>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body" style="font-size: 0.82rem;">vidas = <span class="c-num">3</span>;</div>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-dim);">Ahora la caja contiene el valor 3.</p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Inicialización</h4>
+            <p style="font-size: 0.85rem;">Combinar los dos pasos anteriores en una única línea elegante.</p>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body" style="font-size: 0.82rem;"><span class="c-kw">int</span> vidas = <span class="c-num">3</span>;</div>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-dim);">Nace directamente con su valor inicial seguro.</p>
+          </div>
+        </div>
+
+        <div class="box box-rose" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            ⚠️ <b>¡Regla de oro profesional!:</b> Siempre que puedas, <b>inicializá tus variables</b>. Si lees una variable sin inicializar, C te devolverá cualquier número aleatorio residual ("basura") que haya quedado en esa celda de memoria RAM.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: SOBREESCRITURA DE VALORES -->
+      <section>
+        <h2><span class="section-num">05</span> Modificación del Valor Almacenado</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Una variable solo puede contener <b>un único valor a la vez</b>. Cuando asignás uno nuevo, el anterior se destruye:</p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">modificacion.c</span>
+              <span class="code-badge">Seguimiento</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> score = <span class="c-num">0</span>;    <span class="c-cmt">// Paso 1</span>
+score = <span class="c-num">100</span>;        <span class="c-cmt">// Paso 2</span>
+score = <span class="c-num">250</span>;        <span class="c-cmt">// Paso 3</span></div>
+          </div>
+
+          <div class="memory-diagram">
+            <div class="memory-box">
+              <div class="memory-address">Variable: score</div>
+              <div class="memory-label">RAM</div>
+              <div class="memory-value" style="font-size: 1.4rem;">250</div>
+              <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 6px;">
+                (0 y 100 fueron eliminados)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 14px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Uso de variables en expresiones</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Podés usar el valor de una variable para calcular el de otra sin modificar la original:<br>
+            <code>int bonus = score + 50;</code> ➔ <code>score</code> sigue valiendo 250, mientras que <code>bonus</code> recibe 300.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: TABLA DE SEGUIMIENTO PASO A PASO -->
+      <section>
+        <h2><span class="section-num">06</span> Tabla de Seguimiento (Traza de Memoria)</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">Veamos cómo el procesador actualiza la RAM línea por línea:</p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Línea Ejecutada</th>
+              <th>Acción Realizada</th>
+              <th>Valor de a</th>
+              <th>Valor de b</th>
+              <th>Valor de c</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>int a = 10;</code></td>
+              <td>Se crea 'a' con valor inicial 10</td>
+              <td><code>10</code></td>
+              <td><em>no existe</em></td>
+              <td><em>no existe</em></td>
+            </tr>
+            <tr>
+              <td><code>int b = 5;</code></td>
+              <td>Se crea 'b' con valor inicial 5</td>
+              <td><code>10</code></td>
+              <td><code>5</code></td>
+              <td><em>no existe</em></td>
+            </tr>
+            <tr>
+              <td><code>int c = a + b;</code></td>
+              <td>Se calcula 10 + 5 y se guarda en 'c'</td>
+              <td><code>10</code></td>
+              <td><code>5</code></td>
+              <td><code>15</code></td>
+            </tr>
+            <tr>
+              <td><code>a = 20;</code></td>
+              <td>Se sobreescribe 'a' con 20</td>
+              <td><code>20</code> (cambió)</td>
+              <td><code>5</code></td>
+              <td><code>15</code> (no cambia)</td>
+            </tr>
+            <tr>
+              <td><code>b = a * 2;</code></td>
+              <td>Se busca 'a' (20) * 2 = 40 en 'b'</td>
+              <td><code>20</code></td>
+              <td><code>40</code> (cambió)</td>
+              <td><code>15</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-size: 0.84rem; color: var(--accent-emerald);">
+          ✓ Notá cómo cada asignación solo modifica la variable que está a la izquierda del <code>=</code>.
+        </p>
+      </section>
+
+      <!-- SLIDE 8: LA DIFERENCIA FUNDAMENTAL = VS == -->
+      <section>
+        <h2><span class="section-num">07</span> ¡ALERTA CRÍTICA!: Diferencia entre <code>=</code> y <code>==</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Confundir estos dos operadores es el origen del 50% de los errores en programación:</p>
+
+        <div class="comparison-box">
+          <div class="correct-card" style="background: rgba(18, 32, 54, 0.85); border-color: var(--accent-cyan);">
+            <div class="correct-title" style="color: var(--accent-cyan); font-size: 1.05rem;">
+              El Operador <code>=</code> (UN SOLO SIGNO)
+            </div>
+            <p style="font-size: 0.9rem; font-weight: 700; color: #ffffff;">Es una ASIGNACIÓN (ACCIÓN)</p>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Significa: <i>"Tomá lo que está a la derecha y <b>guardalo</b> dentro de la caja de la izquierda"</i>.
+            </p>
+            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; color: #38bdf8;">
+              edad = 18;  // Guarda 18 en edad
+            </div>
+          </div>
+
+          <div class="wrong-card" style="background: rgba(45, 30, 20, 0.85); border-color: var(--accent-amber);">
+            <div class="wrong-title" style="color: var(--accent-amber); font-size: 1.05rem;">
+              El Operador <code>==</code> (DOS SIGNOS JUNTOS)
+            </div>
+            <p style="font-size: 0.9rem; font-weight: 700; color: #ffffff;">Es una COMPARACIÓN (PREGUNTA)</p>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Significa: <i>"¿El valor guardado a la izquierda <b>es igual</b> al de la derecha?"</i>. Devuelve verdadero o falso. No modifica ninguna caja.
+            </p>
+            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; color: #fbbf24;">
+              edad == 18;  // ¿Tiene edad el valor 18?
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: REGLAS PARA NOMBRAR VARIABLES -->
+      <section>
+        <h2><span class="section-num">08</span> Reglas para Nombrar Variables en C</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Reglas Obligatorias del Compilador</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li>Solo pueden contener <b>letras (a-z, A-Z)</b>, <b>números (0-9)</b> y <b>guiones bajos (<code>_</code>)</b>.</li>
+              <li><b>Nunca</b> pueden empezar con un número (<code>2daEdad</code> es inválido; <code>edad2</code> es válido).</li>
+              <li><b>No se permiten espacios</b> ni símbolos extraños (<code>mi edad</code> es inválido; <code>mi_edad</code> es válido).</li>
+              <li><b>No usar palabras reservadas</b> de C (como <code>int</code>, <code>float</code>, <code>return</code>, <code>main</code>, <code>if</code>).</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Buenas Prácticas Profesionales</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li>Usá nombres descriptivos: <code>precioFinal</code> en vez de <code>p</code> o <code>x</code>.</li>
+              <li>Convención <b>camelCase</b>: primera palabra en minúscula y cada siguiente palabra con mayúscula (<code>edadUsuario</code>, <code>puntosMaximos</code>).</li>
+              <li>O convención <b>snake_case</b>: todo en minúsculas separado por guiones bajos (<code>edad_usuario</code>).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: ERRORES FRECUENTES -->
+      <section>
+        <h2><span class="section-num">09</span> Errores Frecuentes con Variables</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Errores Clásicos</div>
+            <p style="font-size: 0.82rem; line-height: 1.5; color: #fecaca;">
+              • Usar una variable sin declararla previamente:<br>
+              &nbsp;&nbsp;<code>total = 100;</code> ➔ <i>error: 'total' undeclared</i><br>
+              • Declarar dos veces la misma variable en el mismo bloque:<br>
+              &nbsp;&nbsp;<code>int edad = 15; int edad = 20;</code> ➔ <i>redefinition</i><br>
+              • Invertir el orden de la asignación:<br>
+              &nbsp;&nbsp;<code>16 = edad;</code> ➔ ¡La caja siempre va a la izquierda!
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Forma Correcta</div>
+            <p style="font-size: 0.82rem; line-height: 1.5; color: #a7f3d0;">
+              • Declarar primero, usar después:<br>
+              &nbsp;&nbsp;<code>int total; total = 100;</code><br>
+              • Modificar sin volver a declarar:<br>
+              &nbsp;&nbsp;<code>int edad = 15; edad = 20;</code><br>
+              • Destino a la izquierda, valor a la derecha:<br>
+              &nbsp;&nbsp;<code>edad = 16;</code>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: EJERCICIO PRÁCTICO INTERACTIVO -->
+      <section>
+        <h2><span class="section-num">10</span> Desafío de Seguimiento: Predicción</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Leé el siguiente código y resolvé mentalmente:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">desafio_variables.c</span>
+            <span class="code-badge">¿Cuánto valen x e y?</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> x = <span class="c-num">8</span>;
+<span class="c-kw">int</span> y = <span class="c-num">3</span>;
+x = x + y;
+y = x - y;
+x = x - y;</div>
+        </div>
+
+        <p style="font-weight: 600; color: #ffffff; font-size: 0.92rem; margin-top: 10px;">
+          🔮 Pregunta: Al finalizar todas las líneas, ¿cuánto vale <code>x</code> y cuánto vale <code>y</code>?
+        </p>
+
+        <details class="code-solution">
+          <summary>👉 Clic acá para ver el resultado paso a paso</summary>
+          <div class="solution-content">
+            <p style="font-size: 0.92rem; color: var(--accent-emerald); font-weight: 700; margin-bottom: 6px;">
+              ¡Resultado: x = 3 e y = 8! (¡Se intercambiaron los valores!)
+            </p>
+            <ol style="font-size: 0.85rem; line-height: 1.5; margin-left: 18px; color: #cbd5e1;">
+              <li><code>x = x + y</code> ➔ <code>8 + 3 = 11</code>. Ahora <code>x = 11</code>.</li>
+              <li><code>y = x - y</code> ➔ <code>11 - 3 = 8</code>. Ahora <code>y = 8</code> (el valor original de x).</li>
+              <li><code>x = x - y</code> ➔ <code>11 - 8 = 3</code>. Ahora <code>x = 3</code> (el valor original de y).</li>
+            </ol>
+            <p style="font-size: 0.82rem; color: var(--accent-cyan); margin-top: 6px;">
+              💡 Este es un famoso truco clásico de programación para intercambiar dos variables sin usar una tercera variable auxiliar.
+            </p>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 12: RESUMEN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">11</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Puntos Cardinales</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Variable:</b> Espacio de memoria con nombre, tipo y valor.</li>
+              <li><b>Declaración:</b> Reserva la caja (<code>int x;</code>).</li>
+              <li><b>Asignación:</b> Guarda el valor (<code>x = 5;</code>).</li>
+              <li><b>Sobreescritura:</b> El valor nuevo reemplaza al anterior.</li>
+              <li><b>= vs ==:</b> <code>=</code> guarda, <code>==</code> compara.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar los 3 atributos de una variable?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué es riesgoso leer una variable sin inicializar?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé nombrar variables respetando las reglas de C?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo armar una tabla de seguimiento para rastrear valores?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="02-estructura-programa-c.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Estructura Básica
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            1er Cuatrimestre
+          </a>
+          <a href="04-tipos-datos.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: Tipos de Datos →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

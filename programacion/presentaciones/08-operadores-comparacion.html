@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 08: Operadores de Comparación | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <a href="../index.html">← Volver al temario de Programación</a>
+    <span class="plan-tag">Módulo 08 • Relaciones y Verdad</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-amber">Programación Inicial • Unidad 8</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Operadores de Comparación</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Hacer preguntas a la máquina: igualdad, desigualdad, orden y valores de verdad en C
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">== (Igual a)</span>
+            <span class="badge badge-rose">!= (Distinto de)</span>
+            <span class="badge badge-emerald">&gt;, &lt; (Mayor y Menor)</span>
+            <span class="badge badge-purple">&gt;=, &lt;= (Mayor/Menor o Igual)</span>
+          </div>
+
+          <div class="box box-amber" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Qué es una comparación?</h4>
+            <p style="font-size: 0.88rem;">
+              Para que un programa tome decisiones inteligentes (por ejemplo: dejar pasar a un usuario, cobrar un descuento o avisar que se agotaron las vidas), primero debe ser capaz de **comparar dos valores**.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              Una comparación es una **pregunta lógica**. A diferencia de una suma (que da otro número), una comparación solo puede responder una de dos cosas: **Verdadero (1)** o **Falso (0)**.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Comprender el concepto de **expresión relacional**.</li>
+              <li>Dominar los 6 operadores: <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>.</li>
+              <li>Aprender a formular cada comparación como una **pregunta clara**.</li>
+              <li>Analizar tablas de evaluación con edades de 16, 18 y 20 años.</li>
+              <li>Blindar tu código contra el error más destructivo: <code>if (x = 10)</code>.</li>
+              <li>Preparar el terreno para las estructuras condicionales (<code>if / else</code>).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: LOS SEIS OPERADORES RELACIONALES -->
+      <section>
+        <h2><span class="section-num">02</span> El Arsenal de los 6 Operadores</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Los 6 símbolos con los que evaluamos relaciones en C:</p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Operador</th>
+              <th>Nombre Formal</th>
+              <th>Pregunta que le hace a la CPU</th>
+              <th>Ejemplo de Código</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>==</code></td>
+              <td>Igual a</td>
+              <td>¿Es el valor de la izquierda idéntico al de la derecha?</td>
+              <td><code>edad == 18</code></td>
+            </tr>
+            <tr>
+              <td><code>!=</code></td>
+              <td>Distinto de</td>
+              <td>¿Son los valores diferentes entre sí?</td>
+              <td><code>edad != 18</code></td>
+            </tr>
+            <tr>
+              <td><code>&gt;</code></td>
+              <td>Mayor que</td>
+              <td>¿Es el de la izquierda estrictamente mayor?</td>
+              <td><code>edad &gt; 18</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;</code></td>
+              <td>Menor que</td>
+              <td>¿Es el de la izquierda estrictamente menor?</td>
+              <td><code>edad &lt; 18</code></td>
+            </tr>
+            <tr>
+              <td><code>&gt;=</code></td>
+              <td>Mayor o igual que</td>
+              <td>¿Es el de la izquierda mayor o exactamente igual?</td>
+              <td><code>edad &gt;= 18</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;=</code></td>
+              <td>Menor o igual que</td>
+              <td>¿Es el de la izquierda menor o exactamente igual?</td>
+              <td><code>edad &lt;= 18</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 4: LOS SEIS CASOS CANÓNICOS CON EDAD -->
+      <section>
+        <h2><span class="section-num">03</span> Los 6 Ejemplos Obligatorios con <code>edad</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Veamos las 6 expresiones requeridas formuladas como preguntas cotidianas:</p>
+
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. edad == 18</h4>
+            <p style="font-size: 0.85rem;"><b>Pregunta:</b> ¿Tiene exactamente 18 años?</p>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">Solo es verdadero si <code>edad</code> vale 18.</p>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">2. edad != 18</h4>
+            <p style="font-size: 0.85rem;"><b>Pregunta:</b> ¿Tiene una edad distinta a 18?</p>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">Es verdadero para cualquier edad salvo el 18.</p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">3. edad &gt; 18</h4>
+            <p style="font-size: 0.85rem;"><b>Pregunta:</b> ¿Es estrictamente mayor a 18?</p>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">Verdadero si tiene 19, 20, 21... (si tiene 18, es falso).</p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">4. edad &lt; 18</h4>
+            <p style="font-size: 0.85rem;"><b>Pregunta:</b> ¿Es estrictamente menor a 18?</p>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">Verdadero si tiene 17, 16, 15... (si tiene 18, es falso).</p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">5. edad &gt;= 18</h4>
+            <p style="font-size: 0.85rem;"><b>Pregunta:</b> ¿Tiene 18 o más años?</p>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">¡Incluye al 18! Verdadero para 18, 19, 20...</p>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">6. edad &lt;= 18</h4>
+            <p style="font-size: 0.85rem;"><b>Pregunta:</b> ¿Tiene 18 o menos años?</p>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">¡Incluye al 18! Verdadero para 18, 17, 16...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: TABLA COMPARATIVA CON 16, 18 Y 20 -->
+      <section>
+        <h2><span class="section-num">04</span> Tabla de Evaluación: Tres Valores a Prueba</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">Simulemos las 6 comparaciones para tres alumnos de 16, 18 y 20 años:</p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Expresión</th>
+              <th>Si edad = 16</th>
+              <th>Si edad = 18</th>
+              <th>Si edad = 20</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>edad == 18</code></td>
+              <td style="color: var(--accent-rose);">FALSO (0)</td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1)</td>
+              <td style="color: var(--accent-rose);">FALSO (0)</td>
+            </tr>
+            <tr>
+              <td><code>edad != 18</code></td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1)</td>
+              <td style="color: var(--accent-rose);">FALSO (0)</td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1)</td>
+            </tr>
+            <tr>
+              <td><code>edad &gt; 18</code></td>
+              <td style="color: var(--accent-rose);">FALSO (0)</td>
+              <td style="color: var(--accent-rose);">FALSO (0) ⚠️</td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1)</td>
+            </tr>
+            <tr>
+              <td><code>edad &lt; 18</code></td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1)</td>
+              <td style="color: var(--accent-rose);">FALSO (0) ⚠️</td>
+              <td style="color: var(--accent-rose);">FALSO (0)</td>
+            </tr>
+            <tr>
+              <td><code>edad &gt;= 18</code></td>
+              <td style="color: var(--accent-rose);">FALSO (0)</td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1) ✓</td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1)</td>
+            </tr>
+            <tr>
+              <td><code>edad &lt;= 18</code></td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1)</td>
+              <td style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1) ✓</td>
+              <td style="color: var(--accent-rose);">FALSO (0)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-amber" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            👀 <b>¡Prestá especial atención a la columna del 18!:</b> Con <code>&gt;</code> da FALSO, pero con <code>&gt;=</code> da VERDADERO. El igual incluido en <code>&gt;=</code> y <code>&lt;=</code> marca la diferencia en las fronteras.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: EL PELIGRO MORTAL DE = VS == -->
+      <section>
+        <h2><span class="section-num">05</span> El Peligro Mortal: <code>=</code> vs <code>==</code></h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Lo que muchos principiantes escriben</div>
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              if (edad = 18) // ¡UN SOLO SIGNO IGUAL!
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin-top: 6px;">
+              <b>¿Qué hace C realmente?:</b> C **no compara**. Toma el 18 y lo guarda dentro de <code>edad</code>. Luego evalúa el valor 18, que como no es cero, ¡es considerado **SIEMPRE VERDADERO**! El código ejecutará el bloque sin importar qué edad tenía antes.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ La forma correcta con doble igual</div>
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #a7f3d0; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
+              if (edad == 18) // ¡DOBLE SIGNO IGUAL!
+            </div>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin-top: 6px;">
+              <b>Lo que hace C:</b> Comprueba sin modificar la memoria si <code>edad</code> tiene guardado el número 18.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: COMPARACIONES DE VARIABLES Y CONSTANTES -->
+      <section>
+        <h2><span class="section-num">06</span> Comparando Variables entre Sí</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Podés comparar una variable contra un número fijo (constante) o dos variables entre sí:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">comparacion_dos_variables.c</span>
+            <span class="code-badge">Duelo de Variables</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> puntuacionJugador1 = <span class="c-num">450</span>;
+<span class="c-kw">int</span> puntuacionJugador2 = <span class="c-num">500</span>;
+
+<span class="c-cmt">// ¿Ganó el jugador 2?</span>
+<span class="c-kw">bool</span> ganoJugador2 = (puntuacionJugador2 &gt; puntuacionJugador1);
+
+<span class="c-cmt">// ¿Hubo empate?</span>
+<span class="c-kw">bool</span> huboEmpate = (puntuacionJugador1 == puntuacionJugador2);</div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Guardar el resultado de una comparación</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Como ves arriba, el resultado de <code>(puntuacionJugador2 &gt; puntuacionJugador1)</code> es un valor lógico (<code>true</code> / <code>1</code>) que podés almacenar directamente adentro de una variable <code>bool</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: DESAFÍO DE PREDICCIÓN -->
+      <section>
+        <h2><span class="section-num">07</span> Desafío de Predicción: Verdadero o Falso</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Dadas las variables <code>int a = 7; int b = 10;</code>, determiná mentalmente si cada expresión es 1 (Verdadera) o 0 (Falsa):</p>
+
+        <div class="grid-2">
+          <div class="box box-cyan"><b>A)</b> <code>a + 3 == b</code></div>
+          <div class="box box-amber"><b>B)</b> <code>a != b - 3</code></div>
+          <div class="box box-purple"><b>C)</b> <code>b / 2 &gt;= a</code></div>
+          <div class="box box-emerald"><b>D)</b> <code>a &lt;= 7</code></div>
+        </div>
+
+        <details class="code-solution">
+          <summary>👉 Clic acá para verificar tus respuestas</summary>
+          <div class="solution-content">
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px; color: #cbd5e1;">
+              <li><b>A) <code>7 + 3 == 10</code> ➔ 10 == 10 ➔ <span style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1)</span></b>.</li>
+              <li><b>B) <code>7 != 10 - 3</code> ➔ 7 != 7 ➔ <span style="color: var(--accent-rose); font-weight: 700;">FALSO (0)</span></b> (porque 7 sí es igual a 7).</li>
+              <li><b>C) <code>10 / 2 &gt;= 7</code> ➔ 5 &gt;= 7 ➔ <span style="color: var(--accent-rose); font-weight: 700;">FALSO (0)</span></b> (5 es menor que 7).</li>
+              <li><b>D) <code>7 &lt;= 7</code> ➔ <span style="color: var(--accent-emerald); font-weight: 700;">VERDADERO (1)</span></b> (por el componente "o igual").</li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 9: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">08</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Puntos Clave</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Toda comparación produce <b>1 (verdadero)</b> o <b>0 (falso)</b>.</li>
+              <li><code>==</code> compara igualdad; <code>!=</code> compara desigualdad.</li>
+              <li><code>&gt;=</code> y <code>&lt;=</code> incluyen el valor límite.</li>
+              <li><b>= es asignar, == es comparar</b> (nunca los confundas).</li>
+              <li>Las comparaciones son la condición de entrada para los condicionales.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar los 6 operadores de comparación?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué <code>18 &gt; 18</code> es falso pero <code>18 &gt;= 18</code> es verdadero?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo la regla de oro para no confundir <code>=</code> con <code>==</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué valor numérico devuelve C para una comparación verdadera?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="07-incremento-variables.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Incremento de Variables
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Temario
+          </a>
+          <a href="09-condicionales.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: Condicionales if y else →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 10: Vectores Dinámicos e Integración | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Módulo 10 • Cierre de Materia</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-emerald">2do Cuatrimestre • Integración Final • Unidad 10</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Vectores Dinámicos e Integración</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Arreglos sin límites predefinidos, estructuras en el Heap y el proyecto integrador definitivo en C
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">Vector Dinámico Completo</span>
+            <span class="badge badge-indigo">Structs en Heap</span>
+            <span class="badge badge-amber">Burbuja &amp; Búsqueda en Dinámico</span>
+            <span class="badge badge-emerald">Proyecto Integrador</span>
+          </div>
+
+          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos del Módulo Final</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">La Cúspide de Programación en C</h4>
+            <p style="font-size: 0.88rem;">
+              Comenzamos el año aprendiendo qué era una variable y un bucle. En este segundo cuatrimestre aprendiste vectores, algoritmos de búsqueda y ordenamiento, matrices bidimensionales, estructuras compuestas y la gestión manual de la memoria en el Heap.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              Hoy unimos <b>todos los cables sueltos</b> para construir estructuras de datos dinámicas profesionales, capaces de adaptarse a cualquier volumen de información sin desperdiciar un solo byte.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Entender la arquitectura de un <b>Vector Dinámico</b> (Puntero, Capacidad y Cantidad).</li>
+              <li>Aprovechar la equivalencia <code>v[i] == *(v + i)</code> con punteros en el Heap.</li>
+              <li>Crear y manipular <b>vectores dinámicos de estructuras (<code>struct</code>)</b>.</li>
+              <li>Adaptar el ordenamiento de burbuja y búsquedas a memoria dinámica.</li>
+              <li>Construir un <b>Sistema de Gestión Completo</b> interactivo con menú en C.</li>
+              <li>Garantizar un ciclo de vida limpio sin fugas de memoria (<i>zero memory leaks</i>).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: LA ANATOMÍA DE UN VECTOR DINÁMICO -->
+      <section>
+        <h2><span class="section-num">02</span> La Anatomía de un Vector Dinámico Real</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">La Tríada Fundamental</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Un vector dinámico profesional no es sólo un puntero. Está compuesto por tres variables que trabajan en equipo:
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-emerald" style="text-align: center;">
+            <div style="font-size: 1.6rem; margin-bottom: 6px;">🎯</div>
+            <h4 style="color: #34d399; font-size: 1rem;">1. Puntero (<code>datos</code>)</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              La dirección de memoria en el Heap donde empieza el bloque contiguo de elementos.
+            </p>
+          </div>
+
+          <div class="box box-amber" style="text-align: center;">
+            <div style="font-size: 1.6rem; margin-bottom: 6px;">📦</div>
+            <h4 style="color: #fbbf24; font-size: 1rem;">2. Capacidad (<code>capacidad</code>)</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              El total de casillas reservadas actualmente con <code>malloc</code>/<code>realloc</code> (ej. 10 casillas).
+            </p>
+          </div>
+
+          <div class="box box-indigo" style="text-align: center;">
+            <div style="font-size: 1.6rem; margin-bottom: 6px;">📝</div>
+            <h4 style="color: #818cf8; font-size: 1rem;">3. Cantidad (<code>tamano</code>)</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              Cuántos elementos válidos ingresó realmente el usuario hasta el momento (ej. 4 cargados).
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px;">
+          <div style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px;">Visualización del estado en RAM:</div>
+          <div class="array-container">
+            <div class="array-cell" style="border-color: #34d399;"><span class="cell-idx">[0]</span><span class="cell-val">15</span></div>
+            <div class="array-cell" style="border-color: #34d399;"><span class="cell-idx">[1]</span><span class="cell-val">28</span></div>
+            <div class="array-cell" style="border-color: #34d399;"><span class="cell-idx">[2]</span><span class="cell-val">42</span></div>
+            <div class="array-cell" style="border-color: #34d399;"><span class="cell-idx">[3]</span><span class="cell-val">09</span></div>
+            <div class="array-cell" style="border-color: rgba(255,255,255,0.15); opacity: 0.5;"><span class="cell-idx">[4]</span><span class="cell-val" style="color: #64748b;">vacío</span></div>
+            <div class="array-cell" style="border-color: rgba(255,255,255,0.15); opacity: 0.5;"><span class="cell-idx">[5]</span><span class="cell-val" style="color: #64748b;">vacío</span></div>
+          </div>
+          <p style="font-size: 0.82rem; color: #94a3b8; text-align: center; margin-top: 6px;">
+            <b>Cantidad = 4</b> (elementos útiles) | <b>Capacidad = 6</b> (espacio total reservado)
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EL CICLO DE VIDA COMPLETO -->
+      <section>
+        <h2><span class="section-num">03</span> El Ciclo de Vida del Vector Dinámico</h2>
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Inicialización:</b> Reservar una capacidad inicial pequeña (ej. 2 o 4 casillas) con <code>malloc()</code> y validar que no sea <code>NULL</code>. <code>cantidad = 0;</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Inserción &amp; Auto-expansión:</b> Antes de guardar un nuevo valor, verificar: <code>if (cantidad == capacidad)</code>. Si está lleno, duplicar capacidad (<code>capacidad *= 2</code>) con <code>realloc()</code> seguro. Luego guardar el dato y hacer <code>cantidad++;</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>Operaciones:</b> Recorrer, buscar, modificar u ordenar usando exactamente la misma sintaxis de corchetes <code>v[i]</code> desde <code>0</code> hasta <code>cantidad - 1</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b>Destrucción obligatoria:</b> Al cerrar el programa o terminar el módulo, devolver la memoria al sistema con <code>free(vector); vector = NULL;</code>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: LA MAGIA DE LA SINTAXIS v[i] -->
+      <section>
+        <h2><span class="section-num">04</span> ¿Por qué podemos usar <code>v[i]</code> con punteros?</h2>
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">La Regla de Oro del Compilador C</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            En C, los corchetes <code>v[i]</code> son simplemente "azúcar sintáctico" (*syntactic sugar*). El compilador traduce automáticamente:
+          </p>
+          <div style="text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: #38bdf8; margin-top: 8px;">
+            v[i] &nbsp;≡&nbsp; *(v + i)
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">En Vectores Estáticos</h4>
+            <div class="code-window" style="margin-top: 6px;">
+              <div class="code-body" style="font-size: 0.85rem;"><span class="c-kw">int</span> v[5];
+v[2] = 40; <span class="c-cmt">// Guarda en la casilla 2</span></div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">En Vectores Dinámicos</h4>
+            <div class="code-window" style="margin-top: 6px;">
+              <div class="code-body" style="font-size: 0.85rem;"><span class="c-kw">int</span> *v = (<span class="c-kw">int</span> *)<span class="c-fn">malloc</span>(5 * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+v[2] = 40; <span class="c-cmt">// ¡Exactamente la misma sintaxis!</span></div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size: 0.88rem; color: var(--text-muted); text-align: center; margin-top: 12px;">
+          ✨ ¡Esto significa que <b>todas las funciones y algoritmos que programaste antes</b> (búsquedas, sumatorias, promedios) funcionan con memoria dinámica sin cambiar nada!
+        </p>
+      </section>
+
+      <!-- SLIDE 6: VECTORES DINÁMICOS DE STRUCTS -->
+      <section>
+        <h2><span class="section-num">05</span> Vectores Dinámicos de Estructuras (<code>struct</code>)</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Combinando Registros Compuestos con el Heap</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Imaginá un sistema escolar: no sabemos cuántos alumnos se van a inscribir. Creamos un vector dinámico donde cada celda es una estructura <code>Alumno</code> completa:
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 12px;">
+          <div class="code-header"><span class="code-title">alumnos_dinamico.c</span></div>
+          <div class="code-body" style="font-size: 0.84rem;"><span class="c-kw">typedef struct</span> {
+    <span class="c-kw">int</span> legajo;
+    <span class="c-kw">char</span> nombre[30];
+    <span class="c-kw">float</span> promedio;
+} <span class="c-type">Alumno</span>;
+
+<span class="c-cmt">// Reservamos espacio para N alumnos en el Heap</span>
+<span class="c-type">Alumno</span> *lista = (<span class="c-type">Alumno</span> *)<span class="c-fn">malloc</span>(n * <span class="c-kw">sizeof</span>(<span class="c-type">Alumno</span>));
+<span class="c-kw">if</span> (lista == <span class="c-kw">NULL</span>) <span class="c-kw">return</span> 1;
+
+<span class="c-cmt">// Acceso con corchetes y operador punto:</span>
+lista[0].legajo = 1001;
+<span class="c-fn">strcpy</span>(lista[0].nombre, <span class="c-str">"Lucía Gómez"</span>);
+lista[0].promedio = 9.5;</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: ALGORITMOS EN DINÁMICO (ORDENAMIENTO BURBUJA) -->
+      <section>
+        <h2><span class="section-num">06</span> Ordenar Estructuras Dinámicas con Burbuja</h2>
+        <div class="code-window">
+          <div class="code-header"><span class="code-title">ordenar_alumnos.c</span></div>
+          <div class="code-body" style="font-size: 0.82rem;"><span class="c-cmt">// Ordena los alumnos por promedio de mayor a menor</span>
+<span class="c-kw">void</span> <span class="c-fn">ordenarPorPromedio</span>(<span class="c-type">Alumno</span> *arr, <span class="c-kw">int</span> n) {
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = 0; i &lt; n - 1; i++) {
+        <span class="c-kw">for</span> (<span class="c-kw">int</span> j = 0; j &lt; n - 1 - i; j++) {
+            <span class="c-kw">if</span> (arr[j].promedio &lt; arr[j + 1].promedio) {
+                <span class="c-cmt">// Swap de la estructura completa (copia legajo, nombre y promedio)</span>
+                <span class="c-type">Alumno</span> temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}</div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <p style="font-size: 0.88rem; margin: 0;">
+            💡 <b>Poder de C:</b> Al hacer <code>Alumno temp = arr[j];</code>, C copia <b>todos los campos internos de la estructura de golpe</b>, manteniendo la consistencia de cada alumno.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: PROYECTO INTEGRADOR: ARQUITECTURA -->
+      <section>
+        <h2><span class="section-num">07</span> Proyecto Integrador: Sistema de Estudiantes</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">El Desafío de Cierre del 2do Cuatrimestre</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Construir un programa interactivo con consola en C que integre todo lo aprendido:
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Funcionalidades del Sistema</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 16px;">
+              <li>Menú de opciones interactivo (1 a 5).</li>
+              <li><b>1. Agregar alumno:</b> Auto-expande con <code>realloc()</code> si se llena.</li>
+              <li><b>2. Listar alumnos:</b> Recorre e imprime en formato prolijo.</li>
+              <li><b>3. Buscar por legajo:</b> Búsqueda secuencial rápida.</li>
+              <li><b>4. Ordenar por mérito:</b> Ordenamiento de burbuja.</li>
+              <li><b>5. Salir:</b> Libera la memoria con <code>free()</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Conceptos Aplicados</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 16px;">
+              <li><code>struct</code> para agrupar campos heterogéneos.</li>
+              <li>Punteros y memoria dinámica en el Heap.</li>
+              <li><code>malloc()</code>, <code>realloc()</code> seguro con <code>temp</code> y <code>free()</code>.</li>
+              <li>Bucles anidados y condicionales.</li>
+              <li>Modularización con funciones limpias.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: CÓDIGO DEL PROYECTO (PARTE 1: MENU Y MAIN) -->
+      <section>
+        <h2><span class="section-num">08</span> Código del Proyecto: Función <code>main()</code></h2>
+        <div class="code-window">
+          <div class="code-header"><span class="code-title">sistema_gestion.c (Parte 1)</span></div>
+          <div class="code-body" style="font-size: 0.78rem;"><span class="c-pp">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pp">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+<span class="c-pp">#include</span> <span class="c-str">&lt;string.h&gt;</span>
+
+<span class="c-kw">typedef struct</span> { <span class="c-kw">int</span> legajo; <span class="c-kw">char</span> nombre[30]; <span class="c-kw">float</span> promedio; } <span class="c-type">Alumno</span>;
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-kw">void</span>) {
+    <span class="c-kw">int</span> capacidad = 2, cantidad = 0, opcion = 0;
+    <span class="c-type">Alumno</span> *alumnos = (<span class="c-type">Alumno</span> *)<span class="c-fn">malloc</span>(capacidad * <span class="c-kw">sizeof</span>(<span class="c-type">Alumno</span>));
+    <span class="c-kw">if</span> (alumnos == <span class="c-kw">NULL</span>) { <span class="c-fn">printf</span>(<span class="c-str">"Sin memoria\n"</span>); <span class="c-kw">return</span> 1; }
+
+    <span class="c-kw">do</span> {
+        <span class="c-fn">printf</span>(<span class="c-str">"\n--- SISTEMA DE GESTION DE ALUMNOS ---\n"</span>);
+        <span class="c-fn">printf</span>(<span class="c-str">"1. Agregar Alumno | 2. Listar | 3. Buscar | 4. Ordenar | 5. Salir\nOpcion: "</span>);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;opcion);
+
+        <span class="c-kw">if</span> (opcion == 1) {
+            <span class="c-kw">if</span> (cantidad == capacidad) {
+                capacidad *= 2;
+                <span class="c-type">Alumno</span> *temp = (<span class="c-type">Alumno</span> *)<span class="c-fn">realloc</span>(alumnos, capacidad * <span class="c-kw">sizeof</span>(<span class="c-type">Alumno</span>));
+                <span class="c-kw">if</span> (temp == <span class="c-kw">NULL</span>) { <span class="c-fn">printf</span>(<span class="c-str">"Error al reasignar\n"</span>); <span class="c-kw">break</span>; }
+                alumnos = temp;
+                <span class="c-fn">printf</span>(<span class="c-str">"  [Capacidad expandida a %d lugares]\n"</span>, capacidad);
+            }
+            <span class="c-fn">printf</span>(<span class="c-str">"Legajo: "</span>); <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;alumnos[cantidad].legajo);
+            <span class="c-fn">printf</span>(<span class="c-str">"Nombre: "</span>); <span class="c-fn">scanf</span>(<span class="c-str">"%s"</span>, alumnos[cantidad].nombre);
+            <span class="c-fn">printf</span>(<span class="c-str">"Promedio: "</span>); <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;alumnos[cantidad].promedio);
+            cantidad++;
+        }
+        <span class="c-cmt">/* resto de opciones en la siguiente slide */</span>
+    } <span class="c-kw">while</span> (opcion != 5);
+
+    <span class="c-fn">free</span>(alumnos); alumnos = <span class="c-kw">NULL</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Memoria liberada exitosamente. Fin del programa.\n"</span>);
+    <span class="c-kw">return</span> 0;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: CÓDIGO DEL PROYECTO (PARTE 2: OPERACIONES) -->
+      <section>
+        <h2><span class="section-num">09</span> Código del Proyecto: Listar y Buscar</h2>
+        <div class="code-window">
+          <div class="code-header"><span class="code-title">sistema_gestion.c (Parte 2: Casos 2, 3 y 4)</span></div>
+          <div class="code-body" style="font-size: 0.80rem;"><span class="c-kw">else if</span> (opcion == 2) { <span class="c-cmt">// LISTAR</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"\n--- LISTADO DE ALUMNOS (%d cargados) ---\n"</span>, cantidad);
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = 0; i &lt; cantidad; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"[%d] Legajo: %d | Nombre: %-12s | Promedio: %.2f\n"</span>,
+               i + 1, alumnos[i].legajo, alumnos[i].nombre, alumnos[i].promedio);
+    }
+}
+<span class="c-kw">else if</span> (opcion == 3) { <span class="c-cmt">// BUSCAR POR LEGAJO</span>
+    <span class="c-kw">int</span> buscado, hallado = 0;
+    <span class="c-fn">printf</span>(<span class="c-str">"Legajo a buscar: "</span>); <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;buscado);
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = 0; i &lt; cantidad; i++) {
+        <span class="c-kw">if</span> (alumnos[i].legajo == buscado) {
+            <span class="c-fn">printf</span>(<span class="c-str">"Encontrado: %s con promedio %.2f\n"</span>, alumnos[i].nombre, alumnos[i].promedio);
+            hallado = 1; <span class="c-kw">break</span>;
+        }
+    }
+    <span class="c-kw">if</span> (!hallado) <span class="c-fn">printf</span>(<span class="c-str">"No existe alumno con ese legajo.\n"</span>);
+}
+<span class="c-kw">else if</span> (opcion == 4) { <span class="c-cmt">// ORDENAR POR PROMEDIO (BURBUJA)</span>
+    <span class="c-fn">ordenarPorPromedio</span>(alumnos, cantidad);
+    <span class="c-fn">printf</span>(<span class="c-str">"Alumnos ordenados exitosamente por promedio.\n"</span>);
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: MAPA CONCEPTUAL DEL 2DO CUATRIMESTRE -->
+      <section>
+        <h2><span class="section-num">10</span> El Mapa Conceptual del 2do Cuatrimestre</h2>
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1-3</span>
+            <div class="step-content">
+              <b>Vectores y Algoritmos:</b> Casillas contiguas en RAM, índices <code>0</code> a <code>N-1</code>, recorridos con <code>for</code>, acumuladores, máximos/mínimos y ordenamiento de burbuja.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4-5</span>
+            <div class="step-content">
+              <b>Matrices Bidimensionales:</b> Cuadrículas <code>[FILAS][COLS]</code>, bucles anidados <code>(i, j)</code>, diagonal principal (<code>i == j</code>) y diagonal secundaria (<code>i + j == N - 1</code>).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">6</span>
+            <div class="step-content">
+              <b>Estructuras (<code>struct</code>):</b> Empaquetar tipos de datos heterogéneos bajo un mismo nombre, operador punto <code>.</code> y arreglos de estructuras.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">7-9</span>
+            <div class="step-content">
+              <b>Memoria Dinámica &amp; Punteros:</b> Stack vs Heap, <code>sizeof()</code>, <code>malloc()</code>, <code>free()</code>, inicialización a cero con <code>calloc()</code> y redimensionamiento con <code>realloc()</code> seguro.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">10</span>
+            <div class="step-content">
+              <b>Vectores Dinámicos Integrados:</b> Estructuras en el Heap sin límite de tamaño prefijado, ordenadas y gestionadas interactivamente.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: CHECKLIST FINAL DEL PROGRAMADOR EN C -->
+      <section>
+        <h2><span class="section-num">11</span> Checklist del Programador Senior en C</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Reglas de Oro</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 16px;">
+              <li>Toda reserva dinámica con <code>malloc</code>, <code>calloc</code> o <code>realloc</code> debe validarse contra <code>NULL</code>.</li>
+              <li>A todo <code>malloc</code> / <code>calloc</code> le corresponde un <code>free</code> exactamente una vez.</li>
+              <li>Después de hacer <code>free(p)</code>, siempre escribir <code>p = NULL;</code> para evitar punteros colgantes.</li>
+              <li>Para redimensionar con <code>realloc()</code>, utilizar siempre un puntero auxiliar <code>temp</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #f43f5e;">Errores a Erradicar</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 16px;">
+              <li>Nunca acceder al índice <code>N</code> (los índices van de <code>0</code> a <code>N - 1</code>).</li>
+              <li>Nunca leer variables locales sin inicializar antes.</li>
+              <li>No perder punteros sin liberarlos (fugas de memoria).</li>
+              <li>Nunca hacer <code>free()</code> sobre una variable estática del Stack.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: CIERRE Y FELICITACIONES -->
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald" style="font-size: 1rem; padding: 6px 16px;">¡Materia Completada con Éxito! 🎉</span>
+          <h1 style="font-size: 2.8rem; margin: 16px 0;">¡Felicitaciones!</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; line-height: 1.5; margin-bottom: 30px;">
+            Has recorrido desde los fundamentos más básicos de la programación hasta el control minucioso de la memoria del procesador en lenguaje C. Estas bases sólidas te acompañarán en cualquier lenguaje y carrera tecnológica.
+          </p>
+
+          <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+            <a href="../index.html" class="stat-badge" style="text-decoration: none; padding: 12px 22px; font-size: 0.95rem; background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.4); color: #38bdf8; font-weight: 600;">
+              ← Volver al Índice del 2do Cuatrimestre
+            </a>
+            <a href="../../index.html" class="stat-badge" style="text-decoration: none; padding: 12px 22px; font-size: 0.95rem; background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.15); color: #f8fafc; font-weight: 600;">
+              Índice General de Programación
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: true,
+      transition: 'slide',
+      transitionSpeed: 'fast'
+    });
+  </script>
+</body>
+</html>

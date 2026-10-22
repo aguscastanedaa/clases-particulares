@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 06: Estructuras (struct) | Clases Particulares</title>
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Índice General</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Módulo 06</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-amber">2do Cuatrimestre • Estructuras de Datos • Unidad 6</span>
+          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Estructuras (struct) en C</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Modelando entidades del mundo real: tipos de datos heterogéneos, operador punto, typedef y vectores de structs
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">struct</span>
+            <span class="badge badge-emerald">Operador Punto (.)</span>
+            <span class="badge badge-purple">typedef</span>
+            <span class="badge badge-rose">Vectores de Alumnos</span>
+          </div>
+
+          <div class="box box-amber" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">La limitación de los vectores</h4>
+            <p style="font-size: 0.88rem;">
+              Un vector solo puede almacenar elementos del **mismo tipo** (todos <code>int</code> o todos <code>float</code>).
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+              Pero en la vida real, una entidad como un **Alumno** tiene un número de legajo (<code>int</code>), una inicial (<code>char</code>), un promedio general (<code>float</code>) y un estado de regularidad (<code>bool</code>). ¿Cómo agrupamos datos de tipos distintos bajo un solo nombre? Con un <b><code>struct</code></b>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Comprender qué es un <b>tipo de dato compuesto (struct)</b>.</li>
+              <li>Declarar plantillas de estructuras con sus campos o miembros.</li>
+              <li>Acceder y modificar campos usando el **operador punto (<code>.</code>)**.</li>
+              <li>Simplificar el código profesional con <b><code>typedef</code></b>.</li>
+              <li>Crear y recorrer **vectores de estructuras**.</li>
+              <li>Resolver búsquedas y filtros en listas de registros.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: QUÉ ES UN STRUCT -->
+      <section>
+        <h2><span class="section-num">02</span> ¿Qué es un <code>struct</code>?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Una **estructura (`struct`)** es un tipo de dato definido por el usuario que permite empaquetar una o más variables de **diferentes tipos** bajo un mismo identificador.
+          </p>
+        </div>
+
+        <div class="struct-container" style="max-width: 600px; margin: 16px auto;">
+          <div class="struct-header">
+            <span>struct Alumno</span>
+            <span>Entidad Compuesta</span>
+          </div>
+          <div class="struct-fields">
+            <div class="struct-field">
+              <div class="struct-field-name">int legajo</div>
+              <div class="struct-field-val">1042</div>
+            </div>
+            <div class="struct-field">
+              <div class="struct-field-name">int edad</div>
+              <div class="struct-field-val">16</div>
+            </div>
+            <div class="struct-field">
+              <div class="struct-field-name">float promedio</div>
+              <div class="struct-field-val">8.75</div>
+            </div>
+            <div class="struct-field">
+              <div class="struct-field-name">bool regular</div>
+              <div class="struct-field-val">true</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: SINTAXIS Y OPERADOR PUNTO -->
+      <section>
+        <h2><span class="section-num">03</span> Declaración y el Operador Punto (<code>.</code>)</h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">definicion_struct.c</span>
+            <span class="code-badge">Sintaxis Básica</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-cmt">// 1. Molde o plantilla de la estructura:</span>
+<span class="c-kw">struct</span> Alumno {
+    <span class="c-kw">int</span> legajo;
+    <span class="c-kw">int</span> edad;
+    <span class="c-kw">float</span> promedio;
+    <span class="c-kw">bool</span> regular;
+}; <span class="c-cmt">// ¡Atención!: El punto y coma final es obligatorio</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-cmt">// 2. Creamos una variable real de ese tipo:</span>
+    <span class="c-kw">struct</span> Alumno a1;
+
+    <span class="c-cmt">// 3. Asignamos valores a cada campo con el operador PUNTO (.):</span>
+    a1.legajo = <span class="c-num">1042</span>;
+    a1.edad = <span class="c-num">16</span>;
+    a1.promedio = <span class="c-num">8.75f</span>;
+    a1.regular = <span class="c-kw">true</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Legajo: %d - Promedio: %.2f\n"</span>, a1.legajo, a1.promedio);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: EL OPERADOR TYPEDEF -->
+      <section>
+        <h2><span class="section-num">04</span> La Elegancia de <code>typedef</code></h2>
+        <div class="grid-2">
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">Sin typedef (Tedioso)</h4>
+            <p style="font-size: 0.84rem;">Cada vez que declarás una variable tenés que escribir las dos palabras: <code>struct Alumno</code>.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; color: #fecaca; margin-top: 6px;">
+              struct Alumno a1;<br>
+              struct Alumno a2;
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Con typedef (Profesional)</h4>
+            <p style="font-size: 0.84rem;">Crea un alias para que <code>Alumno</code> funcione como un tipo nativo igual que <code>int</code>.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; color: #a7f3d0; margin-top: 6px;">
+              typedef struct {<br>
+              &nbsp;&nbsp;int legajo;<br>
+              &nbsp;&nbsp;float promedio;<br>
+              } Alumno;<br><br>
+              Alumno a1, a2; // ¡Directo y limpio!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: VECTORES DE ESTRUCTURAS -->
+      <section>
+        <h2><span class="section-num">05</span> Vectores de Estructuras (Tablas de Registros)</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">La combinación más poderosa: un arreglo donde cada casillero es un alumno completo:</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">vector_alumnos.c</span>
+            <span class="code-badge">Vector de structs</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#define</span> CANT <span class="c-num">3</span>
+
+<span class="c-kw">typedef struct</span> {
+    <span class="c-kw">int</span> legajo;
+    <span class="c-kw">float</span> promedio;
+} Alumno;
+
+<span class="c-cmt">// Declaramos un vector con 3 alumnos e inicializamos sus campos:</span>
+Alumno curso[CANT] = {
+    {<span class="c-num">101</span>, <span class="c-num">7.5f</span>},
+    {<span class="c-num">102</span>, <span class="c-num">9.8f</span>},
+    {<span class="c-num">103</span>, <span class="c-num">6.2f</span>}
+};
+
+<span class="c-cmt">// Acceso con corchetes y punto: curso[i].campo</span>
+<span class="c-fn">printf</span>(<span class="c-str">"El promedio del segundo alumno es: %.1f\n"</span>, curso[<span class="c-num">1</span>].promedio);</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: BÚSQUEDA DEL MEJOR PROMEDIO -->
+      <section>
+        <h2><span class="section-num">06</span> Algoritmo: Encontrar al Alumno con Mayor Promedio</h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">mejor_alumno.c</span>
+            <span class="code-badge">Búsqueda en Structs</span>
+          </div>
+          <div class="code-body"><span class="c-cmt">// Asumimos que el primer alumno tiene el mejor promedio:</span>
+<span class="c-kw">int</span> indiceMejor = <span class="c-num">0</span>;
+
+<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; CANT; i++)
+{
+    <span class="c-kw">if</span> (curso[i].promedio &gt; curso[indiceMejor].promedio)
+    {
+        indiceMejor = i; <span class="c-cmt">// Actualizamos el índice campeón</span>
+    }
+}
+
+<span class="c-fn">printf</span>(<span class="c-str">"El mejor alumno es legajo %d con promedio %.2f\n"</span>, 
+       curso[indiceMejor].legajo, curso[indiceMejor].promedio);</div>
+        </div>
+
+        <div class="box box-cyan">
+          <p style="margin: 0; font-size: 0.85rem;">
+            💡 <b>Consejo clave:</b> En lugar de guardar solo el valor numérico del promedio, guardamos el **índice <code>indiceMejor</code>**. De ese modo, al final tenemos acceso a **todos los datos del alumno ganador** (su legajo, edad, promedio, etc.).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">07</span> Resumen de la Unidad y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Puntos Clave</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>struct:</b> Agrupa datos de distintos tipos (heterogéneos).</li>
+              <li><b>Punto y coma:</b> <code>struct Nombre { ... };</code> lleva <code>;</code> al final.</li>
+              <li><b>Operador punto (.):</b> Accede a los campos de una estructura.</li>
+              <li><b>typedef:</b> Evita tener que repetir <code>struct</code> al declarar variables.</li>
+              <li><b>Vector de structs:</b> <code>lista[i].campo</code> para listas de registros.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué diferencia fundamental tiene un <code>struct</code> respecto a un vector?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué símbolo se usa para acceder a un miembro de una estructura?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Para qué sirve usar <code>typedef</code> junto con <code>struct</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Cómo se escribe la sintaxis para consultar el campo <code>edad</code> del alumno 3?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <a href="05-diagonales-matriz.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Diagonales de una Matriz
+          </a>
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Índice 2do Cuatrimestre
+          </a>
+          <a href="07-introduccion-memoria-dinamica.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            Siguiente: Memoria Dinámica y Punteros →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>
