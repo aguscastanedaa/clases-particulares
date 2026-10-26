@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 09: Punteros a Estructuras y el Operador Flecha (->) | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
+  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
+  <style>
+    .reveal .code-body,
+    .reveal pre.code-body,
+    .reveal .code-window pre {
+      font-size: 1.05rem !important;
+      line-height: 1.38 !important;
+      width: 100% !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      padding: 10px 18px !important;
+      box-sizing: border-box !important;
+    }
+    .grid-2 .code-body,
+    .grid-1-2 .code-body,
+    .grid-2-1 .code-body,
+    .grid-2 pre.code-body,
+    .grid-1-2 pre.code-body,
+    .grid-2-1 pre.code-body,
+    .grid-2 .code-window pre,
+    .grid-1-2 .code-window pre,
+    .grid-2-1 .code-window pre {
+      font-size: 1.00rem !important;
+      padding: 10px 14px !important;
+      line-height: 1.38 !important;
+    }
+    .grid-3 .code-body,
+    .grid-3 pre.code-body,
+    .grid-3 .code-window pre {
+      font-size: 0.80rem !important;
+      padding: 8px 10px !important;
+      line-height: 1.34 !important;
+    }
+    .terminal-body {
+      font-size: 1.05rem !important;
+      padding: 12px 16px !important;
+      line-height: 1.40 !important;
+    }
+    .reveal code:not(.code-body *) {
+      font-size: 0.88em !important;
+      border: none !important;
+      padding: 1px 5px !important;
+      box-decoration-break: clone !important;
+      -webkit-box-decoration-break: clone !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Unidad 09</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-emerald">2do Cuatrimestre • Estructuras Avanzadas • Unidad 09</span>
+          <h1 style="font-size: 2.4rem; margin-bottom: 12px;">Punteros a Estructuras y el Operador Flecha (<code>-&gt;</code>)</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Combinando structs y punteros: máxima eficiencia en el paso de parámetros, mutación directa de campos y la anatomía de <code>ptr-&gt;campo</code> vs <code>(*ptr).campo</code>.
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-purple">struct *puntero</span>
+            <span class="badge badge-emerald">Operador flecha -&gt;</span>
+            <span class="badge badge-amber">(*emp).campo</span>
+            <span class="badge badge-cyan">Aumento salarial porcentual</span>
+          </div>
+
+          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué necesitamos punteros a estructuras?</h4>
+            <p>Una estructura puede ser inmensa (contener decenas de cadenas, vectores y números, pesando cientos de bytes). Pasarla por valor implica duplicar todos esos bytes en el Stack.</p>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
+              Pasar un puntero a una struct tiene dos ventajas determinantes: <b>1. Eficiencia extrema</b> (solo viajan 8 bytes de dirección) y <b>2. Capacidad de modificar la entidad original</b> de forma permanente.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+              <li>Declarar y asignar punteros a estructuras: <code>struct Empleado *emp</code>.</li>
+              <li>Comprender la necesidad y origen del operador flecha <code>-&gt;</code>.</li>
+              <li>Descifrar la equivalencia: <code>emp-&gt;salario</code> es <code>(*emp).salario</code>.</li>
+              <li>Entender la precedencia de operadores que obliga al paréntesis.</li>
+              <li>Implementar la función de aumento salarial del apunte oficial.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: DECLARACIÓN Y ASIGNACIÓN -->
+      <section>
+        <h2><span class="section-num">02</span> Declaración de un Puntero a Struct</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Un puntero a struct guarda la dirección de memoria donde comienza la estructura.</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">empleado.c</span>
+              <span class="code-badge">Puntero</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> Empleado 
+{ 
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>]; 
+    <span class="c-kw">int</span> edad; 
+    <span class="c-kw">float</span> salario; 
+}; 
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">struct</span> Empleado empleado;
+    empleado.edad = <span class="c-num">30</span>;
+    empleado.salario = <span class="c-num">50000.0f</span>;
+    
+    <span class="c-cmt">// Declaramos el puntero a la estructura:</span>
+    <span class="c-kw">struct</span> Empleado *ptr = &amp;empleado;
+    
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="memory-diagram" style="flex-direction: column; align-items: center;">
+            <div class="memory-box" style="border-color: var(--accent-purple); width: 230px;">
+              <div class="memory-address">Dirección: 0x4000</div>
+              <div class="memory-label">empleado <span class="memory-type">struct</span></div>
+              <div class="memory-value" style="font-size: 0.82rem; color: #e2e8f0; text-align: left; line-height: 1.4;">
+                edad: 30<br>salario: $50000.00
+              </div>
+            </div>
+
+            <div style="color: var(--accent-amber); font-size: 1.4rem;">▲ apunta a</div>
+
+            <div class="memory-box" style="border-color: var(--accent-emerald); width: 230px;">
+              <div class="memory-address">Dirección: 0x7000</div>
+              <div class="memory-label">ptr <span class="memory-type" style="color: var(--accent-emerald);">Empleado*</span></div>
+              <div class="memory-value" style="color: var(--accent-cyan); font-size: 0.9rem;">0x4000</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EL OPERADOR FLECHA -> -->
+      <section>
+        <h2><span class="section-num">03</span> El Operador Flecha <code>-&gt;</code></h2>
+        <div class="box box-emerald" style="margin-bottom: 16px;">
+          <h4 style="margin-bottom: 4px;">La Regla Visual de Oro</h4>
+          <p style="font-size: 1.05rem; margin: 0;">
+            Si tenés una <b>variable struct directa</b>, usás el punto: <code>empleado.salario</code>.<br>
+            Si tenés un <b>puntero a una struct</b>, usás la flecha: <code>emp-&gt;salario</code>.
+          </p>
+        </div>
+
+        <div class="comparison-box">
+          <div class="box box-cyan">
+            <h4 style="color: var(--accent-cyan);">Variable ordinaria de Struct</h4>
+            <div style="font-family: var(--font-mono); font-size: 1.1rem; color: #fff; margin: 10px 0;">
+              empleado<span style="color: var(--accent-cyan); font-weight: bold;">.</span>salario
+            </div>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              La variable contiene los datos directamente. Se usa el <b>operador punto <code>.</code></b> para seleccionar el campo.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: var(--accent-emerald);">Puntero a una Struct</h4>
+            <div style="font-family: var(--font-mono); font-size: 1.1rem; color: #fff; margin: 10px 0;">
+              emp<span style="color: var(--accent-emerald); font-weight: bold;">-&gt;</span>salario
+            </div>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              La variable contiene una dirección de memoria. La <b>flecha <code>-&gt;</code></b> viaja a esa dirección y accede al campo de la estructura remota.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: ANATOMÍA DE -> VS (*EMP).CAMPO -->
+      <section>
+        <h2><span class="section-num">04</span> ¿Por qué existe <code>-&gt;</code>? La Trampa de Precedencia</h2>
+        <div class="box box-indigo">
+          <p style="font-size: 0.95rem; margin: 0;">
+            El operador flecha <code>emp-&gt;salario</code> es una forma abreviada y elegante de escribir:
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 1.25rem; color: var(--accent-amber); text-align: center; margin: 12px 0;">
+            (*emp).salario
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">¿Por qué los paréntesis son obligatorios?</h4>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              En C, el <b>operador punto <code>.</code> tiene mayor prioridad de evaluación que el asterisco <code>*</code></b>.
+            </p>
+            <p style="font-size: 0.82rem; color: #fecaca; margin-top: 6px;">
+              Si escribís <code>*emp.salario</code>, C interpreta <code>*(emp.salario)</code>, lo cual falla estrepitosamente porque <code>emp</code> no tiene un campo <code>salario</code> (es solo un puntero).
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">El rol pacificador de la flecha</h4>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              Como escribir <code>(*emp).campo</code> en cada línea resultaba tedioso y propenso a errores tipográficos, los diseñadores de C introdujeron el operador <b><code>-&gt;</code></b> para hacer ambas cosas en un solo paso: desreferenciar y acceder.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: EJEMPLO AUMENTO SALARIAL -->
+      <section>
+        <h2><span class="section-num">05</span> Ejemplo: Aumento Salarial Porcentual</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Función que recibe un puntero a empleado y modifica su salario real en la memoria.</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">aumentar_salario.c</span>
+              <span class="code-badge">Definición y Puntero</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> Empleado 
+{ 
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>]; 
+    <span class="c-kw">int</span> edad; 
+    <span class="c-kw">float</span> salario; 
+}; 
+
+<span class="c-type">void</span> <span class="c-fn">aumentarSalario</span>(<span class="c-kw">struct</span> Empleado *emp, 
+                     <span class="c-kw">float</span> porcentaje) 
+{ 
+    emp-&gt;salario += emp-&gt;salario * porcentaje / <span class="c-num">100.0f</span>; 
+}</div>
+          </div>
+
+          <div>
+            <div class="code-window">
+              <div class="code-header">
+                <span class="code-title">main.c</span>
+                <span class="code-badge">Paso de Dirección &amp;</span>
+              </div>
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">struct</span> Empleado emp = {<span class="c-str">"Carlos"</span>, <span class="c-num">35</span>, <span class="c-num">100000.0f</span>};
+    <span class="c-fn">printf</span>(<span class="c-str">"Inicial: $%.2f\n"</span>, emp.salario);
+    
+    <span class="c-cmt">// Pasamos la dirección con &amp; :</span>
+    <span class="c-fn">aumentarSalario</span>(&amp;emp, <span class="c-num">15.0f</span>); 
+    <span class="c-fn">printf</span>(<span class="c-str">"Con 15%%: $%.2f\n"</span>, emp.salario);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Terminal de salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body" style="padding: 10px 14px;">Inicial: $100000.00
+Con 15%: $115000.00</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: AUTOEVALUACIÓN Y CIERRE -->
+      <section>
+        <h2><span class="section-num">06</span> Resumen y Autoevaluación</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Puntos Clave del Módulo</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
+              <li>Pasar punteros a estructuras ahorra copias pesadas en memoria y permite modificar el original.</li>
+              <li>El operador <code>-&gt;</code> se usa cuando accedemos a un campo a través de un puntero.</li>
+              <li><code>p-&gt;campo</code> es 100% equivalente a <code>(*p).campo</code>.</li>
+              <li>En la llamada siempre debemos anteponer el operador <code>&amp;</code>: <code>funcion(&amp;miStruct);</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Cuándo debo usar <code>.</code> y cuándo <code>-&gt;</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué <code>*ptr.campo</code> genera error de compilador?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué operador uso para pasar una estructura por puntero en <code>main</code>? (<code>&amp;</code>).</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+          <a href="08-estructuras-struct-fundamentos.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Fundamentos de Structs
+          </a>
+          <a href="../index.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Índice 2do Cuatrimestre
+          </a>
+          <a href="10-arreglos-de-estructuras.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Siguiente: Arreglos de Estructuras →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

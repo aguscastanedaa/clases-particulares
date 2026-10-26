@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 08: Estructuras (struct) y Fundamentos | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
+
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
+  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
+  <style>
+    .reveal .code-body,
+    .reveal pre.code-body,
+    .reveal .code-window pre {
+      font-size: 1.05rem !important;
+      line-height: 1.38 !important;
+      width: 100% !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      padding: 10px 18px !important;
+      box-sizing: border-box !important;
+    }
+    .grid-2 .code-body,
+    .grid-1-2 .code-body,
+    .grid-2-1 .code-body,
+    .grid-2 pre.code-body,
+    .grid-1-2 pre.code-body,
+    .grid-2-1 pre.code-body,
+    .grid-2 .code-window pre,
+    .grid-1-2 .code-window pre,
+    .grid-2-1 .code-window pre {
+      font-size: 1.00rem !important;
+      padding: 10px 14px !important;
+      line-height: 1.38 !important;
+    }
+    .grid-3 .code-body,
+    .grid-3 pre.code-body,
+    .grid-3 .code-window pre {
+      font-size: 0.80rem !important;
+      padding: 8px 10px !important;
+      line-height: 1.34 !important;
+    }
+    .terminal-body {
+      font-size: 1.05rem !important;
+      padding: 12px 16px !important;
+      line-height: 1.40 !important;
+    }
+    .reveal code:not(.code-body *) {
+      font-size: 0.88em !important;
+      border: none !important;
+      padding: 1px 5px !important;
+      box-decoration-break: clone !important;
+      -webkit-box-decoration-break: clone !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Unidad 08</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-purple">2do Cuatrimestre • Registros y Modelado • Unidad 08</span>
+          <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Estructuras (<code>struct</code>) y Modelado de Datos</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Creando tipos de datos personalizados: cómo agrupar variables heterogéneas, el operador punto <code>.</code>
+            y el pasaje de estructuras a funciones.
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-purple">struct y campos</span>
+            <span class="badge badge-cyan">Operador punto (.)</span>
+            <span class="badge badge-emerald">Estructuras por valor</span>
+            <span class="badge badge-amber">Modelado de Alumnos y Puntos</span>
+          </div>
+
+          <div class="box box-purple" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
+              para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Superando la limitación homogénea</h4>
+            <p>Los vectores y matrices en C tienen una gran limitación: <b>todos sus elementos deben ser del mismo
+                tipo</b> (todos <code>int</code> o todos <code>float</code>).</p>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
+              En el mundo real, los objetos son heterogéneos: un alumno tiene un nombre (texto), una edad (entero) y un
+              promedio (decimal). La palabra clave <code>struct</code> nos permite crear el molde para representar
+              entidades completas.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+              <li>Comprender qué problema resuelve una estructura.</li>
+              <li>Declarar moldes de tipo struct con campos heterogéneos.</li>
+              <li>Instanciar variables struct (ej. <code>struct Persona p1;</code>).</li>
+              <li>Acceder a sus miembros para lectura y escritura con el operador punto (<code>.</code>).</li>
+              <li>Pasar estructuras a funciones por valor y comprender la copia de datos.</li>
+              <li>Entender la relación directa con Bases de Datos y Clases de POO.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: DECLARACIÓN Y MOLDE -->
+      <section>
+        <h2><span class="section-num">02</span> Declaración de una Struct: El "Molde"</h2>
+        <div class="box box-purple">
+          <h4 style="margin-bottom: 4px;">Analogía del Molde de Cocina</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            Una <code>struct</code> es un plano o molde de cocina: no ocupa memoria por sí misma hasta que creás una
+            variable concreta usando esa forma.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">persona.h</span>
+              <span class="code-badge">Molde</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> Persona 
+{ 
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>]; 
+    <span class="c-kw">int</span> edad; 
+    <span class="c-kw">float</span> altura; 
+};</div>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">instanciar.c</span>
+              <span class="code-badge">Uso</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-cmt">// Creamos la variable real en memoria:</span>
+    <span class="c-kw">struct</span> Persona persona1;
+    
+    <span class="c-cmt">// Accedemos con el operador punto (.)</span>
+    persona1.edad = <span class="c-num">20</span>;
+    persona1.altura = <span class="c-num">1.75f</span>;
+    <span class="c-fn">strcpy</span>(persona1.nombre, <span class="c-str">"Agustin"</span>);
+    
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: CAJA CON CAJITAS (OPERADOR PUNTO) -->
+      <section>
+        <h2><span class="section-num">03</span> El Operador Punto <code>.</code> y la Caja con Cajitas</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Podemos visualizar una estructura como una caja grande
+          rotulada que contiene cajitas internas etiquetadas.</p>
+
+        <div class="grid-2">
+          <div class="struct-container">
+            <div class="struct-header">
+              <span>persona1</span>
+              <span>struct Persona</span>
+            </div>
+            <div class="struct-fields">
+              <div class="struct-field">
+                <div class="struct-field-name">.nombre (char[50])</div>
+                <div class="struct-field-val">"Agustin"</div>
+              </div>
+              <div class="struct-field">
+                <div class="struct-field-name">.edad (int)</div>
+                <div class="struct-field-val">20</div>
+              </div>
+              <div class="struct-field">
+                <div class="struct-field-name">.altura (float)</div>
+                <div class="struct-field-val">1.75 m</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Sintaxis de Acceso</h4>
+            <div
+              style="font-family: var(--font-mono); font-size: 0.95rem; background: rgba(0,0,0,0.4); padding: 10px 14px; border-radius: 8px; margin: 10px 0;">
+              variable.campo
+            </div>
+            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">
+              <code>persona1.edad</code> significa literalmente: <i>"Entrá a la caja <code>persona1</code> y dame el
+                valor del campo <code>edad</code>"</i>.
+            </p>
+            <p style="font-size: 0.82rem; color: var(--accent-cyan); margin-top: 8px;">
+              💡 <b>Relación con POO y BD:</b> Esta estructura es el ancestro directo de las tablas SQL (donde cada
+              campo es una columna) y de las Clases de la Programación Orientada a Objetos.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: STRUCTS Y FUNCIONES (POR VALOR) -->
+      <section>
+        <h2><span class="section-num">04</span> Enviar Estructuras a Funciones (Paso por Valor)</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Podemos pasar una estructura completa como argumento a
+          una función.</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">punto.c</span>
+              <span class="code-badge">struct Punto</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> Punto 
+{ 
+    <span class="c-kw">int</span> x; 
+    <span class="c-kw">int</span> y; 
+}; 
+
+<span class="c-type">void</span> <span class="c-fn">imprimirPunto</span>(<span class="c-kw">struct</span> Punto p) 
+{ 
+    <span class="c-fn">printf</span>(<span class="c-str">"(%d, %d)\n"</span>, p.x, p.y); 
+} 
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>) 
+{ 
+    <span class="c-kw">struct</span> Punto punto; 
+    punto.x = <span class="c-num">10</span>; 
+    punto.y = <span class="c-num">20</span>; 
+    
+    <span class="c-fn">imprimirPunto</span>(punto); <span class="c-cmt">// Imprime: (10, 20)</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>; 
+}</div>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">¿Qué significa que sea por valor?</h4>
+            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">
+              La función <code>imprimirPunto</code> recibe una <b>copia completa e independiente</b> de la estructura
+              original.
+            </p>
+            <div class="checklist-item" style="margin-top: 10px;"><span class="icon">✔️</span> <b>Ideal para:</b> leer
+              datos, imprimir o hacer cálculos.</div>
+            <div class="checklist-item"><span class="icon">🔒</span> <b>Seguridad:</b> Si modificás p.x = 99 adentro
+              de la función, el punto de main <b>no cambia</b>.</div>
+            <div class="checklist-item"><span class="icon">⚠️</span> <b>Costo:</b> Si la estructura tiene muchos campos grandes, copiarla consume tiempo y memoria de Stack.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: EJEMPLO ALUMNO Y PROMEDIO -->
+      <section>
+        <h2><span class="section-num">05</span> Ejemplo Completo: Alumno y Cálculo de Promedio</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Modelado de un alumno con 3 notas parciales y función de cálculo.</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">alumno_struct.c</span>
+              <span class="code-badge">Molde y Función</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> Alumno 
+{ 
+    <span class="c-kw">char</span> nombre[<span class="c-num">30</span>]; 
+    <span class="c-kw">float</span> nota1; 
+    <span class="c-kw">float</span> nota2; 
+    <span class="c-kw">float</span> nota3; 
+}; 
+
+<span class="c-kw">float</span> <span class="c-fn">calcularPromedio</span>(<span class="c-kw">struct</span> Alumno alumno) 
+{ 
+    <span class="c-kw">return</span> (alumno.nota1 + 
+            alumno.nota2 + 
+            alumno.nota3) / <span class="c-num">3.0f</span>; 
+}</div>
+          </div>
+
+          <div>
+            <div class="code-window">
+              <div class="code-header">
+                <span class="code-title">main.c</span>
+                <span class="code-badge">Uso en main</span>
+              </div>
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>) 
+{ 
+    <span class="c-kw">struct</span> Alumno a1; 
+    a1.nota1 = <span class="c-num">8.0f</span>; 
+    a1.nota2 = <span class="c-num">6.0f</span>; 
+    a1.nota3 = <span class="c-num">9.0f</span>; 
+
+    <span class="c-kw">float</span> prom = <span class="c-fn">calcularPromedio</span>(a1); 
+    <span class="c-fn">printf</span>(<span class="c-str">"Promedio final: %.2f\n"</span>, prom); 
+    <span class="c-kw">return</span> <span class="c-num">0</span>; 
+}</div>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Terminal de salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body" style="padding: 10px 14px;">Promedio final: 7.67</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: AUTOEVALUACIÓN Y CIERRE -->
+      <section>
+        <h2><span class="section-num">06</span> Resumen y Autoevaluación</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Puntos Clave del Módulo</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
+              <li>Una <code>struct</code> agrupa datos de diferente tipo bajo un solo identificador.</li>
+              <li>El molde define los campos; la variable real reserva la memoria.</li>
+              <li>El operador punto <code>.</code> accede a los miembros de una variable struct.</li>
+              <li>Al pasar una struct por valor, la función trabaja con una copia inofensiva.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cuál es la diferencia entre declarar
+              struct Auto { ... }; y struct Auto miAuto;?
+            </div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué para asignar texto a
+              <code>persona1.nombre</code> usamos <code>strcpy</code>?
+            </div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué ocurre con la variable original si una función
+              modifica un campo de una struct pasada por valor? (No cambia).</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+          <a href="07-punteros-y-arreglos.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Punteros y Arreglos
+          </a>
+          <a href="../index.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Índice 2do Cuatrimestre
+          </a>
+          <a href="09-punteros-a-estructuras-operador-flecha.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Siguiente: Punteros a Structs y -> →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+
+</html>

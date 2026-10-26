@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PA 1: Función Cuadrática | Clases Particulares</title>
-  
+  <link rel="icon" type="image/jpeg" href="../logo.jpeg">
+
   <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
   <link rel="stylesheet" href="css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
@@ -47,7 +51,8 @@
 
           <div class="box box-cyan" style="max-width: 700px; margin: 0 auto; text-align: center;">
             <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar o retroceder diapositiva por diapositiva.
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
+              para avanzar o retroceder diapositiva por diapositiva.
             </p>
           </div>
         </div>
@@ -61,9 +66,12 @@
         <div class="grid-2">
           <div class="box box-indigo">
             <h4 style="color: #818cf8;">¿Qué vamos a estudiar y por qué?</h4>
-            <p>La <b>función cuadrática</b> es el primer modelo matemático no lineal con el que trabajamos. Su gráfica es una curva fundamental de la naturaleza: la <b>parábola</b>.</p>
+            <p>La <b>función cuadrática</b> es el primer modelo matemático no lineal con el que trabajamos. Su gráfica
+              es una curva fundamental de la naturaleza: la <b>parábola</b>.</p>
             <p class="subtext">
-              Aparece en el tiro oblicuo de proyectiles en Física, en la arquitectura de puentes colgantes, en la concentración de señales de antenas parabólicas y en problemas económicos de <b>máxima ganancia</b> o <b>mínimo costo</b>.
+              Aparece en el tiro oblicuo de proyectiles en Física, en la arquitectura de puentes colgantes, en la
+              concentración de señales de antenas parabólicas y en problemas económicos de <b>máxima ganancia</b> o
+              <b>mínimo costo</b>.
             </p>
           </div>
 
@@ -90,8 +98,10 @@
         <div class="grid-3" style="margin-top: 15px;">
           <div class="box box-cyan">
             <h4>1. Función Lineal vs Cuadrática</h4>
-            <p style="font-size: 0.88rem;">En la función lineal $y = mx + b$, la variable $x$ tiene exponente $1$ (crecimiento constante, recta).</p>
-            <p style="font-size: 0.88rem; color: #38bdf8;">En la cuadrática aparece el término <b>$x^2$</b>, generando una curva simétrica.</p>
+            <p style="font-size: 0.88rem;">En la función lineal $y = mx + b$, la variable $x$ tiene exponente $1$
+              (crecimiento constante, recta).</p>
+            <p style="font-size: 0.88rem; color: #38bdf8;">En la cuadrática aparece el término <b>$x^2$</b>, generando
+              una curva simétrica.</p>
           </div>
 
           <div class="box box-amber">
@@ -119,17 +129,20 @@
            ========================================== -->
       <section>
         <h2><span class="section-num">03</span> Definición y Forma Polinómica</h2>
-        
+
         <div class="box card-definition">
           <h4 style="color: #38bdf8;">Definición Formal</h4>
-          <p>Una función $f: \mathbb{R} \to \mathbb{R}$ es una <b>función cuadrática</b> si puede expresarse mediante un polinomio de segundo grado:</p>
+          <p>Una función $f: \mathbb{R} \to \mathbb{R}$ es una <b>función cuadrática</b> si puede expresarse mediante un
+            polinomio de segundo grado:</p>
           <div style="text-align: center; margin: 12px 0;">
-            <span style="font-size: 1.4rem; font-weight: 700; color: #ffffff; background: rgba(56, 189, 248, 0.15); padding: 6px 18px; border-radius: 10px; border: 1px solid rgba(56, 189, 248, 0.3);">
+            <span
+              style="font-size: 1.4rem; font-weight: 700; color: #ffffff; background: rgba(56, 189, 248, 0.15); padding: 6px 18px; border-radius: 10px; border: 1px solid rgba(56, 189, 248, 0.3);">
               $f(x) = ax^2 + bx + c$
             </span>
           </div>
           <p style="font-size: 0.9rem; margin-top: 8px;">
-            donde $a$, $b$ y $c$ son números reales conocidos como <b>coeficientes</b>, con la condición obligatoria de que <b>$a \neq 0$</b>.
+            donde $a$, $b$ y $c$ son números reales conocidos como <b>coeficientes</b>, con la condición obligatoria de
+            que <b>$a \neq 0$</b>.
           </p>
         </div>
 
@@ -137,21 +150,24 @@
           <div class="box">
             <b style="color: #38bdf8;">Término Cuadrático ($ax^2$)</b>
             <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 6px;">
-              $a$ es el <b>coeficiente principal</b>. Determina la orientación (concavidad) y el grado de apertura de la parábola. Si $a = 0$, la función deja de ser cuadrática y pasa a ser lineal ($bx + c$).
+              $a$ es el <b>coeficiente principal</b>. Determina la orientación (concavidad) y el grado de apertura de la
+              parábola. Si $a = 0$, la función deja de ser cuadrática y pasa a ser lineal ($bx + c$).
             </p>
           </div>
 
           <div class="box">
             <b style="color: #818cf8;">Término Lineal ($bx$)</b>
             <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 6px;">
-              $b$ es el coeficiente lineal. Junto con $a$, define el desplazamiento horizontal y la posición del eje de simetría y del vértice en el plano cartesiano.
+              $b$ es el coeficiente lineal. Junto con $a$, define el desplazamiento horizontal y la posición del eje de
+              simetría y del vértice en el plano cartesiano.
             </p>
           </div>
 
           <div class="box">
             <b style="color: #34d399;">Término Independiente ($c$)</b>
             <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 6px;">
-              $c$ es la <b>ordenada al origen</b>. Es el valor que toma la función cuando $x = 0$: $f(0) = c$. Indica exactamente dónde la curva corta al eje vertical $y$: $(0, c)$.
+              $c$ es la <b>ordenada al origen</b>. Es el valor que toma la función cuando $x = 0$: $f(0) = c$. Indica
+              exactamente dónde la curva corta al eje vertical $y$: $(0, c)$.
             </p>
           </div>
         </div>
@@ -167,8 +183,10 @@
             <div class="box box-cyan">
               <h4 style="color: #38bdf8;">1. El Signo de $a$ (Orientación de las Ramas)</h4>
               <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
-                <li><b>Si $a > 0$ (positivo):</b> Las ramas van hacia arriba (cóncava hacia arriba o convexa). El vértice es el punto más bajo: un <b>Mínimo Absoluto</b>.</li>
-                <li><b>Si $a < 0$ (negativo):</b> Las ramas van hacia abajo (cóncava hacia abajo). El vértice es el punto más alto: un <b>Máximo Absoluto</b>.</li>
+                <li><b>Si $a > 0$ (positivo):</b> Las ramas van hacia arriba (cóncava hacia arriba o convexa). El
+                  vértice es el punto más bajo: un <b>Mínimo Absoluto</b>.</li>
+                <li><b>Si $a < 0$ (negativo):</b> Las ramas van hacia abajo (cóncava hacia abajo). El vértice es el
+                      punto más alto: un <b>Máximo Absoluto</b>.</li>
               </ul>
             </div>
 
@@ -187,11 +205,11 @@
               <!-- Grid background -->
               <defs>
                 <pattern id="grid1" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
                 </pattern>
               </defs>
               <rect width="280" height="240" fill="url(#grid1)" rx="8" />
-              
+
               <!-- Axes -->
               <line x1="20" y1="120" x2="260" y2="120" stroke="#64748b" stroke-width="1.5" />
               <line x1="140" y1="20" x2="140" y2="220" stroke="#64748b" stroke-width="1.5" />
@@ -202,7 +220,7 @@
               <path d="M 60 210 Q 140 30 220 210" fill="none" stroke="#f87171" stroke-width="2.5" />
               <!-- Parabola 2: a < 0 (Downwards, red) -->
               <path d="M 60 30 Q 140 210 220 30" fill="none" stroke="#38bdf8" stroke-width="2.5" />
-              
+
               <text x="75" y="195" fill="#38bdf8" font-size="10" font-weight="bold">a &gt; 0 (Mínimo)</text>
               <text x="75" y="45" fill="#f87171" font-size="10" font-weight="bold">a &lt; 0 (Máximo)</text>
 
@@ -219,7 +237,8 @@
       <section>
         <h2><span class="section-num">05</span> Vértice y Eje de Simetría</h2>
         <div class="box box-indigo">
-          <p>Toda parábola es perfectamente <b>simétrica</b> respecto a una recta vertical llamada <b>eje de simetría</b>, la cual pasa justo por el <b>vértice</b> $V = (x_v, y_v)$.</p>
+          <p>Toda parábola es perfectamente <b>simétrica</b> respecto a una recta vertical llamada <b>eje de
+              simetría</b>, la cual pasa justo por el <b>vértice</b> $V = (x_v, y_v)$.</p>
         </div>
 
         <div class="grid-2">
@@ -230,9 +249,11 @@
               <span class="math-key" style="font-size: 1.15rem;">$x_v = -\frac{b}{2a}$</span>
             </div>
             <p class="subtext">
-              Propiedad de simetría: Si la función tiene raíces reales $x_1$ y $x_2$, el vértice está exactamente en el punto medio: $x_v = \frac{x_1 + x_2}{2}$.
+              Propiedad de simetría: Si la función tiene raíces reales $x_1$ y $x_2$, el vértice está exactamente en el
+              punto medio: $x_v = \frac{x_1 + x_2}{2}$.
             </p>
-            <p style="font-size: 0.85rem; margin-top: 6px;"><b>Ecuación del eje de simetría:</b> Es la recta vertical $x = x_v$.</p>
+            <p style="font-size: 0.85rem; margin-top: 6px;"><b>Ecuación del eje de simetría:</b> Es la recta vertical $x
+              = x_v$.</p>
           </div>
 
           <div class="box">
@@ -242,11 +263,11 @@
               <span class="math-key" style="font-size: 1.15rem;">$y_v = f(x_v) = a(x_v)^2 + b(x_v) + c$</span>
             </div>
             <p class="subtext">
-              Representa el <b>valor extremo</b> de la función: el valor mínimo alcanzable si $a > 0$, o el valor máximo alcanzable si $a < 0$.
-            </p>
-            <p style="font-size: 0.85rem; margin-top: 6px; color: #34d399;">
-              <b>Coordenadas del Vértice:</b> $V = (x_v, y_v)$.
-            </p>
+              Representa el <b>valor extremo</b> de la función: el valor mínimo alcanzable si $a > 0$, o el valor máximo
+              alcanzable si $a < 0$. </p>
+                <p style="font-size: 0.85rem; margin-top: 6px; color: #34d399;">
+                  <b>Coordenadas del Vértice:</b> $V = (x_v, y_v)$.
+                </p>
           </div>
         </div>
       </section>
@@ -272,17 +293,18 @@
 
           <div class="box box-rose">
             <h4 style="color: #f87171;">Caso $a < 0$ (Cóncava hacia abajo ∩)</h4>
-            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>Dominio:</b> $\mathrm{Dom}(f) = \mathbb{R} = (-\infty, +\infty)$</li>
-              <li><b>Imagen:</b> $\mathrm{Im}(f) = (-\infty, y_v]$ (el techo es $y_v$).</li>
-              <li><b>Extremo:</b> Máximo absoluto en $V = (x_v, y_v)$.</li>
-              <li><b>Intervalo de Crecimiento ($I_{\uparrow}$):</b> $(-\infty, x_v)$</li>
-              <li><b>Intervalo de Decrecimiento ($I_{\downarrow}$):</b> $(x_v, +\infty)$</li>
-            </ul>
+                <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+                  <li><b>Dominio:</b> $\mathrm{Dom}(f) = \mathbb{R} = (-\infty, +\infty)$</li>
+                  <li><b>Imagen:</b> $\mathrm{Im}(f) = (-\infty, y_v]$ (el techo es $y_v$).</li>
+                  <li><b>Extremo:</b> Máximo absoluto en $V = (x_v, y_v)$.</li>
+                  <li><b>Intervalo de Crecimiento ($I_{\uparrow}$):</b> $(-\infty, x_v)$</li>
+                  <li><b>Intervalo de Decrecimiento ($I_{\downarrow}$):</b> $(x_v, +\infty)$</li>
+                </ul>
           </div>
         </div>
         <p class="subtext" style="text-align: center; margin-top: 8px;">
-          ⚠️ <i>Nota pedagógica:</i> Los intervalos de crecimiento y decrecimiento siempre se expresan sobre el <b>eje $x$</b> mediante intervalos abiertos.
+          ⚠️ <i>Nota pedagógica:</i> Los intervalos de crecimiento y decrecimiento siempre se expresan sobre el <b>eje
+            $x$</b> mediante intervalos abiertos.
         </p>
       </section>
 
@@ -293,7 +315,9 @@
         <h2><span class="section-num">07</span> Raíces e Intersecciones con el Eje $x$</h2>
         <div class="box card-theory">
           <p>
-            Las <b>raíces</b> o <b>ceros</b> de la función son los valores de $x$ para los cuales la función vale cero: $f(x) = 0$. Gráficamente, representan los puntos $(x, 0)$ donde la parábola corta o toca al eje horizontal $x$.
+            Las <b>raíces</b> o <b>ceros</b> de la función son los valores de $x$ para los cuales la función vale cero:
+            $f(x) = 0$. Gráficamente, representan los puntos $(x, 0)$ donde la parábola corta o toca al eje horizontal
+            $x$.
           </p>
         </div>
 
@@ -302,12 +326,14 @@
             <h4 style="color: #38bdf8;">Fórmula Resolvente (Bhaskara)</h4>
             <p style="font-size: 0.88rem;">Para resolver la ecuación cuadrática $ax^2 + bx + c = 0$:</p>
             <div style="text-align: center; margin: 12px 0;">
-              <span style="font-size: 1.35rem; color: #ffffff; background: rgba(56, 189, 248, 0.15); padding: 6px 16px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3);">
+              <span
+                style="font-size: 1.35rem; color: #ffffff; background: rgba(56, 189, 248, 0.15); padding: 6px 16px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3);">
                 $$x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
               </span>
             </div>
             <p class="subtext">
-              El signo $\pm$ da lugar a dos posibles valores: $x_1 = \frac{-b + \sqrt{\Delta}}{2a}$ y $x_2 = \frac{-b - \sqrt{\Delta}}{2a}$.
+              El signo $\pm$ da lugar a dos posibles valores: $x_1 = \frac{-b + \sqrt{\Delta}}{2a}$ y $x_2 = \frac{-b -
+              \sqrt{\Delta}}{2a}$.
             </p>
           </div>
 
@@ -329,14 +355,16 @@
            ========================================== -->
       <section>
         <h2><span class="section-num">08</span> El Discriminante ($\Delta = b^2 - 4ac$)</h2>
-        <p class="subtext">La cantidad que se encuentra bajo la raíz cuadrada determina la cantidad y naturaleza de las raíces reales:</p>
+        <p class="subtext">La cantidad que se encuentra bajo la raíz cuadrada determina la cantidad y naturaleza de las
+          raíces reales:</p>
 
         <div class="grid-3" style="margin-top: 15px;">
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Caso 1: $\Delta > 0$</h4>
             <p style="font-weight: 600; font-size: 0.9rem;">Dos raíces reales distintas</p>
             <p style="text-align: center; font-size: 0.9rem; color: #34d399;">$x_1 \neq x_2$</p>
-            <p class="subtext">La parábola corta al eje $x$ en <b>dos puntos</b> diferenciados: $(x_1, 0)$ y $(x_2, 0)$.</p>
+            <p class="subtext">La parábola corta al eje $x$ en <b>dos puntos</b> diferenciados: $(x_1, 0)$ y $(x_2, 0)$.
+            </p>
             <div style="text-align: center; margin-top: 8px;">
               <small style="color: #94a3b8;">Ej: $x^2 - 4x + 3 = 0 \implies \Delta = 4 > 0$</small>
             </div>
@@ -346,7 +374,8 @@
             <h4 style="color: #fbbf24;">Caso 2: $\Delta = 0$</h4>
             <p style="font-weight: 600; font-size: 0.9rem;">Una raíz real doble</p>
             <p style="text-align: center; font-size: 0.9rem; color: #fbbf24;">$x_1 = x_2 = x_v$</p>
-            <p class="subtext">La parábola es <b>tangente</b> al eje $x$ en un único punto: el propio vértice está sobre el eje $x$ ($y_v = 0$).</p>
+            <p class="subtext">La parábola es <b>tangente</b> al eje $x$ en un único punto: el propio vértice está sobre
+              el eje $x$ ($y_v = 0$).</p>
             <div style="text-align: center; margin-top: 8px;">
               <small style="color: #94a3b8;">Ej: $x^2 - 4x + 4 = 0 \implies \Delta = 0$</small>
             </div>
@@ -354,12 +383,13 @@
 
           <div class="box box-rose">
             <h4 style="color: #f87171;">Caso 3: $\Delta < 0$</h4>
-            <p style="font-weight: 600; font-size: 0.9rem;">Sin raíces reales</p>
-            <p style="text-align: center; font-size: 0.9rem; color: #f87171;">$\nexists x \in \mathbb{R}$</p>
-            <p class="subtext">Como no existe la raíz cuadrada real de un negativo, la parábola <b>no corta</b> al eje $x$ (queda flotando).</p>
-            <div style="text-align: center; margin-top: 8px;">
-              <small style="color: #94a3b8;">Ej: $x^2 + 2x + 5 = 0 \implies \Delta = -16 < 0$</small>
-            </div>
+                <p style="font-weight: 600; font-size: 0.9rem;">Sin raíces reales</p>
+                <p style="text-align: center; font-size: 0.9rem; color: #f87171;">$\nexists x \in \mathbb{R}$</p>
+                <p class="subtext">Como no existe la raíz cuadrada real de un negativo, la parábola <b>no corta</b> al
+                  eje $x$ (queda flotando).</p>
+                <div style="text-align: center; margin-top: 8px;">
+                  <small style="color: #94a3b8;">Ej: $x^2 + 2x + 5 = 0 \implies \Delta = -16 < 0$</small>
+                </div>
           </div>
         </div>
       </section>
@@ -369,7 +399,8 @@
            ========================================== -->
       <section>
         <h2><span class="section-num">09</span> Las Tres Formas de la Función Cuadrática</h2>
-        <p class="subtext">Una misma parábola puede escribirse algebraicamente de tres maneras según la información que queramos destacar:</p>
+        <p class="subtext">Una misma parábola puede escribirse algebraicamente de tres maneras según la información que
+          queramos destacar:</p>
 
         <table class="math-table">
           <thead>
@@ -404,7 +435,8 @@
 
         <div class="box box-amber" style="margin-top: 10px;">
           <p style="font-size: 0.88rem; margin: 0;">
-            ⚠️ <b>¡Regla de oro!</b> En las tres formas, el coeficiente principal <b>$a$ es exactamente el mismo número</b>. ¡Nunca debe omitirse en la forma factorizada ni en la canónica!
+            ⚠️ <b>¡Regla de oro!</b> En las tres formas, el coeficiente principal <b>$a$ es exactamente el mismo
+              número</b>. ¡Nunca debe omitirse en la forma factorizada ni en la canónica!
           </p>
         </div>
       </section>
@@ -515,7 +547,8 @@
                 </div>
                 <div class="step-item">
                   <span class="step-num">3</span>
-                  <div class="step-content"><b>Raíces:</b> $x_1 = -1 \implies (-1, 0)$ y $x_2 = 3 \implies (3, 0)$.</div>
+                  <div class="step-content"><b>Raíces:</b> $x_1 = -1 \implies (-1, 0)$ y $x_2 = 3 \implies (3, 0)$.
+                  </div>
                 </div>
                 <div class="step-item">
                   <span class="step-num">4</span>
@@ -536,7 +569,7 @@
               <!-- Origin at cx=120, cy=180. Scale: 30 px = 1 unit -->
               <!-- x in [-3, 5] -> px in [30, 270]. y in [-2, 5] -> py in [240, 30] -->
               <rect width="320" height="280" fill="#0b101b" rx="8" />
-              
+
               <!-- Grid background -->
               <g stroke="rgba(255,255,255,0.06)" stroke-width="1">
                 <line x1="30" y1="30" x2="30" y2="250" />
@@ -547,7 +580,7 @@
                 <line x1="180" y1="30" x2="180" y2="250" />
                 <line x1="210" y1="30" x2="210" y2="250" />
                 <line x1="240" y1="30" x2="240" y2="250" />
-                
+
                 <line x1="30" y1="60" x2="290" y2="60" />
                 <line x1="30" y1="90" x2="290" y2="90" />
                 <line x1="30" y1="120" x2="290" y2="120" />
@@ -609,7 +642,8 @@
         <h2><span class="section-num">13</span> Aplicación Real 1: Lanzamiento de Proyectil</h2>
         <div class="box card-theory">
           <p>
-            Desde la terraza de un edificio de $25\text{ m}$ de altura se dispara verticalmente un proyectil. Su altura $h$ (en metros) respecto al suelo en función del tiempo transcurrido $t$ (en segundos) está modelada por:
+            Desde la terraza de un edificio de $25\text{ m}$ de altura se dispara verticalmente un proyectil. Su altura
+            $h$ (en metros) respecto al suelo en función del tiempo transcurrido $t$ (en segundos) está modelada por:
           </p>
           <div style="text-align: center; margin: 8px 0;">
             <span class="math-key" style="font-size: 1.25rem;">$h(t) = -5t^2 + 20t + 25$</span>
@@ -655,7 +689,8 @@
         <h2><span class="section-num">14</span> Aplicación Real 2: Optimización de Ingresos</h2>
         <div class="box card-theory">
           <p>
-            Un fabricante de software estima que el ingreso total semanal $I(x)$ (en miles de pesos) por la venta de $x$ licencias está dado por la función cuadrática:
+            Un fabricante de software estima que el ingreso total semanal $I(x)$ (en miles de pesos) por la venta de $x$
+            licencias está dado por la función cuadrática:
           </p>
           <div style="text-align: center; margin: 8px 0;">
             <span class="math-key" style="font-size: 1.25rem;">$I(x) = -2x^2 + 120x$</span>
@@ -666,7 +701,8 @@
           <div class="box box-indigo">
             <h4 style="color: #818cf8;">1. Cantidad óptima de licencias</h4>
             <p style="font-size: 0.88rem;">
-              Como el coeficiente principal es $a = -2 < 0$, la parábola abre hacia abajo y su vértice representa el <b>Máximo Absoluto</b> de ingresos.
+              Como el coeficiente principal es $a = -2 < 0$, la parábola abre hacia abajo y su vértice representa el <b>
+                Máximo Absoluto</b> de ingresos.
             </p>
             <div style="text-align: center; margin: 10px 0;">
               $$x_v = -\frac{b}{2a} = -\frac{120}{2(-2)} = \frac{120}{4} = \mathbf{30\text{ licencias}}$$
@@ -682,7 +718,7 @@
               $$I(30) = -2(900) + 3600 = -1800 + 3600$$
               $$\mathbf{I(30) = 1800\text{ (miles de pesos)}}$$
             </div>
-            <p class="subtext">El ingreso máximo alcanzable es de \$1.800.000.</p>
+            <p class="subtext">El ingreso máximo alcanzable es de: $1.800.000.</p>
           </div>
         </div>
       </section>
@@ -716,8 +752,10 @@
           </div>
           <div class="correct-card">
             <div class="correct-title">✔️ Procedimiento Correcto</div>
-            <p style="font-size: 0.85rem;">La estructura es $a(x - x_v)^2 + y_v$. Por lo tanto, $(x + 4) = (x - (-4))$:</p>
-            <p style="color: #34d399; text-align: center;">$\mathbf{x_v = -4}, \quad \mathbf{y_v = -5} \implies \mathbf{V = (-4, -5)}$</p>
+            <p style="font-size: 0.85rem;">La estructura es $a(x - x_v)^2 + y_v$. Por lo tanto, $(x + 4) = (x - (-4))$:
+            </p>
+            <p style="color: #34d399; text-align: center;">$\mathbf{x_v = -4}, \quad \mathbf{y_v = -5} \implies
+              \mathbf{V = (-4, -5)}$</p>
             <p class="subtext">El signo dentro del paréntesis se invierte; el de afuera se conserva.</p>
           </div>
         </div>
@@ -732,7 +770,8 @@
         <div class="box box-indigo">
           <h4 style="color: #818cf8;">Problema Interactivo: Reconstrucción Funcional</h4>
           <p style="font-size: 0.9rem;">
-            Hallar la ecuación de la función cuadrática cuya parábola tiene vértice en $\mathbf{V = (2, -3)}$ y pasa por el punto $\mathbf{P = (4, 5)}$.
+            Hallar la ecuación de la función cuadrática cuya parábola tiene vértice en $\mathbf{V = (2, -3)}$ y pasa por
+            el punto $\mathbf{P = (4, 5)}$.
           </p>
         </div>
 
@@ -743,7 +782,8 @@
               <div class="step-item">
                 <span class="step-num">1</span>
                 <div class="step-content">
-                  <b>Elegir la forma adecuada:</b> Como conocemos el vértice $V(x_v, y_v) = (2, -3)$, la forma más directa es la <b>canónica</b>:
+                  <b>Elegir la forma adecuada:</b> Como conocemos el vértice $V(x_v, y_v) = (2, -3)$, la forma más
+                  directa es la <b>canónica</b>:
                   $$f(x) = a(x - x_v)^2 + y_v \implies f(x) = a(x - 2)^2 - 3$$
                 </div>
               </div>
@@ -807,8 +847,7 @@
               <div class="solution-body" style="font-size: 0.8rem;">
                 • $x_v = 1, y_v = 8 \implies \mathbf{g(x) = -2(x - 1)^2 + 8}$.<br>
                 • $\Delta = 16 - 4(-2)(6) = 64$. $x_1 = -1, x_2 = 3 \implies \mathbf{g(x) = -2(x + 1)(x - 3)}$.<br>
-                • Como $a < 0 \implies \mathbf{\mathrm{Im}(g) = (-\infty, 8]}$.
-              </div>
+                • Como $a < 0 \implies \mathbf{\mathrm{Im}(g)=(-\infty, 8]}$. </div>
             </details>
           </div>
 
@@ -816,7 +855,8 @@
             <span class="badge badge-amber">Nivel 3 • Desafío</span>
             <p style="font-size: 0.85rem; margin-top: 8px;"><b>Cercado de un campo:</b></p>
             <p style="font-size: 0.8rem; line-height: 1.4;">
-              Se tienen $80\text{ m}$ de alambre para cercar 3 lados de un terreno rectangular adyacente a un río recto. Hallar las dimensiones que maximizan el área.
+              Se tienen $80\text{ m}$ de alambre para cercar 3 lados de un terreno rectangular adyacente a un río recto.
+              Hallar las dimensiones que maximizan el área.
             </p>
             <details class="math-solution" style="margin-top: 10px;">
               <summary>Solución N3</summary>
@@ -852,17 +892,22 @@
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé reconocer la concavidad según el signo de $a$?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo calcular $V(x_v, y_v)$ sin dudar en los signos?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé reconocer la concavidad según el signo de $a$?
+            </div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo calcular $V(x_v, y_v)$ sin dudar en los
+              signos?</div>
             <div class="checklist-item"><span class="icon">✓</span> ¿Interpreto los tres casos del discriminante?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé pasar de polinómica a canónica y a factorizada?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo construir la gráfica con los 5 puntos clave?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé pasar de polinómica a canónica y a factorizada?
+            </div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo construir la gráfica con los 5 puntos clave?
+            </div>
             <div class="checklist-item"><span class="icon">✓</span> ¿Sé plantear problemas de máximos y mínimos?</div>
           </div>
         </div>
 
         <div style="text-align: center; margin-top: 18px;">
-          <a href="index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
+          <a href="index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
             ← Volver al Menú de Matemática
           </a>
         </div>
@@ -884,7 +929,7 @@
       width: 1200,
       height: 750,
       margin: 0.05,
-      plugins: [ RevealMath.KaTeX ],
+      plugins: [RevealMath.KaTeX],
       katex: {
         version: 'latest',
         delimiters: [
@@ -898,4 +943,5 @@
     });
   </script>
 </body>
+
 </html>

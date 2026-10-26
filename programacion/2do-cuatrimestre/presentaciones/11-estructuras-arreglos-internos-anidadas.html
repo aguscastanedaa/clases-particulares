@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 11: Estructuras con Arreglos Internos y Estructuras Anidadas | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
+
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
+  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
+  <style>
+    .reveal .code-body,
+    .reveal pre.code-body,
+    .reveal .code-window pre {
+      font-size: 1.05rem !important;
+      line-height: 1.38 !important;
+      width: 100% !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      padding: 10px 18px !important;
+      box-sizing: border-box !important;
+    }
+    .grid-2 .code-body,
+    .grid-1-2 .code-body,
+    .grid-2-1 .code-body,
+    .grid-2 pre.code-body,
+    .grid-1-2 pre.code-body,
+    .grid-2-1 pre.code-body,
+    .grid-2 .code-window pre,
+    .grid-1-2 .code-window pre,
+    .grid-2-1 .code-window pre {
+      font-size: 1.00rem !important;
+      padding: 10px 14px !important;
+      line-height: 1.38 !important;
+    }
+    .grid-3 .code-body,
+    .grid-3 pre.code-body,
+    .grid-3 .code-window pre {
+      font-size: 0.80rem !important;
+      padding: 8px 10px !important;
+      line-height: 1.34 !important;
+    }
+    .terminal-body {
+      font-size: 1.05rem !important;
+      padding: 12px 16px !important;
+      line-height: 1.40 !important;
+    }
+    .reveal code:not(.code-body *) {
+      font-size: 0.88em !important;
+      border: none !important;
+      padding: 1px 5px !important;
+      box-decoration-break: clone !important;
+      -webkit-box-decoration-break: clone !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Unidad 11</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-emerald">2do Cuatrimestre • Estructuras Complejas • Unidad 11</span>
+          <h1 style="font-size: 2.4rem; margin-bottom: 12px;">Estructuras con Arreglos Internos y Anidadas</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Composición de datos avanzada: cuando un registro alberga un vector en su interior y cómo anidar una
+            estructura dentro de otra.
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">notas[3] dentro de Estudiante</span>
+            <span class="badge badge-purple">struct Fecha en Persona</span>
+            <span class="badge badge-amber">persona.nacimiento.dia</span>
+            <span class="badge badge-emerald">Promedio con acumulación</span>
+          </div>
+
+          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
+              para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Jerarquía y composición de datos</h4>
+            <p>En problemas de complejidad real, una entidad no se compone únicamente de valores primitivos sueltos.</p>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
+              Un estudiante posee una serie de notas (vector interno), y una persona posee una fecha de nacimiento que a
+              su vez tiene día, mes y año (estructura anidada). En esta unidad aprenderás la sintaxis y la mecánica en
+              memoria para anidar estos componentes sin confusión.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+              <li>Declarar una estructura que incluye un arreglo interno (ej. <code>float notas[3]</code>).</li>
+              <li>Acceder a elementos del arreglo interno: <code>estudiante.notas[0]</code>.</li>
+              <li>Recorrer arreglos internos con bucles para cálculos estadísticos.</li>
+              <li>Declarar estructuras compuestas por otras estructuras (anidamiento).</li>
+              <li>Navegar jerarquías profundas con el operador punto doble: <code>persona.nacimiento.dia</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: STRUCTS CON ARREGLOS INTERNOS -->
+      <section>
+        <h2><span class="section-num">02</span> Structs con Arreglos Internos</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Un campo dentro de la estructura puede ser un vector
+          completo de tamaño fijo.</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">estudiante.h</span>
+              <span class="code-badge">Arreglo Interno</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> Estudiante 
+{ 
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>]; 
+    <span class="c-kw">float</span> notas[<span class="c-num">3</span>]; <span class="c-cmt">// Vector de 3 notas</span>
+};</div>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Árbol de Acceso en Memoria</h4>
+            <div
+              style="font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.6; color: #cbd5e1; margin: 10px 0;">
+              Estudiante<br>
+              ├── nombre (char[50])<br>
+              └── notas (float[3])<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;├── notas[0]<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;├── notas[1]<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;└── notas[2]
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              Para acceder a la primera nota escribimos: <code>estudiante.notas[0]</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: PROCESAR ARREGLO INTERNO -->
+      <section>
+        <h2><span class="section-num">03</span> Procesar el Arreglo Interno</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Cálculo del promedio iterando sobre el arreglo interno de la estructura.</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">promedio_estudiante.c</span>
+              <span class="code-badge">for sobre notas</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> Estudiante {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">float</span> notas[<span class="c-num">3</span>];
+};
+
+<span class="c-kw">float</span> <span class="c-fn">calcularPromedio</span>(<span class="c-kw">struct</span> Estudiante e) 
+{ 
+    <span class="c-kw">float</span> suma = <span class="c-num">0.0f</span>; 
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++) 
+    { 
+        suma += e.notas[i]; 
+    } 
+
+    <span class="c-kw">return</span> suma / <span class="c-num">3.0f</span>; 
+}</div>
+          </div>
+
+          <div>
+            <div class="code-window">
+              <div class="code-header">
+                <span class="code-title">main.c</span>
+                <span class="code-badge">Uso y Acceso</span>
+              </div>
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">struct</span> Estudiante est = {
+        <span class="c-str">"Lucia"</span>, 
+        {<span class="c-num">9.0f</span>, <span class="c-num">8.5f</span>, <span class="c-num">10.0f</span>}
+    };
+    
+    <span class="c-fn">printf</span>(<span class="c-str">"Promedio: %.2f\n"</span>, 
+           <span class="c-fn">calcularPromedio</span>(est));
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Terminal de salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body" style="padding: 10px 14px;">Promedio: 9.17</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: ESTRUCTURAS ANIDADAS -->
+      <section>
+        <h2><span class="section-num">04</span> Estructuras Anidadas: <code>struct</code> dentro de <code>struct</code>
+        </h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Modularizar modelos reutilizando estructuras más
+          pequeñas como campos.</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">anidamiento.c</span>
+              <span class="code-badge">Fecha y Persona</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> Fecha 
+{ 
+    <span class="c-kw">int</span> dia; 
+    <span class="c-kw">int</span> mes; 
+    <span class="c-kw">int</span> anio; 
+}; 
+
+<span class="c-kw">struct</span> Persona 
+{ 
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>]; 
+    <span class="c-kw">struct</span> Fecha nacimiento; <span class="c-cmt">// Struct anidada</span>
+};</div>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">Jerarquía Visual en RAM</h4>
+            <div
+              style="font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.6; color: #cbd5e1; margin: 10px 0;">
+              Persona<br>
+              ├── nombre (char[50])<br>
+              └── nacimiento (struct Fecha)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;├── dia (int)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;├── mes (int)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;└── anio (int)
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              Cada nivel de jerarquía se atraviesa encadenando el operador punto: <code>persona.nacimiento.dia</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: USO Y ASIGNACIÓN DE ANIDADAS -->
+      <section>
+        <h2><span class="section-num">05</span> Asignación e Impresión de Estructuras Anidadas</h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">uso_anidadas.c</span>
+              <span class="code-badge">punto encadenado</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;string.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">struct</span> Persona p;
+    <span class="c-fn">strcpy</span>(p.nombre, <span class="c-str">"Martin"</span>);
+    
+    <span class="c-cmt">// Acceso jerárquico paso a paso:</span>
+    p.nacimiento.dia  = <span class="c-num">15</span>;
+    p.nacimiento.mes  = <span class="c-num">8</span>;
+    p.nacimiento.anio = <span class="c-num">2002</span>;
+    
+    <span class="c-fn">printf</span>(<span class="c-str">"Nombre: %s\n"</span>, p.nombre);
+    <span class="c-fn">printf</span>(<span class="c-str">"Nacimiento: %02d/%02d/%d\n"</span>, 
+           p.nacimiento.dia, 
+           p.nacimiento.mes, 
+           p.nacimiento.anio);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="box box-emerald" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <h4 style="color: #34d399; margin-bottom: 8px;">Regla del Doble Punto</h4>
+              <p style="font-size: 0.86rem; color: #cbd5e1; line-height: 1.6;">
+                El primer punto ingresa a la variable anidada: <code>p.nacimiento</code>.
+                <br><br>
+                El segundo punto ingresa al campo concreto: <code>.dia</code>, <code>.mes</code> o <code>.anio</code>.
+              </p>
+            </div>
+            <div class="terminal-window" style="margin-top: 12px;">
+              <div class="terminal-header">
+                <span>Terminal de salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body" style="padding: 10px 14px;">Nombre: Martin
+Nacimiento: 15/08/2002</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: AUTOEVALUACIÓN Y CIERRE -->
+      <section>
+        <h2><span class="section-num">06</span> Resumen y Autoevaluación</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Puntos Clave del Módulo</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
+              <li>Un arreglo dentro de una struct se indexa tras el punto: <code>est.notas[i]</code>.</li>
+              <li>Una struct dentro de otra se accede encadenando puntos: <code>a.b.c</code>.</li>
+              <li>Esto permite modelar entidades complejas del mundo real sin variables sueltas.</li>
+              <li>Facilita la modularidad al poder escribir funciones para cada subtipo (ej.
+                <code>imprimirFecha(p.nacimiento)</code>).</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cómo declarar una estructura con un vector
+              interno de flotantes?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué persona.nacimiento = 15; da error de
+              compilador? (Porque nacimiento es la struct Fecha, no el día).</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo pasar solo la subestructura p.nacimiento a
+              una función que reciba struct Fecha? (Sí, ¡perfectamente!).</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+          <a href="10-arreglos-de-estructuras.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Arreglos de Estructuras
+          </a>
+          <a href="../index.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Índice 2do Cuatrimestre
+          </a>
+          <a href="12-integracion-transferencia-bancaria.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Siguiente: Transferencia Bancaria →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+
+</html>

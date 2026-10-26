@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 02: Introducción a los Strings en C | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
+
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
+  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
+  <style>
+    .reveal .code-body,
+    .reveal pre.code-body,
+    .reveal .code-window pre {
+      font-size: 1.05rem !important;
+      line-height: 1.38 !important;
+      width: 100% !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      padding: 10px 18px !important;
+      box-sizing: border-box !important;
+    }
+    .grid-2 .code-body,
+    .grid-1-2 .code-body,
+    .grid-2-1 .code-body,
+    .grid-2 pre.code-body,
+    .grid-1-2 pre.code-body,
+    .grid-2-1 pre.code-body,
+    .grid-2 .code-window pre,
+    .grid-1-2 .code-window pre,
+    .grid-2-1 .code-window pre {
+      font-size: 1.00rem !important;
+      padding: 10px 14px !important;
+      line-height: 1.38 !important;
+    }
+    .grid-3 .code-body,
+    .grid-3 pre.code-body,
+    .grid-3 .code-window pre {
+      font-size: 0.80rem !important;
+      padding: 8px 10px !important;
+      line-height: 1.34 !important;
+    }
+    .terminal-body {
+      font-size: 1.05rem !important;
+      padding: 12px 16px !important;
+      line-height: 1.40 !important;
+    }
+    .reveal code:not(.code-body *) {
+      font-size: 0.88em !important;
+      border: none !important;
+      padding: 1px 5px !important;
+      box-decoration-break: clone !important;
+      -webkit-box-decoration-break: clone !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Unidad 02</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-cyan">2do Cuatrimestre • Manejo de Texto • Unidad 02</span>
+          <h1 style="font-size: 2.6rem; margin-bottom: 12px;">Introducción a los Strings en C</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            El texto bajo la lupa del hardware: arreglos de caracteres <code>char[]</code>, el carácter terminador
+            <code>'\0'</code> y su almacenamiento en memoria.
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-indigo">char[] en memoria</span>
+            <span class="badge badge-rose">Carácter nulo '\0'</span>
+            <span class="badge badge-amber">'A' vs "Agustin"</span>
+            <span class="badge badge-emerald">Formato %s</span>
+          </div>
+
+          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
+              para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">La verdad sobre las cadenas en C</h4>
+            <p>A diferencia de otros lenguajes donde una palabra es un objeto mágico de tipo <code>String</code>, en C
+              <b>no existe un tipo de dato primitivo para texto</b>.</p>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
+              El texto en C es estrictamente un arreglo unidimensional de bytes de tipo <code>char</code>. Comprender
+              esto desde el primer día te evitará incontables dolores de cabeza y fallos de segmentación.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+              <li>Saber qué es un string en C y cómo se define con <code>char[]</code>.</li>
+              <li>Diferenciar un carácter único (<code>'A'</code>) de una cadena (<code>"A"</code>).</li>
+              <li>Entender la función vital del terminador nulo <code>'\0'</code>.</li>
+              <li>Aprender por qué una palabra de N letras necesita N + 1 casillas de RAM.</li>
+              <li>Utilizar el especificador de formato <code>%s</code> en <code>printf</code>.</li>
+              <li>Construir el algoritmo manual para calcular la longitud de una cadena.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: ¿QUÉ ES UN STRING? -->
+      <section>
+        <h2><span class="section-num">02</span> ¿Qué es un String en C?</h2>
+        <div class="box box-cyan">
+          <h4 style="margin-bottom: 6px;">Definición Fundamental</h4>
+          <p style="margin: 0; font-size: 1rem;">
+            En C, un <b>String</b> no es un tipo de dato especial: es simplemente un <b>arreglo de caracteres</b>
+            (<code>char[]</code>) que finaliza con un byte especial llamado carácter nulo: <code>'\0'</code>.
+          </p>
+        </div>
+
+        <div class="code-window">
+          <div class="code-header">
+            <div class="code-dots"><span class="code-dot dot-red"></span><span class="code-dot dot-yellow"></span><span
+                class="code-dot dot-green"></span></div>
+            <span class="code-title">declaracion_string.c</span>
+            <span class="code-badge">char[]</span>
+          </div>
+          <div class="code-body"><span class="c-kw">char</span> nombre[] = <span class="c-str">"Agustin"</span>;</div>
+        </div>
+
+        <p style="font-size: 0.92rem; color: var(--text-muted);">
+          Bajo la superficie, el compilador reserva en memoria un arreglo de <b>8 elementos tipo char</b>:
+        </p>
+
+        <div class="array-container">
+          <div class="array-cell-wrapper"><span class="array-index">0</span>
+            <div class="array-cell">'A'</div>
+          </div>
+          <div class="array-cell-wrapper"><span class="array-index">1</span>
+            <div class="array-cell">'g'</div>
+          </div>
+          <div class="array-cell-wrapper"><span class="array-index">2</span>
+            <div class="array-cell">'u'</div>
+          </div>
+          <div class="array-cell-wrapper"><span class="array-index">3</span>
+            <div class="array-cell">'s'</div>
+          </div>
+          <div class="array-cell-wrapper"><span class="array-index">4</span>
+            <div class="array-cell">'t'</div>
+          </div>
+          <div class="array-cell-wrapper"><span class="array-index">5</span>
+            <div class="array-cell">'i'</div>
+          </div>
+          <div class="array-cell-wrapper"><span class="array-index">6</span>
+            <div class="array-cell">'n'</div>
+          </div>
+          <div class="array-cell-wrapper"><span class="array-index">7</span>
+            <div class="array-cell match" style="border-color: var(--accent-rose); color: var(--accent-rose);">'\0'
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EL CARÁCTER '\0' -->
+      <section>
+        <h2><span class="section-num">03</span> El Guardián de la Memoria: El <code>'\0'</code></h2>
+        <div class="grid-2">
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">¿Por qué existe el '\0'?</h4>
+            <p style="font-size: 0.88rem;">
+              En la memoria RAM, los datos de tu programa están rodeados por bytes pertenecientes a otras variables o
+              procesos.
+            </p>
+            <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 8px;">
+              C necesita una <b>señal de alto inequívoca</b> para saber dónde termina el texto: <i>"Acá termina el
+                String"</i>. Esa marca es el byte con valor numérico 0, escrito como <code>'\0'</code> (carácter nulo).
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">La regla del N + 1</h4>
+            <p style="font-size: 0.88rem;">
+              Si querés guardar una palabra de <b>4 letras</b> como <code>"Hola"</code>, necesitás como mínimo un
+              arreglo de <b>5 posiciones</b>:
+            </p>
+            <div
+              style="font-family: var(--font-mono); font-size: 0.95rem; text-align: center; margin: 12px 0; background: rgba(0,0,0,0.5); padding: 8px; border-radius: 8px;">
+              [ H ][ o ][ l ][ a ][ <span style="color: var(--accent-rose);">\0</span> ]
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              Si declarás <code>char palabra[4] = "Hola";</code> cometerás un error grave: no habrá espacio para el
+              <code>'\0'</code> y C imprimirá basura de memoria.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: CHAR VS STRING (COMILLAS) -->
+      <section>
+        <h2><span class="section-num">04</span> Diferencia Crucial: <code>char</code> vs String</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Un solo carácter vs una secuencia de caracteres:
+          cuidado estricto con las comillas.</p>
+
+        <div class="comparison-box">
+          <div class="box box-cyan">
+            <h4 style="color: var(--accent-cyan);">Un solo carácter: <code>char</code></h4>
+            <div style="font-family: var(--font-mono); font-size: 1rem; color: #e2e8f0; margin: 10px 0;">
+              char letra = <span style="color: var(--accent-amber);">'A'</span>;
+            </div>
+            <ul style="font-size: 0.85rem; line-height: 1.5; color: #cbd5e1; margin-left: 16px;">
+              <li>Usa <b>comillas simples</b>: <code>' '</code>.</li>
+              <li>Ocupa exactamente <b>1 byte</b> en memoria.</li>
+              <li>Guarda directamente el código ASCII (ej. 65).</li>
+              <li><b>NO lleva</b> terminador <code>'\0'</code>.</li>
+              <li>Se imprime con el especificador <b><code>%c</code></b>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: var(--accent-emerald);">Una cadena de texto: String</h4>
+            <div style="font-family: var(--font-mono); font-size: 1rem; color: #e2e8f0; margin: 10px 0;">
+              char nombre[] = <span style="color: var(--accent-emerald);">"Agustin"</span>;
+            </div>
+            <ul style="font-size: 0.85rem; line-height: 1.5; color: #cbd5e1; margin-left: 16px;">
+              <li>Usa <b>comillas dobles</b>: <code>" "</code>.</li>
+              <li>Es un arreglo de varios <code>char</code>.</li>
+              <li>El compilador añade automáticamente el <b><code>'\0'</code></b> al final.</li>
+              <li>Ocupa <code>longitud + 1</code> bytes en memoria.</li>
+              <li>Se imprime con el especificador <b><code>%s</code></b>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="box box-rose" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.88rem; color: #fca5a5;">
+            ⚠️ <b>¡Ojo con <code>'A'</code> vs <code>"A"</code>!</b> <code>'A'</code> es un carácter simple de 1 byte.
+            En cambio, <code>"A"</code> es un string de 2 bytes: <code>['A', '\0']</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: IMPRIMIR CON %S -->
+      <section>
+        <h2><span class="section-num">05</span> Impresión de Strings: El Formato <code>%s</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Así como usábamos <code>%d</code> para enteros y
+          <code>%f</code> para flotantes, para cadenas usamos <code>%s</code> (de string).</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot dot-red"></span><span
+                  class="code-dot dot-yellow"></span><span class="code-dot dot-green"></span></div>
+              <span class="code-title">imprimir_string.c</span>
+              <span class="code-badge">printf %s</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">char</span> nombre[] = <span class="c-str">"alumno"</span>;
+    
+    <span class="c-fn">printf</span>(<span class="c-str">"String: %s\n"</span>, nombre);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <span>Terminal de salida</span>
+              <span>bash</span>
+            </div>
+            <div class="terminal-body">
+              String: alumno
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">¿Cómo funciona <code>printf("%s", nombre)</code> internamente?
+          </h4>
+          <p style="font-size: 0.88rem; margin: 0; color: #cbd5e1;">
+            <code>printf</code> recibe la dirección inicial de <code>nombre</code>, lee el primer carácter e imprime
+            <code>'a'</code>, pasa al siguiente e imprime <code>'l'</code>... y continúa avanzando de celda en celda por
+            la memoria hasta que encuentra el <b><code>'\0'</code></b>. En ese instante exacto se detiene.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: RECORRER UN STRING -->
+      <section>
+        <h2><span class="section-num">06</span> Recorrer un String: El Patrón Universal</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">El bucle canónico para procesar cadenas carácter por
+          carácter.</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <div class="code-dots"><span class="code-dot dot-red"></span><span class="code-dot dot-yellow"></span><span
+                class="code-dot dot-green"></span></div>
+            <span class="code-title">recorrido_string.c</span>
+            <span class="code-badge">for con != '\0'</span>
+          </div>
+          <div class="code-body"><span class="c-kw">char</span> nombre[] = <span class="c-str">"Hola"</span>; 
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; nombre[i] != <span class="c-str">'\0'</span>; i++) 
+{ 
+    <span class="c-fn">printf</span>(<span class="c-str">"%c\n"</span>, nombre[i]); 
+}</div>
+        </div>
+
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 6px;">Explicación de la condición <code>nombre[i] != '\0'</code>
+          </h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Significa literalmente: <i>"Mientras el carácter en la posición i no sea el terminador nulo, seguí
+              procesando"</i>.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #cbd5e1; margin-top: 8px;">
+            i = 0 ➔ 'H' (imprime) &nbsp;|&nbsp; i = 1 ➔ 'o' (imprime) &nbsp;|&nbsp; i = 2 ➔ 'l' (imprime) &nbsp;|&nbsp;
+            i = 3 ➔ 'a' (imprime) &nbsp;|&nbsp; i = 4 ➔ '\0' (falso, sale del bucle).
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: LONGITUD MANUAL DE UN STRING -->
+      <section>
+        <h2><span class="section-num">07</span> Cálculo Manual de Longitud</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Cómo contar los caracteres reales de una cadena sin
+          bibliotecas externas.</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot dot-red"></span><span
+                  class="code-dot dot-yellow"></span><span class="code-dot dot-green"></span></div>
+              <span class="code-title">longitud_manual.c</span>
+              <span class="code-badge">while</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">longitud</span>(<span class="c-kw">char</span> cadena[]) 
+{ 
+    <span class="c-kw">int</span> contador = <span class="c-num">0</span>; 
+
+    <span class="c-kw">while</span>(cadena[contador] != <span class="c-str">'\0'</span>) 
+    { 
+        contador++; 
+    } 
+
+    <span class="c-kw">return</span> contador; 
+}</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué devuelve 4 para "Hola" y no 5?</h4>
+            <div class="step-list">
+              <div class="step-item"><span class="step-num">1</span>
+                <div>'H' es un carácter real (contador pasa a 1).</div>
+              </div>
+              <div class="step-item"><span class="step-num">2</span>
+                <div>'o' es un carácter real (contador pasa a 2).</div>
+              </div>
+              <div class="step-item"><span class="step-num">3</span>
+                <div>'l' es un carácter real (contador pasa a 3).</div>
+              </div>
+              <div class="step-item"><span class="step-num">4</span>
+                <div>'a' es un carácter real (contador pasa a 4).</div>
+              </div>
+              <div class="step-item"><span class="step-num">5</span>
+                <div>'\0' marca el final: el <code>while</code> se detiene <b>sin incrementarse</b>.</div>
+              </div>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--accent-emerald); margin-top: 8px;">
+              ✅ El <code>'\0'</code> sirve para marcar el final, pero <b>no forma parte de la longitud del texto</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: AUTOEVALUACIÓN Y CIERRE -->
+      <section>
+        <h2><span class="section-num">08</span> Resumen y Autoevaluación</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Puntos Clave del Módulo</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
+              <li>Un String en C es un arreglo de caracteres (<code>char[]</code>).</li>
+              <li>Siempre finaliza con el carácter nulo <code>'\0'</code>.</li>
+              <li>Las comillas simples <code>''</code> son para <code>char</code>; las dobles <code>""</code> para
+                Strings.</li>
+              <li>Siempre reservá <b>1 byte extra</b> para el terminador nulo.</li>
+              <li>Para imprimir un string usamos <code>%s</code>.</li>
+              <li>Para recorrerlo usamos <code>cadena[i] != '\0'</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cuántos bytes ocupa en memoria la cadena "C++"?
+              (Respuesta: 4 bytes: 'C', '+', '+', '\0').</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo qué ocurre si un string no tiene
+              <code>'\0'</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Distingo entre <code>'X'</code> y <code>"X"</code>?
+            </div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo escribir de memoria el bucle <code>for</code>
+              que recorre un string?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+          <a href="01-funciones-retorno-arreglos-parametros.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Funciones con Retorno
+          </a>
+          <a href="../index.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Índice 2do Cuatrimestre
+          </a>
+          <a href="03-libreria-string-h.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Siguiente: Biblioteca string.h →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+
+</html>

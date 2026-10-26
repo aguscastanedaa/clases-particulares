@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 06: Paso por Referencia, Punteros y Funciones | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
+
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+
+  <link rel="stylesheet" href="../../assets/css/presentation.css?v=2">
+  <!-- Estilos de código optimizados para alta legibilidad en proyector/pantalla -->
+  <style>
+    .reveal .code-body,
+    .reveal pre.code-body,
+    .reveal .code-window pre {
+      font-size: 1.30rem !important;
+      line-height: 1.55 !important;
+      width: 100% !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      padding: 16px 22px !important;
+      box-sizing: border-box !important;
+    }
+
+    .grid-2 .code-body,
+    .grid-1-2 .code-body,
+    .grid-2-1 .code-body,
+    .grid-2 pre.code-body,
+    .grid-1-2 pre.code-body,
+    .grid-2-1 pre.code-body {
+      font-size: 1.22rem !important;
+      padding: 14px 18px !important;
+      line-height: 1.50 !important;
+    }
+
+    .terminal-body {
+      font-size: 1.15rem !important;
+      padding: 14px 18px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Unidad 06</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-emerald">2do Cuatrimestre • Modularidad Avanzada • Unidad 06</span>
+          <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Paso por Referencia, Punteros y Funciones</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            Cómo alterar variables originales desde funciones y devolver múltiples resultados usando punteros como
+            parámetros de salida.
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-rose">Paso por valor (copia)</span>
+            <span class="badge badge-emerald">Referencia con punteros</span>
+            <span class="badge badge-amber">Múltiples retornos</span>
+            <span class="badge badge-cyan">Ejemplos: dividir y minMax</span>
+          </div>
+
+          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
+              para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">La barrera del paso por valor</h4>
+            <p>En C, <b>todas las funciones reciben sus argumentos por valor</b> (copia). Si modificás una variable
+              dentro de la función, el cambio muere al cerrarse la llave <code>}</code>.</p>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
+              Los punteros son la herramienta que nos permite romper esa barrera: al pasarle a la función <b>la
+                dirección de la variable original</b>, la función adquiere la capacidad de modificarla de verdad.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+              <li>Demostrar experimentalmente por qué el paso por valor no altera el original.</li>
+              <li>Aprender la sintaxis: <code>&amp;variable</code> en la llamada y <code>int *param</code> en la
+                cabecera.</li>
+              <li>Utilizar <code>*param = nuevo_valor;</code> para alterar el dato original en RAM.</li>
+              <li>Superar la limitación de <code>return</code> y devolver múltiples valores.</li>
+              <li>Analizar el ejemplo de división (cociente y resto simultáneos).</li>
+              <li>Analizar el algoritmo <code>minMax</code> para calcular los extremos de un vector.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: POR VALOR VS POR REFERENCIA -->
+      <section>
+        <h2><span class="section-num">02</span> El Problema: Paso por Valor</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">¿Por qué este código no funciona como uno esperaría?
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">cambiar_fallido.c</span>
+              <span class="code-badge">Por Valor</span>
+            </div>
+            <div class="code-body"><span class="c-type">void</span> <span class="c-fn">cambiar</span>(<span
+                class="c-kw">int</span> numero)
+              {
+              numero = <span class="c-num">100</span>;
+              }
+
+              <span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+              {
+              <span class="c-kw">int</span> x = <span class="c-num">5</span>;
+              <span class="c-fn">cambiar</span>(x);
+              <span class="c-fn">printf</span>(<span class="c-str">"x = %d\n"</span>, x); <span class="c-cmt">// Imprime
+                5 !!</span>
+              <span class="c-kw">return</span> <span class="c-num">0</span>;
+              }
+            </div>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">¿Qué ocurrió en la memoria RAM?</h4>
+            <div class="step-list">
+              <div class="step-item"><span class="step-num">1</span>
+                <div>En <code>main</code>, la variable <code>x</code> vive en su propia celda con el valor
+                  <code>5</code>.
+                </div>
+              </div>
+              <div class="step-item"><span class="step-num">2</span>
+                <div>Al llamar a <code>cambiar(x)</code>, C crea una <b>caja nueva independiente</b> en el Stack llamada
+                  <code>numero</code> y copia el <code>5</code>.
+                </div>
+              </div>
+              <div class="step-item"><span class="step-num">3</span>
+                <div>La función hace <code>numero = 100</code>, modificando su propia copia local.</div>
+              </div>
+              <div class="step-item"><span class="step-num">4</span>
+                <div>Al terminar la función, <code>numero</code> es destruida. <b>La variable <code>x</code> de
+                    <code>main</code> nunca se enteró</b>.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: LA SOLUCIÓN CON PUNTEROS -->
+      <section>
+        <h2><span class="section-num">03</span> La Solución: Modificar la Variable Original</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">En lugar de mandar el número 5, enviamos la
+          <b>dirección de memoria</b> <code>&amp;x</code>.
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">cambiar_exitoso.c</span>
+              <span class="code-badge">Punteros</span>
+            </div>
+            <div class="code-body"><span class="c-type">void</span> <span class="c-fn">cambiar</span>(<span
+                class="c-kw">int</span> *numero)
+              {
+              *numero = <span class="c-num">100</span>; <span class="c-cmt">// Modifica la celda apuntada</span>
+              }
+
+              <span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+              {
+              <span class="c-kw">int</span> x = <span class="c-num">5</span>;
+              <span class="c-fn">cambiar</span>(&amp;x); <span class="c-cmt">// Enviamos &amp;x (su dirección)</span>
+              <span class="c-fn">printf</span>(<span class="c-str">"x = %d\n"</span>, x); <span class="c-cmt">// Imprime
+                100 !!</span>
+              <span class="c-kw">return</span> <span class="c-num">0</span>;
+              }
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Mecánica del Éxito</h4>
+            <div class="step-list">
+              <div class="step-item"><span class="step-num">1</span>
+                <div><code>&amp;x</code> entrega la dirección de memoria de <code>x</code> (ej. <code>0x1000</code>).
+                </div>
+              </div>
+              <div class="step-item"><span class="step-num">2</span>
+                <div>El parámetro <code>int *numero</code> guarda esa dirección <code>0x1000</code>.</div>
+              </div>
+              <div class="step-item"><span class="step-num">3</span>
+                <div>La orden <code>*numero = 100</code> significa: <i>"Andá a la celda 0x1000 y guardá el número
+                    100"</i>.</div>
+              </div>
+              <div class="step-item"><span class="step-num">4</span>
+                <div>Como esa celda es físicamente la variable <code>x</code>, <b>su valor cambió en la memoria
+                    real</b>.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: EJEMPLO INCREMENTAR -->
+      <section>
+        <h2><span class="section-num">04</span> Ejemplo: Función <code>incrementar</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Modificar una variable sumándole una cantidad determinada <code>n</code>.</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">incrementar.c</span>
+              <span class="code-badge">+= con *ptr</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-type">void</span> <span class="c-fn">incrementar</span>(<span class="c-kw">int</span> *numero, <span class="c-kw">int</span> n)
+{
+    *numero += n;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">int</span> x = <span class="c-num">10</span>;
+    <span class="c-fn">incrementar</span>(&amp;x, <span class="c-num">5</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"x = %d\n"</span>, x); <span class="c-cmt">// x = 15</span>
+
+    <span class="c-fn">incrementar</span>(&amp;x, <span class="c-num">20</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"x = %d\n"</span>, x); <span class="c-cmt">// x = 35</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué <code>&amp;x</code> pero <code>n</code> solo?</h4>
+            <p style="font-size: 0.88rem; color: #cbd5e1;">
+              Notá la asimetría intencional en la llamada:
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.95rem; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 6px; margin: 10px 0;">
+              incrementar(&amp;x, 5);
+            </div>
+            <ul style="font-size: 0.84rem; color: #cbd5e1; line-height: 1.5; margin-left: 14px;">
+              <li><code>&amp;x</code> porque <b>queremos modificar</b> la variable <code>x</code>.</li>
+              <li><code>5</code> (o una variable <code>n</code>) porque solo queremos <b>leer su valor</b> para sumarlo, sin alterar el dato que lo originó.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: MÚLTIPLES RESULTADOS (DIVISIÓN) -->
+      <section>
+        <h2><span class="section-num">05</span> Devolver Varios Valores: División Entera</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Un <code>return</code> solo puede devolver un dato. Con punteros podemos devolver dos, tres o más resultados simultáneos.</p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">division_modular.c</span>
+            <span class="code-badge">Cociente y Resto</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-type">void</span> <span class="c-fn">dividir</span>(<span class="c-kw">int</span> dividendo, <span class="c-kw">int</span> divisor, <span class="c-kw">int</span> *cociente, <span class="c-kw">int</span> *resto)
+{
+    *cociente = dividendo / divisor;
+    *resto    = dividendo % divisor;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">int</span> c, r;
+    <span class="c-fn">dividir</span>(<span class="c-num">10</span>, <span class="c-num">3</span>, &amp;c, &amp;r);
+    <span class="c-fn">printf</span>(<span class="c-str">"Cociente: %d\n"</span>, c); <span class="c-cmt">// 3</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Resto:    %d\n"</span>, r); <span class="c-cmt">// 1</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="box box-amber">
+          <p style="margin: 0; font-size: 0.88rem; color: #fde68a;">
+            💡 <b>Concepto de Parámetros de Salida:</b> Las variables <code>c</code> y <code>r</code> se declaran vacías en <code>main</code>. Se le envían sus direcciones <code>&amp;c</code> y <code>&amp;r</code> a la función, y esta se encarga de rellenarlas con los resultados.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: EJEMPLO MIN Y MAX -->
+      <section>
+        <h2><span class="section-num">06</span> Ejemplo Integrador: Mínimo y Máximo de un Vector</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Una única función que recorre el vector y devuelve ambos extremos a la vez.</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">min_max.c</span>
+              <span class="code-badge">Vector + Punteros</span>
+            </div>
+            <div class="code-body"><span class="c-type">void</span> <span class="c-fn">minMax</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano, <span class="c-kw">int</span> *minimo, <span class="c-kw">int</span> *maximo)
+{
+    *minimo = vector[<span class="c-num">0</span>];
+    *maximo = vector[<span class="c-num">0</span>];
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; tamano; i++)
+    {
+        <span class="c-kw">if</span>(vector[i] &lt; *minimo) {
+            *minimo = vector[i];
+        }
+        <span class="c-kw">if</span>(vector[i] &gt; *maximo) {
+            *maximo = vector[i];
+        }
+    }
+}</div>
+          </div>
+
+          <div class="box box-emerald" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <h4 style="color: #34d399; margin-bottom: 6px;">Llamada y Uso en <code>main()</code></h4>
+              <p style="font-size: 0.84rem; color: #cbd5e1; margin-bottom: 8px;">
+                Pasamos <code>&amp;min</code> y <code>&amp;max</code> para que la función almacene ambos resultados directamente:
+              </p>
+              <div class="code-window" style="margin: 0 0 10px;">
+                <div class="code-body"><span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">45</span>, <span class="c-num">12</span>, <span class="c-num">89</span>, <span class="c-num">3</span>, <span class="c-num">67</span>};
+<span class="c-kw">int</span> min, max;
+
+<span class="c-fn">minMax</span>(numeros, <span class="c-num">5</span>, &amp;min, &amp;max);
+<span class="c-fn">printf</span>(<span class="c-str">"Min: %d | Max: %d\n"</span>, min, max);</div>
+              </div>
+            </div>
+            <div style="background: rgba(0,0,0,0.4); border-left: 3px solid var(--accent-emerald); padding: 8px 12px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.82rem; color: #34d399;">
+              &gt; Min: 3 | Max: 89
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: AUTOEVALUACIÓN Y CIERRE -->
+      <section>
+        <h2><span class="section-num">07</span> Resumen y Autoevaluación</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Puntos Clave del Módulo</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
+              <li>C solo tiene paso por valor; el paso por referencia se implementa pasando direcciones de memoria.</li>
+              <li>Si querés que una función modifique tu variable, pasale <code>&amp;variable</code>.</li>
+              <li>La función debe declarar el parámetro como puntero: <code>int *ptr</code>.</li>
+              <li>Dentro de la función usamos <code>*ptr = valor</code> para guardar el resultado.</li>
+              <li>Es el patrón estándar de C para devolver múltiples resultados.</li>
+            </ul>
+          </div>
+
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué void f(int x) { x = 10; } no modifica a la
+              variable de main?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué operador uso en la llamada de dividir(10, 3,
+              &amp;c, &amp;r)?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué en minMax usamos
+              <code>*minimo = vector[i]</code> y no <code>minimo = ...</code>?
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+          <a href="05-introduccion-punteros-direcciones-memoria.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Punteros y Memoria
+          </a>
+          <a href="../index.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Índice 2do Cuatrimestre
+          </a>
+          <a href="07-punteros-y-arreglos.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Siguiente: Punteros y Arreglos →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+
+</html>

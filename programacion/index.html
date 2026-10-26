@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Programación en C | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../logo.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -131,7 +132,7 @@
       color: var(--accent-emerald);
     }
 
-    /* SEMESTER SELECTOR HERO CARDS */
+    /* SEMESTERS HERO GRID */
     .semesters-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -218,16 +219,13 @@
       font-weight: 700;
       margin-bottom: 8px;
       color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .semester-hero p {
       font-size: 0.88rem;
       color: var(--text-muted);
       line-height: 1.5;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .semester-features {
@@ -245,17 +243,8 @@
       gap: 8px;
     }
 
-    .semester-feature-item span.bullet {
-      font-size: 0.9rem;
-    }
-
-    .c1 .semester-feature-item span.bullet {
-      color: var(--accent);
-    }
-
-    .c2 .semester-feature-item span.bullet {
-      color: var(--accent-emerald);
-    }
+    .c1 .semester-feature-item span.bullet { color: var(--accent); }
+    .c2 .semester-feature-item span.bullet { color: var(--accent-emerald); }
 
     .semester-footer {
       display: flex;
@@ -343,13 +332,8 @@
       gap: 10px;
     }
 
-    .section-title.c1 {
-      color: var(--accent);
-    }
-
-    .section-title.c2 {
-      color: var(--accent-emerald);
-    }
+    .section-title.c1 { color: var(--accent); }
+    .section-title.c2 { color: var(--accent-emerald); }
 
     .section-link {
       font-size: 0.84rem;
@@ -361,9 +345,7 @@
       transition: color 0.2s ease;
     }
 
-    .section-link:hover {
-      color: #ffffff;
-    }
+    .section-link:hover { color: #ffffff; }
 
     .lesson-list {
       display: flex;
@@ -482,22 +464,13 @@
       transition: gap 0.2s ease;
     }
 
-    .c1-card .lesson-action {
-      color: var(--accent);
-    }
+    .c1-card .lesson-action { color: var(--accent); }
+    .c2-card .lesson-action { color: var(--accent-emerald); }
 
-    .c2-card .lesson-action {
-      color: var(--accent-emerald);
-    }
-
-    .lesson-card:hover .lesson-action {
-      gap: 10px;
-    }
+    .lesson-card:hover .lesson-action { gap: 10px; }
 
     @media (max-width: 768px) {
-      .semesters-grid {
-        grid-template-columns: 1fr;
-      }
+      .semesters-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
@@ -506,10 +479,7 @@
         align-items: flex-start;
         gap: 14px;
       }
-
-      .lesson-action {
-        align-self: flex-end;
-      }
+      .lesson-action { align-self: flex-end; }
     }
   </style>
 </head>
@@ -521,12 +491,11 @@
     <header>
       <div class="header-badge">Cátedra de Programación en C</div>
       <h1>Programación en C</h1>
-      <p>Plan curricular integral estructurado en dos cuatrimestres: desde los fundamentos de la algoritmia y sintaxis
-        básica hasta estructuras de datos complejas y administración de memoria dinámica en el Heap.</p>
+      <p>Plan curricular integral estructurado académicamente en dos cuatrimestres: desde los fundamentos algorítmicos, control de flujo, vectores, matrices y memoria dinámica (1er Cuatrimestre: 1er y 2do Bimestre), hasta funciones con retorno, procesamiento de strings, aritmética de punteros, registros avanzados e integraciones del segundo cuatrimestre.</p>
 
       <div class="stats-bar">
         <span class="stat-badge"><b>2</b> Cuatrimestres</span>
-        <span class="stat-badge"><b>23</b> Unidades Didácticas</span>
+        <span class="stat-badge"><b>36</b> Unidades Didácticas</span>
         <span class="stat-badge"><b class="emerald">100%</b> Presentaciones Independientes</span>
       </div>
     </header>
@@ -536,50 +505,40 @@
       <!-- 1ER CUATRIMESTRE -->
       <a href="1er-cuatrimestre/index.html" class="semester-hero c1">
         <div>
-          <span class="semester-badge">Bloque I • Fundamentos</span>
+          <span class="semester-badge">1er Cuatrimestre • 2 Bimestres</span>
           <h2>1er Cuatrimestre</h2>
-          <p>Bases de la computación algorítmica, tipos de datos, entrada y salida, operadores, bifurcaciones
-            condicionales, modularidad de funciones y bucles iterativos.</p>
+          <p>Dividido en dos bimestres complementarios: fundamentos y lógica en el 1er Bimestre, seguido de vectores, matrices, estructuras y memoria dinámica en el 2do Bimestre.</p>
 
           <div class="semester-features">
-            <div class="semester-feature-item"><span class="bullet">▸</span> Variables, tipos e I/O (printf / scanf)
-            </div>
-            <div class="semester-feature-item"><span class="bullet">▸</span> Operadores aritméticos, incremento y lógica
-            </div>
-            <div class="semester-feature-item"><span class="bullet">▸</span> Bifurcaciones (if / else) y booleanos</div>
-            <div class="semester-feature-item"><span class="bullet">▸</span> Funciones y ciclos repetitivos (while /
-              for)</div>
+            <div class="semester-feature-item"><span class="bullet">▸</span> <b>1er Bimestre:</b> Variables, I/O, operadores, if/else, bucles y funciones (13 U.)</div>
+            <div class="semester-feature-item"><span class="bullet">▸</span> <b>2do Bimestre:</b> Vectores estáticos, ordenamiento, matrices y memoria Heap (10 U.)</div>
           </div>
         </div>
 
         <div class="semester-footer">
-          <span class="semester-count">13 Unidades didácticas</span>
-          <span class="semester-btn">Abrir Cuatrimestre →</span>
+          <span class="semester-count">23 Unidades Didácticas</span>
+          <span class="semester-btn">Abrir 1er Cuatrimestre →</span>
         </div>
       </a>
 
       <!-- 2DO CUATRIMESTRE -->
       <a href="2do-cuatrimestre/index.html" class="semester-hero c2">
         <div>
-          <span class="semester-badge">Bloque II • Estructuras & Memoria</span>
+          <span class="semester-badge">2do Cuatrimestre • Avanzado</span>
           <h2>2do Cuatrimestre</h2>
-          <p>Estructuras de datos unidimensionales y bidimensionales, ordenamiento por burbuja, registros struct y
-            gestión
-            manual de memoria dinámica en el Heap.</p>
+          <p>Funciones con retorno, paso de arreglos, strings (char[]), biblioteca &lt;string.h&gt;, algoritmos de texto, punteros, paso por referencia, punteros a structs (-&gt;) e integración bancaria.</p>
 
           <div class="semester-features">
-            <div class="semester-feature-item"><span class="bullet">▸</span> Vectores estáticos, recorridos y búsqueda
-              lineal</div>
-            <div class="semester-feature-item"><span class="bullet">▸</span> Algoritmo de ordenamiento burbuja</div>
-            <div class="semester-feature-item"><span class="bullet">▸</span> Matrices bidimensionales y diagonales</div>
-            <div class="semester-feature-item"><span class="bullet">▸</span> Structs, punteros y memoria dinámica (Heap)
-            </div>
+            <div class="semester-feature-item"><span class="bullet">▸</span> Funciones con retorno y arreglos como parámetros</div>
+            <div class="semester-feature-item"><span class="bullet">▸</span> Strings, &lt;string.h&gt;, algoritmos, inversión y palíndromos</div>
+            <div class="semester-feature-item"><span class="bullet">▸</span> Punteros, direcciones de RAM (&amp; y *), paso por referencia</div>
+            <div class="semester-feature-item"><span class="bullet">▸</span> Structs avanzadas, operador -&gt;, anidamiento y transferencia</div>
           </div>
         </div>
 
         <div class="semester-footer">
-          <span class="semester-count">10 Unidades didácticas</span>
-          <span class="semester-btn">Abrir Cuatrimestre →</span>
+          <span class="semester-count">13 Unidades Didácticas</span>
+          <span class="semester-btn">Abrir 2do Cuatrimestre →</span>
         </div>
       </a>
     </div>
@@ -587,285 +546,308 @@
     <!-- BUSCADOR GLOBAL -->
     <div class="search-section">
       <input type="text" id="filter" class="search-box"
-        placeholder="Buscar cualquier unidad, instrucción o concepto (ej. printf, for, vector, matriz, struct, malloc, heap)...">
+        placeholder="Buscar cualquier unidad del programa (ej. printf, scanf, for, vector, matriz, malloc, string, strlen, strcmp, puntero, struct, flecha)...">
     </div>
 
     <!-- LISTADO 1ER CUATRIMESTRE -->
     <div class="section-header" id="header-c1">
-      <div class="section-title c1">1er Cuatrimestre: Fundamentos y Control de Flujo</div>
-      <a href="1er-cuatrimestre/index.html" class="section-link">Ver índice detallado →</a>
+      <div class="section-title c1">1er Cuatrimestre: Fundamentos, Estructuras y Memoria (23 Unidades)</div>
+      <a href="1er-cuatrimestre/index.html" class="section-link">Ver índice detallado del 1er Cuatrimestre →</a>
     </div>
 
     <div class="lesson-list" id="list-c1">
-      <!-- U01 -->
-      <a href="1er-cuatrimestre/presentaciones/01-introduccion-programacion.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre introduccion que es programar algoritmo secuencia instrucciones cpu ram doble numero">
+      <!-- 1B U01 -->
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/01-introduccion-programacion.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre introduccion que es programar algoritmo cpu ram doble numero">
         <div class="lesson-info">
           <div class="lesson-badges">
-            <span class="lesson-num">Unidad 01</span>
+            <span class="lesson-num">1B • Unidad 01</span>
             <span class="cuatrimestre-tag">1er Cuatrimestre</span>
           </div>
           <h3>¿Qué es programar?</h3>
-          <p>Definición sencilla, analogía del robot y recetas, hardware de ejecución (CPU/RAM), precisión algorítmica y
-            primer código para calcular el doble de un número.</p>
+          <p>Definición sencilla, analogía del robot y recetas, hardware de ejecución (CPU/RAM) y primer código para calcular el doble de un número.</p>
           <div class="tag-list">
             <span class="tag-item">Algoritmos</span>
             <span class="tag-item">Secuencia</span>
             <span class="tag-item">CPU / RAM</span>
-            <span class="tag-item">numero * 2</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U02 -->
-      <a href="1er-cuatrimestre/presentaciones/02-estructura-programa-c.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre estructura c include stdio stdbool main llaves punto y coma return 0 compilacion errores">
+      <!-- 1B U02 -->
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/02-estructura-programa-c.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre estructura c include stdio main return 0">
         <div class="lesson-info">
           <div class="lesson-badges">
-            <span class="lesson-num">Unidad 02</span>
+            <span class="lesson-num">1B • Unidad 02</span>
             <span class="cuatrimestre-tag">1er Cuatrimestre</span>
           </div>
           <h3>Estructura básica de un programa en C</h3>
-          <p>Anatomía completa del esqueleto en C: qué hace #include &lt;stdio.h&gt;, por qué main() es el punto de
-            entrada, el rol de las llaves {}, el punto y coma ; y return 0.</p>
+          <p>Anatomía completa del esqueleto en C: qué hace #include &lt;stdio.h&gt;, por qué main() es el punto de entrada, delimitadores {} y return 0.</p>
           <div class="tag-list">
             <span class="tag-item">#include &lt;stdio.h&gt;</span>
-            <span class="tag-item">int main(void)</span>
-            <span class="tag-item">return 0;</span>
-            <span class="tag-item">Compilador</span>
+            <span class="tag-item">main()</span>
+            <span class="tag-item">return 0</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U03 -->
-      <a href="1er-cuatrimestre/presentaciones/03-variables.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre variables cajas memoria ram declaracion asignacion inicializacion sobreescritura = vs == nombres">
+      <!-- 1B U03 -->
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/03-variables.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre variables cajas memoria ram declaracion asignacion inicializacion = vs ==">
         <div class="lesson-info">
           <div class="lesson-badges">
-            <span class="lesson-num">Unidad 03</span>
+            <span class="lesson-num">1B • Unidad 03</span>
             <span class="cuatrimestre-tag">1er Cuatrimestre</span>
           </div>
           <h3>Variables: La memoria de tu programa</h3>
-          <p>La analogía de las cajas con etiqueta en la RAM, los tres momentos (declaración, asignación e
-            inicialización), sobreescritura, la diferencia crucial entre = y == y tablas de traza.</p>
+          <p>Analogía de las cajas en RAM, declaración, asignación e inicialización, sobreescritura y diferencia entre = y ==.</p>
           <div class="tag-list">
             <span class="tag-item">int edad</span>
             <span class="tag-item">Asignación =</span>
-            <span class="tag-item">Comparación ==</span>
             <span class="tag-item">Memoria RAM</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U04 -->
-      <a href="1er-cuatrimestre/presentaciones/04-tipos-datos.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre tipos de datos int float char bool stdbool decimales comillas punto coma">
+      <!-- 1B U04 -->
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/04-tipos-datos.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre tipos de datos int float char bool stdbool decimales comillas">
         <div class="lesson-info">
           <div class="lesson-badges">
-            <span class="lesson-num">Unidad 04</span>
+            <span class="lesson-num">1B • Unidad 04</span>
             <span class="cuatrimestre-tag">1er Cuatrimestre</span>
           </div>
           <h3>Tipos de datos fundamentales</h3>
-          <p>Por qué C necesita tipado estático: números enteros (int), decimales con punto (float), caracteres entre
-            comillas simples (char) y valores de verdad lógica (bool).</p>
+          <p>Tipado estático en C: números enteros (int), decimales con punto (float), caracteres entre comillas simples (char) y booleanos.</p>
           <div class="tag-list">
             <span class="tag-item">int</span>
-            <span class="tag-item">float (punto .)</span>
-            <span class="tag-item">char 'A'</span>
-            <span class="tag-item">bool true/false</span>
+            <span class="tag-item">float</span>
+            <span class="tag-item">char</span>
+            <span class="tag-item">bool</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U05 -->
-      <a href="1er-cuatrimestre/presentaciones/05-entrada-salida.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre entrada salida printf scanf especificadores formato %d %f %c ampersand & teclado">
+      <!-- 1B U05 -->
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/05-entrada-salida.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre entrada salida printf scanf especificadores formato %d %f %c ampersand &">
         <div class="lesson-info">
           <div class="lesson-badges">
-            <span class="lesson-num">Unidad 05</span>
+            <span class="lesson-num">1B • Unidad 05</span>
             <span class="cuatrimestre-tag">1er Cuatrimestre</span>
           </div>
           <h3>Entrada y salida de datos (E/S)</h3>
-          <p>Comunicación con el usuario: cómo imprimir con printf(), leer del teclado con scanf(), el rol del operador
-            de dirección &amp; y los comodines %d, %f y %c.</p>
+          <p>Comunicación interactiva: impresión formateada con printf(), lectura con scanf(), el rol del operador &amp; y comodines %d, %f, %c.</p>
           <div class="tag-list">
             <span class="tag-item">printf()</span>
             <span class="tag-item">scanf()</span>
             <span class="tag-item">Operador &amp;</span>
-            <span class="tag-item">%d, %f, %c</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U06 -->
-      <a href="1er-cuatrimestre/presentaciones/06-operadores-aritmeticos.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre operadores aritmeticos suma resta multiplicacion division entera modulo resto % par impar divisibilidad">
+      <!-- 1B U06 a U13 RESUMIDOS -->
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/06-operadores-aritmeticos.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre operadores aritmeticos suma resta division entera modulo resto %">
         <div class="lesson-info">
-          <div class="lesson-badges">
-            <span class="lesson-num">Unidad 06</span>
-            <span class="cuatrimestre-tag">1er Cuatrimestre</span>
-          </div>
+          <div class="lesson-badges"><span class="lesson-num">1B • Unidad 06</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
           <h3>Operadores aritméticos y el operador módulo %</h3>
-          <p>Las 5 operaciones en C: por qué 7 / 2 da 3, cómo obtener decimales, el cálculo del resto con % y el
-            criterio universal de divisibilidad (numero % divisor == 0).</p>
-          <div class="tag-list">
-            <span class="tag-item">+ - * /</span>
-            <span class="tag-item">Módulo %</span>
-            <span class="tag-item">7 / 2 = 3</span>
-            <span class="tag-item">num % 2 == 0</span>
-          </div>
+          <p>Las 5 operaciones en C: por qué 7 / 2 da 3, obtención de decimales y cálculo de divisibilidad con %.</p>
+          <div class="tag-list"><span class="tag-item">+ - * /</span><span class="tag-item">Módulo %</span></div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U07 -->
-      <a href="1er-cuatrimestre/presentaciones/07-incremento-variables.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre incremento variables x = x + 1 += ++ -- contadores acumuladores i++ ++i">
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/07-incremento-variables.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre incremento variables x = x + 1 += ++ -- contadores acumuladores">
         <div class="lesson-info">
-          <div class="lesson-badges">
-            <span class="lesson-num">Unidad 07</span>
-            <span class="cuatrimestre-tag">1er Cuatrimestre</span>
-          </div>
+          <div class="lesson-badges"><span class="lesson-num">1B • Unidad 07</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
           <h3>Incremento de variables</h3>
-          <p>Hacer crecer datos: cómo funciona x = x + 1, operadores abreviados (+=, -=, *=), el operador ++ y --,
-            contadores, acumuladores y la sutileza de i++ vs ++i.</p>
-          <div class="tag-list">
-            <span class="tag-item">x = x + 1</span>
-            <span class="tag-item">x += 1</span>
-            <span class="tag-item">x++</span>
-            <span class="tag-item">Contadores</span>
-          </div>
+          <p>Operadores abreviados (+=, -=), contadores, acumuladores y la diferencia entre i++ y ++i.</p>
+          <div class="tag-list"><span class="tag-item">x++</span><span class="tag-item">+=</span><span class="tag-item">Contadores</span></div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U08 -->
-      <a href="1er-cuatrimestre/presentaciones/08-operadores-comparacion.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre operadores comparacion relacionales == != > < >= <= verdad falso 1 0 preguntas">
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/08-operadores-comparacion.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre operadores comparacion == != > < >= <= verdad falso">
         <div class="lesson-info">
-          <div class="lesson-badges">
-            <span class="lesson-num">Unidad 08</span>
-            <span class="cuatrimestre-tag">1er Cuatrimestre</span>
-          </div>
+          <div class="lesson-badges"><span class="lesson-num">1B • Unidad 08</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
           <h3>Operadores de comparación</h3>
-          <p>Hacer preguntas lógicas: igualdad (==), desigualdad (!=), mayor (&gt;), menor (&lt;) y límites (&gt;=,
-            &lt;=). Tabla de evaluación para edades de 16, 18 y 20 años.</p>
-          <div class="tag-list">
-            <span class="tag-item">== vs =</span>
-            <span class="tag-item">!=</span>
-            <span class="tag-item">&gt;= &lt;=</span>
-            <span class="tag-item">1 (True) / 0 (False)</span>
-          </div>
+          <p>Preguntas lógicas en código: igualdad (==), desigualdad (!=), mayor, menor y límites relacionales.</p>
+          <div class="tag-list"><span class="tag-item">== vs =</span><span class="tag-item">!=</span><span class="tag-item">&gt;= &lt;=</span></div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U09 -->
-      <a href="1er-cuatrimestre/presentaciones/09-condicionales.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre condicionales if else if-else else if diagrama flujo decisiones bifurcacion mayoria par positivo">
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/09-condicionales.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre condicionales if else if-else cascada bifurcacion decisiones">
         <div class="lesson-info">
-          <div class="lesson-badges">
-            <span class="lesson-num">Unidad 09</span>
-            <span class="cuatrimestre-tag">1er Cuatrimestre</span>
-          </div>
+          <div class="lesson-badges"><span class="lesson-num">1B • Unidad 09</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
           <h3>Condicionales: if y else</h3>
-          <p>Tomar caminos según las condiciones: estructura if-else, diagramas de flujo SVG, simulación con distintas
-            edades, números positivos/negativos y verificación de paridad.</p>
-          <div class="tag-list">
-            <span class="tag-item">if (condicion)</span>
-            <span class="tag-item">else</span>
-            <span class="tag-item">else if cascada</span>
-            <span class="tag-item">Diagramas de Flujo</span>
-          </div>
+          <p>Bifurcaciones de flujo, diagramas SVG, estructuras if-else y cascadas de decisión múltiple con else if.</p>
+          <div class="tag-list"><span class="tag-item">if</span><span class="tag-item">else</span><span class="tag-item">else if</span></div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U10 -->
-      <a href="1er-cuatrimestre/presentaciones/10-operadores-logicos.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre operadores logicos and or not && || ! tablas verdad cortocircuito rangos">
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/10-operadores-logicos.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre operadores logicos and or not && || ! tablas verdad cortocircuito">
         <div class="lesson-info">
-          <div class="lesson-badges">
-            <span class="lesson-num">Unidad 10</span>
-            <span class="cuatrimestre-tag">1er Cuatrimestre</span>
-          </div>
+          <div class="lesson-badges"><span class="lesson-num">1B • Unidad 10</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
           <h3>Operadores lógicos: &amp;&amp;, || y !</h3>
-          <p>Combinar múltiples condiciones simultáneas: conjunción AND (&amp;&amp;), disyunción OR (||), negación NOT
-            (!), tablas de verdad completas y la trampa de 10 &lt; x &lt; 20.</p>
-          <div class="tag-list">
-            <span class="tag-item">&amp;&amp; (AND)</span>
-            <span class="tag-item">|| (OR)</span>
-            <span class="tag-item">! (NOT)</span>
-            <span class="tag-item">Tablas de Verdad</span>
-          </div>
+          <p>Conjunción AND, disyunción OR, negación NOT, tablas de verdad completas y evaluación de cortocircuito.</p>
+          <div class="tag-list"><span class="tag-item">&amp;&amp;</span><span class="tag-item">||</span><span class="tag-item">!</span></div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U11 -->
-      <a href="1er-cuatrimestre/presentaciones/11-booleanos.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre booleanos bool true false stdbool banderas flags interruptores">
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/11-booleanos.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre booleanos bool true false stdbool banderas flags">
         <div class="lesson-info">
-          <div class="lesson-badges">
-            <span class="lesson-num">Unidad 11</span>
-            <span class="cuatrimestre-tag">1er Cuatrimestre</span>
-          </div>
+          <div class="lesson-badges"><span class="lesson-num">1B • Unidad 11</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
           <h3>Booleanos: bool, true y false</h3>
-          <p>El tipo de dato de Boole en C moderno con &lt;stdbool.h&gt;: guardar el resultado de comparaciones,
-            banderas de estado (flags) y escritura de condiciones limpias.</p>
-          <div class="tag-list">
-            <span class="tag-item">&lt;stdbool.h&gt;</span>
-            <span class="tag-item">bool flag</span>
-            <span class="tag-item">if (activo)</span>
-            <span class="tag-item">Estado del Sistema</span>
-          </div>
+          <p>Valores de verdad en C moderno con &lt;stdbool.h&gt;: almacenamiento de resultados lógicos y flags de estado.</p>
+          <div class="tag-list"><span class="tag-item">&lt;stdbool.h&gt;</span><span class="tag-item">bool</span></div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U12 -->
-      <a href="1er-cuatrimestre/presentaciones/12-funciones.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre funciones return printf parametros argumentos void prototipos scope ambito dry modularidad">
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/12-funciones.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre funciones return printf parametros argumentos void modularidad">
         <div class="lesson-info">
-          <div class="lesson-badges">
-            <span class="lesson-num">Unidad 12</span>
-            <span class="cuatrimestre-tag">1er Cuatrimestre</span>
-          </div>
+          <div class="lesson-badges"><span class="lesson-num">1B • Unidad 12</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
           <h3>Funciones en C: Modularidad y Reutilización</h3>
-          <p>No repetir código: anatomía de una función, parámetros vs argumentos, la diferencia fundamental entre
-            return y printf, funciones void, prototipos y scope local.</p>
-          <div class="tag-list">
-            <span class="tag-item">int doble(int n)</span>
-            <span class="tag-item">return vs printf</span>
-            <span class="tag-item">void</span>
-            <span class="tag-item">Scope Local</span>
-          </div>
+          <p>Diseño modular: parámetros vs argumentos, return vs printf, funciones void, prototipos y scope local.</p>
+          <div class="tag-list"><span class="tag-item">Funciones</span><span class="tag-item">return</span><span class="tag-item">Scope</span></div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U13 -->
-      <a href="1er-cuatrimestre/presentaciones/13-bucles-while-for.html" class="lesson-card c1-card"
-        data-search="1er cuatrimestre bucles ciclos repeticion while for iteracion infinito traza acumulador contador centinela">
+      <a href="1er-cuatrimestre/1er-bimestre/presentaciones/13-bucles-while-for.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 1er bimestre bucles ciclos while for iteracion infinito traza">
         <div class="lesson-info">
-          <div class="lesson-badges">
-            <span class="lesson-num">Unidad 13</span>
-            <span class="cuatrimestre-tag">1er Cuatrimestre</span>
-          </div>
+          <div class="lesson-badges"><span class="lesson-num">1B • Unidad 13</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
           <h3>Bucles: while y for</h3>
-          <p>Automatizar tareas repetitivas: los 3 componentes (inicialización, condición y paso), seguimiento de while
-            iteración por iteración, bucle for compacto y comparación lado a lado.</p>
-          <div class="tag-list">
-            <span class="tag-item">while (cond)</span>
-            <span class="tag-item">for (ini; cond; act)</span>
-            <span class="tag-item">Tabla de Traza</span>
-            <span class="tag-item">Bucles Infinitos</span>
-          </div>
+          <p>Automatización repetitiva: inicialización, condición y paso, seguimiento de iteraciones y prevención de bucles infinitos.</p>
+          <div class="tag-list"><span class="tag-item">while</span><span class="tag-item">for</span><span class="tag-item">Traza</span></div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- 2B U01 A U10 -->
+      <a href="1er-cuatrimestre/2do-bimestre/presentaciones/01-vectores-estaticos.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 2do bimestre vectores arreglos estaticos indices subindices ram contigua">
+        <div class="lesson-info">
+          <div class="lesson-badges"><span class="lesson-num">2B • Unidad 01</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
+          <h3>Vectores y Arreglos Estáticos</h3>
+          <p>Colecciones homogéneas, memoria contigua, indexación de 0 a N-1 y prevención de desbordamientos.</p>
+          <div class="tag-list"><span class="tag-item">int v[N]</span><span class="tag-item">Índices 0 a N-1</span></div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <a href="1er-cuatrimestre/2do-bimestre/presentaciones/02-recorridos-busquedas-vectores.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 2do bimestre recorridos busqueda lineal acumulacion promedio maximo minimo">
+        <div class="lesson-info">
+          <div class="lesson-badges"><span class="lesson-num">2B • Unidad 02</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
+          <h3>Recorridos, Búsquedas y Procesamiento de Vectores</h3>
+          <p>Patrón universal de recorrido con bucle for, sumatoria, promedio, máximo/mínimo y búsqueda lineal.</p>
+          <div class="tag-list"><span class="tag-item">Búsqueda Lineal</span><span class="tag-item">Máximo / Mínimo</span></div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <a href="1er-cuatrimestre/2do-bimestre/presentaciones/03-ordenamiento-vectores.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 2do bimestre ordenamiento vectores bubble sort burbuja swaps temp">
+        <div class="lesson-info">
+          <div class="lesson-badges"><span class="lesson-num">2B • Unidad 03</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
+          <h3>Ordenamiento de Vectores: Método de la Burbuja</h3>
+          <p>Intercambio seguro con vaso auxiliar, pasadas completas con bucles anidados y corte anticipado con bandera.</p>
+          <div class="tag-list"><span class="tag-item">Bubble Sort</span><span class="tag-item">Swap temp</span></div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <a href="1er-cuatrimestre/2do-bimestre/presentaciones/04-matrices-bidimensionales.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 2do bimestre matrices bidimensionales filas columnas row-major 2d">
+        <div class="lesson-info">
+          <div class="lesson-badges"><span class="lesson-num">2B • Unidad 04</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
+          <h3>Matrices y Recorridos Bidimensionales</h3>
+          <p>Grillas con filas y columnas, almacenamiento Row-Major en RAM y doble bucle for(i, j).</p>
+          <div class="tag-list"><span class="tag-item">int M[3][4]</span><span class="tag-item">Row-Major</span></div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <a href="1er-cuatrimestre/2do-bimestre/presentaciones/05-diagonales-matriz.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 2do bimestre diagonales matriz cuadrada principal secundaria i == j i + j == N - 1">
+        <div class="lesson-info">
+          <div class="lesson-badges"><span class="lesson-num">2B • Unidad 05</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
+          <h3>Diagonales de una Matriz Cuadrada</h3>
+          <p>Condición matemática de la diagonal principal (i == j) y secundaria (i + j == N - 1), y optimización O(N).</p>
+          <div class="tag-list"><span class="tag-item">Principal (i==j)</span><span class="tag-item">Secundaria</span></div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <a href="1er-cuatrimestre/2do-bimestre/presentaciones/06-estructuras-struct.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 2do bimestre estructuras struct registros campos miembros operador punto typedef">
+        <div class="lesson-info">
+          <div class="lesson-badges"><span class="lesson-num">2B • Unidad 06</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
+          <h3>Estructuras (struct) y Vectores de Registros</h3>
+          <p>Agrupación de datos heterogéneos, definición con typedef struct, operador punto (.) y vectores de registros.</p>
+          <div class="tag-list"><span class="tag-item">typedef struct</span><span class="tag-item">Punto (.)</span></div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <a href="1er-cuatrimestre/2do-bimestre/presentaciones/07-introduccion-memoria-dinamica.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 2do bimestre introduccion memoria dinamica stack heap punteros & * direcciones">
+        <div class="lesson-info">
+          <div class="lesson-badges"><span class="lesson-num">2B • Unidad 07</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
+          <h3>Introducción a la Memoria Dinámica y Punteros</h3>
+          <p>Limitaciones del tamaño fijo, arquitectura Stack vs Heap, punteros a memoria y operadores &amp; y *.</p>
+          <div class="tag-list"><span class="tag-item">Stack vs Heap</span><span class="tag-item">int *ptr</span></div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <a href="1er-cuatrimestre/2do-bimestre/presentaciones/08-reserva-liberacion-malloc-free.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 2do bimestre reserva liberacion malloc free sizeof stdlib null memory leak">
+        <div class="lesson-info">
+          <div class="lesson-badges"><span class="lesson-num">2B • Unidad 08</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
+          <h3>Reserva y Liberación: malloc(), free() y sizeof()</h3>
+          <p>Solicitud de memoria dinámica en Heap, validación obligatoria contra NULL y liberación con free().</p>
+          <div class="tag-list"><span class="tag-item">malloc()</span><span class="tag-item">free()</span><span class="tag-item">sizeof</span></div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <a href="1er-cuatrimestre/2do-bimestre/presentaciones/09-calloc-realloc.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 2do bimestre calloc realloc inicializacion ceros redimensionar heap puntero temporal">
+        <div class="lesson-info">
+          <div class="lesson-badges"><span class="lesson-num">2B • Unidad 09</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
+          <h3>calloc() y realloc(): Inicialización y Redimensión</h3>
+          <p>Limpieza garantizada a ceros con calloc(), redimensión con realloc() y patrón seguro de puntero auxiliar temp.</p>
+          <div class="tag-list"><span class="tag-item">calloc()</span><span class="tag-item">realloc()</span></div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <a href="1er-cuatrimestre/2do-bimestre/presentaciones/10-vectores-dinamicos.html" class="lesson-card c1-card"
+        data-search="1er cuatrimestre 2do bimestre vectores dinamicos capacidad tamano agregacion struct dinamico proyecto final">
+        <div class="lesson-info">
+          <div class="lesson-badges"><span class="lesson-num">2B • Unidad 10</span><span class="cuatrimestre-tag">1er Cuatrimestre</span></div>
+          <h3>Vectores Dinámicos e Integración de Conceptos</h3>
+          <p>Arquitectura de crecimiento elástico: separación entre capacidad y tamaño, y proyecto integrador completo.</p>
+          <div class="tag-list"><span class="tag-item">Vector Dinámico</span><span class="tag-item">Heap</span></div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
@@ -873,216 +855,261 @@
 
     <!-- LISTADO 2DO CUATRIMESTRE -->
     <div class="section-header" id="header-c2">
-      <div class="section-title c2">2do Cuatrimestre: Estructuras de Datos y Memoria Dinámica</div>
-      <a href="2do-cuatrimestre/index.html" class="section-link">Ver índice detallado →</a>
+      <div class="section-title c2">2do Cuatrimestre: Texto, Punteros, Estructuras Avanzadas y Proyectos (13 Unidades)</div>
+      <a href="2do-cuatrimestre/index.html" class="section-link">Ver índice detallado del 2do Cuatrimestre →</a>
     </div>
 
     <div class="lesson-list" id="list-c2">
-      <!-- U01 C2 -->
-      <a href="2do-cuatrimestre/presentaciones/01-vectores-estaticos.html" class="lesson-card c2-card"
-        data-search="2do cuatrimestre vectores arreglos arrays estaticos indices subindices corchetes contiguidad memoria stack sizeof">
+      <!-- 2C U01 -->
+      <a href="2do-cuatrimestre/presentaciones/01-funciones-retorno-arreglos-parametros.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre funciones con retorno return printf parametros argumentos doble sumar calcularDescuento arreglos como parametros mostrarVector sumarVector tamano longitud">
         <div class="lesson-info">
           <div class="lesson-badges">
             <span class="lesson-num">Unidad 01</span>
             <span class="cuatrimestre-tag">2do Cuatrimestre</span>
           </div>
-          <h3>Vectores y Arreglos Estáticos</h3>
-          <p>La limitación de las variables individuales, analogía del casillero postal, contigüidad en RAM, índices
-            base 0, inicialización y el peligro del desbordamiento.</p>
+          <h3>Funciones con Retorno y Arreglos como Parámetros</h3>
+          <p>Diferencia entre funciones void y con retorno, palabra clave return, pasaje de vectores como parámetros, por qué C exige enviar el tamaño y acumuladores vectoriales.</p>
           <div class="tag-list">
-            <span class="tag-item">int v[5]</span>
-            <span class="tag-item">Índices 0 a N-1</span>
-            <span class="tag-item">Memoria Contigua</span>
-            <span class="tag-item">Buffer Overflow</span>
+            <span class="tag-item">return</span>
+            <span class="tag-item">int vector[]</span>
+            <span class="tag-item">int tamano</span>
+            <span class="tag-item">sumarVector</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U02 C2 -->
-      <a href="2do-cuatrimestre/presentaciones/02-recorridos-busquedas-vectores.html" class="lesson-card c2-card"
-        data-search="2do cuatrimestre recorridos busqueda lineal acumulacion promedio maximo minimo banderas centinela">
+      <!-- 2C U02 -->
+      <a href="2do-cuatrimestre/presentaciones/02-introduccion-strings.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre introduccion strings char[] arreglo caracteres terminador nulo \0 memoria ram comillas simples vs dobles %s recorrido longitud manual">
         <div class="lesson-info">
           <div class="lesson-badges">
             <span class="lesson-num">Unidad 02</span>
             <span class="cuatrimestre-tag">2do Cuatrimestre</span>
           </div>
-          <h3>Recorridos, Búsquedas y Procesamiento de Vectores</h3>
-          <p>Patrón universal de recorrido con bucle for, carga por teclado, sumatoria, promedio, algoritmo para
-            encontrar máximo/mínimo y búsqueda lineal con bandera de corte temprano.</p>
+          <h3>Introducción a los Strings en C</h3>
+          <p>Relación entre strings y char[], el terminador nulo '\0', por qué se reservan N + 1 bytes en memoria, especificador %s y conteo manual de longitud.</p>
           <div class="tag-list">
-            <span class="tag-item">for (i=0; i&lt;N; i++)</span>
-            <span class="tag-item">Búsqueda Lineal</span>
-            <span class="tag-item">Máximo / Mínimo</span>
-            <span class="tag-item">Banderas bool</span>
+            <span class="tag-item">char[]</span>
+            <span class="tag-item">Terminador '\0'</span>
+            <span class="tag-item">%s</span>
+            <span class="tag-item">nombre[i] != '\0'</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U03 C2 -->
-      <a href="2do-cuatrimestre/presentaciones/03-ordenamiento-vectores.html" class="lesson-card c2-card"
-        data-search="2do cuatrimestre ordenamiento vectores bubble sort burbuja algoritmo swaps intercambios variable auxiliar pasadas complejidad">
+      <!-- 2C U03 -->
+      <a href="2do-cuatrimestre/presentaciones/03-libreria-string-h.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre libreria string.h strlen strcpy strncpy strcmp strncmp strcat strncat strchr strstr buscar subcadena empieza con">
         <div class="lesson-info">
           <div class="lesson-badges">
             <span class="lesson-num">Unidad 03</span>
             <span class="cuatrimestre-tag">2do Cuatrimestre</span>
           </div>
-          <h3>Ordenamiento de Vectores: Método de la Burbuja</h3>
-          <p>¿Por qué ordenar? El intercambio seguro con vaso auxiliar (temp), mecánica de burbujas flotantes, bucles
-            anidados paso a paso y optimización con bandera hubo_intercambio.</p>
+          <h3>Biblioteca &lt;string.h&gt; y Operaciones con Cadenas</h3>
+          <p>Operaciones estándar: strlen, strcpy, strcmp (por qué == falla), strcat, strchr, strstr y variantes seguras con límite de caracteres.</p>
           <div class="tag-list">
-            <span class="tag-item">Bubble Sort</span>
-            <span class="tag-item">Intercambio (temp)</span>
-            <span class="tag-item">Bucles Anidados</span>
-            <span class="tag-item">Optimización Early Exit</span>
+            <span class="tag-item">#include &lt;string.h&gt;</span>
+            <span class="tag-item">strlen / strcpy</span>
+            <span class="tag-item">strcmp == 0</span>
+            <span class="tag-item">strstr / strchr</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U04 C2 -->
-      <a href="2do-cuatrimestre/presentaciones/04-matrices-bidimensionales.html" class="lesson-card c2-card"
-        data-search="2do cuatrimestre matrices bidimensionales filas columnas 2d arreglos bidimensionales tablas tablero ajedrez row-major order">
+      <!-- 2C U04 -->
+      <a href="2do-cuatrimestre/presentaciones/04-algoritmos-procesamiento-strings.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre algoritmos procesamiento strings comparar manual sonIguales contarCaracter buscar subcadenas comienzaCon modificar reemplazar mayusculas minusculas ascii 32 invertirString palindromos">
         <div class="lesson-info">
           <div class="lesson-badges">
             <span class="lesson-num">Unidad 04</span>
             <span class="cuatrimestre-tag">2do Cuatrimestre</span>
           </div>
-          <h3>Matrices y Recorridos Bidimensionales</h3>
-          <p>Estructuras en dos dimensiones [filas][columnas], coordenadas cartesianas, almacenamiento lineal por filas
-            en RAM (row-major order) y bucles anidados i (filas) y j (columnas).</p>
+          <h3>Procesamiento y Algoritmos con Strings</h3>
+          <p>Lógica paso a paso: comparación manual carácter por carácter, conteo, verificación de prefijos, mutación, conversión mayúsculas/minúsculas (+32), inversión y palíndromos.</p>
           <div class="tag-list">
-            <span class="tag-item">int M[3][4]</span>
-            <span class="tag-item">Filas &amp; Columnas</span>
-            <span class="tag-item">for i, for j</span>
-            <span class="tag-item">Row-Major Order</span>
+            <span class="tag-item">sonIguales</span>
+            <span class="tag-item">contarCaracter</span>
+            <span class="tag-item">ASCII ±32</span>
+            <span class="tag-item">esPalindromo</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U05 C2 -->
-      <a href="2do-cuatrimestre/presentaciones/05-diagonales-matriz.html" class="lesson-card c2-card"
-        data-search="2do cuatrimestre diagonales matriz cuadrada diagonal principal secundaria i == j i + j == N - 1 simetria traza">
+      <!-- 2C U05 -->
+      <a href="2do-cuatrimestre/presentaciones/05-introduccion-punteros-direcciones-memoria.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre punteros direcciones memoria ram operador & ampersand operador * asterisco desreferenciacion int *ptr %p analogia casa">
         <div class="lesson-info">
           <div class="lesson-badges">
             <span class="lesson-num">Unidad 05</span>
             <span class="cuatrimestre-tag">2do Cuatrimestre</span>
           </div>
-          <h3>Diagonales de una Matriz Cuadrada</h3>
-          <p>Matrices de N x N: condición matemática de la diagonal principal (i == j), diagonal secundaria (i + j == N
-            - 1), optimización O(N) de un solo bucle y elementos fuera de la diagonal.</p>
+          <h3>Introducción a los Punteros y Direcciones de Memoria</h3>
+          <p>Qué es físicamente una dirección de RAM, impresión con %p, operador de dirección &amp;, declaración de punteros, operador de desreferenciación * y analogía de la casa.</p>
           <div class="tag-list">
-            <span class="tag-item">Matriz N x N</span>
-            <span class="tag-item">Principal (i == j)</span>
-            <span class="tag-item">Secundaria (i+j==N-1)</span>
-            <span class="tag-item">Algoritmo O(N)</span>
+            <span class="tag-item">&amp;variable</span>
+            <span class="tag-item">*puntero</span>
+            <span class="tag-item">int *p</span>
+            <span class="tag-item">%p</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U06 C2 -->
-      <a href="2do-cuatrimestre/presentaciones/06-estructuras-struct.html" class="lesson-card c2-card"
-        data-search="2do cuatrimestre estructuras struct registros campos miembros operador punto typedef vectores de estructuras base de datos alumnos">
+      <!-- 2C U06 -->
+      <a href="2do-cuatrimestre/presentaciones/06-paso-por-referencia-punteros-funciones.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre paso por referencia punteros funciones modificar variable original cambiar(&x) incrementar division cociente resto devolver varios valores minMax">
         <div class="lesson-info">
           <div class="lesson-badges">
             <span class="lesson-num">Unidad 06</span>
             <span class="cuatrimestre-tag">2do Cuatrimestre</span>
           </div>
-          <h3>Estructuras (struct) y Vectores de Registros</h3>
-          <p>Agrupación de datos heterogéneos bajo un mismo nombre, definición con typedef struct, operador punto (.),
-            registros anidados y vectores de estructuras como base de datos en memoria.</p>
+          <h3>Paso por Referencia, Punteros y Funciones</h3>
+          <p>Mutación de variables remotas mediante punteros, funciones que devuelven múltiples resultados: cálculo simultáneo de cociente y resto, y algoritmo minMax sobre vectores.</p>
           <div class="tag-list">
-            <span class="tag-item">typedef struct</span>
-            <span class="tag-item">Operador Punto (.)</span>
-            <span class="tag-item">Alumno curso[30]</span>
-            <span class="tag-item">Registros en RAM</span>
+            <span class="tag-item">cambiar(&amp;x)</span>
+            <span class="tag-item">*ptr = valor</span>
+            <span class="tag-item">Múltiples Retornos</span>
+            <span class="tag-item">minMax</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U07 C2 -->
-      <a href="2do-cuatrimestre/presentaciones/07-introduccion-memoria-dinamica.html" class="lesson-card c2-card"
-        data-search="2do cuatrimestre introduccion memoria dinamica stack heap punteros direcciones operador & operador * desreferenciacion mapa ram">
+      <!-- 2C U07 -->
+      <a href="2do-cuatrimestre/presentaciones/07-punteros-y-arreglos.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre relacion punteros arreglos direccion primer elemento numeros == &numeros[0] int *p = numeros aritmetica punteros p + 1 *(p + i) equivalencia corchetes">
         <div class="lesson-info">
           <div class="lesson-badges">
             <span class="lesson-num">Unidad 07</span>
             <span class="cuatrimestre-tag">2do Cuatrimestre</span>
           </div>
-          <h3>Introducción a la Memoria Dinámica y Punteros</h3>
-          <p>Limitaciones del tamaño fijo en compilación, el mapa de memoria de un programa (Stack vs Heap), punteros
-            como variables que guardan direcciones, operador &amp; y desreferenciación con *.</p>
+          <h3>Relación entre Punteros y Arreglos</h3>
+          <p>El nombre de un vector como dirección de inicio, aritmética de punteros (p + 1 avanza sizeof bytes), acceso con *(p + i), equivalencia con v[i] y diferencias fundamentales.</p>
           <div class="tag-list">
-            <span class="tag-item">Stack vs Heap</span>
-            <span class="tag-item">Punteros (int *ptr)</span>
-            <span class="tag-item">Operador &amp;</span>
-            <span class="tag-item">Desreferenciación *</span>
+            <span class="tag-item">v == &amp;v[0]</span>
+            <span class="tag-item">p + 1</span>
+            <span class="tag-item">*(p + i)</span>
+            <span class="tag-item">Aritmética Punteros</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U08 C2 -->
-      <a href="2do-cuatrimestre/presentaciones/08-reserva-liberacion-malloc-free.html" class="lesson-card c2-card"
-        data-search="2do cuatrimestre reserva liberacion malloc free sizeof stdlib puntero null memory leak fuga memoria dangling pointer">
+      <!-- 2C U08 -->
+      <a href="2do-cuatrimestre/presentaciones/08-estructuras-struct-fundamentos.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre estructuras struct fundamentos registros campos heterogeneos operador punto . struct Persona struct Punto Alumno copia valor">
         <div class="lesson-info">
           <div class="lesson-badges">
             <span class="lesson-num">Unidad 08</span>
             <span class="cuatrimestre-tag">2do Cuatrimestre</span>
           </div>
-          <h3>Reserva y Liberación: malloc(), free() y sizeof()</h3>
-          <p>Sintaxis estricta de malloc(), el operador portátil sizeof, verificación obligatoria de puntero NULL,
-            liberación responsable con free() y prevención de fugas de memoria (memory leaks).</p>
+          <h3>Estructuras (struct) y Fundamentos de Modelado</h3>
+          <p>Agrupación de datos heterogéneos bajo un molde, declaración de campos, operador punto (.), envío de estructuras a funciones por valor y copia inmutable en el Stack.</p>
           <div class="tag-list">
-            <span class="tag-item">malloc(N * sizeof)</span>
-            <span class="tag-item">if (p == NULL)</span>
-            <span class="tag-item">free(p)</span>
-            <span class="tag-item">Memory Leaks</span>
+            <span class="tag-item">struct Persona</span>
+            <span class="tag-item">Operador Punto (.)</span>
+            <span class="tag-item">Paso por Valor</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U09 C2 -->
-      <a href="2do-cuatrimestre/presentaciones/09-calloc-realloc.html" class="lesson-card c2-card"
-        data-search="2do cuatrimestre calloc realloc inicializacion ceros redimensionar heap puntero temporal fuga expansion reubicacion">
+      <!-- 2C U09 -->
+      <a href="2do-cuatrimestre/presentaciones/09-punteros-a-estructuras-operador-flecha.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre punteros a estructuras operador flecha -> (*emp).salario aumentarSalario porcentaje mutacion directa">
         <div class="lesson-info">
           <div class="lesson-badges">
             <span class="lesson-num">Unidad 09</span>
             <span class="cuatrimestre-tag">2do Cuatrimestre</span>
           </div>
-          <h3>calloc() y realloc(): Inicialización Limpia y Redimensión</h3>
-          <p>calloc() con limpieza a ceros vs malloc(), redimensionar bloques en el Heap con realloc(), los 3 escenarios
-            de realloc en memoria y el patrón defensivo con puntero temporal (temp).</p>
+          <h3>Punteros a Estructuras y el Operador Flecha (-&gt;)</h3>
+          <p>Paso eficiente de registros por dirección, necesidad de la flecha (-&gt;), equivalencia con (*emp).campo, precedencia de operadores y aumento salarial porcentual.</p>
           <div class="tag-list">
-            <span class="tag-item">calloc(n, size)</span>
-            <span class="tag-item">realloc(p, size)</span>
-            <span class="tag-item">Puntero Temporal</span>
-            <span class="tag-item">Redimensión Heap</span>
+            <span class="tag-item">struct Empleado *emp</span>
+            <span class="tag-item">Operador -&gt;</span>
+            <span class="tag-item">(*emp).campo</span>
+            <span class="tag-item">aumentarSalario</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
-      <!-- U10 C2 -->
-      <a href="2do-cuatrimestre/presentaciones/10-vectores-dinamicos.html" class="lesson-card c2-card"
-        data-search="2do cuatrimestre vectores dinamicos capacidad tamano agregacion redimension estructurada struct dinamico proyecto final">
+      <!-- 2C U10 -->
+      <a href="2do-cuatrimestre/presentaciones/10-arreglos-de-estructuras.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre arreglos de estructuras vectores de structs struct Alumno clase[30] clase[i].campo mejorPromedio modificar vehiculos flota">
         <div class="lesson-info">
           <div class="lesson-badges">
             <span class="lesson-num">Unidad 10</span>
             <span class="cuatrimestre-tag">2do Cuatrimestre</span>
           </div>
-          <h3>Vectores Dinámicos e Integración de Conceptos</h3>
-          <p>Arquitectura de un vector con crecimiento automático, separación entre tamaño actual y capacidad máxima,
-            agregación de elementos con duplicación de capacidad y proyecto integrador completo.</p>
+          <h3>Arreglos de Estructuras</h3>
+          <p>Vectores donde cada elemento es una estructura completa, sintaxis clase[i].campo, recorridos con for, búsqueda del mejor promedio y actualización de datos en flota de vehículos.</p>
           <div class="tag-list">
-            <span class="tag-item">Vector Dinámico</span>
-            <span class="tag-item">Capacidad vs Tamaño</span>
-            <span class="tag-item">Crecimiento Dinámico</span>
-            <span class="tag-item">Proyecto Integrador</span>
+            <span class="tag-item">struct Alumno curso[30]</span>
+            <span class="tag-item">curso[i].campo</span>
+            <span class="tag-item">mejorPromedio</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- 2C U11 -->
+      <a href="2do-cuatrimestre/presentaciones/11-estructuras-arreglos-internos-anidadas.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre estructuras con arreglos internos estructuras anidadas estudiante notas[3] struct Fecha nacimiento persona.nacimiento.dia">
+        <div class="lesson-info">
+          <div class="lesson-badges">
+            <span class="lesson-num">Unidad 11</span>
+            <span class="cuatrimestre-tag">2do Cuatrimestre</span>
+          </div>
+          <h3>Estructuras con Arreglos Internos y Anidadas</h3>
+          <p>Composición avanzada: estructuras con vectores internos (notas[3]), acumulación y promedio, y estructuras anidadas como struct Fecha dentro de struct Persona.</p>
+          <div class="tag-list">
+            <span class="tag-item">notas[3] interno</span>
+            <span class="tag-item">struct Fecha</span>
+            <span class="tag-item">persona.nacimiento.dia</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- 2C U12 -->
+      <a href="2do-cuatrimestre/presentaciones/12-integracion-transferencia-bancaria.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre integracion transferencia bancaria struct CuentaBancaria saldo estado activa inactiva transferir punteros origen destino validaciones">
+        <div class="lesson-info">
+          <div class="lesson-badges">
+            <span class="lesson-num">Unidad 12</span>
+            <span class="cuatrimestre-tag">2do Cuatrimestre</span>
+          </div>
+          <h3>Integración: Transferencia Bancaria</h3>
+          <p>El caso integrador definitivo: modelado de CuentaBancaria, transferencia atómica con dos punteros (*origen y *destino), protocolo defensivo de validaciones e integridad.</p>
+          <div class="tag-list">
+            <span class="tag-item">struct CuentaBancaria</span>
+            <span class="tag-item">Punteros Dobles</span>
+            <span class="tag-item">Integridad Atómica</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- 2C U13 -->
+      <a href="2do-cuatrimestre/presentaciones/13-resumen-simbolos-repaso-integrador.html" class="lesson-card c2-card"
+        data-search="2do cuatrimestre resumen simbolos repaso integrador guia operadores & * int* [] . -> \0 return lectura expresiones complejas">
+        <div class="lesson-info">
+          <div class="lesson-badges">
+            <span class="lesson-num">Unidad 13</span>
+            <span class="cuatrimestre-tag">2do Cuatrimestre</span>
+          </div>
+          <h3>Resumen de Símbolos y Repaso Integrador</h3>
+          <p>Tabla maestra con los 9 símbolos clave de C (&amp;, *, int*, [], ., -&gt;, '\0', return), método para descifrar expresiones complejas, trampas comunes y autoevaluación interactiva.</p>
+          <div class="tag-list">
+            <span class="tag-item">Tabla Maestra de Símbolos</span>
+            <span class="tag-item">Expresiones Complejas</span>
+            <span class="tag-item">Autoevaluación</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>

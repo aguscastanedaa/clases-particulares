@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 13: Resumen de Símbolos y Repaso Integrador | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
+  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
+  <style>
+    .reveal .code-body,
+    .reveal pre.code-body,
+    .reveal .code-window pre {
+      font-size: 1.05rem !important;
+      line-height: 1.38 !important;
+      width: 100% !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      padding: 10px 18px !important;
+      box-sizing: border-box !important;
+    }
+    .grid-2 .code-body,
+    .grid-1-2 .code-body,
+    .grid-2-1 .code-body,
+    .grid-2 pre.code-body,
+    .grid-1-2 pre.code-body,
+    .grid-2-1 pre.code-body,
+    .grid-2 .code-window pre,
+    .grid-1-2 .code-window pre,
+    .grid-2-1 .code-window pre {
+      font-size: 1.00rem !important;
+      padding: 10px 14px !important;
+      line-height: 1.38 !important;
+    }
+    .grid-3 .code-body,
+    .grid-3 pre.code-body,
+    .grid-3 .code-window pre {
+      font-size: 0.80rem !important;
+      padding: 8px 10px !important;
+      line-height: 1.34 !important;
+    }
+    .terminal-body {
+      font-size: 1.05rem !important;
+      padding: 12px 16px !important;
+      line-height: 1.40 !important;
+    }
+    .reveal code:not(.code-body *) {
+      font-size: 0.88em !important;
+      border: none !important;
+      padding: 1px 5px !important;
+      box-decoration-break: clone !important;
+      -webkit-box-decoration-break: clone !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Unidad 13</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-amber">2do Cuatrimestre • Guía Maestra • Unidad 13</span>
+          <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Resumen de Símbolos y Repaso Integrador</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            La brújula definitiva de C: tabla maestra de operadores, descifrado de expresiones complejas, trampas comunes y ejercicios de autoevaluación.
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">&amp; vs *</span>
+            <span class="badge badge-emerald">. vs -&gt;</span>
+            <span class="badge badge-amber">'\0' y return</span>
+            <span class="badge badge-purple">Preguntas de examen</span>
+          </div>
+
+          <div class="box box-amber" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: TABLA MAESTRA DE SÍMBOLOS -->
+      <section>
+        <h2><span class="section-num">01</span> Tabla Maestra de Símbolos del Apunte</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">El compendio canónico de los 9 símbolos indispensables de C.</p>
+
+        <table class="trace-table" style="font-size: 0.82rem;">
+          <thead>
+            <tr>
+              <th>Símbolo</th>
+              <th>Nombre Técnico</th>
+              <th>Significado Práctico</th>
+              <th>Ejemplo Canónico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&amp;x</code></td>
+              <td>Operador de dirección</td>
+              <td>"¿Dónde está <code>x</code>?" Obtiene su dirección física de RAM</td>
+              <td><code>int *p = &amp;x;</code></td>
+            </tr>
+            <tr>
+              <td><code>*p</code></td>
+              <td>Desreferenciación</td>
+              <td>"¿Qué valor hay en la dirección <code>p</code>?" Accede al contenido</td>
+              <td><code>*p = 50;</code></td>
+            </tr>
+            <tr>
+              <td><code>int *p</code></td>
+              <td>Declaración de puntero</td>
+              <td>Declara que <code>p</code> es una variable que guardará direcciones de enteros</td>
+              <td><code>int *puntero;</code></td>
+            </tr>
+            <tr>
+              <td><code>x[i]</code></td>
+              <td>Subíndice / Arreglo</td>
+              <td>Accede al elemento en la posición <code>i</code> de una colección</td>
+              <td><code>vector[0] = 10;</code></td>
+            </tr>
+            <tr>
+              <td><code>.</code></td>
+              <td>Operador punto</td>
+              <td>Accede a un campo de una estructura directa (en la variable)</td>
+              <td><code>persona.edad = 20;</code></td>
+            </tr>
+            <tr>
+              <td><code>-&gt;</code></td>
+              <td>Operador flecha</td>
+              <td>Accede a un campo a través de un puntero a estructura (<code>(*p).campo</code>)</td>
+              <td><code>emp-&gt;salario = 900;</code></td>
+            </tr>
+            <tr>
+              <td><code>'\0'</code></td>
+              <td>Carácter nulo</td>
+              <td>Marca indispensable de fin de un String en memoria</td>
+              <td><code>cad[len] = '\0';</code></td>
+            </tr>
+            <tr>
+              <td><code>[]</code></td>
+              <td>Corchetes</td>
+              <td>Definición o indexación de arreglos unidimensionales o cadenas</td>
+              <td><code>char texto[30];</code></td>
+            </tr>
+            <tr>
+              <td><code>return</code></td>
+              <td>Retorno</td>
+              <td>Devuelve el resultado producido por una función a quien la llamó</td>
+              <td><code>return resultado;</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 3: CÓMO LEER EXPRESIONES COMPLEJAS -->
+      <section>
+        <h2><span class="section-num">02</span> Cómo Descifrar Expresiones Complejas</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Un método paso a paso para no perderse en líneas densas de código.</p>
+
+        <div class="box box-indigo" style="margin-bottom: 16px;">
+          <h4 style="color: #818cf8;">Analicemos esta expresión real:</h4>
+          <div style="font-family: var(--font-mono); font-size: 1.25rem; color: #fff; background: rgba(0,0,0,0.4); padding: 10px 16px; border-radius: 8px; margin: 8px 0;">
+            empresa<span style="color: var(--accent-cyan); font-weight: bold;">.</span>sucursales<span style="color: var(--accent-amber); font-weight: bold;">[i]</span><span style="color: var(--accent-emerald); font-weight: bold;">-&gt;</span>gerente<span style="color: var(--accent-cyan); font-weight: bold;">.</span>sueldo
+          </div>
+        </div>
+
+        <div class="step-list">
+          <div class="step-item"><span class="step-num">1</span><div><code>empresa</code> es una estructura directa. Usamos <code>.</code> para acceder a sus miembros.</div></div>
+          <div class="step-item"><span class="step-num">2</span><div><code>sucursales</code> es un arreglo. Usamos <code>[i]</code> para elegir la sucursal número <code>i</code>.</div></div>
+          <div class="step-item"><span class="step-num">3</span><div>La sucursal <code>[i]</code> es un puntero a otra estructura. Por eso usamos <code>-&gt;</code> para acceder al <code>gerente</code>.</div></div>
+          <div class="step-item"><span class="step-num">4</span><div>El <code>gerente</code> es una estructura anidada directa. Usamos <code>.</code> para leer su <code>sueldo</code>.</div></div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: MAPA MENTAL INTEGRADO -->
+      <section>
+        <h2><span class="section-num">03</span> Mapa Conceptual: Todo Conectado</h2>
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: var(--accent-cyan);">1. Vectores &amp; Strings</h4>
+            <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;">
+              Un string es un vector de <code>char</code> que termina en <code>'\0'</code>.
+              El nombre del arreglo representa la dirección del primer elemento: <code>v == &amp;v[0]</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: var(--accent-emerald);">2. Punteros &amp; Funciones</h4>
+            <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;">
+              C pasa parámetros por valor. Para modificar variables remotas o arreglos, pasamos direcciones con <code>&amp;</code> y las recibimos como punteros con <code>*</code>.
+            </p>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: var(--accent-purple);">3. Structs &amp; Flecha</h4>
+            <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;">
+              Agrupan datos heterogéneos. Si tenemos la struct directa usamos <code>.</code>; si tenemos un puntero usamos <code>-&gt;</code> para evitar escribir <code>(*p).campo</code>.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.86rem; color: #fde68a;">
+            🚀 <b>La Síntesis:</b> Cuando combinás structs con arreglos y punteros, tenés el 100% de los bloques fundamentales con los que están construidos los sistemas operativos, motores de bases de datos y videojuegos modernos.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: TRICKY QUESTIONS / AUTOEVALUACIÓN -->
+      <section>
+        <h2><span class="section-num">04</span> Autoevaluación Interactiva</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">Poné a prueba tu comprensión antes de rendir el examen.</p>
+
+        <details class="code-solution">
+          <summary>❓ Pregunta 1: ¿Qué imprime este fragmento?</summary>
+          <div class="solution-content">
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> a = <span class="c-num">5</span>;
+<span class="c-kw">int</span> *p = &amp;a;
+*p = *p + <span class="c-num">10</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, a);</div>
+            </div>
+            <p style="font-size: 0.85rem; color: #86efac;">
+              <b>Respuesta: 15.</b> <code>p</code> apunta a la variable <code>a</code>. <code>*p</code> lee 5, le suma 10 (15) y lo vuelve a guardar en la celda de <code>a</code>.
+            </p>
+          </div>
+        </details>
+
+        <details class="code-solution">
+          <summary>❓ Pregunta 2: ¿Qué error fatal tiene esta comparación?</summary>
+          <div class="solution-content">
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">char</span> cad1[] = <span class="c-str">"clave"</span>;
+<span class="c-kw">if</span> (cad1 == <span class="c-str">"clave"</span>) { ... }</div>
+            </div>
+            <p style="font-size: 0.85rem; color: #fca5a5;">
+              <b>Respuesta:</b> Compara las direcciones de memoria RAM, no el contenido del texto. Se debe usar siempre <code>if (strcmp(cad1, "clave") == 0)</code>.
+            </p>
+          </div>
+        </details>
+
+        <details class="code-solution">
+          <summary>❓ Pregunta 3: ¿Por qué usamos <code>emp-&gt;salario</code> en vez de <code>emp.salario</code>?</summary>
+          <div class="solution-content">
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              <b>Respuesta:</b> Porque <code>emp</code> es un <b>puntero</b> a la estructura (guarda su dirección). Si usáramos <code>.</code>, el compilador daría error porque un puntero no tiene campos directos. La flecha <code>-&gt;</code> desreferencia y accede en una sola operación.
+            </p>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 6: CONCLUSIÓN Y CIERRE -->
+      <section>
+        <h2><span class="section-num">05</span> ¡Felicitaciones! Fin del Plan Curricular</h2>
+        <div class="box box-emerald" style="text-align: center; padding: 24px;">
+          <h3 style="color: #34d399; margin-bottom: 8px;">Has completado el 2do Cuatrimestre de Programación en C</h3>
+          <p style="font-size: 1rem; color: #cbd5e1; max-width: 800px; margin: 0 auto;">
+            Desde las funciones con retorno hasta la manipulación de strings, la aritmética de punteros, la mutación por referencia y las estructuras anidadas de alta complejidad.
+          </p>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 16px; margin-top: 30px; flex-wrap: wrap;">
+          <a href="12-integracion-transferencia-bancaria.html" class="badge badge-cyan" style="font-size: 0.95rem; text-decoration: none; padding: 10px 24px;">
+            ← Unidad Anterior: Transferencia Bancaria
+          </a>
+          <a href="../index.html" class="badge badge-indigo" style="font-size: 0.95rem; text-decoration: none; padding: 10px 24px;">
+            Índice del 2do Cuatrimestre
+          </a>
+          <a href="../../index.html" class="badge badge-emerald" style="font-size: 0.95rem; text-decoration: none; padding: 10px 24px;">
+            Portal Principal de Programación 💻
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>

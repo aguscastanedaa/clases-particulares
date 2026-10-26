@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2do Cuatrimestre | Programación en C | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../logo.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -18,7 +19,6 @@
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --accent: #34d399;
-      /* Emerald theme for 2do cuatrimestre */
       --accent-glow: rgba(52, 211, 153, 0.2);
       --accent-cyan: #38bdf8;
       --accent-purple: #c084fc;
@@ -116,7 +116,7 @@
       line-height: 1.55;
     }
 
-    .semester-switch-banner {
+    .switch-cuatrimestre-banner {
       background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(15, 23, 42, 0.8) 100%);
       border: 1px solid rgba(56, 189, 248, 0.3);
       border-radius: 14px;
@@ -337,227 +337,268 @@
     </div>
 
     <header>
-      <div class="header-badge">Segundo Cuatrimestre • Estructuras de Datos y Memoria</div>
+      <div class="header-badge">Segundo Cuatrimestre • Texto, Punteros y Estructuras Avanzadas</div>
       <h1>Programación en C: 2do Cuatrimestre</h1>
       <p>
-        Vectores, ordenamiento, matrices bidimensionales, diagonales, estructuras compuestas (<code>struct</code>) y
-        gestión profesional de la memoria en el Heap (<code>malloc</code>, <code>free</code>, <code>calloc</code>,
-        <code>realloc</code>).
+        Plan curricular avanzado basado en el Apunte Teórico oficial (Parte 3): funciones con retorno, arreglos como parámetros, cadenas de caracteres (strings), biblioteca <code>string.h</code>, algoritmos de texto, punteros, direcciones físicas de memoria, paso por referencia simulado, equivalencia con arreglos, estructuras complejas, operador <code>-&gt;</code>, colecciones de registros y casos integradores.
       </p>
       <div class="stats-bar">
-        <span class="stat-badge"><b>10</b> Unidades Temáticas</span>
-        <span class="stat-badge"><b>Heap &amp; Punteros</b> Avanzado</span>
+        <span class="stat-badge">📚 Unidades: <b>13 Presentaciones</b></span>
+        <span class="stat-badge">🎯 Temas: <b>40 Apartados Cubiertos</b></span>
+        <span class="stat-badge">⚡ Nivel: <b>Avanzado &amp; Profesional</b></span>
       </div>
     </header>
 
-    <div class="semester-switch-banner">
+    <div class="switch-cuatrimestre-banner">
       <div class="switch-text">
-        <h4>¿Necesitás repasar las bases de programación?</h4>
-        <p>El 1er Cuatrimestre cubre desde cero: variables, tipos de datos, printf/scanf, condicionales if/else,
-          funciones y bucles while/for.</p>
+        <h4>¿Necesitás consultar los temas del 1er Cuatrimestre?</h4>
+        <p>El 1er Cuatrimestre contiene 23 presentaciones divididas en sus dos bimestres: desde fundamentos iniciales (variables, if, for) hasta vectores, matrices y memoria dinámica (malloc, free).</p>
       </div>
       <a href="../1er-cuatrimestre/index.html" class="switch-btn">Ir al 1er Cuatrimestre →</a>
     </div>
 
     <input type="text" id="filter" class="search-box"
-      placeholder="Buscar por tema o concepto (ej. vectores, matrices, diagonales, struct, malloc, realloc, burbuja)...">
+      placeholder="Buscar por tema o concepto (ej. return, string, strlen, strcmp, punteros, &, *, flecha ->, transferencia)...">
 
-    <!-- BLOQUE 1: VECTORES Y ALGORITMOS -->
-    <div class="section-title">Bloque I: Vectores y Algoritmos Fundamentales</div>
+    <!-- BLOQUE 1: FUNCIONES CON RETORNO Y ARREGLOS -->
+    <div class="section-title">Bloque I: Funciones con Retorno y Arreglos como Parámetros</div>
     <div class="lesson-list">
 
       <!-- UNIDAD 1 -->
-      <a href="presentaciones/01-vectores-estaticos.html" class="lesson-card"
-        data-search="vectores estaticos arreglos arrays indices 0 a n-1 casillas ram contigua corchetes desbordamiento">
+      <a href="presentaciones/01-funciones-retorno-arreglos-parametros.html" class="lesson-card"
+        data-search="funciones con retorno return printf parametros argumentos doble sumar calcularDescuento arreglos como parametros mostrarVector sumarVector tamano longitud">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 01</span>
-          <h3>¿Qué es un vector? Vectores estáticos</h3>
-          <p>La necesidad de colecciones homogéneas en RAM, declaración con corchetes, indexación de 0 a N-1,
-            inicialización y el peligro del desbordamiento (Out of Bounds).</p>
+          <h3>Funciones con Retorno y Arreglos como Parámetros</h3>
+          <p>Diferencia entre funciones void y con valor devuelto, uso de return, pasaje de vectores como parámetros, por qué C exige enviar el tamaño y cálculo de acumuladores y promedios.</p>
           <div class="tag-list">
-            <span class="tag-item">int v[N]</span>
-            <span class="tag-item">Índices 0 a N-1</span>
-            <span class="tag-item">Memoria Contigua</span>
-            <span class="tag-item">Stack RAM</span>
+            <span class="tag-item">return</span>
+            <span class="tag-item">tipo vector[]</span>
+            <span class="tag-item">int tamano</span>
+            <span class="tag-item">sumarVector</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
+    </div>
+
+    <!-- BLOQUE 2: STRINGS Y BIBLIOTECA STRING.H -->
+    <div class="section-title">Bloque II: Manejo de Texto y Algoritmos con Strings</div>
+    <div class="lesson-list">
 
       <!-- UNIDAD 2 -->
-      <a href="presentaciones/02-recorridos-busquedas-vectores.html" class="lesson-card"
-        data-search="recorridos for busqueda lineal acumulador suma promedio maximo minimo scanf &v[i]">
+      <a href="presentaciones/02-introduccion-strings.html" class="lesson-card"
+        data-search="introduccion strings char[] arreglo caracteres terminador nulo \0 memoria ram comillas simples vs dobles %s recorrido longitud manual">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 02</span>
-          <h3>Recorridos, búsquedas y procesamiento de vectores</h3>
-          <p>El patrón universal del bucle for, carga desde teclado con scanf(&amp;v[i]), acumuladores de sumatoria y
-            promedio, cálculo de máximo/mínimo y búsqueda lineal secuencial.</p>
+          <h3>Introducción a los Strings en C</h3>
+          <p>Relación entre strings y char[], diferencia entre 'A' y "Agustin", el rol vital del terminador nulo '\0', por qué se reserva N + 1 bytes en RAM, especificador %s y conteo manual.</p>
           <div class="tag-list">
-            <span class="tag-item">for (int i = 0; i &lt; N; i++)</span>
-            <span class="tag-item">Búsqueda Lineal</span>
-            <span class="tag-item">Máximo / Mínimo</span>
-            <span class="tag-item">Acumuladores</span>
+            <span class="tag-item">char[]</span>
+            <span class="tag-item">Terminador '\0'</span>
+            <span class="tag-item">%s</span>
+            <span class="tag-item">nombre[i] != '\0'</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
       <!-- UNIDAD 3 -->
-      <a href="presentaciones/03-ordenamiento-vectores.html" class="lesson-card"
-        data-search="ordenamiento vectores metodo burbuja bubble sort swap variable temporal bucles anidados optimizacion bandera">
+      <a href="presentaciones/03-libreria-string-h.html" class="lesson-card"
+        data-search="libreria string.h strlen strcpy strncpy strcmp strncmp strcat strncat strchr strstr buscar subcadena empieza con buffer overflow">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 03</span>
-          <h3>Ordenamiento de vectores: El Método Burbuja</h3>
-          <p>Mecánica intuitiva de intercambio (swap) con variable auxiliar temporal, pasadas completas con bucles
-            anidados, optimización con bandera huboCambio y complejidad.</p>
+          <h3>Biblioteca &lt;string.h&gt; y Operaciones con Cadenas</h3>
+          <p>Funciones estándar: strlen, strcpy, strcmp (por qué == falla), strcat, strchr, strstr, y las variantes seguras con límite de caracteres (strncpy, strncmp, strncat).</p>
           <div class="tag-list">
-            <span class="tag-item">Bubble Sort</span>
-            <span class="tag-item">Swap con temp</span>
-            <span class="tag-item">Bucles Anidados</span>
-            <span class="tag-item">Optimización Flag</span>
+            <span class="tag-item">#include &lt;string.h&gt;</span>
+            <span class="tag-item">strlen / strcpy</span>
+            <span class="tag-item">strcmp == 0</span>
+            <span class="tag-item">strstr / strchr</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
-
-    </div>
-
-    <!-- BLOQUE 2: MATRICES Y ESTRUCTURAS -->
-    <div class="section-title">Bloque II: Matrices Bidimensionales y Registros (Struct)</div>
-    <div class="lesson-list">
 
       <!-- UNIDAD 4 -->
-      <a href="presentaciones/04-matrices-bidimensionales.html" class="lesson-card"
-        data-search="matrices bidimensionales filas columnas m[i][j] bucles anidados coordenadas row-major totales">
+      <a href="presentaciones/04-algoritmos-procesamiento-strings.html" class="lesson-card"
+        data-search="algoritmos procesamiento strings comparar manual sonIguales contarCaracter buscar subcadenas comienzaCon modificar reemplazar mayusculas minusculas ascii 32 invertirString palindromos radar">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 04</span>
-          <h3>Matrices y recorridos bidimensionales</h3>
-          <p>Tablas con filas y columnas [FILAS][COLS], orden Row-Major en RAM física, doble bucle for(i, j), carga
-            interactiva y cálculo de subtotales por fila y columna.</p>
+          <h3>Procesamiento y Algoritmos con Strings</h3>
+          <p>Lógica paso a paso: comparación manual carácter a carácter, conteo de ocurrencias, detección de prefijos, mutación de letras, alternancia de mayúsculas/minúsculas con ASCII (+32), inversión de texto y verificación de palíndromos.</p>
           <div class="tag-list">
-            <span class="tag-item">m[FILAS][COLS]</span>
-            <span class="tag-item">Row-Major Order</span>
-            <span class="tag-item">Doble bucle (i, j)</span>
-            <span class="tag-item">Subtotales</span>
+            <span class="tag-item">sonIguales</span>
+            <span class="tag-item">contarCaracter</span>
+            <span class="tag-item">ASCII ±32</span>
+            <span class="tag-item">esPalindromo</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
+    </div>
+
+    <!-- BLOQUE 3: PUNTEROS Y MEMORIA -->
+    <div class="section-title">Bloque III: Punteros, Direcciones de Memoria y Referencia</div>
+    <div class="lesson-list">
 
       <!-- UNIDAD 5 -->
-      <a href="presentaciones/05-diagonales-matriz.html" class="lesson-card"
-        data-search="diagonales matriz cuadrada diagonal principal i == j diagonal secundaria i + j == n - 1 optimizacion o(n) triangular">
+      <a href="presentaciones/05-introduccion-punteros-direcciones-memoria.html" class="lesson-card"
+        data-search="punteros direcciones memoria ram operador & ampersand operador * asterisco desreferenciacion int *ptr %p analogia casa papel direccion">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 05</span>
-          <h3>Diagonales de una matriz: Principal y Secundaria</h3>
-          <p>Matrices cuadradas (N × N), condición de diagonal principal (i == j), deducción matemática de secundaria (j
-            = N - 1 - i), optimización a un solo bucle O(N) y zonas triangulares.</p>
+          <h3>Introducción a los Punteros y Direcciones de Memoria</h3>
+          <p>Qué es físicamente una dirección de RAM, impresión con %p, operador de dirección &amp;, declaración de punteros, operador de desreferenciación *, analogía de la casa y prevención de punteros salvajes.</p>
           <div class="tag-list">
-            <span class="tag-item">Matriz Cuadrada N×N</span>
-            <span class="tag-item">Principal (i == j)</span>
-            <span class="tag-item">Secundaria (i + j = N-1)</span>
-            <span class="tag-item">Bucle Único O(N)</span>
+            <span class="tag-item">&amp;variable</span>
+            <span class="tag-item">*puntero</span>
+            <span class="tag-item">int *p</span>
+            <span class="tag-item">%p</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
       <!-- UNIDAD 6 -->
-      <a href="presentaciones/06-estructuras-struct.html" class="lesson-card"
-        data-search="estructuras struct typedef operador punto . campos heterogeneos registros arreglos de estructuras curso[i]">
+      <a href="presentaciones/06-paso-por-referencia-punteros-funciones.html" class="lesson-card"
+        data-search="paso por referencia punteros funciones modificar variable original cambiar(&x) incrementar division cociente resto devolver varios valores minMax">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 06</span>
-          <h3>Estructuras (struct) y vectores de estructuras</h3>
-          <p>Superando la limitación homogénea: registros con campos de distinto tipo, simplificación con typedef,
-            operador punto (.) y arreglos de registros para bases de datos en memoria.</p>
+          <h3>Paso por Referencia, Punteros y Funciones</h3>
+          <p>Limitaciones del paso por valor, mutación de variables originales mediante punteros, funciones que devuelven múltiples resultados: cálculo simultáneo de cociente y resto, y algoritmo minMax sobre vectores.</p>
           <div class="tag-list">
-            <span class="tag-item">typedef struct</span>
-            <span class="tag-item">Operador Punto (.)</span>
-            <span class="tag-item">Campos Heterogéneos</span>
-            <span class="tag-item">Vector de Structs</span>
+            <span class="tag-item">cambiar(&amp;x)</span>
+            <span class="tag-item">*ptr = valor</span>
+            <span class="tag-item">Múltiples Retornos</span>
+            <span class="tag-item">minMax</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
-
-    </div>
-
-    <!-- BLOQUE 3: MEMORIA DINÁMICA -->
-    <div class="section-title">Bloque III: Gestión Profesional de Memoria Dinámica</div>
-    <div class="lesson-list">
 
       <!-- UNIDAD 7 -->
-      <a href="presentaciones/07-introduccion-memoria-dinamica.html" class="lesson-card"
-        data-search="introduccion memoria dinamica stack vs heap punteros *ptr direccion & ampersand operador indireccion null">
+      <a href="presentaciones/07-punteros-y-arreglos.html" class="lesson-card"
+        data-search="relacion punteros arreglos direccion primer elemento numeros == &numeros[0] int *p = numeros aritmetica punteros p + 1 *(p + i) equivalencia corchetes limites constantes">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 07</span>
-          <h3>Introducción a la memoria dinámica y punteros</h3>
-          <p>Por qué los vectores estáticos tienen límites, arquitectura de RAM (Stack automático vs Heap flexible),
-            variables puntero (*), operador dirección (&amp;) y puntero nulo NULL.</p>
+          <h3>Relación entre Punteros y Arreglos</h3>
+          <p>El nombre de un vector como dirección de inicio, aritmética de punteros (p + 1 avanza sizeof bytes), acceso con *(p + i), equivalencia con v[i] y diferencias reales entre arreglos y punteros móviles.</p>
           <div class="tag-list">
-            <span class="tag-item">Stack vs Heap</span>
-            <span class="tag-item">Punteros (*ptr)</span>
-            <span class="tag-item">Dirección (&amp;)</span>
-            <span class="tag-item">Puntero NULL</span>
+            <span class="tag-item">v == &amp;v[0]</span>
+            <span class="tag-item">p + 1</span>
+            <span class="tag-item">*(p + i)</span>
+            <span class="tag-item">Aritmética Punteros</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
+    </div>
+
+    <!-- BLOQUE 4: ESTRUCTURAS AVANZADAS E INTEGRACIÓN -->
+    <div class="section-title">Bloque IV: Estructuras Avanzadas, Punteros e Integración</div>
+    <div class="lesson-list">
 
       <!-- UNIDAD 8 -->
-      <a href="presentaciones/08-reserva-liberacion-malloc-free.html" class="lesson-card"
-        data-search="malloc free sizeof reserva liberacion heap validacion ptr == null memory leak fuga memoria dangling pointer">
+      <a href="presentaciones/08-estructuras-struct-fundamentos.html" class="lesson-card"
+        data-search="estructuras struct fundamentos registros campos heterogeneos operador punto . struct Persona struct Punto Alumno copia valor imprimirPunto calcularPromedio">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 08</span>
-          <h3>Reserva y liberación de memoria: malloc(), free() y sizeof()</h3>
-          <p>Cálculo portable con sizeof(), solicitud de bytes en el Heap con malloc(), regla obligatoria de validación
-            contra NULL, liberación con free() y prevención de fugas de memoria.</p>
+          <h3>Estructuras (struct) y Fundamentos de Modelado</h3>
+          <p>Agrupación de datos heterogéneos bajo un molde, declaración de campos, operador punto (.), envío de estructuras a funciones por valor y copia inmutable en el Stack.</p>
           <div class="tag-list">
-            <span class="tag-item">sizeof(tipo)</span>
-            <span class="tag-item">malloc(bytes)</span>
-            <span class="tag-item">free(ptr)</span>
-            <span class="tag-item">Memory Leaks</span>
+            <span class="tag-item">struct Persona</span>
+            <span class="tag-item">Operador Punto (.)</span>
+            <span class="tag-item">Paso por Valor</span>
+            <span class="tag-item">Copia Inmutable</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
       <!-- UNIDAD 9 -->
-      <a href="presentaciones/09-calloc-realloc.html" class="lesson-card"
-        data-search="calloc realloc memoria limpia ceros redimensionar in-place reubicacion patron puntero temporal temp fugar memoria">
+      <a href="presentaciones/09-punteros-a-estructuras-operador-flecha.html" class="lesson-card"
+        data-search="punteros a estructuras operador flecha -> (*emp).salario aumentarSalario porcentaje mutacion directa precedencia operadores">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 09</span>
-          <h3>calloc() y realloc(): Memoria limpia y redimensionamiento</h3>
-          <p>Inicialización en ceros con calloc(), expansión y contracción de bloques con realloc(), los 3 caminos en el
-            Heap y el patrón de puntero temporal para evitar pérdidas de datos.</p>
+          <h3>Punteros a Estructuras y el Operador Flecha (-&gt;)</h3>
+          <p>Paso eficiente de registros por dirección, necesidad de la flecha (-&gt;), equivalencia con (*emp).campo, precedencia del punto sobre el asterisco y función de aumento salarial porcentual.</p>
           <div class="tag-list">
-            <span class="tag-item">calloc(num, size)</span>
-            <span class="tag-item">realloc(ptr, new_size)</span>
-            <span class="tag-item">Puntero temp auxiliar</span>
-            <span class="tag-item">Reubicación en Heap</span>
+            <span class="tag-item">struct Empleado *emp</span>
+            <span class="tag-item">Operador -&gt;</span>
+            <span class="tag-item">(*emp).campo</span>
+            <span class="tag-item">aumentarSalario</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
       <!-- UNIDAD 10 -->
-      <a href="presentaciones/10-vectores-dinamicos.html" class="lesson-card"
-        data-search="vectores dinamicos integracion proyecto final estructuras heap ordenamiento busqueda menu interactivo c99">
+      <a href="presentaciones/10-arreglos-de-estructuras.html" class="lesson-card"
+        data-search="arreglos de estructuras vectores de structs struct Alumno clase[30] clase[i].campo mejorPromedio modificar vehiculos flota kilometraje">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 10</span>
-          <h3>Vectores dinámicos e integración de conceptos</h3>
-          <p>Estructura tríada (puntero, capacidad y cantidad), arreglos dinámicos de structs, algoritmos sobre Heap y
-            el proyecto final: Sistema interactivo completo de gestión en C.</p>
+          <h3>Arreglos de Estructuras</h3>
+          <p>Vectores donde cada elemento es una estructura completa, sintaxis clase[i].campo, recorridos con for, búsqueda del mejor promedio y actualización de datos en flota de vehículos.</p>
           <div class="tag-list">
-            <span class="tag-item">Vector Dinámico</span>
-            <span class="tag-item">Structs en Heap</span>
-            <span class="tag-item">Burbuja Dinámica</span>
-            <span class="tag-item">Proyecto Integrador</span>
+            <span class="tag-item">struct Alumno curso[30]</span>
+            <span class="tag-item">curso[i].campo</span>
+            <span class="tag-item">mejorPromedio</span>
+            <span class="tag-item">actualizarKilometraje</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
       </a>
 
+      <!-- UNIDAD 11 -->
+      <a href="presentaciones/11-estructuras-arreglos-internos-anidadas.html" class="lesson-card"
+        data-search="estructuras con arreglos internos estructuras anidadas estudiante notas[3] struct Fecha nacimiento persona.nacimiento.dia jerarquia arbol">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 11</span>
+          <h3>Estructuras con Arreglos Internos y Anidadas</h3>
+          <p>Composición avanzada: estructuras con vectores internos (notas[3]), acumulación y promedio, y estructuras anidadas como struct Fecha dentro de struct Persona (persona.nacimiento.dia).</p>
+          <div class="tag-list">
+            <span class="tag-item">notas[3] interno</span>
+            <span class="tag-item">struct Fecha</span>
+            <span class="tag-item">persona.nacimiento.dia</span>
+            <span class="tag-item">Jerarquía en RAM</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 12 -->
+      <a href="presentaciones/12-integracion-transferencia-bancaria.html" class="lesson-card"
+        data-search="integracion transferencia bancaria struct CuentaBancaria saldo estado activa inactiva transferir punteros origen destino validaciones atomica return 1 0">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 12</span>
+          <h3>Integración: Transferencia Bancaria</h3>
+          <p>El caso integrador definitivo: modelado de CuentaBancaria, transferencia atómica con dos punteros (*origen y *destino), protocolo defensivo de validaciones y garantía de integridad transaccional.</p>
+          <div class="tag-list">
+            <span class="tag-item">struct CuentaBancaria</span>
+            <span class="tag-item">Punteros Dobles</span>
+            <span class="tag-item">Validaciones Defensivas</span>
+            <span class="tag-item">Integridad Atómica</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 13 -->
+      <a href="presentaciones/13-resumen-simbolos-repaso-integrador.html" class="lesson-card"
+        data-search="resumen simbolos repaso integrador guia operadores & * int* [] . -> \0 return lectura expresiones complejas autoevaluacion">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 13</span>
+          <h3>Resumen de Símbolos y Repaso Integrador</h3>
+          <p>Tabla maestra con los 9 símbolos clave de C (&amp;, *, int*, [], ., -&gt;, '\0', return), método para descifrar expresiones complejas, trampas comunes de examen y autoevaluación interactiva.</p>
+          <div class="tag-list">
+            <span class="tag-item">Tabla Maestra de Símbolos</span>
+            <span class="tag-item">Expresiones Complejas</span>
+            <span class="tag-item">Preguntas de Examen</span>
+            <span class="tag-item">Autoevaluación</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
     </div>
   </div>
 
@@ -578,7 +619,6 @@
         }
       });
 
-      // Hide section titles if all cards in the section are hidden
       sections.forEach(sec => {
         let sibling = sec.nextElementSibling;
         if (sibling && sibling.classList.contains('lesson-list')) {

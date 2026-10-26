@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C - 12: Integración: Transferencia Bancaria con Punteros y Structs | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
+  
+  <!-- Reveal.js Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
+  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
+  <style>
+    .reveal .code-body,
+    .reveal pre.code-body,
+    .reveal .code-window pre {
+      font-size: 1.05rem !important;
+      line-height: 1.38 !important;
+      width: 100% !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      padding: 10px 18px !important;
+      box-sizing: border-box !important;
+    }
+    .grid-2 .code-body,
+    .grid-1-2 .code-body,
+    .grid-2-1 .code-body,
+    .grid-2 pre.code-body,
+    .grid-1-2 pre.code-body,
+    .grid-2-1 pre.code-body,
+    .grid-2 .code-window pre,
+    .grid-1-2 .code-window pre,
+    .grid-2-1 .code-window pre {
+      font-size: 1.00rem !important;
+      padding: 10px 14px !important;
+      line-height: 1.38 !important;
+    }
+    .grid-3 .code-body,
+    .grid-3 pre.code-body,
+    .grid-3 .code-window pre {
+      font-size: 0.80rem !important;
+      padding: 8px 10px !important;
+      line-height: 1.34 !important;
+    }
+    .terminal-body {
+      font-size: 1.05rem !important;
+      padding: 12px 16px !important;
+      line-height: 1.40 !important;
+    }
+    .reveal code:not(.code-body *) {
+      font-size: 0.88em !important;
+      border: none !important;
+      padding: 1px 5px !important;
+      box-decoration-break: clone !important;
+      -webkit-box-decoration-break: clone !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • Unidad 12</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
+          <span class="badge badge-emerald">2do Cuatrimestre • Proyecto Integrador • Unidad 12</span>
+          <h1 style="font-size: 2.4rem; margin-bottom: 12px;">Integración: Transferencia Bancaria</h1>
+          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
+            El ejercicio maestro: structs, punteros, operador <code>-&gt;</code>, lógica defensiva, validaciones atómicas e integridad transaccional en C.
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">struct CuentaBancaria</span>
+            <span class="badge badge-emerald">Punteros *origen y *destino</span>
+            <span class="badge badge-amber">Validaciones de seguridad</span>
+            <span class="badge badge-purple">Integridad atómica (return 1 / 0)</span>
+          </div>
+
+          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">La culminación práctica del apunte</h4>
+            <p>Este es el ejercicio integrador más completo de la materia. Conecta de manera armónica todos los conceptos aprendidos a lo largo del cuatrimestre.</p>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
+              Resolver una transferencia bancaria requiere rigor profesional: dos cuentas deben modificarse en RAM de forma simultánea, pero <b>si una sola validación de negocio falla, el estado de ambas cuentas debe quedar intacto</b>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+              <li>Modelar la entidad financiera <code>struct CuentaBancaria</code>.</li>
+              <li>Diseñar una función que recibe dos punteros a estructura simultáneos.</li>
+              <li>Implementar validaciones defensivas: monto positivo, cuentas activas y saldo.</li>
+              <li>Garantizar integridad transaccional (todo o nada).</li>
+              <li>Usar el valor de retorno (<code>1</code> o <code>0</code>) para informar éxito o fallo.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: EL MODELO DE DATOS -->
+      <section>
+        <h2><span class="section-num">02</span> El Modelo: <code>struct CuentaBancaria</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Definición de la entidad bancaria con saldo y estado lógico.</p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">cuenta.h</span>
+              <span class="code-badge">Modelo</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> CuentaBancaria 
+{ 
+    <span class="c-kw">int</span> numero; 
+    <span class="c-kw">float</span> saldo; 
+    <span class="c-kw">int</span> estado; <span class="c-cmt">// 1 = activa, 0 = inactiva</span>
+};</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Significado de los Campos</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; color: #cbd5e1; margin-left: 14px;">
+              <li><code>numero</code>: Identificador único de cuenta (ej. 1001, 2002).</li>
+              <li><code>saldo</code>: Dinero disponible en la cuenta corriente.</li>
+              <li><code>estado</code>: Bandera booleana (flag). Si vale <code>1</code>, la cuenta puede operar; si vale <code>0</code>, está bloqueada o inactiva y no puede enviar ni recibir transferencias.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: ANATOMÍA DEL ALGORITMO -->
+      <section>
+        <h2><span class="section-num">03</span> Diagrama y Reglas de Negocio</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Flujo Transaccional</h4>
+            <div style="font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.6; color: #cbd5e1; margin: 10px 0;">
+              Cuenta Origen ($10.000)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;↓ debita $3.000<br>
+              Nuevo saldo: $7.000<br><br>
+              Cuenta Destino ($5.000)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;↓ acredita $3.000<br>
+              Nuevo saldo: $8.000
+            </div>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Protocolo de Validaciones Obligatorias</h4>
+            <div class="step-list">
+              <div class="step-item"><span class="step-num">1</span><div>¿Monto positivo? (<code>monto &gt; 0</code>).</div></div>
+              <div class="step-item"><span class="step-num">2</span><div>¿Cuenta origen activa? (<code>origen-&gt;estado == 1</code>).</div></div>
+              <div class="step-item"><span class="step-num">3</span><div>¿Cuenta destino activa? (<code>destino-&gt;estado == 1</code>).</div></div>
+              <div class="step-item"><span class="step-num">4</span><div>¿Saldo suficiente? (<code>origen-&gt;saldo &gt;= monto</code>).</div></div>
+              <div class="step-item"><span class="step-num">5</span><div>¿Son cuentas distintas? (<code>origen != destino</code>).</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: CÓDIGO COMPLETO DE LA FUNCIÓN -->
+      <section>
+        <h2><span class="section-num">04</span> Código de la Función: <code>transferir</code></h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">transferencia.c</span>
+            <span class="code-badge">Lógica Defensiva</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">transferir</span>(<span class="c-kw">struct</span> CuentaBancaria *origen, 
+               <span class="c-kw">struct</span> CuentaBancaria *destino, 
+               <span class="c-kw">float</span> monto) 
+{ 
+    <span class="c-cmt">// Validaciones previas de seguridad:</span>
+    <span class="c-kw">if</span> (monto &lt;= <span class="c-num">0</span>) {
+        <span class="c-kw">return</span> <span class="c-num">0</span>; <span class="c-cmt">// Monto inválido</span>
+    }
+    <span class="c-kw">if</span> (origen-&gt;estado != <span class="c-num">1</span> || destino-&gt;estado != <span class="c-num">1</span>) {
+        <span class="c-kw">return</span> <span class="c-num">0</span>; <span class="c-cmt">// Al menos una cuenta está inactiva</span>
+    }
+    <span class="c-kw">if</span> (origen-&gt;saldo &lt; monto) {
+        <span class="c-kw">return</span> <span class="c-num">0</span>; <span class="c-cmt">// Saldo insuficiente</span>
+    }
+
+    <span class="c-cmt">// Si todas las validaciones pasaron, ejecutamos la transacción atómica:</span>
+    origen-&gt;saldo  -= monto; 
+    destino-&gt;saldo += monto; 
+
+    <span class="c-kw">return</span> <span class="c-num">1</span>; <span class="c-cmt">// Éxito total</span>
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: SIMULACIÓN EN MAIN -->
+      <section>
+        <h2><span class="section-num">05</span> Simulación Completa en <code>main()</code></h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">simulacion.c</span>
+            <span class="code-badge">Ejecución</span>
+          </div>
+          <div class="code-body" style="font-size: 1.12rem; line-height: 1.4; padding: 12px 18px;"><span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+{
+    <span class="c-kw">struct</span> CuentaBancaria cta1 = {<span class="c-num">101</span>, <span class="c-num">10000.0f</span>, <span class="c-num">1</span>}; <span class="c-cmt">// Activa con $10.000</span>
+    <span class="c-kw">struct</span> CuentaBancaria cta2 = {<span class="c-num">102</span>, <span class="c-num">5000.0f</span>, <span class="c-num">1</span>};  <span class="c-cmt">// Activa con $5.000</span>
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Antes: Cta1 = $%.2f | Cta2 = $%.2f\n"</span>, cta1.saldo, cta2.saldo);
+
+    <span class="c-kw">int</span> exito = <span class="c-fn">transferir</span>(&amp;cta1, &amp;cta2, <span class="c-num">3000.0f</span>);
+
+    <span class="c-kw">if</span> (exito) {
+        <span class="c-fn">printf</span>(<span class="c-str">"✅ Transferencia exitosa!\n"</span>);
+    } <span class="c-kw">else</span> {
+        <span class="c-fn">printf</span>(<span class="c-str">"❌ La transferencia fue rechazada.\n"</span>);
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Despues: Cta1 = $%.2f | Cta2 = $%.2f\n"</span>, cta1.saldo, cta2.saldo);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <span>Terminal de salida</span>
+            <span>bash</span>
+          </div>
+          <div class="terminal-body">
+Antes: Cta1 = $10000.00 | Cta2 = $5000.00
+✅ Transferencia exitosa!
+Despues: Cta1 = $7000.00 | Cta2 = $8000.00
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: AUTOEVALUACIÓN Y CIERRE -->
+      <section>
+        <h2><span class="section-num">06</span> Resumen y Autoevaluación</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Conceptos Integrados en este Ejercicio</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
+              <li>Estructuras para empaquetar saldo, número y estado.</li>
+              <li>Punteros dobles para mutar dos entidades distintas.</li>
+              <li>Operador flecha <code>-&gt;</code> para modificar saldos remotos.</li>
+              <li>Lógica booleana y condicionales para blindar la operación.</li>
+              <li>Retorno de estado numérico (1/0) como señal de éxito.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué es fundamental que la función reciba punteros y no structs por valor?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Qué pasaría si debitáramos antes de verificar si la cuenta destino está activa? (¡Fuga de dinero!).</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo cómo se garantiza que ante un error ninguna cuenta se modifique?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+          <a href="11-estructuras-arreglos-internos-anidadas.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Anterior: Estructuras Anidadas
+          </a>
+          <a href="../index.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Índice 2do Cuatrimestre
+          </a>
+          <a href="13-resumen-simbolos-repaso-integrador.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+            Siguiente: Resumen de Símbolos y Repaso →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05
+    });
+  </script>
+</body>
+</html>
