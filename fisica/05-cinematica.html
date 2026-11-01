@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Física 05: Cinemática | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../logo.jpeg">
+  
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="css/presentation.css">
+</head>
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <a href="index.html">← Volver al temario de Física</a>
+    <span class="plan-tag">Módulo 05 • Nivel Secundario</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 26px auto 0;">
+          <span class="badge badge-cyan">Física Fundamental • Módulo 05</span>
+          <h1 style="font-size: 2.8rem; margin-bottom: 10px;">Cinemática en Una Dimensión</h1>
+          <p style="color: #94a3b8; font-size: 1.22rem; font-weight: 500; margin-bottom: 22px;">
+            El estudio geométrico y matemático del movimiento: MRU, MRUV, Caída Libre y Tiro Vertical
+          </p>
+
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-indigo">Posición • Desplazamiento • Velocidad</span>
+            <span class="badge badge-emerald">MRU: Ecuación Horaria & Gráficos</span>
+            <span class="badge badge-amber">MRUV: Aceleración Constante</span>
+            <span class="badge badge-purple">Caída Libre & Tiro Vertical ($g = 9{,}8\text{ m/s}^2$)</span>
+            <span class="badge badge-rose">Metodología de 12 Pasos</span>
+          </div>
+
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.93rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS -->
+      <section>
+        <h2><span class="section-num">01</span> Objetivos Pedagógicos y Hoja de Ruta</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué la Cinemática es el pilar de la Física?</h4>
+            <p>Todo en el Universo está en constante cambio y desplazamiento: desde los electrones en un átomo hasta las galaxias. La Cinemática nos da el <b>lenguaje matemático riguroso</b> para predecir <i>dónde</i> y <i>cuándo</i> estará un cuerpo.</p>
+            <p class="subtext">
+              No se limita a memorizar fórmulas: enseña a interpretar fenómenos cotidianos, comprender qué nos dice el velocímetro de un auto, calcular distancias de frenado para salvar vidas y analizar lanzamientos gravitatorios.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
+              <li>Comprender el concepto de <b>Sistema de Referencia</b> y la relatividad del movimiento.</li>
+              <li>Diferenciar con precisión entre <b>distancia recorrida</b> (escalar) y <b>desplazamiento</b> (vector).</li>
+              <li>Manejar el <b>MRU</b> ($v = \text{cte}$, $a = 0$) y su ecuación horaria $x(t) = x_0 + v \cdot t$.</li>
+              <li>Dominar el <b>MRUV</b> ($a = \text{cte} \neq 0$), deduciendo cuándo acelera y cuándo frena.</li>
+              <li>Resolver <b>caída libre</b> y <b>tiro vertical</b> con gravedad $g = 9{,}8\text{ m/s}^2$.</li>
+              <li>Leer e interpretar pendientes y áreas en gráficos $x(t)$, $v(t)$ y $a(t)$.</li>
+              <li>Aplicar el <b>método sistemático de 12 pasos</b> para resolver cualquier problema.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: ¿QUÉ ES LA CINEMÁTICA? -->
+      <section>
+        <h2><span class="section-num">02</span> ¿Qué es la Cinemática y qué estudia?</h2>
+        <div class="box box-cyan" style="margin-bottom: 14px;">
+          <h4 style="margin-bottom: 4px;">Definición Formal</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            La <b>Cinemática</b> (del griego <i>kinēma</i>, movimiento) es la rama de la Mecánica Clásica que estudia y describe matemáticamente el <b>movimiento de los cuerpos a través del espacio y el tiempo</b>, <u>sin ocuparse de las causas que lo originan ni de las fuerzas actuantes</u> (de las causas se encarga la <i>Dinámica</i>).
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. El Móvil (Partícula)</h4>
+            <p style="font-size: 0.88rem;">
+              Llamamos <b>móvil</b> a cualquier cuerpo en movimiento. En esta etapa lo modelamos como una <b>partícula puntual</b> (toda su masa concentrada en un punto, sin considerar rotaciones ni deformaciones).
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. El Movimiento</h4>
+            <p style="font-size: 0.88rem;">
+              Decimos que un cuerpo está en <b>movimiento</b> cuando su <b>posición en el espacio cambia continuamente respecto del tiempo</b> en relación con un observador determinado.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">3. Todo Movimiento es Relativo</h4>
+            <p style="font-size: 0.88rem;">
+              El reposo absoluto no existe. Un pasajero sentado en un tren está en <b>reposo</b> respecto al asiento, pero se mueve a $120\text{ km/h}$ respecto a un observador parado en el andén.
+            </p>
+          </div>
+        </div>
+
+        <div class="card-warning" style="margin-top: 10px; padding: 10px 16px; border-radius: 10px; font-size: 0.86rem;">
+          ⚡ <b>Regla fundamental:</b> Antes de escribir una sola ecuación cinemática, es <u>obligatorio</u> definir claramente: <i>¿respecto a qué observador o sistema de referencia medimos?</i>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: SISTEMA DE REFERENCIA Y POSICIÓN -->
+      <section>
+        <h2><span class="section-num">03</span> Sistema de Referencia (SR) y Posición</h2>
+        <div class="grid-2">
+          <div>
+            <div class="box box-indigo">
+              <h4 style="color: #818cf8;">¿Qué es un Sistema de Referencia?</h4>
+              <p style="font-size: 0.88rem;">
+                Es el conjunto formado por:
+              </p>
+              <ul style="font-size: 0.86rem; line-height: 1.5; margin-left: 18px;">
+                <li>Un <b>origen o punto fijo ($O$)</b> donde se sitúa el observador.</li>
+                <li>Un <b>eje coordenado orientado</b> con sentido positivo (+) y negativo (-).</li>
+                <li>Un <b>reloj</b> que mide el tiempo transcurrido desde un instante inicial ($t = 0$).</li>
+              </ul>
+            </div>
+
+            <div class="box box-cyan" style="margin-top: 10px;">
+              <h4 style="color: #38bdf8;">La Posición ($x$)</h4>
+              <p style="font-size: 0.88rem;">
+                Es la coordenada numérica que indica la <b>ubicación exacta del móvil sobre el eje en un instante $t$</b>.
+              </p>
+              <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 6px;">
+                • $x_0$ o $x_i$: <b>Posición inicial</b> (ubicación cuando se enciende el cronómetro en $t = 0$).<br>
+                • $x(t)$ o $x_f$: <b>Posición final</b> en cualquier instante posterior.
+              </p>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Ejemplo Cotidiano: Los Mojones de la Ruta</h4>
+            <p style="font-size: 0.88rem;">
+              En la Ruta 2, la ciudad de Buenos Aires es el <b>origen ($x = 0\text{ km}$)</b> y el sentido hacia Mar del Plata es <b>positivo ($+$)</b>.
+            </p>
+            <div class="step-list" style="margin: 10px 0;">
+              <div class="step-item">
+                <span class="step-num">📍</span>
+                <div class="step-content"><b>Mojón km 80:</b> El auto está a $+80\text{ km}$ a la derecha del origen.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">📍</span>
+                <div class="step-content"><b>Mojón km 250:</b> Se encuentra en $x = +250\text{ km}$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">🔙</span>
+                <div class="step-content"><b>Hacia el norte de Bs As:</b> Si el auto viaja a Zárate en el sentido opuesto, su posición sería <b>negativa</b> ($x = -70\text{ km}$).</div>
+              </div>
+            </div>
+            <div class="card-definition" style="padding: 8px 12px; font-size: 0.82rem; border-radius: 8px;">
+              💡 <b>Importante:</b> ¡El signo menos en una posición NO significa que el auto "debe" distancia! Solo indica que está del lado opuesto al sentido elegido como positivo.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: TRAYECTORIA, DISTANCIA Y DESPLAZAMIENTO -->
+      <section>
+        <h2><span class="section-num">04</span> Trayectoria vs Distancia vs Desplazamiento</h2>
+        <p class="subtext">Tres conceptos que los estudiantes suelen confundir, pero físicamente son muy diferentes:</p>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <!-- Trayectoria -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. Trayectoria</h4>
+            <p style="font-size: 0.86rem;">
+              Es la <b>línea geométrica continua</b> que describe el móvil al desplazarse. Es el "camino" o "rastro" que deja en el espacio.
+            </p>
+            <div class="card-theory" style="padding: 8px; border-radius: 8px; font-size: 0.82rem; margin-top: 8px;">
+              Puede ser <b>rectilínea</b> (línea recta), <b>circular</b>, <b>parabólica</b> (un proyectil) o <b>irregular</b>.
+            </div>
+          </div>
+
+          <!-- Distancia recorrida -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Distancia Recorrida ($d$)</h4>
+            <p style="font-size: 0.86rem;">
+              Es la <b>longitud real medida sobre la trayectoria</b>. Es la cantidad de metros o kilómetros efectivamente transitados por el móvil.
+            </p>
+            <div class="card-example" style="padding: 8px; border-radius: 8px; font-size: 0.82rem; margin-top: 8px;">
+              Es un <b>escalar</b>. Es <b>siempre positiva o nula</b> ($d \ge 0$). ¡Nunca disminuye mientras el móvil siga en movimiento!
+            </div>
+          </div>
+
+          <!-- Desplazamiento -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">3. Desplazamiento ($\Delta x$)</h4>
+            <p style="font-size: 0.86rem;">
+              Es el <b>vector</b> que une en línea recta la posición inicial con la posición final, sin importar el camino recorrido:
+            </p>
+            <p class="math-key" style="display: block; text-align: center; margin: 8px 0; font-size: 1.05rem;">
+              $$\Delta x = x_f - x_i$$
+            </p>
+            <div class="card-definition" style="padding: 8px; border-radius: 8px; font-size: 0.82rem;">
+              Puede ser <b>positivo</b> ($x_f > x_i$), <b>negativo</b> ($x_f < x_i$) o <b>cero</b> si regresa al origen.
+            </div>
+          </div>
+        </div>
+
+        <!-- El contraejemplo clásico -->
+        <div class="box box-rose" style="margin-top: 12px;">
+          <h4 style="color: #f87171; font-size: 0.95rem; margin-bottom: 4px;">🏃‍♂️ El Clásico Ejemplo de la Pista de Atletismo</h4>
+          <p style="font-size: 0.88rem; margin: 0; color: #f1f5f9;">
+            Un atleta corre exactamente <b>una vuelta completa</b> a una pista olímpica de $400\text{ m}$ y vuelve a la meta:
+            <br>
+            • <b>Distancia recorrida:</b> $d = 400\text{ m}$ (el atleta transpiró y gastó energía cubriendo esa distancia).<br>
+            • <b>Desplazamiento:</b> $\Delta x = x_f - x_i = 0\text{ m}$ (¡su cambio neto de posición en el espacio es nulo porque partió y llegó al mismo punto!).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: MAGNITUDES DEL MOVIMIENTO -->
+      <section>
+        <h2><span class="section-num">05</span> Magnitudes del Movimiento: Escalares vs Vectoriales</h2>
+        <div class="grid-2">
+          <!-- Columna Escalar / Vectorial -->
+          <div>
+            <table class="math-table">
+              <thead>
+                <tr>
+                  <th>Concepto</th>
+                  <th>Carácter</th>
+                  <th>Unidad SI</th>
+                  <th>Significado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Tiempo ($t, \Delta t$)</b></td>
+                  <td><span class="math-key">Escalar</span></td>
+                  <td>$\text{s}$ (segundo)</td>
+                  <td>Duración del evento</td>
+                </tr>
+                <tr>
+                  <td><b>Distancia ($d$)</b></td>
+                  <td><span class="math-key">Escalar</span></td>
+                  <td>$\text{m}$ (metro)</td>
+                  <td>Longitud de trayectoria ($\ge 0$)</td>
+                </tr>
+                <tr>
+                  <td><b>Posición ($x$)</b></td>
+                  <td><span class="badge-cyan" style="padding:2px 8px; font-size:0.75rem;">Vectorial</span></td>
+                  <td>$\text{m}$ (metro)</td>
+                  <td>Ubicación respecto al origen</td>
+                </tr>
+                <tr>
+                  <td><b>Desplazamiento ($\Delta x$)</b></td>
+                  <td><span class="badge-cyan" style="padding:2px 8px; font-size:0.75rem;">Vectorial</span></td>
+                  <td>$\text{m}$ (metro)</td>
+                  <td>Cambio neto de posición ($x_f - x_i$)</td>
+                </tr>
+                <tr>
+                  <td><b>Rapidez ($v$)</b></td>
+                  <td><span class="math-key">Escalar</span></td>
+                  <td>$\text{m/s}$</td>
+                  <td>Ritmo con que se recorre distancia</td>
+                </tr>
+                <tr>
+                  <td><b>Velocidad ($\vec{v}$)</b></td>
+                  <td><span class="badge-cyan" style="padding:2px 8px; font-size:0.75rem;">Vectorial</span></td>
+                  <td>$\text{m/s}$</td>
+                  <td>Rapidez + Dirección + Sentido</td>
+                </tr>
+                <tr>
+                  <td><b>Aceleración ($\vec{a}$)</b></td>
+                  <td><span class="badge-cyan" style="padding:2px 8px; font-size:0.75rem;">Vectorial</span></td>
+                  <td>$\text{m/s}^2$</td>
+                  <td>Ritmo de cambio de velocidad</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Rapidez vs Velocidad -->
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Rapidez vs Velocidad</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">🏎️</span>
+                <div class="step-content">
+                  <b>Rapidez media:</b> Es la distancia dividida el tiempo:
+                  $$v_{\text{rap}} = \frac{d}{\Delta t} \ge 0$$
+                  El velocímetro de tu auto marca <i>rapidez instantánea</i> (ej: $90\text{ km/h}$), porque no le importa si vas al norte, al sur o en círculos.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">🧭</span>
+                <div class="step-content">
+                  <b>Velocidad media:</b> Es el vector desplazamiento dividido el tiempo:
+                  $$\vec{v}_m = \frac{\Delta \vec{x}}{\Delta t} = \frac{x_f - x_i}{t_f - t_i}$$
+                  En 1D, el signo indica el sentido: $+25\text{ m/s}$ (hacia la derecha/adelante) y $-25\text{ m/s}$ (hacia la izquierda/atrás).
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: CONVERSIÓN DE UNIDADES (km/h <-> m/s) -->
+      <section>
+        <h2><span class="section-num">06</span> La Conversión Clave: $\text{km/h} \longleftrightarrow \text{m/s}$</h2>
+        <p class="subtext">En la vida real usamos $\text{km/h}$, pero en las leyes de la Física es <b>obligatorio usar el SI ($\text{m/s}$)</b>.</p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <!-- Deducción analítica -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Deducción del Factor Mágico: $3{,}6$</h4>
+            <p style="font-size: 0.88rem;">Recordando las equivalencias de unidades fundamentales:</p>
+            <p style="font-size: 0.86rem; color: #cbd5e1; margin-left: 10px;">
+              • $1\text{ km} = 1.000\text{ m}$<br>
+              • $1\text{ h} = 60\text{ min} = 3.600\text{ s}$
+            </p>
+            <div class="card-formula" style="padding: 12px; border-radius: 10px; margin-top: 10px; font-size: 0.95rem;">
+              $$1\text{ }\frac{\text{km}}{\text{h}} = \frac{1.000\text{ m}}{3.600\text{ s}} = \frac{1}{3{,}6}\text{ }\frac{\text{m}}{\text{s}}$$
+            </div>
+            <div class="step-list" style="margin-top: 10px;">
+              <div class="step-item">
+                <span class="step-num">➗</span>
+                <div class="step-content"><b>De $\text{km/h}$ a $\text{m/s}$</b> $\implies$ <b>DIVIDIR por $3{,}6$</b></div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">✖️</span>
+                <div class="step-content"><b>De $\text{m/s}$ a $\text{km/h}$</b> $\implies$ <b>MULTIPLICAR por $3{,}6$</b></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabla de equivalencias directas -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Valores Típicos que Tenés que Conocer</h4>
+            <table class="math-table">
+              <thead>
+                <tr>
+                  <th>En $\text{km/h}$</th>
+                  <th>Operación</th>
+                  <th>En $\text{m/s}$ (SI)</th>
+                  <th>Contexto Real</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>$18\text{ km/h}$</td>
+                  <td>$18 / 3{,}6$</td>
+                  <td>$\mathbf{5\text{ m/s}}$</td>
+                  <td>Bicicleta urbana</td>
+                </tr>
+                <tr>
+                  <td>$36\text{ km/h}$</td>
+                  <td>$36 / 3{,}6$</td>
+                  <td>$\mathbf{10\text{ m/s}}$</td>
+                  <td>Corredor olímpico</td>
+                </tr>
+                <tr>
+                  <td>$72\text{ km/h}$</td>
+                  <td>$72 / 3{,}6$</td>
+                  <td>$\mathbf{20\text{ m/s}}$</td>
+                  <td>Auto en avenida</td>
+                </tr>
+                <tr>
+                  <td>$90\text{ km/h}$</td>
+                  <td>$90 / 3{,}6$</td>
+                  <td>$\mathbf{25\text{ m/s}}$</td>
+                  <td>Auto en ruta provincial</td>
+                </tr>
+                <tr>
+                  <td>$108\text{ km/h}$</td>
+                  <td>$108 / 3{,}6$</td>
+                  <td>$\mathbf{30\text{ m/s}}$</td>
+                  <td>Autopista estándar</td>
+                </tr>
+                <tr>
+                  <td>$180\text{ km/h}$</td>
+                  <td>$180 / 3{,}6$</td>
+                  <td>$\mathbf{50\text{ m/s}}$</td>
+                  <td>Auto de carreras (Fórmula 1)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: ACELERACIÓN Y SIGNIFICADO DE SIGNOS -->
+      <section>
+        <h2><span class="section-num">07</span> Aceleración e Interpretación de Signos</h2>
+        <div class="box box-indigo" style="margin-bottom: 12px;">
+          <h4 style="margin-bottom: 4px;">Definición de Aceleración ($\vec{a}$)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            La <b>aceleración media</b> es la razón de cambio de la velocidad en función del tiempo:
+            $$a = \frac{\Delta v}{\Delta t} = \frac{v_f - v_i}{t_f - t_i} \qquad \left[\frac{\text{m/s}}{\text{s}} = \mathbf{\frac{\text{m}}{\text{s}^2}}\right]$$
+            <i>Significado físico de $a = 4\text{ m/s}^2$:</i> Por cada segundo que pasa, la velocidad del móvil varía en $4\text{ m/s}$.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <!-- ¿Acelera o frena? -->
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">¿El signo negativo siempre significa frenar? ¡NO!</h4>
+            <p style="font-size: 0.86rem;">
+              Este es uno de los mayores errores conceptuales en Física. Que $a < 0$ <u>no</u> implica necesariamente que el móvil esté frenando.
+            </p>
+            <div class="step-list" style="margin-top: 8px;">
+              <div class="step-item">
+                <span class="step-num">🟢</span>
+                <div class="step-content">
+                  <b>ACELERANDO (Gana rapidez):</b><br>
+                  Ocurre cuando <b>$\vec{v}$ y $\vec{a}$ tienen el MISMO SIGNO</b>.<br>
+                  • $v > 0$ y $a > 0$ $\implies$ avanza hacia la derecha cada vez más rápido.<br>
+                  • $v < 0$ y $a < 0$ $\implies$ avanza hacia la izquierda cada vez más rápido.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">🔴</span>
+                <div class="step-content">
+                  <b>FRENANDO / DESACELERANDO (Pierde rapidez):</b><br>
+                  Ocurre cuando <b>$\vec{v}$ y $\vec{a}$ tienen SIGNOS OPUESTOS</b>.<br>
+                  • $v > 0$ y $a < 0$ $\implies$ avanza a la derecha pero va frenando.<br>
+                  • $v < 0$ y $a > 0$ $\implies$ retrocede a la izquierda pero va frenando.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cuadro resumen de signos -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Matriz de Interpretación Física</h4>
+            <table class="math-table">
+              <thead>
+                <tr>
+                  <th>Velocidad</th>
+                  <th>Aceleración</th>
+                  <th>Efecto Físico</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>$+$ (hacia adelante)</td>
+                  <td>$+$</td>
+                  <td><span class="math-success">Acelera hacia adelante</span></td>
+                </tr>
+                <tr>
+                  <td>$+$ (hacia adelante)</td>
+                  <td>$-$</td>
+                  <td><span class="math-danger">Frena yendo hacia adelante</span></td>
+                </tr>
+                <tr>
+                  <td>$-$ (retrocediendo)</td>
+                  <td>$-$</td>
+                  <td><span class="math-success">Acelera retrocediendo</span></td>
+                </tr>
+                <tr>
+                  <td>$-$ (retrocediendo)</td>
+                  <td>$+$</td>
+                  <td><span class="math-danger">Frena mientras retrocede</span></td>
+                </tr>
+                <tr>
+                  <td>Cualquiera</td>
+                  <td>$0$</td>
+                  <td><b>MRU (Velocidad constante)</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: MRU - DEFINICIÓN Y CARACTERÍSTICAS -->
+      <section>
+        <h2><span class="section-num">08</span> Movimiento Rectilíneo Uniforme (MRU)</h2>
+        <div class="box box-cyan">
+          <h4 style="margin-bottom: 4px;">Definición y Postulados Fundamentales</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            Un móvil describe un <b>MRU</b> cuando se desplaza en <b>línea recta</b> a <b>velocidad constante</b> en módulo, dirección y sentido, a lo largo de todo el recorrido.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. Trayectoria Rectilínea</h4>
+            <p style="font-size: 0.88rem;">
+              La dirección del vector velocidad no cambia jamás. El móvil no dobla, no gira ni se desvía del eje coordenado.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Velocidad Constante</h4>
+            <p style="font-size: 0.88rem;">
+              El móvil recorre <b>distancias iguales en intervalos de tiempo iguales</b>. Su rapidez es idéntica en cualquier instante:
+              $$v(t) = v = \text{constante}$$
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">3. Aceleración Nula</h4>
+            <p style="font-size: 0.88rem;">
+              Dado que la velocidad no varía en ningún momento ($\Delta v = 0$):
+              $$a = \frac{\Delta v}{\Delta t} = \mathbf{0\text{ m/s}^2}$$
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-purple" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.88rem; color: #f1f5f9;">
+            💡 <b>Ejemplo cotidiano:</b> Un tren de alta velocidad en un tramo recto de vías con control crucero activado a $200\text{ km/h}$, o una sonda espacial que viaja por el vacío interestelar libre de fuerzas gravitatorias externas (Primera Ley de Newton).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: MRU - ECUACIÓN HORARIA Y DESPEJES -->
+      <section>
+        <h2><span class="section-num">09</span> MRU: La Ecuación Horaria y sus Despejes</h2>
+        <div class="box box-indigo">
+          <h4 style="margin-bottom: 4px;">Deducción de la Ecuación Horaria</h4>
+          <p style="font-size: 0.90rem; margin: 0;">
+            Por definición: $v = \frac{x - x_0}{t - t_0}$. Si tomamos el instante inicial en $t_0 = 0$ y multiplicamos por $t$:
+          </p>
+          <div class="card-formula" style="text-align: center; font-size: 1.45rem; padding: 12px; margin: 10px 0; color: #38bdf8;">
+            $$x(t) = x_0 + v \cdot t$$
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <!-- Despeje Posición -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Calcular Posición ($x$)</h4>
+            <p style="font-size: 0.85rem;">¿Dónde estará el móvil al cabo de un tiempo $t$?</p>
+            <p class="math-key" style="display:block; text-align:center; margin:8px 0;">$$x = x_0 + v \cdot t$$</p>
+            <p class="subtext">Si parte del origen ($x_0 = 0$), se reduce al clásico: $x = v \cdot t$ (distancia = velocidad × tiempo).</p>
+          </div>
+
+          <!-- Despeje Tiempo -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Calcular Tiempo ($t$)</h4>
+            <p style="font-size: 0.85rem;">¿Cuánto tarda en llegar a la posición $x$?</p>
+            <p class="math-key" style="display:block; text-align:center; margin:8px 0;">$$t = \frac{x - x_0}{v} = \frac{\Delta x}{v}$$</p>
+            <p class="subtext">Dividimos la distancia neta que falta recorrer por la velocidad del móvil.</p>
+          </div>
+
+          <!-- Despeje Velocidad -->
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">3. Calcular Velocidad ($v$)</h4>
+            <p style="font-size: 0.85rem;">¿A qué velocidad viajó si tardó $t$ segundos?</p>
+            <p class="math-key" style="display:block; text-align:center; margin:8px 0;">$$v = \frac{x - x_0}{t} = \frac{\Delta x}{t}$$</p>
+            <p class="subtext">Representa la pendiente de la recta en el gráfico de posición en función del tiempo.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: MRU - EJEMPLO COMPLETO RESUELTO -->
+      <section>
+        <h2><span class="section-num">10</span> MRU: Ejemplo Resuelto de Aplicación Real</h2>
+        <div class="box box-cyan">
+          <h4 style="margin-bottom: 4px;">Enunciado del Problema</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Un ciclista que compite en ruta se encuentra inicialmente en el mojón del <b>kilómetro $12$</b> ($x_0 = 12\text{ km}$). Avanza en línea recta con velocidad constante de <b>$36\text{ km/h}$</b>.
+            <br>
+            <b>a)</b> Escribir su ecuación horaria en el SI. <b>b)</b> ¿En qué posición estará luego de $20\text{ minutos}$? <b>c)</b> ¿Cuánto tardará en llegar al mojón del kilómetro $42$?
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <!-- Parte a y b -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Paso 1: Conversión de Unidades al SI</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content"><b>Posición inicial:</b> $x_0 = 12\text{ km} \times 1.000 = \mathbf{12.000\text{ m}}$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content"><b>Velocidad:</b> $v = \frac{36\text{ km/h}}{3{,}6} = \mathbf{10\text{ m/s}}$.</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Ecuación horaria SI:</b>
+                  $$\mathbf{x(t) = 12.000 + 10 \cdot t} \quad [x \text{ en m}, t \text{ en s}]$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Parte c y d -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Paso 2: Resolución de las Incógnitas</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">b</span>
+                <div class="step-content">
+                  <b>Posición a los $20\text{ min}$ ($1.200\text{ s}$):</b><br>
+                  $x(1.200) = 12.000 + 10 \cdot (1.200) = 12.000 + 12.000 = \mathbf{24.000\text{ m}} = \mathbf{24\text{ km}}$.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">c</span>
+                <div class="step-content">
+                  <b>Tiempo para llegar al km 42 ($x = 42.000\text{ m}$):</b><br>
+                  $42.000 = 12.000 + 10 \cdot t \implies 30.000 = 10 \cdot t$<br>
+                  $$t = \frac{30.000\text{ m}}{10\text{ m/s}} = \mathbf{3.000\text{ s}} = \mathbf{50\text{ minutos}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: GRÁFICOS DEL MRU -->
+      <section>
+        <h2><span class="section-num">11</span> Gráficos del MRU: $x(t)$, $v(t)$ y $a(t)$</h2>
+        <div class="grid-3">
+          <!-- Gráfico x(t) -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Gráfico Posición-Tiempo: $x(t)$</h4>
+            <div class="svg-container" style="padding: 6px;">
+              <svg class="svg-plot" viewBox="0 0 160 110" style="max-width: 220px;">
+                <line x1="20" y1="95" x2="150" y2="95" stroke="#94a3b8" stroke-width="1.2" />
+                <line x1="20" y1="95" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2" />
+                <text x="145" y="105" fill="#94a3b8" font-size="9">t (s)</text>
+                <text x="5" y="20" fill="#38bdf8" font-size="9">x (m)</text>
+                <!-- Line x(t) -->
+                <line x1="20" y1="70" x2="135" y2="25" stroke="#38bdf8" stroke-width="2.5" />
+                <circle cx="20" cy="70" r="3" fill="#38bdf8" />
+                <text x="5" y="73" fill="#cbd5e1" font-size="8">x₀</text>
+                <!-- Slope indicator -->
+                <path d="M 75 51 L 115 51 L 115 36" fill="none" stroke="rgba(255,255,255,0.4)" stroke-dasharray="2,2" />
+                <text x="120" y="47" fill="#fbbf24" font-size="8">Pendiente = v</text>
+              </svg>
+            </div>
+            <p style="font-size: 0.82rem; margin-top: 6px;">
+              • Es una <b>recta inclinada</b>.<br>
+              • <b>Ordenada al origen:</b> Posición inicial $x_0$.<br>
+              • <b>Pendiente:</b> Representa la <b>velocidad $v$</b>. Si sube $\implies v > 0$. Si baja $\implies v < 0$.
+            </p>
+          </div>
+
+          <!-- Gráfico v(t) -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Gráfico Velocidad-Tiempo: $v(t)$</h4>
+            <div class="svg-container" style="padding: 6px;">
+              <svg class="svg-plot" viewBox="0 0 160 110" style="max-width: 220px;">
+                <line x1="20" y1="95" x2="150" y2="95" stroke="#94a3b8" stroke-width="1.2" />
+                <line x1="20" y1="95" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2" />
+                <text x="145" y="105" fill="#94a3b8" font-size="9">t (s)</text>
+                <text x="5" y="20" fill="#34d399" font-size="9">v (m/s)</text>
+                <!-- Shaded Area -->
+                <rect x="20" y="40" width="100" height="55" fill="rgba(52, 211, 153, 0.2)" stroke="none" />
+                <!-- Line v(t) -->
+                <line x1="20" y1="40" x2="140" y2="40" stroke="#34d399" stroke-width="2.5" />
+                <text x="5" y="43" fill="#cbd5e1" font-size="8">v = cte</text>
+                <text x="50" y="72" fill="#34d399" font-size="9" font-weight="bold">Área = Δx</text>
+              </svg>
+            </div>
+            <p style="font-size: 0.82rem; margin-top: 6px;">
+              • Es una <b>recta horizontal paralela al eje $t$</b>.<br>
+              • <b>Pendiente:</b> Cero ($a = 0$).<br>
+              • <b>Propiedad clave:</b> El <b>área geométrica bajo la curva</b> entre dos tiempos equivale al <b>desplazamiento ($\Delta x = v \cdot \Delta t$)</b>.
+            </p>
+          </div>
+
+          <!-- Gráfico a(t) -->
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">3. Gráfico Aceleración-Tiempo: $a(t)$</h4>
+            <div class="svg-container" style="padding: 6px;">
+              <svg class="svg-plot" viewBox="0 0 160 110" style="max-width: 220px;">
+                <line x1="20" y1="60" x2="150" y2="60" stroke="#94a3b8" stroke-width="1.2" />
+                <line x1="20" y1="95" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2" />
+                <text x="145" y="72" fill="#94a3b8" font-size="9">t (s)</text>
+                <text x="5" y="20" fill="#fbbf24" font-size="9">a (m/s²)</text>
+                <!-- Line a = 0 -->
+                <line x1="20" y1="60" x2="140" y2="60" stroke="#fbbf24" stroke-width="3.5" />
+                <text x="45" y="52" fill="#fbbf24" font-size="9" font-weight="bold">a = 0 m/s²</text>
+              </svg>
+            </div>
+            <p style="font-size: 0.82rem; margin-top: 6px;">
+              • Es una <b>recta sobre el propio eje horizontal</b> ($a = 0$).<br>
+              • No existe área ni variación de velocidad.<br>
+              • Confirma visualmente que en el MRU no hay aceleración.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: MRUV - DEFINICIÓN Y CARACTERÍSTICAS -->
+      <section>
+        <h2><span class="section-num">12</span> Movimiento Rectilíneo Uniformemente Variado (MRUV)</h2>
+        <div class="box box-indigo">
+          <h4 style="margin-bottom: 4px;">Definición y Postulados Fundamentales</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            Un móvil describe un <b>MRUV</b> cuando su trayectoria es una <b>línea recta</b> y su <b>aceleración permanece constante y distinta de cero</b> ($a = \text{cte} \neq 0$) a lo largo de todo el movimiento.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Variación Uniforme de $v$</h4>
+            <p style="font-size: 0.86rem;">
+              La velocidad cambia a un ritmo perfectamente constante. En cada segundo que transcurre, la velocidad se incrementa o decrementa exactamente en el mismo número de $\text{m/s}$.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Aceleración Constante</h4>
+            <p style="font-size: 0.86rem;">
+              La aceleración instantánea coincide en todo momento con la aceleración media:
+              $$a(t) = a = \text{constante} \neq 0$$
+            </p>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">3. Espacios Cuadráticos</h4>
+            <p style="font-size: 0.86rem;">
+              En intervalos de tiempo iguales <u>NO</u> se recorren distancias iguales (la distancia crece o decrece con el cuadrado del tiempo $t^2$).
+            </p>
+          </div>
+        </div>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="correct-card">
+            <div class="correct-title">MRU (Velocidad Constante)</div>
+            <p style="font-size: 0.84rem; margin: 0;">$a = 0$ • Velocidad fija • $x(t)$ es lineal (recta) • Distancias iguales en tiempos iguales.</p>
+          </div>
+          <div class="wrong-card">
+            <div class="wrong-title" style="color: #38bdf8;">MRUV (Aceleración Constante)</div>
+            <p style="font-size: 0.84rem; margin: 0;">$a \neq 0$ • Velocidad cambia linealmente • $x(t)$ es cuadrática (parábola) • Distancias crecientes/decrecientes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: LAS ECUACIONES MAESTRAS DEL MRUV -->
+      <section>
+        <h2><span class="section-num">13</span> Las Ecuaciones Maestras del MRUV</h2>
+        <p class="subtext">Para resolver cualquier ejercicio de MRUV en Física disponemos de 3 fórmulas fundamentales:</p>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <!-- Ecuación de velocidad -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Velocidad en función del tiempo</h4>
+            <p style="font-size: 0.84rem;">Relaciona: velocidad inicial, aceleración y tiempo:</p>
+            <div class="card-formula" style="padding: 10px; border-radius: 8px; text-align: center; margin: 8px 0;">
+              $$\mathbf{v(t) = v_0 + a \cdot t}$$
+            </div>
+            <div class="card-definition" style="padding: 6px 10px; font-size: 0.80rem; border-radius: 6px;">
+              <b>¿Cuándo usarla?</b> Cuando conocés o buscás velocidades y tiempos, sin importar la posición recorrida.
+            </div>
+          </div>
+
+          <!-- Ecuación de posición -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">2. Posición en función del tiempo</h4>
+            <p style="font-size: 0.84rem;">La gran ecuación horaria cuadrática:</p>
+            <div class="card-formula" style="padding: 10px; border-radius: 8px; text-align: center; margin: 8px 0;">
+              $$\mathbf{x(t) = x_0 + v_0 \cdot t + \frac{1}{2} a \cdot t^2}$$
+            </div>
+            <div class="card-theory" style="padding: 6px 10px; font-size: 0.80rem; border-radius: 6px;">
+              <b>¿Cuándo usarla?</b> Cuando conocés el tiempo y querés saber qué posición o distancia alcanzó el móvil.
+            </div>
+          </div>
+
+          <!-- Ecuación independiente del tiempo (Torricelli) -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Ecuación de Torricelli (Sin Tiempo)</h4>
+            <p style="font-size: 0.84rem;">¡La salvadora cuando NO te dan el tiempo!</p>
+            <div class="card-formula" style="padding: 10px; border-radius: 8px; text-align: center; margin: 8px 0;">
+              $$\mathbf{v_f^2 = v_0^2 + 2 \cdot a \cdot (x_f - x_0)}$$
+            </div>
+            <div class="card-example" style="padding: 6px 10px; font-size: 0.80rem; border-radius: 6px;">
+              <b>¿Cuándo usarla?</b> Cuando el problema no menciona el tiempo ni te lo pide, y relaciona velocidades con distancias.
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 10px; padding: 10px 16px;">
+          <p style="margin: 0; font-size: 0.86rem; color: #cbd5e1;">
+            💡 <b>Fórmula auxiliar útil (Velocidad Media):</b> Como la aceleración es constante, la velocidad media es el promedio aritmético: $v_m = \frac{v_0 + v_f}{2}$. Por ende: $\mathbf{\Delta x = \left(\frac{v_0 + v_f}{2}\right) \cdot t}$. ¡Permite resolver problemas de frenado sin calcular antes la aceleración!
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: CASOS TÍPICOS: PARTIDA DEL REPOSO Y FRENADO -->
+      <section>
+        <h2><span class="section-num">14</span> Casos Clásicos de MRUV: Partida del Reposo y Frenado</h2>
+        <div class="grid-2">
+          <!-- Partida del Reposo -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Caso A: Partida del Reposo ($v_0 = 0$)</h4>
+            <p style="font-size: 0.86rem;">
+              Las frases del enunciado: <i>"un auto parte del reposo"</i>, <i>"se enciende el motor desde parado"</i>, o <i>"se suelta un objeto"</i> indican matemáticamente:
+            </p>
+            <p class="math-key" style="display: block; text-align: center; font-size: 1.1rem; margin: 8px 0;">
+              $$v_0 = 0\text{ m/s}$$
+            </p>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content"><b>Velocidad final:</b> $v(t) = a \cdot t$</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content"><b>Distancia recorrida:</b> $\Delta x = \frac{1}{2} a \cdot t^2$</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content"><b>Relación directa:</b> $v^2 = 2 \cdot a \cdot \Delta x \implies \mathbf{a = \frac{v^2}{2 \Delta x}}$</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Frenado Completo -->
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">Caso B: Frenado hasta Detenerse ($v_f = 0$)</h4>
+            <p style="font-size: 0.86rem;">
+              Las frases: <i>"aplica los frenos hasta detenerse"</i> o <i>"llega al reposo"</i> indican que la velocidad final se anula:
+            </p>
+            <p class="math-key" style="display: block; text-align: center; font-size: 1.1rem; margin: 8px 0; color: #f87171; background: rgba(248,113,113,0.15);">
+              $$v_f = 0\text{ m/s}$$
+            </p>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content"><b>Desaceleración:</b> $0 = v_0 + a \cdot t \implies \mathbf{a = -\frac{v_0}{t}}$ (signo negativo).</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content"><b>Tiempo de frenado:</b> $t_{\text{freno}} = \frac{v_0}{|a|}$</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content"><b>Distancia de frenado:</b> $0 = v_0^2 + 2 a d \implies \mathbf{d_{\text{freno}} = \frac{v_0^2}{2 |a|}}$</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: GRÁFICOS DEL MRUV -->
+      <section>
+        <h2><span class="section-num">15</span> Gráficos del MRUV: $x(t)$, $v(t)$ y $a(t)$</h2>
+        <div class="grid-3">
+          <!-- Gráfico x(t) parábola -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Posición-Tiempo: $x(t)$ (Parábola)</h4>
+            <div class="svg-container" style="padding: 6px;">
+              <svg class="svg-plot" viewBox="0 0 160 110" style="max-width: 220px;">
+                <line x1="20" y1="95" x2="150" y2="95" stroke="#94a3b8" stroke-width="1.2" />
+                <line x1="20" y1="95" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2" />
+                <text x="145" y="105" fill="#94a3b8" font-size="9">t (s)</text>
+                <text x="5" y="20" fill="#38bdf8" font-size="9">x (m)</text>
+                <!-- Parabola curve -->
+                <path d="M 20 90 Q 70 85 135 25" fill="none" stroke="#38bdf8" stroke-width="2.5" />
+                <text x="75" y="45" fill="#38bdf8" font-size="8">Curva Cuadrática</text>
+              </svg>
+            </div>
+            <p style="font-size: 0.82rem; margin-top: 6px;">
+              • Es una <b>rama de parábola</b>.<br>
+              • Concavidad hacia arriba ($\cup$) si $a > 0$.<br>
+              • Concavidad hacia abajo ($\cap$) si $a < 0$.<br>
+              • La recta tangente en cada punto representa la velocidad instantánea.
+            </p>
+          </div>
+
+          <!-- Gráfico v(t) recta inclinada -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Velocidad-Tiempo: $v(t)$ (Recta)</h4>
+            <div class="svg-container" style="padding: 6px;">
+              <svg class="svg-plot" viewBox="0 0 160 110" style="max-width: 220px;">
+                <line x1="20" y1="95" x2="150" y2="95" stroke="#94a3b8" stroke-width="1.2" />
+                <line x1="20" y1="95" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2" />
+                <text x="145" y="105" fill="#94a3b8" font-size="9">t (s)</text>
+                <text x="5" y="20" fill="#34d399" font-size="9">v (m/s)</text>
+                <!-- Trapecio area -->
+                <polygon points="20,70 120,25 120,95 20,95" fill="rgba(52, 211, 153, 0.2)" />
+                <line x1="20" y1="70" x2="135" y2="20" stroke="#34d399" stroke-width="2.5" />
+                <circle cx="20" cy="70" r="3" fill="#34d399" />
+                <text x="5" y="73" fill="#cbd5e1" font-size="8">v₀</text>
+                <text x="50" y="75" fill="#34d399" font-size="8.5" font-weight="bold">Área = Δx</text>
+              </svg>
+            </div>
+            <p style="font-size: 0.82rem; margin-top: 6px;">
+              • Es una <b>recta inclinada (función lineal)</b>.<br>
+              • <b>Pendiente:</b> Equivale a la <b>aceleración $a$</b>.<br>
+              • <b>Área bajo la recta:</b> Área de un trapecio = $\Delta x$.
+            </p>
+          </div>
+
+          <!-- Gráfico a(t) constante -->
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">3. Aceleración-Tiempo: $a(t)$</h4>
+            <div class="svg-container" style="padding: 6px;">
+              <svg class="svg-plot" viewBox="0 0 160 110" style="max-width: 220px;">
+                <line x1="20" y1="95" x2="150" y2="95" stroke="#94a3b8" stroke-width="1.2" />
+                <line x1="20" y1="95" x2="20" y2="15" stroke="#94a3b8" stroke-width="1.2" />
+                <text x="145" y="105" fill="#94a3b8" font-size="9">t (s)</text>
+                <text x="5" y="20" fill="#fbbf24" font-size="9">a (m/s²)</text>
+                <!-- Area rectangle -->
+                <rect x="20" y="45" width="100" height="50" fill="rgba(251, 191, 36, 0.2)" />
+                <line x1="20" y1="45" x2="140" y2="45" stroke="#fbbf24" stroke-width="2.5" />
+                <text x="5" y="48" fill="#cbd5e1" font-size="8">a = cte</text>
+                <text x="45" y="75" fill="#fbbf24" font-size="8.5" font-weight="bold">Área = Δv</text>
+              </svg>
+            </div>
+            <p style="font-size: 0.82rem; margin-top: 6px;">
+              • Es una <b>recta horizontal no nula</b>.<br>
+              • Si $a > 0$, está por encima del eje.<br>
+              • <b>Área bajo la curva:</b> Equivale al cambio de velocidad $\Delta v = a \cdot \Delta t$.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: CAÍDA LIBRE -->
+      <section>
+        <h2><span class="section-num">16</span> Caída Libre: El MRUV de la Gravedad</h2>
+        <div class="grid-2">
+          <div>
+            <div class="box box-indigo">
+              <h4 style="color: #818cf8;">¿Qué es la Caída Libre?</h4>
+              <p style="font-size: 0.88rem;">
+                Es el movimiento vertical que experimenta un cuerpo cuando se <b>deja caer libremente desde cierta altura</b> bajo la acción exclusiva del campo gravitatorio terrestre, sin resistencia del aire.
+              </p>
+              <div class="card-definition" style="padding: 10px; border-radius: 8px; font-size: 0.84rem; margin-top: 8px;">
+                <b>Condición inicial esencial:</b> Al "dejarse caer" o "soltarse", su velocidad inicial es cero:
+                $$\mathbf{v_0 = 0\text{ m/s}}$$
+              </div>
+            </div>
+
+            <div class="box box-cyan" style="margin-top: 10px;">
+              <h4 style="color: #38bdf8;">La Aceleración de la Gravedad ($g$)</h4>
+              <p style="font-size: 0.88rem;">
+                Cerca de la superficie terrestre todos los cuerpos caen con la misma aceleración, independientemente de su masa (demostrado por Galileo):
+              </p>
+              <p class="math-key" style="display: block; text-align: center; font-size: 1.15rem; margin: 6px 0;">
+                $$\mathbf{g = 9{,}8\text{ m/s}^2} \quad (\approx 10\text{ m/s}^2 \text{ en estimaciones})$$
+              </p>
+            </div>
+          </div>
+
+          <!-- Ecuaciones de caída libre -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Fórmulas Directas de Caída Libre</h4>
+            <p style="font-size: 0.85rem;">Tomando el origen en el punto de lanzamiento y eje positivo hacia abajo:</p>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Velocidad tras un tiempo $t$:</b>
+                  $$v(t) = g \cdot t$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Altura de caída tras un tiempo $t$:</b>
+                  $$h = \frac{1}{2} g \cdot t^2$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Tiempo total de caída desde altura $h$:</b>
+                  $$\mathbf{t_{\text{caída}} = \sqrt{\frac{2h}{g}}}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">4</span>
+                <div class="step-content">
+                  <b>Velocidad de impacto contra el piso:</b>
+                  $$\mathbf{v_{\text{impacto}} = \sqrt{2 \cdot g \cdot h} = g \cdot t_{\text{caída}}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: CAÍDA LIBRE - EJEMPLO NUMÉRICO -->
+      <section>
+        <h2><span class="section-num">17</span> Caída Libre: Ejemplo Resuelto Paso a Paso</h2>
+        <div class="box box-cyan">
+          <h4 style="margin-bottom: 4px;">Enunciado Modelo</h4>
+          <p style="font-size: 0.95rem; margin: 0;">
+            Una esfera de acero se suelta desde lo alto de una torre de <b>$40\text{ metros}$</b> de altura. Adoptando $g = 9{,}8\text{ m/s}^2$:
+            <br>
+            <b>a)</b> ¿Cuánto tiempo tardará en chocar contra el suelo?
+            <br>
+            <b>b)</b> ¿Con qué velocidad impactará?
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <!-- Inciso a -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">a) Cálculo del Tiempo de Caída</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content"><b>Fórmula:</b> $h = \frac{1}{2} g \cdot t^2 \implies t = \sqrt{\frac{2h}{g}}$</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Sustitución numérica:</b>
+                  $$t = \sqrt{\frac{2 \cdot 40\text{ m}}{9{,}8\text{ m/s}^2}} = \sqrt{\frac{80}{9{,}8}} = \sqrt{\frac{400}{49}}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Resultado exacto:</b>
+                  $$t = \frac{20}{7}\text{ s} \approx \mathbf{2{,}86\text{ s}}$$
+                  <i>(Nota: con $g = 10\text{ m/s}^2$ daría $\sqrt{8} \approx 2{,}83\text{ s}$).</i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inciso b -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">b) Cálculo de la Velocidad de Impacto</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content"><b>Fórmula de Torricelli:</b> $v_f^2 = 2 \cdot g \cdot h \implies v_f = \sqrt{2 \cdot g \cdot h}$</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Sustitución numérica:</b>
+                  $$v_f = \sqrt{2 \cdot 9{,}8 \cdot 40} = \sqrt{784}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Resultado exacto:</b>
+                  $$\mathbf{v_f = 28\text{ m/s}} \quad (= 100{,}8\text{ km/h})$$
+                  <i>Comprobación con tiempo:</i> $v = g \cdot t = 9{,}8 \cdot \frac{20}{7} = 1{,}4 \cdot 20 = \mathbf{28\text{ m/s}}$ ¡Exacto e impecable!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: TIRO VERTICAL -->
+      <section>
+        <h2><span class="section-num">18</span> Tiro Vertical: Ascenso y Descenso Simétrico</h2>
+        <div class="box box-indigo">
+          <h4 style="margin-bottom: 4px;">Definición y Dinámica del Movimiento</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            El <b>tiro vertical</b> es el movimiento que realiza un cuerpo lanzado hacia arriba con velocidad inicial no nula ($v_0 > 0$). La gravedad actúa constantemente hacia abajo, frenándolo en la subida hasta detenerlo momentáneamente, y acelerándolo en la bajada.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <!-- Subida -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Etapa de Subida</h4>
+            <p style="font-size: 0.85rem;">
+              El vector velocidad apunta hacia arriba ($\uparrow$) y la gravedad hacia abajo ($\downarrow$). Tienen signos opuestos: <b>movimiento desacelerado</b>. La rapidez disminuye $9{,}8\text{ m/s}$ cada segundo.
+            </p>
+            <div class="card-formula" style="padding: 6px; text-align: center; font-size: 0.9rem;">
+              $$v(t) = v_0 - g \cdot t$$
+            </div>
+          </div>
+
+          <!-- Altura Máxima -->
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. Altura Máxima ($h_{\text{max}}$)</h4>
+            <p style="font-size: 0.85rem;">
+              En el punto más alto, el móvil se detiene por una fracción infinitesimal de segundo:
+            </p>
+            <p class="math-key" style="display: block; text-align: center; margin: 6px 0;">
+              $$\mathbf{v = 0\text{ m/s}}$$
+            </p>
+            <p style="font-size: 0.80rem; color: #fca5a5;">
+              ⚠️ <b>¡Cuidado!</b> La velocidad es cero, pero la aceleración <u>sigue siendo $g = 9{,}8\text{ m/s}^2$</u> hacia abajo. Si la aceleración fuera cero, el proyectil flotaría suspendido en el aire para siempre.
+            </p>
+          </div>
+
+          <!-- Bajada -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Etapa de Bajada</h4>
+            <p style="font-size: 0.85rem;">
+              Tras alcanzar el punto máximo, comienza a caer libremente desde el reposo. La velocidad apunta hacia abajo y la gravedad también: <b>movimiento acelerado</b>.
+            </p>
+            <div class="card-example" style="padding: 6px; text-align: center; font-size: 0.85rem;">
+              Simetría total con la subida
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: TIRO VERTICAL - FÓRMULAS Y SIMETRÍAS -->
+      <section>
+        <h2><span class="section-num">19</span> Fórmulas Fundamentales del Tiro Vertical</h2>
+        <div class="grid-2">
+          <!-- Columna Fórmulas Clave -->
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Las 4 Fórmulas Maestras de Lanzamiento</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                  <b>Tiempo de subida hasta $v = 0$:</b>
+                  $$0 = v_0 - g \cdot t_{\text{sub}} \implies \mathbf{t_{\text{subida}} = \frac{v_0}{g}}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                  <b>Altura máxima alcanzada ($h_{\text{max}}$):</b>
+                  $$0 = v_0^2 - 2 g h_{\text{max}} \implies \mathbf{h_{\text{max}} = \frac{v_0^2}{2g}}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                  <b>Tiempo total de vuelo (ida y vuelta al suelo):</b>
+                  $$\mathbf{t_{\text{vuelo}} = 2 \cdot t_{\text{subida}} = \frac{2 v_0}{g}}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">4</span>
+                <div class="step-content">
+                  <b>Ecuación horaria completa de posición:</b>
+                  $$\mathbf{y(t) = y_0 + v_0 \cdot t - \frac{1}{2} g \cdot t^2}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Propiedades de Simetría -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Propiedades Fascinantes de Simetría</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">⏱️</span>
+                <div class="step-content">
+                  <b>Simetría de tiempo:</b> El tiempo que tarda en subir es exactamente igual al tiempo que tarda en bajar hasta el mismo nivel:
+                  $$t_{\text{subida}} = t_{\text{bajada}}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">⚡</span>
+                <div class="step-content">
+                  <b>Simetría de rapidez:</b> A cualquier altura determinada, la rapidez con la que sube es exactamente igual a la rapidez con la que baja:
+                  $$|v_{\text{subida}}(y)| = |v_{\text{bajada}}(y)|$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">🎯</span>
+                <div class="step-content">
+                  <b>Velocidad de retorno al suelo:</b> Llega al piso exactamente con la misma rapidez con la que fue lanzado: $v_{\text{suelo}} = -v_0$.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: EJEMPLO COMPLETO DE TIRO VERTICAL -->
+      <section>
+        <h2><span class="section-num">20</span> Tiro Vertical: Ejemplo Resuelto Completo</h2>
+        <div class="box box-cyan">
+          <h4 style="margin-bottom: 4px;">Enunciado del Ejercicio</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Un proyectil se lanza verticalmente hacia arriba desde el suelo con una velocidad inicial de <b>$v_0 = 29{,}4\text{ m/s}$</b>. Adoptando $g = 9{,}8\text{ m/s}^2$, calcular:
+            <br>
+            <b>a)</b> Tiempo de subida. <b>b)</b> Altura máxima. <b>c)</b> Tiempo total en el aire. <b>d)</b> Velocidad y altura a $t = 1\text{ s}$ y a $t = 4\text{ s}$.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Cálculos Globales (Subida y Altura)</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">a</span>
+                <div class="step-content">
+                  <b>Tiempo de subida:</b>
+                  $$t_{\text{sub}} = \frac{v_0}{g} = \frac{29{,}4\text{ m/s}}{9{,}8\text{ m/s}^2} = \mathbf{3{,}0\text{ s}}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">b</span>
+                <div class="step-content">
+                  <b>Altura máxima:</b>
+                  $$h_{\text{max}} = \frac{v_0^2}{2g} = \frac{(29{,}4)^2}{19{,}6} = \frac{864{,}36}{19{,}6} = \mathbf{44{,}1\text{ m}}$$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">c</span>
+                <div class="step-content">
+                  <b>Tiempo en el aire:</b>
+                  $$t_{\text{total}} = 2 \cdot t_{\text{sub}} = 2 \cdot 3{,}0\text{ s} = \mathbf{6{,}0\text{ s}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Análisis en Instantes Específicos</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1s</span>
+                <div class="step-content">
+                  <b>A los $1\text{ s}$ (Subiendo, pues $t < 3\text{ s}$):</b><br>
+                  $v(1) = 29{,}4 - 9{,}8(1) = \mathbf{+19{,}6\text{ m/s}}$ (hacia arriba)<br>
+                  $y(1) = 29{,}4(1) - 4{,}9(1)^2 = \mathbf{24{,}5\text{ m}}$
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">4s</span>
+                <div class="step-content">
+                  <b>A los $4\text{ s}$ (Cayendo, pues $t > 3\text{ s}$):</b><br>
+                  $v(4) = 29{,}4 - 9{,}8(4) = 29{,}4 - 39{,}2 = \mathbf{-9{,}8\text{ m/s}}$ (hacia abajo)<br>
+                  $y(4) = 29{,}4(4) - 4{,}9(4)^2 = 117{,}6 - 78{,}4 = \mathbf{39{,}2\text{ m}}$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: MASTERCLASS INTERPRETACIÓN DE GRÁFICOS -->
+      <section>
+        <h2><span class="section-num">21</span> Masterclass: Interpretación Visual de Gráficos</h2>
+        <p class="subtext">Para resolver ejercicios de gráficos sin dudas, aprendé a leer las dos propiedades maestras: <b>Pendiente</b> y <b>Área</b>.</p>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <!-- Tabla de Pendientes -->
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. ¿Qué nos dice la PENDIENTE ($m = \frac{\Delta y}{\Delta x}$)?</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">📈</span>
+                <div class="step-content">
+                  <b>En un gráfico Posición-Tiempo $x(t)$:</b><br>
+                  La pendiente es la <b>velocidad</b> ($v = \frac{\Delta x}{\Delta t}$).<br>
+                  • Recta inclinada $\implies$ pendiente fija $\implies$ MRU ($v = \text{cte}$).<br>
+                  • Curva $\implies$ la pendiente cambia $\implies$ MRUV ($v$ cambia).<br>
+                  • Recta horizontal $\implies$ pendiente $0 \implies$ Móvil en reposo ($v=0$).
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">📉</span>
+                <div class="step-content">
+                  <b>En un gráfico Velocidad-Tiempo $v(t)$:</b><br>
+                  La pendiente es la <b>aceleración</b> ($a = \frac{\Delta v}{\Delta t}$).<br>
+                  • Recta horizontal $\implies$ pendiente $0 \implies$ $a = 0$ (MRU).<br>
+                  • Recta oblicua $\implies$ pendiente constante $\implies$ MRUV ($a = \text{cte}$).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabla de Áreas -->
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. ¿Qué nos dice el ÁREA BAJO LA CURVA?</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">🟩</span>
+                <div class="step-content">
+                  <b>Área en un gráfico Velocidad-Tiempo $v(t)$:</b><br>
+                  Representa exactamente el <b>Desplazamiento neto ($\Delta x$)</b>.<br>
+                  $$\Delta x = \text{Base} \times \text{Altura} = \Delta t \cdot v$$
+                  • Si el área está <b>sobre el eje $t$</b> ($v > 0$): $\Delta x > 0$ (avanza).<br>
+                  • Si el área está <b>debajo del eje $t$</b> ($v < 0$): $\Delta x < 0$ (retrocede).
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">🟧</span>
+                <div class="step-content">
+                  <b>Área en un gráfico Aceleración-Tiempo $a(t)$:</b><br>
+                  Representa la <b>Variación de velocidad ($\Delta v = v_f - v_i$)</b>.<br>
+                  $$\Delta v = a \cdot \Delta t$$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: METODOLOGÍA GENERAL DE 12 PASOS -->
+      <section>
+        <h2><span class="section-num">22</span> Metodología General para Resolver Ejercicios (12 Pasos)</h2>
+        <p class="subtext">El algoritmo sistemático para resolver cualquier problema de cinemática con éxito garantizado:</p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="step-list">
+            <div class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-content"><b>Lectura comprensiva:</b> Leer el enunciado completo identificando el fenómeno físico.</div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-content"><b>Identificar el tipo de movimiento:</b> ¿MRU, MRUV, Caída libre o Tiro vertical?</div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-content"><b>Extraer los datos conocidos:</b> Anotar valores con sus nombres y unidades ($x_0, v_0, t$, etc.).</div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-content"><b>Identificar las incógnitas:</b> Tener 100% claro qué magnitud se busca ($a, t, d$, etc.).</div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">5</span>
+              <div class="step-content"><b>Conversión de unidades:</b> Pasar todo al SI ($\text{m}, \text{s}, \text{m/s}, \text{m/s}^2$).</div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">6</span>
+              <div class="step-content"><b>Establecer Sistema de Referencia:</b> Fijar origen ($x=0$) y sentido positivo (+).</div>
+            </div>
+          </div>
+
+          <div class="step-list">
+            <div class="step-item">
+              <span class="step-num">7</span>
+              <div class="step-content"><b>Elegir la fórmula adecuada:</b> Seleccionar la ecuación que contiene los datos y la incógnita.</div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">8</span>
+              <div class="step-content"><b>Despejar algebraicamente:</b> Dejar sola la incógnita antes de sustituir números.</div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">9</span>
+              <div class="step-content"><b>Reemplazar valores numéricos:</b> Sustituir los datos siempre acompañados de sus unidades.</div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">10</span>
+              <div class="step-content"><b>Realizar los cálculos:</b> Operar con rigor aritmético y simplificar unidades algebraicamente.</div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">11</span>
+              <div class="step-content"><b>Expresar el resultado final:</b> Destacar número y unidad correcta ($[\text{m/s}^2], [\text{m}]$, etc.).</div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">12</span>
+              <div class="step-content"><b>Interpretación física y coherencia:</b> ¿Tiene sentido en el mundo real? (ej: tiempo positivo).</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: TABLA COMPARATIVA DE FÓRMULAS -->
+      <section>
+        <h2><span class="section-num">23</span> Gran Resumen Comparativo de Cinemática</h2>
+        <table class="math-table" style="font-size: 0.82rem;">
+          <thead>
+            <tr>
+              <th>Tipo de Movimiento</th>
+              <th>Aceleración</th>
+              <th>Ecuación de Velocidad</th>
+              <th>Ecuación de Posición</th>
+              <th>Ecuación de Torricelli</th>
+              <th>Situación Típica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b style="color:#38bdf8;">MRU</b></td>
+              <td>$a = 0$</td>
+              <td>$v = \text{constante}$</td>
+              <td>$x = x_0 + v \cdot t$</td>
+              <td>No aplica ($a=0$)</td>
+              <td>Velocidad crucero, sonido en el aire, luz</td>
+            </tr>
+            <tr>
+              <td><b style="color:#818cf8;">MRUV (Acelerado)</b></td>
+              <td>$a = \text{cte} > 0$</td>
+              <td>$v = v_0 + a \cdot t$</td>
+              <td>$x = x_0 + v_0 t + \frac{1}{2} a t^2$</td>
+              <td>$v^2 = v_0^2 + 2a\Delta x$</td>
+              <td>Auto acelerando, despegue de avión</td>
+            </tr>
+            <tr>
+              <td><b style="color:#f87171;">MRUV (Frenado)</b></td>
+              <td>$a = \text{cte} < 0$</td>
+              <td>$v = v_0 - |a| \cdot t$</td>
+              <td>$x = x_0 + v_0 t - \frac{1}{2} |a| t^2$</td>
+              <td>$0 = v_0^2 - 2|a|d_{\text{freno}}$</td>
+              <td>Frenada de emergencia, detención en semáforo</td>
+            </tr>
+            <tr>
+              <td><b style="color:#34d399;">Caída Libre</b></td>
+              <td>$a = g = 9{,}8\text{ m/s}^2$</td>
+              <td>$v = g \cdot t$ ($v_0 = 0$)</td>
+              <td>$h = \frac{1}{2} g \cdot t^2$</td>
+              <td>$v^2 = 2 g h$</td>
+              <td>Objeto que se suelta desde un puente o edificio</td>
+            </tr>
+            <tr>
+              <td><b style="color:#c084fc;">Tiro Vertical</b></td>
+              <td>$a = -g = -9{,}8\text{ m/s}^2$</td>
+              <td>$v = v_0 - g \cdot t$</td>
+              <td>$y = y_0 + v_0 t - \frac{1}{2} g t^2$</td>
+              <td>$v^2 = v_0^2 - 2g\Delta y$</td>
+              <td>Pelota o flecha disparada hacia el cielo</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-emerald" style="margin-top: 12px; padding: 10px 18px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Regla Mnemotécnica de Oro</h4>
+          <p style="font-size: 0.86rem; margin: 0; color: #cbd5e1;">
+            • Si no interviene el tiempo $\implies$ <b>Usá Torricelli ($v^2 = v_0^2 + 2a\Delta x$)</b>.<br>
+            • Si te piden o dan tiempos y posiciones $\implies$ <b>Usá la cuadrática de posición ($x = x_0 + v_0 t + \frac{1}{2} a t^2$)</b>.<br>
+            • Si te piden o dan tiempos y velocidades $\implies$ <b>Usá la lineal de velocidad ($v = v_0 + a t$)</b>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: ERRORES FRECUENTES Y CIERRE -->
+      <section>
+        <h2><span class="section-num">24</span> Errores Frecuentes y Checklist de Autoevaluación</h2>
+        <div class="grid-2">
+          <div class="wrong-card">
+            <div class="wrong-title">⚠️ Errores Críticos que Debés Evitar</div>
+            <ul style="font-size: 0.82rem; line-height: 1.5; margin-left: 16px; color: #fca5a5;">
+              <li><b>No convertir $\text{km/h}$ a $\text{m/s}$</b> antes de mezclar con segundos o metros.</li>
+              <li><b>Olvidar elevar el tiempo al cuadrado</b> en $\frac{1}{2} a t^2$.</li>
+              <li><b>Confundir distancia y desplazamiento</b> en trayectorias con ida y vuelta.</li>
+              <li><b>Creer que $a = 0$ en la altura máxima</b> del tiro vertical (¡la gravedad nunca se apaga!).</li>
+              <li><b>Olvidar el signo menos</b> en la aceleración cuando un móvil frena.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé convertir entre $\text{km/h}$ y $\text{m/s}$ usando el factor $3{,}6$?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Reconozco cuándo usar MRU ($a=0$) y cuándo MRUV ($a=\text{cte}$)?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo despejar cualquiera de las variables en $x(t) = x_0 + v \cdot t$?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo que el área bajo la curva en $v(t)$ es el desplazamiento?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé calcular tiempo de subida y altura máxima en tiro vertical con $g=9{,}8\text{ m/s}^2$?</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px; display: flex; justify-content: center; gap: 14px;">
+          <a href="index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Volver al Menú de Física
+          </a>
+          <a href="resolucion-tp2-cinematica.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            Ir a la Resolución del TP N.º 2 →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Scripts Reveal.js + KaTeX -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [ RevealMath.KaTeX ],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+  </script>
+</body>
+</html>
