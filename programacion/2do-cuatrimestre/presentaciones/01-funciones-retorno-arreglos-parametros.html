@@ -1,74 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 2C - 01: Funciones con Retorno y Vectores como Parámetros | Clases Particulares</title>
+  <title>Programación 2C - 01: Funciones con Retorno y Arreglos como Parámetros | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
-  
-  <!-- Reveal.js Styles -->
+
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
-  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
-  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
-  <style>
-    .reveal .code-body,
-    .reveal pre.code-body,
-    .reveal .code-window pre {
-      font-size: 1.05rem !important;
-      line-height: 1.38 !important;
-      width: 100% !important;
-      margin: 0 !important;
-      box-shadow: none !important;
-      padding: 10px 18px !important;
-      box-sizing: border-box !important;
-    }
-    .grid-2 .code-body,
-    .grid-1-2 .code-body,
-    .grid-2-1 .code-body,
-    .grid-2 pre.code-body,
-    .grid-1-2 pre.code-body,
-    .grid-2-1 pre.code-body,
-    .grid-2 .code-window pre,
-    .grid-1-2 .code-window pre,
-    .grid-2-1 .code-window pre {
-      font-size: 1.00rem !important;
-      padding: 10px 14px !important;
-      line-height: 1.38 !important;
-    }
-    .grid-3 .code-body,
-    .grid-3 pre.code-body,
-    .grid-3 .code-window pre {
-      font-size: 0.80rem !important;
-      padding: 8px 10px !important;
-      line-height: 1.34 !important;
-    }
-    .terminal-body {
-      font-size: 1.05rem !important;
-      padding: 12px 16px !important;
-      line-height: 1.40 !important;
-    }
-    .reveal code:not(.code-body *) {
-      font-size: 0.88em !important;
-      border: none !important;
-      padding: 1px 5px !important;
-      box-decoration-break: clone !important;
-      -webkit-box-decoration-break: clone !important;
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../index.html">← Índice 2do Cuatrimestre</a>
       <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">2do Cuatrimestre • Unidad 01</span>
@@ -79,404 +38,1449 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-emerald">2do Cuatrimestre • Modularidad Avanzada • Unidad 01</span>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-emerald">2do Cuatrimestre • Unidad 01</span>
           <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Funciones con Retorno y Arreglos como Parámetros</h1>
-          <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px;">
-            De la ejecución secuencial a la ingeniería modular: cómo calcular y devolver valores con <code>return</code> y procesar colecciones completas en funciones.
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 24px;">
+            Cómo diseñar funciones que calculan y devuelven resultados con <code>return</code> y cómo procesar vectores completos de forma modular
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-indigo">Funciones con retorno</span>
-            <span class="badge badge-cyan">Palabra clave return</span>
-            <span class="badge badge-amber">Vectores como parámetros</span>
-            <span class="badge badge-emerald">Envío explícito del tamaño</span>
+            <span class="badge badge-cyan">1. Funciones con Retorno</span>
+            <span class="badge badge-indigo">Entrada → Proceso → Resultado</span>
+            <span class="badge badge-amber">2. Vectores como Parámetros</span>
+            <span class="badge badge-purple">Envío de Tamaño</span>
+            <span class="badge badge-rose">numeros vs numeros[0]</span>
           </div>
 
-          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-emerald" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar por las 35 diapositivas de esta clase.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta: Bienvenida al 2do Cuatrimestre</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué este tema es el punto de partida?</h4>
-            <p>En el primer cuatrimestre vimos funciones sencillas y procedimientos <code>void</code>. En esta nueva etapa necesitamos que las funciones se comporten como <b>módulos matemáticos y transformadores de datos</b> capaces de dialogar con arreglos, strings y estructuras complejas.</p>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
-              Comprender el retorno y el paso de vectores es el puente obligatorio antes de abordar los strings y los punteros en C.
-            </p>
+            <h4 style="color: #818cf8;">Lo que ya sabemos del 1er Cuatrimestre</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Declarar variables (<code>int</code>, <code>float</code>, <code>char</code>), condicionales <code>if</code> y ciclos <code>for</code> / <code>while</code>.</li>
+              <li>Crear y recorrer <b>vectores (arreglos)</b> desde la posición <code>0</code> hasta <code>tamaño - 1</code>.</li>
+              <li>Definir funciones sencillas que agrupan tareas para no repetir código dentro de <code>main()</code>.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
-            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
-              <li>Comprender la analogía de la función como <b>máquina procesadora</b>.</li>
-              <li>Diferenciar con total precisión entre <code>return</code> y <code>printf</code>.</li>
-              <li>Construir funciones que devuelven enteros (<code>int</code>) y reales (<code>float</code>).</li>
-              <li>Aprender a pasar un arreglo a una función con la sintaxis <code>tipo vector[]</code>.</li>
-              <li>Entender <b>por qué C exige enviar el tamaño</b> de forma obligatoria.</li>
-              <li>Evitar la confusión clásica entre enviar <code>numeros</code> vs <code>numeros[0]</code>.</li>
+            <h4 style="color: #34d399;">Lo que vamos a dominar hoy (Secciones 1 y 2)</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Entender las funciones como <b>máquinas</b>: <code>Entrada → proceso → resultado</code>.</li>
+              <li>Usar <code>return</code> en <code>doble</code>, <code>sumar</code> y <code>calcularDescuento</code>.</li>
+              <li>Pasar un vector a una función: <code>mostrarVector(int vector[], int tamano)</code> y <code>sumarVector</code>.</li>
+              <li>Comprender por qué enviamos <code>tamano</code> y por qué se escribe <code>numeros</code> y <b>nunca</b> <code>numeros[0]</code>.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: LA MÁQUINA DE FUNCIONES -->
+      <!-- SLIDE 3: EL PROBLEMA QUE RESUELVEN LAS FUNCIONES -->
       <section>
-        <h2><span class="section-num">02</span> ¿Qué es una Función con Retorno?</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Una función es un bloque de código reusable que realiza una tarea específica.</p>
+        <h2><span class="section-num">02</span> ¿Qué Problema Resuelven las Funciones con Retorno?</h2>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+          Imaginá que en distintas partes de un programa de ventas necesitás calcular precios con descuento o sumar totales. Si escribís toda la cuenta suelta dentro de <code>main()</code>:
+        </p>
 
-        <div class="box box-cyan">
-          <p style="margin: 0; font-size: 1.05rem;">
-            Podemos imaginar una función como una <b>máquina procesadora</b>:
-          </p>
-          <div style="display: flex; justify-content: center; align-items: center; gap: 18px; margin: 14px 0; font-family: var(--font-mono); font-size: 1.1rem;">
-            <div style="background: rgba(56, 189, 248, 0.15); border: 1px solid var(--accent-cyan); padding: 8px 16px; border-radius: 8px; color: var(--accent-cyan);">Entrada (Parámetro)</div>
-            <div style="color: var(--accent-amber);">➔</div>
-            <div style="background: rgba(129, 140, 248, 0.15); border: 1px solid var(--accent-indigo); padding: 8px 16px; border-radius: 8px; color: var(--accent-indigo);">Proceso interno</div>
-            <div style="color: var(--accent-amber);">➔</div>
-            <div style="background: rgba(52, 211, 153, 0.15); border: 1px solid var(--accent-emerald); padding: 8px 16px; border-radius: 8px; color: var(--accent-emerald);">Resultado (return)</div>
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Todo mezclado en main()</div>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li>Repetís la misma fórmula una y otra vez.</li>
+              <li>Si cambia la fórmula, tenés que corregirla en 10 lugares distintos.</li>
+              <li>El código principal se vuelve largo y difícil de leer.</li>
+            </ul>
           </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Con Funciones con Retorno</div>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li>Escribís la lógica <b>una sola vez</b> dentro de una función con nombre claro.</li>
+              <li>Le enviás los datos de entrada (parámetros).</li>
+              <li>La función calcula y te <b>devuelve el resultado</b> listo para guardar o usar.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: 1. FUNCIONES CON RETORNO Y LA MÁQUINA -->
+      <section>
+        <h2><span class="section-num">03</span> 1. Funciones con Retorno: La Máquina Procesadora</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición del Apunte</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Una <b>función</b> es un bloque de código que realiza una tarea específica. Podemos pensar una función como una <b>máquina</b> que recibe una entrada, realiza un proceso y entrega un resultado.
+          </p>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin: 18px 0; font-family: var(--font-mono); font-size: 1.05rem;">
+          <div style="background: rgba(56, 189, 248, 0.15); border: 1px solid var(--accent-cyan); padding: 12px 20px; border-radius: 10px; color: var(--accent-cyan); text-align: center;">
+            <b>Entrada</b><br><span style="font-size: 0.85rem; color: #cbd5e1;">5</span>
+          </div>
+          <div style="color: var(--accent-amber); font-size: 1.4rem;">➔</div>
+          <div style="background: rgba(129, 140, 248, 0.15); border: 1px solid var(--accent-indigo); padding: 12px 24px; border-radius: 10px; color: var(--accent-indigo); text-align: center;">
+            <b>Proceso</b><br><span style="font-size: 0.85rem; color: #cbd5e1;">función doble (× 2)</span>
+          </div>
+          <div style="color: var(--accent-amber); font-size: 1.4rem;">➔</div>
+          <div style="background: rgba(52, 211, 153, 0.15); border: 1px solid var(--accent-emerald); padding: 12px 20px; border-radius: 10px; color: var(--accent-emerald); text-align: center;">
+            <b>Resultado</b><br><span style="font-size: 0.85rem; color: #cbd5e1;">10</span>
+          </div>
+        </div>
+
+        <div class="box box-indigo">
+          <p style="margin: 0; font-size: 0.88rem;">
+            💡 <b>Analogía cotidiana:</b> Es como una licuadora o una calculadora: vos ponés los ingredientes (<b>entrada</b>), la máquina trabaja por dentro (<b>proceso</b>) y te entrega el vaso servido (<b>resultado</b>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: PRIMER EJEMPLO DEL APUNTE: int doble(int numero) -->
+      <section>
+        <h2><span class="section-num">04</span> Primer Ejemplo del Apunte: <code>doble</code></h2>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+          Veamos cómo se escribe en lenguaje C la máquina que calcula el doble de un número entero:
+        </p>
+
+        <div class="code-window" style="margin: 12px 0;">
+          <div class="code-header">
+            <span class="code-title">funcion_doble.c</span>
+            <span class="code-badge">Apunte pág. 2</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+}</div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿Qué entra a la máquina?</h4>
+            <p style="font-size: 0.85rem; margin: 0;">
+              Entra un número entero guardado en el parámetro <code>int numero</code>. Si la llamamos con <code>5</code>, entonces <code>numero</code> vale <code>5</code>.
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Qué sale de la máquina?</h4>
+            <p style="font-size: 0.85rem; margin: 0;">
+              Calcula <code>numero * 2</code> (que da <code>10</code>) y la palabra clave <code>return</code> expulsa ese <code>10</code> hacia afuera como resultado final.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: DESGLOSE PIEZA POR PIEZA DE LA SINTAXIS -->
+      <section>
+        <h2><span class="section-num">05</span> Desglose Pieza por Pieza de la Sintaxis</h2>
+        <div class="code-window" style="margin-bottom: 14px;">
+          <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero) { <span class="c-kw">return</span> numero * <span class="c-num">2</span>; }</div>
+        </div>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div><b>Tipo de retorno (<code>int</code> adelante del nombre):</b> Promete qué tipo de dato va a devolver la función. Como devuelve un entero, escribimos <code>int</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div><b>Nombre de la función (<code>doble</code>):</b> Identificador con el que vamos a invocar a la función desde <code>main()</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div><b>Parámetro de entrada (<code>(int numero)</code>):</b> Variable local que recibe el dato enviado desde afuera al momento de llamarla.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div><b>Sentencia <code>return numero * 2;</code>:</b> Evalúa la expresión a su derecha y entrega ese valor como respuesta de la función.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: ¿QUÉ SIGNIFICA RETURN? EJEMPLO SUMAR -->
+      <section>
+        <h2><span class="section-num">06</span> ¿Qué Significa <code>return</code>? Ejemplo <code>sumar</code></h2>
+        <div class="box box-indigo" style="margin-bottom: 12px;">
+          <p style="margin: 0; font-size: 0.92rem;">
+            <b>Definición del Apunte:</b> <code>return</code> permite que una función <b>devuelva un resultado</b> al lugar donde fue llamada.
+          </p>
         </div>
 
         <div class="grid-2">
           <div class="code-window">
             <div class="code-header">
-              <div class="code-dots"><span class="code-dot dot-red"></span><span class="code-dot dot-yellow"></span><span class="code-dot dot-green"></span></div>
-              <span class="code-title">doble.c</span>
-              <span class="code-badge">C99</span>
+              <span class="code-title">sumar.c</span>
+              <span class="code-badge">Apunte pág. 2</span>
             </div>
-            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">sumar</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b)
 {
-    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+    <span class="c-kw">return</span> a + b;
 }
 
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-{
-    <span class="c-kw">int</span> valor = <span class="c-fn">doble</span>(<span class="c-num">5</span>);
-    <span class="c-fn">printf</span>(<span class="c-str">"Resultado: %d\n"</span>, valor); <span class="c-cmt">// 10</span>
-    <span class="c-kw">return</span> <span class="c-num">0</span>;
-}</div>
+<span class="c-cmt">// En main hacemos:</span>
+<span class="c-kw">int</span> resultado = <span class="c-fn">sumar</span>(<span class="c-num">5</span>, <span class="c-num">3</span>);</div>
           </div>
 
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Paso a paso de la llamada</h4>
-            <div class="step-list">
-              <div class="step-item">
-                <span class="step-num">1</span>
-                <div>En <code>main()</code>, llamamos a <code>doble(5)</code>. El <b>argumento 5</b> viaja a la función.</div>
-              </div>
-              <div class="step-item">
-                <span class="step-num">2</span>
-                <div>El parámetro <code>numero</code> recibe una copia con el valor <code>5</code>.</div>
-              </div>
-              <div class="step-item">
-                <span class="step-num">3</span>
-                <div>La expresión <code>numero * 2</code> evalúa a <code>10</code>.</div>
-              </div>
-              <div class="step-item">
-                <span class="step-num">4</span>
-                <div><code>return 10;</code> devuelve ese valor al punto exacto donde se invocó, asignándolo a <code>valor</code>.</div>
-              </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Qué ocurre paso a paso?</h4>
+            <p style="font-size: 0.85rem; margin: 0 0 8px;">
+              Cuando ejecutamos <code>int resultado = sumar(5, 3);</code>:
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.86rem; background: rgba(15,23,42,0.7); padding: 10px 14px; border-radius: 8px; line-height: 1.55;">
+              1) a recibe 5, b recibe 3<br>
+              2) La función hace: 5 + 3 ➔ 8<br>
+              3) Y devuelve: 8<br>
+              4) Entonces: <b>resultado = 8;</b>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: RETURN VS PRINTF -->
+      <!-- SLIDE 8: DIFERENCIA CRUCIAL: VOID VS CON RETORNO -->
       <section>
-        <h2><span class="section-num">03</span> Diferencia Crucial: <code>return</code> vs <code>printf</code></h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Uno de los errores más comunes de los principiantes es confundir mostrar un valor con devolverlo.</p>
+        <h2><span class="section-num">07</span> Diferencia Crucial: Funciones <code>void</code> vs Con Retorno</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          No es lo mismo <b>mostrar</b> un dato en pantalla con <code>printf</code> que <b>devolver</b> un resultado con <code>return</code>:
+        </p>
 
         <div class="comparison-box">
           <div class="wrong-card">
-            <div class="wrong-title">❌ Imprimir en pantalla (Efecto visual)</div>
-            <div class="code-window" style="margin: 0 0 10px;">
-              <div class="code-body"><span class="c-type">void</span> <span class="c-fn">sumarMal</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b)
-{
+            <div class="wrong-title">📢 Función void (Solo muestra)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-type">void</span> <span class="c-fn">mostrarSuma</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b) {
     <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, a + b);
 }</div>
             </div>
-            <p style="font-size: 0.85rem; color: #fca5a5;">
-              <code>printf</code> dibuja caracteres de texto en la consola de la terminal. <b>No le entrega ningún dato al resto del programa</b>. El resultado no se puede guardar, comparar ni reutilizar.
+            <p style="font-size: 0.8rem; margin: 6px 0 0;">
+              Imprime el número en la consola, pero <b>no devuelve nada</b>. No podés hacer <code>int x = mostrarSuma(5, 3);</code> ni usar ese valor en otra cuenta.
             </p>
           </div>
 
           <div class="correct-card">
-            <div class="correct-title">✅ Devolver un valor (Dato útil en RAM)</div>
-            <div class="code-window" style="margin: 0 0 10px;">
-              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">sumarBien</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b)
-{
+            <div class="correct-title">⚙️ Función con Retorno (Devuelve el dato)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">sumar</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b) {
     <span class="c-kw">return</span> a + b;
 }</div>
             </div>
-            <p style="font-size: 0.85rem; color: #86efac;">
-              <code>return</code> entrega el dato al programa que llamó. Ahora podemos hacer:
-              <code>int total = sumarBien(5, 3) * 10;</code>. ¡El valor devuelto es un número real listo para procesar!
+            <p style="font-size: 0.8rem; margin: 6px 0 0;">
+              Entrega el número <code>8</code> a <code>main()</code>. Ahí vos decidís si querés guardarlo en una variable, multiplicarlo por 2 o imprimirlo con <code>printf</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: MODELO MENTAL EN MEMORIA RAM -->
+      <section>
+        <h2><span class="section-num">08</span> Modelo Mental en Memoria RAM: El Viaje de los Datos</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          ¿Qué pasa en la memoria RAM cuando <code>main()</code> ejecuta <code>int resultado = sumar(5, 3);</code>?
+        </p>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="memory-box">
+            <div class="memory-label">1. LLAMADA EN MAIN</div>
+            <div style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-cyan); margin: 8px 0;">
+              sumar(5, 3)
+            </div>
+            <p style="font-size: 0.78rem; color: #cbd5e1; margin: 0;">
+              Los valores <code>5</code> y <code>3</code> se copian en los parámetros de la función.
+            </p>
+          </div>
+
+          <div class="memory-box">
+            <div class="memory-label">2. VARIABLES DE SUMAR</div>
+            <div style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-amber); margin: 8px 0;">
+              a = [ 5 ] &nbsp; b = [ 3 ]
+            </div>
+            <p style="font-size: 0.78rem; color: #cbd5e1; margin: 0;">
+              <code>sumar</code> calcula <code>a + b</code> (<code>8</code>) y ejecuta <code>return 8;</code>.
+            </p>
+          </div>
+
+          <div class="memory-box">
+            <div class="memory-label">3. REGRESO A MAIN</div>
+            <div style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-emerald); margin: 8px 0;">
+              resultado = [ 8 ]
+            </div>
+            <p style="font-size: 0.78rem; color: #cbd5e1; margin: 0;">
+              La llamada <code>sumar(5, 3)</code> es reemplazada por el valor devuelto <code>8</code>.
             </p>
           </div>
         </div>
 
-        <div class="box box-amber">
-          <p style="margin: 0; font-size: 0.88rem; color: #fde68a;">
-            💡 <b>Regla mnemotécnica:</b> Si el programa necesita hacer una cuenta y seguir operando con el resultado en otra parte, la función <b>DEBE devolver un valor</b> con <code>return</code>. Si solo es un mensaje o informe final, puede ser <code>void</code>.
+        <div class="box box-amber" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            📌 <b>Regla clave:</b> Pensá que en el momento en que la función ejecuta <code>return 8;</code>, toda la expresión <code>sumar(5, 3)</code> se transforma mágicamente en un <code>8</code>.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 5: EJEMPLO DESCUENTO -->
+      <!-- SLIDE 10: EJEMPLO NIVEL 1 COMPLETO -->
       <section>
-        <h2><span class="section-num">04</span> Ejemplo con Flotantes: <code>calcularDescuento</code></h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Aplicación práctica con tipos de coma flotante (<code>float</code>) extraída del apunte teórico.</p>
-
-        <div class="grid-1-2">
-          <div class="box box-purple">
-            <h4 style="color: #c084fc;">Fórmula Financiera</h4>
-            <p style="font-size: 0.88rem;">
-              Para calcular el precio con descuento:
-            </p>
-            <div style="font-family: var(--font-mono); font-size: 0.85rem; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 6px; margin: 10px 0; color: #f8fafc;">
-              precioFinal = precio - (precio * desc / 100)
-            </div>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">
-              Si el precio es <b>$1000</b> y el descuento es <b>20%</b>:
-              <br>Descuento = $200.
-              <br>Precio Final = $800.
-            </p>
-          </div>
-
+        <h2><span class="section-num">09</span> Ejemplo Nivel 1: Programa Completo con <code>doble</code> y <code>sumar</code></h2>
+        <div class="grid-2-1" style="align-items: center;">
           <div class="code-window">
             <div class="code-header">
-              <div class="code-dots"><span class="code-dot dot-red"></span><span class="code-dot dot-yellow"></span><span class="code-dot dot-green"></span></div>
-              <span class="code-title">descuento.c</span>
-              <span class="code-badge">float return</span>
+              <span class="code-title">nivel1_retorno.c</span>
+              <span class="code-badge">Nivel 1</span>
             </div>
-            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
 
-<span class="c-kw">float</span> <span class="c-fn">calcularDescuento</span>(<span class="c-kw">float</span> precio, <span class="c-kw">float</span> descuento) 
-{ 
-    <span class="c-kw">return</span> precio - (precio * descuento / <span class="c-num">100.0f</span>); 
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero) {
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
 }
 
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-{
-    <span class="c-kw">float</span> precioFinal = <span class="c-fn">calcularDescuento</span>(<span class="c-num">1000.0f</span>, <span class="c-num">20.0f</span>);
-    
-    <span class="c-fn">printf</span>(<span class="c-str">"Precio final a abonar: $%.2f\n"</span>, precioFinal);
-    <span class="c-cmt">// Imprime: Precio final a abonar: $800.00</span>
-    
+<span class="c-kw">int</span> <span class="c-fn">sumar</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b) {
+    <span class="c-kw">return</span> a + b;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> r1 = <span class="c-fn">doble</span>(<span class="c-num">5</span>);
+    <span class="c-kw">int</span> resultado = <span class="c-fn">sumar</span>(<span class="c-num">5</span>, <span class="c-num">3</span>);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"El doble de 5 es: %d\n"</span>, r1);
+    <span class="c-fn">printf</span>(<span class="c-str">"La suma de 5 y 3 es: %d\n"</span>, resultado);
     <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel1_retorno</span>
+El doble de 5 es: 10
+La suma de 5 y 3 es: 8</div>
+            </div>
+            <div class="box box-cyan" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                Observá dónde se definen las funciones: <b>arriba de <code>main()</code></b>, para que el compilador ya las conozca cuando las llamamos.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 6: ARREGLOS COMO PARÁMETROS -->
+      <!-- SLIDE 11: TERCER EJEMPLO DEL APUNTE: calcularDescuento -->
       <section>
-        <h2><span class="section-num">05</span> Arreglos / Vectores como Parámetros</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Cómo delegar el procesamiento de colecciones de datos a una función.</p>
+        <h2><span class="section-num">10</span> Tercer Ejemplo del Apunte: <code>calcularDescuento</code></h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Las funciones no solo devuelven enteros (<code>int</code>). Si trabajamos con dinero o porcentajes, podemos recibir y devolver números con decimales (<code>float</code>):
+        </p>
 
-        <div class="code-window">
+        <div class="code-window" style="margin: 10px 0;">
           <div class="code-header">
-            <div class="code-dots"><span class="code-dot dot-red"></span><span class="code-dot dot-yellow"></span><span class="code-dot dot-green"></span></div>
-            <span class="code-title">mostrar_vector.c</span>
-            <span class="code-badge">Arreglos</span>
+            <span class="code-title">descuento.c</span>
+            <span class="code-badge">Apunte págs. 2–3</span>
           </div>
-          <div class="code-body"><span class="c-type">void</span> <span class="c-fn">mostrarVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) 
-{ 
-    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) 
-    { 
-        <span class="c-fn">printf</span>(<span class="c-str">"Elemento en [%d]: %d\n"</span>, i, vector[i]); 
-    } 
+          <div class="code-body"><span class="c-kw">float</span> <span class="c-fn">calcularDescuento</span>(<span class="c-kw">float</span> precio, <span class="c-kw">float</span> descuento)
+{
+    <span class="c-kw">return</span> precio - (precio * descuento / <span class="c-num">100</span>);
 }</div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Cómo se usa en el programa?</h4>
+            <div class="code-window" style="margin-top: 6px;">
+              <div class="code-body"><span class="c-kw">float</span> precioFinal = <span class="c-fn">calcularDescuento</span>(<span class="c-num">1000</span>, <span class="c-num">20</span>);</div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Cálculo interno paso a paso</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              • <code>precio = 1000</code>, <code>descuento = 20</code><br>
+              • Descuento en pesos: <code>1000 * 20 / 100 = 200</code><br>
+              • Resta final: <code>1000 - 200 = 800</code><br>
+              • Resultado devuelto: <b><code>800</code></b>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: EJEMPLO NIVEL 2 CON TABLA DE SEGUIMIENTO -->
+      <section>
+        <h2><span class="section-num">11</span> Ejemplo Nivel 2: Seguimiento de <code>calcularDescuento</code></h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">tienda_descuentos.c</span>
+              <span class="code-badge">Nivel 2</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">float</span> <span class="c-fn">calcularDescuento</span>(<span class="c-kw">float</span> precio, <span class="c-kw">float</span> descuento) {
+    <span class="c-kw">return</span> precio - (precio * descuento / <span class="c-num">100</span>);
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">float</span> precioFinal = <span class="c-fn">calcularDescuento</span>(<span class="c-num">1000</span>, <span class="c-num">20</span>);
+    <span class="c-kw">float</span> oferta = <span class="c-fn">calcularDescuento</span>(<span class="c-num">500</span>, <span class="c-num">10</span>);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Precio 1: %.0f\n"</span>, precioFinal);
+    <span class="c-fn">printf</span>(<span class="c-str">"Precio 2: %.0f\n"</span>, oferta);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Llamada</th>
+                  <th><code>precio</code></th>
+                  <th><code>descuento</code></th>
+                  <th>Cálculo</th>
+                  <th>Retorno</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1° llamada</td>
+                  <td><code>1000</code></td>
+                  <td><code>20</code></td>
+                  <td><code>1000 - 200</code></td>
+                  <td><b><code>800</code></b></td>
+                </tr>
+                <tr>
+                  <td>2° llamada</td>
+                  <td><code>500</code></td>
+                  <td><code>10</code></td>
+                  <td><code>500 - 50</code></td>
+                  <td><b><code>450</code></b></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 12px;">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./tienda_descuentos</span>
+Precio 1: 800
+Precio 2: 450</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: REGLA IMPORTANTE: RETURN TERMINA LA FUNCIÓN -->
+      <section>
+        <h2><span class="section-num">12</span> Propiedad Clave: <code>return</code> Corta la Función</h2>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+          Además de devolver el resultado, ejecutar <code>return</code> <b>finaliza inmediatamente</b> la función y regresa el control a quien la llamó.
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Código inalcanzable después de return</div>
+            <div class="code-window" style="margin-top: 6px;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero) {
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Terminé\n"</span>); <span class="c-cmt">// ¡NUNCA SE EJECUTA!</span>
+}</div>
+            </div>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ return como último paso del camino</div>
+            <div class="code-window" style="margin-top: 6px;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero) {
+    <span class="c-kw">int</span> res = numero * <span class="c-num">2</span>;
+    <span class="c-kw">return</span> res; <span class="c-cmt">// Cierra la función y devuelve res</span>
+}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 Esta propiedad es muy útil cuando buscamos algo en un vector o validamos una condición: apenas encontramos la respuesta, podemos hacer <code>return</code> y salir sin seguir dando vueltas.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: 2. ARREGLOS/VECTORES COMO PARÁMETROS -->
+      <section>
+        <h2><span class="section-num">13</span> 2. Arreglos / Vectores como Parámetros</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Definición del Apunte (pág. 3)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Una función no solo puede recibir números sueltos: también <b>puede recibir un vector/arreglo como parámetro</b> para recorrerlo, mostrarlo o hacer cálculos sobre todos sus elementos.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin: 12px 0;">
+          <div class="code-header">
+            <span class="code-title">mostrar_vector.c</span>
+            <span class="code-badge">Apunte pág. 3</span>
+          </div>
+          <div class="code-body"><span class="c-type">void</span> <span class="c-fn">mostrarVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, vector[i]);
+    }
+}</div>
+        </div>
+
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">
+          Mirá con atención los paréntesis de la función: recibe <b>dos parámetros</b> trabajando en equipo.
+        </p>
+      </section>
+
+      <!-- SLIDE 15: DESGLOSE DE LOS DOS PARÁMETROS -->
+      <section>
+        <h2><span class="section-num">14</span> Desglose de <code>void mostrarVector(int vector[], int tamano)</code></h2>
+        <div class="code-window" style="margin-bottom: 14px;">
+          <div class="code-body"><span class="c-type">void</span> <span class="c-fn">mostrarVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano)</div>
         </div>
 
         <div class="grid-2">
           <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">1. Parámetro <code>vector[]</code></h4>
-            <p style="font-size: 0.88rem;">
-              Los corchetes vacíos <code>[]</code> indican que la función recibirá un arreglo de enteros. No especificamos tamaño dentro de los corchetes en el parámetro.
+            <h4 style="color: #38bdf8;">1° Parámetro: <code>int vector[]</code></h4>
+            <p style="font-size: 0.86rem; margin: 0;">
+              Es el <b>arreglo que queremos recorrer</b>. Los corchetes vacíos <code>[]</code> le avisan al compilador de C: <i>"Acá no viene un solo entero, viene un vector de enteros de cualquier longitud"</i>.
             </p>
           </div>
 
           <div class="box box-amber">
-            <h4 style="color: #fbbf24;">2. Parámetro <code>tamano</code></h4>
-            <p style="font-size: 0.88rem;">
-              Cantidad exacta de casilleros válidos que la función debe procesar. Es indispensable para que el bucle <code>for</code> sepa cuándo detenerse.
+            <h4 style="color: #fbbf24;">2° Parámetro: <code>int tamano</code></h4>
+            <p style="font-size: 0.86rem; margin: 0;">
+              Es la <b>cantidad de elementos</b> que tiene ese arreglo. Nos sirve como límite del ciclo: <code>for(int i = 0; i &lt; tamano; i++)</code>.
             </p>
           </div>
         </div>
+
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 Gracias a que los corchetes <code>[]</code> están vacíos y el tamaño entra como parámetro, la <b>misma función</b> <code>mostrarVector</code> sirve para mostrar un vector de 3, de 5 o de 100 números.
+          </p>
+        </div>
       </section>
 
-      <!-- SLIDE 7: ¿POR QUÉ ENVIAR EL TAMAÑO? -->
+      <!-- SLIDE 16: ¿POR QUÉ TENEMOS QUE ENVIAR TAMBIÉN EL TAMAÑO? -->
       <section>
-        <h2><span class="section-num">06</span> ¿Por qué C Exige Enviar el Tamaño?</h2>
-        <div class="grid-2">
-          <div class="box box-rose">
-            <h4 style="color: #f87171;">El Arreglo no guarda su longitud en memoria</h4>
-            <p style="font-size: 0.88rem;">
-              En lenguajes de alto nivel como Python, Java o JavaScript, un arreglo es un objeto que conoce su longitud (<code>arr.length</code>).
-            </p>
-            <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 8px;">
-              En <b>lenguaje C puro</b>, un arreglo es simplemente una secuencia de bytes contiguos en la memoria RAM. <b>El arreglo no almacena ninguna etiqueta con cuántos elementos tiene</b>.
-            </p>
-          </div>
+        <h2><span class="section-num">15</span> ¿Por Qué Tenemos que Enviar También el Tamaño?</h2>
+        <div class="box box-rose" style="margin-bottom: 12px;">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Pregunta del Apunte (pág. 3)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <b>¿Por qué tenemos que enviar también el tamaño?</b><br>
+            Porque <b>C necesita saber hasta dónde recorrer el arreglo</b>. Cuando un vector entra a una función, no trae adherida una etiqueta con su cantidad de casilleros.
+          </p>
+        </div>
 
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">El Recorrido Controlado</h4>
-            <p style="font-size: 0.88rem;">
-              Si tenemos:
-              <br><code>int numeros[5] = {10, 20, 30, 40, 50};</code>
-            </p>
-            <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 8px;">
-              Al llamar a <code>mostrarVector(numeros, 5);</code>, la función sabe exactamente que debe recorrer:
-            </p>
-            <div style="font-family: var(--font-mono); font-size: 0.85rem; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 6px; margin-top: 8px;">
-              posición 0 ➔ posición 1 ➔ posición 2 ➔ posición 3 ➔ posición 4
+        <div class="code-window" style="margin-bottom: 10px;">
+          <div class="code-body"><span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">40</span>, <span class="c-num">50</span>};
+<span class="c-fn">mostrarVector</span>(numeros, <span class="c-num">5</span>);</div>
+        </div>
+
+        <div class="array-container" style="margin: 12px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">posición 0</span>
+            <div class="array-cell highlight">10</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">posición 1</span>
+            <div class="array-cell highlight">20</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">posición 2</span>
+            <div class="array-cell highlight">30</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">posición 3</span>
+            <div class="array-cell highlight">40</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">posición 4</span>
+            <div class="array-cell highlight">50</div>
+          </div>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; margin: 0;">
+          Al recibir <code>tamano = 5</code>, la función sabe que debe recorrer: <b>posición 0, posición 1, posición 2, posición 3 y posición 4</b>.
+        </p>
+      </section>
+
+      <!-- SLIDE 17: EJEMPLO NIVEL 1 CON mostrarVector -->
+      <section>
+        <h2><span class="section-num">16</span> Ejemplo Completo en C: <code>mostrarVector</code> en Acción</h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">demo_mostrar_vector.c</span>
+              <span class="code-badge">Apunte pág. 3</span>
             </div>
-            <p style="font-size: 0.8rem; color: var(--accent-amber); margin-top: 6px;">
-              ⚠️ Sin el tamaño, el bucle continuaría leyendo memoria prohibida fuera del arreglo (Segmentation Fault).
-            </p>
-          </div>
-        </div>
-      </section>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
 
-      <!-- SLIDE 8: SUMAR ELEMENTOS DE UN VECTOR -->
-      <section>
-        <h2><span class="section-num">07</span> Procesar y Sumar Elementos de un Vector</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Función con acumulador que recibe un arreglo y devuelve el total con <code>return</code>.</p>
+<span class="c-type">void</span> <span class="c-fn">mostrarVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, vector[i]);
+    }
+}
 
-        <div class="code-window">
-          <div class="code-header">
-            <div class="code-dots"><span class="code-dot dot-red"></span><span class="code-dot dot-yellow"></span><span class="code-dot dot-green"></span></div>
-            <span class="code-title">sumar_vector.c</span>
-            <span class="code-badge">Acumulador</span>
-          </div>
-          <div class="code-body" style="font-size: 1.18rem; line-height: 1.45; padding: 14px 20px;"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
-
-<span class="c-kw">int</span> <span class="c-fn">sumarVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) 
-{ 
-    <span class="c-kw">int</span> suma = <span class="c-num">0</span>; 
-
-    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) 
-    { 
-        suma += vector[i]; 
-    } 
-
-    <span class="c-kw">return</span> suma; 
-} 
-
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>) 
-{ 
-    <span class="c-kw">int</span> numeros[<span class="c-num">4</span>] = {<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">40</span>}; 
-    
-    <span class="c-kw">int</span> resultado = <span class="c-fn">sumarVector</span>(numeros, <span class="c-num">4</span>); 
-    
-    <span class="c-fn">printf</span>(<span class="c-str">"La suma total es: %d\n"</span>, resultado); <span class="c-cmt">// 100</span>
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">40</span>, <span class="c-num">50</span>};
+    <span class="c-fn">mostrarVector</span>(numeros, <span class="c-num">5</span>);
     <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./demo_mostrar</span>
+10
+20
+30
+40
+50</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                Aunque en <code>main</code> el arreglo se llama <code>numeros</code>, adentro de la función lo usamos con el nombre de su parámetro: <code>vector[i]</code>.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 9: REGLA DE ORO: NOMBRE VS ELEMENTO -->
+      <!-- SLIDE 18: COMBINANDO VECTOR COMO PARÁMETRO + RETURN -->
       <section>
-        <h2><span class="section-num">08</span> Regla Fundamental: <code>numeros</code> vs <code>numeros[0]</code></h2>
-        <div class="box box-amber" style="margin-bottom: 20px;">
-          <h4 style="color: #fbbf24; margin-bottom: 6px;">¡Atención a este detalle sintáctico!</h4>
-          <p style="font-size: 0.95rem; margin: 0;">
-            Cuando pasamos un arreglo a una función, <b>solo escribimos su nombre sin corchetes</b>:
+        <h2><span class="section-num">17</span> Ejemplo del Apunte: Sumar Elementos (<code>sumarVector</code>)</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Ahora unamos los dos grandes temas de hoy: una función que <b>recibe un vector</b> como parámetro y <b>devuelve un resultado con <code>return</code></b>.
+        </p>
+
+        <div class="code-window" style="margin: 10px 0;">
+          <div class="code-header">
+            <span class="code-title">sumar_vector.c</span>
+            <span class="code-badge">Apunte págs. 3–4</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">sumarVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano)
+{
+    <span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++)
+    {
+        suma += vector[i];
+    }
+
+    <span class="c-kw">return</span> suma;
+}</div>
+        </div>
+
+        <div class="step-list" style="margin-top: 8px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div>Inicializamos el acumulador <code>int suma = 0;</code> antes de empezar a recorrer.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div>En cada vuelta del <code>for</code>, sumamos el elemento actual: <code>suma += vector[i];</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div>Al terminar el ciclo, devolvemos el total acumulado con <code>return suma;</code>.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: TRAZA PASO A PASO DE sumarVector -->
+      <section>
+        <h2><span class="section-num">18</span> Traza Paso a Paso de <code>sumarVector</code></h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">uso_sumar_vector.c</span>
+              <span class="code-badge">Apunte pág. 4</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">sumarVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        suma += vector[i];
+    }
+    <span class="c-kw">return</span> suma;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numeros[<span class="c-num">4</span>] = {<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">40</span>};
+    <span class="c-kw">int</span> resultado = <span class="c-fn">sumarVector</span>(numeros, <span class="c-num">4</span>);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Resultado: %d\n"</span>, resultado);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Vuelta (<code>i</code>)</th>
+                  <th><code>vector[i]</code></th>
+                  <th>Operación</th>
+                  <th><code>suma</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Inicio</td>
+                  <td>—</td>
+                  <td><code>suma = 0</code></td>
+                  <td><code>0</code></td>
+                </tr>
+                <tr>
+                  <td><code>i = 0</code></td>
+                  <td><code>10</code></td>
+                  <td><code>0 + 10</code></td>
+                  <td><code>10</code></td>
+                </tr>
+                <tr>
+                  <td><code>i = 1</code></td>
+                  <td><code>20</code></td>
+                  <td><code>10 + 20</code></td>
+                  <td><code>30</code></td>
+                </tr>
+                <tr>
+                  <td><code>i = 2</code></td>
+                  <td><code>30</code></td>
+                  <td><code>30 + 30</code></td>
+                  <td><code>60</code></td>
+                </tr>
+                <tr>
+                  <td><code>i = 3</code></td>
+                  <td><code>40</code></td>
+                  <td><code>60 + 40</code></td>
+                  <td><b><code>100</code></b></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./uso_sumar_vector</span>
+Resultado: 100</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: ALGO MUY IMPORTANTE DEL APUNTE: numeros VS numeros[0] -->
+      <section>
+        <h2><span class="section-num">19</span> ⚠️ Algo MUY Importante: <code>numeros</code> vs <code>numeros[0]</code></h2>
+        <div class="box box-rose" style="margin-bottom: 14px;">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Advertencia Destacada del Apunte (pág. 4)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Cuando pasamos un arreglo a una función, escribimos <b>solamente el nombre del arreglo</b> sin corchetes.
           </p>
         </div>
 
         <div class="comparison-box">
           <div class="correct-card">
             <div class="correct-title">✅ Forma Correcta</div>
-            <div style="font-family: var(--font-mono); font-size: 1rem; color: #34d399; margin: 10px 0;">
-              sumarVector(numeros, 4);
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-fn">sumarVector</span>(numeros, <span class="c-num">4</span>);</div>
             </div>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              El identificador <code>numeros</code> representa al <b>arreglo completo</b> (en realidad, la dirección de inicio en memoria). La función recibe el acceso a toda la colección.
+            <p style="font-size: 0.84rem; margin: 0;">
+              <b><code>numeros</code></b> (sin corchetes) representa <b>todo el arreglo</b> que estamos enviando a la función.
             </p>
           </div>
 
           <div class="wrong-card">
-            <div class="wrong-title">❌ Error Común</div>
-            <div style="font-family: var(--font-mono); font-size: 1rem; color: #f87171; margin: 10px 0;">
-              sumarVector(numeros[0], 4);
+            <div class="wrong-title">❌ Forma Incorrecta</div>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-fn">sumarVector</span>(numeros[<span class="c-num">0</span>], <span class="c-num">4</span>);</div>
             </div>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              <code>numeros[0]</code> es un <b>único elemento entero</b> (en nuestro ejemplo, el número 10), ¡no el vector! Provoca un error de compilación por incompatibilidad de tipos (esperaba <code>int[]</code> y recibió <code>int</code>).
+            <p style="font-size: 0.84rem; margin: 0;">
+              <b><code>numeros[0]</code></b> es <b>un solo elemento</b> (el número entero <code>10</code>), ¡no el arreglo completo!
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 10: EJERCICIO PRÁCTICO -->
+      <!-- SLIDE 21: MODELO VISUAL DE numeros VS numeros[0] -->
       <section>
-        <h2><span class="section-num">09</span> Ejercicio Práctico: Cálculo de Promedio</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Escribí una función que reciba un vector de calificaciones enteras y devuelva su promedio como <code>float</code>.</p>
+        <h2><span class="section-num">20</span> Visualizando la Diferencia en Memoria</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Dado <code>int numeros[4] = {10, 20, 30, 40};</code>, mirá qué ve el compilador en cada caso:
+        </p>
 
-        <details class="code-solution">
-          <summary>🔍 Ver solución explicada paso a paso</summary>
-          <div class="solution-content">
-            <div class="code-window">
-              <div class="code-body"><span class="c-kw">float</span> <span class="c-fn">calcularPromedio</span>(<span class="c-kw">int</span> notas[], <span class="c-kw">int</span> cantidad)
-{
-    <span class="c-kw">if</span> (cantidad &lt;= <span class="c-num">0</span>) <span class="c-kw">return</span> <span class="c-num">0.0f</span>; <span class="c-cmt">// Protección defensiva</span>
-    
-    <span class="c-kw">int</span> acumulador = <span class="c-num">0</span>;
-    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++)
-    {
-        acumulador += notas[i];
-    }
-    
-    <span class="c-cmt">// Casteo explícito a float para evitar división entera</span>
-    <span class="c-kw">return</span> (<span class="c-kw">float</span>)acumulador / cantidad;
-}</div>
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Escribir <code>numeros</code></h4>
+            <div class="array-container" style="margin: 12px 0;">
+              <div class="array-cell-wrapper">
+                <span class="array-index">Pos 0</span>
+                <div class="array-cell highlight">10</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">Pos 1</span>
+                <div class="array-cell highlight">20</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">Pos 2</span>
+                <div class="array-cell highlight">30</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">Pos 3</span>
+                <div class="array-cell highlight">40</div>
+              </div>
             </div>
-            <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 6px;">
-              Notá el <b>casteo <code>(float)acumulador</code></b>: si dividimos dos enteros en C, el resultado trunca los decimales. Al castear uno a <code>float</code>, C realiza una división real con precisión decimal exacta.
+            <p style="font-size: 0.82rem; margin: 0;">
+              Le entrega a la función acceso a la fila completa de casilleros. Coincide con el parámetro <code>int vector[]</code>.
             </p>
           </div>
-        </details>
+
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">Escribir <code>numeros[0]</code></h4>
+            <div class="array-container" style="margin: 12px 0;">
+              <div class="array-cell-wrapper">
+                <span class="array-index">Valor suelto</span>
+                <div class="array-cell" style="border-color: #f87171;">10</div>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Extrae únicamente el número <code>10</code>. Sería equivalente a llamar <code>sumarVector(10, 4)</code>, lo cual produce un error de tipos en C.
+            </p>
+          </div>
+        </div>
       </section>
 
-      <!-- SLIDE 11: AUTOEVALUACIÓN Y CIERRE -->
+      <!-- SLIDE 22: RESUMEN DE CÓMO DECLARAR VS CÓMO LLAMAR -->
       <section>
-        <h2><span class="section-num">10</span> Resumen y Autoevaluación</h2>
+        <h2><span class="section-num">21</span> Regla Mnemotécnica: Los 3 Lugares de los Corchetes</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Para no confundirte nunca con los corchetes al trabajar con vectores y funciones, recordá esta tabla:
+        </p>
+
+        <table class="trace-table" style="margin-top: 12px;">
+          <thead>
+            <tr>
+              <th>Momento</th>
+              <th>Cómo se escribe</th>
+              <th>¿Lleva corchetes?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1. Al crear el vector en <code>main</code></b></td>
+              <td><code>int numeros[4] = {10, 20, 30, 40};</code></td>
+              <td>✅ Sí, con el tamaño: <code>[4]</code></td>
+            </tr>
+            <tr>
+              <td><b>2. En el encabezado de la función</b></td>
+              <td><code>int sumarVector(int vector[], int tamano)</code></td>
+              <td>✅ Sí, vacíos: <code>vector[]</code></td>
+            </tr>
+            <tr>
+              <td><b>3. Al llamar a la función</b></td>
+              <td><code>sumarVector(numeros, 4);</code></td>
+              <td>❌ <b>NO lleva corchetes</b> (solo el nombre)</td>
+            </tr>
+            <tr>
+              <td><b>4. Al usar un casillero adentro del <code>for</code></b></td>
+              <td><code>suma += vector[i];</code></td>
+              <td>✅ Sí, con el índice: <code>[i]</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 23: EJEMPLO NIVEL 3: CONTAR PARES EN UN VECTOR -->
+      <section>
+        <h2><span class="section-num">22</span> Ejemplo Nivel 3: Contar Números Pares en una Función</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Combinemos lo aprendido con condicionales: creemos una función que reciba un vector y su tamaño, y <b>devuelva cuántos números pares contiene</b>.
+        </p>
+
+        <div class="code-window" style="margin: 10px 0;">
+          <div class="code-header">
+            <span class="code-title">contar_pares.c</span>
+            <span class="code-badge">Nivel 3</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">contarPares</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano)
+{
+    <span class="c-kw">int</span> contador = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++)
+    {
+        <span class="c-kw">if</span>(vector[i] % <span class="c-num">2</span> == <span class="c-num">0</span>)
+        {
+            contador++;
+        }
+    }
+
+    <span class="c-kw">return</span> contador;
+}</div>
+        </div>
+
+        <div class="box box-indigo">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🔍 <b>Patrón de Contador en Función:</b> 1) <code>int contador = 0;</code> afuera del ciclo, 2) <code>if(condicion) contador++;</code> adentro del <code>for</code>, y 3) <code>return contador;</code> al final.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: TRAZA Y SALIDA DE CONTAR PARES -->
+      <section>
+        <h2><span class="section-num">23</span> Ejecución y Seguimiento de <code>contarPares</code></h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">main_pares.c</span>
+              <span class="code-badge">Programa Completo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">contarPares</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">int</span> contador = <span class="c-num">0</span>;
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        <span class="c-kw">if</span>(vector[i] % <span class="c-num">2</span> == <span class="c-num">0</span>) {
+            contador++;
+        }
+    }
+    <span class="c-kw">return</span> contador;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> datos[<span class="c-num">5</span>] = {<span class="c-num">12</span>, <span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">5</span>, <span class="c-num">20</span>};
+    <span class="c-kw">int</span> pares = <span class="c-fn">contarPares</span>(datos, <span class="c-num">5</span>);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Cantidad de pares: %d\n"</span>, pares);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th><code>i</code></th>
+                  <th><code>vector[i]</code></th>
+                  <th><code>% 2 == 0</code></th>
+                  <th><code>contador</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>0</code></td>
+                  <td><code>12</code></td>
+                  <td>Verdadero</td>
+                  <td><code>1</code></td>
+                </tr>
+                <tr>
+                  <td><code>1</code></td>
+                  <td><code>7</code></td>
+                  <td>Falso</td>
+                  <td><code>1</code></td>
+                </tr>
+                <tr>
+                  <td><code>2</code></td>
+                  <td><code>8</code></td>
+                  <td>Verdadero</td>
+                  <td><code>2</code></td>
+                </tr>
+                <tr>
+                  <td><code>3</code></td>
+                  <td><code>5</code></td>
+                  <td>Falso</td>
+                  <td><code>2</code></td>
+                </tr>
+                <tr>
+                  <td><code>4</code></td>
+                  <td><code>20</code></td>
+                  <td>Verdadero</td>
+                  <td><b><code>3</code></b></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./main_pares</span>
+Cantidad de pares: 3</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: EJEMPLO NIVEL 4: RAZONAMIENTO LÓGICO PARA MÁXIMO Y MÍNIMO -->
+      <section>
+        <h2><span class="section-num">24</span> Ejemplo Nivel 4: Pensar <code>buscarMaximo</code> y <code>buscarMinimo</code></h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          ¿Cómo diseñamos una función que reciba un vector y nos <b>devuelva el mayor</b> (o el menor) de sus elementos? Construyamos el razonamiento paso a paso:
+        </p>
+
+        <div class="step-list" style="margin-top: 10px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div><b>Punto de partida seguro:</b> Asumimos provisoriamente que el primer elemento es el mayor: <code>int maximo = vector[0];</code> (¡nunca inicialices en <code>0</code> por si todos son negativos!).</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div><b>Recorrido comparativo:</b> Recorremos desde <code>i = 1</code> hasta <code>i &lt; tamano</code> comparando cada casillero contra nuestro récord actual.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div><b>Actualización:</b> Si encontramos un <code>vector[i] &gt; maximo</code>, actualizamos <code>maximo = vector[i];</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div><b>Retorno:</b> Al terminar todo el ciclo, devolvemos el campeón con <code>return maximo;</code>.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: IMPLEMENTACIÓN COMPLETA NIVEL 4: MÁXIMO Y MÍNIMO -->
+      <section>
+        <h2><span class="section-num">25</span> Implementación Nivel 4: <code>buscarMaximo</code> y <code>buscarMinimo</code></h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">max_min_funciones.c</span>
+              <span class="code-badge">Nivel 4</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">buscarMaximo</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">int</span> max = vector[<span class="c-num">0</span>];
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; tamano; i++) {
+        <span class="c-kw">if</span>(vector[i] &gt; max) {
+            max = vector[i];
+        }
+    }
+    <span class="c-kw">return</span> max;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">buscarMinimo</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">int</span> min = vector[<span class="c-num">0</span>];
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; tamano; i++) {
+        <span class="c-kw">if</span>(vector[i] &lt; min) {
+            min = vector[i];
+        }
+    }
+    <span class="c-kw">return</span> min;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> notas[<span class="c-num">5</span>] = {<span class="c-num">7</span>, <span class="c-num">10</span>, <span class="c-num">4</span>, <span class="c-num">9</span>, <span class="c-num">8</span>};
+    <span class="c-fn">printf</span>(<span class="c-str">"Mayor: %d\n"</span>, <span class="c-fn">buscarMaximo</span>(notas, <span class="c-num">5</span>));
+    <span class="c-fn">printf</span>(<span class="c-str">"Menor: %d\n"</span>, <span class="c-fn">buscarMinimo</span>(notas, <span class="c-num">5</span>));
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./max_min_funciones</span>
+Mayor: 10
+Menor: 4</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                Mirá qué limpio queda <code>main()</code>: incluso podemos llamar a <code>buscarMaximo(notas, 5)</code> directamente dentro del <code>printf</code> porque la función devuelve un <code>int</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: REUTILIZACIÓN DE FUNCIONES: CALCULAR PROMEDIO -->
+      <section>
+        <h2><span class="section-num">26</span> El Poder Modular: Una Función que Usa a Otra Función</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Si ya tenemos escrita <code>sumarVector</code>, ¡no hace falta volver a programar el ciclo <code>for</code> para calcular el promedio! Podemos llamarla desde <code>promedioVector</code>:
+        </p>
+
+        <div class="code-window" style="margin: 10px 0;">
+          <div class="code-header">
+            <span class="code-title">promedio_modular.c</span>
+            <span class="code-badge">Reutilización</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">sumarVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        suma += vector[i];
+    }
+    <span class="c-kw">return</span> suma;
+}
+
+<span class="c-kw">float</span> <span class="c-fn">promedioVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">int</span> total = <span class="c-fn">sumarVector</span>(vector, tamano);
+    <span class="c-kw">return</span> (<span class="c-kw">float</span>)total / tamano;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> notas[<span class="c-num">4</span>] = {<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>, <span class="c-num">10</span>};
+    <span class="c-fn">printf</span>(<span class="c-str">"Promedio: %.2f\n"</span>, <span class="c-fn">promedioVector</span>(notas, <span class="c-num">4</span>)); <span class="c-cmt">// 8.50</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: MODIFICAR UN VECTOR DENTRO DE UNA FUNCIÓN -->
+      <section>
+        <h2><span class="section-num">27</span> ¿Qué Pasa si una Función Modifica <code>vector[i]</code>?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          A diferencia de una variable suelta, cuando pasamos un arreglo a una función, la función trabaja sobre los <b>casilleros reales del arreglo</b>.
+        </p>
+
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">duplicar_elementos.c</span>
+              <span class="code-badge">C99</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-type">void</span> <span class="c-fn">duplicarVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        vector[i] = vector[i] * <span class="c-num">2</span>;
+    }
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> v[<span class="c-num">3</span>] = {<span class="c-num">5</span>, <span class="c-num">10</span>, <span class="c-num">15</span>};
+    <span class="c-fn">duplicarVector</span>(v, <span class="c-num">3</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"%d %d %d\n"</span>, v[<span class="c-num">0</span>], v[<span class="c-num">1</span>], v[<span class="c-num">2</span>]);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./duplicar</span>
+10 20 30</div>
+            </div>
+            <div class="box box-amber" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                💡 Esto nos permite crear funciones como <code>cargarVector</code> o <code>ordenarVector</code> que actualizan directamente el vector de <code>main</code> (veremos el porqué profundo en la unidad de Punteros).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: ERRORES FRECUENTES DE PRINCIPIANTES (PARTE 1) -->
+      <section>
+        <h2><span class="section-num">28</span> Errores Frecuentes de Principiantes (Parte 1)</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Error clásico: llamar a una función con retorno pero <b>no guardar ni usar</b> el valor que devuelve:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Llamada "al aire" (Se pierde el resultado)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-fn">sumar</span>(<span class="c-num">5</span>, <span class="c-num">3</span>); <span class="c-cmt">// Devuelve 8, pero nadie lo atrapa</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              La función hace la suma y devuelve <code>8</code>, pero como no se asigna a ninguna variable ni se pasa a <code>printf</code>, el valor se descarta.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Guardar el retorno en una variable</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> resultado = <span class="c-fn">sumar</span>(<span class="c-num">5</span>, <span class="c-num">3</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Suma: %d\n"</span>, resultado);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Atrapamos el valor devuelto dentro de <code>int resultado</code> y luego lo mostramos o seguimos operando con él.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: ERRORES FRECUENTES DE PRINCIPIANTES (PARTE 2) -->
+      <section>
+        <h2><span class="section-num">29</span> Errores Frecuentes de Principiantes (Parte 2)</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Error muy común en exámenes: poner el <code>return</code> <b>adentro del ciclo <code>for</code></b> en un acumulador:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ return adentro del for (Corta en i = 0)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">sumarVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        suma += vector[i];
+        <span class="c-kw">return</span> suma; <span class="c-cmt">// ¡ERROR! Sale en la 1° vuelta</span>
+    }
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Suma únicamente <code>vector[0]</code> e inmediatamente termina la función sin recorrer el resto del vector.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ return afuera, después de cerrar el for</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">sumarVector</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        suma += vector[i];
+    }
+    <span class="c-kw">return</span> suma; <span class="c-cmt">// Recién cuando sumó TODOS</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              El ciclo termina de dar todas las vueltas de <code>0</code> a <code>tamano - 1</code> y recién ahí devuelve <code>suma</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: ERRORES FRECUENTES (PARTE 3): EN LA LLAMADA DEL VECTOR -->
+      <section>
+        <h2><span class="section-num">30</span> Errores Frecuentes (Parte 3): Cómo Pasar el Vector</h2>
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Pasar numeros[0]</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-fn">sumarVector</span>(numeros[<span class="c-num">0</span>], <span class="c-num">4</span>);</div>
+            </div>
+            <p style="font-size: 0.78rem; margin: 0;">
+              Envía solo el primer número entero en vez del arreglo.
+            </p>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Poner corchetes vacíos</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-fn">sumarVector</span>(numeros[], <span class="c-num">4</span>);</div>
+            </div>
+            <p style="font-size: 0.78rem; margin: 0;">
+              Error de sintaxis: <code>[]</code> solo va en la declaración, nunca al llamar.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Solo el nombre</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-fn">sumarVector</span>(numeros, <span class="c-num">4</span>);</div>
+            </div>
+            <p style="font-size: 0.78rem; margin: 0;">
+              Envía el arreglo completo y la cantidad de elementos.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            📌 Recordá siempre la regla del apunte: <code>numeros[0]</code> es un solo elemento; en cambio, <b><code>numeros</code></b> representa el arreglo que estamos enviando.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: BUENAS PRÁCTICAS DE PROGRAMACIÓN -->
+      <section>
+        <h2><span class="section-num">31</span> Buenas Prácticas de Programación con Funciones</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Diseño limpio de funciones</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Nombres con verbos claros:</b> <code>calcularDescuento</code>, <code>mostrarVector</code>, <code>sumarVector</code>, <code>contarPares</code>.</li>
+              <li><b>Una sola responsabilidad:</b> Si una función se llama <code>sumarVector</code>, que solo calcule y devuelva la suma (sin meter <code>printf</code> ni <code>scanf</code> adentro).</li>
+              <li><b>Coherencia de tipos:</b> Si el encabezado dice <code>float</code>, asegurate de que la variable devuelta o la división conserve los decimales.</li>
+            </ul>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Trabajo seguro con vectores</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Siempre recibir <code>int tamano</code>:</b> Usá siempre <code>i &lt; tamano</code> en el <code>for</code> en lugar de clavar un número fijo como <code>i &lt; 5</code>.</li>
+              <li><b>Inicializar acumuladores en 0:</b> Siempre escribí <code>int suma = 0;</code> al comenzar la función.</li>
+              <li><b>Inicializar máximo/mínimo en <code>vector[0]</code>:</b> Evitá inicializar en <code>0</code> o en números arbitrarios.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: EJERCICIOS DE APLICACIÓN 1 Y 2 -->
+      <section>
+        <h2><span class="section-num">32</span> Ejercicios de Aplicación (1 y 2)</h2>
+
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">Ejercicio 1: Función <code>triple</code> y <code>restar</code></h4>
+          <p style="font-size: 0.82rem; margin: 0 0 6px;">
+            Escribí una función <code>int triple(int n)</code> que devuelva el triple de un número, y una función <code>int restar(int a, int b)</code> que devuelva <code>a - b</code>. Probalas en <code>main()</code>.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">triple</span>(<span class="c-kw">int</span> n) {
+    <span class="c-kw">return</span> n * <span class="c-num">3</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">restar</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b) {
+    <span class="c-kw">return</span> a - b;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-fn">printf</span>(<span class="c-str">"Triple de 4: %d\n"</span>, <span class="c-fn">triple</span>(<span class="c-num">4</span>));       <span class="c-cmt">// 12</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Resta 10 - 3: %d\n"</span>, <span class="c-fn">restar</span>(<span class="c-num">10</span>, <span class="c-num">3</span>)); <span class="c-cmt">// 7</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Ejercicio 2: Contar mayores o iguales a 7 (aprobados)</h4>
+          <p style="font-size: 0.82rem; margin: 0 0 6px;">
+            Escribí una función <code>int contarAprobados(int notas[], int tamano)</code> que reciba un vector de notas y devuelva cuántas son mayores o iguales a <code>7</code>.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">contarAprobados</span>(<span class="c-kw">int</span> notas[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">int</span> aprobados = <span class="c-num">0</span>;
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        <span class="c-kw">if</span>(notas[i] &gt;= <span class="c-num">7</span>) {
+            aprobados++;
+        }
+    }
+    <span class="c-kw">return</span> aprobados;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> curso[<span class="c-num">5</span>] = {<span class="c-num">4</span>, <span class="c-num">8</span>, <span class="c-num">7</span>, <span class="c-num">5</span>, <span class="c-num">10</span>};
+    <span class="c-fn">printf</span>(<span class="c-str">"Aprobados: %d\n"</span>, <span class="c-fn">contarAprobados</span>(curso, <span class="c-num">5</span>)); <span class="c-cmt">// 3</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: EJERCICIO INTEGRADOR 3 -->
+      <section>
+        <h2><span class="section-num">33</span> Ejercicio Integrador Tipo Examen (3)</h2>
+
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Ejercicio 3: Sumar únicamente los elementos positivos de un vector</h4>
+          <p style="font-size: 0.84rem; margin: 0 0 8px;">
+            Creá una función <code>int sumarPositivos(int vector[], int tamano)</code> que recorra el arreglo y sume solamente los números estrictamente mayores a <code>0</code>. En <code>main()</code>, probala con el arreglo <code>{-5, 10, -2, 30, 15}</code> y mostrá el resultado devuelto.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución completa</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">sumarPositivos</span>(<span class="c-kw">int</span> vector[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        <span class="c-kw">if</span>(vector[i] &gt; <span class="c-num">0</span>) {
+            suma += vector[i];
+        }
+    }
+    <span class="c-kw">return</span> suma;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> movimientos[<span class="c-num">5</span>] = {-<span class="c-num">5</span>, <span class="c-num">10</span>, -<span class="c-num">2</span>, <span class="c-num">30</span>, <span class="c-num">15</span>};
+    <span class="c-kw">int</span> total = <span class="c-fn">sumarPositivos</span>(movimientos, <span class="c-num">5</span>);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Suma de positivos: %d\n"</span>, total); <span class="c-cmt">// Imprime 55 (10 + 30 + 15)</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 35: RESUMEN FINAL Y CHECKLIST -->
+      <section>
+        <h2><span class="section-num">34</span> Resumen de la Unidad 01 y Checklist</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Puntos Clave del Módulo</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
-              <li><code>return</code> finaliza la ejecución de la función y devuelve un dato a quien la llamó.</li>
-              <li>Los tipos simples se pasan por valor (copia independiente).</li>
-              <li>Para recibir un arreglo usamos <code>tipo nombre[]</code>.</li>
-              <li>Siempre debemos enviar la variable <code>tamano</code> junto al arreglo.</li>
-              <li>Para enviar el arreglo, pasamos su nombre simple: <code>v</code> y no <code>v[0]</code>.</li>
+            <h4 style="color: #818cf8;">Conceptos Clave del Apunte</h4>
+            <ul style="font-size: 0.82rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Máquina de funciones:</b> <code>Entrada → proceso → resultado</code>.</li>
+              <li><b>Palabra clave <code>return</code>:</b> Devuelve el valor calculado al lugar donde se llamó a la función.</li>
+              <li><b>Vector como parámetro:</b> <code>void mostrarVector(int vector[], int tamano)</code>.</li>
+              <li><b>Envío del tamaño:</b> Obligatorio para que C sepa hasta qué posición recorrer.</li>
+              <li><b>Llamada correcta:</b> Se escribe <code>sumarVector(numeros, 4)</code> y nunca <code>numeros[0]</code>.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar la diferencia entre <code>printf</code> y <code>return</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué no se coloca el número de casillas dentro de <code>vector[]</code> en la cabecera?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué C necesita recibir el parámetro <code>tamano</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Reconozco el error de escribir <code>funcion(v[0], N)</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Distingo cuándo usar una función <code>void</code> y cuándo una función con <code>return</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé guardar el valor devuelto en una variable como <code>int r = sumar(5, 3);</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué hay que pasar <code>tamano</code> junto con <code>int vector[]</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar por qué <code>numeros[0]</code> es un solo elemento y <code>numeros</code> es el arreglo?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo programar <code>sumarVector</code>, <code>contarPares</code> y <code>buscarMaximo</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 24px;">
-          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
-            ← Volver al 2do Cuatrimestre
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
+            ← Índice 2do Cuatrimestre
           </a>
-          <a href="02-introduccion-strings.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 12px;">
-            Siguiente: Introducción a los Strings en C →
+          <a href="02-introduccion-strings.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Siguiente Unidad: Introducción a Strings →
           </a>
         </div>
       </section>
@@ -484,8 +1488,9 @@
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -495,8 +1500,20 @@
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>
+
 </html>

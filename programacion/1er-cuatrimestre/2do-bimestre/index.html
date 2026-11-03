@@ -332,42 +332,57 @@
     </div>
 
     <header>
-      <div class="header-badge">1er Cuatrimestre • 2do Bimestre • 10 Unidades</div>
-      <h1>2do Bimestre: Vectores, Matrices y Memoria Dinámica</h1>
+      <div class="header-badge">1er Cuatrimestre • 2do Bimestre • 10 Unidades Completas</div>
+      <h1>2do Bimestre: Vectores, Matrices, Structs y Memoria Dinámica</h1>
       <p>
-        Estructuras de datos en memoria Stack y Heap: vectores estáticos, ordenamiento burbuja, matrices bidimensionales, diagonales, registros heterogéneos (<code>struct</code>) y administración dinámica con <code>malloc</code>, <code>free</code>, <code>calloc</code> y <code>realloc</code>.
+        Clases completas paso a paso desde cero basadas en el Apunte Teórico de Laboratorio de Algoritmos y Estructura
+        de Datos: vectores estáticos, recorridos, búsquedas, ordenamiento con variable auxiliar y ciclos anidados,
+        matrices bidimensionales, diagonales principal y secundaria, estructuras (<code>struct</code>), memoria dinámica
+        en el Heap (<code>malloc</code>, <code>free</code>, <code>calloc</code>, <code>realloc</code>) y vectores
+        dinámicos.
       </p>
       <div class="stats-bar">
-        <span class="stat-badge">📚 Unidades: <b>10 Presentaciones</b></span>
-        <span class="stat-badge">🎯 Enfoque: <b>Estructuras &amp; Memoria Heap</b></span>
+        <span class="stat-badge">📚 Unidades: <b>10 Clases Magistrales (~350 Diapositivas)</b></span>
+        <span class="stat-badge">🎯 Enfoque: <b>Desde Cero • Traza Paso a Paso • Ejemplos N1–N4</b></span>
         <span class="stat-badge">⚡ Estándar: <b>C99 / C11</b></span>
       </div>
     </header>
 
     <div class="switch-banner">
-      <p>💡 ¿Necesitás repasar las bases de programación del primer bimestre?</p>
-      <a href="../1er-bimestre/index.html">Ir al 1er Bimestre →</a>
+      <p>📄 <b>Material Oficial de Cátedra:</b> Consultá el Apunte Teórico original del 2do Bimestre o repasá el 1er
+        Bimestre.</p>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="Apunte teorico - Lab. Algoritmos y Estructura de Datos p2.pdf" target="_blank">📘 Abrir Apunte Teórico
+          (PDF)</a>
+        <a href="../1er-bimestre/index.html">Ir al 1er Bimestre →</a>
+      </div>
     </div>
 
     <input type="text" id="filter" class="search-box"
-      placeholder="Buscar por tema o concepto (ej. vectores, matrices, diagonales, struct, malloc, realloc, burbuja)...">
+    placeholder="Buscar por tema o concepto (ej. vectores, indices, recorrido, menor, par, break, ordenar, aux,
+    matrices, diagonales, struct, malloc, free, calloc, realloc)...">
 
     <!-- BLOQUE 1: VECTORES Y ALGORITMOS -->
-    <div class="section-title">Bloque I: Vectores y Algoritmos Fundamentales</div>
+    <div class="section-title">Bloque I: Vectores Estáticos, Recorridos, Búsquedas y Ordenamiento</div>
     <div class="lesson-list">
 
       <!-- UNIDAD 1 -->
       <a href="presentaciones/01-vectores-estaticos.html" class="lesson-card"
-        data-search="vectores estaticos arreglos arrays indices 0 a n-1 casillas ram contigua corchetes desbordamiento">
+        data-search="vectores estaticos arreglos arrays que es un vector indices 0 a n-1 casillas ram contigua corchetes
+        inicializacion directa ventajas desventajas desbordamiento">
         <div class="lesson-info">
-          <span class="lesson-num">Unidad 01</span>
-          <h3>¿Qué es un vector? Vectores estáticos</h3>
-          <p>La necesidad de colecciones homogéneas en RAM, declaración con corchetes, indexación de 0 a N-1, inicialización y el peligro del desbordamiento (Out of Bounds).</p>
+          <span class="lesson-num">Unidad 01 • Clase Completa</span>
+          <h3>¿Qué es un vector? Vectores estáticos desde cero</h3>
+          <p>El problema de las variables sueltas frente a múltiples datos, definición y analogía de las cajitas con
+            separaciones, declaración <code>tipo nombre[tamaño]</code>, índices en base 0, asignación y acceso manual,
+            inicialización directa, vectores de <code>int</code>, <code>float</code> y <code>char</code>,
+            ventajas/desventajas y errores fuera de rango.</p>
           <div class="tag-list">
-            <span class="tag-item">int v[N]</span>
+            <span class="tag-item">int edades[5]</span>
             <span class="tag-item">Índices 0 a N-1</span>
+            <span class="tag-item">Inicialización { }</span>
             <span class="tag-item">Memoria Contigua</span>
-            <span class="tag-item">Stack RAM</span>
+            <span class="tag-item">Fuera de Rango</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
@@ -375,16 +390,21 @@
 
       <!-- UNIDAD 2 -->
       <a href="presentaciones/02-recorridos-busquedas-vectores.html" class="lesson-card"
-        data-search="recorridos for busqueda lineal acumulador suma promedio maximo minimo scanf &v[i]">
+        data-search="recorridos for busqueda lineal acumulador contador suma promedio maximo minimo menor par break
+        bandera flag scanf &edades[i] modelo examen">
         <div class="lesson-info">
-          <span class="lesson-num">Unidad 02</span>
+          <span class="lesson-num">Unidad 02 • Clase Completa</span>
           <h3>Recorridos, búsquedas y procesamiento de vectores</h3>
-          <p>El patrón universal del bucle for, carga desde teclado con scanf(&amp;v[i]), acumuladores de sumatoria y promedio, cálculo de máximo/mínimo y búsqueda lineal secuencial.</p>
+          <p>Por qué recorrer con ciclos, simulación paso a paso de <code>for(int i = 0; i &lt; N; i++)</code>, carga
+            con <code>scanf</code>, modificación de elementos, acumuladores y contadores, búsqueda del menor y mayor
+            elemento, corte con <code>break</code>, banderas de existencia y resolución del modelo de examen (menor
+            número par).</p>
           <div class="tag-list">
             <span class="tag-item">for (int i = 0; i &lt; N; i++)</span>
-            <span class="tag-item">Búsqueda Lineal</span>
-            <span class="tag-item">Máximo / Mínimo</span>
-            <span class="tag-item">Acumuladores</span>
+            <span class="tag-item">Menor y Mayor</span>
+            <span class="tag-item">Corte con break</span>
+            <span class="tag-item">Contadores y Bandera</span>
+            <span class="tag-item">Menor Par (Examen)</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
@@ -392,16 +412,20 @@
 
       <!-- UNIDAD 3 -->
       <a href="presentaciones/03-ordenamiento-vectores.html" class="lesson-card"
-        data-search="ordenamiento vectores metodo burbuja bubble sort swap variable temporal bucles anidados optimizacion bandera">
+        data-search="ordenamiento vectores ordenar menor a mayor descendente intercambio swap variable auxiliar aux for
+        anidado j = i + 1 metodo burbuja">
         <div class="lesson-info">
-          <span class="lesson-num">Unidad 03</span>
-          <h3>Ordenamiento de vectores: El Método Burbuja</h3>
-          <p>Mecánica intuitiva de intercambio (swap) con variable auxiliar temporal, pasadas completas con bucles anidados, optimización con bandera huboCambio y complejidad.</p>
+          <span class="lesson-num">Unidad 03 • Clase Completa</span>
+          <h3>Ordenamiento de vectores paso a paso</h3>
+          <p>Orden ascendente y descendente, por qué falla el intercambio directo y uso de la variable auxiliar
+            (<code>aux</code>), ciclos <code>for</code> anidados (<code>i</code> y <code>j = i + 1</code>), simulación
+            completa pasada por pasada sobre <code>{8, 3, 10, 1, 5}</code>, variante de burbujeo adyacente y ejercicios
+            de examen.</p>
           <div class="tag-list">
-            <span class="tag-item">Bubble Sort</span>
-            <span class="tag-item">Swap con temp</span>
-            <span class="tag-item">Bucles Anidados</span>
-            <span class="tag-item">Optimización Flag</span>
+            <span class="tag-item">Variable Auxiliar (aux)</span>
+            <span class="tag-item">For Anidado (i, j=i+1)</span>
+            <span class="tag-item">Menor a Mayor / Mayor a Menor</span>
+            <span class="tag-item">Método Burbuja</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
@@ -409,21 +433,25 @@
     </div>
 
     <!-- BLOQUE 2: MATRICES Y ESTRUCTURAS -->
-    <div class="section-title">Bloque II: Matrices Bidimensionales y Registros (Struct)</div>
+    <div class="section-title">Bloque II: Matrices Bidimensionales, Diagonales y Estructuras (Struct)</div>
     <div class="lesson-list">
 
       <!-- UNIDAD 4 -->
       <a href="presentaciones/04-matrices-bidimensionales.html" class="lesson-card"
-        data-search="matrices bidimensionales filas columnas m[i][j] bucles anidados coordenadas row-major totales">
+        data-search="matrices bidimensionales filas columnas matriz[fila][columna] bucles anidados tabla excel edificio
+        casilleros scanf mayor">
         <div class="lesson-info">
-          <span class="lesson-num">Unidad 04</span>
-          <h3>Matrices y recorridos bidimensionales</h3>
-          <p>Tablas con filas y columnas [FILAS][COLS], orden Row-Major en RAM física, doble bucle for(i, j), carga interactiva y cálculo de subtotales por fila y columna.</p>
+          <span class="lesson-num">Unidad 04 • Clase Completa</span>
+          <h3>Matrices bidimensionales: filas y columnas</h3>
+          <p>De 1D a 2D (fila de casilleros vs edificio de casilleros), declaración
+            <code>tipo nombre[filas][columnas]</code>, inicialización con llaves anidadas, acceso y modificación por
+            doble coordenada, simulación paso a paso del doble <code>for</code> (fila y columna), carga con
+            <code>scanf</code> y búsqueda del mayor en una matriz.</p>
           <div class="tag-list">
-            <span class="tag-item">m[FILAS][COLS]</span>
-            <span class="tag-item">Row-Major Order</span>
-            <span class="tag-item">Doble bucle (i, j)</span>
-            <span class="tag-item">Subtotales</span>
+            <span class="tag-item">matriz[fila][columna]</span>
+            <span class="tag-item">Doble for (fila, col)</span>
+            <span class="tag-item">Salto de línea \n</span>
+            <span class="tag-item">Búsqueda y Sumas 2D</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
@@ -431,16 +459,20 @@
 
       <!-- UNIDAD 5 -->
       <a href="presentaciones/05-diagonales-matriz.html" class="lesson-card"
-        data-search="diagonales matriz cuadrada diagonal principal i == j diagonal secundaria i + j == n - 1 optimizacion o(n) triangular">
+        data-search="diagonales matriz cuadrada diagonal principal fila == columna matriz[i][i] diagonal secundaria fila
+        + columna == N - 1 matriz[i][N-1-i] suma">
         <div class="lesson-info">
-          <span class="lesson-num">Unidad 05</span>
+          <span class="lesson-num">Unidad 05 • Clase Completa</span>
           <h3>Diagonales de una matriz: Principal y Secundaria</h3>
-          <p>Matrices cuadradas (N × N), condición de diagonal principal (i == j), deducción matemática de secundaria (j = N - 1 - i), optimización a un solo bucle O(N) y zonas triangulares.</p>
+          <p>Matrices cuadradas (N × N), deducción visual y matemática de la Diagonal Principal
+            (<code>fila == columna</code>, acceso directo con <code>matriz[i][i]</code>) y de la Diagonal Secundaria
+            (<code>fila + columna = N - 1</code>, acceso con <code>matriz[i][N - 1 - i]</code>), recorrido con un único
+            <code>for</code>, sumatorias y zonas triangulares.</p>
           <div class="tag-list">
             <span class="tag-item">Matriz Cuadrada N×N</span>
-            <span class="tag-item">Principal (i == j)</span>
-            <span class="tag-item">Secundaria (i + j = N-1)</span>
-            <span class="tag-item">Bucle Único O(N)</span>
+            <span class="tag-item">Principal: matriz[i][i]</span>
+            <span class="tag-item">Secundaria: matriz[i][N-1-i]</span>
+            <span class="tag-item">Suma de Diagonales</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
@@ -448,15 +480,19 @@
 
       <!-- UNIDAD 6 -->
       <a href="presentaciones/06-estructuras-struct.html" class="lesson-card"
-        data-search="estructuras struct typedef operador punto . campos heterogeneos registros arreglos de estructuras curso[i]">
+        data-search="estructuras struct molde campos atributos operador punto . struct Alumno alumno1 vector de
+        estructuras alumnos[30] Producto">
         <div class="lesson-info">
-          <span class="lesson-num">Unidad 06</span>
+          <span class="lesson-num">Unidad 06 • Clase Completa</span>
           <h3>Estructuras (struct) y vectores de estructuras</h3>
-          <p>Superando la limitación homogénea: registros con campos de distinto tipo, simplificación con typedef, operador punto (.), registros anidados y arreglos de registros para bases de datos en memoria.</p>
+          <p>Por qué agrupar datos relacionados de distinto tipo (ficha de Alumno o Producto), definición del molde
+            <code>struct Alumno</code>, creación de variables, acceso con el operador punto (<code>alumno1.edad</code>),
+            vectores de estructuras (<code>struct Alumno alumnos[30]</code>), carga con <code>for</code> y búsquedas por
+            campo.</p>
           <div class="tag-list">
-            <span class="tag-item">typedef struct</span>
+            <span class="tag-item">struct Alumno</span>
             <span class="tag-item">Operador Punto (.)</span>
-            <span class="tag-item">Campos Heterogéneos</span>
+            <span class="tag-item">alumnos[i].campo</span>
             <span class="tag-item">Vector de Structs</span>
           </div>
         </div>
@@ -465,20 +501,24 @@
     </div>
 
     <!-- BLOQUE 3: MEMORIA DINÁMICA -->
-    <div class="section-title">Bloque III: Gestión Profesional de Memoria Dinámica</div>
+    <div class="section-title">Bloque III: Memoria Dinámica, Punteros y Vectores Dinámicos</div>
     <div class="lesson-list">
 
       <!-- UNIDAD 7 -->
       <a href="presentaciones/07-introduccion-memoria-dinamica.html" class="lesson-card"
-        data-search="introduccion memoria dinamica stack vs heap punteros *ptr direccion & ampersand operador indireccion null">
+        data-search="introduccion memoria dinamica estatica vs dinamica analogia fiesta sillas stack vs heap direcciones
+        de memoria punteros int *numeros NULL">
         <div class="lesson-info">
-          <span class="lesson-num">Unidad 07</span>
+          <span class="lesson-num">Unidad 07 • Clase Completa</span>
           <h3>Introducción a la memoria dinámica y punteros</h3>
-          <p>Por qué los vectores estáticos tienen límites, arquitectura de RAM (Stack automático vs Heap flexible), variables puntero (*), operador dirección (&amp;) y puntero nulo NULL.</p>
+          <p>Qué es la memoria RAM y qué problema resuelve la memoria dinámica, analogía de las sillas en una fiesta,
+            memoria estática vs dinámica, zonas Stack y Heap, concepto de dirección de memoria (<code>&amp;</code>), qué
+            es un puntero (<code>int *vector</code>), puntero seguro <code>NULL</code> y panorama de las 4 funciones de
+            <code>&lt;stdlib.h&gt;</code>.</p>
           <div class="tag-list">
-            <span class="tag-item">Stack vs Heap</span>
-            <span class="tag-item">Punteros (*ptr)</span>
-            <span class="tag-item">Dirección (&amp;)</span>
+            <span class="tag-item">Estática vs Dinámica</span>
+            <span class="tag-item">Zona Heap</span>
+            <span class="tag-item">Direcciones y Punteros (*)</span>
             <span class="tag-item">Puntero NULL</span>
           </div>
         </div>
@@ -487,16 +527,20 @@
 
       <!-- UNIDAD 8 -->
       <a href="presentaciones/08-reserva-liberacion-malloc-free.html" class="lesson-card"
-        data-search="malloc free sizeof reserva liberacion heap validacion ptr == null memory leak fuga memoria dangling pointer">
+        data-search="malloc free sizeof stdlib.h reserva liberacion heap validacion NULL analogia cancha futbol memory
+        leak doble free">
         <div class="lesson-info">
-          <span class="lesson-num">Unidad 08</span>
-          <h3>Reserva y liberación de memoria: malloc(), free() y sizeof()</h3>
-          <p>Cálculo portable con sizeof(), solicitud de bytes en el Heap con malloc(), regla obligatoria de validación contra NULL, liberación con free() y prevención de fugas de memoria.</p>
+          <span class="lesson-num">Unidad 08 • Clase Completa</span>
+          <h3>Reserva y liberación: malloc(), free() y sizeof()</h3>
+          <p>Biblioteca <code>&lt;stdlib.h&gt;</code>, cálculo de bytes con <code>sizeof(tipo)</code>, reserva en tiempo
+            de ejecución con <code>malloc(cantidad * sizeof(int))</code>, verificación de <code>NULL</code>, analogía
+            del alquiler de la cancha de fútbol, liberación obligatoria con <code>free()</code> y prevención de fugas y
+            doble liberación.</p>
           <div class="tag-list">
-            <span class="tag-item">sizeof(tipo)</span>
-            <span class="tag-item">malloc(bytes)</span>
-            <span class="tag-item">free(ptr)</span>
-            <span class="tag-item">Memory Leaks</span>
+            <span class="tag-item">#include &lt;stdlib.h&gt;</span>
+            <span class="tag-item">sizeof(int)</span>
+            <span class="tag-item">malloc()</span>
+            <span class="tag-item">free()</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
@@ -504,16 +548,20 @@
 
       <!-- UNIDAD 9 -->
       <a href="presentaciones/09-calloc-realloc.html" class="lesson-card"
-        data-search="calloc realloc memoria limpia ceros redimensionar in-place reubicacion patron puntero temporal temp fugar memoria">
+        data-search="calloc realloc basura malloc inicializacion en 0 cambiar tamano agrandar achicar conservar datos
+        puntero auxiliar">
         <div class="lesson-info">
-          <span class="lesson-num">Unidad 09</span>
-          <h3>calloc() y realloc(): Memoria limpia y redimensionamiento</h3>
-          <p>Inicialización en ceros con calloc(), expansión y contracción de bloques con realloc(), los 3 caminos en el Heap y el patrón de puntero temporal para evitar pérdidas de datos.</p>
+          <span class="lesson-num">Unidad 09 • Clase Completa</span>
+          <h3>calloc() y realloc(): Inicialización en 0 y cambio de tamaño</h3>
+          <p>Valores basura en <code>malloc()</code> vs inicialización limpia en cero con
+            <code>calloc(cantidad, sizeof(int))</code>, cómo agrandar o achicar un bloque existente con
+            <code>realloc()</code> sin perder los datos cargados, qué ocurre en el Heap al reubicar y uso seguro con
+            puntero auxiliar.</p>
           <div class="tag-list">
-            <span class="tag-item">calloc(num, size)</span>
-            <span class="tag-item">realloc(ptr, new_size)</span>
-            <span class="tag-item">Puntero temp auxiliar</span>
-            <span class="tag-item">Reubicación en Heap</span>
+            <span class="tag-item">calloc(N, sizeof)</span>
+            <span class="tag-item">Todo en 0</span>
+            <span class="tag-item">realloc(v, nuevo_tam)</span>
+            <span class="tag-item">Puntero Auxiliar</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
@@ -521,16 +569,20 @@
 
       <!-- UNIDAD 10 -->
       <a href="presentaciones/10-vectores-dinamicos.html" class="lesson-card"
-        data-search="vectores dinamicos integracion proyecto final estructuras heap ordenamiento busqueda menu interactivo c99">
+        data-search="vectores dinamicos cantidad elegida por usuario notas[i] acceso igual a estatico recorrido carga
+        busqueda ordenamiento struct dinamico integracion">
         <div class="lesson-info">
-          <span class="lesson-num">Unidad 10</span>
-          <h3>Vectores dinámicos e integración de conceptos</h3>
-          <p>Estructura tríada (puntero, capacidad y cantidad), arreglos dinámicos de structs, algoritmos sobre Heap y el proyecto final: Sistema interactivo completo de gestión en C.</p>
+          <span class="lesson-num">Unidad 10 • Clase Completa</span>
+          <h3>Vectores dinámicos e integración del 2do Bimestre</h3>
+          <p>Creación de un vector del tamaño exacto pedido por el usuario, por qué se accede igual que un vector
+            estático (<code>notas[0]</code>, <code>notas[i]</code>), carga, impresión, búsquedas, ordenamiento,
+            redimensión con <code>realloc()</code>, vectores dinámicos de <code>struct</code> y ciclo de vida completo
+            con <code>free()</code>.</p>
           <div class="tag-list">
             <span class="tag-item">Vector Dinámico</span>
-            <span class="tag-item">Structs en Heap</span>
-            <span class="tag-item">Burbuja Dinámica</span>
-            <span class="tag-item">Proyecto Integrador</span>
+            <span class="tag-item">Acceso notas[i]</span>
+            <span class="tag-item">Ciclo de Vida Completo</span>
+            <span class="tag-item">Integración 2do Bimestre</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>

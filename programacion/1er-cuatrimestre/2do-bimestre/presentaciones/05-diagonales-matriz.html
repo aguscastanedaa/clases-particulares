@@ -28,8 +28,8 @@
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
       <a href="../index.html">← Volver al 2do Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a
-        href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 2do Bimestre • Unidad 05</span>
   </div>
@@ -39,313 +39,1630 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-purple">1er Cuatrimestre • 2do Bimestre • Unidad 5</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Diagonales de una Matriz</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            Geometría y relaciones algebraicas de índices: diagonal principal (i == j), secundaria (i + j == N - 1) y
-            algoritmos O(N)
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-purple">1er Cuatrimestre • 2do Bimestre • Unidad 05</span>
+          <h1 style="font-size: 2.65rem; margin-bottom: 12px;">Diagonales de una Matriz</h1>
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 22px;">
+            Matrices cuadradas, deducción paso a paso de la Diagonal Principal (<code>matriz[i][i]</code>) y de la
+            Diagonal Secundaria (<code>matriz[i][N - 1 - i]</code>) con un solo ciclo <code>for</code>
           </p>
 
-          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">Matrices Cuadradas (NxN)</span>
-            <span class="badge badge-emerald">Diagonal Principal [i][i]</span>
-            <span class="badge badge-amber">Secundaria [i][N-1-i]</span>
-            <span class="badge badge-purple">Optimización a 1 Solo Bucle</span>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">Matrices Cuadradas (N×N)</span>
+            <span class="badge badge-emerald">Diagonal Principal \</span>
+            <span class="badge badge-amber">Diagonal Secundaria /</span>
+            <span class="badge badge-indigo">Recorrido con 1 solo for</span>
           </div>
 
-          <div class="box box-purple" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
+          <div class="box box-purple" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.92rem; color: #cbd5e1;">
               💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
-              para avanzar diapositiva por diapositiva.
+              para avanzar diapositiva por diapositiva. No hace falta ningún conocimiento previo sobre diagonales:
+              vamos a deducir cada fórmula juntos desde cero.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: OBJETIVOS Y HOJA DE RUTA -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje y Hoja de Ruta</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Condición Previa Obligatoria</h4>
+            <h4 style="color: #818cf8;">¿Por qué estudiamos las diagonales?</h4>
             <p style="font-size: 0.88rem;">
-              Las diagonales solo tienen sentido geométrico en <b>matrices cuadradas</b>, es decir, aquellas que tienen
-              exactamente la misma cantidad de filas que de columnas ($N \times N$).
+              En la unidad anterior aprendimos a recorrer toda una matriz fila por fila usando dos ciclos
+              <code>for</code>. Pero muchas veces en exámenes, tableros de juegos (como el Ta-Te-Ti o el ajedrez) y
+              problemas matemáticos necesitamos mirar únicamente las <b>líneas que cruzan de esquina a esquina</b>.
             </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              En álgebra lineal, gráficos por computadora (transformaciones 3D) y videojuegos, las operaciones con
-              diagonales son el pan de cada día.
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">
+              Además, descubrir el patrón de las coordenadas de una diagonal nos enseña a <b>pensar como
+              programadores</b>: observar posiciones, encontrar una regla y ahorrar pasos innecesarios.
             </p>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Identificar los elementos de la <b>Diagonal Principal</b>.</li>
-              <li>Comprender la regla matemática de la principal: <b><code>i == j</code></b>.</li>
-              <li>Identificar los elementos de la <b>Diagonal Secundaria</b>.</li>
-              <li>Descubrir la relación algebraica secundaria: <b><code>i + j == N - 1</code></b>.</li>
-              <li>Aprender a procesar diagonales con <b>un solo bucle eficiente</b>.</li>
-              <li>Conocer las zonas triangulares (superior e inferior).</li>
+            <h4 style="color: #34d399;">Lo que vas a aprender paso a paso</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.58; margin-left: 18px;">
+              <li>Distinguir entre una matriz rectangular y una <b>matriz cuadrada</b>.</li>
+              <li>Identificar visualmente la <b>Diagonal Principal (<code>\</code>)</b> y la <b>Secundaria (<code>/</code>)</b>.</li>
+              <li>Deducir por qué en la diagonal principal siempre se cumple <code>fila == columna</code>.</li>
+              <li>Recorrer y sumar la diagonal principal con un único <code>for</code> usando <code>matriz[i][i]</code>.</li>
+              <li>Deducir la suma constante <code>fila + columna == N - 1</code> de la diagonal secundaria.</li>
+              <li>Recorrer y sumar la diagonal secundaria con <code>matriz[i][N - 1 - i]</code>.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: MAPA VISUAL DE AMBAS DIAGONALES -->
+      <!-- SLIDE 3: CONCEPTO PREVIO: MATRIZ RECTANGULAR VS MATRIZ CUADRADA -->
       <section>
-        <h2><span class="section-num">02</span> Mapa Visual: Las Dos Diagonales</h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem;">Observá una matriz cuadrada de 3x3:</p>
+        <h2><span class="section-num">02</span> Concepto Previo: ¿Qué es una Matriz Cuadrada?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">
+          Antes de hablar de diagonales, tenemos que distinguir dos tipos de matrices según su forma:
+        </p>
 
-        <div style="text-align: center;">
-          <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr);">
-            <!-- Fila 0 -->
-            <div class="matrix-cell diag-main">
-              1
-              <span class="coord">[0][0]</span>
+        <div class="grid-2">
+          <div class="box box-rose" style="text-align: center;">
+            <h4 style="color: #f87171;">Matriz Rectangular (Filas ≠ Columnas)</h4>
+            <p style="font-size: 0.83rem; margin-bottom: 6px;">
+              Tiene distinta cantidad de filas que de columnas. Por ejemplo: <code>int mat[2][4];</code> (2 filas y 4 columnas).
+            </p>
+            <div class="matrix-grid" style="grid-template-columns: repeat(4, 1fr); margin: 6px auto;">
+              <div class="matrix-cell">10<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">20<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell">30<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">40<span class="coord">[0][3]</span></div>
+              <div class="matrix-cell">50<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell">60<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">70<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell">80<span class="coord">[1][3]</span></div>
             </div>
-            <div class="matrix-cell">
-              2
-              <span class="coord">[0][1]</span>
-            </div>
-            <div class="matrix-cell diag-sec">
-              3
-              <span class="coord">[0][2]</span>
-            </div>
-
-            <!-- Fila 1 -->
-            <div class="matrix-cell">
-              4
-              <span class="coord">[1][0]</span>
-            </div>
-            <div class="matrix-cell diag-both">
-              5
-              <span class="coord">[1][1]</span>
-            </div>
-            <div class="matrix-cell">
-              6
-              <span class="coord">[1][2]</span>
-            </div>
-
-            <!-- Fila 2 -->
-            <div class="matrix-cell diag-sec">
-              7
-              <span class="coord">[2][0]</span>
-            </div>
-            <div class="matrix-cell">
-              8
-              <span class="coord">[2][1]</span>
-            </div>
-            <div class="matrix-cell diag-main">
-              9
-              <span class="coord">[2][2]</span>
-            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 4px 0 0;">
+              Es más ancha que alta (como una tabla de horarios).
+            </p>
           </div>
-        </div>
 
-        <div style="display: flex; gap: 14px; justify-content: center; font-size: 0.82rem; margin-top: 8px;">
-          <span style="color: var(--accent-cyan);">■ Azul: Diagonal Principal</span>
-          <span style="color: var(--accent-amber);">■ Amarillo: Diagonal Secundaria</span>
-          <span style="color: var(--accent-purple);">■ Violeta: Elemento Central (Compartido)</span>
+          <div class="box box-emerald" style="text-align: center;">
+            <h4 style="color: #34d399;">Matriz Cuadrada (Filas == Columnas)</h4>
+            <p style="font-size: 0.83rem; margin-bottom: 6px;">
+              Tiene <b>exactamente la misma cantidad de filas que de columnas</b> ($N \times N$). Por ejemplo: <code>int mat[3][3];</code>.
+            </p>
+            <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr); margin: 6px auto;">
+              <div class="matrix-cell">1<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">2<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell">3<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">4<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell">5<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">6<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell">7<span class="coord">[2][0]</span></div>
+              <div class="matrix-cell">8<span class="coord">[2][1]</span></div>
+              <div class="matrix-cell">9<span class="coord">[2][2]</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 4px 0 0;">
+              Forma un cuadrado perfecto (3×3, 4×4, 5×5...).
+            </p>
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: DIAGONAL PRINCIPAL -->
+      <!-- SLIDE 4: POR QUÉ SOLO LAS CUADRADAS TIENEN DIAGONALES -->
       <section>
-        <h2><span class="section-num">03</span> La Diagonal Principal: <code>i == j</code></h2>
+        <h2><span class="section-num">03</span> ¿Por Qué Necesitamos que la Matriz sea Cuadrada?</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 10px;">
+          Una <b>diagonal</b> es una línea recta de casillas que sale de una esquina y avanza bajando una fila y
+          moviéndose una columna por paso hasta llegar a la <b>esquina opuesta</b>. Mirá qué pasa si intentamos hacer eso:
+        </p>
+
+        <div class="grid-2">
+          <div class="wrong-card" style="text-align: center;">
+            <div class="wrong-title">❌ En una matriz 2×4 no llega a la esquina</div>
+            <div class="matrix-grid" style="grid-template-columns: repeat(4, 1fr); margin: 8px auto;">
+              <div class="matrix-cell diag-main">10<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">20<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell">30<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">40<span class="coord">[0][3]</span></div>
+              <div class="matrix-cell">50<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-main">60<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">70<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell">80<span class="coord">[1][3]</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 4px 0 0;">
+              Empezamos en <code>[0][0]</code>, bajamos a <code>[1][1]</code> y ¡nos quedamos sin filas! Nunca llegamos a la esquina inferior derecha <code>[1][3]</code>.
+            </p>
+          </div>
+
+          <div class="correct-card" style="text-align: center;">
+            <div class="correct-title">✅ En una matriz 3×3 une esquina con esquina</div>
+            <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr); margin: 8px auto;">
+              <div class="matrix-cell diag-main">1<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">2<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell">3<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">4<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-main">5<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">6<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell">7<span class="coord">[2][0]</span></div>
+              <div class="matrix-cell">8<span class="coord">[2][1]</span></div>
+              <div class="matrix-cell diag-main">9<span class="coord">[2][2]</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 4px 0 0;">
+              Como hay 3 filas y 3 columnas, salimos de la esquina <code>[0][0]</code>, pasamos por el centro <code>[1][1]</code> y llegamos exacto a la esquina <code>[2][2]</code>.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            📌 <b>Regla fundamental:</b> Solo las <b>matrices cuadradas</b> ($N \times N$, donde <code>filas == columnas</code>) tienen una <b>Diagonal Principal</b> y una <b>Diagonal Secundaria</b> bien definidas.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: EL TRUCO VISUAL DEL APUNTE (\ vs /) -->
+      <section>
+        <h2><span class="section-num">04</span> Las Dos Diagonales y el Truco Visual del Apunte</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">
+          En toda matriz cuadrada existen exactamente <b>dos diagonales</b>. El apunte teórico nos da un truco visual infalible con las barras del teclado para no confundirlas nunca:
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-cyan" style="text-align: center;">
+            <span class="badge badge-cyan">7.1 Diagonal Principal</span>
+            <h3 style="color: #38bdf8; margin: 4px 0;">Baja de izquierda a derecha: <code>\</code></h3>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Empieza arriba a la izquierda (<code>[0][0]</code>) y baja hacia abajo a la derecha, igual que la barra invertida <b><code>\</code></b>.
+            </p>
+            <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr); margin: 6px auto;">
+              <div class="matrix-cell diag-main">1<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">2<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell">3<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">4<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-main">5<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">6<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell">7<span class="coord">[2][0]</span></div>
+              <div class="matrix-cell">8<span class="coord">[2][1]</span></div>
+              <div class="matrix-cell diag-main">9<span class="coord">[2][2]</span></div>
+            </div>
+            <p style="font-size: 0.84rem; margin: 2px 0 0; color: #38bdf8;">
+              Elementos: <b>1, 5 y 9</b>
+            </p>
+          </div>
+
+          <div class="box box-amber" style="text-align: center;">
+            <span class="badge badge-amber">7.2 Diagonal Secundaria</span>
+            <h3 style="color: #fbbf24; margin: 4px 0;">Baja de derecha a izquierda: <code>/</code></h3>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Empieza arriba a la derecha (<code>[0][2]</code>) y baja hacia abajo a la izquierda, igual que la barra común <b><code>/</code></b>.
+            </p>
+            <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr); margin: 6px auto;">
+              <div class="matrix-cell">1<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">2<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell diag-sec">3<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">4<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-sec">5<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">6<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell diag-sec">7<span class="coord">[2][0]</span></div>
+              <div class="matrix-cell">8<span class="coord">[2][1]</span></div>
+              <div class="matrix-cell">9<span class="coord">[2][2]</span></div>
+            </div>
+            <p style="font-size: 0.84rem; margin: 2px 0 0; color: #fbbf24;">
+              Elementos: <b>3, 5 y 7</b>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: PARTE 1 - LA DIAGONAL PRINCIPAL (DEFINICIÓN DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">05</span> Parte 1: La Diagonal Principal (Sección 7.1)</h2>
         <div class="box box-cyan">
-          <h4 style="color: #38bdf8; margin-bottom: 4px;">Regla Matemática</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            Un elemento pertenece a la diagonal principal si y solo si su número de fila es <b>exactamente igual</b> a
-            su número de columna: <b><code>fila == columna</code></b>.
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición del Apunte Teórico</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            La <b>diagonal principal</b> de una matriz cuadrada está formada por todos los elementos cuya <b>fila y columna tienen el mismo índice</b>. Va desde la esquina superior izquierda hasta la esquina inferior derecha formando una línea así: <b><code>\</code></b>.
           </p>
         </div>
 
-        <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 10px;">
-          En una matriz de $N=3$, los casilleros son: <code>[0][0]</code>, <code>[1][1]</code> y <code>[2][2]</code>.
-        </p>
-
-        <div class="comparison-box" style="margin-top: 10px;">
-          <div class="wrong-card">
-            <div class="wrong-title">❌ Forma Ineficiente (Doble bucle)</div>
-            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #f87171;">
-              for (int i=0; i&lt;N; i++) {<br>
-              &nbsp;&nbsp;for (int j=0; j&lt;N; j++) {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;if (i == j) suma += m[i][j];<br>
-              &nbsp;&nbsp;}<br>
-              }
+        <div class="grid-1-2" style="margin-top: 12px; align-items: center;">
+          <div style="text-align: center;">
+            <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr);">
+              <div class="matrix-cell diag-main">1<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">2<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell">3<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">4<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-main">5<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">6<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell">7<span class="coord">[2][0]</span></div>
+              <div class="matrix-cell">8<span class="coord">[2][1]</span></div>
+              <div class="matrix-cell diag-main">9<span class="coord">[2][2]</span></div>
             </div>
-            <p style="font-size: 0.76rem; color: #fecaca; margin-top: 4px;">
-              Da $N^2$ vueltas y descarta casi todas.
-            </p>
           </div>
 
-          <div class="correct-card">
-            <div class="correct-title">✅ Forma Eficiente (1 Solo Bucle)</div>
-            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #a7f3d0;">
-              for (int i = 0; i &lt; N; i++) {<br>
-              &nbsp;&nbsp;suma += m[i][i]; // ¡Directo!<br>
-              }
+          <div>
+            <div class="code-window">
+              <div class="code-header">
+                <span class="code-title">matriz_ejemplo.c</span>
+                <span class="code-badge">Matriz 3×3 del Apunte</span>
+              </div>
+              <div class="code-body"><span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">3</span>] = {
+    {<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>},
+    {<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>},
+    {<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>}
+};</div>
             </div>
-            <p style="font-size: 0.76rem; color: #a7f3d0; margin-top: 4px;">
-              Va directo al blanco en solo $N$ vueltas ($O(N)$).
+            <p style="font-size: 0.86rem; color: #cbd5e1; margin-top: 8px;">
+              En esta matriz de 3×3, los números que forman la diagonal principal son el <b><code>1</code></b>, el <b><code>5</code></b> y el <b><code>9</code></b>.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: DIAGONAL SECUNDARIA -->
+      <!-- SLIDE 7: DEDUCCIÓN DESDE CERO DE LA DIAGONAL PRINCIPAL -->
       <section>
-        <h2><span class="section-num">04</span> La Diagonal Secundaria: <code>i + j == N - 1</code></h2>
-        <div class="box box-amber">
-          <h4 style="color: #fbbf24; margin-bottom: 4px;">La Relación Inversa</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            A medida que bajamos una fila (<code>i</code> aumenta), la columna debe retroceder un paso (<code>j</code>
-            disminuye). La suma de ambas coordenadas es siempre constante: <b><code>i + j = N - 1</code></b>.
-          </p>
-        </div>
-
-        <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 12px;">
-          Despejando <code>j</code> obtenemos la fórmula mágica: <b><code>j = N - 1 - i</code></b>.
+        <h2><span class="section-num">06</span> Deducción Paso a Paso: ¿Dónde Están Ubicados?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          En lugar de memorizar una fórmula, miremos en qué fila y en qué columna vive cada uno de los tres elementos (<code>1</code>, <code>5</code> y <code>9</code>):
         </p>
 
-        <table class="trace-table" style="margin-top: 10px;">
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div>
+              <b>El número <code>1</code> está arriba a la izquierda:</b> vive en la <b>Fila 0</b> y <b>Columna 0</b> → se escribe <code>matriz[0][0]</code>. Notá que la fila vale <code>0</code> y la columna también vale <code>0</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div>
+              <b>El número <code>5</code> está en el centro:</b> vive en la <b>Fila 1</b> y <b>Columna 1</b> → se escribe <code>matriz[1][1]</code>. La fila vale <code>1</code> y la columna también vale <code>1</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div>
+              <b>El número <code>9</code> está abajo a la derecha:</b> vive en la <b>Fila 2</b> y <b>Columna 2</b> → se escribe <code>matriz[2][2]</code>. La fila vale <code>2</code> y la columna también vale <code>2</code>.
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px; text-align: center;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">¡Descubrimos el patrón!</h4>
+          <p style="margin: 0; font-size: 0.95rem;">
+            En las tres casillas (<code>[0][0]</code>, <code>[1][1]</code> y <code>[2][2]</code>) los dos números entre corchetes son idénticos:<br>
+            <b>En toda la diagonal principal siempre se cumple que <code>fila == columna</code></b>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: COMPROBACIÓN EN MATRIZ 4x4 -->
+      <section>
+        <h2><span class="section-num">07</span> Comprobación del Patrón en una Matriz 4×4</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          ¿Funciona la misma regla si la matriz es más grande, por ejemplo de <b>4×4</b>? ¡Comprobémoslo!
+        </p>
+
+        <div class="grid-1-2" style="align-items: center;">
+          <div style="text-align: center;">
+            <div class="matrix-grid" style="grid-template-columns: repeat(4, 1fr);">
+              <div class="matrix-cell diag-main">10<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">12<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell">15<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">18<span class="coord">[0][3]</span></div>
+
+              <div class="matrix-cell">21<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-main">25<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">28<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell">30<span class="coord">[1][3]</span></div>
+
+              <div class="matrix-cell">33<span class="coord">[2][0]</span></div>
+              <div class="matrix-cell">36<span class="coord">[2][1]</span></div>
+              <div class="matrix-cell diag-main">40<span class="coord">[2][2]</span></div>
+              <div class="matrix-cell">42<span class="coord">[2][3]</span></div>
+
+              <div class="matrix-cell">50<span class="coord">[3][0]</span></div>
+              <div class="matrix-cell">55<span class="coord">[3][1]</span></div>
+              <div class="matrix-cell">60<span class="coord">[3][2]</span></div>
+              <div class="matrix-cell diag-main">70<span class="coord">[3][3]</span></div>
+            </div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th>Fila</th>
+                  <th>Columna</th>
+                  <th>Coordenada</th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1°</td>
+                  <td><code>0</code></td>
+                  <td><code>0</code></td>
+                  <td><code>matriz[0][0]</code></td>
+                  <td><b>10</b></td>
+                </tr>
+                <tr>
+                  <td>2°</td>
+                  <td><code>1</code></td>
+                  <td><code>1</code></td>
+                  <td><code>matriz[1][1]</code></td>
+                  <td><b>25</b></td>
+                </tr>
+                <tr>
+                  <td>3°</td>
+                  <td><code>2</code></td>
+                  <td><code>2</code></td>
+                  <td><code>matriz[2][2]</code></td>
+                  <td><b>40</b></td>
+                </tr>
+                <tr>
+                  <td>4°</td>
+                  <td><code>3</code></td>
+                  <td><code>3</code></td>
+                  <td><code>matriz[3][3]</code></td>
+                  <td><b>70</b></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="box box-indigo" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.84rem;">
+                💡 No importa si la matriz es de 3×3, 4×4 o 100×100: la diagonal principal siempre está en <code>[0][0]</code>, <code>[1][1]</code>, <code>[2][2]</code>, ..., <code>[i][i]</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: CÓMO RECORRER LA DIAGONAL PRINCIPAL - FORMA 1 (DOBLE FOR + IF) -->
+      <section>
+        <h2><span class="section-num">08</span> Recorrer la Diagonal Principal — Forma 1 (Con 2 <code>for</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Cuando recién aprendemos matrices, nuestra primera idea suele ser recorrer <b>toda la matriz</b> con dos ciclos <code>for</code> y preguntar con un <code>if</code> si estamos parados en la diagonal:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">diagonal_con_if.c</span>
+              <span class="code-badge">Forma 1: 2 for + if</span>
+            </div>
+            <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">3</span>; fila++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> col = <span class="c-num">0</span>; col &lt; <span class="c-num">3</span>; col++)
+    {
+        <span class="c-cmt">// ¿Coincide la fila con la columna?</span>
+        <span class="c-kw">if</span>(fila == col)
+        {
+            <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, matriz[fila][col]);
+        }
+    }
+}</div>
+          </div>
+
+          <div>
+            <div class="box box-amber">
+              <h4 style="color: #fbbf24;">¿Funciona? Sí, pero trabaja de más</h4>
+              <p style="font-size: 0.84rem;">
+                En una matriz de 3×3 hay <b>9 casillas</b> en total, pero solo <b>3 casillas</b> pertenecen a la diagonal principal.
+              </p>
+              <p style="font-size: 0.84rem; margin-top: 6px;">
+                Este código visita las 9 casillas una por una (<code>[0][0]</code>, <code>[0][1]</code>, <code>[0][2]</code>, <code>[1][0]</code>...) y en 6 de ellas el <code>if</code> da falso.
+              </p>
+            </div>
+            <div class="box box-cyan" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.84rem;">
+                🤔 <b>Pregunta clave:</b> Si ya sabemos que la fila y la columna son iguales, ¿para qué necesitamos dos variables distintas <code>fila</code> y <code>col</code>?
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: CÓMO RECORRER LA DIAGONAL PRINCIPAL - FORMA 2 (UN SOLO FOR DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">09</span> Forma 2: La Forma Directa del Apunte (1 Solo <code>for</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Como la fila y la columna siempre valen lo mismo, ¡podemos usar <b>un único ciclo <code>for</code></b> con una sola variable <code>i</code> tanto para la fila como para la columna!
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">diagonal_principal.c</span>
+              <span class="code-badge">Código del Apunte (Pág. 21)</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">3</span>] = {
+        {<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>},
+        {<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>},
+        {<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>}
+    };
+
+<span class="c-hl">    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++)</span>
+<span class="c-hl">    {</span>
+<span class="c-hl">        <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, matriz[i][i]);</span>
+<span class="c-hl">    }</span>
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Salida por pantalla</span>
+                <span>stdout</span>
+              </div>
+              <div class="terminal-body">1
+5
+9</div>
+            </div>
+
+            <div class="box box-emerald" style="margin-top: 10px;">
+              <h4 style="color: #34d399; margin-bottom: 4px;">¿Por qué funciona <code>matriz[i][i]</code>?</h4>
+              <p style="margin: 0; font-size: 0.85rem;">
+                Porque ponemos la misma variable <code>i</code> en el primer corchete (fila) y en el segundo corchete (columna). Cuando <code>i</code> cambia de valor, ¡la fila y la columna avanzan juntas al mismo tiempo!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: SIMULACIÓN PASO A PASO DEL APUNTE + PATRÓN IMPORTANTE -->
+      <section>
+        <h2><span class="section-num">10</span> Simulación Paso a Paso de <code>matriz[i][i]</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Sigamos vuelta por vuelta cómo ejecuta la computadora el ciclo <code>for(int i = 0; i &lt; 3; i++)</code> tal como lo explica el apunte en las páginas 21 y 22:
+        </p>
+
+        <table class="trace-table">
           <thead>
             <tr>
-              <th>Fila (i)</th>
-              <th>Cálculo de j: (3 - 1 - i)</th>
-              <th>Coordenada Resultante</th>
-              <th>Valor en el gráfico</th>
+              <th>Iteración</th>
+              <th>Valor de <code>i</code></th>
+              <th>¿Cumple <code>i &lt; 3</code>?</th>
+              <th>Casilla accedida <code>matriz[i][i]</code></th>
+              <th>Valor mostrado en pantalla</th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td><b>1ª iteración</b></td>
               <td><code>i = 0</code></td>
-              <td><code>j = 2 - 0 = 2</code></td>
-              <td><code>m[0][2]</code></td>
-              <td><b>3</b> (esquina superior derecha)</td>
+              <td>Sí (<code>0 &lt; 3</code>)</td>
+              <td>Accede a <code>matriz[0][0]</code></td>
+              <td>Muestra <b><code>1</code></b></td>
             </tr>
             <tr>
+              <td><b>2ª iteración</b></td>
               <td><code>i = 1</code></td>
-              <td><code>j = 2 - 1 = 1</code></td>
-              <td><code>m[1][1]</code></td>
-              <td><b>5</b> (centro)</td>
+              <td>Sí (<code>1 &lt; 3</code>)</td>
+              <td>Accede a <code>matriz[1][1]</code></td>
+              <td>Muestra <b><code>5</code></b></td>
             </tr>
             <tr>
+              <td><b>3ª iteración</b></td>
               <td><code>i = 2</code></td>
-              <td><code>j = 2 - 2 = 0</code></td>
-              <td><code>m[2][0]</code></td>
-              <td><b>7</b> (esquina inferior izquierda)</td>
+              <td>Sí (<code>2 &lt; 3</code>)</td>
+              <td>Accede a <code>matriz[2][2]</code></td>
+              <td>Muestra <b><code>9</code></b></td>
+            </tr>
+            <tr>
+              <td><b>Fin del ciclo</b></td>
+              <td><code>i = 3</code></td>
+              <td>No (<code>3 &lt; 3</code> es falso)</td>
+              <td>Termina el <code>for</code></td>
+              <td>—</td>
             </tr>
           </tbody>
         </table>
-      </section>
 
-      <!-- SLIDE 6: CÓDIGO EFICIENTE DE AMBAS DIAGONALES -->
-      <section>
-        <h2><span class="section-num">05</span> Código Profesional: Suma de Diagonales en O(N)</h2>
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">suma_diagonales.c</span>
-            <span class="code-badge">Un Solo Bucle</span>
-          </div>
-          <div class="code-body"><span class="c-pre">#define</span> N <span class="c-num">3</span>
-
-            <span class="c-kw">int</span> sumaPrincipal = <span class="c-num">0</span>;
-            <span class="c-kw">int</span> sumaSecundaria = <span class="c-num">0</span>;
-
-            <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; N;
-            i++)
-            {
-            sumaPrincipal += matriz[i][i]; <span class="c-cmt">// Diagonal Principal</span>
-            sumaSecundaria += matriz[i][N - <span class="c-num">1</span> - i]; <span class="c-cmt">// Diagonal
-              Secundaria</span>
-            }
-
-            <span class="c-fn">printf</span>(<span class="c-str">"Suma Diagonal Principal: %d\n"</span>, sumaPrincipal);
-            <span class="c-fn">printf</span>(<span class="c-str">"Suma Diagonal Secundaria: %d\n"</span>,
-            sumaSecundaria);
-          </div>
-        </div>
-
-        <div class="box box-emerald">
-          <p style="margin: 0; font-size: 0.85rem;">
-            ⚡ <b>¡Máxima Eficiencia!:</b> Calculamos ambas diagonales en simultáneo en una sola pasada de $N$ ciclos,
-            sin necesidad de anidar bucles ni usar condicionales.
+        <div class="box box-purple" style="margin-top: 12px; text-align: center;">
+          <h4 style="color: #c084fc; margin-bottom: 4px;">⭐ Patrón Importante del Apunte (Pág. 22)</h4>
+          <p style="margin: 0; font-size: 0.95rem; color: #f8fafc;">
+            <b>«Si ves <code>matriz[i][i]</code> → estás trabajando con la diagonal principal.»</b>
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 7: TRIANGULARES SUPERIOR E INFERIOR -->
+      <!-- SLIDE 12: COMPARACIÓN LADO A LADO: 2 FOR VS 1 FOR -->
       <section>
-        <h2><span class="section-num">06</span> Zonas Triangulares de una Matriz</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">La diagonal principal divide a toda matriz cuadrada en
-          dos mitades simétricas:</p>
-
-        <div class="grid-2">
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">Triangular Superior: i &lt; j</h4>
-            <p style="font-size: 0.85rem;">
-              Son todos los elementos que están estrictamente <b>por encima</b> de la diagonal principal.
-            </p>
-            <p style="font-size: 0.82rem; color: #cbd5e1;">
-              La columna es mayor que la fila (ej. <code>[0][1]</code>, <code>[0][2]</code>, <code>[1][2]</code>).
-            </p>
+        <h2><span class="section-num">11</span> Comparación: ¿Por Qué es Mejor Usar 1 Solo <code>for</code>?</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">🐢 Con dos ciclos for y un if</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> f = <span class="c-num">0</span>; f &lt; <span class="c-num">3</span>; f++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> c = <span class="c-num">0</span>; c &lt; <span class="c-num">3</span>; c++)
+    {
+        <span class="c-kw">if</span>(f == c)
+            <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, matriz[f][c]);
+    }
+}</div>
+            </div>
+            <ul style="font-size: 0.8rem; color: #fecaca; margin-left: 16px;">
+              <li>En una matriz de 3×3 da <b>9 vueltas</b> ($3 \times 3$).</li>
+              <li>En una matriz de 100×100 da <b>10.000 vueltas</b> para mostrar apenas 100 números.</li>
+              <li>Más largo de escribir y leer.</li>
+            </ul>
           </div>
 
-          <div class="box box-amber">
-            <h4 style="color: #fbbf24;">Triangular Inferior: i &gt; j</h4>
-            <p style="font-size: 0.85rem;">
-              Son todos los elementos que están estrictamente <b>por debajo</b> de la diagonal principal.
-            </p>
-            <p style="font-size: 0.82rem; color: #cbd5e1;">
-              La fila es mayor que la columna (ej. <code>[1][0]</code>, <code>[2][0]</code>, <code>[2][1]</code>).
+          <div class="correct-card">
+            <div class="correct-title">🚀 Con un único ciclo for (Directo)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, matriz[i][i]);
+}</div>
+            </div>
+            <ul style="font-size: 0.8rem; color: #a7f3d0; margin-left: 16px;">
+              <li>En una matriz de 3×3 da solo <b>3 vueltas</b>.</li>
+              <li>En una matriz de 100×100 da solo <b>100 vueltas</b> (¡100 veces más rápido!).</li>
+              <li>Va directo a las casillas de la diagonal sin necesidad de usar <code>if</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: OPERACIONES SOBRE LA DIAGONAL PRINCIPAL: SUMAR (APUNTE PÁG 22) -->
+      <section>
+        <h2><span class="section-num">12</span> Sumar la Diagonal Principal (Apunte Pág. 22)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Una de las actividades más pedidas en clase y exámenes es calcular cuánto suman todos los números de la diagonal principal. Usamos una variable acumuladora <code>suma</code> inicializada en <code>0</code>:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">sumar_diagonal_principal.c</span>
+              <span class="code-badge">Apunte Pág. 22</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">3</span>] = {
+    {<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>},
+    {<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>},
+    {<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>}
+};
+
+<span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++)
+{
+<span class="c-hl">    suma += matriz[i][i];</span>
+}
+
+<span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, suma);</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Vuelta</th>
+                  <th>Elemento <code>matriz[i][i]</code></th>
+                  <th>Cálculo de <code>suma</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Inicio</td>
+                  <td>—</td>
+                  <td><code>suma = 0</code></td>
+                </tr>
+                <tr>
+                  <td><code>i = 0</code></td>
+                  <td><code>matriz[0][0]</code> vale <b>1</b></td>
+                  <td><code>0 + 1 = 1</code></td>
+                </tr>
+                <tr>
+                  <td><code>i = 1</code></td>
+                  <td><code>matriz[1][1]</code> vale <b>5</b></td>
+                  <td><code>1 + 5 = 6</code></td>
+                </tr>
+                <tr>
+                  <td><code>i = 2</code></td>
+                  <td><code>matriz[2][2]</code> vale <b>9</b></td>
+                  <td><code>6 + 9 = 15</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 8px;">
+              <div class="terminal-header"><span>Resultado: 1 + 5 + 9 = 15</span><span>stdout</span></div>
+              <div class="terminal-body">15</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: OPERACIONES: CONTAR PARES O POSITIVOS EN LA DIAGONAL PRINCIPAL -->
+      <section>
+        <h2><span class="section-num">13</span> Contar Elementos que Cumplen una Condición</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          ¿Y si nos piden contar cuántos números de la diagonal principal son <b>pares</b> (o cuántos son mayores a 10)? Combinamos nuestro ciclo de <code>matriz[i][i]</code> con un <code>if</code> y un contador:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">contar_pares_diagonal.c</span>
+              <span class="code-badge">Contador en Diagonal</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">3</span>] = {
+    {<span class="c-num">4</span>, <span class="c-num">7</span>, <span class="c-num">1</span>},
+    {<span class="c-num">9</span>, <span class="c-num">5</span>, <span class="c-num">3</span>},
+    {<span class="c-num">2</span>, <span class="c-num">6</span>, <span class="c-num">8</span>}
+};
+
+<span class="c-kw">int</span> cantPares = <span class="c-num">0</span>;
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++)
+{
+    <span class="c-kw">if</span>(matriz[i][i] % <span class="c-num">2</span> == <span class="c-num">0</span>)
+    {
+        cantPares++;
+    }
+}
+
+<span class="c-fn">printf</span>(<span class="c-str">"Pares en la diagonal: %d\n"</span>, cantPares);</div>
+          </div>
+
+          <div>
+            <div style="text-align: center;">
+              <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="matrix-cell diag-main">4<span class="coord">[0][0] Par ✔</span></div>
+                <div class="matrix-cell">7<span class="coord">[0][1]</span></div>
+                <div class="matrix-cell">1<span class="coord">[0][2]</span></div>
+                <div class="matrix-cell">9<span class="coord">[1][0]</span></div>
+                <div class="matrix-cell diag-main">5<span class="coord">[1][1] Impar ✘</span></div>
+                <div class="matrix-cell">3<span class="coord">[1][2]</span></div>
+                <div class="matrix-cell">2<span class="coord">[2][0]</span></div>
+                <div class="matrix-cell">6<span class="coord">[2][1]</span></div>
+                <div class="matrix-cell diag-main">8<span class="coord">[2][2] Par ✔</span></div>
+              </div>
+            </div>
+            <div class="box box-cyan">
+              <p style="margin: 0; font-size: 0.84rem;">
+                📌 Observá que el <code>6</code> y el <code>2</code> también son pares, pero <b>no se cuentan</b> porque están fuera de la diagonal principal. Solo miramos <code>[0][0]=4</code>, <code>[1][1]=5</code> y <code>[2][2]=8</code> → Resultado: <b>2 pares</b>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: OPERACIONES: BUSCAR EL MAYOR DE LA DIAGONAL PRINCIPAL -->
+      <section>
+        <h2><span class="section-num">14</span> Buscar el Mayor Elemento de la Diagonal Principal</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Para encontrar el número más grande que vive en la diagonal principal, tomamos como referencia inicial el primer elemento de la diagonal (<code>matriz[0][0]</code>) y comparamos con el resto:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">mayor_diagonal.c</span>
+              <span class="code-badge">Máximo de la Diagonal</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">3</span>] = {
+    {<span class="c-num">12</span>, <span class="c-num">99</span>, <span class="c-num">40</span>},
+    {<span class="c-num">15</span>, <span class="c-num">35</span>, <span class="c-num">80</span>},
+    {<span class="c-num">70</span>, <span class="c-num">10</span>, <span class="c-num">20</span>}
+};
+
+<span class="c-cmt">// Empezamos asumiendo que el mayor es [0][0]</span>
+<span class="c-kw">int</span> mayor = matriz[<span class="c-num">0</span>][<span class="c-num">0</span>];
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; <span class="c-num">3</span>; i++)
+{
+    <span class="c-kw">if</span>(matriz[i][i] &gt; mayor)
+    {
+        mayor = matriz[i][i];
+    }
+}
+
+<span class="c-fn">printf</span>(<span class="c-str">"Mayor de la diagonal: %d\n"</span>, mayor);</div>
+          </div>
+
+          <div>
+            <div class="box box-emerald">
+              <h4 style="color: #34d399;">Seguimiento del algoritmo</h4>
+              <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 16px;">
+                <li><b>Inicio:</b> <code>mayor = matriz[0][0]</code> → empieza valiendo <b><code>12</code></b>.</li>
+                <li><b><code>i = 1</code>:</b> compara <code>matriz[1][1]</code> (<code>35</code>) &gt; <code>12</code> → ¡Sí! Ahora <code>mayor = 35</code>.</li>
+                <li><b><code>i = 2</code>:</b> compara <code>matriz[2][2]</code> (<code>20</code>) &gt; <code>35</code> → No. Queda <code>35</code>.</li>
+              </ul>
+            </div>
+            <div class="box box-amber" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.83rem;">
+                ⚠️ Aunque en la matriz está el <code>99</code> en <code>[0][1]</code>, nuestro programa responde <b><code>35</code></b> porque solo estamos buscando dentro de la diagonal principal (<code>12</code>, <code>35</code> y <code>20</code>).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: OPERACIONES: MATRIZ IDENTIDAD (MODIFICAR LA DIAGONAL) -->
+      <section>
+        <h2><span class="section-num">15</span> Modificar la Diagonal: La Matriz Identidad</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          En matemática se llama <b>Matriz Identidad</b> a una matriz cuadrada que tiene <b><code>1</code> en toda su diagonal principal</b> y <b><code>0</code> en todas las demás casillas</b>. ¿Cómo la construimos en C?
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">matriz_identidad.c</span>
+              <span class="code-badge">Rellenar con 1 y 0</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> id[<span class="c-num">3</span>][<span class="c-num">3</span>];
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> f = <span class="c-num">0</span>; f &lt; <span class="c-num">3</span>; f++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> c = <span class="c-num">0</span>; c &lt; <span class="c-num">3</span>; c++)
+    {
+        <span class="c-kw">if</span>(f == c)
+            id[f][c] = <span class="c-num">1</span>; <span class="c-cmt">// Diagonal principal</span>
+        <span class="c-kw">else</span>
+            id[f][c] = <span class="c-num">0</span>; <span class="c-cmt">// Resto de la matriz</span>
+    }
+}</div>
+          </div>
+
+          <div style="text-align: center;">
+            <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr);">
+              <div class="matrix-cell diag-main">1<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">0<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell">0<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">0<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-main">1<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">0<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell">0<span class="coord">[2][0]</span></div>
+              <div class="matrix-cell">0<span class="coord">[2][1]</span></div>
+              <div class="matrix-cell diag-main">1<span class="coord">[2][2]</span></div>
+            </div>
+            <p style="font-size: 0.83rem; color: #cbd5e1; margin-top: 6px;">
+              Acá usamos dos <code>for</code> porque necesitamos rellenar <b>todas las casillas</b> de la matriz: las de la diagonal (<code>f == c</code>) con <code>1</code> y las demás con <code>0</code>.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 8: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <!-- SLIDE 17: PARTE 2 - LA DIAGONAL SECUNDARIA (DEFINICIÓN DEL APUNTE) -->
       <section>
-        <h2><span class="section-num">07</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">16</span> Parte 2: La Diagonal Secundaria (Sección 7.2)</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Definición del Apunte Teórico (Pág. 22)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            La <b>diagonal secundaria</b> es la otra diagonal de la matriz. Va desde el <b>extremo superior derecho</b> hasta el <b>extremo inferior izquierdo</b>, formando una línea así: <b><code>/</code></b>.
+          </p>
+        </div>
+
+        <div class="grid-1-2" style="margin-top: 12px; align-items: center;">
+          <div style="text-align: center;">
+            <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr);">
+              <div class="matrix-cell">1<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">2<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell diag-sec">3<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">4<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-sec">5<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">6<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell diag-sec">7<span class="coord">[2][0]</span></div>
+              <div class="matrix-cell">8<span class="coord">[2][1]</span></div>
+              <div class="matrix-cell">9<span class="coord">[2][2]</span></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="code-window">
+              <div class="code-header">
+                <span class="code-title">matriz_3x3.c</span>
+                <span class="code-badge">Ejemplo del Apunte</span>
+              </div>
+              <div class="code-body"><span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">3</span>] = {
+    {<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>},
+    {<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>},
+    {<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>}
+};</div>
+            </div>
+            <p style="font-size: 0.86rem; color: #cbd5e1; margin-top: 8px;">
+              En esta misma matriz de 3×3, los elementos de la diagonal secundaria son el <b><code>3</code></b>, el <b><code>5</code></b> y el <b><code>7</code></b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: DEDUCCIÓN PASO A PASO DE LA DIAGONAL SECUNDARIA (PARTE 1: COORDENADAS) -->
+      <section>
+        <h2><span class="section-num">17</span> ¿Dónde Están Ubicados los Elementos 3, 5 y 7?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Anotemos las coordenadas exactas (fila y columna) de cada elemento de la diagonal secundaria como hace el apunte en la página 23:
+        </p>
+
+        <div class="grid-3">
+          <div class="box box-amber" style="text-align: center;">
+            <span class="badge badge-amber">Arriba a la derecha</span>
+            <h3 style="color: #fbbf24; margin: 4px 0;">Valor: 3</h3>
+            <p style="font-size: 0.9rem; margin: 4px 0;">
+              Está en <b><code>matriz[0][2]</code></b>
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
+              Fila = <code>0</code> | Columna = <code>2</code>
+            </p>
+          </div>
+
+          <div class="box box-amber" style="text-align: center;">
+            <span class="badge badge-amber">En el centro</span>
+            <h3 style="color: #fbbf24; margin: 4px 0;">Valor: 5</h3>
+            <p style="font-size: 0.9rem; margin: 4px 0;">
+              Está en <b><code>matriz[1][1]</code></b>
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
+              Fila = <code>1</code> | Columna = <code>1</code>
+            </p>
+          </div>
+
+          <div class="box box-amber" style="text-align: center;">
+            <span class="badge badge-amber">Abajo a la izquierda</span>
+            <h3 style="color: #fbbf24; margin: 4px 0;">Valor: 7</h3>
+            <p style="font-size: 0.9rem; margin: 4px 0;">
+              Está en <b><code>matriz[2][0]</code></b>
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
+              Fila = <code>2</code> | Columna = <code>0</code>
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-rose" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.88rem;">
+            👀 <b>¡Atención!</b> Acá ya <b>NO se cumple</b> que <code>fila == columna</code> (porque en <code>[0][2]</code> la fila es <code>0</code> y la columna es <code>2</code>). Pero mirá qué pasa a medida que bajamos: mientras la <b>fila sube de a 1</b> (<code>0 → 1 → 2</code>), la <b>columna baja de a 1</b> (<code>2 → 1 → 0</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: DESCUBRIENDO EL SECRETO MATEMÁTICO (SUMAR FILA + COLUMNA) -->
+      <section>
+        <h2><span class="section-num">18</span> ¿Cómo Identificarla? ¡Sumemos Fila + Columna!</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Como la fila aumenta en 1 y la columna disminuye en 1 en cada paso, veamos qué ocurre si <b>sumamos el número de fila más el número de columna</b> en cada casilla de la diagonal secundaria (Apunte, pág. 23):
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div style="font-size: 0.92rem;">
+              En <b><code>matriz[0][2]</code></b> (donde está el <code>3</code>): sumamos <code>fila + columna</code> → <b><code>0 + 2 = 2</code></b> ✔
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div style="font-size: 0.92rem;">
+              En <b><code>matriz[1][1]</code></b> (donde está el <code>5</code>): sumamos <code>fila + columna</code> → <b><code>1 + 1 = 2</code></b> ✔
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div style="font-size: 0.92rem;">
+              En <b><code>matriz[2][0]</code></b> (donde está el <code>7</code>): sumamos <code>fila + columna</code> → <b><code>2 + 0 = 2</code></b> ✔
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px; text-align: center;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">¡Hallazgo clave en la matriz 3×3!</h4>
+          <p style="margin: 0; font-size: 0.95rem;">
+            En las tres casillas de la diagonal secundaria de una matriz 3×3, la suma da siempre <b><code>2</code></b>:<br>
+            <b><code>fila + columna = 2</code></b>
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: LA FÓRMULA GENERAL DEL APUNTE (FILA + COLUMNA = N - 1) -->
+      <section>
+        <h2><span class="section-num">19</span> La Fórmula General para Cualquier Matriz $N \times N$</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          ¿Por qué en una matriz de tamaño $N = 3$ la suma dio <code>2</code>? Porque en C los índices empiezan en <code>0</code>, así que el último índice de una matriz de tamaño $N$ siempre es <b>$N - 1$</b> ($3 - 1 = 2$).
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-amber" style="text-align: center;">
+            <h4 style="color: #fbbf24;">1. Suma de Coordenadas</h4>
+            <p style="font-size: 0.86rem;">
+              En general, para cualquier matriz cuadrada de tamaño $N$:
+            </p>
+            <div style="background: rgba(0,0,0,0.35); padding: 10px; border-radius: 8px; margin: 8px 0;">
+              $$\text{fila} + \text{columna} = N - 1$$
+            </div>
+            <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0;">
+              Si $N = 3 \rightarrow \text{fila} + \text{columna} = 2$<br>
+              Si $N = 4 \rightarrow \text{fila} + \text{columna} = 3$<br>
+              Si $N = 5 \rightarrow \text{fila} + \text{columna} = 4$
+            </p>
+          </div>
+
+          <div class="box box-cyan" style="text-align: center;">
+            <h4 style="color: #38bdf8;">2. Despejando la Columna</h4>
+            <p style="font-size: 0.86rem;">
+              Si pasamos $\text{fila}$ restando para el otro lado, obtenemos cómo calcular la columna:
+            </p>
+            <div style="background: rgba(0,0,0,0.35); padding: 10px; border-radius: 8px; margin: 8px 0;">
+              $$\text{columna} = N - 1 - \text{fila}$$
+            </div>
+            <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0;">
+              En una matriz de $3 \times 3$ ($N - 1 = 2$):<br>
+              <b><code>columna = 2 - fila</code></b><br>
+              Si la fila se llama <code>i</code> → <b><code>columna = 2 - i</code></b>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: COMPROBACIÓN VISUAL EN UNA MATRIZ 4x4 -->
+      <section>
+        <h2><span class="section-num">20</span> Comprobación en una Matriz 4×4 ($N = 4$)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Verifiquemos la fórmula en una matriz de <b>4×4</b> ($N = 4$). Aquí $N - 1 = 3$, por lo tanto en toda la diagonal secundaria se cumple <b><code>fila + columna = 3</code></b> (o sea, <code>columna = 3 - fila</code>):
+        </p>
+
+        <div class="grid-1-2" style="align-items: center;">
+          <div style="text-align: center;">
+            <div class="matrix-grid" style="grid-template-columns: repeat(4, 1fr);">
+              <div class="matrix-cell">10<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">12<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell">15<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell diag-sec">18<span class="coord">[0][3]</span></div>
+
+              <div class="matrix-cell">21<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell">25<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell diag-sec">28<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell">30<span class="coord">[1][3]</span></div>
+
+              <div class="matrix-cell">33<span class="coord">[2][0]</span></div>
+              <div class="matrix-cell diag-sec">36<span class="coord">[2][1]</span></div>
+              <div class="matrix-cell">40<span class="coord">[2][2]</span></div>
+              <div class="matrix-cell">42<span class="coord">[2][3]</span></div>
+
+              <div class="matrix-cell diag-sec">50<span class="coord">[3][0]</span></div>
+              <div class="matrix-cell">55<span class="coord">[3][1]</span></div>
+              <div class="matrix-cell">60<span class="coord">[3][2]</span></div>
+              <div class="matrix-cell">70<span class="coord">[3][3]</span></div>
+            </div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Fila <code>i</code></th>
+                  <th>Columna <code>3 - i</code></th>
+                  <th>Casilla</th>
+                  <th>Suma <code>f + c</code></th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>0</code></td>
+                  <td><code>3 - 0 = 3</code></td>
+                  <td><code>[0][3]</code></td>
+                  <td><code>0 + 3 = 3</code> ✔</td>
+                  <td><b>18</b></td>
+                </tr>
+                <tr>
+                  <td><code>1</code></td>
+                  <td><code>3 - 1 = 2</code></td>
+                  <td><code>[1][2]</code></td>
+                  <td><code>1 + 2 = 3</code> ✔</td>
+                  <td><b>28</b></td>
+                </tr>
+                <tr>
+                  <td><code>2</code></td>
+                  <td><code>3 - 2 = 1</code></td>
+                  <td><code>[2][1]</code></td>
+                  <td><code>2 + 1 = 3</code> ✔</td>
+                  <td><b>36</b></td>
+                </tr>
+                <tr>
+                  <td><code>3</code></td>
+                  <td><code>3 - 3 = 0</code></td>
+                  <td><code>[3][0]</code></td>
+                  <td><code>3 + 0 = 3</code> ✔</td>
+                  <td><b>50</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: CÓMO RECORRER LA DIAGONAL SECUNDARIA (APUNTE PÁG 23) -->
+      <section>
+        <h2><span class="section-num">21</span> Cómo Recorrer la Diagonal Secundaria (Apunte Pág. 23)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Igual que antes, gracias a que sabemos que para la fila <code>i</code> la columna es <code>2 - i</code> (en 3×3) o <code>N - 1 - i</code> (en general), ¡podemos recorrerla con <b>un único ciclo <code>for</code></b>!
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">diagonal_secundaria_3x3.c</span>
+              <span class="code-badge">Apunte Pág. 23 (3×3)</span>
+            </div>
+            <div class="code-body"><span class="c-cmt">// En una matriz de 3x3 (donde N - 1 = 2):</span>
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++)
+{
+<span class="c-hl">    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, matriz[i][<span class="c-num">2</span> - i]);</span>
+}</div>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">diagonal_secundaria_general.c</span>
+              <span class="code-badge">Forma General (N×N)</span>
+            </div>
+            <div class="code-body"><span class="c-cmt">// Para cualquier matriz cuadrada N x N:</span>
+<span class="c-kw">int</span> N = <span class="c-num">3</span>;
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; N; i++)
+{
+<span class="c-hl">    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, matriz[i][N - <span class="c-num">1</span> - i]);</span>
+}</div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 <b>¿Cómo funciona <code>matriz[i][2 - i]</code>?</b> La variable <code>i</code> representa la <b>fila</b> (que sube <code>0, 1, 2</code>), y la resta <code>2 - i</code> calcula automáticamente la <b>columna</b> (que baja <code>2, 1, 0</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: SIMULACIÓN PASO A PASO DE LA DIAGONAL SECUNDARIA (APUNTE PÁG 23-24) -->
+      <section>
+        <h2><span class="section-num">22</span> Simulación Paso a Paso de <code>matriz[i][2 - i]</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Hagamos el seguimiento paso a paso tal como aparece en el Apunte Teórico (páginas 23 y 24) sobre la matriz <code>{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}</code>:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Iteración</th>
+              <th>Fila (<code>i</code>)</th>
+              <th>Columna (<code>2 - i</code>)</th>
+              <th>Acceso a la matriz</th>
+              <th>Salida en pantalla</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1ª iteración</b></td>
+              <td><code>i = 0</code></td>
+              <td><code>2 - 0 = 2</code></td>
+              <td>Accede a <code>matriz[0][2]</code></td>
+              <td>Muestra <b><code>3</code></b></td>
+            </tr>
+            <tr>
+              <td><b>2ª iteración</b></td>
+              <td><code>i = 1</code></td>
+              <td><code>2 - 1 = 1</code></td>
+              <td>Accede a <code>matriz[1][1]</code></td>
+              <td>Muestra <b><code>5</code></b></td>
+            </tr>
+            <tr>
+              <td><b>3ª iteración</b></td>
+              <td><code>i = 2</code></td>
+              <td><code>2 - 2 = 0</code></td>
+              <td>Accede a <code>matriz[2][0]</code></td>
+              <td>Muestra <b><code>7</code></b></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="grid-2" style="margin-top: 10px; align-items: center;">
+          <div class="terminal-window">
+            <div class="terminal-header"><span>Salida por pantalla</span><span>stdout</span></div>
+            <div class="terminal-body">3
+5
+7</div>
+          </div>
+          <div class="box box-purple">
+            <p style="margin: 0; font-size: 0.86rem;">
+              ⭐ <b>Patrón para recordar:</b><br>
+              Si ves <b><code>matriz[i][N - 1 - i]</code></b> (o <code>matriz[i][2 - i]</code> en 3×3) → estás trabajando con la <b>diagonal secundaria</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: SUMAR LA DIAGONAL SECUNDARIA (APUNTE PÁG 24) -->
+      <section>
+        <h2><span class="section-num">23</span> Sumar la Diagonal Secundaria (Apunte Pág. 24)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Veamos ahora el código del apunte (página 24) para sumar los elementos de la diagonal secundaria:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">sumar_diagonal_secundaria.c</span>
+              <span class="code-badge">Apunte Pág. 24</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">3</span>] = {
+    {<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>},
+    {<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>},
+    {<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>}
+};
+
+<span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++)
+{
+<span class="c-hl">    suma += matriz[i][<span class="c-num">2</span> - i];</span>
+}
+
+<span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, suma);</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Vuelta</th>
+                  <th>Casilla <code>matriz[i][2 - i]</code></th>
+                  <th>Cálculo de <code>suma</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Inicio</td>
+                  <td>—</td>
+                  <td><code>suma = 0</code></td>
+                </tr>
+                <tr>
+                  <td><code>i = 0</code></td>
+                  <td><code>matriz[0][2]</code> vale <b>3</b></td>
+                  <td><code>0 + 3 = 3</code></td>
+                </tr>
+                <tr>
+                  <td><code>i = 1</code></td>
+                  <td><code>matriz[1][1]</code> vale <b>5</b></td>
+                  <td><code>3 + 5 = 8</code></td>
+                </tr>
+                <tr>
+                  <td><code>i = 2</code></td>
+                  <td><code>matriz[2][0]</code> vale <b>7</b></td>
+                  <td><code>8 + 7 = 15</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 8px;">
+              <div class="terminal-header"><span>Resultado: 3 + 5 + 7 = 15</span><span>stdout</span></div>
+              <div class="terminal-body">15</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: COMPARACIÓN INTEGRAL Y CRUCE CENTRAL (IMPAR VS PAR) -->
+      <section>
+        <h2><span class="section-num">24</span> ¿Qué Pasa en el Centro? Tamaño Impar vs Tamaño Par</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Cuando miramos ambas diagonales al mismo tiempo, ocurre un detalle geométrico muy interesante según si el tamaño $N$ es <b>impar</b> o <b>par</b>:
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-purple" style="text-align: center;">
+            <h4 style="color: #c084fc;">Tamaño Impar (3×3, 5×5): ¡Comparten el centro!</h4>
+            <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr); margin: 6px auto;">
+              <div class="matrix-cell diag-main">1<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">2<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell diag-sec">3<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">4<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-both">5<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">6<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell diag-sec">7<span class="coord">[2][0]</span></div>
+              <div class="matrix-cell">8<span class="coord">[2][1]</span></div>
+              <div class="matrix-cell diag-main">9<span class="coord">[2][2]</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin: 4px 0 0;">
+              En 3×3, la casilla central <b><code>[1][1]</code></b> cumple ambas reglas (<code>1 == 1</code> y <code>1 + 1 == 2</code>). Pertenece a las <b>dos diagonales</b>.
+            </p>
+          </div>
+
+          <div class="box box-cyan" style="text-align: center;">
+            <h4 style="color: #38bdf8;">Tamaño Par (2×2, 4×4): No comparten casilla</h4>
+            <div class="matrix-grid" style="grid-template-columns: repeat(4, 1fr); margin: 6px auto;">
+              <div class="matrix-cell diag-main">1<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">2<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell">3<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell diag-sec">4<span class="coord">[0][3]</span></div>
+              <div class="matrix-cell">5<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-main">6<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell diag-sec">7<span class="coord">[1][2]</span></div>
+              <div class="matrix-cell">8<span class="coord">[1][3]</span></div>
+              <div class="matrix-cell">9<span class="coord">[2][0]</span></div>
+              <div class="matrix-cell diag-sec">10<span class="coord">[2][1]</span></div>
+              <div class="matrix-cell diag-main">11<span class="coord">[2][2]</span></div>
+              <div class="matrix-cell">12<span class="coord">[2][3]</span></div>
+              <div class="matrix-cell diag-sec">13<span class="coord">[3][0]</span></div>
+              <div class="matrix-cell">14<span class="coord">[3][1]</span></div>
+              <div class="matrix-cell">15<span class="coord">[3][2]</span></div>
+              <div class="matrix-cell diag-main">16<span class="coord">[3][3]</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin: 4px 0 0;">
+              En 4×4 se cruzan entre las casillas sin tocar ningún elemento en común.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: ELEMENTOS FUERA DE LA DIAGONAL (TRIANGULAR SUPERIOR E INFERIOR) -->
+      <section>
+        <h2><span class="section-num">25</span> Elementos Fuera de la Diagonal: Zonas Triangulares</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          La diagonal principal (<code>fila == columna</code>) divide a la matriz en dos triángulos. ¿Cómo sabemos si una casilla está <b>arriba</b> o <b>abajo</b> de la diagonal principal?
+        </p>
+
+        <div class="grid-3" style="align-items: stretch;">
+          <div class="box box-emerald" style="text-align: center;">
+            <span class="badge badge-emerald">Arriba de la Diagonal</span>
+            <h4 style="color: #34d399;">Triangular Superior</h4>
+            <p style="font-size: 0.9rem; font-weight: 700; margin: 6px 0;">
+              <code>fila &lt; columna</code>
+            </p>
+            <p style="font-size: 0.8rem; color: #cbd5e1;">
+              En una matriz 3×3 son las casillas:<br>
+              <code>[0][1]</code>, <code>[0][2]</code> y <code>[1][2]</code>.<br>
+              En todas ellas el número de fila es menor que el de columna.
+            </p>
+          </div>
+
+          <div class="box box-cyan" style="text-align: center;">
+            <span class="badge badge-cyan">En la Diagonal</span>
+            <h4 style="color: #38bdf8;">Diagonal Principal</h4>
+            <p style="font-size: 0.9rem; font-weight: 700; margin: 6px 0;">
+              <code>fila == columna</code>
+            </p>
+            <p style="font-size: 0.8rem; color: #cbd5e1;">
+              En una matriz 3×3 son las casillas:<br>
+              <code>[0][0]</code>, <code>[1][1]</code> y <code>[2][2]</code>.<br>
+              La frontera exacta que parte la matriz al medio.
+            </p>
+          </div>
+
+          <div class="box box-amber" style="text-align: center;">
+            <span class="badge badge-amber">Abajo de la Diagonal</span>
+            <h4 style="color: #fbbf24;">Triangular Inferior</h4>
+            <p style="font-size: 0.9rem; font-weight: 700; margin: 6px 0;">
+              <code>fila &gt; columna</code>
+            </p>
+            <p style="font-size: 0.8rem; color: #cbd5e1;">
+              En una matriz 3×3 son las casillas:<br>
+              <code>[1][0]</code>, <code>[2][0]</code> y <code>[2][1]</code>.<br>
+              En todas ellas el número de fila es mayor que el de columna.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: EJEMPLO PROGRESIVO NIVEL 1 Y 2: SUMAR AMBAS DIAGONALES EN UN SOLO FOR -->
+      <section>
+        <h2><span class="section-num">26</span> Ejemplo Integrador (Nivel 1-2): Ambas Diagonales Juntas</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          ¡Podemos calcular la suma de la diagonal principal y la suma de la diagonal secundaria <b>dentro del mismo ciclo <code>for</code></b>!
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">ambas_diagonales.c</span>
+              <span class="code-badge">Nivel 1-2</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> m[<span class="c-num">3</span>][<span class="c-num">3</span>] = {
+        {<span class="c-num">10</span>, <span class="c-num">2</span>,  <span class="c-num">4</span>},
+        {<span class="c-num">1</span>,  <span class="c-num">5</span>,  <span class="c-num">8</span>},
+        {<span class="c-num">3</span>,  <span class="c-num">9</span>, <span class="c-num">20</span>}
+    };
+    <span class="c-kw">int</span> sumaPrin = <span class="c-num">0</span>, sumaSec = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++)
+    {
+        sumaPrin += m[i][i];
+        sumaSec  += m[i][<span class="c-num">2</span> - i];
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Suma Principal: %d\n"</span>, sumaPrin);
+    <span class="c-fn">printf</span>(<span class="c-str">"Suma Secundaria: %d\n"</span>, sumaSec);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header"><span>Ejecución</span><span>stdout</span></div>
+              <div class="terminal-body">Suma Principal: 35
+Suma Secundaria: 12</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.84rem;">
+                🔍 <b>Verificación:</b><br>
+                • Diagonal Principal (<code>\</code>): <code>10 + 5 + 20 = 35</code>.<br>
+                • Diagonal Secundaria (<code>/</code>): <code>4 + 5 + 3 = 12</code>.<br>
+                Todo resuelto en apenas 3 vueltas del ciclo <code>for</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: EJEMPLO NIVEL 3: CARGAR MATRIZ POR TECLADO Y COMPARAR DIAGONALES -->
+      <section>
+        <h2><span class="section-num">27</span> Ejemplo Nivel 3: Cargar Matriz y Comparar Diagonales</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Programa completo que pide al usuario cargar una matriz 3×3 y luego informa cuál de las dos diagonales tiene mayor suma (o si empatan):
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">comparar_diagonales.c</span>
+            <span class="code-badge">Nivel 3: Carga + Comparación</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> m[<span class="c-num">3</span>][<span class="c-num">3</span>];
+<span class="c-kw">for</span>(<span class="c-kw">int</span> f = <span class="c-num">0</span>; f &lt; <span class="c-num">3</span>; f++) {
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> c = <span class="c-num">0</span>; c &lt; <span class="c-num">3</span>; c++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Ingrese valor [%d][%d]: "</span>, f, c);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;m[f][c]);
+    }
+}
+
+<span class="c-kw">int</span> sumaP = <span class="c-num">0</span>, sumaS = <span class="c-num">0</span>;
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++) {
+    sumaP += m[i][i];
+    sumaS += m[i][<span class="c-num">2</span> - i];
+}
+
+<span class="c-kw">if</span>(sumaP &gt; sumaS)
+    <span class="c-fn">printf</span>(<span class="c-str">"Gana la Diagonal Principal (%d vs %d)\n"</span>, sumaP, sumaS);
+<span class="c-kw">else if</span>(sumaS &gt; sumaP)
+    <span class="c-fn">printf</span>(<span class="c-str">"Gana la Diagonal Secundaria (%d vs %d)\n"</span>, sumaS, sumaP);
+<span class="c-kw">else</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Ambas diagonales suman lo mismo: %d\n"</span>, sumaP);</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: EJEMPLO NIVEL 4: INTERCAMBIAR LAS DOS DIAGONALES -->
+      <section>
+        <h2><span class="section-num">28</span> Ejemplo Nivel 4: Intercambiar Ambas Diagonales</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          ¿Cómo hacemos si en cada fila <code>i</code> queremos <b>intercambiar</b> el elemento de la diagonal principal (<code>m[i][i]</code>) con el de la diagonal secundaria (<code>m[i][2 - i]</code>)? Usamos una variable auxiliar <code>aux</code>:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">intercambiar_diagonales.c</span>
+              <span class="code-badge">Nivel 4: Swap de Diagonales</span>
+            </div>
+            <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++)
+{
+    <span class="c-kw">int</span> aux = matriz[i][i];
+    matriz[i][i] = matriz[i][<span class="c-num">2</span> - i];
+    matriz[i][<span class="c-num">2</span> - i] = aux;
+}</div>
+          </div>
+
+          <div style="text-align: center;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+              <div>
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Antes</div>
+                <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr); margin: 4px auto;">
+                  <div class="matrix-cell diag-main">1</div>
+                  <div class="matrix-cell">2</div>
+                  <div class="matrix-cell diag-sec">3</div>
+                  <div class="matrix-cell">4</div>
+                  <div class="matrix-cell diag-both">5</div>
+                  <div class="matrix-cell">6</div>
+                  <div class="matrix-cell diag-sec">7</div>
+                  <div class="matrix-cell">8</div>
+                  <div class="matrix-cell diag-main">9</div>
+                </div>
+              </div>
+              <div style="font-size: 1.4rem; color: var(--accent-cyan);">→</div>
+              <div>
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Después</div>
+                <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr); margin: 4px auto;">
+                  <div class="matrix-cell diag-sec">3</div>
+                  <div class="matrix-cell">2</div>
+                  <div class="matrix-cell diag-main">1</div>
+                  <div class="matrix-cell">4</div>
+                  <div class="matrix-cell diag-both">5</div>
+                  <div class="matrix-cell">6</div>
+                  <div class="matrix-cell diag-main">9</div>
+                  <div class="matrix-cell">8</div>
+                  <div class="matrix-cell diag-sec">7</div>
+                </div>
+              </div>
+            </div>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;">
+              En la fila 0 se intercambian <code>1</code> y <code>3</code>; en la fila 1 el <code>5</code> se intercambia consigo mismo; en la fila 2 se intercambian <code>7</code> y <code>9</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: ERRORES FRECUENTES DE PRINCIPIANTES -->
+      <section>
+        <h2><span class="section-num">29</span> Errores Frecuentes que Debés Evitar</h2>
+        <div class="grid-2">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 1: Escribir <code>matriz[i][3 - i]</code> en una matriz 3×3</div>
+            <p style="font-size: 0.82rem; color: #fecaca;">
+              Si la matriz es de 3×3, las columnas válidas son <code>0</code>, <code>1</code> y <code>2</code>. Si escribís <code>3 - i</code>, cuando <code>i = 0</code> intenta acceder a <code>matriz[0][3]</code>, ¡que está <b>fuera de la matriz</b> y lee basura de memoria!
+            </p>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin-top: 6px;">
+              ✅ <b>Solución:</b> Siempre restá desde el <b>último índice</b> ($N - 1$). En 3×3 es <code>matriz[i][2 - i]</code>; en 4×4 es <code>matriz[i][3 - i]</code>.
+            </p>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 2: Usar dos <code>for</code> anidados y adentro poner <code>matriz[i][i]</code></div>
+            <p style="font-size: 0.82rem; color: #fecaca;">
+              Si ponés un <code>for(j = 0; j &lt; 3; j++)</code> adentro del <code>for(i...)</code> y sumás <code>suma += matriz[i][i]</code>, vas a sumar 3 veces repetidas cada casilla de la diagonal (dando 45 en vez de 15).
+            </p>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin-top: 6px;">
+              ✅ <b>Solución:</b> Para recorrer una diagonal con <code>matriz[i][i]</code> o <code>matriz[i][N-1-i]</code> se usa <b>un único ciclo <code>for</code></b>.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            ⚠️ <b>Error 3 (Olvidar inicializar el acumulador):</b> Antes de hacer <code>suma += matriz[i][i];</code>, asegurate siempre de haber escrito <code>int suma = 0;</code> afuera y antes del ciclo <code>for</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: EJERCICIO PRÁCTICO 1 CON SOLUCIÓN -->
+      <section>
+        <h2><span class="section-num">30</span> Ejercicio Práctico 1: Predicción y Diagonal de 4×4</h2>
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8;">Consigna</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Dada una matriz cuadrada <code>int mat[4][4]</code> ya cargada en memoria, escribí un ciclo <code>for</code> que muestre por pantalla todos los elementos de su <b>diagonal secundaria</b> y calcule su suma total. (Recordá: en 4×4, ¿cuánto vale $N - 1$?).
+          </p>
+        </div>
+
+        <details class="code-solution">
+          <summary>🔍 Ver solución explicada paso a paso</summary>
+          <div class="solution-content">
+            <p style="margin: 0 0 8px;">
+              Como la matriz tiene tamaño $N = 4$, el último índice es $N - 1 = 3$. Por lo tanto, la columna de la diagonal secundaria en la fila <code>i</code> es <b><code>3 - i</code></b>:
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> sumaSec = <span class="c-num">0</span>;
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">4</span>; i++)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Elemento [%d][%d] = %d\n"</span>, i, <span class="c-num">3</span> - i, mat[i][<span class="c-num">3</span> - i]);
+    sumaSec += mat[i][<span class="c-num">3</span> - i];
+}
+
+<span class="c-fn">printf</span>(<span class="c-str">"Suma de la diagonal secundaria: %d\n"</span>, sumaSec);</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 32: EJERCICIO PRÁCTICO 2 CON SOLUCIÓN -->
+      <section>
+        <h2><span class="section-num">31</span> Ejercicio Práctico 2: ¿Son Iguales en la Diagonal?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8;">Consigna</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            En el juego del Ta-Te-Ti (matriz 3×3), un jugador gana en la diagonal principal si las tres casillas de la diagonal principal tienen el mismo número (por ejemplo, todas valen <code>1</code>). Escribí un programa que verifique si los 3 elementos de la diagonal principal de <code>int tablero[3][3]</code> son iguales entre sí.
+          </p>
+        </div>
+
+        <details class="code-solution">
+          <summary>🔍 Ver solución explicada paso a paso</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> iguales = <span class="c-num">1</span>; <span class="c-cmt">// 1 = verdadero, asumimos que son iguales</span>
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; <span class="c-num">3</span>; i++)
+{
+    <span class="c-cmt">// Comparamos cada casilla de la diagonal con la primera [0][0]</span>
+    <span class="c-kw">if</span>(tablero[i][i] != tablero[<span class="c-num">0</span>][<span class="c-num">0</span>])
+    {
+        iguales = <span class="c-num">0</span>; <span class="c-cmt">// Encontramos uno distinto</span>
+    }
+}
+
+<span class="c-kw">if</span>(iguales == <span class="c-num">1</span>)
+    <span class="c-fn">printf</span>(<span class="c-str">"Todos los elementos de la diagonal principal son iguales.\n"</span>);
+<span class="c-kw">else</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"No todos son iguales.\n"</span>);</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 33: EJERCICIO PRÁCTICO 3 CON SOLUCIÓN -->
+      <section>
+        <h2><span class="section-num">32</span> Ejercicio Práctico 3: Suma en X sin Repetir el Centro</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24;">Consigna</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            En una matriz de 3×3, si sumamos la diagonal principal y la diagonal secundaria, el elemento del centro (<code>matriz[1][1]</code>) se suma dos veces porque pertenece a ambas diagonales. Escribí el código para obtener la suma de todas las casillas que forman la "X" de ambas diagonales <b>sin contar dos veces el centro</b>.
+          </p>
+        </div>
+
+        <details class="code-solution">
+          <summary>🔍 Ver solución explicada paso a paso</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> sumaTotal = <span class="c-num">0</span>;
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++)
+{
+    sumaTotal += matriz[i][i];       <span class="c-cmt">// Suma diagonal principal</span>
+    sumaTotal += matriz[i][<span class="c-num">2</span> - i];   <span class="c-cmt">// Suma diagonal secundaria</span>
+}
+
+<span class="c-cmt">// Restamos una vez la casilla central [1][1] que se sumó dos veces:</span>
+sumaTotal = sumaTotal - matriz[<span class="c-num">1</span>][<span class="c-num">1</span>];
+
+<span class="c-fn">printf</span>(<span class="c-str">"Suma de la X sin repetir el centro: %d\n"</span>, sumaTotal);</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 34: RESUMEN DE LA UNIDAD, CHECKLIST Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">33</span> Resumen de la Unidad y Checklist Final</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Fórmulas Clave</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>Requisito:</b> La matriz debe ser cuadrada ($N \times N$).</li>
-              <li><b>Diagonal Principal:</b> <code>matriz[i][i]</code> (cuando <code>i == j</code>).</li>
-              <li><b>Diagonal Secundaria:</b> <code>matriz[i][N - 1 - i]</code> (cuando <code>i + j == N - 1</code>).
-              </li>
-              <li><b>Eficiencia:</b> Se resuelven con 1 solo bucle <code>for</code> en $O(N)$.</li>
-              <li><b>Triangulares:</b> <code>i &lt; j</code> (arriba) e <code>i &gt; j</code> (abajo).</li>
+            <h4 style="color: #818cf8;">Resumen de Reglas del Apunte</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.58; margin-left: 18px;">
+              <li><b>Condición:</b> Solo en matrices cuadradas ($N \times N$).</li>
+              <li><b>Diagonal Principal (<code>\</code>):</b> Cumple <code>fila == columna</code>. Se recorre con 1 solo ciclo <code>for</code> usando <b><code>matriz[i][i]</code></b>.</li>
+              <li><b>Diagonal Secundaria (<code>/</code>):</b> Cumple <code>fila + columna == N - 1</code>. Se recorre con 1 solo ciclo <code>for</code> usando <b><code>matriz[i][N - 1 - i]</code></b> (en 3×3 es <code>matriz[i][2 - i]</code>).</li>
+              <li><b>Triangulares:</b> Superior (<code>fila &lt; col</code>) e Inferior (<code>fila &gt; col</code>).</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué una matriz de 3x4 no tiene diagonal
-              principal estricta?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Cuál es la coordenada secundaria en la fila 0 de
-              una matriz 4x4?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué es mejor usar matriz[i][i] antes que un
-              doble bucle con if (i==j)?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Qué celda comparten ambas diagonales en una matriz
-              de orden impar (3x3)?</div>
+            <div class="checklist-item"><span class="icon">✓</span> Reconozco al instante que <code>matriz[i][i]</code> es la diagonal principal.</div>
+            <div class="checklist-item"><span class="icon">✓</span> Sé deducir por qué en una matriz 3×3 la diagonal secundaria suma <code>fila + col = 2</code>.</div>
+            <div class="checklist-item"><span class="icon">✓</span> Puedo mostrar y sumar cualquiera de las dos diagonales usando un único <code>for</code>.</div>
+            <div class="checklist-item"><span class="icon">✓</span> Entiendo por qué en matrices de tamaño impar ambas diagonales se cruzan en el centro.</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
+        <div style="text-align: center; margin-top: 16px;">
           <a href="04-matrices-bidimensionales.html" class="badge badge-indigo"
-            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            style="font-size: 0.88rem; text-decoration: none; padding: 8px 20px;">
             ← Anterior: Matrices Bidimensionales
           </a>
           <a href="../index.html" class="badge badge-cyan"
-            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            Índice 2do Cuatrimestre
+            style="font-size: 0.88rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Índice 2do Bimestre
           </a>
           <a href="06-estructuras-struct.html" class="badge badge-emerald"
-            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+            style="font-size: 0.88rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
             Siguiente: Estructuras (struct) →
           </a>
         </div>

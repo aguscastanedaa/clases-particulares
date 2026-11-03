@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 1C - 12: Funciones en C | Clases Particulares</title>
+  <title>Programación 1C 1B - 12: Funciones en C | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
-  
-  <!-- Reveal.js Styles -->
+
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
   <link rel="stylesheet" href="../../../assets/css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 1er Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../index.html">← Índice 1er Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 1er Bimestre • Unidad 12</span>
   </div>
@@ -33,336 +39,1482 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-cyan">1er Cuatrimestre • Funciones • Unidad 12</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Funciones en C</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            Divide y vencerás: cómo crear bloques reutilizables de código con parámetros, retorno y ámbito local
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-cyan">1er Cuatrimestre • 1er Bimestre • Unidad 12</span>
+          <h1 style="font-size: 2.6rem; margin-bottom: 12px;">12. Funciones en C</h1>
+          <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px;">
+            Cómo dividir un programa en bloques de código reutilizables con parámetros, proceso y retorno
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-indigo">Definición &amp; Invocación</span>
+            <span class="badge badge-cyan">Analogía de la Licuadora</span>
+            <span class="badge badge-indigo">int doble(int numero)</span>
             <span class="badge badge-emerald">Parámetros vs Argumentos</span>
             <span class="badge badge-amber">return vs printf</span>
-            <span class="badge badge-rose">Funciones void &amp; Scope</span>
+            <span class="badge badge-rose">Funciones void y Scope</span>
           </div>
 
-          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar por las 36 diapositivas de esta unidad.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Qué Vamos a Aprender</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué las funciones son el pilar del software?</h4>
-            <p style="font-size: 0.88rem;">
-              Si escribiéramos todo nuestro código adentro de un solo bloque gigante de <code>main()</code>, un programa de 1.000 líneas se volvería un laberinto incomprensible e imposible de corregir.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Las <b>funciones</b> nos permiten empaquetar una tarea específica en una pequeña "caja negra" con nombre, resolverla una sola vez y usarla miles de veces (principio <b>DRY: Don't Repeat Yourself</b>).
-            </p>
+            <h4 style="color: #818cf8;">Lo que ya dominamos (Unidades 01 a 11)</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Guardar datos en variables (<code>int</code>, <code>float</code>, <code>char</code>, <code>bool</code>).</li>
+              <li>Interactuar con el usuario usando <code>printf()</code> y <code>scanf()</code>.</li>
+              <li>Realizar cálculos con operadores aritméticos (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>).</li>
+              <li>Tomar decisiones con condicionales <code>if / else</code> y operadores lógicos (<code>&amp;&amp;</code>, <code>||</code>, <code>!</code>).</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Distinguir entre <b>definir</b> una función y <b>llamarla</b>.</li>
-              <li>Entender la anatomía: tipo de retorno, nombre y parámetros.</li>
-              <li>Diferenciar con precisión entre <b>parámetros</b> y <b>argumentos</b>.</li>
-              <li>Aclarar la gran confusión universal: <b><code>return</code> vs <code>printf</code></b>.</li>
-              <li>Comprender el uso de <code>void</code> para funciones sin retorno.</li>
-              <li>Aprender qué son los <b>prototipos</b> y el <b>ámbito (scope) local</b>.</li>
+            <h4 style="color: #34d399;">Lo que vamos a aprender hoy (Sección 12)</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Qué es una <b>función</b> y la analogía de la <b>licuadora</b> del apunte.</li>
+              <li>Sintaxis completa: <code>tipo_retorno nombre(parametros)</code>.</li>
+              <li>Desglose y llamada de <code>int doble(int numero)</code> y <code>int resultado = doble(5);</code>.</li>
+              <li>Diferencia entre <b>parámetros y argumentos</b>, y entre <b><code>return</code> y <code>printf</code></b>.</li>
+              <li>Funciones con varios parámetros, funciones <code>void</code> y ámbito local (<i>scope</i>).</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: EL EJEMPLO CANÓNICO OBLIGATORIO -->
+      <!-- SLIDE 3: EL PROBLEMA QUE RESUELVEN LAS FUNCIONES -->
       <section>
-        <h2><span class="section-num">02</span> El Ejemplo Canónico: La Función <code>doble()</code></h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Veamos la función requerida en su forma más pura y clara:</p>
+        <h2><span class="section-num">02</span> El Problema: ¿Qué Pasa Cuando Repetimos Código?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Hasta ahora escribimos todas nuestras instrucciones adentro de <code>main()</code>. Pero imaginá que en tres partes distintas del programa necesitamos calcular el doble de distintos números:
+        </p>
 
         <div class="code-window">
           <div class="code-header">
-            <div class="code-dots">
-              <span class="code-dot dot-red"></span>
-              <span class="code-dot dot-yellow"></span>
-              <span class="code-dot dot-green"></span>
-            </div>
-            <span class="code-title">funcion_doble.c</span>
-            <span class="code-badge">Definición y Llamada</span>
+            <span class="code-title">sin_funciones.c</span>
+            <span class="code-badge">Todo amontonado en main</span>
           </div>
-          <div class="code-body"><span class="c-cmt">// 1. DEFINICIÓN de la función</span>
-<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
-{
-    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
-}
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 
-<span class="c-cmt">// 2. LLAMADA a la función adentro de main:</span>
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
 {
-    <span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(<span class="c-num">5</span>);
-    <span class="c-fn">printf</span>(<span class="c-str">"El doble de 5 es %d\n"</span>, resultado);
+    <span class="c-kw">int</span> r1 = <span class="c-num">5</span> * <span class="c-num">2</span>;
+    <span class="c-kw">int</span> r2 = <span class="c-num">12</span> * <span class="c-num">2</span>;
+    <span class="c-kw">int</span> r3 = <span class="c-num">30</span> * <span class="c-num">2</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Resultados: %d, %d, %d\n"</span>, r1, r2, r3);
     <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
         </div>
+
+        <div class="box box-rose" style="margin-top: 12px;">
+          <h4 style="color: #f87171; margin-bottom: 4px;">¿Por qué esto se vuelve un problema en programas reales?</h4>
+          <p style="font-size: 0.85rem; margin: 0;">
+            Si una tarea lleva 15 líneas de código y la necesitamos 10 veces, tendríamos que copiar y pegar 150 líneas adentro de <code>main()</code>. Si luego descubrimos un error en la fórmula, ¡habría que corregirlo en los 10 lugares! Las <b>funciones</b> resuelven esto: escribimos la receta <b>una sola vez</b> y la usamos cuantas veces queramos.
+          </p>
+        </div>
       </section>
 
-      <!-- SLIDE 4: EL VIAJE DEL ARGUMENTO AL PARÁMETRO Y RETORNO -->
+      <!-- SLIDE 4: DEFINICIÓN DEL APUNTE -->
       <section>
-        <h2><span class="section-num">03</span> El Viaje del Dato Paso a Paso</h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem;">¿Qué ocurre paso a paso cuando la CPU ejecuta <code>int resultado = doble(5);</code>?</p>
+        <h2><span class="section-num">03</span> 12. ¿Qué es una Función? (Definición del Apunte)</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 6px;">Definición del Apunte</h4>
+          <p style="font-size: 1rem; margin: 0;">
+            <b>Una función es un bloque de código que realiza una tarea específica.</b>
+          </p>
+        </div>
 
-        <div class="step-list">
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">En palabras simples</h4>
+            <p style="font-size: 0.86rem; line-height: 1.55;">
+              Una función es como una <b>mini-máquina con nombre propio</b> dentro de nuestro programa. Le damos un nombre claro (por ejemplo, <code>doble</code>, <code>sumar</code> o <code>esMayor</code>) y la entrenamos para hacer <b>un único trabajo bien definido</b>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¡Ya venimos usando funciones!</h4>
+            <p style="font-size: 0.86rem; line-height: 1.55;">
+              En la Unidad 02 aprendimos que <code>#include &lt;stdio.h&gt;</code> nos trae funciones ya creadas por otros programadores, como <code>printf()</code> y <code>scanf()</code>, y que <code>main()</code> es la función principal. ¡Hoy vamos a <b>crear nuestras propias funciones</b>!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: ANALOGÍA COTIDIANA DEL APUNTE: LA LICUADORA -->
+      <section>
+        <h2><span class="section-num">04</span> Ejemplo Cotidiano del Apunte: La Licuadora</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Para entender cómo funciona una función por dentro, el apunte nos propone una analogía perfecta: <b>pensá en una licuadora</b>.
+        </p>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Ingredientes ➔ Parámetros</h4>
+            <p style="font-size: 0.85rem;">
+              Es lo que metemos adentro de la licuadora para que trabaje (por ejemplo: banana y leche). En programación, son los <b>datos de entrada</b> que recibe la función entre paréntesis.
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">2. Proceso ➔ Código</h4>
+            <p style="font-size: 0.85rem;">
+              Es el trabajo que hacen las cuchillas girando para transformar los ingredientes. En programación, son las <b>instrucciones entre llaves <code>{ }</code></b> que procesan o calculan.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Resultado ➔ <code>return</code></h4>
+            <p style="font-size: 0.85rem;">
+              Es el vaso de licuado listo que nos entrega al terminar. En programación, es el <b>valor final que la función devuelve</b> usando la palabra clave <code>return</code>.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 14px; text-align: center;">
+          <p style="margin: 0; font-size: 0.9rem;">
+            🍌 <b>Ingredientes</b> (<code>parámetros</code>) ➔ ⚙️ <b>Licuadora</b> (<code>código</code>) ➔ 🥤 <b>Licuado listo</b> (<code>return</code>)
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: MODELO MENTAL: MAIN Y SUS AYUDANTES -->
+      <section>
+        <h2><span class="section-num">05</span> Modelo Mental: <code>main()</code> y sus Ayudantes</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Recordemos de la Unidad 02 que todo programa en C comienza ejecutándose en <code>int main()</code> (la puerta principal). ¿Cómo se relaciona <code>main()</code> con las funciones que creamos?
+        </p>
+
+        <div class="step-list" style="margin-top: 10px;">
           <div class="step-item">
             <span class="step-num">1</span>
             <div class="step-content">
-              <b>Paso del Argumento:</b> En <code>main</code>, se envía el valor <b><code>5</code></b> (el <i>argumento</i>) hacia la función <code>doble</code>.
+              <b><code>main()</code> es el Director de Orquesta:</b> El programa arranca siempre en la primera línea de <code>main()</code>. Las demás funciones están "dormidas" esperando que alguien las llame.
             </div>
           </div>
           <div class="step-item">
             <span class="step-num">2</span>
             <div class="step-content">
-              <b>Recepción en el Parámetro:</b> La función <code>doble</code> despierta en memoria RAM y crea su variable local <code>int numero</code>, recibiendo el <b><code>5</code></b>.
+              <b>El Llamado (Invocación):</b> Cuando <code>main()</code> necesita hacer un cálculo específico, llama a una función ayudante por su nombre y le pasa los ingredientes (datos).
             </div>
           </div>
           <div class="step-item">
             <span class="step-num">3</span>
             <div class="step-content">
-              <b>Cálculo y Retorno:</b> Calcula <code>5 * 2 = 10</code>. La instrucción <code>return 10;</code> finaliza la función de inmediato y "escupe" el número <b><code>10</code></b> hacia quien la llamó.
+              <b>Pausa y Ejecución:</b> <code>main()</code> se queda en pausa un instante mientras la función ayudante despierta, ejecuta su código interno y llega a su <code>return</code>.
             </div>
           </div>
           <div class="step-item">
             <span class="step-num">4</span>
             <div class="step-content">
-              <b>Almacenamiento:</b> La expresión <code>doble(5)</code> es reemplazada por <code>10</code>, y el operador <code>=</code> lo guarda en la variable <code>resultado</code>.
+              <b>Regreso con el Resultado:</b> La función le entrega el resultado a <code>main()</code>, se apaga, y <code>main()</code> continúa ejecutando normalmente desde donde se había quedado.
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: ANATOMÍA DE UNA FUNCIÓN -->
+      <!-- SLIDE 7: SINTAXIS GENERAL DEL APUNTE -->
       <section>
-        <h2><span class="section-num">04</span> Anatomía Formal de una Función</h2>
-        <div style="background: rgba(18, 27, 46, 0.95); padding: 18px; border-radius: 12px; border: 1px solid var(--card-border); font-family: var(--font-mono); font-size: 1.1rem; text-align: center; margin: 12px 0;">
-          <span style="color: var(--accent-cyan); font-weight: bold;">int</span> 
-          <span style="color: var(--accent-purple); font-weight: bold;">doble</span>( 
-          <span style="color: var(--accent-emerald); font-weight: bold;">int numero</span> )
+        <h2><span class="section-num">06</span> Sintaxis General de una Función en C</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Tal como muestra el apunte en la Sección 12, la estructura general para escribir (definir) una función en C es:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">Plantilla de Sintaxis del Apunte</span>
+            <span class="code-badge">Sección 12</span>
+          </div>
+          <div class="code-body"><span class="c-kw">tipo_retorno</span> <span class="c-fn">nombre</span>(parametros)
+{
+    codigo;
+}</div>
         </div>
 
-        <div class="grid-3">
+        <div class="grid-2" style="margin-top: 12px;">
           <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">1. Tipo de Retorno (int)</h4>
-            <p style="font-size: 0.85rem;">
-              Qué clase de dato le entregará la función al terminar a quien la llamó (<code>int</code>, <code>float</code>, <code>char</code>, <code>bool</code> o <code>void</code> si no entrega nada).
-            </p>
-          </div>
-
-          <div class="box box-purple">
-            <h4 style="color: #c084fc;">2. Nombre Identificador (doble)</h4>
-            <p style="font-size: 0.85rem;">
-              El nombre con el que invocaremos a la función. Debe ser un verbo o acción clara (<code>calcularArea</code>, <code>esPar</code>).
+            <h4 style="color: #38bdf8;">La Cabecera (Firma)</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              La primera línea <code>tipo_retorno nombre(parametros)</code> presenta a la función: dice <b>qué tipo de dato devuelve</b>, <b>cómo se llama</b> y <b>qué datos necesita recibir</b> para trabajar. <b>¡Nunca lleva punto y coma al final de esta línea cuando abrimos llaves!</b>
             </p>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">3. Parámetros (int numero)</h4>
-            <p style="font-size: 0.85rem;">
-              Los datos de entrada que la función necesita recibir para poder hacer su trabajo. Si no necesita nada, se escribe <code>(void)</code>.
+            <h4 style="color: #34d399;">El Cuerpo de la Función</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Todo lo que está encerrado entre la llave de apertura <code>{</code> y la llave de cierre <code>}</code> es el <b>proceso</b>: las instrucciones que se ejecutarán cada vez que llamemos a la función.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 6: PARÁMETROS VS ARGUMENTOS -->
+      <!-- SLIDE 8: ¿QUÉ ES EL TIPO DE RETORNO? -->
       <section>
-        <h2><span class="section-num">05</span> Parámetros vs Argumentos: La Distinción Exacta</h2>
-        <div class="comparison-box">
-          <div class="correct-card" style="background: rgba(22, 33, 56, 0.8); border-color: var(--accent-cyan);">
-            <div class="correct-title" style="color: var(--accent-cyan); font-size: 1rem;">
-              PARÁMETRO (En la Definición)
-            </div>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              Es la <b>variable receptora vacía</b> declarada entre los paréntesis de la función. Es como el molde o el casillero en el formulario.
-            </p>
-            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; color: #38bdf8;">
-              int doble(int numero) // 'numero' es el parámetro
-            </div>
-          </div>
-
-          <div class="correct-card" style="background: rgba(20, 36, 40, 0.8); border-color: var(--accent-emerald);">
-            <div class="correct-title" style="color: var(--accent-emerald); font-size: 1rem;">
-              ARGUMENTO (En la Invocación / Llamada)
-            </div>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              Es el <b>valor real y concreto</b> que le enviamos a la función cuando la ejecutamos en <code>main()</code>.
-            </p>
-            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; color: #34d399;">
-              int res = doble(5); // '5' es el argumento real
-            </div>
-          </div>
+        <h2><span class="section-num">07</span> ¿Qué Significa <code>tipo_retorno</code>?</h2>
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">Explicación Textual del Apunte</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <b>"Tipo de retorno es el TIPO DE DATO que la función va a devolver (retornar), si quiero que devuelva un ENTERO, sería <code>int</code>."</b>
+          </p>
         </div>
+
+        <table class="trace-table" style="margin-top: 14px;">
+          <thead>
+            <tr>
+              <th>Si la función devuelve...</th>
+              <th>El <code>tipo_retorno</code> es...</th>
+              <th>Ejemplo de cabecera</th>
+              <th>Ejemplo de <code>return</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Un número entero</td>
+              <td><code>int</code></td>
+              <td><code>int doble(int numero)</code></td>
+              <td><code>return 10;</code></td>
+            </tr>
+            <tr>
+              <td>Un número con decimales</td>
+              <td><code>float</code></td>
+              <td><code>float mitad(float x)</code></td>
+              <td><code>return 2.5;</code></td>
+            </tr>
+            <tr>
+              <td>Un único carácter</td>
+              <td><code>char</code></td>
+              <td><code>char inicial()</code></td>
+              <td><code>return 'A';</code></td>
+            </tr>
+            <tr>
+              <td>Verdadero o falso</td>
+              <td><code>bool</code></td>
+              <td><code>bool esPar(int n)</code></td>
+              <td><code>return true;</code></td>
+            </tr>
+            <tr>
+              <td><b>Nada</b> (solo hace una acción)</td>
+              <td><code>void</code></td>
+              <td><code>void saludar()</code></td>
+              <td><em>No devuelve valor</em></td>
+            </tr>
+          </tbody>
+        </table>
       </section>
 
-      <!-- SLIDE 7: LA GRAN CONFUSIÓN: RETURN VS PRINTF -->
+      <!-- SLIDE 9: EL EJEMPLO DEL APUNTE: int doble(int numero) -->
       <section>
-        <h2><span class="section-num">06</span> ¡ALERTA FUNDAMENTAL!: <code>return</code> vs <code>printf</code></h2>
-        <div class="comparison-box">
-          <div class="wrong-card" style="background: rgba(30, 25, 45, 0.85); border-color: var(--accent-purple);">
-            <div class="wrong-title" style="color: var(--accent-purple); font-size: 1rem;">
-              printf(): Es para los OJOS del HUMANO
-            </div>
-            <p style="font-size: 0.84rem; color: #e2e8f0;">
-              <code>printf</code> dibuja letras con luz en la pantalla de la computadora. <b>No le entrega ningún dato a la memoria de tu programa</b>. No podés guardar la salida de un printf en una variable para hacer cálculos posteriores.
-            </p>
-          </div>
-
-          <div class="correct-card" style="background: rgba(18, 36, 48, 0.85); border-color: var(--accent-cyan);">
-            <div class="correct-title" style="color: var(--accent-cyan); font-size: 1rem;">
-              return: Es para la MEMORIA de la COMPUTADORA
-            </div>
-            <p style="font-size: 0.84rem; color: #e2e8f0;">
-              <code>return</code> no muestra nada en pantalla. Devuelve un valor numérico o lógico a la memoria para que otra parte del código pueda sumarlo, guardarlo o usarlo en un <code>if</code>.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 8: EL TIPO VOID -->
-      <section>
-        <h2><span class="section-num">07</span> Funciones de Tipo <code>void</code> (Sin Retorno)</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Cuando una función realiza una acción pero no necesita entregar ningún número de vuelta:</p>
+        <h2><span class="section-num">08</span> El Ejemplo Central del Apunte: <code>doble</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          En la página 1 de nuestro apunte vimos que la computadora no sabe qué significa "el doble de un número" a menos que le digamos que multiplique por 2. En la Sección 12, el apunte convierte esa idea en nuestra primera función:
+        </p>
 
         <div class="code-window">
           <div class="code-header">
-            <span class="code-title">funcion_void.c</span>
-            <span class="code-badge">tipo void</span>
+            <span class="code-title">Ejemplo del Apunte — Definición de la función doble</span>
+            <span class="code-badge">Página 9</span>
           </div>
-          <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">mostrarCartelBienvenida</span>(<span class="c-type">void</span>)
+          <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
 {
-    <span class="c-fn">printf</span>(<span class="c-str">"====================================\n"</span>);
-    <span class="c-fn">printf</span>(<span class="c-str">"   BIENVENIDO AL SISTEMA ESCOLAR    \n"</span>);
-    <span class="c-fn">printf</span>(<span class="c-str">"====================================\n"</span>);
-    <span class="c-cmt">// No lleva 'return valor;' porque es de tipo void</span>
-}
-
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-{
-    <span class="c-fn">mostrarCartelBienvenida</span>(); <span class="c-cmt">// Se llama así de simple</span>
-    <span class="c-kw">return</span> <span class="c-num">0</span>;
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
 }</div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 14px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">¿Cómo se lee esto en español?</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            "Creamos una función llamada <b><code>doble</code></b> que recibe como ingrediente un número entero llamado <b><code>numero</code></b>, lo multiplica por <code>2</code>, y <b>retorna</b> ese resultado como un número entero (<b><code>int</code></b>)."
+          </p>
         </div>
       </section>
 
-      <!-- SLIDE 9: PROGRAMAS COMPLETOS DE EJEMPLO -->
+      <!-- SLIDE 10: PARTES DE UNA FUNCIÓN SEGÚN EL APUNTE -->
       <section>
-        <h2><span class="section-num">08</span> Galería de Funciones Prácticas Reales</h2>
-        <div class="grid-2">
+        <h2><span class="section-num">09</span> Partes de una Función (Desglose del Apunte)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Analicemos las 4 piezas exactas que señala el apunte sobre la función <code>doble</code>:
+        </p>
+
+        <div style="background: rgba(18, 27, 46, 0.95); padding: 14px; border-radius: 12px; border: 1px solid var(--card-border); font-family: var(--font-mono); font-size: 1.05rem; text-align: center; margin: 10px 0;">
+          <span style="color: var(--accent-cyan); font-weight: bold;">int</span>
+          <span style="color: var(--accent-purple); font-weight: bold;">doble</span>(
+          <span style="color: var(--accent-emerald); font-weight: bold;">int numero</span> )
+          { <span style="color: var(--accent-amber); font-weight: bold;">return numero * 2;</span> }
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Tipo de retorno: <code>int</code></h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Indica que el resultado final que entregará la función al terminar será un número entero.
+            </p>
+          </div>
+
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">1. Sumar dos números</h4>
-            <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body" style="font-size: 0.8rem;"><span class="c-kw">int</span> <span class="c-fn">sumar</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b)
-{
-    <span class="c-kw">return</span> a + b;
-}</div>
-            </div>
-            <p style="font-size: 0.78rem; color: #a5b4fc;">Llamada: <code>int total = sumar(15, 20); // 35</code></p>
+            <h4 style="color: #c084fc;">2. Nombre: <code>doble</code></h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Es la etiqueta o identificador con el que vamos a llamar a esta función cuando la necesitemos.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Parámetro: <code>numero</code> (de tipo <code>int</code>)</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Es la "cajita" receptora donde se guardará el número de entrada que le enviemos al llamarla.
+            </p>
           </div>
 
           <div class="box box-amber">
-            <h4 style="color: #fbbf24;">2. Calcular el cuadrado</h4>
-            <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body" style="font-size: 0.8rem;"><span class="c-kw">float</span> <span class="c-fn">cuadrado</span>(<span class="c-kw">float</span> x)
+            <h4 style="color: #fbbf24;">4. Retorno: <code>return numero * 2;</code></h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Calcula el doble del valor recibido en <code>numero</code> y lo devuelve como respuesta final.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: LLAMAR UNA FUNCIÓN SEGÚN EL APUNTE -->
+      <section>
+        <h2><span class="section-num">10</span> Cómo Llamar a una Función (Página 9 y 10)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Escribir la función <code>doble</code> es como fabricar la licuadora: todavía está apagada. Para usarla adentro de <code>main()</code>, tenemos que <b>llamarla</b> (o invocarla):
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">Llamar una función (Apunte)</span>
+            <span class="code-badge">Resultado: 10</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(<span class="c-num">5</span>);</div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Explicación Textual del Apunte</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            <b>"GUARDO en una variable de tipo <code>int</code> llamada <code>resultado</code>, al resultado que devuelve la función <code>doble</code> cuando le ingresa el valor <code>5</code>. Esto sería hacer <code>5 * 2</code> ➔ <code>10</code>."</b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Lado derecho del <code>=</code> (Primero)</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Se ejecuta <code>doble(5)</code>. El número <code>5</code> viaja a la función, se multiplica por <code>2</code> y la función retorna <code>10</code>.
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lado izquierdo del <code>=</code> (Después)</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Ese valor <code>10</code> retornado se guarda dentro de la cajita <code>int resultado</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: EL VIAJE DEL DATO EN MEMORIA RAM -->
+      <section>
+        <h2><span class="section-num">11</span> El Viaje del Dato Paso a Paso en Memoria RAM</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Sigamos con lupa los 4 momentos exactos de <code>int resultado = doble(5);</code>:
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Envío de entrada:</b> En <code>main()</code> escribimos <code>doble(5)</code>. El valor <code>5</code> sale de <code>main()</code> hacia la puerta de entrada de la función <code>doble</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Copia en el parámetro:</b> La función <code>doble(int numero)</code> crea su propia cajita temporal <code>numero</code> y guarda adentro el <code>5</code> (es decir, hace internamente <code>numero = 5</code>).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>Proceso y <code>return</code>:</b> Evalúa <code>numero * 2</code> ➔ <code>5 * 2</code> ➔ <code>10</code>. La orden <code>return 10;</code> envía el número <code>10</code> de vuelta hacia <code>main()</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b>Reemplazo y asignación:</b> En <code>main()</code>, el llamado <code>doble(5)</code> se transforma en <code>10</code>, quedando <code>int resultado = 10;</code>. ¡La cajita <code>resultado</code> ahora vale <code>10</code>!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: EJEMPLO NIVEL 1 COMPLETO -->
+      <section>
+        <h2><span class="section-num">12</span> Ejemplo Nivel 1: Programa Completo con <code>doble()</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Unamos la definición de <code>doble</code> y su llamada dentro de un programa completo en C listo para compilar y ejecutar:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">nivel1_doble.c</span>
+            <span class="code-badge">Nivel 1 — Introductorio</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-cmt">// 1. Definimos la función ANTES de main()</span>
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
 {
-    <span class="c-kw">return</span> x * x;
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-cmt">// 2. Llamamos a la función y guardamos lo que retorna</span>
+    <span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(<span class="c-num">5</span>);
+
+    <span class="c-cmt">// 3. Mostramos el valor guardado en resultado</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Resultado: %d\n"</span>, resultado);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="terminal-window" style="margin-top: 10px;">
+          <div class="terminal-header">Salida en Consola</div>
+          <div class="terminal-body"><span class="terminal-prompt">$ ./nivel1_doble</span>
+Resultado: 10</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: REUTILIZACIÓN Y TRAZA DE LLAMADAS -->
+      <section>
+        <h2><span class="section-num">13</span> El Poder de Reutilizar la Misma Función</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Una vez definida <code>doble()</code>, podemos llamarla todas las veces que queramos, pasándole números fijos o incluso el contenido de otras variables:
+        </p>
+
+        <div class="code-window">
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> a = <span class="c-fn">doble</span>(<span class="c-num">5</span>);
+    <span class="c-kw">int</span> b = <span class="c-fn">doble</span>(<span class="c-num">12</span>);
+    <span class="c-kw">int</span> x = <span class="c-num">7</span>;
+    <span class="c-kw">int</span> c = <span class="c-fn">doble</span>(x);
+    <span class="c-fn">printf</span>(<span class="c-str">"a=%d, b=%d, c=%d\n"</span>, a, b, c);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <table class="trace-table" style="margin-top: 8px;">
+          <thead>
+            <tr>
+              <th>Llamada en <code>main()</code></th>
+              <th>Valor que recibe <code>numero</code></th>
+              <th>Cálculo en <code>doble</code></th>
+              <th>Valor retornado</th>
+              <th>Variable en <code>main</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>doble(5)</code></td>
+              <td><code>numero = 5</code></td>
+              <td><code>5 * 2</code></td>
+              <td><code>10</code></td>
+              <td><code>a = 10</code></td>
+            </tr>
+            <tr>
+              <td><code>doble(12)</code></td>
+              <td><code>numero = 12</code></td>
+              <td><code>12 * 2</code></td>
+              <td><code>24</code></td>
+              <td><code>b = 24</code></td>
+            </tr>
+            <tr>
+              <td><code>doble(x)</code> (con <code>x = 7</code>)</td>
+              <td><code>numero = 7</code></td>
+              <td><code>7 * 2</code></td>
+              <td><code>14</code></td>
+              <td><code>c = 14</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 15: DIFERENCIA ENTRE PARÁMETROS Y ARGUMENTOS -->
+      <section>
+        <h2><span class="section-num">14</span> Parámetros vs Argumentos: ¿Cuál es la Diferencia?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          En programación vas a escuchar ambos términos todo el tiempo. Aunque trabajan juntos, nombran dos momentos distintos:
+        </p>
+
+        <div class="comparison-box">
+          <div class="correct-card" style="background: rgba(22, 33, 56, 0.85); border-color: var(--accent-cyan);">
+            <div class="correct-title" style="color: var(--accent-cyan); font-size: 1rem;">
+              📥 PARÁMETRO (En la Definición)
+            </div>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Es la <b>variable declarada entre los paréntesis</b> cuando escribimos la receta de la función. Es el "molde vacío" que espera recibir un dato.
+            </p>
+            <div class="code-window" style="margin-top: 8px;">
+              <div class="code-body"><span class="c-cmt">// 'numero' es el PARÁMETRO</span>
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
 }</div>
             </div>
-            <p style="font-size: 0.78rem; color: #fef08a;">Llamada: <code>float c = cuadrado(4.0f); // 16.0</code></p>
           </div>
 
-          <div class="box box-emerald" style="grid-column: 1 / -1;">
-            <h4 style="color: #34d399;">3. Función Booleana: Determinar si un número es par</h4>
+          <div class="correct-card" style="background: rgba(20, 36, 40, 0.85); border-color: var(--accent-emerald);">
+            <div class="correct-title" style="color: var(--accent-emerald); font-size: 1rem;">
+              🚀 ARGUMENTO (En la Llamada)
+            </div>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Es el <b>valor concreto</b> (por ejemplo <code>5</code>) que le enviamos entre paréntesis cuando llamamos a la función para usarla.
+            </p>
+            <div class="code-window" style="margin-top: 8px;">
+              <div class="code-body"><span class="c-cmt">// '5' es el ARGUMENTO</span>
+<span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(<span class="c-num">5</span>);</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: FUNCIONES CON VARIOS PARÁMETROS -->
+      <section>
+        <h2><span class="section-num">15</span> Funciones con Varios Parámetros: <code>sumar(int a, int b)</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          ¿Qué pasa si nuestra "licuadora" necesita <b>dos o más ingredientes</b>? Separamos cada parámetro con una <b>coma (<code>,</code>)</b>, indicando siempre el tipo de dato de cada uno:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">Función con 2 parámetros enteros</span>
+            <span class="code-badge">Separados por coma</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">sumar</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b)
+{
+    <span class="c-kw">return</span> a + b;
+}</div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Regla de Oro de los Parámetros</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              En la cabecera de la función, <b>cada parámetro debe llevar su propio tipo de dato</b>: se escribe <code>(int a, int b)</code>. Escribir <code>(int a, b)</code> es un error de compilación en C.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Correspondencia por Orden</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Al llamar <code>sumar(4, 9)</code>, el primer argumento (<code>4</code>) se copia en el primer parámetro (<code>a</code>), y el segundo argumento (<code>9</code>) se copia en el segundo parámetro (<code>b</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: EJEMPLO NIVEL 2 CON SCANF Y TRAZA -->
+      <section>
+        <h2><span class="section-num">16</span> Ejemplo Nivel 2: <code>sumar()</code> con Datos del Usuario</h2>
+        <div class="grid-2">
+          <div>
+            <div class="code-window">
+              <div class="code-header">
+                <span class="code-title">nivel2_suma.c</span>
+                <span class="code-badge">Nivel 2</span>
+              </div>
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">sumar</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b)
+{
+    <span class="c-kw">int</span> r = a + b;
+    <span class="c-kw">return</span> r;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> n1, n2, total;
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese dos enteros: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d %d"</span>, &amp;n1, &amp;n2);
+
+    total = <span class="c-fn">sumar</span>(n1, n2);
+    <span class="c-fn">printf</span>(<span class="c-str">"La suma es: %d\n"</span>, total);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">Interacción en Terminal</div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel2_suma</span>
+Ingrese dos enteros: 15 25
+La suma es: 40</div>
+            </div>
+
+            <table class="trace-table" style="margin-top: 10px;">
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th>Dónde</th>
+                  <th>Estado de Variables</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1. <code>scanf</code></td>
+                  <td><code>main</code></td>
+                  <td><code>n1 = 15</code>, <code>n2 = 25</code></td>
+                </tr>
+                <tr>
+                  <td>2. Llamada</td>
+                  <td><code>sumar</code></td>
+                  <td><code>a = 15</code>, <code>b = 25</code></td>
+                </tr>
+                <tr>
+                  <td>3. Cálculo</td>
+                  <td><code>sumar</code></td>
+                  <td><code>r = 40</code> ➔ <code>return 40</code></td>
+                </tr>
+                <tr>
+                  <td>4. Regreso</td>
+                  <td><code>main</code></td>
+                  <td><code>total = 40</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: FUNCIONES CON FLOAT Y BOOL -->
+      <section>
+        <h2><span class="section-num">17</span> Funciones que Retornan <code>float</code> y <code>bool</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Las funciones no solo devuelven <code>int</code>. Podemos combinar lo aprendido en las Unidades 04 (Tipos de datos) y 11 (Booleanos):
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">1. Promedio con decimales (<code>float</code>)</h4>
             <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body" style="font-size: 0.8rem;"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+              <div class="code-body"><span class="c-kw">float</span> <span class="c-fn">promedio</span>(<span class="c-kw">float</span> x, <span class="c-kw">float</span> y)
+{
+    <span class="c-kw">return</span> (x + y) / <span class="c-num">2.0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Llamada: <code>float prom = promedio(7.0, 8.0);</code> ➔ guarda <code>7.5</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Función lógica (<code>bool</code>)</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
 
 <span class="c-kw">bool</span> <span class="c-fn">esPar</span>(<span class="c-kw">int</span> numero)
 {
     <span class="c-kw">return</span> (numero % <span class="c-num">2</span> == <span class="c-num">0</span>);
 }</div>
             </div>
-            <p style="font-size: 0.8rem; color: #a7f3d0;">
-              ¡Mirá qué belleza cómo se usa en un if!: <code>if (esPar(edad)) { printf("Tu edad es par"); }</code>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Llamada: <code>bool par = esPar(14);</code> ➔ guarda <code>true</code> (porque <code>14 % 2 == 0</code>).
             </p>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            💡 <b>Truco profesional:</b> Una función que devuelve <code>bool</code> se puede usar directamente adentro de la condición de un <code>if</code>: <code>if (esPar(numero)) { printf("Es par"); }</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: FUNCIONES VOID -->
+      <section>
+        <h2><span class="section-num">18</span> Funciones <code>void</code>: Cuando No Hay Valor de Retorno</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          En inglés, <b><code>void</code></b> significa "vacío" o "nada". Si queremos que una función realice una tarea (por ejemplo, mostrar un cartel o imprimir un reporte por pantalla) pero <b>no necesitamos que devuelva ningún dato</b>, ponemos <code>void</code> como tipo de retorno:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">funciones_void.c</span>
+            <span class="code-badge">Sin return de valor</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">void</span> <span class="c-fn">mostrarBienvenida</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"=== SISTEMA DE ALUMNOS ===\n"</span>);
+}
+
+<span class="c-kw">void</span> <span class="c-fn">mostrarEdad</span>(<span class="c-kw">int</span> edad)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Edad registrada: %d anios\n"</span>, edad);
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">mostrarBienvenida</span>();
+    <span class="c-fn">mostrarEdad</span>(<span class="c-num">16</span>);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.83rem;">
+            Observá cómo se llaman en <code>main()</code>: van <b>sueltas en su propia línea</b> (<code>mostrarEdad(16);</code>), sin <code>int resultado = ...</code> adelante, porque no devuelven ningún valor para guardar.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: LA DIFERENCIA CRUCIAL: RETURN VS PRINTF -->
+      <section>
+        <h2><span class="section-num">19</span> Diferencia Crucial: <code>return</code> vs <code>printf</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Una de las dudas más frecuentes al empezar a programar es confundir <code>return</code> con <code>printf()</code>. ¡Hacen cosas totalmente distintas!
+        </p>
+
+        <div class="comparison-box">
+          <div class="correct-card" style="background: rgba(18, 36, 48, 0.85); border-color: var(--accent-cyan);">
+            <div class="correct-title" style="color: var(--accent-cyan); font-size: 1rem;">
+              🔙 <code>return</code> (Para la MEMORIA)
+            </div>
+            <ul style="font-size: 0.83rem; color: #e2e8f0; line-height: 1.55; margin-left: 16px;">
+              <li>Le entrega el resultado a <b>quien llamó a la función</b> (por ejemplo, a <code>main</code>).</li>
+              <li><b>NO muestra nada</b> en la pantalla negra de la consola.</li>
+              <li>El valor devuelto <b>se puede guardar en una variable</b> o seguir usando en cuentas: <code>int r = doble(5) + 1;</code>.</li>
+            </ul>
+          </div>
+
+          <div class="wrong-card" style="background: rgba(35, 25, 48, 0.85); border-color: var(--accent-amber);">
+            <div class="wrong-title" style="color: var(--accent-amber); font-size: 1rem;">
+              🖥️ <code>printf</code> (Para la PANTALLA)
+            </div>
+            <ul style="font-size: 0.83rem; color: #e2e8f0; line-height: 1.55; margin-left: 16px;">
+              <li>Dibuja texto o números en el monitor para que <b>los ojos del humano</b> los lean.</li>
+              <li><b>NO le devuelve el resultado numérico</b> a la variable de <code>main</code>.</li>
+              <li>Una vez impreso en pantalla, el programa no puede "agarrar" ese texto para multiplicarlo o sumarlo.</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 10: ÁMBITO LOCAL (SCOPE) Y PROTOTIPOS -->
+      <!-- SLIDE 21: DEMOSTRACIÓN PRÁCTICA RETURN VS PRINTF -->
       <section>
-        <h2><span class="section-num">09</span> Ámbito de Variables (Scope) y Prototipos</h2>
-        <div class="grid-2">
+        <h2><span class="section-num">20</span> ¿Por Qué <code>return</code> Permite Seguir Calculando?</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Mirá por qué en el apunte la función <code>doble</code> usa <code>return numero * 2;</code> y no <code>printf</code>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">encadenar_calculos.c</span>
+            <span class="code-badge">Ventaja de return</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(<span class="c-num">5</span>);           <span class="c-cmt">// Guarda 10</span>
+    <span class="c-kw">int</span> masDiez = resultado + <span class="c-num">10</span>;       <span class="c-cmt">// Usa ese 10: 10 + 10 = 20</span>
+    <span class="c-kw">int</span> cuadruple = <span class="c-fn">doble</span>(<span class="c-fn">doble</span>(<span class="c-num">3</span>));    <span class="c-cmt">// doble(3) da 6 -> doble(6) da 12</span>
+
+    <span class="c-fn">printf</span>(<span class="c-str">"resultado = %d\n"</span>, resultado);
+    <span class="c-fn">printf</span>(<span class="c-str">"masDiez   = %d\n"</span>, masDiez);
+    <span class="c-fn">printf</span>(<span class="c-str">"cuadruple = %d\n"</span>, cuadruple);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            ✅ Como <code>doble()</code> <b>retorna</b> el número, en <code>main()</code> podemos guardarlo, sumarle 10, compararlo en un <code>if</code> o incluso metérselo adentro de otro <code>doble()</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: EL EFECTO DE CORTE INMEDIATO DEL RETURN -->
+      <section>
+        <h2><span class="section-num">21</span> ¿Qué Ocurre en el Instante en que se Ejecuta <code>return</code>?</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Regla de Ejecución</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            La instrucción <code>return</code> cumple dos tareas al mismo tiempo: <b>1)</b> entrega el valor de respuesta y <b>2) finaliza la función inmediatamente</b>. Cualquier línea escrita debajo de un <code>return</code> que ya se ejecutó jamás llegará a correrse.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
           <div class="box box-rose">
-            <h4 style="color: #f87171;">El Ámbito Local (Scope)</h4>
-            <p style="font-size: 0.84rem;">
-              Las variables declaradas adentro de una función son <b>locales y privadas</b>: nacen cuando la función empieza y mueren cuando termina con el <code>return</code>.
-            </p>
-            <p style="font-size: 0.82rem; color: #fecaca;">
-              <code>main()</code> no puede ver ni modificar las variables internas de <code>doble()</code>, y viceversa. ¡Esto evita que distintas partes de un programa se arruinen variables entre sí por accidente!
-            </p>
+            <h4 style="color: #f87171;">Código Inalcanzable (Código Muerto)</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+    <span class="c-cmt">// ¡Esta línea NUNCA se ejecuta!</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Calculado\n"</span>);
+}</div>
+            </div>
           </div>
 
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">Prototipos de Función</h4>
-            <p style="font-size: 0.84rem;">
-              El compilador lee tu archivo de arriba hacia abajo. Si ponés la definición de tu función <b>debajo de <code>main()</code></b>, tenés que avisarle arriba mediante un <b>prototipo</b> (la firma de la función terminada en <code>;</code>):
-            </p>
-            <div style="background: rgba(0,0,0,0.3); padding: 6px 10px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.8rem;">
-              <span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero); <span class="c-cmt">// Prototipo</span>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Múltiples <code>return</code> en un <code>if / else</code></h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">mayor</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b)
+{
+    <span class="c-kw">if</span> (a &gt;= b) {
+        <span class="c-kw">return</span> a; <span class="c-cmt">// Sale por acá</span>
+    } <span class="c-kw">else</span> {
+        <span class="c-kw">return</span> b; <span class="c-cmt">// O sale por acá</span>
+    }
+}</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 11: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <!-- SLIDE 23: ÁMBITO (SCOPE) LOCAL DE VARIABLES -->
       <section>
-        <h2><span class="section-num">10</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">22</span> Ámbito (<i>Scope</i>) Local: Las Cajitas son Privadas</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          En la Unidad 03 vimos que cada variable es una "cajita" en memoria. Cuando trabajamos con funciones, <b>cada función tiene su propia habitación privada de cajitas</b>:
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Habitación de <code>main()</code></h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 16px;">
+              <li>Las variables creadas dentro de <code>main()</code> (como <code>resultado</code>) <b>solo existen dentro de <code>main()</code></b>.</li>
+              <li>La función <code>doble()</code> no puede tocar ni ver directamente la cajita <code>resultado</code> de <code>main()</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Habitación de <code>doble()</code></h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 16px;">
+              <li>El parámetro <code>numero</code> y cualquier variable declarada dentro de <code>doble()</code> son <b>variables locales</b>.</li>
+              <li>Nacen cuando llamamos a <code>doble()</code> y <b>se destruyen automáticamente</b> apenas ejecuta su <code>return</code>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            🛡️ <b>¿Por qué esto es buenísimo?</b> Porque podemos usar el nombre <code>numero</code> o <code>resultado</code> en 5 funciones distintas sin que se mezclen ni se pisen los valores entre sí.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: PASO POR VALOR EN C -->
+      <section>
+        <h2><span class="section-num">23</span> Paso por Valor: Se Envía una Copia del Dato</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Cuando llamamos a una función pasándole una variable de <code>main()</code>, C envía una <b>fotocopia del valor</b>, no la cajita original. Mirá qué pasa si modificamos el parámetro adentro de la función:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    numero = numero * <span class="c-num">2</span>;
+    <span class="c-kw">return</span> numero;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> original = <span class="c-num">5</span>;
+    <span class="c-kw">int</span> res = <span class="c-fn">doble</span>(original);
+    <span class="c-fn">printf</span>(<span class="c-str">"original = %d\n"</span>, original);
+    <span class="c-fn">printf</span>(<span class="c-str">"res      = %d\n"</span>, res);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Momento</th>
+                  <th><code>original</code> (en <code>main</code>)</th>
+                  <th><code>numero</code> (en <code>doble</code>)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Antes de llamar</td>
+                  <td><code>5</code></td>
+                  <td><em>No existe</em></td>
+                </tr>
+                <tr>
+                  <td>Al entrar a <code>doble</code></td>
+                  <td><code>5</code></td>
+                  <td><code>5</code> (copia)</td>
+                </tr>
+                <tr>
+                  <td><code>numero = numero * 2</code></td>
+                  <td><b><code>5</code> (intacto)</b></td>
+                  <td><code>10</code></td>
+                </tr>
+                <tr>
+                  <td>Después del <code>return</code></td>
+                  <td><b><code>5</code></b> (y <code>res = 10</code>)</td>
+                  <td><em>Destruida</em></td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 8px;">
+              En <code>main()</code>, <code>original</code> <b>sigue valiendo 5</b> porque <code>doble()</code> trabajó sobre su propia copia local <code>numero</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: UBICACIÓN EN EL ARCHIVO Y PROTOTIPOS -->
+      <section>
+        <h2><span class="section-num">24</span> ¿Dónde Escribimos las Funciones en el Archivo <code>.c</code>?</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          El compilador de C lee nuestro código de arriba hacia abajo. Por eso existen dos formas válidas de organizar un programa con funciones:
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Opción A (Recomendada): Arriba de <code>main()</code></h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(<span class="c-num">5</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, resultado);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.78rem; margin: 0;">Cuando el compilador llega a <code>main()</code>, ya conoce a <code>doble()</code>.</p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Opción B: Con Prototipo arriba y código abajo</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero); <span class="c-cmt">// Prototipo (aviso)</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(<span class="c-num">5</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, resultado);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.78rem; margin: 0;">El prototipo (terminado en <code>;</code>) avisa que la función está definida más abajo.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: EJEMPLO NIVEL 3 (COMBINANDO CON CONDICIONALES Y MÓDULO) -->
+      <section>
+        <h2><span class="section-num">25</span> Ejemplo Nivel 3: Funciones + Divisibilidad e <code>if/else</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          En la Sección 6 del apunte vimos que si <code>numero % divisor == 0</code>, entonces <code>numero</code> es divisible por <code>divisor</code>. Llevemos esa regla y los condicionales de la Sección 9 adentro de funciones:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">nivel3_divisible_y_mayor.c</span>
+            <span class="code-badge">Nivel 3 — Intermedio</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">bool</span> <span class="c-fn">esDivisible</span>(<span class="c-kw">int</span> numero, <span class="c-kw">int</span> divisor)
+{
+    <span class="c-kw">if</span> (numero % divisor == <span class="c-num">0</span>) {
+        <span class="c-kw">return</span> <span class="c-kw">true</span>;
+    } <span class="c-kw">else</span> {
+        <span class="c-kw">return</span> <span class="c-kw">false</span>;
+    }
+}
+
+<span class="c-kw">int</span> <span class="c-fn">calcularMayor</span>(<span class="c-kw">int</span> a, <span class="c-kw">int</span> b)
+{
+    <span class="c-kw">if</span> (a &gt; b) {
+        <span class="c-kw">return</span> a;
+    } <span class="c-kw">else</span> {
+        <span class="c-kw">return</span> b;
+    }
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> mayor = <span class="c-fn">calcularMayor</span>(<span class="c-num">14</span>, <span class="c-num">20</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"El mayor entre 14 y 20 es: %d\n"</span>, mayor);
+
+    <span class="c-kw">if</span> (<span class="c-fn">esDivisible</span>(<span class="c-num">14</span>, <span class="c-num">7</span>)) {
+        <span class="c-fn">printf</span>(<span class="c-str">"14 es divisible por 7\n"</span>);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: SEGUIMIENTO DEL EJEMPLO NIVEL 3 -->
+      <section>
+        <h2><span class="section-num">26</span> Traza de Ejecución del Ejemplo Nivel 3</h2>
+        <div class="terminal-window">
+          <div class="terminal-header">Salida en Consola</div>
+          <div class="terminal-body"><span class="terminal-prompt">$ ./nivel3_divisible_y_mayor</span>
+El mayor entre 14 y 20 es: 20
+14 es divisible por 7</div>
+        </div>
+
+        <table class="trace-table" style="margin-top: 12px;">
+          <thead>
+            <tr>
+              <th>Orden</th>
+              <th>Llamada desde <code>main()</code></th>
+              <th>Parámetros recibidos</th>
+              <th>Condición evaluada</th>
+              <th>Retorno a <code>main()</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1°</td>
+              <td><code>calcularMayor(14, 20)</code></td>
+              <td><code>a = 14</code>, <code>b = 20</code></td>
+              <td><code>14 &gt; 20</code> ➔ Falso (entra al <code>else</code>)</td>
+              <td><code>return 20;</code> (se guarda en <code>mayor</code>)</td>
+            </tr>
+            <tr>
+              <td>2°</td>
+              <td><code>esDivisible(14, 7)</code></td>
+              <td><code>numero = 14</code>, <code>divisor = 7</code></td>
+              <td><code>14 % 7 == 0</code> ➔ Verdadero (resto 0)</td>
+              <td><code>return true;</code> (entra al <code>if</code> de <code>main</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 28: EJEMPLO NIVEL 4: RAZONAMIENTO LÓGICO PASO A PASO -->
+      <section>
+        <h2><span class="section-num">27</span> Ejemplo Nivel 4: Cómo Pensar un Problema con Funciones</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Enunciado del Problema</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Un cine cobra <b>$4000</b> la entrada general, pero si la persona es menor de 18 años o tiene 65 años o más, recibe un <b>descuento de $1500</b>. Además, queremos comprar varias entradas del mismo tipo y saber el total a pagar. ¿Cómo lo dividimos en funciones?
+          </p>
+        </div>
+
+        <div class="step-list" style="margin-top: 10px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Función 1 — <code>bool tieneDescuento(int edad)</code>:</b> Recibe la edad y usa el operador lógico OR (<code>||</code>) de la Sección 10: retorna <code>true</code> si <code>edad &lt; 18 || edad &gt;= 65</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Función 2 — <code>int calcularPrecioEntrada(int edad)</code>:</b> Llama a <code>tieneDescuento(edad)</code>; si es verdadero retorna <code>4000 - 1500</code> (<code>2500</code>), si no retorna <code>4000</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>Función 3 — <code>int calcularTotal(int precioUnitario, int cantidad)</code>:</b> Multiplica el precio de cada entrada por la cantidad de entradas y retorna el total.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: IMPLEMENTACIÓN COMPLETA DEL EJEMPLO NIVEL 4 -->
+      <section>
+        <h2><span class="section-num">28</span> Ejemplo Nivel 4: Código Completo e Integrador</h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel4_cine.c</span>
+              <span class="code-badge">Nivel 4 — Modular</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">bool</span> <span class="c-fn">tieneDescuento</span>(<span class="c-kw">int</span> edad)
+{
+    <span class="c-kw">return</span> (edad &lt; <span class="c-num">18</span> || edad &gt;= <span class="c-num">65</span>);
+}
+
+<span class="c-kw">int</span> <span class="c-fn">calcularPrecioEntrada</span>(<span class="c-kw">int</span> edad)
+{
+    <span class="c-kw">if</span> (<span class="c-fn">tieneDescuento</span>(edad)) {
+        <span class="c-kw">return</span> <span class="c-num">4000</span> - <span class="c-num">1500</span>;
+    } <span class="c-kw">else</span> {
+        <span class="c-kw">return</span> <span class="c-num">4000</span>;
+    }
+}
+
+<span class="c-kw">int</span> <span class="c-fn">calcularTotal</span>(<span class="c-kw">int</span> precio, <span class="c-kw">int</span> cantidad)
+{
+    <span class="c-kw">return</span> precio * cantidad;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+    <span class="c-kw">int</span> cant = <span class="c-num">3</span>;
+    <span class="c-kw">int</span> unitario = <span class="c-fn">calcularPrecioEntrada</span>(edad);
+    <span class="c-kw">int</span> total = <span class="c-fn">calcularTotal</span>(unitario, cant);
+    <span class="c-fn">printf</span>(<span class="c-str">"Precio unitario: $%d\n"</span>, unitario);
+    <span class="c-fn">printf</span>(<span class="c-str">"Total por %d entradas: $%d\n"</span>, cant, total);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">Salida en Consola</div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel4_cine</span>
+Precio unitario: $2500
+Total por 3 entradas: $7500</div>
+            </div>
+
+            <div class="box box-emerald" style="margin-top: 12px;">
+              <h4 style="color: #34d399; margin-bottom: 4px;">¿Viste cómo una función puede llamar a otra?</h4>
+              <p style="font-size: 0.82rem; margin: 0;">
+                <code>main()</code> llamó a <code>calcularPrecioEntrada(16)</code>, y esta a su vez llamó a <code>tieneDescuento(16)</code>. Cada función es cortita, fácil de leer y hace una única responsabilidad.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: ERROR FRECUENTE 1: DEFINIR ADENTRO DE MAIN -->
+      <section>
+        <h2><span class="section-num">29</span> Error Frecuente #1: Definir una Función Adentro de <code>main()</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          En lenguaje C estándar, <b>no existen funciones adentro de otras funciones</b>. Todas las funciones son "hermanas" al mismo nivel:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ MAL: Función metida adentro de <code>main</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-cmt">// ERROR: ¡No se puede definir acá adentro!</span>
+    <span class="c-cmt">// int doble(int numero) { ... }</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 0;">
+              Adentro de <code>main()</code> solo se <b>llaman</b> las funciones, nunca se definen.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ BIEN: Definida afuera y llamada adentro</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(<span class="c-num">5</span>);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 0;">
+              <code>doble()</code> se define arriba de <code>main()</code>, y adentro de <code>main()</code> la llamamos.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: ERROR FRECUENTE 2: IGNORAR RETORNO O PONER TIPOS EN LA LLAMADA -->
+      <section>
+        <h2><span class="section-num">30</span> Error Frecuente #2: Ignorar el Retorno o Poner Tipos al Llamar</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ MAL: Llamar sin guardar y poner <code>int</code> al argumento</div>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #f87171; background: rgba(0,0,0,0.45); padding: 10px; border-radius: 8px;">
+              int main()<br>
+              {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;// Error A: tirar el retorno a la basura<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;doble(5);<br><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;// Error B: poner el tipo 'int' al llamar<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;int r = doble(int 5);<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+              }
+            </div>
+            <p style="font-size: 0.79rem; color: #fecaca; margin-top: 6px;">
+              Si escribís <code>doble(5);</code> suelto, la función calcula el <code>10</code> pero como nadie lo recibe, ¡se pierde en el aire! Y al llamar nunca se escribe la palabra <code>int</code> adentro del paréntesis.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ BIEN: Guardar el retorno y pasar solo el valor</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(<span class="c-num">5</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, resultado);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.79rem; color: #a7f3d0; margin-top: 6px;">
+              El tipo <code>int</code> del parámetro va solo en la definición (arriba). En la llamada (abajo) pasamos directamente <code>5</code> y guardamos el retorno en <code>resultado</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: ERROR FRECUENTE 3: OLVIDAR EL RETURN -->
+      <section>
+        <h2><span class="section-num">31</span> Error Frecuente #3: Prometer un Tipo y Olvidar el <code>return</code></h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ MAL: Declarar <code>int</code> pero no retornar nada</div>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #f87171; background: rgba(0,0,0,0.45); padding: 10px; border-radius: 8px;">
+              int doble(int numero)<br>
+              {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;int r = numero * 2;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;// ¡Olvidó escribir return r;!<br>
+              }
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 8px;">
+              Si la función promete devolver un <code>int</code> en su cabecera pero termina sin ejecutar <code>return</code>, la variable <code>resultado</code> en <code>main()</code> recibirá <b>basura de memoria</b> impredecible.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ BIEN: Toda función con tipo debe retornar ese tipo</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">int</span> r = numero * <span class="c-num">2</span>;
+    <span class="c-kw">return</span> r;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin-top: 8px;">
+              O en una sola línea directa como en el apunte: <code>return numero * 2;</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: BUENAS PRÁCTICAS DE PROGRAMACIÓN -->
+      <section>
+        <h2><span class="section-num">32</span> Buenas Prácticas al Crear Funciones</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Nombres con Verbos Claros</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Como las funciones realizan acciones o cálculos, llamalas con nombres descriptivos: <code>doble</code>, <code>sumar</code>, <code>calcularPromedio</code>, <code>esMayorDeEdad</code>. Evitá nombres vagos como <code>f1()</code> o <code>cosa()</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Una Función = Una Sola Tarea</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Respetá la definición del apunte: <i>"realiza una tarea específica"</i>. Es mejor tener una función que calcule y otra que muestre, en vez de una función gigante que mezcle todo.
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">3. Preferí <code>return</code> para los Cálculos</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Hacé que las funciones matemáticas (como <code>doble</code> o <code>sumar</code>) devuelvan el resultado con <code>return</code>, y dejá que <code>main()</code> decida cuándo mostrarlo con <code>printf()</code>.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">4. Usá Variables Locales y Parámetros</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Pasá siempre los datos que la función necesita como <b>parámetros</b> entre paréntesis. Así la función es 100% independiente y fácil de probar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: EJERCICIOS DE APLICACIÓN 1 Y 2 -->
+      <section>
+        <h2><span class="section-num">33</span> Ejercicios de Aplicación (Parte 1)</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Ejercicio 1: Función <code>triple</code> (Siguiendo el modelo del apunte)</h4>
+          <p style="font-size: 0.83rem; margin: 0 0 6px;">
+            Tomando como guía la función <code>int doble(int numero)</code> del apunte, escribí una función llamada <code>triple</code> que reciba un entero y retorne su triple (multiplicado por 3). En <code>main()</code>, guardá en <code>resultado</code> el llamado a <code>triple(7)</code> y mostralo por pantalla.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">triple</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">3</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> resultado = <span class="c-fn">triple</span>(<span class="c-num">7</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"El triple de 7 es: %d\n"</span>, resultado); <span class="c-cmt">// Muestra 21</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Ejercicio 2: Área de un Rectángulo (2 parámetros)</h4>
+          <p style="font-size: 0.83rem; margin: 0 0 6px;">
+            Creá una función <code>int areaRectangulo(int base, int altura)</code> que retorne la multiplicación de la base por la altura. Probala en <code>main()</code> con base <code>8</code> y altura <code>5</code>.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">areaRectangulo</span>(<span class="c-kw">int</span> base, <span class="c-kw">int</span> altura)
+{
+    <span class="c-kw">return</span> base * altura;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> area = <span class="c-fn">areaRectangulo</span>(<span class="c-num">8</span>, <span class="c-num">5</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Area: %d\n"</span>, area); <span class="c-cmt">// Muestra 40</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 35: EJERCICIO DE APLICACIÓN 3 (INTEGRADOR) -->
+      <section>
+        <h2><span class="section-num">34</span> Ejercicio de Aplicación 3 (Integrador con <code>bool</code> e <code>if</code>)</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Ejercicio 3: ¿Promociona la Materia?</h4>
+          <p style="font-size: 0.85rem; margin: 0 0 8px;">
+            Para promocionar una materia, un estudiante debe tener <b>ambos parciales con nota mayor o igual a 7</b> (recordá el operador <code>&amp;&amp;</code> de la Sección 10).<br>
+            1) Escribí una función <code>bool promociona(int nota1, int nota2)</code> que retorne <code>true</code> si cumple la condición, o <code>false</code> en caso contrario.<br>
+            2) En <code>main()</code>, probala con las notas <code>8</code> y <code>9</code> mostrando <code>"Promocionado"</code> o <code>"Debe rendir final"</code>.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución completa</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">bool</span> <span class="c-fn">promociona</span>(<span class="c-kw">int</span> nota1, <span class="c-kw">int</span> nota2)
+{
+    <span class="c-kw">if</span> (nota1 &gt;= <span class="c-num">7</span> &amp;&amp; nota2 &gt;= <span class="c-num">7</span>) {
+        <span class="c-kw">return</span> <span class="c-kw">true</span>;
+    } <span class="c-kw">else</span> {
+        <span class="c-kw">return</span> <span class="c-kw">false</span>;
+    }
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">bool</span> estado = <span class="c-fn">promociona</span>(<span class="c-num">8</span>, <span class="c-num">9</span>);
+
+    <span class="c-kw">if</span> (estado == <span class="c-kw">true</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Promocionado\n"</span>);
+    } <span class="c-kw">else</span> {
+        <span class="c-fn">printf</span>(<span class="c-str">"Debe rendir final\n"</span>);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 36: RESUMEN FINAL Y CHECKLIST -->
+      <section>
+        <h2><span class="section-num">35</span> Resumen de la Unidad 12 y Checklist</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Síntesis Modular</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>Función:</b> Bloque autónomo reutilizable con nombre.</li>
-              <li><b>Parámetro:</b> Variable que recibe datos en la definición.</li>
-              <li><b>Argumento:</b> Valor concreto enviado en la invocación.</li>
-              <li><b>return:</b> Entrega el resultado a la memoria y finaliza la función.</li>
-              <li><b>void:</b> Indica ausencia de retorno o de argumentos.</li>
-              <li><b>Scope:</b> Las variables locales solo viven dentro de su función.</li>
+            <h4 style="color: #818cf8;">Conceptos Clave del Apunte</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Función:</b> Bloque de código que realiza una tarea específica.</li>
+              <li><b>Licuadora:</b> Ingredientes ➔ parámetros; Proceso ➔ código; Resultado ➔ <code>return</code>.</li>
+              <li><b>Sintaxis:</b> <code>tipo_retorno nombre(parametros) { codigo; }</code>.</li>
+              <li><b>Ejemplo del apunte:</b> <code>int doble(int numero) { return numero * 2; }</code>.</li>
+              <li><b>Llamada:</b> <code>int resultado = doble(5);</code> guarda <code>10</code> en <code>resultado</code>.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar con precisión la diferencia entre <code>return</code> y <code>printf</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Identifico qué es un parámetro y qué es un argumento?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé para qué se utiliza el tipo de retorno <code>void</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué una variable creada dentro de una función no existe en <code>main</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé identificar el tipo de retorno, el nombre, el parámetro y el <code>return</code> en <code>int doble(int numero)</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo qué ocurre paso a paso al ejecutar <code>int resultado = doble(5);</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar la diferencia entre <code>return</code> (memoria) y <code>printf</code> (pantalla)?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cuándo usar <code>void</code> y por qué las funciones van afuera de <code>main()</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
-          <a href="11-booleanos.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
-            ← Anterior: Booleanos
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="11-booleanos.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
+            ← Anterior: 11. Booleanos
           </a>
-          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            1er Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            ← Índice 1er Bimestre
           </a>
-          <a href="13-bucles-while-for.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            Siguiente: Bucles while y for →
+          <a href="13-bucles-while-for.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Siguiente: 13. Bucles while y for →
           </a>
         </div>
       </section>
@@ -370,8 +1522,9 @@
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -381,8 +1534,20 @@
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>
+
 </html>

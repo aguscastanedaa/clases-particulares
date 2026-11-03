@@ -1,74 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 2C - 09: Punteros a Estructuras y el Operador Flecha (->) | Clases Particulares</title>
+  <title>Programación 2C - 09: Punteros a Estructuras y Operador Flecha (-&gt;) | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
-  
-  <!-- Reveal.js Styles -->
+
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
-  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
-  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
-  <style>
-    .reveal .code-body,
-    .reveal pre.code-body,
-    .reveal .code-window pre {
-      font-size: 1.05rem !important;
-      line-height: 1.38 !important;
-      width: 100% !important;
-      margin: 0 !important;
-      box-shadow: none !important;
-      padding: 10px 18px !important;
-      box-sizing: border-box !important;
-    }
-    .grid-2 .code-body,
-    .grid-1-2 .code-body,
-    .grid-2-1 .code-body,
-    .grid-2 pre.code-body,
-    .grid-1-2 pre.code-body,
-    .grid-2-1 pre.code-body,
-    .grid-2 .code-window pre,
-    .grid-1-2 .code-window pre,
-    .grid-2-1 .code-window pre {
-      font-size: 1.00rem !important;
-      padding: 10px 14px !important;
-      line-height: 1.38 !important;
-    }
-    .grid-3 .code-body,
-    .grid-3 pre.code-body,
-    .grid-3 .code-window pre {
-      font-size: 0.80rem !important;
-      padding: 8px 10px !important;
-      line-height: 1.34 !important;
-    }
-    .terminal-body {
-      font-size: 1.05rem !important;
-      padding: 12px 16px !important;
-      line-height: 1.40 !important;
-    }
-    .reveal code:not(.code-body *) {
-      font-size: 0.88em !important;
-      border: none !important;
-      padding: 1px 5px !important;
-      box-decoration-break: clone !important;
-      -webkit-box-decoration-break: clone !important;
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../index.html">← Índice 2do Cuatrimestre</a>
       <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">2do Cuatrimestre • Unidad 09</span>
@@ -79,256 +38,1396 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-emerald">2do Cuatrimestre • Estructuras Avanzadas • Unidad 09</span>
-          <h1 style="font-size: 2.4rem; margin-bottom: 12px;">Punteros a Estructuras y el Operador Flecha (<code>-&gt;</code>)</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            Combinando structs y punteros: máxima eficiencia en el paso de parámetros, mutación directa de campos y la anatomía de <code>ptr-&gt;campo</code> vs <code>(*ptr).campo</code>.
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-emerald">2do Cuatrimestre • Unidad 09</span>
+          <h1 style="font-size: 2.38rem; margin-bottom: 12px;">Punteros a Estructuras y el Operador Flecha (<code>-&gt;</code>)</h1>
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 24px;">
+            Cómo combinar <code>struct</code> + punteros para modificar registros originales desde funciones, la equivalencia <code>emp-&gt;salario == (*emp).salario</code> y el caso de aumento salarial
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-purple">struct *puntero</span>
-            <span class="badge badge-emerald">Operador flecha -&gt;</span>
-            <span class="badge badge-amber">(*emp).campo</span>
-            <span class="badge badge-cyan">Aumento salarial porcentual</span>
+            <span class="badge badge-purple">30. Punteros a Structs</span>
+            <span class="badge badge-emerald">31. Operador -&gt;</span>
+            <span class="badge badge-amber">(*emp).salario</span>
+            <span class="badge badge-cyan">37. Structs + Punteros</span>
+            <span class="badge badge-rose">aumentarSalario(&amp;empleado, 10)</span>
           </div>
 
-          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-emerald" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar por las 35 diapositivas de esta unidad.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Conexión con las Unidades 06 y 08</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué necesitamos punteros a estructuras?</h4>
-            <p>Una estructura puede ser inmensa (contener decenas de cadenas, vectores y números, pesando cientos de bytes). Pasarla por valor implica duplicar todos esos bytes en el Stack.</p>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
-              Pasar un puntero a una struct tiene dos ventajas determinantes: <b>1. Eficiencia extrema</b> (solo viajan 8 bytes de dirección) y <b>2. Capacidad de modificar la entidad original</b> de forma permanente.
-            </p>
+            <h4 style="color: #818cf8;">Las dos piezas que hoy vamos a unir</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>De la Unidad 06 (Punteros):</b> Para que una función modifique una variable original de <code>main</code>, le pasamos su dirección con <code>&amp;</code> y la recibimos con un puntero <code>*</code>.</li>
+              <li><b>De la Unidad 08 (Structs):</b> Si pasamos una <code>struct</code> por valor, la función recibe una copia y el original no cambia.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
-            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
-              <li>Declarar y asignar punteros a estructuras: <code>struct Empleado *emp</code>.</li>
-              <li>Comprender la necesidad y origen del operador flecha <code>-&gt;</code>.</li>
-              <li>Descifrar la equivalencia: <code>emp-&gt;salario</code> es <code>(*emp).salario</code>.</li>
-              <li>Entender la precedencia de operadores que obliga al paréntesis.</li>
-              <li>Implementar la función de aumento salarial del apunte oficial.</li>
+            <h4 style="color: #34d399;">Lo que vamos a dominar hoy (Secciones 30, 31 y 37)</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Declarar un <b>puntero a una estructura</b>: <code>struct Empleado *emp = &amp;empleado;</code>.</li>
+              <li>Cuándo usar el operador punto <code>.</code> y cuándo el <b>operador flecha <code>-&gt;</code></b>.</li>
+              <li>Por qué <code>emp-&gt;salario</code> equivale a <code>(*emp).salario</code> y por qué <code>*emp.salario</code> falla.</li>
+              <li>Programar funciones como <code>aumentarSalario(&amp;empleado, 10)</code> que modifican la estructura original.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: DECLARACIÓN Y ASIGNACIÓN -->
+      <!-- SLIDE 3: EL PROBLEMA QUE NECESITAMOS RESOLVER -->
       <section>
-        <h2><span class="section-num">02</span> Declaración de un Puntero a Struct</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Un puntero a struct guarda la dirección de memoria donde comienza la estructura.</p>
+        <h2><span class="section-num">02</span> El Problema de Pasar una Struct por Valor</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Imaginemos que tenemos un empleado con un salario de <code>$100.000</code> y queremos hacer una función que le aumente el sueldo un <code>10%</code>. Mirá qué pasa si la pasamos por valor:
+        </p>
 
-        <div class="grid-2">
+        <div class="grid-2" style="align-items: center;">
           <div class="code-window">
             <div class="code-header">
-              <span class="code-title">empleado.c</span>
-              <span class="code-badge">Puntero</span>
+              <span class="code-title">intento_fallido_por_valor.c</span>
+              <span class="code-badge">¡No cambia en main!</span>
             </div>
-            <div class="code-body"><span class="c-kw">struct</span> Empleado 
-{ 
-    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>]; 
-    <span class="c-kw">int</span> edad; 
-    <span class="c-kw">float</span> salario; 
-}; 
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-{
-    <span class="c-kw">struct</span> Empleado empleado;
-    empleado.edad = <span class="c-num">30</span>;
-    empleado.salario = <span class="c-num">50000.0f</span>;
-    
-    <span class="c-cmt">// Declaramos el puntero a la estructura:</span>
-    <span class="c-kw">struct</span> Empleado *ptr = &amp;empleado;
-    
+<span class="c-kw">struct</span> Empleado {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> edad;
+    <span class="c-kw">float</span> salario;
+};
+
+<span class="c-type">void</span> <span class="c-fn">aumentarMal</span>(<span class="c-kw">struct</span> Empleado emp, <span class="c-kw">float</span> porc) {
+    emp.salario += emp.salario * porc / <span class="c-num">100</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Empleado empleado = {<span class="c-str">"Ana"</span>, <span class="c-num">30</span>, <span class="c-num">100000</span>};
+    <span class="c-fn">aumentarMal</span>(empleado, <span class="c-num">10</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Salario en main: %.2f\n"</span>, empleado.salario);
     <span class="c-kw">return</span> <span class="c-num">0</span>;
-}</div>
-          </div>
-
-          <div class="memory-diagram" style="flex-direction: column; align-items: center;">
-            <div class="memory-box" style="border-color: var(--accent-purple); width: 230px;">
-              <div class="memory-address">Dirección: 0x4000</div>
-              <div class="memory-label">empleado <span class="memory-type">struct</span></div>
-              <div class="memory-value" style="font-size: 0.82rem; color: #e2e8f0; text-align: left; line-height: 1.4;">
-                edad: 30<br>salario: $50000.00
-              </div>
-            </div>
-
-            <div style="color: var(--accent-amber); font-size: 1.4rem;">▲ apunta a</div>
-
-            <div class="memory-box" style="border-color: var(--accent-emerald); width: 230px;">
-              <div class="memory-address">Dirección: 0x7000</div>
-              <div class="memory-label">ptr <span class="memory-type" style="color: var(--accent-emerald);">Empleado*</span></div>
-              <div class="memory-value" style="color: var(--accent-cyan); font-size: 0.9rem;">0x4000</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 4: EL OPERADOR FLECHA -> -->
-      <section>
-        <h2><span class="section-num">03</span> El Operador Flecha <code>-&gt;</code></h2>
-        <div class="box box-emerald" style="margin-bottom: 16px;">
-          <h4 style="margin-bottom: 4px;">La Regla Visual de Oro</h4>
-          <p style="font-size: 1.05rem; margin: 0;">
-            Si tenés una <b>variable struct directa</b>, usás el punto: <code>empleado.salario</code>.<br>
-            Si tenés un <b>puntero a una struct</b>, usás la flecha: <code>emp-&gt;salario</code>.
-          </p>
-        </div>
-
-        <div class="comparison-box">
-          <div class="box box-cyan">
-            <h4 style="color: var(--accent-cyan);">Variable ordinaria de Struct</h4>
-            <div style="font-family: var(--font-mono); font-size: 1.1rem; color: #fff; margin: 10px 0;">
-              empleado<span style="color: var(--accent-cyan); font-weight: bold;">.</span>salario
-            </div>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              La variable contiene los datos directamente. Se usa el <b>operador punto <code>.</code></b> para seleccionar el campo.
-            </p>
-          </div>
-
-          <div class="box box-emerald">
-            <h4 style="color: var(--accent-emerald);">Puntero a una Struct</h4>
-            <div style="font-family: var(--font-mono); font-size: 1.1rem; color: #fff; margin: 10px 0;">
-              emp<span style="color: var(--accent-emerald); font-weight: bold;">-&gt;</span>salario
-            </div>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              La variable contiene una dirección de memoria. La <b>flecha <code>-&gt;</code></b> viaja a esa dirección y accede al campo de la estructura remota.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 5: ANATOMÍA DE -> VS (*EMP).CAMPO -->
-      <section>
-        <h2><span class="section-num">04</span> ¿Por qué existe <code>-&gt;</code>? La Trampa de Precedencia</h2>
-        <div class="box box-indigo">
-          <p style="font-size: 0.95rem; margin: 0;">
-            El operador flecha <code>emp-&gt;salario</code> es una forma abreviada y elegante de escribir:
-          </p>
-          <div style="font-family: var(--font-mono); font-size: 1.25rem; color: var(--accent-amber); text-align: center; margin: 12px 0;">
-            (*emp).salario
-          </div>
-        </div>
-
-        <div class="grid-2" style="margin-top: 14px;">
-          <div class="box box-rose">
-            <h4 style="color: #f87171;">¿Por qué los paréntesis son obligatorios?</h4>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              En C, el <b>operador punto <code>.</code> tiene mayor prioridad de evaluación que el asterisco <code>*</code></b>.
-            </p>
-            <p style="font-size: 0.82rem; color: #fecaca; margin-top: 6px;">
-              Si escribís <code>*emp.salario</code>, C interpreta <code>*(emp.salario)</code>, lo cual falla estrepitosamente porque <code>emp</code> no tiene un campo <code>salario</code> (es solo un puntero).
-            </p>
-          </div>
-
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">El rol pacificador de la flecha</h4>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              Como escribir <code>(*emp).campo</code> en cada línea resultaba tedioso y propenso a errores tipográficos, los diseñadores de C introdujeron el operador <b><code>-&gt;</code></b> para hacer ambas cosas en un solo paso: desreferenciar y acceder.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 6: EJEMPLO AUMENTO SALARIAL -->
-      <section>
-        <h2><span class="section-num">05</span> Ejemplo: Aumento Salarial Porcentual</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Función que recibe un puntero a empleado y modifica su salario real en la memoria.</p>
-
-        <div class="grid-2">
-          <div class="code-window">
-            <div class="code-header">
-              <span class="code-title">aumentar_salario.c</span>
-              <span class="code-badge">Definición y Puntero</span>
-            </div>
-            <div class="code-body"><span class="c-kw">struct</span> Empleado 
-{ 
-    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>]; 
-    <span class="c-kw">int</span> edad; 
-    <span class="c-kw">float</span> salario; 
-}; 
-
-<span class="c-type">void</span> <span class="c-fn">aumentarSalario</span>(<span class="c-kw">struct</span> Empleado *emp, 
-                     <span class="c-kw">float</span> porcentaje) 
-{ 
-    emp-&gt;salario += emp-&gt;salario * porcentaje / <span class="c-num">100.0f</span>; 
 }</div>
           </div>
 
           <div>
-            <div class="code-window">
-              <div class="code-header">
-                <span class="code-title">main.c</span>
-                <span class="code-badge">Paso de Dirección &amp;</span>
-              </div>
-              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-{
-    <span class="c-kw">struct</span> Empleado emp = {<span class="c-str">"Carlos"</span>, <span class="c-num">35</span>, <span class="c-num">100000.0f</span>};
-    <span class="c-fn">printf</span>(<span class="c-str">"Inicial: $%.2f\n"</span>, emp.salario);
-    
-    <span class="c-cmt">// Pasamos la dirección con &amp; :</span>
-    <span class="c-fn">aumentarSalario</span>(&amp;emp, <span class="c-num">15.0f</span>); 
-    <span class="c-fn">printf</span>(<span class="c-str">"Con 15%%: $%.2f\n"</span>, emp.salario);
-    <span class="c-kw">return</span> <span class="c-num">0</span>;
-}</div>
-            </div>
-
-            <div class="terminal-window" style="margin-top: 10px;">
+            <div class="terminal-window">
               <div class="terminal-header">
-                <span>Terminal de salida</span>
-                <span>bash</span>
+                <span>Terminal</span>
+                <span>Salida</span>
               </div>
-              <div class="terminal-body" style="padding: 10px 14px;">Inicial: $100000.00
-Con 15%: $115000.00</div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./intento_fallido</span>
+Salario en main: 100000.00</div>
+            </div>
+            <div class="box box-rose" style="margin-top: 10px;">
+              <h4 style="color: #f87171;">Dos problemas a la vez:</h4>
+              <ol style="font-size: 0.8rem; line-height: 1.5; margin-left: 16px;">
+                <li><b>No modifica el original:</b> aumentó el sueldo en la copia local <code>emp</code> y <code>empleado</code> en <code>main</code> quedó igual.</li>
+                <li><b>Copia innecesaria de memoria:</b> copió los 58 bytes de la estructura en cada llamada.</li>
+              </ol>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 7: AUTOEVALUACIÓN Y CIERRE -->
+      <!-- SLIDE 4: SECCIÓN 30 DEL APUNTE: PUNTEROS A STRUCTS -->
       <section>
-        <h2><span class="section-num">06</span> Resumen y Autoevaluación</h2>
+        <h2><span class="section-num">03</span> 30. Punteros a Structs: La Solución del Apunte</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Sección 30 del Apunte (Página 30)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            <b>Ahora podemos combinar: <code>Struct + puntero</code>.</b> En lugar de mandar una copia de toda la estructura, creamos la variable <code>struct Empleado empleado;</code> y le pasamos a la función <b>su dirección de memoria</b>: <code>&amp;empleado</code>.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 12px;">
+          <div class="code-header">
+            <span class="code-title">Código de la página 30 del Apunte</span>
+            <span class="code-badge">Struct + Puntero</span>
+          </div>
+          <div class="code-body"><span class="c-kw">struct</span> Empleado
+{
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> edad;
+    <span class="c-kw">float</span> salario;
+};
+
+<span class="c-type">void</span> <span class="c-fn">aumentarSalario</span>(<span class="c-kw">struct</span> Empleado *emp, <span class="c-kw">float</span> porcentaje)
+{
+    emp-&gt;salario += emp-&gt;salario * porcentaje / <span class="c-num">100</span>;
+}
+
+<span class="c-cmt">// En main creamos la variable y pasamos su dirección:</span>
+<span class="c-cmt">// struct Empleado empleado;</span>
+<span class="c-cmt">// aumentarSalario(&amp;empleado, 10);</span></div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: ¿QUÉ ES UN PUNTERO A UNA STRUCT? -->
+      <section>
+        <h2><span class="section-num">04</span> ¿Qué Es Exactamente un Puntero a una Struct?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Igual que <code>int *p</code> guarda la dirección de memoria de un <code>int</code>, un puntero <b><code>struct Empleado *emp</code></b> es una variable que guarda la dirección de memoria donde empieza una estructura <code>struct Empleado</code>:
+        </p>
+
+        <div class="grid-2" style="align-items: center; margin-top: 10px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">Declaración y asignación</span>
+              <span class="code-badge">Sintaxis</span>
+            </div>
+            <div class="code-body"><span class="c-cmt">// 1. Creamos la estructura real:</span>
+<span class="c-kw">struct</span> Empleado empleado;
+
+<span class="c-cmt">// 2. Creamos un puntero que apunta a ella:</span>
+<span class="c-kw">struct</span> Empleado *emp = &amp;empleado;</div>
+          </div>
+
+          <div class="memory-diagram" style="flex-direction: column; align-items: center; gap: 10px;">
+            <div class="memory-box" style="border-color: var(--accent-emerald); width: 250px;">
+              <div class="memory-address">Dirección: 0x7000</div>
+              <div class="memory-label">emp <span class="memory-type">struct Empleado *</span></div>
+              <div class="memory-value" style="font-size: 0.95rem; color: var(--accent-cyan);">0x4000</div>
+            </div>
+            <div style="color: var(--accent-amber); font-size: 1.15rem; font-weight: 700;">▼ apunta a la caja en 0x4000 ▼</div>
+            <div class="memory-box" style="border-color: var(--accent-purple); width: 250px;">
+              <div class="memory-address">Dirección: 0x4000</div>
+              <div class="memory-label">empleado <span class="memory-type">struct Empleado</span></div>
+              <div class="memory-value" style="font-size: 0.82rem; text-align: left; line-height: 1.4;">
+                nombre: "Carlos"<br>edad: 35 | salario: 100000
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: DESGLOSE PIEZA POR PIEZA DE struct Empleado *emp = &empleado; -->
+      <section>
+        <h2><span class="section-num">05</span> Desglose Pieza por Pieza de la Declaración</h2>
+        <div class="code-window">
+          <div class="code-body"><span class="c-kw">struct</span> Empleado *emp = &amp;empleado;</div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;"><code>struct Empleado *</code></h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Indica el tipo del puntero: <b>"puntero a una estructura de tipo <code>struct Empleado</code>"</b>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;"><code>emp</code></h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Es el nombre de nuestra variable puntero. Adentro suyo solo se guarda una dirección de memoria (ej: <code>0x4000</code>).
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;"><code>= &amp;empleado;</code></h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              El operador <code>&amp;</code> obtiene la dirección de memoria donde está guardada la variable <code>empleado</code>. <b>¡Sí lleva <code>&amp;</code>!</b>
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            📌 <b>Diferencia clave con los arreglos:</b> El nombre de un arreglo ya es una dirección (no lleva <code>&amp;</code>), pero el nombre de una variable <code>struct</code> representa a la caja entera; por eso para obtener su dirección <b>siempre usamos <code>&amp;empleado</code></b>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: 31. OPERADOR -> -->
+      <section>
+        <h2><span class="section-num">06</span> 31. El Operador Flecha (<code>-&gt;</code>)</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Explicación del Apunte (Página 30)</h4>
+          <p style="font-size: 0.9rem; margin: 0; line-height: 1.55;">
+            • Cuando tenemos una <b>Struct normal</b> (<code>struct Empleado empleado;</code>), usamos el punto <b><code>.</code></b> ➔ <code>empleado.salario</code>.<br>
+            • Pero cuando tenemos un <b>puntero a una Struct</b> (<code>struct Empleado *emp;</code>), usamos la flecha <b><code>-&gt;</code></b> ➔ <code>emp-&gt;salario</code>.
+          </p>
+        </div>
+
+        <div class="comparison-box" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Struct normal (Tengo la caja en la mano)</h4>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body">empleado.salario = <span class="c-num">100000</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; margin: 0;">
+              <code>empleado</code> es la estructura misma. Usamos el <b>operador punto <code>.</code></b> para abrir el campo <code>salario</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Puntero a Struct (Tengo la dirección en un papel)</h4>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body">emp-&gt;salario = <span class="c-num">100000</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; margin: 0;">
+              <b><code>emp-&gt;salario</code> significa:</b> <i>"Acceder al campo <code>salario</code> de la Struct a la que apunta <code>emp</code>"</i>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: ¿CÓMO SE ESCRIBE EL OPERADOR FLECHA -> EN EL TECLADO? -->
+      <section>
+        <h2><span class="section-num">07</span> Cómo Se Escribe <code>-&gt;</code> y Qué Hace Exactamente</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          El operador flecha <code>-&gt;</code> se escribe con dos caracteres pegados (sin espacio en el medio): un <b>guion medio (<code>-</code>)</b> seguido del símbolo <b>mayor que (<code>&gt;</code>)</b>.
+        </p>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Mira el puntero <code>emp</code></h4>
+              <p style="font-size: 0.8rem; margin: 0;">Lee la dirección de memoria guardada adentro de <code>emp</code> (por ejemplo, <code>0x4000</code>).</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Viaja a esa dirección</h4>
+              <p style="font-size: 0.8rem; margin: 0;">Se traslada por la memoria RAM hasta encontrar la estructura original <code>empleado</code>.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Entra al campo</h4>
+              <p style="font-size: 0.8rem; margin: 0;">Abre la cajita interna indicada después de la flecha (<code>salario</code>, <code>edad</code> o <code>nombre</code>).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🎯 <b>Analogía cotidiana:</b> Si tenés la caja frente a vos, la abrís directamente con el punto (<code>empleado.salario</code>). Si tenés un papel con la dirección de dónde está la caja, seguís la flecha del mapa (<code>emp-&gt;salario</code>) hasta la caja y la abrís.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: LA EQUIVALENCIA DEL APUNTE: emp->salario == (*emp).salario -->
+      <section>
+        <h2><span class="section-num">08</span> La Equivalencia Conceptual: <code>emp-&gt;salario</code> vs <code>(*emp).salario</code></h2>
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">Una forma de entenderlo (Página 31 del Apunte)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Si tenemos <code>struct Empleado *emp;</code>, entonces escribir <b><code>emp-&gt;salario</code></b> es equivalente conceptualmente a escribir <b><code>(*emp).salario</code></b>.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px; align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">Desglose en dos pasos</span>
+              <span class="code-badge">(*emp).salario</span>
+            </div>
+            <div class="code-body"><span class="c-cmt">// Paso 1: *emp</span>
+<span class="c-cmt">// -&gt; obtenemos la Struct apuntada.</span>
+
+<span class="c-cmt">// Paso 2: .salario</span>
+<span class="c-cmt">// -&gt; accedemos al campo de esa Struct.</span>
+
+(*emp).salario = <span class="c-num">120000</span>;
+emp-&gt;salario   = <span class="c-num">120000</span>; <span class="c-cmt">// ¡Hacen exactamente lo mismo!</span></div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Conclusión del Apunte</h4>
+            <p style="font-size: 0.85rem; margin: 0; line-height: 1.55;">
+              <i>"Por eso <code>emp-&gt;salario</code> es simplemente una forma más cómoda de escribir <code>(*emp).salario</code>."</i><br><br>
+              En lugar de tener que poner paréntesis, asterisco y punto cada vez, la flecha <code>-&gt;</code> hace los dos pasos en uno solo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: ¿POR QUÉ *emp.salario SIN PARÉNTESIS DA ERROR? -->
+      <section>
+        <h2><span class="section-num">09</span> ¿Por Qué <code>*emp.salario</code> Sin Paréntesis Da Error?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Una duda muy común es: <i>"¿Por qué hay que escribir <code>(*emp).salario</code> con paréntesis y no <code>*emp.salario</code>?"</i>. La respuesta está en la <b>prioridad (precedencia) de los operadores</b> en C:
+        </p>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="card-title">❌ Sin paréntesis: <code>*emp.salario</code></div>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body">*emp.salario = <span class="c-num">50000</span>; <span class="c-cmt">// ❌ ERROR de compilación</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: #fecaca;">
+              <b>Qué pasa:</b> El punto <code>.</code> tiene más prioridad que el asterisco <code>*</code>. Entonces C intenta hacer primero <code>emp.salario</code>, ¡pero <code>emp</code> es un puntero, no una struct!
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Con paréntesis <code>(*emp).salario</code> o flecha <code>emp-&gt;salario</code></div>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body">(*emp).salario = <span class="c-num">50000</span>; <span class="c-cmt">// ✅ Válido</span>
+emp-&gt;salario   = <span class="c-num">50000</span>; <span class="c-cmt">// ✅ Más cómodo y claro</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: #a7f3d0;">
+              <b>Por qué funciona:</b> Primero desreferencia el puntero <code>emp</code> para llegar a la estructura y recién después entra al campo <code>salario</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: EJEMPLO NIVEL 1 COMPLETO -->
+      <section>
+        <h2><span class="section-num">10</span> Ejemplo Nivel 1: Usar un Puntero a Struct en <code>main</code></h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          Veamos primero dentro de <code>main</code> cómo un puntero <code>emp</code> lee y modifica los campos de <code>empleado</code> usando <code>-&gt;</code>:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel1_flecha_en_main.c</span>
+              <span class="code-badge">Nivel 1 • Inicial</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Empleado {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> edad;
+    <span class="c-kw">float</span> salario;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Empleado empleado = {<span class="c-str">"Laura"</span>, <span class="c-num">28</span>, <span class="c-num">80000.0</span>};
+    <span class="c-kw">struct</span> Empleado *emp = &amp;empleado;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Antes:   $%.2f\n"</span>, emp-&gt;salario);
+    emp-&gt;salario = <span class="c-num">95000.0</span>;
+    emp-&gt;edad = <span class="c-num">29</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Despues: %s (%d anios) cobra $%.2f\n"</span>,
+           empleado.nombre, empleado.edad, empleado.salario);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel1_flecha</span>
+Antes:   $80000.00
+Despues: Laura (29 anios) cobra $95000.00</div>
+            </div>
+            <div class="box box-cyan" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.8rem; line-height: 1.5;">
+                Observá cómo cambiamos <code>emp-&gt;salario</code> y <code>emp-&gt;edad</code> a través del puntero, y cuando imprimimos <code>empleado.edad</code> y <code>empleado.salario</code> con punto, ¡la variable original cambió!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: SECCIÓN 37 DEL APUNTE: COMBINAR STRUCTS + PUNTEROS -->
+      <section>
+        <h2><span class="section-num">11</span> 37. Combinar Structs + Punteros + Funciones</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Sección 37 del Apunte (Páginas 34 y 35)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Acá unimos los cuatro conceptos centrales del cuatrimestre:<br>
+            <b><code>struct</code> + <code>puntero</code> + <code>función</code> + <code>modificación</code></b>.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px; align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">Función del Apunte (Pág. 30 y 34)</span>
+              <span class="code-badge">aumentarSalario</span>
+            </div>
+            <div class="code-body"><span class="c-type">void</span> <span class="c-fn">aumentarSalario</span>(<span class="c-kw">struct</span> Empleado *emp, <span class="c-kw">float</span> porcentaje)
+{
+    emp-&gt;salario += emp-&gt;salario * porcentaje / <span class="c-num">100</span>;
+}</div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Qué significa la llamada?</h4>
+            <p style="font-size: 0.84rem; margin: 0; line-height: 1.55;">
+              En <code>main</code> escribimos:<br>
+              <code>aumentarSalario(&amp;empleado, 10);</code><br><br>
+              Tal como explica el apunte, esto significa:<br>
+              <b><i>"Te paso la dirección de este empleado para que puedas modificarlo."</i></b><br>
+              Y adentro, <code>emp-&gt;salario</code> permite acceder y actualizar directamente su salario original.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: ANÁLISIS DE LA FÓRMULA DE AUMENTO PORCENTUAL -->
+      <section>
+        <h2><span class="section-num">12</span> Desglose de la Fórmula de Aumento Salarial</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Analicemos con números reales qué calcula la línea <code>emp-&gt;salario += emp-&gt;salario * porcentaje / 100;</code> cuando el salario inicial es <code>100000</code> y el porcentaje es <code>10</code>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-body">emp-&gt;salario += emp-&gt;salario * porcentaje / <span class="c-num">100</span>;
+<span class="c-cmt">// Es equivalente a escribir:</span>
+emp-&gt;salario = emp-&gt;salario + (emp-&gt;salario * porcentaje / <span class="c-num">100</span>);</div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Calcula el aumento</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              <code>emp-&gt;salario * 10 / 100</code><br>
+              <code>100000 * 10 / 100 = 10000</code>.<br>
+              El 10% de 100.000 es <b>10.000</b>.
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">2. Lo suma al actual</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              El operador <code>+=</code> suma ese <code>10000</code> al salario que ya tenía:<br>
+              <code>100000 + 10000 = 110000</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Guarda en el original</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Como usa <code>emp-&gt;salario</code>, el nuevo valor <b>110.000</b> queda guardado directamente en <code>empleado.salario</code> de <code>main</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: EJEMPLO NIVEL 2 COMPLETO (PROGRAMA DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">13</span> Ejemplo Nivel 2: Programa Completo de <code>aumentarSalario</code></h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel2_aumentar_salario.c</span>
+              <span class="code-badge">Nivel 2 • Apunte pág. 30</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Empleado {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> edad;
+    <span class="c-kw">float</span> salario;
+};
+
+<span class="c-type">void</span> <span class="c-fn">aumentarSalario</span>(<span class="c-kw">struct</span> Empleado *emp, <span class="c-kw">float</span> porcentaje) {
+    emp-&gt;salario += emp-&gt;salario * porcentaje / <span class="c-num">100</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Empleado empleado = {<span class="c-str">"Carlos"</span>, <span class="c-num">35</span>, <span class="c-num">100000.0</span>};
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Salario inicial: $%.2f\n"</span>, empleado.salario);
+    <span class="c-fn">aumentarSalario</span>(&amp;empleado, <span class="c-num">10</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Con 10%% aumento: $%.2f\n"</span>, empleado.salario);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel2_aumentar_salario</span>
+Salario inicial: $100000.00
+Con 10% aumento: $110000.00</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.8rem; line-height: 1.5;">
+                • En <code>main</code> usamos <b><code>.</code></b> (<code>empleado.salario</code>) porque <code>empleado</code> es una struct.<br>
+                • En <code>aumentarSalario</code> usamos <b><code>-&gt;</code></b> (<code>emp-&gt;salario</code>) porque <code>emp</code> es un puntero.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: TABLA DE SEGUIMIENTO EN MEMORIA DE aumentarSalario -->
+      <section>
+        <h2><span class="section-num">14</span> Tabla de Seguimiento en Memoria (<code>aumentarSalario</code>)</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          Supongamos que <code>empleado</code> vive en la dirección <code>0x4000</code> de <code>main</code>:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Paso de Ejecución</th>
+              <th>Ámbito</th>
+              <th>Puntero <code>emp</code></th>
+              <th><code>porcentaje</code></th>
+              <th><code>empleado.salario</code> (en <code>0x4000</code>)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1. <code>struct Empleado empleado = ...</code></td>
+              <td><code>main</code></td>
+              <td>—</td>
+              <td>—</td>
+              <td><code>100000.00</code></td>
+            </tr>
+            <tr>
+              <td>2. Llamada <code>aumentarSalario(&amp;empleado, 10)</code></td>
+              <td><code>aumentarSalario</code></td>
+              <td><code>0x4000</code></td>
+              <td><code>10.0</code></td>
+              <td><code>100000.00</code></td>
+            </tr>
+            <tr>
+              <td>3. <code>emp-&gt;salario += emp-&gt;salario * 10 / 100</code></td>
+              <td><code>aumentarSalario</code></td>
+              <td><code>0x4000</code></td>
+              <td><code>10.0</code></td>
+              <td><b><code>110000.00</code></b> (modificado en <code>0x4000</code>)</td>
+            </tr>
+            <tr>
+              <td>4. Fin de la función y <code>printf</code> en <code>main</code></td>
+              <td><code>main</code></td>
+              <td>(destruido)</td>
+              <td>—</td>
+              <td><b><code>110000.00</code></b></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 16: CARGAR UNA STRUCT DESDE UNA FUNCIÓN USANDO PUNTERO -->
+      <section>
+        <h2><span class="section-num">15</span> Modificar Strings y Varios Campos mediante <code>-&gt;</code></h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          Con un puntero a estructura podemos inicializar o actualizar <b>todos los campos</b> de una struct dentro de una función, incluyendo campos de tipo String con <code>strcpy(emp-&gt;nombre, ...)</code>:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">cargar_empleado_puntero.c</span>
+              <span class="code-badge">Inicialización por Puntero</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;string.h&gt;</span>
+
+<span class="c-kw">struct</span> Empleado {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> edad;
+    <span class="c-kw">float</span> salario;
+};
+
+<span class="c-type">void</span> <span class="c-fn">inicializarEmpleado</span>(<span class="c-kw">struct</span> Empleado *emp, <span class="c-kw">int</span> edad, <span class="c-kw">float</span> sal) {
+    <span class="c-fn">strcpy</span>(emp-&gt;nombre, <span class="c-str">"Nuevo Ingreso"</span>);
+    emp-&gt;edad = edad;
+    emp-&gt;salario = sal;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Empleado e1;
+    <span class="c-fn">inicializarEmpleado</span>(&amp;e1, <span class="c-num">22</span>, <span class="c-num">75000.0</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"%s | %d anios | $%.2f\n"</span>, e1.nombre, e1.edad, e1.salario);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./cargar_empleado</span>
+Nuevo Ingreso | 22 anios | $75000.00</div>
+            </div>
+            <div class="box box-indigo" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.8rem; line-height: 1.5;">
+                Declaramos <code>struct Empleado e1;</code> vacío en <code>main</code> y le pasamos <code>&amp;e1</code> a <code>inicializarEmpleado</code> para que rellene sus tres cajitas internas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: ¿CÓMO USAR SCANF CON UN PUNTERO A STRUCT? -->
+      <section>
+        <h2><span class="section-num">16</span> Detalle Importante: <code>scanf</code> con un Puntero a Struct</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          ¿Qué pasa si adentro de una función que recibe <code>struct Empleado *emp</code> queremos pedir datos por teclado con <code>scanf</code>?
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">scanf_con_flecha.c</span>
+            <span class="code-badge">¡Atención al &amp;!</span>
+          </div>
+          <div class="code-body"><span class="c-type">void</span> <span class="c-fn">cargarPorTeclado</span>(<span class="c-kw">struct</span> Empleado *emp) {
+    <span class="c-fn">scanf</span>(<span class="c-str">"%s"</span>, emp-&gt;nombre);   <span class="c-cmt">// String (char[50]): NO lleva &amp;</span>
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;emp-&gt;edad);    <span class="c-cmt">// int: SÍ lleva &amp; adelante</span>
+    <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;emp-&gt;salario); <span class="c-cmt">// float: SÍ lleva &amp; adelante</span>
+}</div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Por qué <code>emp-&gt;nombre</code> no lleva <code>&amp;</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Porque el campo <code>nombre</code> es un arreglo de caracteres (<code>char[50]</code>), y como vimos en la Unidad 07, el nombre de un arreglo ya evalúa a la dirección de su primer carácter.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Por qué <code>&amp;emp-&gt;edad</code> sí lleva <code>&amp;</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Porque <code>emp-&gt;edad</code> es el número entero guardado en el campo <code>edad</code>. Como <code>-&gt;</code> tiene mayor prioridad que <code>&amp;</code>, <code>&amp;emp-&gt;edad</code> significa <code>&amp;(emp-&gt;edad)</code>: la dirección de ese campo entero.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: EJEMPLO NIVEL 3 -->
+      <section>
+        <h2><span class="section-num">17</span> Ejemplo Nivel 3: Función que Modifica y Devuelve Estado</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          Un patrón muy usado en C (y clave para los ejercicios integradores del apunte) es que una función reciba un puntero a <code>struct</code> para modificarla y además devuelva con <code>return</code> un <code>1</code> (éxito) o <code>0</code> (error):
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel3_vender_producto.c</span>
+              <span class="code-badge">Nivel 3 • Validación + Flecha</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Producto {
+    <span class="c-kw">char</span> nombre[<span class="c-num">40</span>];
+    <span class="c-kw">int</span> stock;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">vender</span>(<span class="c-kw">struct</span> Producto *prod, <span class="c-kw">int</span> cantidad) {
+    <span class="c-kw">if</span> (cantidad &lt;= <span class="c-num">0</span> || prod-&gt;stock &lt; cantidad) {
+        <span class="c-kw">return</span> <span class="c-num">0</span>; <span class="c-cmt">// No alcanza el stock</span>
+    }
+    prod-&gt;stock -= cantidad;
+    <span class="c-kw">return</span> <span class="c-num">1</span>; <span class="c-cmt">// Venta exitosa</span>
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Producto item = {<span class="c-str">"Monitor"</span>, <span class="c-num">10</span>};
+    <span class="c-kw">if</span> (<span class="c-fn">vender</span>(&amp;item, <span class="c-num">3</span>) == <span class="c-num">1</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Venta OK. Stock restante: %d\n"</span>, item.stock);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel3_vender</span>
+Venta OK. Stock restante: 7</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.8rem; line-height: 1.5;">
+                • Si hay stock suficiente, <code>prod-&gt;stock -= cantidad;</code> descuenta del producto original y retorna <code>1</code>.<br>
+                • Si no alcanza, retorna <code>0</code> sin tocar el stock.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: FUNCIONES QUE RECIBEN DOS PUNTEROS A STRUCT -->
+      <section>
+        <h2><span class="section-num">18</span> Funciones que Reciben Dos Punteros a Struct</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          ¿Y si una operación necesita modificar <b>dos estructuras al mismo tiempo</b> (por ejemplo, intercambiar los datos de dos puntos o transferir de un registro a otro)? Pasamos las direcciones de ambas con <code>&amp;</code>:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">intercambiar_puntos.c</span>
+              <span class="code-badge">2 Punteros a Struct</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Punto {
+    <span class="c-kw">int</span> x;
+    <span class="c-kw">int</span> y;
+};
+
+<span class="c-type">void</span> <span class="c-fn">intercambiarPuntos</span>(<span class="c-kw">struct</span> Punto *a, <span class="c-kw">struct</span> Punto *b) {
+    <span class="c-kw">struct</span> Punto aux = *a;
+    *a = *b;
+    *b = aux;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Punto p1 = {<span class="c-num">1</span>, <span class="c-num">2</span>};
+    <span class="c-kw">struct</span> Punto p2 = {<span class="c-num">8</span>, <span class="c-num">9</span>};
+    <span class="c-fn">intercambiarPuntos</span>(&amp;p1, &amp;p2);
+    <span class="c-fn">printf</span>(<span class="c-str">"p1=(%d,%d) p2=(%d,%d)\n"</span>, p1.x, p1.y, p2.x, p2.y);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./intercambiar_puntos</span>
+p1=(8,9) p2=(1,2)</div>
+            </div>
+            <div class="box box-cyan" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.8rem; line-height: 1.5;">
+                Mirá qué potente: <code>*a</code> representa la estructura completa apuntada por <code>a</code>. Con <code>*a = *b;</code> intercambiamos todos los campos de golpe.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: COMPARATIVA COMPLETA: PASO POR VALOR VS PASO POR PUNTERO -->
+      <section>
+        <h2><span class="section-num">19</span> Comparativa Definitiva: Struct por Valor vs Puntero a Struct</h2>
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>Struct por Valor (Unidad 08)</th>
+              <th>Puntero a Struct (Unidad 09)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Encabezado de la función</b></td>
+              <td><code>void mostrar(struct Empleado emp)</code></td>
+              <td><code>void aumentar(struct Empleado *emp)</code></td>
+            </tr>
+            <tr>
+              <td><b>Cómo se llama desde <code>main</code></b></td>
+              <td><code>mostrar(empleado);</code> (sin <code>&amp;</code>)</td>
+              <td><code>aumentar(&amp;empleado);</code> (<b>con <code>&amp;</code></b>)</td>
+            </tr>
+            <tr>
+              <td><b>Operador para acceder a campos</b></td>
+              <td>Operador punto: <b><code>emp.salario</code></b></td>
+              <td>Operador flecha: <b><code>emp-&gt;salario</code></b></td>
+            </tr>
+            <tr>
+              <td><b>¿Qué viaja por memoria?</b></td>
+              <td>Una copia de todos los campos</td>
+              <td>Solo la dirección de memoria (8 bytes)</td>
+            </tr>
+            <tr>
+              <td><b>¿Modifica el original en <code>main</code>?</b></td>
+              <td><b>NO</b> (solo cambia la copia local)</td>
+              <td><b>SÍ</b> (modifica la variable original)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 21: REGLA PRÁCTICA PARA NUNCA DUDAR ENTRE . Y -> -->
+      <section>
+        <h2><span class="section-num">20</span> Regla Visual Infalible: ¿Uso Punto <code>.</code> o Flecha <code>-&gt;</code>?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Ante cualquier duda en un ejercicio o examen, mirá cómo fue declarada la variable que tenés a la izquierda:
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿Fue declarada SIN asterisco? ➔ Usá <code>.</code></h4>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">struct</span> Empleado empleado;
+empleado.edad = <span class="c-num">30</span>;
+empleado.salario = <span class="c-num">90000</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; margin: 0;">
+              No tiene <code>*</code> en su declaración: es una variable struct directa ➔ lleva <b>punto (<code>.</code>)</b>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Fue declarada CON asterisco? ➔ Usá <code>-&gt;</code></h4>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">struct</span> Empleado *emp = &amp;empleado;
+emp-&gt;edad = <span class="c-num">30</span>;
+emp-&gt;salario = <span class="c-num">90000</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Tiene <code>*</code> en su declaración: es un puntero a struct ➔ lleva <b>flecha (<code>-&gt;</code>)</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: EJEMPLO NIVEL 4 (PLANTEO) -->
+      <section>
+        <h2><span class="section-num">21</span> Ejemplo Nivel 4 (Tipo Examen): Planteo Paso a Paso</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Problema Integrador: Ascenso y Bono por Antigüedad</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Dado un <code>struct Empleado</code> con <code>nombre</code>, <code>edad</code>, <code>antiguedad</code> y <code>salario</code>:<br>
+            Escribir una función <code>int evaluarAscenso(struct Empleado *emp, float bonoExtra)</code> que reciba un puntero al empleado:<br>
+            1. Si su <code>antiguedad &gt;= 5</code> años, le sume un <code>20%</code> a su salario actual más el <code>bonoExtra</code> fijo, y retorne <code>1</code>.<br>
+            2. Si tiene menos de 5 años de antigüedad, solo le aumente un <code>5%</code> sin bono extra y retorne <code>0</code>.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Recibir Puntero</h4>
+              <p style="font-size: 0.78rem; margin: 0;">Como hay que modificar el salario original, el parámetro debe ser <code>struct Empleado *emp</code>.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Verificar Antigüedad</h4>
+              <p style="font-size: 0.78rem; margin: 0;">Evaluamos <code>if (emp-&gt;antiguedad &gt;= 5)</code> usando el operador flecha <code>-&gt;</code>.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Actualizar y Retornar</h4>
+              <p style="font-size: 0.78rem; margin: 0;">Actualizamos <code>emp-&gt;salario</code> según corresponda y devolvemos <code>1</code> o <code>0</code>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: EJEMPLO NIVEL 4 (CÓDIGO COMPLETO) -->
+      <section>
+        <h2><span class="section-num">22</span> Ejemplo Nivel 4: Código Completo y Salida</h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel4_ascenso_empleado.c</span>
+              <span class="code-badge">Nivel 4 • Modelo Examen</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Empleado {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> edad;
+    <span class="c-kw">int</span> antiguedad;
+    <span class="c-kw">float</span> salario;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">evaluarAscenso</span>(<span class="c-kw">struct</span> Empleado *emp, <span class="c-kw">float</span> bonoExtra) {
+    <span class="c-kw">if</span> (emp-&gt;antiguedad &gt;= <span class="c-num">5</span>) {
+        emp-&gt;salario += (emp-&gt;salario * <span class="c-num">20</span> / <span class="c-num">100</span>) + bonoExtra;
+        <span class="c-kw">return</span> <span class="c-num">1</span>;
+    }
+    emp-&gt;salario += emp-&gt;salario * <span class="c-num">5</span> / <span class="c-num">100</span>;
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Empleado e1 = {<span class="c-str">"Elena"</span>, <span class="c-num">34</span>, <span class="c-num">7</span>, <span class="c-num">200000.0</span>};
+    <span class="c-kw">int</span> ascendio = <span class="c-fn">evaluarAscenso</span>(&amp;e1, <span class="c-num">15000.0</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"%s | Ascenso: %d | Nuevo sueldo: $%.2f\n"</span>,
+           e1.nombre, ascendio, e1.salario);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel4_ascenso</span>
+Elena | Ascenso: 1 | Nuevo sueldo: $255000.00</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.78rem; line-height: 1.45;">
+                • <code>antiguedad</code> es <code>7 &gt;= 5</code>.<br>
+                • 20% de <code>200000</code> es <code>40000</code>.<br>
+                • Suma <code>40000 + 15000 = 55000</code>.<br>
+                • <code>e1.salario</code> pasa a <b>$255.000</b> y retorna <code>1</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: PUNTEROS CONSTANTES PARA LECTURA EFICIENTE -->
+      <section>
+        <h2><span class="section-num">23</span> Tip Profesional: Pasar Puntero para No Copiar Estructuras Grandes</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          ¿Qué pasa si solo queremos <b>mostrar</b> una estructura muy grande, sin modificarla, pero tampoco queremos que C copie cientos de bytes al pasarla por valor?
+        </p>
+
+        <div class="grid-2" style="align-items: center; margin-top: 10px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">mostrar_con_puntero.c</span>
+              <span class="code-badge">Eficiencia en RAM</span>
+            </div>
+            <div class="code-body"><span class="c-type">void</span> <span class="c-fn">mostrarEmpleado</span>(<span class="c-kw">struct</span> Empleado *emp) {
+    <span class="c-fn">printf</span>(<span class="c-str">"Nombre:  %s\n"</span>, emp-&gt;nombre);
+    <span class="c-fn">printf</span>(<span class="c-str">"Edad:    %d\n"</span>, emp-&gt;edad);
+    <span class="c-fn">printf</span>(<span class="c-str">"Salario: $%.2f\n"</span>, emp-&gt;salario);
+}</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Las 2 grandes ventajas de los punteros a Struct</h4>
+            <ol style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Poder modificar la estructura original</b> desde adentro de la función (como en <code>aumentarSalario</code>).</li>
+              <li><b>Ahorrar memoria y velocidad</b>, ya que en vez de duplicar toda la caja solo viajan los 8 bytes de su dirección.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: REUTILIZAR FUNCIONES QUE RECIBEN PUNTEROS A STRUCT -->
+      <section>
+        <h2><span class="section-num">24</span> Aplicar varios Aumentos Consecutivos sobre el Mismo Registro</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          Como <code>aumentarSalario(&amp;empleado, porcentaje)</code> modifica directamente la variable en memoria, si la llamamos dos veces seguidas el segundo aumento se calcula sobre el salario ya actualizado:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">aumentos_acumulados.c</span>
+              <span class="code-badge">Acumulación</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Empleado {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> edad;
+    <span class="c-kw">float</span> salario;
+};
+
+<span class="c-type">void</span> <span class="c-fn">aumentarSalario</span>(<span class="c-kw">struct</span> Empleado *emp, <span class="c-kw">float</span> porcentaje) {
+    emp-&gt;salario += emp-&gt;salario * porcentaje / <span class="c-num">100</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Empleado emp = {<span class="c-str">"Diego"</span>, <span class="c-num">40</span>, <span class="c-num">100000.0</span>};
+    <span class="c-fn">aumentarSalario</span>(&amp;emp, <span class="c-num">10</span>); <span class="c-cmt">// Pasa a 110000</span>
+    <span class="c-fn">aumentarSalario</span>(&amp;emp, <span class="c-num">20</span>); <span class="c-cmt">// +20% de 110000 = +22000</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Salario final: $%.2f\n"</span>, emp.salario);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./aumentos_acumulados</span>
+Salario final: $132000.00</div>
+            </div>
+            <div class="box box-amber" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.8rem;">
+                • 1° llamada (+10%): de <code>100.000</code> sube a <code>110.000</code>.<br>
+                • 2° llamada (+20%): el 20% de <code>110.000</code> es <code>22.000</code> ➔ llega a <b>$132.000</b>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: ERRORES FRECUENTES DE PRINCIPIANTES (1) -->
+      <section>
+        <h2><span class="section-num">25</span> Errores Frecuentes de Principiantes (Parte 1)</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Error 1: Usar el operador punto <code>.</code> en un puntero</div>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-type">void</span> <span class="c-fn">aumentarSalario</span>(<span class="c-kw">struct</span> Empleado *emp, <span class="c-kw">float</span> p) {
+    emp.salario += emp.salario * p / <span class="c-num">100</span>; <span class="c-cmt">// ❌ ERROR</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: #fecaca;">
+              <b>Mensaje del compilador:</b> <i>"member reference type 'struct Empleado *' is a pointer; did you mean to use '-&gt;'?"</i>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Correcto: Usar el operador flecha <code>-&gt;</code> en punteros</div>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-type">void</span> <span class="c-fn">aumentarSalario</span>(<span class="c-kw">struct</span> Empleado *emp, <span class="c-kw">float</span> p) {
+    emp-&gt;salario += emp-&gt;salario * p / <span class="c-num">100</span>; <span class="c-cmt">// ✅ OK</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: #a7f3d0;">
+              <b>Por qué funciona:</b> Como <code>emp</code> es un puntero (<code>struct Empleado *</code>), accedemos a sus campos con <code>-&gt;</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: ERRORES FRECUENTES DE PRINCIPIANTES (2) -->
+      <section>
+        <h2><span class="section-num">26</span> Errores Frecuentes de Principiantes (Parte 2)</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Error 2: Olvidar el <code>&amp;</code> al llamar a la función desde <code>main</code></div>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">struct</span> Empleado empleado = {<span class="c-str">"Ana"</span>, <span class="c-num">30</span>, <span class="c-num">100000</span>};
+<span class="c-fn">aumentarSalario</span>(empleado, <span class="c-num">10</span>); <span class="c-cmt">// ❌ Falta el &amp;</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: #fecaca;">
+              <b>Por qué falla:</b> La función espera una <b>dirección de memoria</b> (<code>struct Empleado *</code>), no la estructura por valor.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Correcto: Pasar la dirección con <code>&amp;empleado</code></div>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">struct</span> Empleado empleado = {<span class="c-str">"Ana"</span>, <span class="c-num">30</span>, <span class="c-num">100000</span>};
+<span class="c-fn">aumentarSalario</span>(&amp;empleado, <span class="c-num">10</span>); <span class="c-cmt">// ✅ Pasa su dirección</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: #a7f3d0;">
+              <b>Por qué funciona:</b> <code>&amp;empleado</code> entrega exactamente el puntero <code>struct Empleado *</code> que la función necesita.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: ERRORES FRECUENTES DE PRINCIPIANTES (3) -->
+      <section>
+        <h2><span class="section-num">27</span> Errores Frecuentes de Principiantes (Parte 3)</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Error 3: Escribir <code>*emp.salario</code> sin paréntesis</div>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">struct</span> Empleado *emp = &amp;empleado;
+*emp.salario = <span class="c-num">90000</span>; <span class="c-cmt">// ❌ Error por precedencia</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: #fecaca;">
+              <b>Por qué falla:</b> El operador punto <code>.</code> se evalúa antes que <code>*</code>, intentando hacer <code>*(emp.salario)</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Correcto: Usar <code>emp-&gt;salario</code> o <code>(*emp).salario</code></div>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">struct</span> Empleado *emp = &amp;empleado;
+emp-&gt;salario = <span class="c-num">90000</span>; <span class="c-cmt">// ✅ Limpio y sin errores</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: #a7f3d0;">
+              <b>Por qué funciona:</b> El operador flecha <code>-&gt;</code> fue creado justamente para evitar ese problema de paréntesis.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: ERRORES FRECUENTES DE PRINCIPIANTES (4: PUNTERO SIN INICIALIZAR) -->
+      <section>
+        <h2><span class="section-num">28</span> Errores Frecuentes (Parte 4): Puntero a Struct Sin Inicializar</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Error 4: Usar <code>emp-&gt;...</code> sin apuntarlo a ninguna struct</div>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">struct</span> Empleado *emp; <span class="c-cmt">// ❌ No apunta a nada</span>
+emp-&gt;edad = <span class="c-num">25</span>;       <span class="c-cmt">// 💥 Crash del programa</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: #fecaca;">
+              <b>Por qué falla:</b> <code>emp</code> solo es un papel para anotar una dirección; si no creaste la caja <code>struct Empleado</code>, apunta a basura.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Correcto: Apuntar siempre a una variable <code>struct</code> existente</div>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">struct</span> Empleado empleado;
+<span class="c-kw">struct</span> Empleado *emp = &amp;empleado; <span class="c-cmt">// ✅ Apunta a empleado</span>
+emp-&gt;edad = <span class="c-num">25</span>;</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: #a7f3d0;">
+              <b>Por qué funciona:</b> Primero existe la estructura real en memoria y luego el puntero guarda su dirección con <code>&amp;</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: BUENAS PRÁCTICAS DE PROGRAMACIÓN -->
+      <section>
+        <h2><span class="section-num">29</span> Buenas Prácticas con Punteros a Structs</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">✔️ Cuándo elegir cada forma</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Si la función debe modificar algún campo</b> de la estructura (sueldo, saldo, stock, edad, estado): recibí siempre un <b>puntero a struct</b> (<code>struct Empleado *emp</code>).</li>
+              <li><b>Preferí siempre <code>emp-&gt;campo</code></b> en lugar de <code>(*emp).campo</code>: es el estándar universal en C y mucho más fácil de leer.</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">🧠 Cómo leer tu propio código</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.6; margin-left: 18px;">
+              <li>Leé la flecha <code>-&gt;</code> en voz alta como: <i>"el campo ... de la struct apuntada por ..."</i>.</li>
+              <li>Verificá siempre la pareja: si en los parámetros de la función pusiste <code>*emp</code>, en la llamada desde <code>main</code> tiene que aparecer <code>&amp;empleado</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: EJERCICIOS DE APLICACIÓN (1 y 2) -->
+      <section>
+        <h2><span class="section-num">30</span> Ejercicios de Práctica (Parte 1)</h2>
+
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">Ejercicio 1: Cumplir años mediante puntero a <code>struct Persona</code></h4>
+          <p style="font-size: 0.82rem; margin: 0 0 6px;">
+            Dada <code>struct Persona { char nombre[50]; int edad; };</code>, escribí una función <code>void cumplirAnios(struct Persona *p)</code> que incremente en <code>1</code> la edad de la persona original usando el operador <code>-&gt;</code>. Probala en <code>main</code>.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Persona {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> edad;
+};
+
+<span class="c-type">void</span> <span class="c-fn">cumplirAnios</span>(<span class="c-kw">struct</span> Persona *p) {
+    p-&gt;edad++;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Persona persona1 = {<span class="c-str">"Julieta"</span>, <span class="c-num">19</span>};
+    <span class="c-fn">cumplirAnios</span>(&amp;persona1);
+    <span class="c-fn">printf</span>(<span class="c-str">"%s ahora tiene %d anios\n"</span>, persona1.nombre, persona1.edad); <span class="c-cmt">// 20</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Ejercicio 2: Desplazar un <code>struct Punto</code> en el plano</h4>
+          <p style="font-size: 0.82rem; margin: 0 0 6px;">
+            Dada <code>struct Punto { int x; int y; };</code>, escribí una función <code>void moverPunto(struct Punto *p, int dx, int dy)</code> que le sume <code>dx</code> a <code>x</code> y <code>dy</code> a <code>y</code> en el punto original.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Punto {
+    <span class="c-kw">int</span> x;
+    <span class="c-kw">int</span> y;
+};
+
+<span class="c-type">void</span> <span class="c-fn">moverPunto</span>(<span class="c-kw">struct</span> Punto *p, <span class="c-kw">int</span> dx, <span class="c-kw">int</span> dy) {
+    p-&gt;x += dx;
+    p-&gt;y += dy;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Punto punto = {<span class="c-num">10</span>, <span class="c-num">20</span>};
+    <span class="c-fn">moverPunto</span>(&amp;punto, <span class="c-num">5</span>, -<span class="c-num">3</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Nueva posicion: (%d, %d)\n"</span>, punto.x, punto.y); <span class="c-cmt">// (15, 17)</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: EJERCICIO DE APLICACIÓN 3 -->
+      <section>
+        <h2><span class="section-num">31</span> Ejercicios de Práctica (Parte 2)</h2>
+
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Ejercicio 3: Aplicar descuento a un producto si supera un precio</h4>
+          <p style="font-size: 0.83rem; margin: 0 0 8px;">
+            Dada <code>struct Producto { char nombre[40]; float precio; };</code>, escribí una función <code>int aplicarDescuento(struct Producto *prod, float porcentaje)</code> que, si el <code>precio</code> es mayor a <code>10000</code>, le descuente ese porcentaje en la estructura original y retorne <code>1</code> (o retorne <code>0</code> sin modificarlo si cuesta <code>10000</code> o menos).
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Producto {
+    <span class="c-kw">char</span> nombre[<span class="c-num">40</span>];
+    <span class="c-kw">float</span> precio;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">aplicarDescuento</span>(<span class="c-kw">struct</span> Producto *prod, <span class="c-kw">float</span> porcentaje) {
+    <span class="c-kw">if</span> (prod-&gt;precio &gt; <span class="c-num">10000.0</span>) {
+        prod-&gt;precio -= prod-&gt;precio * porcentaje / <span class="c-num">100.0</span>;
+        <span class="c-kw">return</span> <span class="c-num">1</span>;
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Producto p = {<span class="c-str">"Auriculares"</span>, <span class="c-num">20000.0</span>};
+    <span class="c-kw">if</span> (<span class="c-fn">aplicarDescuento</span>(&amp;p, <span class="c-num">15.0</span>) == <span class="c-num">1</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Precio con descuento: $%.2f\n"</span>, p.precio); <span class="c-cmt">// $17000.00</span>
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: TABLA DE SÍMBOLOS HASTA AQUÍ -->
+      <section>
+        <h2><span class="section-num">32</span> Tabla Resumen de Símbolos de Punteros y Structs</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          Repasemos los símbolos de la Sección 40 del apunte que ya dominamos hasta esta unidad:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Símbolo / Expresión</th>
+              <th>Significado Exacto</th>
+              <th>Ejemplo de Uso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&amp;x</code></td>
+              <td>Dirección de memoria de <code>x</code></td>
+              <td><code>aumentarSalario(&amp;empleado, 10);</code></td>
+            </tr>
+            <tr>
+              <td><code>*p</code></td>
+              <td>Valor (o struct) al que apunta <code>p</code></td>
+              <td><code>(*emp).salario</code></td>
+            </tr>
+            <tr>
+              <td><code>struct Empleado *emp</code></td>
+              <td><code>emp</code> es un puntero a <code>struct Empleado</code></td>
+              <td>Parámetro de función</td>
+            </tr>
+            <tr>
+              <td><code>.</code> (Operador punto)</td>
+              <td>Acceder a campo de una variable Struct</td>
+              <td><code>empleado.salario</code></td>
+            </tr>
+            <tr>
+              <td><code>-&gt;</code> (Operador flecha)</td>
+              <td>Acceder a campo mediante puntero a Struct</td>
+              <td><code>emp-&gt;salario</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 34: PUENTE HACIA LA UNIDAD 10 -->
+      <section>
+        <h2><span class="section-num">33</span> ¿Qué Sigue en la Unidad 10? Arreglos de Structs y Anidación</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Ya sabemos manejar una <code>struct</code> individual, pasarla por valor y modificarla por puntero con <code>-&gt;</code>. En la próxima unidad daremos el gran salto para manejar <b>listas completas de registros</b>:
+        </p>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">32–34. Arreglos de Structs</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Tener un curso entero en un solo vector: <code>struct Alumno clase[30];</code> y recorrerlo con <code>for</code> (<code>clase[i].promedio</code>).
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">35. Structs con Arreglos Internos</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Un estudiante con un vector de notas adentro: <code>estudiante.notas[i]</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">36. Structs Anidados</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Una estructura adentro de otra: <code>persona.nacimiento.dia</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 35: RESUMEN FINAL Y CHECKLIST -->
+      <section>
+        <h2><span class="section-num">34</span> Resumen de la Unidad 09 y Checklist</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Puntos Clave del Módulo</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
-              <li>Pasar punteros a estructuras ahorra copias pesadas en memoria y permite modificar el original.</li>
-              <li>El operador <code>-&gt;</code> se usa cuando accedemos a un campo a través de un puntero.</li>
-              <li><code>p-&gt;campo</code> es 100% equivalente a <code>(*p).campo</code>.</li>
-              <li>En la llamada siempre debemos anteponer el operador <code>&amp;</code>: <code>funcion(&amp;miStruct);</code>.</li>
+            <h4 style="color: #818cf8;">Ideas Clave (Secciones 30, 31 y 37)</h4>
+            <ul style="font-size: 0.82rem; line-height: 1.55; margin-left: 18px;">
+              <li>Para que una función modifique una <code>struct</code> original, le pasamos su dirección con <b><code>&amp;empleado</code></b> y la recibimos con un puntero <b><code>struct Empleado *emp</code></b>.</li>
+              <li>En una variable struct normal usamos punto (<code>empleado.salario</code>); en un puntero a struct usamos flecha (<b><code>emp-&gt;salario</code></b>).</li>
+              <li><b><code>emp-&gt;salario</code></b> es exactamente equivalente a <b><code>(*emp).salario</code></b>.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Cuándo debo usar <code>.</code> y cuándo <code>-&gt;</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué <code>*ptr.campo</code> genera error de compilador?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Qué operador uso para pasar una estructura por puntero en <code>main</code>? (<code>&amp;</code>).</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cuándo debo usar <code>.</code> y cuándo debo usar <code>-&gt;</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué <code>emp-&gt;salario</code> equivale a <code>(*emp).salario</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar por qué <code>*emp.salario</code> sin paréntesis da error?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo programar de cero <code>aumentarSalario(&amp;empleado, 10)</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo poner <code>&amp;</code> al pasar una struct a una función que espera un puntero?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 24px;">
-          <a href="08-estructuras-struct-fundamentos.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
-            ← Anterior: Fundamentos de Structs
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="08-estructuras-struct-fundamentos.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
+            ← Unidad 08: Estructuras (struct)
           </a>
-          <a href="../index.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
-            Índice 2do Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            ← Índice 2do Cuatrimestre
           </a>
-          <a href="10-arreglos-de-estructuras.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
-            Siguiente: Arreglos de Estructuras →
+          <a href="10-arreglos-de-estructuras.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Siguiente Unidad: Arreglos de Structs →
           </a>
         </div>
       </section>
@@ -336,8 +1435,9 @@ Con 15%: $115000.00</div>
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -347,8 +1447,20 @@ Con 15%: $115000.00</div>
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>
+
 </html>

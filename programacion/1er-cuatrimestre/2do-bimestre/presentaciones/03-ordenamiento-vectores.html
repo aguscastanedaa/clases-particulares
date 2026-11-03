@@ -24,7 +24,8 @@
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
       <a href="../index.html">← Volver al 2do Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 2do Bimestre • Unidad 03</span>
   </div>
@@ -34,292 +35,1574 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-amber">1er Cuatrimestre • 2do Bimestre • Unidad 3</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Ordenamiento de Vectores</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            Poniendo orden en el caos: el Método de la Burbuja (Bubble Sort), la operación swap y búsqueda binaria
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-amber">1er Cuatrimestre • 2do Bimestre • Unidad 03</span>
+          <h1 style="font-size: 2.65rem; margin-bottom: 12px;">Ordenamiento de Vectores</h1>
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 22px;">
+            Cómo reorganizar los elementos de un vector paso a paso: el intercambio con variable auxiliar (<code>aux</code>), los ciclos <code>for</code> anidados y el ordenamiento ascendente y descendente
           </p>
 
-          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">Operación Swap</span>
-            <span class="badge badge-emerald">Método de la Burbuja</span>
-            <span class="badge badge-amber">Optimización con Flags</span>
-            <span class="badge badge-purple">Búsqueda Binaria</span>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">Intercambio con Variable Auxiliar</span>
+            <span class="badge badge-emerald">Doble Ciclo for Anidado</span>
+            <span class="badge badge-amber">Menor a Mayor y Mayor a Menor</span>
+            <span class="badge badge-purple">Seguimiento Paso a Paso</span>
           </div>
 
-          <div class="box box-amber" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-amber" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.92rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva. Esta clase parte <b>desde cero absoluto</b> siguiendo el Apunte Teórico.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: OBJETIVOS Y RUTA DE LA CLASE -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Objetivos y Mapa de la Clase</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué ordenar es tan importante?</h4>
-            <p style="font-size: 0.88rem;">
-              Buscá una palabra en un diccionario de 100.000 términos. Si el diccionario estuviera desordenado, tendrías que leer palabra por palabra (búsqueda lineal). Te llevaría horas.
+            <h4 style="color: #818cf8;">¿Qué sabemos hasta ahora y qué sumamos hoy?</h4>
+            <p style="font-size: 0.86rem;">
+              En las Unidades 01 y 02 aprendimos a <b>declarar un vector</b>, <b>recorrerlo</b> con un ciclo <code>for</code> y <b>buscar</b> datos adentro (como el mayor, el menor o contar cuántos cumplen una condición).
             </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Como el diccionario está <b>ordenado alfabéticamente</b>, abrís al medio y encontrás la palabra en 5 segundos. Ordenar datos es uno de los problemas más estudiados de las ciencias de la computación.
+            <p style="font-size: 0.86rem; color: var(--text-muted); margin-top: 8px;">
+              Sin embargo, hasta ahora los elementos siempre se quedaban <b>en el mismo casillero donde nacieron</b>. Hoy vamos a aprender a <b>moverlos de lugar</b> para que todo el vector quede perfectamente ordenado.
             </p>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Comprender la <b>operación de intercambio (swap)</b> con variable auxiliar.</li>
-              <li>Entender la intuición física del <b>Método de la Burbuja</b>.</li>
-              <li>Dominar los <b>bucles anidados</b> necesarios para ordenar.</li>
-              <li>Seguir una simulación paso a paso con traza gráfica.</li>
-              <li>Optimizar el algoritmo con una <b>bandera booleana</b> inteligente.</li>
-              <li>Entender por qué un vector ordenado permite la <b>Búsqueda Binaria</b>.</li>
+            <h4 style="color: #34d399;">Lo que vas a dominar al terminar esta unidad</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.58; margin-left: 18px;">
+              <li>Entender qué significa <b>ordenar un vector</b> de menor a mayor o de mayor a menor.</li>
+              <li>Realizar un <b>intercambio de valores</b> usando una variable auxiliar (<code>int aux;</code>) sin perder datos.</li>
+              <li>Comprender por qué necesitamos <b>dos ciclos <code>for</code> anidados</b> (uno adentro del otro).</li>
+              <li>Trazar en papel el algoritmo del apunte sobre <code>{8, 3, 10, 1, 5}</code> vuelta por vuelta.</li>
+              <li>Reconocer también la variante clásica de <b>burbujeo de vecinos</b> y resolver ejercicios de examen.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: LA OPERACIÓN DE INTERCAMBIO (SWAP) -->
+      <!-- SLIDE 3: ¿QUÉ SIGNIFICA ORDENAR UN VECTOR? -->
       <section>
-        <h2><span class="section-num">02</span> El Bloque Fundamental: El Intercambio (Swap)</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Si tenemos dos vasos (uno con jugo y otro con agua) y queremos intercambiarlos, <b>necesitamos un tercer vaso vacío</b>:</p>
+        <h2><span class="section-num">02</span> ¿Qué Significa Ordenar un Vector?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición del Apunte Teórico</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <b>Ordenar un vector</b> significa <b>reorganizar sus elementos</b> adentro de las casillas siguiendo algún criterio definido, sin agregar ni borrar ningún número.
+          </p>
+        </div>
 
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">🏆 Rankings y Juegos</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              En un videojuego o torneo deportivo, los puntajes se cargan a medida que terminan los jugadores, pero la tabla de posiciones debe mostrarse <b>ordenada del puntaje más alto al más bajo</b>.
+            </p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">🛒 Tiendas Online</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Cuando buscás zapatillas o celulares y elegís <i>"Ordenar por menor precio"</i>, el programa toma el vector de precios y lo reacomoda de <b>menor a mayor</b>.
+            </p>
+          </div>
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">📋 Listados Escolares</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Las notas de un curso, los números de legajo o los promedios finales se ordenan para detectar rápidamente quiénes obtuvieron las calificaciones más altas o más bajas.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🔑 <b>Regla de oro del ordenamiento:</b> El vector ordenado debe contener <b>exactamente los mismos números</b> que tenía el vector original, solo que ubicados en distintas posiciones.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: LOS DOS CRITERIOS MÁS COMUNES -->
+      <section>
+        <h2><span class="section-num">03</span> Los Dos Criterios de Ordenamiento</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px;">
+          Como vemos en la sección 5 del apunte, imaginemos que tenemos cargado en memoria este vector original desordenado de 5 elementos:
+        </p>
+
+        <div style="text-align: center; margin: 4px 0 10px;">
+          <span class="badge badge-indigo">Vector Original Desordenado</span>
+          <div class="array-container" style="margin: 6px 0;">
+            <div class="array-cell-wrapper"><span class="array-index">numeros[0]</span><div class="array-cell">8</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">numeros[1]</span><div class="array-cell">3</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">numeros[2]</span><div class="array-cell">10</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">numeros[3]</span><div class="array-cell">1</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">numeros[4]</span><div class="array-cell">5</div></div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">1. De Menor a Mayor (Ascendente ↗)</h4>
+            <p style="font-size: 0.82rem; margin-bottom: 6px;">
+              El número más chico va en la posición <code>[0]</code> y van creciendo hacia la derecha hasta el más grande:
+            </p>
+            <div class="array-container" style="margin: 6px 0;">
+              <div class="array-cell-wrapper"><span class="array-index">[0]</span><div class="array-cell match">1</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[1]</span><div class="array-cell match">3</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[2]</span><div class="array-cell match">5</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[3]</span><div class="array-cell match">8</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[4]</span><div class="array-cell match">10</div></div>
+            </div>
+            <p style="font-size: 0.78rem; color: #a7f3d0; text-align: center; margin: 0;">
+              Se cumple que <code>1 &lt; 3 &lt; 5 &lt; 8 &lt; 10</code>
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. De Mayor a Menor (Descendente ↘)</h4>
+            <p style="font-size: 0.82rem; margin-bottom: 6px;">
+              El número más grande va en la posición <code>[0]</code> y van disminuyendo hacia la derecha hasta el más chico:
+            </p>
+            <div class="array-container" style="margin: 6px 0;">
+              <div class="array-cell-wrapper"><span class="array-index">[0]</span><div class="array-cell highlight">10</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[1]</span><div class="array-cell highlight">8</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[2]</span><div class="array-cell highlight">5</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[3]</span><div class="array-cell highlight">3</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[4]</span><div class="array-cell highlight">1</div></div>
+            </div>
+            <p style="font-size: 0.78rem; color: #fde68a; text-align: center; margin: 0;">
+              Se cumple que <code>10 &gt; 8 &gt; 5 &gt; 3 &gt; 1</code>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: LA ANALOGÍA DE LAS CARTAS EN LA MANO -->
+      <section>
+        <h2><span class="section-num">04</span> La Idea General: Ordenar Cartas en la Mano</h2>
+        <div class="box box-purple">
+          <h4 style="color: #c084fc; margin-bottom: 4px;">¿Cómo ordenamos los humanos cuando jugamos a las cartas?</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Como explica el apunte: <i>"Una forma muy simple de pensar el ordenamiento es imaginar que estamos ordenando cartas en la mano. Tomamos una carta, la comparamos con las demás y, si encontramos una que debería ir antes, las intercambiamos de lugar."</i>
+          </p>
+        </div>
+
+        <div class="step-list" style="margin-top: 12px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Miramos la primera posición (posición 0):</b> Queremos que ahí quede la carta más chica de toda nuestra mano.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Comparamos con cada una de las cartas que están a su derecha:</b> Miramos la segunda carta; si es menor que la que tenemos en la primera posición, <b>las cambiamos de lugar entre sí</b>. Seguimos comparando contra la tercera, la cuarta y la quinta carta.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>La primera posición ya quedó lista:</b> Cuando terminamos de comparar contra todas las de la derecha, estamos 100% seguros de que en la primera posición quedó la carta más chica de todas.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b>Avanzamos a la siguiente posición:</b> Ahora nos paramos en la segunda posición (posición 1) y repetimos exactamente el mismo trabajo con las cartas que quedan a su derecha.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: EL PASO PREVIO INDISPENSABLE: INTERCAMBIAR DOS VALORES -->
+      <section>
+        <h2><span class="section-num">05</span> Paso Previo: Cómo Intercambiar Dos Valores</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Antes de intentar ordenar un vector entero, el apunte nos pide resolver un problema más pequeño pero fundamental: <b>¿cómo intercambiamos los valores de dos variables en C?</b>
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Estado Inicial</h4>
+            <p style="font-size: 0.85rem;">Supongamos que tenemos dos variables enteras:</p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> a = <span class="c-num">10</span>;
+<span class="c-kw">int</span> b = <span class="c-num">20</span>;</div>
+            </div>
+            <div class="memory-diagram" style="margin: 10px 0 4px;">
+              <div class="memory-box" style="min-width: 110px;">
+                <div class="memory-label">a <span class="memory-type">int</span></div>
+                <div class="memory-value">10</div>
+              </div>
+              <div class="memory-box" style="min-width: 110px;">
+                <div class="memory-label">b <span class="memory-type">int</span></div>
+                <div class="memory-value">20</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Objetivo Buscado</h4>
+            <p style="font-size: 0.85rem;">Queremos que intercambien sus contenidos para que al final queden así:</p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-cmt">// Resultado deseado:</span>
+<span class="c-cmt">// a = 20</span>
+<span class="c-cmt">// b = 10</span></div>
+            </div>
+            <div class="memory-diagram" style="margin: 10px 0 4px;">
+              <div class="memory-box" style="min-width: 110px; border-color: var(--accent-emerald);">
+                <div class="memory-label">a <span class="memory-type">int</span></div>
+                <div class="memory-value" style="color: #38bdf8;">20</div>
+              </div>
+              <div class="memory-box" style="min-width: 110px; border-color: var(--accent-emerald);">
+                <div class="memory-label">b <span class="memory-type">int</span></div>
+                <div class="memory-value" style="color: #fbbf24;">10</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🤔 <b>Pregunta clave:</b> ¿Podemos hacer simplemente <code>a = b;</code> y abajo <code>b = a;</code>? ¡Veamos en la próxima diapositiva qué pasa en la memoria RAM si intentamos eso!
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: PRIMER INTENTO (INCORRECTO) -->
+      <section>
+        <h2><span class="section-num">06</span> Primer Intento (INCORRECTO): Sin Variable Auxiliar</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Alguien podría pensar en escribir estas dos líneas. Sigamos paso a paso qué hace realmente la computadora:
+        </p>
+
+        <div class="grid-1-2">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Código Incorrecto</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> a = <span class="c-num">10</span>;
+<span class="c-kw">int</span> b = <span class="c-num">20</span>;
+
+a = b;
+b = a;</div>
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin-top: 8px; margin-bottom: 0;">
+              Recordá que en una variable entra <b>un solo valor a la vez</b>. Al guardar un valor nuevo, el valor viejo se destruye para siempre.
+            </p>
+          </div>
+
+          <div>
+            <table class="trace-table" style="margin: 0;">
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th>Instrucción</th>
+                  <th>Valor de <code>a</code></th>
+                  <th>Valor de <code>b</code></th>
+                  <th>¿Qué ocurrió en la RAM?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Inicio</b></td>
+                  <td><code>int a=10, b=20;</code></td>
+                  <td><code>10</code></td>
+                  <td><code>20</code></td>
+                  <td>Estado inicial correcto.</td>
+                </tr>
+                <tr>
+                  <td><b>Línea 1</b></td>
+                  <td><code>a = b;</code></td>
+                  <td style="color: #f87171; font-weight: 700;"><code>20</code></td>
+                  <td><code>20</code></td>
+                  <td>Se copia el <code>20</code> de <code>b</code> adentro de <code>a</code>. <b>¡El 10 que tenía <code>a</code> se pisó y se perdió!</b></td>
+                </tr>
+                <tr>
+                  <td><b>Línea 2</b></td>
+                  <td><code>b = a;</code></td>
+                  <td style="color: #f87171; font-weight: 700;"><code>20</code></td>
+                  <td style="color: #f87171; font-weight: 700;"><code>20</code></td>
+                  <td>Se copia el valor actual de <code>a</code> (que ahora es <code>20</code>) en <code>b</code>. ¡Ambas quedan en 20!</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="box box-rose" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.85rem;">
+                💥 <b>Conclusión del apunte:</b> Cuando hicimos <code>a = b;</code>, el valor original de <code>a</code> (que era <code>10</code>) fue sobrescrito por el <code>20</code>. Para no perderlo, necesitamos guardarlo antes en otro lugar.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: LA SOLUCIÓN: LA VARIABLE AUXILIAR (aux) -->
+      <section>
+        <h2><span class="section-num">07</span> La Solución: Usar una Variable Auxiliar (<code>aux</code>)</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">🥤 La Analogía de los Dos Vasos</h4>
+            <p style="font-size: 0.84rem;">
+              Imaginá que tenés el <b>Vaso A lleno de agua</b> y el <b>Vaso B lleno de jugo de naranja</b>. Querés que el jugo pase al Vaso A y el agua al Vaso B.
+            </p>
+            <p style="font-size: 0.84rem; margin-top: 6px;">
+              No podés volcar el Vaso B directamente sobre el Vaso A porque se mezclarían o se rebalsaría. Necesitás sí o sí un <b>tercer vaso vacío temporal (<code>aux</code>)</b>:
+            </p>
+            <ol style="font-size: 0.82rem; margin-left: 18px; margin-top: 6px;">
+              <li>Volcás el agua del <b>Vaso A</b> en el <b>Vaso Auxiliar</b> (<code>aux = a;</code>).</li>
+              <li>Volcás el jugo del <b>Vaso B</b> en el <b>Vaso A</b> (<code>a = b;</code>).</li>
+              <li>Volcás el agua guardada en el <b>Vaso Auxiliar</b> hacia el <b>Vaso B</b> (<code>b = aux;</code>).</li>
+            </ol>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Código Correcto del Apunte con <code>aux</code></div>
+            <div class="code-window">
+              <div class="code-header">
+                <span class="code-title">intercambio_aux.c</span>
+                <span class="code-badge">Patrón de 3 Pasos</span>
+              </div>
+              <div class="code-body"><span class="c-kw">int</span> a = <span class="c-num">10</span>;
+<span class="c-kw">int</span> b = <span class="c-num">20</span>;
+<span class="c-kw">int</span> aux;
+
+aux = a;  <span class="c-cmt">// Paso 1: guardamos el 10 de 'a' en 'aux'</span>
+a = b;    <span class="c-cmt">// Paso 2: pasamos el 20 de 'b' hacia 'a'</span>
+b = aux;  <span class="c-cmt">// Paso 3: recuperamos el 10 desde 'aux' en 'b'</span></div>
+            </div>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin-top: 8px; margin-bottom: 0;">
+              💡 Mirá la diagonal visual del código: <code>aux = <b>a</b>;</code> ➔ <code><b>a</b> = <b>b</b>;</code> ➔ <code><b>b</b> = aux;</code>. La variable que queda a la derecha arriba pasa a la izquierda en el renglón siguiente.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: SIMULACIÓN EN MEMORIA DEL INTERCAMBIO CON AUX -->
+      <section>
+        <h2><span class="section-num">08</span> Seguimiento en Memoria del Intercambio con <code>aux</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Veamos exactamente cómo cambian las tres cajas de memoria paso a paso siguiendo la traza del apunte:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Momento</th>
+              <th>Instrucción Ejecutada</th>
+              <th>Caja <code>aux</code></th>
+              <th>Caja <code>a</code></th>
+              <th>Caja <code>b</code></th>
+              <th>Explicación de lo que pasa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Estado Inicial</b></td>
+              <td><code>int a = 10, b = 20, aux;</code></td>
+              <td style="color: var(--text-dim);"><i>(vacía)</i></td>
+              <td><code>10</code></td>
+              <td><code>20</code></td>
+              <td><code>a</code> vale 10, <code>b</code> vale 20 y <code>aux</code> está lista para usarse.</td>
+            </tr>
+            <tr>
+              <td><b>Paso 1</b></td>
+              <td><code>aux = a;</code></td>
+              <td style="color: var(--accent-cyan); font-weight: 700;"><code>10</code></td>
+              <td><code>10</code></td>
+              <td><code>20</code></td>
+              <td>Hacemos una copia de seguridad del <code>10</code> de <code>a</code> dentro de <code>aux</code>.</td>
+            </tr>
+            <tr>
+              <td><b>Paso 2</b></td>
+              <td><code>a = b;</code></td>
+              <td><code>10</code></td>
+              <td style="color: var(--accent-emerald); font-weight: 700;"><code>20</code></td>
+              <td><code>20</code></td>
+              <td>Copiamos el <code>20</code> de <code>b</code> dentro de <code>a</code>. No importa pisar <code>a</code> porque el <code>10</code> está a salvo en <code>aux</code>.</td>
+            </tr>
+            <tr>
+              <td><b>Paso 3</b></td>
+              <td><code>b = aux;</code></td>
+              <td><code>10</code></td>
+              <td style="color: var(--accent-emerald); font-weight: 700;"><code>20</code></td>
+              <td style="color: var(--accent-emerald); font-weight: 700;"><code>10</code></td>
+              <td>Copiamos el <code>10</code> guardado en <code>aux</code> dentro de <code>b</code>. <b>¡Intercambio completado!</b></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="memory-diagram" style="margin-top: 10px;">
+          <div class="memory-box" style="min-width: 135px; border-color: var(--accent-amber);">
+            <div class="memory-label">aux <span class="memory-type">int</span></div>
+            <div class="memory-value" style="color: var(--accent-amber);">10</div>
+          </div>
+          <div class="memory-box" style="min-width: 135px; border-color: var(--accent-emerald);">
+            <div class="memory-label">a <span class="memory-type">int</span></div>
+            <div class="memory-value">20</div>
+          </div>
+          <div class="memory-box" style="min-width: 135px; border-color: var(--accent-emerald);">
+            <div class="memory-label">b <span class="memory-type">int</span></div>
+            <div class="memory-value">10</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: APLICANDO EL INTERCAMBIO A DOS CASILLAS DE UN VECTOR -->
+      <section>
+        <h2><span class="section-num">09</span> Intercambiando Dos Casillas de un Vector</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Cada casilla de un vector (por ejemplo, <code>numeros[i]</code> y <code>numeros[j]</code>) funciona exactamente igual que una variable entera común. Por lo tanto, usamos las mismas 3 líneas con <code>aux</code>:
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">swap_en_vector.c</span>
+              <span class="code-badge">Casillas i y j</span>
+            </div>
+            <div class="code-body"><span class="c-cmt">// Intercambiar numeros[i] con numeros[j]:</span>
+<span class="c-kw">int</span> aux;
+
+aux = numeros[i];
+numeros[i] = numeros[j];
+numeros[j] = aux;</div>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Ejemplo con <code>i = 0</code> y <code>j = 1</code></h4>
+            <p style="font-size: 0.82rem; margin-bottom: 6px;">
+              Si <code>numeros[0]</code> vale <code>8</code> y <code>numeros[1]</code> vale <code>3</code>:
+            </p>
+            <ul style="font-size: 0.82rem; margin-left: 16px; line-height: 1.55;">
+              <li><code>aux = numeros[0];</code> ➔ <code>aux</code> guarda el <code>8</code>.</li>
+              <li><code>numeros[0] = numeros[1];</code> ➔ <code>numeros[0]</code> recibe el <code>3</code>.</li>
+              <li><code>numeros[1] = aux;</code> ➔ <code>numeros[1]</code> recibe el <code>8</code>.</li>
+            </ul>
+            <div class="array-container" style="margin: 8px 0 0;">
+              <div class="array-cell-wrapper"><span class="array-index">[0]</span><div class="array-cell match">3</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[1]</span><div class="array-cell match">8</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[2]</span><div class="array-cell">10</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[3]</span><div class="array-cell">1</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[4]</span><div class="array-cell">5</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: ¿POR QUÉ UN SOLO CICLO FOR NO ALCANZA? -->
+      <section>
+        <h2><span class="section-num">10</span> ¿Por Qué Necesitamos Dos Ciclos <code>for</code>?</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">La gran duda cuando empezamos a ordenar</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Hasta ahora, para mostrar un vector, sumar sus elementos o buscar el mayor nos alcanzaba con <b>un solo ciclo <code>for</code></b>. ¿Por qué para ordenar necesitamos <b>dos ciclos <code>for</code></b>?
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">Con un solo ciclo <code>for</code>...</h4>
+            <p style="font-size: 0.84rem;">
+              Si solo recorremos el vector una vez comparando la posición <code>0</code> contra las demás (<code>1, 2, 3, 4</code>), logramos ubicar al número más chico (el <code>1</code>) en la casilla <code>[0]</code>.
+            </p>
+            <p style="font-size: 0.84rem; margin-top: 6px;">
+              Pero mirá cómo quedan las demás casillas después de acomodar solo la posición 0:
+            </p>
+            <div class="array-container" style="margin: 8px 0 0;">
+              <div class="array-cell-wrapper"><span class="array-index">[0]</span><div class="array-cell match">1</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[1]</span><div class="array-cell out-of-bounds">8</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[2]</span><div class="array-cell out-of-bounds">10</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[3]</span><div class="array-cell out-of-bounds">3</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[4]</span><div class="array-cell out-of-bounds">5</div></div>
+            </div>
+            <p style="font-size: 0.78rem; color: #fca5a5; text-align: center; margin: 4px 0 0;">
+              ¡Las posiciones 1, 2, 3 y 4 siguen desordenadas!
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Con dos ciclos <code>for</code> (uno adentro del otro)</h4>
+            <p style="font-size: 0.84rem;">
+              Necesitamos repetir ese proceso para <b>cada posición del vector</b>:
+            </p>
+            <ul style="font-size: 0.82rem; margin-left: 16px; line-height: 1.55;">
+              <li>El <b>primer <code>for</code> (con <code>i</code>)</b> elige qué casilla estamos acomodando ahora (primero la <code>0</code>, después la <code>1</code>, luego la <code>2</code>...).</li>
+              <li>El <b>segundo <code>for</code> (con <code>j</code>)</b> recorre todas las casillas que están <b>adelante de <code>i</code></b> para compararlas contra <code>numeros[i]</code>.</li>
+            </ul>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin-top: 8px; margin-bottom: 0;">
+              ✓ A poner un ciclo adentro de otro se lo llama <b>ciclos anidados (<code>for</code> anidado)</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: CÓMO FUNCIONA UN FOR ANIDADO DESDE CERO -->
+      <section>
+        <h2><span class="section-num">11</span> ¿Cómo Funciona un <code>for</code> Anidado?</h2>
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">La Analogía de las Agujas del Reloj 🕒</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Pensá en el ciclo externo (<code>i</code>) como la <b>aguja de las horas</b> y en el ciclo interno (<code>j</code>) como la <b>aguja de los minutos</b>: por cada <b>1 paso</b> que avanza <code>i</code>, el ciclo interno <code>j</code> da <b>todas sus vueltas completas</b> desde el principio hasta el final.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">mecanica_for_anidado.c</span>
+              <span class="code-badge">i fija, j avanza</span>
+            </div>
+            <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> j = i + <span class="c-num">1</span>; j &lt; <span class="c-num">5</span>; j++)
+    {
+        <span class="c-cmt">// Comparamos posición i con posición j</span>
+    }
+}</div>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿Qué parejas <code>(i, j)</code> se forman?</h4>
+            <ul style="font-size: 0.8rem; margin-left: 16px; line-height: 1.52;">
+              <li><b>Cuando <code>i = 0</code>:</b> <code>j</code> arranca en <code>0 + 1 = 1</code> y recorre <code>j = 1, 2, 3, 4</code>.<br>
+                <span style="color: var(--text-muted);">Compara pos 0 contra 1, contra 2, contra 3 y contra 4.</span></li>
+              <li><b>Cuando <code>i = 1</code>:</b> <code>j</code> arranca en <code>1 + 1 = 2</code> y recorre <code>j = 2, 3, 4</code>.<br>
+                <span style="color: var(--text-muted);">Compara pos 1 contra 2, contra 3 y contra 4.</span></li>
+              <li><b>Cuando <code>i = 2</code>:</b> <code>j</code> arranca en <code>2 + 1 = 3</code> y recorre <code>j = 3, 4</code>.</li>
+              <li><b>Cuando <code>i = 3</code>:</b> <code>j</code> arranca en <code>3 + 1 = 4</code> y recorre <code>j = 4</code>.</li>
+              <li><b>Cuando <code>i = 4</code>:</b> <code>j</code> arranca en <code>5</code>; como <code>5 &lt; 5</code> es falso, no entra.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: LA IDEA VISUAL DE i Y j = i + 1 -->
+      <section>
+        <h2><span class="section-num">12</span> ¿Por Qué <code>j</code> Empieza en <code>i + 1</code>?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Miremos gráficamente qué rol cumple cada índice durante el algoritmo del apunte:
+        </p>
+
+        <div class="grid-2" style="margin-top: 8px;">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">📍 Índice <code>i</code> (Posición que estamos acomodando)</h4>
+            <p style="font-size: 0.84rem;">
+              <code>i</code> se queda quieto señalando el casillero donde queremos dejar el menor valor disponible.
+            </p>
+            <p style="font-size: 0.84rem; margin-top: 6px;">
+              Todo lo que está a la <b>izquierda de <code>i</code></b> ya fue ordenado en las vueltas anteriores y <b>no debemos tocarlo más</b>.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">🔍 Índice <code>j = i + 1</code> (Explorador hacia adelante)</h4>
+            <p style="font-size: 0.84rem;">
+              No tiene sentido comparar una casilla consigo misma (<code>numeros[i]</code> con <code>numeros[i]</code>), ni tampoco volver hacia atrás.
+            </p>
+            <p style="font-size: 0.84rem; margin-top: 6px;">
+              Por eso <code>j</code> nace siempre en <b><code>i + 1</code></b> (exactamente <b>una posición a la derecha de <code>i</code></b>) y camina hasta el final del vector.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px; text-align: center;">
+          <p style="margin: 0 0 8px; font-size: 0.86rem;">
+            Ejemplo cuando estamos acomodando la posición <b><code>i = 1</code></b>:
+          </p>
+          <div class="array-container" style="margin: 6px 0;">
+            <div class="array-cell-wrapper"><span class="array-index">pos 0 (Ya fijo)</span><div class="array-cell match">1</div></div>
+            <div class="array-cell-wrapper"><span class="array-index" style="color: var(--accent-amber);">i = 1 (Fijo ahora)</span><div class="array-cell highlight">8</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">j = 2 (i+1)</span><div class="array-cell">10</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">j = 3</span><div class="array-cell">3</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">j = 4</span><div class="array-cell">5</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: EL ALGORITMO DE ORDENAMIENTO DEL APUNTE (DE MENOR A MAYOR) -->
+      <section>
+        <h2><span class="section-num">13</span> El Algoritmo del Apunte (De Menor a Mayor)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Este es el bloque exacto de código que presenta el Apunte Teórico (página 14) para ordenar un vector de 5 números de menor a mayor:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">ordenamiento_apunte.c</span>
+            <span class="code-badge">Algoritmo Central de Clase</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> aux;
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> j = i + <span class="c-num">1</span>; j &lt; <span class="c-num">5</span>; j++)
+    {
+        <span class="c-kw">if</span>(numeros[j] &lt; numeros[i])
+        {
+            aux = numeros[i];
+            numeros[i] = numeros[j];
+            numeros[j] = aux;
+        }
+    }
+}</div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 <b>Leelo en voz alta como una oración en español:</b> <i>"Para cada posición <code>i</code> del vector, recorro todas las posiciones siguientes <code>j</code>. Si encuentro en <code>numeros[j]</code> un número más chico que el que tengo en <code>numeros[i]</code>, los intercambio de lugar usando <code>aux</code>."</i>
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: ANATOMÍA LÍNEA POR LÍNEA DEL ALGORITMO -->
+      <section>
+        <h2><span class="section-num">14</span> Entendiendo el Algoritmo Parte por Parte</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. Primer <code>for</code>: <code>for(int i = 0; i &lt; 5; i++)</code></h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Representa <b>la posición que estamos intentando acomodar</b>. Empieza acomodando la casilla <code>0</code>, luego la <code>1</code>, luego la <code>2</code>, y así sucesivamente.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">2. Segundo <code>for</code>: <code>for(int j = i + 1; j &lt; 5; j++)</code></h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Recorre <b>todas las posiciones que están después de <code>i</code></b>. Como empieza en <code>i + 1</code>, siempre mira hacia adelante buscando candidatos más chicos.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">3. La Comparación: <code>if(numeros[j] &lt; numeros[i])</code></h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Pregunta: <b>¿el número que está más adelante (en <code>j</code>) es menor que el que está en la posición <code>i</code>?</b> Si la respuesta es <b>SÍ</b>, significa que están desordenados y hay que intercambiarlos.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">4. El Intercambio: <code>aux = numeros[i]; ...</code></h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Cuando el <code>if</code> da verdadero, las tres líneas con <code>aux</code> intercambian los dos valores. Así, el número más pequeño pasa inmediatamente a ocupar la posición <code>numeros[i]</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: SIMULACIÓN PASO A PASO SOBRE {8, 3, 10, 1, 5} - VUELTA 1 (PARTE 1) -->
+      <section>
+        <h2><span class="section-num">15</span> Simulación Paso a Paso: Vuelta 1 (<code>i = 0</code>, Parte A)</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Apliquemos el algoritmo al vector del apunte <code>{8, 3, 10, 1, 5}</code>. En la primera vuelta externa, <b><code>i = 0</code></b> (queremos dejar el menor de todos en la casilla <code>[0]</code>):
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">0</span>
+            <div class="step-content">
+              <b>Estado al arrancar <code>i = 0</code>:</b> <code>[ <b>8</b>, 3, 10, 1, 5 ]</code> &nbsp;(en <code>numeros[0]</code> hay un <code>8</code>).
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">j=1</span>
+            <div class="step-content">
+              Compara <code>numeros[1] &lt; numeros[0]</code> ➔ <b>¿<code>3 &lt; 8</code>? SÍ (Verdadero)</b>.<br>
+              ¡Intercambiamos pos 0 y pos 1! Ahora el <code>3</code> pasa a la posición <code>[0]</code>:<br>
+              <span style="color: var(--accent-emerald); font-family: var(--font-mono);">Estado del vector: [ <b>3</b>, <b>8</b>, 10, 1, 5 ]</span>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">j=2</span>
+            <div class="step-content">
+              <i>¡Atención!</i> Ahora en <code>numeros[0]</code> ya no está el 8, ¡está el <b><code>3</code></b>!<br>
+              Compara <code>numeros[2] &lt; numeros[0]</code> ➔ <b>¿<code>10 &lt; 3</code>? NO (Falso)</b>.<br>
+              No entra al <code>if</code>. El vector queda igual: <span style="font-family: var(--font-mono);">[ <b>3</b>, 8, 10, 1, 5 ]</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            📌 <b>Observación clave:</b> Aunque <code>i</code> sigue valiendo <code>0</code>, el valor guardado adentro de <code>numeros[0]</code> puede cambiar varias veces durante la misma pasada a medida que aparecen números cada vez más chicos.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: SIMULACIÓN PASO A PASO - VUELTA 1 (PARTE 2) -->
+      <section>
+        <h2><span class="section-num">16</span> Simulación Paso a Paso: Vuelta 1 (<code>i = 0</code>, Parte B)</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Seguimos adentro de <b><code>i = 0</code></b>. Nuestro vector viene así: <code>[ <b>3</b>, 8, 10, 1, 5 ]</code>. Faltan probar <code>j = 3</code> y <code>j = 4</code>:
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">j=3</span>
+            <div class="step-content">
+              Compara <code>numeros[3] &lt; numeros[0]</code> ➔ <b>¿<code>1 &lt; 3</code>? SÍ (Verdadero)</b>.<br>
+              ¡Encontramos un número todavía más chico que el 3! Intercambiamos pos 0 y pos 3:<br>
+              <span style="color: var(--accent-emerald); font-family: var(--font-mono);">Estado del vector: [ <b>1</b>, 8, 10, <b>3</b>, 5 ]</span>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">j=4</span>
+            <div class="step-content">
+              Ahora en <code>numeros[0]</code> está el <code>1</code>.<br>
+              Compara <code>numeros[4] &lt; numeros[0]</code> ➔ <b>¿<code>5 &lt; 1</code>? NO (Falso)</b>.<br>
+              No hace intercambio. Termina el ciclo interno de <code>j</code>.
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px; text-align: center;">
+          <h4 style="color: #34d399; margin-bottom: 6px;">🎉 Resultado al finalizar la Vuelta 1 (<code>i = 0</code>)</h4>
+          <div class="array-container" style="margin: 6px 0;">
+            <div class="array-cell-wrapper"><span class="array-index">[0] FIJO ✓</span><div class="array-cell match">1</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">[1]</span><div class="array-cell">8</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">[2]</span><div class="array-cell">10</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">[3]</span><div class="array-cell">3</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">[4]</span><div class="array-cell">5</div></div>
+          </div>
+          <p style="margin: 4px 0 0; font-size: 0.84rem; color: #a7f3d0;">
+            ¡El número más chico de todo el vector (<b><code>1</code></b>) ya quedó en su lugar definitivo en <code>numeros[0]</code>!
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: SIMULACIÓN PASO A PASO - VUELTA 2 (i = 1) -->
+      <section>
+        <h2><span class="section-num">17</span> Simulación Paso a Paso: Vuelta 2 (<code>i = 1</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Ahora el ciclo externo avanza a <b><code>i = 1</code></b>. La casilla <code>[0]</code> (que tiene el <code>1</code>) no se toca más. Arrancamos con <code>[ 1, <b>8</b>, 10, 3, 5 ]</code> y <code>j</code> empieza en <code>i + 1 = 2</code>:
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">j=2</span>
+            <div class="step-content">
+              Compara <code>numeros[2] &lt; numeros[1]</code> ➔ <b>¿<code>10 &lt; 8</code>? NO (Falso)</b>.<br>
+              Queda igual: <span style="font-family: var(--font-mono);">[ 1, <b>8</b>, 10, 3, 5 ]</span>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">j=3</span>
+            <div class="step-content">
+              Compara <code>numeros[3] &lt; numeros[1]</code> ➔ <b>¿<code>3 &lt; 8</code>? SÍ (Verdadero)</b>.<br>
+              ¡Intercambiamos pos 1 y pos 3! El <code>3</code> pasa a <code>numeros[1]</code> y el <code>8</code> va a <code>numeros[3]</code>:<br>
+              <span style="color: var(--accent-emerald); font-family: var(--font-mono);">Estado del vector: [ 1, <b>3</b>, 10, <b>8</b>, 5 ]</span>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">j=4</span>
+            <div class="step-content">
+              Ahora en <code>numeros[1]</code> está el <code>3</code>. Compara <code>numeros[4] &lt; numeros[1]</code> ➔ <b>¿<code>5 &lt; 3</code>? NO (Falso)</b>.<br>
+              Queda igual: <span style="font-family: var(--font-mono);">[ 1, <b>3</b>, 10, 8, 5 ]</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            ✓ <b>Al terminar <code>i = 1</code>:</b> Las dos primeras posiciones ya son definitivas: <code>[ <b>1</b>, <b>3</b>, 10, 8, 5 ]</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: SIMULACIÓN PASO A PASO - VUELTAS 3 Y 4 (i = 2 e i = 3) -->
+      <section>
+        <h2><span class="section-num">18</span> Simulación: Últimas Vueltas (<code>i = 2</code> e <code>i = 3</code>)</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Vuelta 3: <code>i = 2</code> (acomodando pos 2)</h4>
+            <p style="font-size: 0.82rem;">
+              Venimos con <code>[ 1, 3, <b>10</b>, 8, 5 ]</code>. <code>j</code> empieza en <code>3</code>:
+            </p>
+            <ul style="font-size: 0.8rem; margin-left: 16px; line-height: 1.55;">
+              <li><b><code>j = 3</code>:</b> ¿<code>numeros[3] &lt; numeros[2]</code>? ¿<code>8 &lt; 10</code>? <b>SÍ</b>.<br>
+                Intercambia pos 2 y pos 3 ➔ <code>[ 1, 3, <b>8</b>, <b>10</b>, 5 ]</code></li>
+              <li><b><code>j = 4</code>:</b> Ahora en pos 2 hay un <code>8</code>. ¿<code>numeros[4] &lt; numeros[2]</code>? ¿<code>5 &lt; 8</code>? <b>SÍ</b>.<br>
+                Intercambia pos 2 y pos 4 ➔ <code>[ 1, 3, <b>5</b>, 10, <b>8</b> ]</code></li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              ✓ ¡El <code>5</code> quedó fijo en la posición <code>[2]</code>!
+            </p>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">Vuelta 4: <code>i = 3</code> (acomodando pos 3)</h4>
+            <p style="font-size: 0.82rem;">
+              Venimos con <code>[ 1, 3, 5, <b>10</b>, 8 ]</code>. <code>j</code> empieza en <code>4</code>:
+            </p>
+            <ul style="font-size: 0.8rem; margin-left: 16px; line-height: 1.55;">
+              <li><b><code>j = 4</code>:</b> ¿<code>numeros[4] &lt; numeros[3]</code>? ¿<code>8 &lt; 10</code>? <b>SÍ</b>.<br>
+                Intercambia pos 3 y pos 4 ➔ <code>[ 1, 3, 5, <b>8</b>, <b>10</b> ]</code></li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              ✓ ¡El <code>8</code> quedó en <code>[3]</code> y automáticamente el <code>10</code> en <code>[4]</code>!
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px; text-align: center;">
+          <h4 style="color: #34d399; margin-bottom: 6px;">🏆 Vector 100% Ordenado de Menor a Mayor</h4>
+          <div class="array-container" style="margin: 6px 0;">
+            <div class="array-cell-wrapper"><span class="array-index">[0]</span><div class="array-cell match">1</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">[1]</span><div class="array-cell match">3</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">[2]</span><div class="array-cell match">5</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">[3]</span><div class="array-cell match">8</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">[4]</span><div class="array-cell match">10</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: TABLA DE SEGUIMIENTO GLOBAL DE LAS 10 COMPARACIONES -->
+      <section>
+        <h2><span class="section-num">19</span> Tabla Completa de Seguimiento (Traza Global)</h2>
+        <p style="color: var(--text-muted); font-size: 0.84rem; margin-bottom: 6px;">
+          Acá tenés las <b>10 comparaciones</b> completas que hace el programa sobre <code>{8, 3, 10, 1, 5}</code> en una sola tabla de referencia:
+        </p>
+
+        <table class="trace-table" style="font-size: 0.78rem;">
+          <thead>
+            <tr>
+              <th>Pasada <code>i</code></th>
+              <th><code>j</code></th>
+              <th>Pregunta <code>numeros[j] &lt; numeros[i]</code></th>
+              <th>¿Intercambia?</th>
+              <th>Vector resultante después del paso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>i = 0</code></td>
+              <td><code>j = 1</code></td>
+              <td><code>¿3 &lt; 8?</code> ➔ <b>Verdadero</b></td>
+              <td style="color: var(--accent-emerald);"><b>SÍ (pos 0 ↔ pos 1)</b></td>
+              <td><code>[ <b>3</b>, <b>8</b>, 10, 1, 5 ]</code></td>
+            </tr>
+            <tr>
+              <td><code>i = 0</code></td>
+              <td><code>j = 2</code></td>
+              <td><code>¿10 &lt; 3?</code> ➔ Falso</td>
+              <td style="color: var(--text-dim);">No</td>
+              <td><code>[ 3, 8, 10, 1, 5 ]</code></td>
+            </tr>
+            <tr>
+              <td><code>i = 0</code></td>
+              <td><code>j = 3</code></td>
+              <td><code>¿1 &lt; 3?</code> ➔ <b>Verdadero</b></td>
+              <td style="color: var(--accent-emerald);"><b>SÍ (pos 0 ↔ pos 3)</b></td>
+              <td><code>[ <b>1</b>, 8, 10, <b>3</b>, 5 ]</code></td>
+            </tr>
+            <tr>
+              <td><code>i = 0</code></td>
+              <td><code>j = 4</code></td>
+              <td><code>¿5 &lt; 1?</code> ➔ Falso</td>
+              <td style="color: var(--text-dim);">No</td>
+              <td><code>[ <b>1</b>, 8, 10, 3, 5 ]</code> &nbsp;<i>(pos 0 lista)</i></td>
+            </tr>
+            <tr>
+              <td><code>i = 1</code></td>
+              <td><code>j = 2</code></td>
+              <td><code>¿10 &lt; 8?</code> ➔ Falso</td>
+              <td style="color: var(--text-dim);">No</td>
+              <td><code>[ 1, 8, 10, 3, 5 ]</code></td>
+            </tr>
+            <tr>
+              <td><code>i = 1</code></td>
+              <td><code>j = 3</code></td>
+              <td><code>¿3 &lt; 8?</code> ➔ <b>Verdadero</b></td>
+              <td style="color: var(--accent-emerald);"><b>SÍ (pos 1 ↔ pos 3)</b></td>
+              <td><code>[ 1, <b>3</b>, 10, <b>8</b>, 5 ]</code></td>
+            </tr>
+            <tr>
+              <td><code>i = 1</code></td>
+              <td><code>j = 4</code></td>
+              <td><code>¿5 &lt; 3?</code> ➔ Falso</td>
+              <td style="color: var(--text-dim);">No</td>
+              <td><code>[ <b>1</b>, <b>3</b>, 10, 8, 5 ]</code> &nbsp;<i>(pos 1 lista)</i></td>
+            </tr>
+            <tr>
+              <td><code>i = 2</code></td>
+              <td><code>j = 3</code></td>
+              <td><code>¿8 &lt; 10?</code> ➔ <b>Verdadero</b></td>
+              <td style="color: var(--accent-emerald);"><b>SÍ (pos 2 ↔ pos 3)</b></td>
+              <td><code>[ 1, 3, <b>8</b>, <b>10</b>, 5 ]</code></td>
+            </tr>
+            <tr>
+              <td><code>i = 2</code></td>
+              <td><code>j = 4</code></td>
+              <td><code>¿5 &lt; 8?</code> ➔ <b>Verdadero</b></td>
+              <td style="color: var(--accent-emerald);"><b>SÍ (pos 2 ↔ pos 4)</b></td>
+              <td><code>[ <b>1</b>, <b>3</b>, <b>5</b>, 10, <b>8</b> ]</code> &nbsp;<i>(pos 2 lista)</i></td>
+            </tr>
+            <tr>
+              <td><code>i = 3</code></td>
+              <td><code>j = 4</code></td>
+              <td><code>¿8 &lt; 10?</code> ➔ <b>Verdadero</b></td>
+              <td style="color: var(--accent-emerald);"><b>SÍ (pos 3 ↔ pos 4)</b></td>
+              <td><code>[ <b>1</b>, <b>3</b>, <b>5</b>, <b>8</b>, <b>10</b> ]</code> &nbsp;<i>(¡Todo ordenado!)</i></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 21: PROGRAMA COMPLETO EN MAIN() -->
+      <section>
+        <h2><span class="section-num">20</span> Programa Completo en <code>main()</code></h2>
+        <div class="grid-2-1">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">programa_ordenar_completo.c</span>
+              <span class="code-badge">C Estándar</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">8</span>, <span class="c-num">3</span>, <span class="c-num">10</span>, <span class="c-num">1</span>, <span class="c-num">5</span>};
+    <span class="c-kw">int</span> aux;
+
+    <span class="c-cmt">// 1. Ordenamos el vector de menor a mayor</span>
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+    {
+        <span class="c-kw">for</span>(<span class="c-kw">int</span> j = i + <span class="c-num">1</span>; j &lt; <span class="c-num">5</span>; j++)
+        {
+            <span class="c-kw">if</span>(numeros[j] &lt; numeros[i])
+            {
+                aux = numeros[i];
+                numeros[i] = numeros[j];
+                numeros[j] = aux;
+            }
+        }
+    }
+
+    <span class="c-cmt">// 2. Mostramos el vector ya ordenado</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Vector ordenado: "</span>);
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, numeros[i]);
+    }
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Consola / Salida</span>
+                <span>stdout</span>
+              </div>
+              <div class="terminal-body">Vector ordenado: 1 3 5 8 10 </div>
+            </div>
+
+            <div class="box box-amber" style="margin-top: 10px;">
+              <h4 style="color: #fbbf24;">Separar etapas</h4>
+              <p style="font-size: 0.8rem; margin: 0;">
+                Observá que el programa tiene <b>etapas bien separadas</b>: primero el doble <code>for</code> termina de ordenar todo el vector en silencio, y recién <b>afuera y abajo</b> usamos un <code>for</code> simple para imprimirlo por pantalla.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: ORDENAR DE MAYOR A MENOR (DESCENDENTE) -->
+      <section>
+        <h2><span class="section-num">21</span> Ordenar de Mayor a Menor (Descendente)</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">El truco del Apunte Teórico (página 15)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            ¿Qué cambia si el ejercicio nos pide ordenar <b>de mayor a menor</b>? ¡Casi nada! Solo tenemos que cambiar el signo <b><code>&lt;</code></b> por el signo <b><code>&gt;</code></b> dentro del <code>if</code>:
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">menor_a_mayor.c</span>
+              <span class="code-badge">Ascendente (&lt;)</span>
+            </div>
+            <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> j = i + <span class="c-num">1</span>; j &lt; <span class="c-num">5</span>; j++)
+    {
+<span class="c-hl">        <span class="c-kw">if</span>(numeros[j] &lt; numeros[i])</span>
+        {
+            aux = numeros[i];
+            numeros[i] = numeros[j];
+            numeros[j] = aux;
+        }
+    }
+}</div>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">mayor_a_menor.c</span>
+              <span class="code-badge">Descendente (&gt;)</span>
+            </div>
+            <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> j = i + <span class="c-num">1</span>; j &lt; <span class="c-num">5</span>; j++)
+    {
+<span class="c-hl">        <span class="c-kw">if</span>(numeros[j] &gt; numeros[i])</span>
+        {
+            aux = numeros[i];
+            numeros[i] = numeros[j];
+            numeros[j] = aux;
+        }
+    }
+}</div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🧠 <b>¿Por qué funciona cambiar <code>&lt;</code> por <code>&gt;</code>?</b> Porque ahora preguntamos: <i>"¿el elemento que está más adelante en <code>numeros[j]</code> es <b>más grande</b> que el que tengo en <code>numeros[i]</code>?"</i>. Si es más grande, lo traemos hacia adelante.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: TRAZA RÁPIDA DE MAYOR A MENOR -->
+      <section>
+        <h2><span class="section-num">22</span> Seguimiento de Mayor a Menor sobre <code>{8, 3, 10, 1, 5}</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Veamos qué hace cada vuelta del ciclo externo cuando usamos <code>if(numeros[j] &gt; numeros[i])</code>:
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">i=0</span>
+            <div class="step-content">
+              Arranca con <code>[ <b>8</b>, 3, 10, 1, 5 ]</code>.<br>
+              • Con <code>j=1</code>: ¿<code>3 &gt; 8</code>? No.<br>
+              • Con <code>j=2</code>: ¿<code>10 &gt; 8</code>? <b>SÍ</b> ➔ Intercambia pos 0 y pos 2 ➔ <code>[ <b>10</b>, 3, <b>8</b>, 1, 5 ]</code>.<br>
+              • Con <code>j=3</code> (¿<code>1 &gt; 10</code>? No) y <code>j=4</code> (¿<code>5 &gt; 10</code>? No). <b>El <code>10</code> queda fijo en <code>[0]</code>.</b>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">i=1</span>
+            <div class="step-content">
+              Arranca con <code>[ 10, <b>3</b>, 8, 1, 5 ]</code>.<br>
+              • Con <code>j=2</code>: ¿<code>8 &gt; 3</code>? <b>SÍ</b> ➔ Intercambia pos 1 y pos 2 ➔ <code>[ 10, <b>8</b>, <b>3</b>, 1, 5 ]</code>.<br>
+              • Con <code>j=3</code> (¿<code>1 &gt; 8</code>? No) y <code>j=4</code> (¿<code>5 &gt; 8</code>? No). <b>El <code>8</code> queda fijo en <code>[1]</code>.</b>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">i=2</span>
+            <div class="step-content">
+              Arranca con <code>[ 10, 8, <b>3</b>, 1, 5 ]</code>.<br>
+              • Con <code>j=3</code>: ¿<code>1 &gt; 3</code>? No. • Con <code>j=4</code>: ¿<code>5 &gt; 3</code>? <b>SÍ</b> ➔ Intercambia pos 2 y pos 4 ➔ <code>[ 10, 8, <b>5</b>, 1, <b>3</b> ]</code>.
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">i=3</span>
+            <div class="step-content">
+              Arranca con <code>[ 10, 8, 5, <b>1</b>, 3 ]</code>.<br>
+              • Con <code>j=4</code>: ¿<code>3 &gt; 1</code>? <b>SÍ</b> ➔ Intercambia pos 3 y pos 4 ➔ <b><code>[ 10, 8, 5, 3, 1 ]</code></b>. ¡Listo!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: CONTENIDO COMPLEMENTARIO: EL MÉTODO DE LA BURBUJA CLÁSICO -->
+      <section>
+        <h2><span class="section-num">23</span> Variante Complementaria: Burbujeo de Adyacentes</h2>
+        <div class="box box-purple">
+          <h4 style="color: #c084fc; margin-bottom: 4px;">¿Por qué vemos también esta variante?</h4>
+          <p style="font-size: 0.85rem; margin: 0;">
+            En libros, videos o ejercicios de programación vas a encontrar muy seguido una variante hermana llamada <b>Método de la Burbuja Clásico (Bubble Sort de vecinos)</b>. Es fundamental conocerla para no confundirte si la ves escrita.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿En qué consiste el Burbujeo de Vecinos?</h4>
+            <p style="font-size: 0.82rem;">
+              En lugar de dejar fija la casilla <code>i</code> y compararla contra todas las <code>j</code> lejanas, esta variante compara siempre <b>dos casillas vecinas pegadas</b>:
+            </p>
+            <p style="font-size: 0.9rem; font-family: var(--font-mono); text-align: center; color: #ffffff; margin: 8px 0;">
+              numeros[j] &nbsp;contra&nbsp; numeros[j + 1]
+            </p>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Si el vecino de la izquierda es mayor que el vecino de la derecha (<code>numeros[j] &gt; numeros[j + 1]</code>), se intercambian. Así, el número más grande va "flotando" como una burbuja hacia el final del vector en cada pasada.
+            </p>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">burbuja_vecinos.c</span>
+              <span class="code-badge">Compara j con j + 1</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> aux;
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span> - <span class="c-num">1</span>; i++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> j = <span class="c-num">0</span>; j &lt; <span class="c-num">5</span> - <span class="c-num">1</span> - i; j++)
+    {
+        <span class="c-kw">if</span>(numeros[j] &gt; numeros[j + <span class="c-num">1</span>])
+        {
+            aux = numeros[j];
+            numeros[j] = numeros[j + <span class="c-num">1</span>];
+            numeros[j + <span class="c-num">1</span>] = aux;
+        }
+    }
+}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: COMPARATIVA LADO A LADO DE AMBAS VARIANTES -->
+      <section>
+        <h2><span class="section-num">24</span> Comparativa: Método del Apunte vs. Burbuja Vecinos</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Ambos métodos usan <b>doble <code>for</code> + <code>if</code> + intercambio con <code>aux</code></b> y ambos dejan el vector exactamente con el mismo resultado final. Mirá sus diferencias:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>Método del Apunte (Fijando <code>i</code>) ⭐</th>
+              <th>Burbuja de Adyacentes (<code>j</code> y <code>j+1</code>)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>¿Qué casillas compara el <code>if</code>?</b></td>
+              <td><code>numeros[j]</code> contra <code>numeros[i]</code></td>
+              <td><code>numeros[j]</code> contra <code>numeros[j + 1]</code></td>
+            </tr>
+            <tr>
+              <td><b>¿Dónde arranca <code>j</code>?</b></td>
+              <td>En <code>j = i + 1</code> (una adelante de <code>i</code>)</td>
+              <td>En <code>j = 0</code> (desde el principio)</td>
+            </tr>
+            <tr>
+              <td><b>¿Qué queda fijo tras la 1ra pasada?</b></td>
+              <td>El <b>menor</b> queda fijo al principio (en <code>[0]</code>)</td>
+              <td>El <b>mayor</b> queda fijo al final (en <code>[N-1]</code>)</td>
+            </tr>
+            <tr>
+              <td><b>¿Cuál debés escribir en tus pruebas?</b></td>
+              <td style="color: var(--accent-emerald);"><b>¡Este! Es el algoritmo oficial del apunte de clase.</b></td>
+              <td>Reconocerlo si aparece en un ejercicio de lectura de código.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            ✅ <b>Para tus exámenes y prácticas:</b> Usá siempre el modelo del apunte (<code>for i</code> ➔ <code>for j = i + 1</code> ➔ <code>if(numeros[j] &lt; numeros[i])</code>), que es más corto, no tiene riesgo de salirse del vector con <code>j + 1</code> y es el que espera tu profesor.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: EL PATRÓN VISUAL Y RELACIÓN CON EL MODELO DE EXAMEN -->
+      <section>
+        <h2><span class="section-num">25</span> El Patrón Visual y el Modelo de Examen</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          En las páginas 15 y 16 del apunte se destaca cómo reconocer inmediatamente un ordenamiento y por qué aparece siempre en las evaluaciones:
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">🔎 El "Esqueleto" Visual del Ordenamiento</h4>
+            <p style="font-size: 0.82rem;">
+              Cada vez que leas un programa en un examen y veas esta escalera de 4 niveles, sabés sin dudar que <b>está ordenando un vector</b>:
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span> (...)              <span class="c-cmt">// 1. Ciclo externo</span>
+{
+    <span class="c-kw">for</span> (...)          <span class="c-cmt">// 2. Ciclo interno</span>
+    {
+        <span class="c-kw">if</span> (...)       <span class="c-cmt">// 3. Comparación</span>
+        {
+            <span class="c-cmt">// 4. Intercambio con aux</span>
+        }
+    }
+}</div>
+            </div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">📝 ¿Por qué se toma siempre en el Examen?</h4>
+            <p style="font-size: 0.82rem;">
+              Como explica el apunte, con un solo ejercicio de ordenamiento el profesor evalúa <b>4 temas fundamentales a la vez</b>:
+            </p>
+            <div class="step-list" style="margin-top: 6px;">
+              <div class="step-item" style="padding: 6px 10px;">
+                <span class="step-num">1</span>
+                <div class="step-content" style="font-size: 0.8rem;">Saber <b>recorrer vectores</b> usando índices sin salirse de rango.</div>
+              </div>
+              <div class="step-item" style="padding: 6px 10px;">
+                <span class="step-num">2</span>
+                <div class="step-content" style="font-size: 0.8rem;">Saber utilizar <b>ciclos <code>for</code> anidados</b> (<code>i</code> y <code>j</code>).</div>
+              </div>
+              <div class="step-item" style="padding: 6px 10px;">
+                <span class="step-num">3</span>
+                <div class="step-content" style="font-size: 0.8rem;">Saber <b>comparar elementos</b> con <code>if</code> (<code>&lt;</code> o <code>&gt;</code>).</div>
+              </div>
+              <div class="step-item" style="padding: 6px 10px;">
+                <span class="step-num">4</span>
+                <div class="step-content" style="font-size: 0.8rem;">Saber <b>intercambiar valores</b> usando una variable auxiliar <code>aux</code>.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: EJEMPLO PROGRESIVO NIVEL 1 Y 2: CARGAR POR TECLADO Y ORDENAR -->
+      <section>
+        <h2><span class="section-num">26</span> Ejemplo Práctico: Cargar con <code>scanf</code> y Ordenar</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Combinemos las 3 etapas clásicas de un programa completo: <b>1) Cargar</b> los 5 números por teclado, <b>2) Ordenarlos</b> de menor a mayor y <b>3) Mostrarlos</b>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">cargar_y_ordenar.c</span>
+            <span class="code-badge">Nivel 1-2 • Ciclo Completo</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> numeros[<span class="c-num">5</span>];
+    <span class="c-kw">int</span> aux;
+
+    <span class="c-cmt">// ETAPA 1: Carga del vector por teclado</span>
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"Ingrese el numero de la posicion %d: "</span>, i);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;numeros[i]);
+    }
+
+    <span class="c-cmt">// ETAPA 2: Ordenamiento de menor a mayor</span>
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+    {
+        <span class="c-kw">for</span>(<span class="c-kw">int</span> j = i + <span class="c-num">1</span>; j &lt; <span class="c-num">5</span>; j++)
+        {
+            <span class="c-kw">if</span>(numeros[j] &lt; numeros[i])
+            {
+                aux = numeros[i];
+                numeros[i] = numeros[j];
+                numeros[j] = aux;
+            }
+        }
+    }
+
+    <span class="c-cmt">// ETAPA 3: Mostrar el resultado</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"\nNumeros ordenados de menor a mayor: "</span>);
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, numeros[i]);
+    }
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: EJEMPLO PROGRESIVO NIVEL 3: PODIO TOP 3 Y EXTREMOS -->
+      <section>
+        <h2><span class="section-num">27</span> Ejemplo Nivel 3: Podio de Puntajes (Top 3)</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Una ventaja enorme de tener un vector ordenado es que <b>los valores especiales quedan en posiciones fijas</b>. Si ordenamos 6 puntajes de <b>mayor a menor</b>, el 1er puesto está en <code>[0]</code>, el 2do en <code>[1]</code> y el 3ro en <code>[2]</code>:
+        </p>
+
+        <div class="grid-2-1">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">podio_puntajes.c</span>
+              <span class="code-badge">Nivel 3 • Top 3</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> pts[<span class="c-num">6</span>] = {<span class="c-num">450</span>, <span class="c-num">890</span>, <span class="c-num">120</span>, <span class="c-num">950</span>, <span class="c-num">610</span>, <span class="c-num">780</span>};
+    <span class="c-kw">int</span> aux;
+
+    <span class="c-cmt">// Ordenamos de MAYOR a MENOR (&gt;)</span>
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">6</span>; i++)
+    {
+        <span class="c-kw">for</span>(<span class="c-kw">int</span> j = i + <span class="c-num">1</span>; j &lt; <span class="c-num">6</span>; j++)
+        {
+            <span class="c-kw">if</span>(pts[j] &gt; pts[i])
+            {
+                aux = pts[i];
+                pts[i] = pts[j];
+                pts[j] = aux;
+            }
+        }
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"1er Puesto (Oro):    %d pts\n"</span>, pts[<span class="c-num">0</span>]);
+    <span class="c-fn">printf</span>(<span class="c-str">"2do Puesto (Plata):  %d pts\n"</span>, pts[<span class="c-num">1</span>]);
+    <span class="c-fn">printf</span>(<span class="c-str">"3er Puesto (Bronce): %d pts\n"</span>, pts[<span class="c-num">2</span>]);
+    <span class="c-fn">printf</span>(<span class="c-str">"Puntaje mas bajo:    %d pts\n"</span>, pts[<span class="c-num">5</span>]);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header"><span>Consola</span><span>stdout</span></div>
+              <div class="terminal-body">1er Puesto (Oro):    950 pts
+2do Puesto (Plata):  890 pts
+3er Puesto (Bronce): 780 pts
+Puntaje mas bajo:    120 pts</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.8rem;">
+                💡 <b>Atajo útil:</b> Con el vector ordenado, el máximo y el mínimo están siempre en las puntas: <code>[0]</code> y <code>[N-1]</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: EJEMPLO PROGRESIVO NIVEL 4: ORDENAR VECTORES PARALELOS -->
+      <section>
+        <h2><span class="section-num">28</span> Ejemplo Nivel 4: Ordenar con Datos Asociados</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">
+          ¿Qué pasa si tenemos un vector de <code>notas[4]</code> y otro vector paralelo con los números de <code>legajo[4]</code> de cada alumno? Si intercambiamos dos notas, <b>también debemos intercambiar sus legajos adentro del mismo <code>if</code></b> para que no se mezclen de dueño:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">vectores_paralelos.c</span>
+            <span class="code-badge">Nivel 4 • Doble Swap Sincronizado</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> legajos[<span class="c-num">4</span>] = {<span class="c-num">101</span>, <span class="c-num">102</span>, <span class="c-num">103</span>, <span class="c-num">104</span>};
+<span class="c-kw">int</span> notas[<span class="c-num">4</span>]   = {<span class="c-num">7</span>,   <span class="c-num">10</span>,  <span class="c-num">4</span>,   <span class="c-num">9</span>};
+<span class="c-kw">int</span> auxNota, auxLegajo;
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">4</span>; i++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> j = i + <span class="c-num">1</span>; j &lt; <span class="c-num">4</span>; j++)
+    {
+        <span class="c-kw">if</span>(notas[j] &gt; notas[i])   <span class="c-cmt">// El criterio lo manda el vector 'notas'</span>
+        {
+            <span class="c-cmt">// 1. Intercambiamos las notas</span>
+            auxNota = notas[i];
+            notas[i] = notas[j];
+            notas[j] = auxNota;
+
+            <span class="c-cmt">// 2. Intercambiamos TAMBIÉN los legajos en las mismas posiciones i y j</span>
+            auxLegajo = legajos[i];
+            legajos[i] = legajos[j];
+            legajos[j] = auxLegajo;
+        }
+    }
+}
+<span class="c-cmt">// Ahora en pos 0 queda: Legajo 102 con Nota 10.</span></div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: ERRORES FRECUENTES (1/2) -->
+      <section>
+        <h2><span class="section-num">29</span> Errores Frecuentes al Ordenar (Parte 1)</h2>
         <div class="comparison-box">
           <div class="wrong-card">
-            <div class="wrong-title">❌ El Error Fatal sin Variable Temporal</div>
-            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
-              a = b; // El valor original de 'a' SE PIERDE<br>
-              b = a; // Ahora ambos tienen el valor de 'b'
+            <div class="wrong-title">❌ Error 1: Hacer el swap sin variable <code>aux</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">if</span>(numeros[j] &lt; numeros[i])
+{
+    numeros[i] = numeros[j];
+    numeros[j] = numeros[i]; <span class="c-cmt">// ¡MAL!</span>
+}</div>
             </div>
-            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px;">
-              ¡Sobreescribiste <code>a</code> antes de guardar una copia de su valor! Ambos quedan iguales.
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px; margin-bottom: 0;">
+              <b>Qué pasa:</b> Perdés el número original que estaba en <code>numeros[i]</code> y el vector termina lleno de números repetidos. Siempre usá las 3 líneas con <code>aux</code>.
+            </p>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 2: Empezar <code>j = 0</code> en vez de <code>j = i + 1</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> j = <span class="c-num">0</span>; j &lt; <span class="c-num">5</span>; j++) <span class="c-cmt">// ¡Cuidado!</span>
+    {
+        <span class="c-kw">if</span>(numeros[j] &lt; numeros[i]) { ... }
+    }
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px; margin-bottom: 0;">
+              <b>Qué pasa:</b> Si <code>j</code> empieza en <code>0</code>, el ciclo interno vuelve a tocar las casillas anteriores a <code>i</code> que ya estaban acomodadas y <b>las desordena al revés</b>. <code>j</code> debe arrancar siempre en <b><code>i + 1</code></b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: ERRORES FRECUENTES (2/2) -->
+      <section>
+        <h2><span class="section-num">30</span> Errores Frecuentes al Ordenar (Parte 2)</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 3: Imprimir el vector ADENTRO del doble <code>for</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> j = i + <span class="c-num">1</span>; j &lt; <span class="c-num">5</span>; j++)
+    {
+        <span class="c-kw">if</span>(numeros[j] &lt; numeros[i]) { ... }
+        <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, numeros[i]); <span class="c-cmt">// ¡MAL UBICADO!</span>
+    }
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px; margin-bottom: 0;">
+              <b>Qué pasa:</b> Se imprimen números a medio ordenar decenas de veces. El <code>for</code> que muestra el vector va <b>después de cerrar las llaves</b> del ordenamiento.
             </p>
           </div>
 
           <div class="correct-card">
-            <div class="correct-title">✅ La Técnica Swap con 'temp'</div>
-            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #a7f3d0; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
-              int temp = a; // 1. Guardamos copia de 'a'<br>
-              a = b;        // 2. Pasamos 'b' a la caja 'a'<br>
-              b = temp;     // 3. Pasamos la copia vieja a 'b'
-            </div>
-            <p style="font-size: 0.8rem; color: #a7f3d0; margin-top: 6px;">
-              ¡Intercambio 100% perfecto sin perder ningún dato!
+            <div class="correct-title">✅ Regla Mnemotécnica para <code>&lt;</code> y <code>&gt;</code></div>
+            <p style="font-size: 0.82rem; color: #e2e8f0;">
+              Si estás usando el algoritmo del apunte con <code>if(numeros[j] OP numeros[i])</code>:
+            </p>
+            <ul style="font-size: 0.82rem; color: #a7f3d0; margin-left: 16px; line-height: 1.6;">
+              <li>Querés de <b>menor</b> a mayor ➔ preguntás si <code>numeros[j]</code> es <b>menor</b>: <code>numeros[j] &lt; numeros[i]</code>.</li>
+              <li>Querés de <b>mayor</b> a menor ➔ preguntás si <code>numeros[j]</code> es <b>mayor</b>: <code>numeros[j] &gt; numeros[i]</code>.</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #6ee7b7; margin-top: 6px; margin-bottom: 0;">
+              ¡El símbolo que ponés cuando <code>numeros[j]</code> va a la izquierda coincide con la primera palabra del criterio!
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: EL MÉTODO DE LA BURBUJA -->
+      <!-- SLIDE 32: EJERCICIO GUIADO 1 -->
       <section>
-        <h2><span class="section-num">03</span> La Intuición del Método de la Burbuja (Bubble Sort)</h2>
+        <h2><span class="section-num">31</span> Ejercicio Práctico 1: Ordenar Precios</h2>
         <div class="box box-cyan">
-          <h4 style="color: #38bdf8; margin-bottom: 4px;">La Metáfora Física</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            Imaginá un tubo con agua. Las burbujas de aire más livianas van subiendo a la superficie, mientras que los elementos más pesados se hunden al fondo.
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Dado el vector <code>int precios[5] = {1500, 800, 2300, 450, 1200};</code>, escribí un programa en C que lo ordene de <b>menor a mayor</b>, muestre el listado completo ordenado y luego informe por separado cuál es el precio más barato y cuál es el más caro usando las posiciones del vector.
           </p>
         </div>
 
-        <div class="step-list" style="margin-top: 14px;">
-          <div class="step-item">
-            <span class="step-num">1</span>
-            <div class="step-content">
-              <b>Comparaciones Adyacentes:</b> Recorremos el vector de izquierda a derecha comparando parejas vecinas: <code>vector[j]</code> contra <code>vector[j + 1]</code>.
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">2</span>
-            <div class="step-content">
-              <b>Intercambio si están desordenados:</b> Si el de la izquierda es mayor que el de la derecha (<code>vector[j] &gt; vector[j + 1]</code>), ¡los intercambiamos con <code>temp</code>!
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">3</span>
-            <div class="step-content">
-              <b>Al final de la primera pasada:</b> El número más grande de todo el vector habrá "burbujeado" inevitablemente hasta la última posición.
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">4</span>
-            <div class="step-content">
-              <b>Repetir:</b> Repetimos el proceso $N - 1$ veces para que todos los elementos encuentren su lugar.
-            </div>
-          </div>
-        </div>
-      </section>
+        <details class="code-solution">
+          <summary>👁️ Ver solución paso a paso en C</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
 
-      <!-- SLIDE 5: SIMULACIÓN PASO A PASO -->
-      <section>
-        <h2><span class="section-num">04</span> Simulación Visual: Pasada a Pasada</h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem;">Ordenemos de menor a mayor el vector: <code>{5, 1, 4, 2, 8}</code>:</p>
-
-        <div class="step-list">
-          <div class="step-item">
-            <span class="step-num">P1</span>
-            <div class="step-content">
-              <b>Vector inicial:</b> <code>[5, 1, 4, 2, 8]</code><br>
-              • Compara 5 y 1 ➔ ¿5 &gt; 1? Sí ➔ Swap ➔ <code>[1, 5, 4, 2, 8]</code><br>
-              • Compara 5 y 4 ➔ ¿5 &gt; 4? Sí ➔ Swap ➔ <code>[1, 4, 5, 2, 8]</code><br>
-              • Compara 5 y 2 ➔ ¿5 &gt; 2? Sí ➔ Swap ➔ <code>[1, 4, 2, 5, 8]</code><br>
-              • Compara 5 y 8 ➔ ¿5 &gt; 8? No ➔ Queda igual ➔ <code>[1, 4, 2, 5, 8]</code><br>
-              <span style="color: var(--accent-emerald);">✓ El 8 (el mayor) ya está en su lugar final definitivo.</span>
-            </div>
-          </div>
-
-          <div class="step-item">
-            <span class="step-num">P2</span>
-            <div class="step-content">
-              <b>Segunda pasada:</b><br>
-              • Compara 1 y 4 (Ok), 4 y 2 (Swap ➔ <code>[1, 2, 4, 5, 8]</code>), 4 y 5 (Ok).<br>
-              <span style="color: var(--accent-emerald);">✓ El 5 y el 8 ya están en su lugar.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 6: CÓDIGO C DE BUBBLE SORT -->
-      <section>
-        <h2><span class="section-num">05</span> El Código en C de Bubble Sort</h2>
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">bubble_sort.c</span>
-            <span class="code-badge">Doble Bucle</span>
-          </div>
-          <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">ordenarBurbuja</span>(<span class="c-kw">int</span> v[], <span class="c-kw">int</span> n)
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
 {
-    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; n - <span class="c-num">1</span>; i++)          <span class="c-cmt">// Bucle de pasadas</span>
+    <span class="c-kw">int</span> precios[<span class="c-num">5</span>] = {<span class="c-num">1500</span>, <span class="c-num">800</span>, <span class="c-num">2300</span>, <span class="c-num">450</span>, <span class="c-num">1200</span>};
+    <span class="c-kw">int</span> aux;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
     {
-        <span class="c-kw">for</span> (<span class="c-kw">int</span> j = <span class="c-num">0</span>; j &lt; n - <span class="c-num">1</span> - i; j++)  <span class="c-cmt">// Bucle de comparaciones adyacentes</span>
+        <span class="c-kw">for</span>(<span class="c-kw">int</span> j = i + <span class="c-num">1</span>; j &lt; <span class="c-num">5</span>; j++)
         {
-            <span class="c-kw">if</span> (v[j] &gt; v[j + <span class="c-num">1</span>])             <span class="c-cmt">// Si están invertidos...</span>
+            <span class="c-kw">if</span>(precios[j] &lt; precios[i])
             {
-                <span class="c-kw">int</span> temp = v[j];              <span class="c-cmt">// Intercambio</span>
-                v[j] = v[j + <span class="c-num">1</span>];
-                v[j + <span class="c-num">1</span>] = temp;
+                aux = precios[i];
+                precios[i] = precios[j];
+                precios[j] = aux;
             }
         }
     }
-}</div>
-        </div>
 
-        <p style="font-size: 0.82rem; color: var(--accent-cyan);">
-          💡 Notá el <code>j &lt; n - 1 - i</code>: como en cada pasada <code>i</code> el elemento mayor ya queda colocado al final, no hace falta volver a compararlo en las pasadas siguientes.
-        </p>
+    <span class="c-fn">printf</span>(<span class="c-str">"Precios de menor a mayor: "</span>);
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"$%d "</span>, precios[i]);
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"\nMas barato: $%d | Mas caro: $%d\n"</span>, precios[<span class="c-num">0</span>], precios[<span class="c-num">4</span>]);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+          </div>
+        </details>
       </section>
 
-      <!-- SLIDE 7: OPTIMIZACIÓN CON BANDERA -->
+      <!-- SLIDE 33: EJERCICIO GUIADO 2: LECTURA DE CÓDIGO TIPO EXAMEN -->
       <section>
-        <h2><span class="section-num">06</span> Optimización con Bandera Booleana</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">¿Qué pasa si el vector ya estaba casi ordenado desde el principio?</p>
+        <h2><span class="section-num">32</span> Ejercicio Práctico 2: Lectura de Código (Tipo Examen)</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Analizá el siguiente código y respondé antes de abrir la solución: <b>1) ¿Qué hace este programa? 2) ¿En qué orden queda el vector? 3) ¿Cómo queda el vector al terminar la primera vuelta externa (<code>i = 0</code>)?</b>
+        </p>
 
         <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">burbuja_optimizada.c</span>
-            <span class="code-badge">Con Flag stdbool.h</span>
-          </div>
-          <div class="code-body"><span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; n - <span class="c-num">1</span>; i++)
+          <div class="code-body"><span class="c-kw">int</span> v[<span class="c-num">4</span>] = {<span class="c-num">12</span>, <span class="c-num">25</span>, <span class="c-num">7</span>, <span class="c-num">30</span>};
+<span class="c-kw">int</span> aux;
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">4</span>; i++)
 {
-    <span class="c-kw">bool</span> huboCambio = <span class="c-kw">false</span>; <span class="c-cmt">// Asumimos que ya está ordenado</span>
-
-    <span class="c-kw">for</span> (<span class="c-kw">int</span> j = <span class="c-num">0</span>; j &lt; n - <span class="c-num">1</span> - i; j++)
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> j = i + <span class="c-num">1</span>; j &lt; <span class="c-num">4</span>; j++)
     {
-        <span class="c-kw">if</span> (v[j] &gt; v[j + <span class="c-num">1</span>])
+        <span class="c-kw">if</span>(v[j] &gt; v[i])
         {
-            <span class="c-kw">int</span> temp = v[j];
-            v[j] = v[j + <span class="c-num">1</span>];
-            v[j + <span class="c-num">1</span>] = temp;
-            huboCambio = <span class="c-kw">true</span>; <span class="c-cmt">// Hubo al menos un swap</span>
+            aux = v[i];
+            v[i] = v[j];
+            v[j] = aux;
         }
-    }
-
-    <span class="c-cmt">// Si en toda la pasada no hubo ningún cambio, ¡ya terminamos!</span>
-    <span class="c-kw">if</span> (!huboCambio)
-    {
-        <span class="c-kw">break</span>;
     }
 }</div>
         </div>
+
+        <details class="code-solution">
+          <summary>👁️ Ver respuestas y traza paso a paso</summary>
+          <div class="solution-content">
+            <ul style="font-size: 0.83rem; margin-left: 16px; line-height: 1.55;">
+              <li><b>1) ¿Qué hace?:</b> Ordena el vector <code>v</code> de 4 elementos.</li>
+              <li><b>2) ¿En qué criterio?:</b> Como la condición es <code>if(v[j] &gt; v[i])</code>, ordena de <b>mayor a menor (descendente)</b>. Al terminar todo el programa queda: <b><code>{30, 25, 12, 7}</code></b>.</li>
+              <li><b>3) Traza de <code>i = 0</code>:</b> Arranca con <code>[12, 25, 7, 30]</code>.<br>
+                • Con <code>j = 1</code>: ¿<code>25 &gt; 12</code>? Sí ➔ intercambia pos 0 y pos 1 ➔ <code>[<b>25</b>, <b>12</b>, 7, 30]</code>.<br>
+                • Con <code>j = 2</code>: ¿<code>7 &gt; 25</code>? No ➔ queda <code>[25, 12, 7, 30]</code>.<br>
+                • Con <code>j = 3</code>: ¿<code>30 &gt; 25</code>? Sí ➔ intercambia pos 0 y pos 3 ➔ <b><code>[30, 12, 7, 25]</code></b>.</li>
+            </ul>
+          </div>
+        </details>
       </section>
 
-      <!-- SLIDE 8: INTRODUCCIÓN A LA BÚSQUEDA BINARIA -->
+      <!-- SLIDE 34: RESUMEN FINAL Y CHECKLIST DE LA UNIDAD 03 -->
       <section>
-        <h2><span class="section-num">07</span> El Premio de Ordenar: Búsqueda Binaria</h2>
-        <div class="box box-emerald">
-          <h4 style="color: #34d399; margin-bottom: 4px;">Dividir y Vencer en O(log N)</h4>
-          <p style="font-size: 0.9rem; margin: 0;">
-            Una vez que un vector está ordenado, <b>no hace falta buscar uno por uno</b>. Podemos aplicar la <b>Búsqueda Binaria</b>:
-          </p>
-        </div>
-
-        <div class="step-list" style="margin-top: 14px;">
-          <div class="step-item">
-            <span class="step-num">1</span>
-            <div class="step-content">
-              Miramos el <b>elemento del medio</b>.
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">2</span>
-            <div class="step-content">
-              ¿Es el buscado? ¡Golazo, terminamos en 1 solo paso!
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">3</span>
-            <div class="step-content">
-              ¿El buscado es <b>menor</b>? Descartamos toda la mitad derecha. Repetimos solo en la mitad izquierda.
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">4</span>
-            <div class="step-content">
-              ¿El buscado es <b>mayor</b>? Descartamos toda la mitad izquierda. Repetimos solo en la mitad derecha.
-            </div>
-          </div>
-        </div>
-
-        <p style="font-size: 0.85rem; color: var(--accent-amber); margin-top: 8px;">
-          ⚡ ¡En un arreglo de 1.000.000 de datos, la búsqueda binaria encuentra cualquier número en como máximo <b>20 comparaciones</b>!
-        </p>
-      </section>
-
-      <!-- SLIDE 9: AUTOEVALUACIÓN Y NAVEGACIÓN -->
-      <section>
-        <h2><span class="section-num">08</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">33</span> Resumen Final y Checklist de la Unidad 03</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Síntesis</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>Swap:</b> Requiere variable <code>temp</code> para no perder datos.</li>
-              <li><b>Bubble Sort:</b> Compara parejas adyacentes e intercambia.</li>
-              <li><b>Doble bucle:</b> Uno para las pasadas y otro para las parejas.</li>
-              <li><b>Optimización con Flag:</b> Evita pasadas inútiles si ya está ordenado.</li>
-              <li><b>Búsqueda binaria:</b> Solo funciona en vectores previamente ordenados.</li>
+            <h4 style="color: #818cf8;">Síntesis de Conceptos Clave</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.58; margin-left: 18px;">
+              <li><b>Ordenar:</b> Reorganizar las casillas de menor a mayor o de mayor a menor sin perder ningún elemento.</li>
+              <li><b>Variable <code>aux</code>:</b> Indispensable para intercambiar dos variables (<code>aux = a; a = b; b = aux;</code>).</li>
+              <li><b>Doble ciclo <code>for</code>:</b> El externo (<code>i</code>) fija la casilla que estamos acomodando; el interno (<code>j = i + 1</code>) recorre todas las siguientes.</li>
+              <li><b>Criterio:</b> <code>if(numeros[j] &lt; numeros[i])</code> ordena de menor a mayor; con <code>&gt;</code> ordena de mayor a menor.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué falla el intercambio si no uso la variable <code>temp</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Qué elemento queda siempre en su posición final tras la primera pasada?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Cómo ayuda una bandera booleana a acelerar el algoritmo?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué la búsqueda binaria exige que el vector esté ordenado?</div>
+            <h4 style="color: #34d399;">Checklist antes de pasar a Matrices</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar con mis palabras por qué falla <code>a = b; b = a;</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé escribir de memoria las 3 líneas del intercambio con <code>aux</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué el segundo ciclo empieza en <code>j = i + 1</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cambiar el signo del <code>if</code> para ordenar ascendente o descendente?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
-          <a href="02-recorridos-busquedas-vectores.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="02-recorridos-busquedas-vectores.html" class="badge badge-indigo" style="font-size: 0.88rem; text-decoration: none; padding: 8px 20px;">
             ← Anterior: Recorridos y Búsquedas
           </a>
-          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            Índice 2do Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.88rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Índice 2do Bimestre
           </a>
-          <a href="04-matrices-bidimensionales.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+          <a href="04-matrices-bidimensionales.html" class="badge badge-emerald" style="font-size: 0.88rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
             Siguiente: Matrices Bidimensionales →
           </a>
         </div>

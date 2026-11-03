@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 1C - 02: Estructura Básica de un Programa en C | Clases Particulares</title>
+  <title>Programación 1C 1B - 02: Estructura Básica de un Programa en C | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
-  
-  <!-- Reveal.js Styles -->
+
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
   <link rel="stylesheet" href="../../../assets/css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 1er Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../index.html">← Índice 1er Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 1er Bimestre • Unidad 02</span>
   </div>
@@ -33,369 +39,1425 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-indigo">1er Cuatrimestre • Estructura • Unidad 2</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Estructura de un Programa en C</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            Anatomía completa del esqueleto fundamental de todo código en C: de "Hola Mundo" al ejecutable
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-cyan">1er Cuatrimestre • 1er Bimestre • Unidad 02</span>
+          <h1 style="font-size: 2.6rem; margin-bottom: 12px;">Estructura Básica de un Programa en C</h1>
+          <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px;">
+            Anatomía completa del esqueleto de todo programa en C: bibliotecas, la puerta principal <code>main()</code> y <code>return 0;</code>
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">#include &amp; Bibliotecas</span>
-            <span class="badge badge-emerald">Función main()</span>
-            <span class="badge badge-amber">Llaves {} y Punto y Coma ;</span>
-            <span class="badge badge-rose">Compilación y Errores</span>
+            <span class="badge badge-indigo">1. #include y Bibliotecas</span>
+            <span class="badge badge-emerald">2. stdio.h y stdbool.h</span>
+            <span class="badge badge-amber">3. int main() (Puerta Principal)</span>
+            <span class="badge badge-purple">4. Llaves { } y Punto y Coma ;</span>
+            <span class="badge badge-rose">5. printf() y return 0;</span>
           </div>
 
-          <div class="box box-indigo" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para recorrer paso a paso las 35 diapositivas de esta clase.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: CONEXIÓN CON LA UNIDAD 01 Y HOJA DE RUTA -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Conexión con la Unidad 01</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Qué es el Lenguaje C?</h4>
-            <p style="font-size: 0.88rem;">
-              Creado en 1972 por <b>Dennis Ritchie</b> en los Laboratorios Bell. Es uno de los lenguajes más influyentes y veloces de la historia.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Los sistemas operativos más importantes del planeta (el núcleo de <b>Linux</b>, gran parte de <b>Windows</b> y <b>macOS</b>), motores de bases de datos y sistemas embebidos de autos y aviones están programados en C. Además, lenguajes como C++, C#, Java, JavaScript y PHP heredaron su sintaxis de C.
-            </p>
+            <h4 style="color: #818cf8;">Lo que aprendimos en la Unidad 01</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Programar es enseñarle a la computadora qué hacer paso a paso.</li>
+              <li>La computadora no piensa, no interpreta y no supone.</li>
+              <li>Escribimos nuestras primeras instrucciones de cálculo:<br>
+                <code>int numero = 5;</code><br>
+                <code>int resultado = numero * 2;</code>
+              </li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Comprender el ciclo de <b>compilación</b> (código fuente → ejecutable).</li>
-              <li>Entender qué hace <code>#include &lt;stdio.h&gt;</code> y qué es una biblioteca.</li>
-              <li>Aprender por qué <code>main()</code> es la puerta de entrada obligatoria.</li>
-              <li>Descubrir el rol sagrado de las llaves <code>{}</code> y del punto y coma <code>;</code>.</li>
-              <li>Entender el significado real de <code>return 0;</code>.</li>
-              <li>Reconocer y corregir los <b>5 errores de sintaxis más comunes</b>.</li>
+            <h4 style="color: #34d399;">Lo que vamos a aprender hoy desde cero</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Cuál es el <b>esqueleto obligatorio</b> para que un archivo en C funcione.</li>
+              <li>Qué es <code>#include</code> y para qué sirven <code>&lt;stdio.h&gt;</code> y <code>&lt;stdbool.h&gt;</code>.</li>
+              <li>Qué es <code>int main()</code> y por qué es la <b>puerta principal</b> del programa.</li>
+              <li>Para qué sirven las llaves <code>{ }</code>, el punto y coma <code>;</code> y <code>return 0;</code>.</li>
+              <li>Cómo compilar, ejecutar y evitar los errores de sintaxis más comunes.</li>
             </ul>
           </div>
         </div>
+
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🎯 <b>Meta de la clase:</b> Que al terminar puedas escribir de memoria la estructura base de cualquier programa en C entendiendo qué hace cada línea y cada símbolo.
+          </p>
+        </div>
       </section>
 
-      <!-- SLIDE 3: CÓMO SE EJECUTA UN PROGRAMA EN C -->
+      <!-- SLIDE 3: EL PROBLEMA: ¿POR QUÉ NO ALCANZA CON ESCRIBIR INSTRUCCIONES SUELTAS? -->
       <section>
-        <h2><span class="section-num">02</span> ¿Cómo se ejecuta un programa en C?</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">A diferencia de otros lenguajes que se interpretan al vuelo, C es un <b>lenguaje compilado</b>:</p>
+        <h2><span class="section-num">02</span> El Problema: ¿Por Qué No Basta con Instrucciones Sueltas?</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Si abrimos un archivo en blanco y escribimos únicamente <code>printf("Hola mundo");</code> suelto sin nada alrededor, el compilador de C nos rechazará el archivo. ¿Por qué?
+        </p>
 
-        <div class="step-list" style="margin-top: 14px;">
-          <div class="step-item">
-            <span class="step-num">1</span>
-            <div class="step-content">
-              <b>Código Fuente (<code>programa.c</code>)</b><br>
-              Es el texto legible escrito por vos en un editor de texto o entorno de desarrollo (IDE).
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Instrucción suelta sin estructura</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// Archivo incompleto:</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);</div>
             </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin: 6px 0 0;">
+              La computadora no sabe de dónde salió la función <code>printf</code>, dónde empieza el programa ni dónde termina.
+            </p>
           </div>
 
-          <div class="step-item">
-            <span class="step-num">2</span>
-            <div class="step-content">
-              <b>El Compilador (ej. GCC o Clang)</b><br>
-              Un software traductor ultrarrápido que analiza la sintaxis, detecta errores y traduce el código C a <b>código máquina binario (ceros y unos)</b> que el procesador entiende directamente.
-            </div>
-          </div>
-
-          <div class="step-item">
-            <span class="step-num">3</span>
-            <div class="step-content">
-              <b>Archivo Ejecutable (<code>programa.exe</code> o binario)</b><br>
-              El archivo final que el sistema operativo puede ejecutar directamente a máxima velocidad nativa, sin requerir ningún intermediario.
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Las 3 cosas que necesita saber la PC</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content" style="font-size: 0.82rem;">
+                  <b>¿Qué herramientas va a usar?</b> (Bibliotecas con <code>#include</code>).
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content" style="font-size: 0.82rem;">
+                  <b>¿Por dónde debe empezar a ejecutar?</b> (Puerta de entrada <code>int main()</code>).
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content" style="font-size: 0.82rem;">
+                  <b>¿Cuándo terminó todo bien?</b> (Aviso de cierre <code>return 0;</code>).
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: EL CÓDIGO BÁSICO UNIVERSAL -->
+      <!-- SLIDE 4: LA ESTRUCTURA BÁSICA DEL APUNTE -->
       <section>
-        <h2><span class="section-num">03</span> El Código Inicial Canónico</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Este es el esqueleto mínimo y estándar de un programa en C:</p>
+        <h2><span class="section-num">03</span> La Estructura Básica de un Programa en C (Apunte)</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Miremos el programa modelo exacto que presenta la Sección 2 de nuestro apunte teórico:
+        </p>
 
-        <div class="code-window">
+        <div class="code-window" style="margin: 10px 0;">
           <div class="code-header">
-            <div class="code-dots">
-              <span class="code-dot dot-red"></span>
-              <span class="code-dot dot-yellow"></span>
-              <span class="code-dot dot-green"></span>
-            </div>
-            <span class="code-title">hola_mundo.c</span>
-            <span class="code-badge">C99 / C11</span>
+            <span class="code-title">hola_mundo.c (Sección 2 del Apunte)</span>
+            <span class="code-badge">Esqueleto Base</span>
           </div>
           <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
 {
-    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+
     <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
         </div>
 
         <div class="terminal-window">
-          <div class="terminal-header">Terminal de Salida</div>
-          <div class="terminal-body"><span class="terminal-prompt">$ gcc hola_mundo.c -o hola_mundo
-$ ./hola_mundo</span>
-Hola mundo</div>
+          <div class="terminal-header">Salida por Pantalla</div>
+          <div class="terminal-body">Hola mundo</div>
         </div>
 
-        <p style="color: var(--accent-cyan); font-size: 0.88rem; font-weight: 600;">
-          A continuación, vamos a diseccionar cada palabra, carácter y símbolo sin dejar ningún misterio sin resolver.
+        <div class="box box-indigo" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🔍 <b>Observá:</b> Aunque parezcan varias líneas para mostrar un solo mensaje, estas 8 líneas forman la <b>plantilla universal</b> que vamos a usar en absolutamente todos los programas de la materia.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: CÓMO SE CONVIERTE ESTE CÓDIGO EN UN PROGRAMA EJECUTABLE -->
+      <section>
+        <h2><span class="section-num">04</span> Funcionamiento Interno: Del Archivo <code>.c</code> a la Pantalla</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          ¿Qué ocurre internamente desde que escribimos este código hasta que vemos <code>Hola mundo</code> en el monitor?
         </p>
-      </section>
 
-      <!-- SLIDE 5: #INCLUDE Y LAS BIBLIOTECAS -->
-      <section>
-        <h2><span class="section-num">04</span> ¿Para qué sirve <code>#include</code> y qué son las bibliotecas?</h2>
-        <div class="grid-2">
-          <div class="box box-purple">
-            <h4 style="color: #c084fc;">¿Qué es una Biblioteca (Librería)?</h4>
-            <p style="font-size: 0.88rem;">
-              En programación no reinventamos la rueda cada vez. Una <b>biblioteca</b> (<i>header file</i>, extensión <code>.h</code>) es un paquete con cientos de funciones prefabricadas y optimizadas por expertos.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Tu computadora por defecto no sabe cómo comunicarse con el monitor para dibujar letras. Esa tarea tan compleja ya está resuelta adentro de la biblioteca estándar de C.
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Código Fuente (<code>.c</code>)</h4>
+            <p style="font-size: 0.83rem; line-height: 1.5;">
+              Escribimos nuestro programa en un archivo de texto terminado en <b><code>.c</code></b> (por ejemplo, <code>programa.c</code>).
             </p>
           </div>
 
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">La Directiva <code>#include</code></h4>
-            <p style="font-size: 0.88rem;">
-              La almohadilla <code>#</code> le avisa al <b>preprocesador</b> que actúe antes de compilar. <code>#include</code> significa literalmente: <i>"Copiar e incluir en este archivo todas las declaraciones de esa biblioteca"</i>.
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. Compilación</h4>
+            <p style="font-size: 0.83rem; line-height: 1.5;">
+              El <b>compilador</b> revisa que no falte ningún <code>;</code> ni ninguna llave <code>}</code> y traduce todo a lenguaje máquina.
             </p>
-            <div style="background: rgba(0,0,0,0.35); padding: 8px 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; margin-top: 10px;">
-              <span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
-            </div>
-            <p style="font-size: 0.82rem; color: #cbd5e1; margin-top: 6px;">
-              Los signos menor y mayor <code>&lt; &gt;</code> indican que es una biblioteca del sistema estándar de C.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 6: STDIO.H Y STDBOOL.H -->
-      <section>
-        <h2><span class="section-num">05</span> Las dos bibliotecas esenciales</h2>
-        <div class="grid-2">
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">1. &lt;stdio.h&gt; (Standard Input Output)</h4>
-            <p style="font-size: 0.88rem;">
-              Su nombre viene de <b>STanDard Input / Output Header</b> (Cabecera Estándar de Entrada y Salida).
-            </p>
-            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; margin-top: 8px;">
-              <li>Nos proporciona <code>printf()</code> para mostrar texto y números en la pantalla.</li>
-              <li>Nos proporciona <code>scanf()</code> para leer lo que el usuario tipea en el teclado.</li>
-              <li><b>Sin ella:</b> El compilador dará error al encontrar <code>printf</code> porque no sabrá qué significa.</li>
-            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">2. &lt;stdbool.h&gt; (Standard Boolean)</h4>
-            <p style="font-size: 0.88rem;">
-              Introducida en el estándar C99 (hace ya más de dos décadas).
+            <h4 style="color: #34d399;">3. Ejecución</h4>
+            <p style="font-size: 0.83rem; line-height: 1.5;">
+              El sistema operativo abre la puerta <code>int main()</code>, ejecuta las instrucciones de adentro y muestra el resultado.
             </p>
-            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; margin-top: 8px;">
-              <li>Permite usar el tipo <code>bool</code> para valores de verdad.</li>
-              <li>Define las constantes lógicas <code>true</code> (verdadero) y <code>false</code> (falso).</li>
-              <li>La utilizaremos ampliamente cuando lleguemos a la unidad de booleanos y condicionales.</li>
-            </ul>
+          </div>
+        </div>
+
+        <div class="box box-purple" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 <b>Por eso es tan importante conocer cada pieza:</b> Si te falta una sola parte del esqueleto, el paso 2 (Compilación) te avisará con un error antes de poder ejecutar.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: MAPA GENERAL DE LAS 4 PARTES DEL ESQUELETO -->
+      <section>
+        <h2><span class="section-num">05</span> Las 4 Zonas del Esqueleto de un Programa en C</h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">zonas_del_programa.c</span>
+              <span class="code-badge">4 Zonas</span>
+            </div>
+            <div class="code-body"><span class="c-cmt">// ZONA 1: Bibliotecas</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-cmt">// ZONA 2: Puerta de entrada</span>
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-cmt">// ZONA 3: Instrucciones del programa</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+
+    <span class="c-cmt">// ZONA 4: Cierre exitoso</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="step-list">
+            <div class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-content" style="font-size: 0.83rem;">
+                <b>Zona 1 (<code>#include</code>):</b> Incorpora las bibliotecas de funciones que vamos a necesitar.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-content" style="font-size: 0.83rem;">
+                <b>Zona 2 (<code>int main()</code>):</b> Marca el punto de entrada donde arranca el programa.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-content" style="font-size: 0.83rem;">
+                <b>Zona 3 (Entre <code>{</code> y <code>}</code>):</b> Tus instrucciones paso a paso (variables, cuentas, <code>printf</code>).
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-content" style="font-size: 0.83rem;">
+                <b>Zona 4 (<code>return 0;</code>):</b> Indica que el programa finalizó correctamente.
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 7: LA FUNCIÓN MAIN -->
+      <!-- SLIDE 7: ¿QUÉ ES #INCLUDE? (DEFINICIÓN DEL APUNTE) -->
       <section>
-        <h2><span class="section-num">06</span> La función <code>main()</code>: El Punto de Entrada</h2>
-        <div class="box box-indigo">
-          <h4 style="color: #818cf8; margin-bottom: 6px;">¿Por qué se llama main y por qué es obligatoria?</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            En inglés, <i>main</i> significa <b>"principal"</b>. En C, la función <code>main</code> es por convención y estándar internacional el <b>punto de entrada obligatorio</b> de cualquier programa convencional. Cuando hacés doble clic en un ejecutable o lo lanzás desde la terminal, el sistema operativo busca la función <code>main()</code> y empieza a ejecutar la primera instrucción que encuentra adentro.
+        <h2><span class="section-num">06</span> Pieza 1: ¿Qué es <code>#include</code> y Qué es una Biblioteca?</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Leamos la definición exacta de nuestro apunte teórico en la Página 2:
+        </p>
+
+        <div class="box box-indigo" style="margin-top: 10px;">
+          <h4 style="color: #818cf8; margin-bottom: 6px;">📘 Definición del Apunte</h4>
+          <p style="font-size: 0.96rem; margin: 0; color: #f8fafc;">
+            <b>¿Qué es <code>#include</code>?</b><br>
+            Permite incorporar <b>bibliotecas</b> al programa.<br>
+            Las bibliotecas contienen <b>funciones que ya fueron creadas por otros programadores</b>.
           </p>
         </div>
 
-        <div class="code-window" style="margin-top: 14px;">
-          <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)</div>
-        </div>
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">🧰 Analogía de la Caja de Herramientas</h4>
+            <p style="font-size: 0.84rem; line-height: 1.5; margin: 0;">
+              Imaginá que vas a armar un mueble. En vez de fabricar vos mismo un destornillador desde cero fundiendo metal, <b>traés una caja de herramientas ya fabricada</b>. Eso hace <code>#include</code>: trae herramientas listas para usar.
+            </p>
+          </div>
 
-        <div class="grid-3" style="margin-top: 10px;">
           <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">int</h4>
-            <p style="font-size: 0.84rem;">Indica que al terminar, la función devolverá un número entero de estado al sistema operativo.</p>
-          </div>
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">main</h4>
-            <p style="font-size: 0.84rem;">El nombre reservado e inmutable que busca el sistema operativo para iniciar.</p>
-          </div>
-          <div class="box box-purple">
-            <h4 style="color: #c084fc;">(void)</h4>
-            <p style="font-size: 0.84rem;">Palabra que en C significa "vacío": explicita formalmente que nuestro programa no recibe argumentos externos de inicio.</p>
+            <h4 style="color: #38bdf8;">🔍 Desglose de <code>#include &lt;stdio.h&gt;</code></h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px; margin-bottom: 0;">
+              <li><b><code>#include</code>:</b> Orden de "incluir / incorporar" antes de compilar.</li>
+              <li><b><code>&lt; &gt;</code>:</b> Signos menor y mayor que encierran el nombre de la biblioteca estándar.</li>
+              <li><b><code>.h</code>:</b> Extensión de archivo de cabecera (<i>header</i>).</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 8: LLAVES Y PUNTO Y COMA -->
+      <!-- SLIDE 8: BIBLIOTECA 1 DEL APUNTE: <stdio.h> -->
       <section>
-        <h2><span class="section-num">07</span> Las Llaves <code>{}</code> y el Punto y Coma <code>;</code></h2>
-        <div class="grid-2">
-          <div class="box box-amber">
-            <h4 style="color: #fbbf24;">Las Llaves { } : Delimitadores de Bloque</h4>
-            <p style="font-size: 0.88rem;">
-              Las llaves delimitan las fronteras del código:
-            </p>
-            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; margin-top: 6px;">
-              <li><code>{</code> marca el <b>inicio</b> del cuerpo de la función.</li>
-              <li><code>}</code> marca el <b>fin</b> definitivo de la función.</li>
+        <h2><span class="section-num">07</span> Primera Biblioteca del Apunte: <code>&lt;stdio.h&gt;</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          La biblioteca que vas a escribir en la primera línea de prácticamente todos tus programas es <code>&lt;stdio.h&gt;</code>:
+        </p>
+
+        <div class="code-window" style="margin: 10px 0;">
+          <div class="code-header">
+            <span class="code-title">Biblioteca de Entrada y Salida</span>
+            <span class="code-badge">Del Apunte</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span></div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿Qué permite utilizar según el apunte?</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.7; margin-left: 18px;">
+              <li><b><code>printf()</code></b> → Para <b>mostrar</b> mensajes y resultados por pantalla (salida / output).</li>
+              <li><b><code>scanf()</code></b> → Para <b>ingresar</b> datos desde el teclado (entrada / input, que veremos en la Unidad 05).</li>
             </ul>
-            <p style="font-size: 0.84rem; color: #fef08a; margin-top: 8px;">
-              Todo lo que esté entre esas llaves pertenece a <code>main</code> y se ejecutará en ese bloque.
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿De dónde sale el nombre <code>stdio.h</code>?</h4>
+            <p style="font-size: 0.84rem; line-height: 1.55; margin: 0;">
+              No es una palabra al azar, es una abreviatura en inglés:<br><br>
+              • <b><code>std</code></b> = <i>Standard</i> (Estándar)<br>
+              • <b><code>i</code></b> = <i>Input</i> (Entrada)<br>
+              • <b><code>o</code></b> = <i>Output</i> (Salida)<br>
+              • <b><code>.h</code></b> = <i>Header</i> (Cabecera)
             </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: BIBLIOTECA 2 DEL APUNTE: <stdbool.h> -->
+      <section>
+        <h2><span class="section-num">08</span> Segunda Biblioteca del Apunte: <code>&lt;stdbool.h&gt;</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          El apunte también nos presenta una segunda biblioteca fundamental cuando trabajamos con valores de verdadero o falso:
+        </p>
+
+        <div class="code-window" style="margin: 10px 0;">
+          <div class="code-header">
+            <span class="code-title">Biblioteca de Valores Booleanos (Lógicos)</span>
+            <span class="code-badge">Del Apunte</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span></div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Qué permite utilizar según el apunte?</h4>
+            <ul style="font-size: 0.88rem; line-height: 1.7; margin-left: 18px;">
+              <li><b><code>bool</code></b> → El tipo de dato para variables lógicas.</li>
+              <li><b><code>true</code></b> → El valor lógico <b>verdadero</b>.</li>
+              <li><b><code>false</code></b> → El valor lógico <b>falso</b>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">¿Podemos poner varios <code>#include</code> juntos?</h4>
+            <p style="font-size: 0.84rem; line-height: 1.5; margin-bottom: 8px;">
+              ¡Sí! Cuando un programa necesita ambas cajas de herramientas, se colocan una debajo de la otra arriba de todo:
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: ¿QUÉ ES MAIN()? (DEFINICIÓN DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">09</span> Pieza 2: ¿Qué es <code>int main()</code>? (La Puerta Principal)</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Debajo de los <code>#include</code> siempre aparece <code>int main()</code>. Veamos cómo lo explica el apunte:
+        </p>
+
+        <div class="box box-indigo" style="margin-top: 10px;">
+          <h4 style="color: #818cf8; margin-bottom: 6px;">📘 Definición del Apunte</h4>
+          <p style="font-size: 0.94rem; margin: 0; color: #f8fafc;">
+            <b>¿Qué es <code>main()</code>?</b><br>
+            La función <code>main</code> es el <b>punto de entrada del programa</b>.<br>
+            Cuando ejecutamos un programa, la primera función que se ejecuta es: <code>int main()</code>.
+          </p>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <h4 style="color: #34d399; margin-bottom: 6px;">🚪 Analogía del Apunte: La Puerta Principal</h4>
+          <p style="font-size: 0.94rem; margin: 0; color: #f8fafc;">
+            <i>"Podemos pensarla como: <b>La puerta principal del programa. Todo comienza ahí.</b>"</i>
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;"><code>int</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">Indica que al terminar, <code>main</code> devolverá un número entero (el <code>0</code> del <code>return 0;</code>).</p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;"><code>main</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">Palabra en inglés que significa "principal". Debe ir siempre en <b>minúsculas</b>.</p>
+          </div>
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;"><code>()</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">Los paréntesis identifican a <code>main</code> como una función.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: LAS LLAVES { } -->
+      <section>
+        <h2><span class="section-num">10</span> Pieza 3: Las Llaves <code>{ }</code> (El Cuerpo del Programa)</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Inmediatamente después de <code>int main()</code> se abre una llave <code>{</code> y al final del programa se cierra con <code>}</code>:
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px; align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">bloque_main.c</span>
+              <span class="code-badge">Inicio y Fin</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">main</span>()
+{   <span class="c-cmt">// &lt;-- Llave de APERTURA (empieza el bloque)</span>
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+
+}   <span class="c-cmt">// &lt;-- Llave de CIERRE (termina el bloque)</span></div>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">🏠 Analogía de las Paredes</h4>
+            <p style="font-size: 0.85rem; line-height: 1.55;">
+              Si <code>int main()</code> es la puerta principal de la casa, las llaves <b><code>{</code></b> y <b><code>}</code></b> son las <b>paredes que encierran la habitación principal</b>.
+            </p>
+            <p style="font-size: 0.84rem; color: #fde68a; margin-top: 8px; margin-bottom: 0;">
+              <b>Regla inquebrantable:</b> Toda llave que se abre <code>{</code> tiene que tener obligatoriamente su llave pareja que la cierra <code>}</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: LA INSTRUCCIÓN PRINTF("HOLA MUNDO"); -->
+      <section>
+        <h2><span class="section-num">11</span> Pieza 4: <code>printf("Hola mundo");</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Adentro de las llaves de <code>main()</code> encontramos nuestra primera orden visible en pantalla:
+        </p>
+
+        <div class="code-window" style="margin: 10px 0;">
+          <div class="code-header">
+            <span class="code-title">Mostrar texto en pantalla</span>
+            <span class="code-badge">Salida (Output)</span>
+          </div>
+          <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);</div>
+        </div>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b><code>printf</code>:</b> Es la función (traída desde <code>&lt;stdio.h&gt;</code>) que imprime información por pantalla.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b><code>( ... )</code> Paréntesis:</b> Adentro de los paréntesis le entregamos a <code>printf</code> qué queremos mostrar.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b><code>"Hola mundo"</code> Comillas dobles:</b> Todo texto o frase literal en C debe ir encerrado entre <b>comillas dobles</b> <code>" "</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b><code>;</code> Punto y coma:</b> Indica el final de la orden.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: EL PUNTO Y COMA ; ¿DÓNDE VA Y DÓNDE NO VA? -->
+      <section>
+        <h2><span class="section-num">12</span> El Punto y Coma <code>;</code>: ¿Cuándo Va y Cuándo NO Va?</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Una duda muy común al empezar es: <i>"¿Por qué algunas líneas llevan punto y coma <code>;</code> al final y otras no?"</i>
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">✅ SÍ llevan punto y coma <code>;</code></h4>
+            <p style="font-size: 0.84rem; margin-bottom: 6px;">
+              Todas las <b>instrucciones o acciones</b> que ejecuta el programa adentro de las llaves:
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+<span class="c-kw">return</span> <span class="c-num">0</span>;</div>
+            </div>
           </div>
 
           <div class="box box-rose">
-            <h4 style="color: #f87171;">El Punto y Coma ; : Fin de Sentencia</h4>
-            <p style="font-size: 0.88rem;">
-              En nuestro idioma usamos un punto al final de cada oración para que el lector sepa dónde termina la idea.
+            <h4 style="color: #fb7185;">🚫 NO llevan punto y coma <code>;</code></h4>
+            <p style="font-size: 0.84rem; margin-bottom: 6px;">
+              Las directivas <code>#include</code>, el encabezado <code>int main()</code> y las llaves <code>{ }</code>:
             </p>
-            <p style="font-size: 0.85rem; color: #fecaca; margin-top: 6px;">
-              En C, el compilador ignora los espacios en blanco y los saltos de línea. La única forma en que sabe que una instrucción terminó y empieza la siguiente es con el <b>punto y coma</b> <code>;</code>.
+            <div class="code-window">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>   <span class="c-cmt">// SIN ;</span>
+<span class="c-kw">int</span> <span class="c-fn">main</span>()           <span class="c-cmt">// SIN ;</span>
+{                    <span class="c-cmt">// SIN ;</span>
+}                    <span class="c-cmt">// SIN ;</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 <b>Regla práctica:</b> Si es una orden suelta adentro del bloque (declarar una variable, hacer una cuenta, llamar a <code>printf</code> o <code>return 0</code>), <b>termina con <code>;</code></b>. Si abre un bloque con <code>{</code> o empieza con <code>#</code>, <b>no lleva <code>;</code></b>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: ¿QUÉ SIGNIFICA RETURN 0;? (DEFINICIÓN DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">13</span> Pieza 5: ¿Qué Significa <code>return 0;</code>? (Apunte)</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          En la última línea antes de cerrar la llave <code>}</code> siempre escribimos <code>return 0;</code>. Veamos la explicación del apunte:
+        </p>
+
+        <div class="box box-indigo" style="margin-top: 10px;">
+          <h4 style="color: #818cf8; margin-bottom: 6px;">📘 Definición del Apunte</h4>
+          <p style="font-size: 0.95rem; margin: 0; color: #f8fafc;">
+            <b>¿Qué significa <code>return 0</code>?</b><br>
+            Indica que el programa <b>terminó correctamente</b>.<br>
+            Por ahora podemos pensar: <b>Todo programa en C termina con <code>return 0;</code></b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿A quién le devuelve ese <code>0</code>?</h4>
+            <p style="font-size: 0.84rem; line-height: 1.55; margin: 0;">
+              Se lo devuelve al <b>sistema operativo</b> (Windows o Linux). Para el sistema operativo, recibir un <code>0</code> significa: <i>"Misión cumplida, hubo 0 errores"</i>.
             </p>
-            <p style="font-size: 0.82rem; color: #cbd5e1;">
-              ¡Olvidar el <code>;</code> es el error número 1 de todo principiante!
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">⚠️ ¿Qué pasa después de <code>return 0;</code>?</h4>
+            <p style="font-size: 0.84rem; line-height: 1.55; margin: 0;">
+              <code>return 0;</code> <b>finaliza inmediatamente</b> la función <code>main()</code>. Por eso siempre debe ser la <b>última instrucción</b> antes de la llave de cierre <code>}</code>.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 9: RETURN 0 Y PRINTF -->
+      <!-- SLIDE 15: RADIOGRAFÍA COMPLETA DEL PROGRAMA DEL APUNTE -->
       <section>
-        <h2><span class="section-num">08</span> <code>printf()</code> y el significado de <code>return 0;</code></h2>
-        <div class="grid-2">
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">printf("Hola mundo\n");</h4>
-            <p style="font-size: 0.88rem;">
-              Es una llamada a la función de impresión de <code>&lt;stdio.h&gt;</code>.
+        <h2><span class="section-num">14</span> Radiografía Completa Línea por Línea</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Repasemos de punta a punta qué función cumple cada una de las líneas del programa básico:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Línea</th>
+              <th>Código en C</th>
+              <th>¿Qué significa y para qué está?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><code>#include &lt;stdio.h&gt;</code></td>
+              <td>Incorpora la biblioteca que nos permite usar <code>printf()</code> y <code>scanf()</code>.</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><code>int main()</code></td>
+              <td>Puerta principal del programa: todo comienza a ejecutarse acá.</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><code>{</code></td>
+              <td>Abre el bloque de instrucciones de <code>main</code>.</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><code>printf("Hola mundo");</code></td>
+              <td>Muestra el texto <code>Hola mundo</code> en la pantalla y termina con <code>;</code>.</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><code>return 0;</code></td>
+              <td>Indica que el programa terminó correctamente.</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td><code>}</code></td>
+              <td>Cierra el bloque de la función <code>main</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 16: EL SALTO DE LÍNEA \n EN PRINTF -->
+      <section>
+        <h2><span class="section-num">15</span> Un Detalle Fundamental: El Salto de Línea <code>\n</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          ¿Qué pasa si ponemos dos <code>printf</code> seguidos sin nada especial adentro del texto? ¡Mirá la diferencia!
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-rose">
+            <h4 style="color: #fb7185;">Sin <code>\n</code> (Sale todo pegado en un renglón)</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"Hola"</span>);
+<span class="c-fn">printf</span>(<span class="c-str">"Mundo"</span>);</div>
+            </div>
+            <div class="terminal-window" style="margin-top: 6px;">
+              <div class="terminal-header">Salida en Pantalla</div>
+              <div class="terminal-body">HolaMundo</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              Como la computadora no supone nada, <code>printf</code> no baja de renglón sola.
             </p>
-            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; margin-top: 6px;">
-              <li>El texto a imprimir va encerrado entre <b>comillas dobles</b> <code>" "</code>.</li>
-              <li>El símbolo <code>\n</code> es un <b>carácter de escape</b> especial que significa <i>newline</i> (salto de línea, equivalente a presionar Enter).</li>
-            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">return 0;</h4>
-            <p style="font-size: 0.88rem;">
-              Es la despedida formal del programa:
+            <h4 style="color: #34d399;">Con <code>\n</code> (Baja al renglón siguiente)</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"Hola\n"</span>);
+<span class="c-fn">printf</span>(<span class="c-str">"Mundo\n"</span>);</div>
+            </div>
+            <div class="terminal-window" style="margin-top: 6px;">
+              <div class="terminal-header">Salida en Pantalla</div>
+              <div class="terminal-body">Hola
+Mundo</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              El símbolo <b><code>\n</code></b> (barra invertida + n) significa <i>nueva línea</i> (como apretar <b>Enter</b>).
             </p>
-            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; margin-top: 6px;">
-              <li>Devuelve el valor numérico <code>0</code> al sistema operativo (Windows, Linux o macOS).</li>
-              <li>En los sistemas operativos estándar, un código de retorno <b>0 significa: "El programa finalizó con total éxito, sin errores"</b>.</li>
-              <li>Cualquier número distinto de cero suele indicar un código de fallo o anomalía.</li>
-            </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 10: ERRORES FRECUENTES -->
+      <!-- SLIDE 17: EJEMPLO NIVEL 1 (EL PROGRAMA DEL APUNTE PASO A PASO) -->
       <section>
-        <h2><span class="section-num">09</span> Los 5 errores típicos de principiantes</h2>
-        <div class="comparison-box">
+        <h2><span class="section-num">16</span> Ejemplo Nivel 1: Nuestro Primer "Hola Mundo"</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Empecemos por el Nivel 1: el programa exacto del apunte y el orden en que el procesador recorre sus líneas al ejecutarse:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel1_hola_mundo.c</span>
+              <span class="code-badge">Nivel 1 • Básico</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Orden CPU</th>
+                  <th>Línea</th>
+                  <th>Efecto en Pantalla / Sistema</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Inicio</td>
+                  <td><code>int main() {</code></td>
+                  <td>Entra por la puerta principal</td>
+                </tr>
+                <tr>
+                  <td>Paso 1</td>
+                  <td><code>printf("Hola mundo");</code></td>
+                  <td>Imprime: <code>Hola mundo</code></td>
+                </tr>
+                <tr>
+                  <td>Paso 2</td>
+                  <td><code>return 0;</code></td>
+                  <td>Finaliza el programa sin errores</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 8px;">
+              <div class="terminal-header">Terminal</div>
+              <div class="terminal-body">Hola mundo</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: EJEMPLO NIVEL 2 (MÚLTIPLES PRINTF EN SECUENCIA) -->
+      <section>
+        <h2><span class="section-num">17</span> Ejemplo Nivel 2: Varias Instrucciones en Orden Secuencial</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Adentro de las llaves de <code>main()</code> podemos poner tantas instrucciones como queramos. Se ejecutarán una por una de arriba hacia abajo:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel2_cartel_bienvenida.c</span>
+              <span class="code-badge">Nivel 2 • Secuencia</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"=== CURSO DE PROGRAMACION ===\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Materia: Algoritmos y Est. de Datos\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Lenguaje: C\n"</span>);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">Salida en Consola</div>
+              <div class="terminal-body">=== CURSO DE PROGRAMACION ===
+Materia: Algoritmos y Est. de Datos
+Lenguaje: C</div>
+            </div>
+
+            <div class="box box-cyan" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.83rem;">
+                📌 Cada <code>printf</code> termina con <code>\n</code> antes de cerrar las comillas para que el siguiente mensaje aparezca en el renglón de abajo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: TRAZA PASO A PASO DEL EJEMPLO NIVEL 2 -->
+      <section>
+        <h2><span class="section-num">18</span> Seguimiento Paso a Paso del Ejemplo Nivel 2</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Miremos cómo se va armando la pantalla línea por línea a medida que avanza el procesador:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Paso</th>
+              <th>Instrucción Ejecutada</th>
+              <th>Lo que se agrega a la pantalla en ese paso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><code>printf("=== CURSO DE PROGRAMACION ===\n");</code></td>
+              <td>Escribe el título y baja al renglón 2.</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><code>printf("Materia: Algoritmos y Est. de Datos\n");</code></td>
+              <td>Escribe el nombre de la materia en el renglón 2 y baja al 3.</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><code>printf("Lenguaje: C\n");</code></td>
+              <td>Escribe <code>Lenguaje: C</code> en el renglón 3 y baja al 4.</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><code>return 0;</code></td>
+              <td>El programa avisa que terminó bien y se cierra.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            ✅ <b>Recordá:</b> Ninguna instrucción dentro de <code>main()</code> se ejecuta al mismo tiempo que otra; siempre van en fila india de arriba hacia abajo.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: EJEMPLO NIVEL 3 (COMBINANDO CON UNIDAD 01: CÁLCULO + ESTRUCTURA) -->
+      <section>
+        <h2><span class="section-num">19</span> Ejemplo Nivel 3: Combinando la Unidad 01 con la Unidad 02</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Ahora unamos el ejemplo de la Unidad 01 (calcular el doble de un número) con la estructura completa de la Unidad 02:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel3_doble_en_main.c</span>
+              <span class="code-badge">Nivel 3 • Integración</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+    <span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Calculo finalizado.\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"El resultado es: %d\n"</span>, resultado);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th><code>numero</code></th>
+                  <th><code>resultado</code></th>
+                  <th>Pantalla</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Línea 5</td>
+                  <td><b>5</b></td>
+                  <td>-</td>
+                  <td><i>(vacía)</i></td>
+                </tr>
+                <tr>
+                  <td>Línea 6</td>
+                  <td>5</td>
+                  <td><b>10</b></td>
+                  <td><i>(vacía)</i></td>
+                </tr>
+                <tr>
+                  <td>Línea 8</td>
+                  <td>5</td>
+                  <td>10</td>
+                  <td><code>Calculo finalizado.</code></td>
+                </tr>
+                <tr>
+                  <td>Línea 9</td>
+                  <td>5</td>
+                  <td>10</td>
+                  <td><code>El resultado es: 10</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 8px;">
+              <div class="terminal-header">Terminal</div>
+              <div class="terminal-body">Calculo finalizado.
+El resultado es: 10</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: EJEMPLO NIVEL 3 CON AMBAS BIBLIOTECAS DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">20</span> Ejemplo Nivel 3B: Usando <code>&lt;stdio.h&gt;</code> y <code>&lt;stdbool.h&gt;</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Veamos un programa que incorpora las <b>dos bibliotecas nombradas en la Página 2 del apunte</b>:
+        </p>
+
+        <div class="code-window" style="margin: 8px 0;">
+          <div class="code-header">
+            <span class="code-title">nivel3_dos_bibliotecas.c</span>
+            <span class="code-badge">stdio.h + stdbool.h</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+    <span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;
+    <span class="c-type">bool</span> calculoListo = <span class="c-kw">true</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Doble calculado: %d\n"</span>, resultado);
+    <span class="c-fn">printf</span>(<span class="c-str">"Estado (1=true): %d\n"</span>, calculoListo);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            🔑 Gracias a <code>#include &lt;stdio.h&gt;</code> pudimos usar <code>printf()</code>, y gracias a <code>#include &lt;stdbool.h&gt;</code> pudimos usar <code>bool</code> y <code>true</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: EJEMPLO NIVEL 4 (CÓMO CONSTRUIR UN PROGRAMA DESDE CERO) -->
+      <section>
+        <h2><span class="section-num">21</span> Ejemplo Nivel 4: Cómo Armar un Programa Completo desde Hoja en Blanco</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Cuando estás frente a una hoja en blanco en un examen o trabajo práctico, ¿en qué orden conviene escribir el código para no olvidarte ninguna llave ni ningún punto y coma?
+        </p>
+
+        <div class="grid-3" style="margin-top: 10px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Paso 1: La Biblioteca</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Empezá siempre trayendo <code>&lt;stdio.h&gt;</code> arriba de todo.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Paso 2: El Esqueleto Vacío</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Abrí y cerrá <code>{ }</code> con <code>return 0;</code> adentro antes de programar nada más.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Paso 3: Rellenar el Interior</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-cmt">// Tus instrucciones aca</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Escribí tus variables y <code>printf</code> arriba del <code>return 0;</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: EJEMPLO NIVEL 4 APLICADO (TICKET DE COMPRA) -->
+      <section>
+        <h2><span class="section-num">22</span> Ejemplo Nivel 4 Completo: Impresión de Ticket</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Apliquemos los 3 pasos para construir un programa que calcule el total de dos entradas de cine (<code>3500</code> pesos cada una) y muestre un ticket prolijo:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel4_ticket_cine.c</span>
+              <span class="code-badge">Nivel 4 • Completo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> precioEntrada = <span class="c-num">3500</span>;
+    <span class="c-kw">int</span> total = precioEntrada * <span class="c-num">2</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"--- CINE CENTRAL ---\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Cantidad de entradas: 2\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Total a abonar: %d\n"</span>, total);
+    <span class="c-fn">printf</span>(<span class="c-str">"--------------------\n"</span>);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-header">Salida en Consola</div>
+            <div class="terminal-body">--- CINE CENTRAL ---
+Cantidad de entradas: 2
+Total a abonar: 7000
+--------------------</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: ERROR FRECUENTE #1: OLVIDAR EL PUNTO Y COMA ; -->
+      <section>
+        <h2><span class="section-num">23</span> Error Frecuente #1: Olvidar el Punto y Coma <code>;</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Es el error número 1 de todo programador en C. Mirá qué ocurre si omitís el <code>;</code> al final de <code>printf</code>:
+        </p>
+
+        <div class="comparison-box" style="margin-top: 10px;">
           <div class="wrong-card">
-            <div class="wrong-title">❌ Lo que nunca debés hacer</div>
-            <p style="font-size: 0.82rem; margin: 4px 0; color: #fecaca;">
-              1. <code>Main()</code> con M mayúscula (C es <i>case-sensitive</i>, distingue mayúsculas).<br>
-              2. Olvidar el punto y coma: <code>printf("Hola")</code>.<br>
-              3. No cerrar la llave: olvidar el <code>}</code> final.<br>
-              4. Usar comillas curvas de procesador de texto: <code>“Hola”</code> en vez de <code>"Hola"</code>.<br>
-              5. Olvidar <code>#include &lt;stdio.h&gt;</code>.
+            <div class="wrong-title">❌ Incorrecto: Falta el ; después de printf</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>)
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+    <span class="c-cmt">// ... error: expected ';' before 'return'</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              El compilador te dirá: <code>error: expected ';' before 'return'</code> porque recién se da cuenta de que faltaba el <code>;</code> cuando choca con la palabra <code>return</code> de abajo.
             </p>
           </div>
 
           <div class="correct-card">
-            <div class="correct-title">✅ La forma correcta e impecable</div>
-            <div style="font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.45; color: #a7f3d0;">
-              <span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span><br><br>
-              <span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)<br>
-              {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-fn">printf</span>(<span class="c-str">"Hola mundo\n"</span>);<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-kw">return</span> <span class="c-num">0</span>;<br>
-              }
+            <div class="correct-title">✅ Correcto: Punto y coma al final de cada instrucción</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
             </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              Tanto <code>printf("Hola mundo");</code> como <code>return 0;</code> llevan su punto y coma obligatorio.
+            </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 11: DESAFÍO ENCONTRAR ERRORES -->
+      <!-- SLIDE 25: ERROR FRECUENTE #2: OLVIDAR CERRAR LA LLAVE } -->
       <section>
-        <h2><span class="section-num">10</span> Desafío: Modo Detective de Código</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Un alumno intentó compilar este código y el compilador le tiró errores. ¿Podés encontrar los 3 errores?</p>
+        <h2><span class="section-num">24</span> Error Frecuente #2: Olvidar la Llave de Cierre <code>}</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Si abrís el cuerpo de <code>main()</code> con <code>{</code> pero te olvidás de cerrarlo al final del archivo con <code>}</code>:
+        </p>
 
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">codigo_con_trampa.c</span>
-            <span class="code-badge">¿Dónde están los fallos?</span>
-          </div>
-          <div class="code-body"><span class="c-pre">#include</span> &lt;stdio.h&gt;
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Llave abierta sin su cierre</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 
-<span class="c-kw">int</span> <span class="c-fn">Main</span>(<span class="c-type">void</span>)
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
 {
-    <span class="c-fn">printf</span>(<span class="c-str">"Bienvenidos a la clase de C\n")</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
     <span class="c-kw">return</span> <span class="c-num">0</span>;
-</div>
+<span class="c-cmt">// ... Falta la llave } al final del archivo</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              El compilador llega al final del archivo esperando encontrar la pared de cierre y arroja: <code>error: expected '}' at end of input</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Toda llave { que abre tiene su } que cierra</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              Tip: apenas escribas <code>{</code>, apretá Enter y escribí inmediatamente la <code>}</code> de cierre para no olvidarla nunca.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: ERROR FRECUENTE #3: MAYÚSCULAS INDEBIDAS -->
+      <section>
+        <h2><span class="section-num">25</span> Error Frecuente #3: Escribir <code>Main</code> o <code>Printf</code> con Mayúscula</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          El lenguaje C es <b>sensible a mayúsculas y minúsculas</b> (en inglés, <i>case-sensitive</i>). Para C, la letra <code>m</code> y la letra <code>M</code> son dos símbolos totalmente distintos:
+        </p>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Palabras clave con mayúscula inicial</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// Mal: Int, Main, Printf y Return no existen</span>
+Int Main()
+{
+    Printf(<span class="c-str">"Hola mundo"</span>);
+    Return <span class="c-num">0</span>;
+    <span class="c-cmt">// ...</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              A veces el corrector del celular o de Word pone la primera letra en mayúscula automáticamente. ¡En C eso rompe el programa!
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Palabras reservadas de C siempre en minúscula</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              <code>#include</code>, <code>int</code>, <code>main</code>, <code>printf</code>, <code>scanf</code>, <code>bool</code>, <code>true</code>, <code>false</code> y <code>return</code> van <b>siempre en minúscula</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: ERROR FRECUENTE #4: PONER INSTRUCCIONES DESPUÉS DE RETURN 0; O AFUERA DE MAIN -->
+      <section>
+        <h2><span class="section-num">26</span> Error Frecuente #4: Escribir Después de <code>return 0;</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          ¿Qué pasa si ponemos un <code>printf</code> <b>debajo</b> de <code>return 0;</code>?
+        </p>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Código inalcanzable debajo de return 0;</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>); <span class="c-cmt">// ¡Nunca se ejecuta!</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              Como <code>return 0;</code> significa <i>"terminar el programa ahora mismo"</i>, la computadora se despide en la línea 5 y <b>jamás llega a ejecutar el <code>printf</code> de la línea 6</b>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: return 0; es el último paso antes de }</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              Primero ejecutamos todas nuestras instrucciones y recién al final cerramos con <code>return 0;</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: ERROR FRECUENTE #5: OLVIDAR #INCLUDE <STDIO.H> -->
+      <section>
+        <h2><span class="section-num">27</span> Error Frecuente #5: Usar <code>printf</code> sin <code>#include &lt;stdio.h&gt;</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          ¿Qué pasa si queremos usar <code>printf()</code> o <code>bool</code> sin haber puesto su <code>#include</code> correspondiente arriba de todo?
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Sin la biblioteca correspondiente</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// Falta #include &lt;stdbool.h&gt;</span>
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-type">bool</span> activo = <span class="c-kw">true</span>;
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+    <span class="c-cmt">// ...</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              El compilador dirá <code>unknown type name 'bool'</code> porque nadie le incorporó la biblioteca donde existe <code>bool</code>.
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Tabla Rápida de Bibliotecas del Apunte</h4>
+            <table class="trace-table" style="margin-top: 8px;">
+              <thead>
+                <tr>
+                  <th>Si en tu programa usás...</th>
+                  <th>Arriba de todo debés poner...</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>printf()</code> o <code>scanf()</code></td>
+                  <td><code>#include &lt;stdio.h&gt;</code></td>
+                </tr>
+                <tr>
+                  <td><code>bool</code>, <code>true</code> o <code>false</code></td>
+                  <td><code>#include &lt;stdbool.h&gt;</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: BUENAS PRÁCTICAS: INDENTACIÓN Y PROLIJIDAD -->
+      <section>
+        <h2><span class="section-num">28</span> Buenas Prácticas: La Indentación (Sangría)</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Al compilador no le importan los espacios en blanco, pero a los seres humanos sí. Compará estos dos programas que hacen exactamente lo mismo:
+        </p>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Desprolijo: Todo amontonado contra el margen</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-kw">int</span> <span class="c-fn">main</span>(){
+<span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+<span class="c-kw">return</span> <span class="c-num">0</span>;}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              Cuesta ver a simple vista dónde empieza y dónde termina el bloque de <code>main()</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Prolijo: Con sangría (Tab) adentro de las llaves</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              Dejar 4 espacios (tecla <b>Tab</b>) adentro de <code>{ }</code> permite ver de inmediato qué instrucciones están adentro de <code>main</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: EJERCICIO DE APLICACIÓN 1 -->
+      <section>
+        <h2><span class="section-num">29</span> Ejercicio 1: Completar las Piezas Faltantes</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Al siguiente programa se le borraron 4 partes clave de su estructura básica. ¡Descubrí cuáles son antes de desplegar la respuesta!
+        </p>
+
+        <div class="code-window" style="margin: 8px 0;">
+          <div class="code-header">
+            <span class="code-title">completar_esqueleto.c</span>
+            <span class="code-badge">Ejercicio 1</span>
+          </div>
+          <div class="code-body"><span class="c-cmt">// 1. Falta incorporar la biblioteca para usar printf:</span>
+________ &lt;stdio.h&gt;
+
+<span class="c-cmt">// 2. Falta el nombre de la puerta principal del programa:</span>
+<span class="c-kw">int</span> ______()
+{
+    <span class="c-cmt">// 3. Falta el simbolo final de esta instruccion:</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>)_
+
+    <span class="c-cmt">// 4. Falta la instruccion que indica que termino correctamente:</span>
+    _________;
+}</div>
         </div>
 
         <details class="code-solution">
-          <summary>👉 Clic acá para ver la corrección de los 3 errores</summary>
+          <summary>👁️ Ver las 4 respuestas y el programa completo</summary>
           <div class="solution-content">
-            <ol style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px; color: #a7f3d0;">
-              <li><b>Error 1:</b> <code>Main</code> está con 'M' mayúscula. Debe ser <code>main</code> en minúscula.</li>
-              <li><b>Error 2:</b> En la línea del <code>printf</code> falta el punto y coma <code>;</code> al final.</li>
-              <li><b>Error 3:</b> Falta la llave de cierre <code>}</code> para cerrar el bloque de la función.</li>
+            <p style="font-size: 0.84rem; margin: 0 0 8px;">
+              1. <b><code>#include</code></b> &nbsp;|&nbsp; 2. <b><code>main</code></b> &nbsp;|&nbsp; 3. Punto y coma <b><code>;</code></b> &nbsp;|&nbsp; 4. <b><code>return 0;</code></b>
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 31: EJERCICIO DE APLICACIÓN 2 -->
+      <section>
+        <h2><span class="section-num">30</span> Ejercicio 2: Encontrar los 4 Errores de Compilación</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Un compañero escribió este programa pero no compila. ¿Podés detectar los <b>4 errores</b> que cometió?
+        </p>
+
+        <div class="code-window" style="margin: 8px 0;">
+          <div class="code-header">
+            <span class="code-title">programa_con_errores.c</span>
+            <span class="code-badge">Detective de Código</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>;
+
+<span class="c-kw">int</span> <span class="c-fn">Main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Aprendiendo C"</span>)
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+<span class="c-cmt">// ...</span></div>
+        </div>
+
+        <details class="code-solution">
+          <summary>👁️ Ver los 4 errores encontrados y su corrección</summary>
+          <div class="solution-content">
+            <ol style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px; color: #a7f3d0;">
+              <li><b>Error 1 (Línea 1):</b> Puso un <code>;</code> al final de <code>#include &lt;stdio.h&gt;</code> (los <code>#include</code> no llevan <code>;</code>).</li>
+              <li><b>Error 2 (Línea 3):</b> Escribió <code>Main()</code> con M mayúscula en lugar de <code>main()</code>.</li>
+              <li><b>Error 3 (Línea 5):</b> Se olvidó el punto y coma <code>;</code> al final de <code>printf("Aprendiendo C");</code>.</li>
+              <li><b>Error 4 (Final):</b> Se olvidó la llave de cierre <code>}</code> después de <code>return 0;</code>.</li>
             </ol>
           </div>
         </details>
       </section>
 
-      <!-- SLIDE 12: RESUMEN Y NAVEGACIÓN -->
+      <!-- SLIDE 32: EJERCICIO DE APLICACIÓN 3 -->
       <section>
-        <h2><span class="section-num">11</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">31</span> Ejercicio 3: Escribir tu Propio Programa Completo en C</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 6px;">📝 Enunciado</h4>
+          <p style="font-size: 0.88rem; margin: 0 0 8px;">
+            Escribir un programa completo en C (desde el <code>#include</code> hasta la última llave <code>}</code>) que muestre por pantalla en dos renglones separados:<br>
+            Renglón 1: <code>Hola mundo</code><br>
+            Renglón 2: <code>Mi primer programa en C</code>
+          </p>
+
+          <details class="code-solution">
+            <summary>💻 Ver código solución completo</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Mi primer programa en C\n"</span>);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: PREGUNTAS RÁPIDAS DE REPASO DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">32</span> Las 3 Preguntas del Apunte que Siempre Toman</h2>
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. ¿Qué es <code>#include</code>?</h4>
+            <p style="font-size: 0.83rem; line-height: 1.5; margin: 0;">
+              Permite incorporar <b>bibliotecas</b> al programa. Las bibliotecas contienen funciones que ya fueron creadas por otros programadores (ej: <code>stdio.h</code> y <code>stdbool.h</code>).
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">2. ¿Qué es <code>main()</code>?</h4>
+            <p style="font-size: 0.83rem; line-height: 1.5; margin: 0;">
+              Es el <b>punto de entrada</b> del programa. La primera función que se ejecuta al arrancar: la <b>puerta principal</b> donde todo comienza.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. ¿Qué es <code>return 0;</code>?</h4>
+            <p style="font-size: 0.83rem; line-height: 1.5; margin: 0;">
+              Indica que el programa <b>terminó correctamente</b>. Todo programa en C termina con <code>return 0;</code> antes de cerrar <code>}</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: PUENTE HACIA LA UNIDAD 03 (VARIABLES) -->
+      <section>
+        <h2><span class="section-num">33</span> ¿Qué Sigue Ahora? Puente hacia la Unidad 03</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 6px;">🔗 De la estructura fija a los datos dinámicos</h4>
+          <p style="font-size: 0.88rem; line-height: 1.55; margin: 0;">
+            Ya dominamos el esqueleto donde viven nuestros programas. Ahora necesitamos aprender en profundidad cómo guardar información adentro de la memoria RAM: qué son las <b>variables</b> (las "cajitas" con etiqueta y tipo), cómo se declaran (<code>int edad; float altura; char inicial;</code>) y la diferencia crucial entre asignar con un igual (<code>=</code>) y comparar con doble igual (<code>==</code>).
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 12px;">
+          <div class="code-header">
+            <span class="code-title">adelanto_unidad_03.c</span>
+            <span class="code-badge">Próxima Clase: Variables</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Edad guardada en la caja: %d\n"</span>, edad);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 35: RESUMEN FINAL, CHECKLIST Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">34</span> Resumen Final y Checklist de Autoevaluación</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Síntesis del Esqueleto en C</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>#include:</b> Carga las bibliotecas necesarias.</li>
-              <li><b>stdio.h:</b> Permite usar <code>printf</code> y <code>scanf</code>.</li>
-              <li><b>int main(void):</b> El punto de entrada obligatorio del programa.</li>
-              <li><b>{ }:</b> Delimitan el cuerpo y bloque de instrucciones.</li>
-              <li><b>;:</b> Marca el final de cada instrucción.</li>
-              <li><b>return 0;:</b> Notifica al SO que el programa terminó bien.</li>
+            <h4 style="color: #818cf8;">Ideas Clave de la Unidad 02</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li><b><code>#include &lt;stdio.h&gt;</code>:</b> Habilita <code>printf()</code> y <code>scanf()</code>.</li>
+              <li><b><code>#include &lt;stdbool.h&gt;</code>:</b> Habilita <code>bool</code>, <code>true</code> y <code>false</code>.</li>
+              <li><b><code>int main()</code>:</b> Puerta principal donde comienza la ejecución.</li>
+              <li><b>Llaves <code>{ }</code>:</b> Delimitan el inicio y el fin del bloque de instrucciones.</li>
+              <li><b><code>return 0;</code>:</b> Avisa que el programa finalizó correctamente.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé escribir de memoria la estructura básica de C?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo qué significa que C sea un lenguaje compilado?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo que C distingue entre mayúsculas y minúsculas?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Tengo claro para qué sirve el <code>\n</code> en un texto?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo escribir de memoria el programa básico de "Hola mundo"?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué funciones nos da <code>&lt;stdio.h&gt;</code> y qué nos da <code>&lt;stdbool.h&gt;</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué <code>int main()</code> es la puerta principal del programa?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Distingo qué líneas llevan punto y coma <code>;</code> y cuáles no?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo para qué sirve <code>return 0;</code> al final de <code>main</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
-          <a href="01-introduccion-programacion.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="01-introduccion-programacion.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
             ← Anterior: ¿Qué es Programar?
           </a>
-          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            1er Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            ← Índice 1er Bimestre
           </a>
-          <a href="03-variables.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            Siguiente: Variables en C →
+          <a href="03-variables.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Siguiente Unidad: Variables en C →
           </a>
         </div>
       </section>
@@ -403,8 +1465,9 @@ Hola mundo</div>
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -414,8 +1477,20 @@ Hola mundo</div>
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>
+
 </html>

@@ -581,11 +581,11 @@
         <div>
           <span class="bimestre-badge">2do Bimestre • Estructuras &amp; Heap</span>
           <h2>2do Bimestre</h2>
-          <p>Estructuras de datos unidimensionales y bidimensionales, ordenamiento por burbuja, registros <code>struct</code> y gestión profesional de la memoria dinámica en el Heap (malloc, free, calloc, realloc).</p>
+          <p>Vectores estáticos, recorridos y búsquedas, ordenamiento por intercambio y burbuja, matrices bidimensionales y diagonales, registros <code>struct</code> y memoria dinámica en el Heap (malloc, free, calloc, realloc y vectores dinámicos).</p>
 
           <div class="bimestre-features">
             <div class="bimestre-feature-item"><span class="bullet">▸</span> Vectores estáticos, recorridos y búsquedas</div>
-            <div class="bimestre-feature-item"><span class="bullet">▸</span> Algoritmo de ordenamiento burbuja</div>
+            <div class="bimestre-feature-item"><span class="bullet">▸</span> Ordenamiento por intercambio y burbuja</div>
             <div class="bimestre-feature-item"><span class="bullet">▸</span> Matrices bidimensionales y diagonales</div>
             <div class="bimestre-feature-item"><span class="bullet">▸</span> Structs y memoria dinámica (Heap)</div>
           </div>
@@ -931,13 +931,13 @@
             <span class="lesson-num">Unidad 03</span>
             <span class="bimestre-tag">2do Bimestre</span>
           </div>
-          <h3>Ordenamiento de Vectores: Método de la Burbuja</h3>
-          <p>¿Por qué ordenar? El intercambio seguro con vaso auxiliar (temp), mecánica de burbujas flotantes, bucles anidados paso a paso y optimización con bandera hubo_intercambio.</p>
+          <h3>Ordenamiento de Vectores: Intercambio y Burbuja</h3>
+          <p>La lógica del intercambio con variable auxiliar (aux), ordenamiento por intercambio fijando posición i (apunte oficial), método de la burbuja y trazas completas paso a paso.</p>
           <div class="tag-list">
             <span class="tag-item">Bubble Sort</span>
-            <span class="tag-item">Swap con temp</span>
+            <span class="tag-item">Variable aux</span>
             <span class="tag-item">Bucles Anidados</span>
-            <span class="tag-item">Early Exit</span>
+            <span class="tag-item">for i / for j=i+1</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
@@ -992,11 +992,11 @@
             <span class="bimestre-tag">2do Bimestre</span>
           </div>
           <h3>Estructuras (struct) y Vectores de Registros</h3>
-          <p>Agrupación de datos heterogéneos bajo un mismo nombre, definición con typedef struct, operador punto (.), registros anidados y vectores de estructuras como base de datos en memoria.</p>
+          <p>Agrupación de datos de distinto tipo con struct Alumno, diferencia entre molde y variable, operador punto (.), vectores de estructuras (alumnos[i].campo) y alias con typedef.</p>
           <div class="tag-list">
-            <span class="tag-item">typedef struct</span>
+            <span class="tag-item">struct Alumno</span>
             <span class="tag-item">Operador Punto (.)</span>
-            <span class="tag-item">Alumno curso[30]</span>
+            <span class="tag-item">alumnos[i].promedio</span>
             <span class="tag-item">Registros en RAM</span>
           </div>
         </div>
@@ -1012,7 +1012,7 @@
             <span class="bimestre-tag">2do Bimestre</span>
           </div>
           <h3>Introducción a la Memoria Dinámica y Punteros</h3>
-          <p>Limitaciones del tamaño fijo en compilación, el mapa de memoria de un programa (Stack vs Heap), punteros como variables que guardan direcciones, operador &amp; y desreferenciación con *.</p>
+          <p>Memoria estática vs dinámica (analogía de las sillas), arquitectura RAM (Stack vs Heap), direcciones de memoria, punteros (int *numeros) y presentación de stdlib.h.</p>
           <div class="tag-list">
             <span class="tag-item">Stack vs Heap</span>
             <span class="tag-item">Punteros (int *ptr)</span>
@@ -1032,7 +1032,7 @@
             <span class="bimestre-tag">2do Bimestre</span>
           </div>
           <h3>Reserva y Liberación: malloc(), free() y sizeof()</h3>
-          <p>Sintaxis estricta de malloc(), el operador portátil sizeof, verificación obligatoria de puntero NULL, liberación responsable con free() y prevención de fugas de memoria (memory leaks).</p>
+          <p>Analogía de la cancha de fútbol, desglose de (int*) malloc(n * sizeof(int)), validación contra NULL, basura en memoria, liberación con free() y prevención de memory leaks.</p>
           <div class="tag-list">
             <span class="tag-item">malloc(N * sizeof)</span>
             <span class="tag-item">if (p == NULL)</span>
@@ -1072,7 +1072,7 @@
             <span class="bimestre-tag">2do Bimestre</span>
           </div>
           <h3>Vectores Dinámicos e Integración de Conceptos</h3>
-          <p>Arquitectura de un vector con crecimiento automático, separación entre tamaño actual y capacidad máxima, agregación de elementos con duplicación de capacidad y proyecto integrador completo.</p>
+          <p>Por qué un vector dinámico se usa igual que uno estático (notas[i]), comparación Stack vs Heap, algoritmos de búsqueda, ordenamiento y structs dinámicos con realloc().</p>
           <div class="tag-list">
             <span class="tag-item">Vector Dinámico</span>
             <span class="tag-item">Capacidad vs Tamaño</span>

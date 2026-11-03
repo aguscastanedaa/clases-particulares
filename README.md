@@ -57,90 +57,173 @@ El módulo de Programación en C contiene un plan curricular completo de **36 pr
 
 #### 🔹 1er Bimestre: Fundamentos de C y Control de Flujo (13 Unidades)
 🔗 **Portal del 1er Bimestre:** [programacion/1er-cuatrimestre/1er-bimestre/index.html](programacion/1er-cuatrimestre/1er-bimestre/index.html)
+📄 **Apunte Teórico Oficial:** [Apunte teorico - Lab. Algoritmos y Estructura de Datos.pdf](programacion/1er-cuatrimestre/1er-bimestre/Apunte%20teorico%20-%20Lab.%20Algoritmos%20y%20Estructura%20de%20Datos.pdf)
 
-1. **[Unidad 01: ¿Qué es programar?](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/01-introduccion-programacion.html)**: Algoritmos, precisión, CPU/RAM, sintaxis vs lógica y primer código (`numero * 2`).
-2. **[Unidad 02: Estructura básica de un programa en C](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/02-estructura-programa-c.html)**: `#include <stdio.h>`, función `main()`, delimitadores `{ }`, punto y coma `;` y `return 0;`.
-3. **[Unidad 03: Variables: La memoria de tu programa](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/03-variables.html)**: Cajas en RAM, declaración, asignación, `=` vs `==` y tablas de traza paso a paso.
-4. **[Unidad 04: Tipos de datos fundamentales](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/04-tipos-datos.html)**: Tipado estático con `int`, `float`, `char` y `bool`; precisión y literales.
-5. **[Unidad 05: Entrada y salida de datos (E/S)](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/05-entrada-salida.html)**: `printf()`, `scanf()`, especificadores (`%d`, `%f`, `%c`) y operador de dirección `&`.
-6. **[Unidad 06: Operadores aritméticos y módulo %](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/06-operadores-aritmeticos.html)**: División entera vs flotante, operador resto `%` y criterio de divisibilidad.
-7. **[Unidad 07: Incremento de variables](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/07-incremento-variables.html)**: `x = x + 1`, operadores abreviados (`+=`), `++x` vs `x++`, contadores y acumuladores.
-8. **[Unidad 08: Operadores de comparación](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/08-operadores-comparacion.html)**: Respuestas booleanas (1 o 0), operadores relacionales (`==`, `!=`, `<`, `>`, `<=`, `>=`).
-9. **[Unidad 09: Condicionales: if y else](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/09-condicionales.html)**: Bifurcaciones, diagramas de flujo SVG, cascadas `else if` y condicionales anidados.
-10. **[Unidad 10: Operadores lógicos: &&, || y !](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/10-operadores-logicos.html)**: Tablas de verdad completas, cortocircuito y rangos combinados.
-11. **[Unidad 11: Booleanos: bool, true y false](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/11-booleanos.html)**: Cabecera `<stdbool.h>`, flags de estado e instrucciones de condición limpias.
-12. **[Unidad 12: Funciones en C: Modularidad y Reutilización](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/12-funciones.html)**: Principio DRY, parámetros vs argumentos, `return` vs `printf`, funciones `void` y scope local.
-13. **[Unidad 13: Bucles: while y for](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/13-bucles-while-for.html)**: Los 3 pilares de repetición, trazas paso a paso, bucles anidados y prevención de loops infinitos.
+1. **[Unidad 01: ¿Qué es programar?](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/01-introduccion-programacion.html)**
+   - Algoritmos de la vida cotidiana, ambigüedad humana vs precisión matemática de la computadora.
+   - Rol de la CPU, memoria RAM y almacenamiento secundario; cómo viajan los datos.
+   - Lenguaje de máquina (binario) vs lenguaje compilado de alto nivel (C).
+   - Sintaxis vs lógica, ciclo de vida del código (código fuente $\rightarrow$ compilador $\rightarrow$ ejecutable binario).
+   - Primer programa en C con análisis detallado: cálculo del doble de un número (`numero * 2`).
+
+2. **[Unidad 02: Estructura básica de un programa en C](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/02-estructura-programa-c.html)**
+   - Anatomía de un archivo `.c`: directivas de preprocesador (`#include <stdio.h>`), punto de entrada `main()`.
+   - Delimitadores de bloque `{ }`, sangría/indentación como buena práctica y punto y coma `;` como finalizador de sentencias.
+   - Significado del valor de retorno `return 0;` como señal de éxito al sistema operativo.
+   - Comentarios de una sola línea (`//`) y de múltiples líneas (`/* ... */`).
+   - El primer "¡Hola, mundo!" explicado línea por línea y errores de novato (olvido de `;`, omitir `#include`).
+
+3. **[Unidad 03: Variables: La memoria de tu programa](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/03-variables.html)**
+   - Analogía de la memoria RAM como una estantería de cajas etiquetadas.
+   - Las 3 características de una variable: tipo de dato, identificador (nombre) y contenido.
+   - Reglas y convenciones de nomenclatura en C (`camelCase`, `snake_case`, palabras reservadas).
+   - Declaración vs Inicialización vs Asignación; peligro de variables no inicializadas (valores basura en RAM).
+   - Operador de asignación `=` (copia de derecha a izquierda) vs operador de comparación `==`.
+   - Trazas de memoria paso a paso y el error clásico de intentar guardar texto en un `int`.
+
+4. **[Unidad 04: Tipos de datos fundamentales](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/04-tipos-datos.html)**
+   - Tipado estático y estricto de C: por qué la máquina necesita saber el tamaño exacto en bytes.
+   - Tipos primitivos: `int` (enteros, 4 bytes), `float` (reales, 4 bytes), `double` (doble precisión, 8 bytes), `char` (1 byte).
+   - El tipo `char` y su relación directa con la tabla de códigos ASCII (un carácter es un número entero).
+   - Rango de representación y desbordamiento (*overflow*) numérico.
+   - Constantes literales y prefijo `const` para variables de solo lectura.
+
+5. **[Unidad 05: Entrada y salida de datos (E/S)](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/05-entrada-salida.html)**
+   - La biblioteca `<stdio.h>` y los flujos estándar `stdout` y `stdin`.
+   - Salida con `printf()`: cadenas de texto, secuencias de escape (`\n`, `\t`, `\\`, `\"`).
+   - Especificadores de formato: `%d` / `%i` (enteros), `%f` (flotantes), `%.2f` (redondeo a 2 decimales), `%c` (caracteres).
+   - Entrada con `scanf()`: especificadores correspondientes y el operador de dirección `&` (el porqué del ampersand).
+   - Errores típicos: olvidar el `&` en `scanf()`, mezclar tipos entre el especificador y la variable, y limpieza básica de búfer.
+
+6. **[Unidad 06: Operadores aritméticos y módulo %](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/06-operadores-aritmeticos.html)**
+   - Operadores básicos: suma (`+`), resta (`-`), multiplicación (`*`), división (`/`).
+   - El gran dilema de la división en C: división entera `5 / 2 = 2` vs división real `5.0 / 2.0 = 2.5` y casteo `(float)a / b`.
+   - El operador módulo o resto `%`: qué calcula matemáticamente y por qué solo opera sobre enteros.
+   - Aplicaciones clave del módulo: comprobar paridad (`n % 2 == 0`), verificar divisibilidad y aislar dígitos de un número.
+   - Precedencia de operadores aritméticos y uso correcto de paréntesis asociativos.
+
+7. **[Unidad 07: Incremento de variables](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/07-incremento-variables.html)**
+   - Concepto de auto-modificación: `x = x + 1` desglosado paso a paso.
+   - Operadores de asignación compuesta: `+=`, `-=`, `*=`, `/=`, `%=`.
+   - Operadores unarios de incremento y decremento: `++` y `--`.
+   - Diferencia fundamental entre pre-incremento (`++x`) y post-incremento (`x++`) con ejemplos y tablas de traza.
+   - Patrones fundamentales en programación: la variable **Contador** vs la variable **Acumulador / Totalizador**.
+
+8. **[Unidad 08: Operadores de comparación](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/08-operadores-comparacion.html)**
+   - Proposiciones y preguntas booleanas en la computadora: la respuesta binaria verdadera (`1`) o falsa (`0`).
+   - Operadores relacionales: igualdad (`==`), desigualdad (`!=`), menor (`<`), mayor (`>`), menor o igual (`<=`), mayor o igual (`>=`).
+   - La trampa mortal de los principiantes: confundir `=` (asignación) con `==` (comparación).
+   - Comparación entre números de punto flotante y comparación de caracteres según su código ASCII.
+   - Evaluación de expresiones lógicas complejas y generación de resultados numéricos en memoria.
+
+9. **[Unidad 09: Condicionales: if y else](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/09-condicionales.html)**
+   - La toma de decisiones en el software: bifurcación de flujos de ejecución.
+   - Estructura `if` simple: ejecución condicional basada en una expresión booleana.
+   - Estructura `if ... else`: caminos mutuamente excluyentes (verdadero vs falso).
+   - Estructura `if ... else if ... else`: escaleras de decisión múltiple con salida anticipada.
+   - Condicionales anidados, buenas prácticas de llaves `{ }` obligatorias y diagramas de flujo SVG paso a paso.
+
+10. **[Unidad 10: Operadores lógicos: &&, || y !](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/10-operadores-logicos.html)**
+    - Combinación de condiciones complejas mediante lógica proposicional booleana.
+    - Conjunción lógica **AND** (`&&`): tabla de verdad completa y validación de rangos numéricos (`x >= 10 && x <= 20`).
+    - Disyunción lógica **OR** (`||`): tabla de verdad completa y validación de alternativas (`dia == 6 || dia == 7`).
+    - Negación lógica **NOT** (`!`): inversión de polaridad de una condición.
+    - Evaluación de cortocircuito (*short-circuit evaluation*) en C y su uso defensivo contra división por cero o punteros nulos.
+    - Leyes de De Morgan aplicadas a la simplificación de condiciones en C.
+
+11. **[Unidad 11: Booleanos: bool, true y false](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/11-booleanos.html)**
+    - Historia de la verdad en C: el estándar original C89 donde cualquier valor distinto de cero es verdadero (`1`) y cero es falso (`0`).
+    - El estándar C99 y la cabecera estándar `<stdbool.h>`: tipos `bool`, `true` y `false`.
+    - Patrón de banderas (*flags*): variables booleanas de estado para alertar eventos en el algoritmo.
+    - Escritura de condiciones idiomáticas y limpias (`if (esActivo)` en lugar de `if (esActivo == true)`).
+    - Casos prácticos de banderas: detección de condiciones especiales en secuencias y bucles.
+
+12. **[Unidad 12: Funciones en C: Modularidad y Reutilización](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/12-funciones.html)**
+    - Filosofía de "Dividir y Vencerás" y el principio DRY (*Don't Repeat Yourself*).
+    - Anatomía de una función: tipo de retorno, nombre significativo, lista de parámetros formales y cuerpo.
+    - Diferencia crucial entre parámetros (declarados en la función) y argumentos (valores reales enviados en la llamada).
+    - Declaración (prototipo de función) vs Definición (implementación) vs Invocación (llamada).
+    - La instrucción `return` y el tipo especial `void` (funciones que ejecutan acciones sin devolver valor).
+    - Scope o ámbito de variables: variables locales, variables globales y aislamiento de pila de ejecución (Stack frame).
+
+13. **[Unidad 13: Bucles: while y for](programacion/1er-cuatrimestre/1er-bimestre/presentaciones/13-bucles-while-for.html)**
+    - La necesidad de la repetición: automatizar tareas iterativas sin duplicar código.
+    - Los 3 pilares indispensables de cualquier ciclo: inicialización, condición de continuación y actualización.
+    - El bucle `while`: ciclo pre-prueba para repeticiones indeterminadas o basadas en condiciones externas.
+    - El bucle `for`: ciclo compacto ideal para iteraciones con contador conocido de antemano (`inicialización; condición; incremento`).
+    - Comparación lado a lado de `while` y `for` resolviendo el mismo problema.
+    - El ciclo `do-while`: ciclo post-prueba que garantiza al menos una ejecución (ideal para validación de menús y entradas).
+    - Control de flujo con `break` (corte anticipado) y `continue` (salto de iteración), bucles anidados y prevención de bucles infinitos.
 
 #### 🔹 2do Bimestre: Vectores, Matrices, Registros y Memoria Dinámica (10 Unidades)
 🔗 **Portal del 2do Bimestre:** [programacion/1er-cuatrimestre/2do-bimestre/index.html](programacion/1er-cuatrimestre/2do-bimestre/index.html)
+📄 **Apunte Teórico Oficial:** [Apunte teorico - Lab. Algoritmos y Estructura de Datos p2.pdf](programacion/1er-cuatrimestre/2do-bimestre/Apunte%20teorico%20-%20Lab.%20Algoritmos%20y%20Estructura%20de%20Datos%20p2.pdf)
 
 1. **[Unidad 01: Vectores y Arreglos Estáticos](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/01-vectores-estaticos.html)**
-   - Limitaciones de variables individuales e índices base 0.
-   - Contigüidad estricta en memoria RAM y tamaño en bytes (`sizeof`).
-   - Declaración, inicialización en lista e inicialización parcial a ceros.
-   - Prevención de desbordamiento de búfer (*buffer overflow*).
+   - Problema de las variables individuales vs colecciones homogéneas en una fila de casilleros numerados.
+   - Declaración (`int numeros[5];`), índices de `0` a `N-1`, acceso (`numeros[0] = 10`) y modificación.
+   - Inicialización explícita (`{8, 10, 7, 9, 6}`), parcial a ceros y contigüidad en memoria RAM (`sizeof`).
+   - Prevención de accesos fuera de rango (*buffer overflow*) y 4 niveles progresivos de ejemplos prácticos.
 
 2. **[Unidad 02: Recorridos, Búsquedas y Procesamiento de Vectores](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/02-recorridos-busquedas-vectores.html)**
-   - Patrón canónico de recorrido con bucle `for (int i = 0; i < N; i++)`.
-   - Carga interactiva por teclado e impresión formateada con corchetes.
-   - Algoritmos de acumulación, promedio con casteo flotante y búsqueda de máximo/mínimo.
-   - Algoritmo de **búsqueda lineal** con bandera booleana y corte anticipado (`break`).
+   - Recorrido canónico con `for(int i = 0; i < N; i++)`, simulación paso a paso y modificación (`numeros[i] = numeros[i] * 2`).
+   - El error clásico `for(int i = 1; i <= 5; i++)`: saltar `pos[0]` y desbordar en `pos[5]`.
+   - Búsqueda de mínimo/máximo (inicializando con `numeros[0]`), primer par con `break`, conteo de pares y búsqueda lineal con bandera.
+   - Problema integrador de examen: encontrar el **menor número par** del vector.
 
-3. **[Unidad 03: Ordenamiento de Vectores: Método de la Burbuja](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/03-ordenamiento-vectores.html)**
-   - La necesidad del orden para la búsqueda y análisis de datos.
-   - El intercambio seguro de dos variables utilizando variable auxiliar (`temp`).
-   - Mecánica de pasadas y burbujas flotantes mediante bucles anidados `i` y `j`.
-   - Optimización con bandera `hubo_intercambio` para terminación temprana $O(N)$.
+3. **[Unidad 03: Ordenamiento de Vectores: Intercambio y Burbuja](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/03-ordenamiento-vectores.html)**
+   - La lógica del intercambio seguro de dos variables usando variable auxiliar (`aux`) vs el error de sobreescritura directa.
+   - Algoritmo de **Ordenamiento por Intercambio** del apunte (`for i` fijando posición y `for j = i + 1` comparando el resto) con traza completa sobre `{8, 3, 10, 1, 5}`.
+   - Algoritmo de **Ordenamiento Burbuja (Bubble Sort)** por pares adyacentes (`j` y `j + 1`) y optimización con bandera.
+   - Ordenamiento ascendente (`<`), descendente (`>`), mediana y ranking de notas.
 
 4. **[Unidad 04: Matrices y Recorridos Bidimensionales](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/04-matrices-bidimensionales.html)**
-   - Concepto de tabla, plano cartesiano y grilla bidimensional `[filas][columnas]`.
-   - Distribución contigua en RAM por filas (*Row-Major Order*).
-   - Recorrido canónico con bucles anidados `for i` (filas) y `for j` (columnas).
-   - Operaciones matriciales: sumatoria global, suma por fila y máximos bidimensionales.
+   - Grillas de dos dimensiones (`int matriz[3][3]`), analogía del aula de pupitres y coordenadas `[fila][columna]`.
+   - Inicialización estructurada por filas, acceso puntual y el error de escribir `matriz[1, 2]` en lugar de `matriz[1][2]`.
+   - Recorrido completo con doble ciclo `for` anidado (`i` para filas, `j` para columnas) y tabla de seguimiento de las 9 iteraciones.
+   - Impresión en formato tabla con `\n` al cierre de cada fila, sumatoria total, suma por fila/columna y máximo con coordenadas `(fila, col)`.
 
 5. **[Unidad 05: Diagonales de una Matriz Cuadrada](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/05-diagonales-matriz.html)**
-   - Matrices cuadradas de orden $N \times N$.
-   - Condición matemática de la **Diagonal Principal** (`i == j`).
-   - Deducción geométrica de la **Diagonal Secundaria** (`i + j == N - 1`).
-   - Optimización algorítmica: reducción de $O(N^2)$ a $O(N)$ con un solo bucle.
-   - Identificación de elementos fuera de las diagonales e intersección central en orden impar.
+   - Matrices cuadradas $N \times N$ y por qué solo ellas poseen diagonales completas.
+   - **Diagonal Principal**: deducción de la ley matemática `i == j` (`[0][0]`, `[1][1]`, `[2][2]`).
+   - **Diagonal Secundaria**: deducción de la ley matemática `i + j == N - 1` (`[0][2]`, `[1][1]`, `[2][0]`) y optimización en un solo ciclo `O(N)`.
+   - Elementos fuera de las diagonales, matriz identidad, traza matricial y cruces en matrices de orden impar.
 
-6. **[Unidad 06: Estructuras (struct) y Vectores de Registros](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/06-estructuras-struct.html)**
-   - Registros heterogéneos vs vectores homogéneos.
-   - Declaración elegante y moderna mediante `typedef struct`.
-   - Acceso a miembros mediante el operador punto (`.`): lectura y escritura.
-   - Arreglos de estructuras (`Alumno curso[30]`): simulación de bases de datos en memoria.
-   - Procesamiento de registros: búsquedas por DNI/legajo y cálculo de mejores promedios.
+6. **[Unidad 06: Estructuras (`struct`) y Vectores de Registros](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/06-estructuras-struct.html)**
+   - Limitación de vectores paralelos homogéneos vs agrupación heterogénea con `struct Alumno { int edad; float promedio; char division; };`.
+   - Diferencia entre definir el molde (`struct Alumno`) y crear variables en RAM (`struct Alumno alumno1;`), incluyendo el `;` obligatorio tras `}`.
+   - Acceso a campos mediante el operador punto (`.`) y alias opcional con `typedef`.
+   - **Vectores de estructuras** (`struct Alumno alumnos[30];`), acceso combinado `alumnos[i].campo`, carga e informes estadísticos con `for`.
 
 7. **[Unidad 07: Introducción a la Memoria Dinámica y Punteros](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/07-introduccion-memoria-dinamica.html)**
-   - Limitaciones del dimensionamiento estático en tiempo de compilación.
-   - Anatomía de la memoria de un proceso: segmento de código, datos, **Stack** (pila) y **Heap** (montículo).
-   - Concepto de puntero: variable que almacena una dirección física de memoria.
-   - Operador de dirección `&` y operador de desreferenciación `*`.
+   - Memoria estática vs memoria dinámica: la analogía de las sillas de una fiesta y el desperdicio/falta de espacio en `int alumnos[100];`.
+   - Mapa de la memoria RAM: **Stack** (automática y fija) vs **Heap** (manual y flexible en tiempo de ejecución).
+   - Fundamentos de direcciones de memoria y punteros (`int *numeros;`), operador dirección `&` y desreferenciación `*`.
+   - Las 4 herramientas de `<stdlib.h>`: `malloc()`, `calloc()`, `realloc()` y `free()`.
 
-8. **[Unidad 08: Reserva y Liberación: malloc(), free() y sizeof()](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/08-reserva-liberacion-malloc-free.html)**
-   - Sintaxis estricta y prototipo de `malloc()` de `<stdlib.h>`.
-   - Cálculo automático de bytes portables con el operador `sizeof()`.
-   - Verificación defensiva contra puntero nulo (`if (ptr == NULL)`).
-   - Liberación obligatoria de memoria con `free()` y consecuencias de las fugas de memoria (*memory leaks*).
+8. **[Unidad 08: Reserva y Liberación: `malloc()`, `free()` y `sizeof()`](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/08-reserva-liberacion-malloc-free.html)**
+   - La analogía del alquiler de una cancha de fútbol: reservar espacio (`malloc`), usarlo y devolverlo (`free`).
+   - Desglose completo de `numeros = (int*) malloc(n * sizeof(int));` y cálculo portable de bytes con `sizeof`.
+   - Verificación defensiva obligatoria contra `NULL` (`if (numeros == NULL)`) y valores basura iniciales en el bloque reservado.
+   - Fugas de memoria (*memory leaks*), punteros colgantes (`numeros = NULL;`) y ciclo de vida completo en 6 pasos.
 
-9. **[Unidad 09: calloc() y realloc(): Inicialización Limpia y Redimensión](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/09-calloc-realloc.html)**
-   - Inicialización a ceros garantizada con `calloc(cantidad, tamano_tipo)` vs basura de `malloc()`.
-   - Redimensión dinámica de bloques en el Heap con `realloc()`.
-   - Los 3 escenarios de realloc: expansión in-situ, reubicación con copia de datos y fallo por falta de memoria contigua.
-   - Patrón de seguridad obligatorio con **puntero temporal** para evitar pérdida del bloque previo.
+9. **[Unidad 09: `calloc()` y `realloc()`: Inicialización en Cero y Redimensión](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/09-calloc-realloc.html)**
+   - `calloc(n, sizeof(int))`: reserva de memoria limpia inicializada automáticamente en `0` vs la basura de `malloc()`.
+   - Tabla comparativa y visualizador de celdas en RAM (`154 | -20 | 987` en `malloc` vs `0 | 0 | 0` en `calloc`).
+   - `realloc(numeros, nuevoTam * sizeof(int))`: ampliación o reducción conservando intactos los datos previos (`10 20 30 40 50 ? ? ? ? ?`).
+   - Los 3 escenarios internos de `realloc()` en el Heap y el patrón seguro con puntero auxiliar `aux` para no perder los datos si devuelve `NULL`.
 
-10. **[Unidad 10: Vectores Dinámicos e Integración de Conceptos](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/10-vectores-dinamicos.html)**
-    - Arquitectura de un vector con crecimiento elástico: separación entre `tamano` (usado) y `capacidad` (reservada).
-    - Algoritmo de inserción con duplicación amortizada de capacidad ($2 \times \text{capacidad}$).
-    - Arreglos dinámicos de estructuras `struct` en el Heap.
-    - Proyecto integrador completo: sistema de gestión escolar modular con alta de registros, cálculo de estadísticas y liberación final de recursos.
+10. **[Unidad 10: Vectores Dinámicos e Integración del Bimestre](programacion/1er-cuatrimestre/2do-bimestre/presentaciones/10-vectores-dinamicos.html)**
+    - Qué es un vector dinámico y por qué en C se recorre y utiliza exactamente igual que un vector estático (`notas[i]`, `&notas[i]`).
+    - Comparación integral: vector estático en Stack vs vector dinámico en Heap.
+    - Integración de todos los algoritmos del bimestre (búsqueda, mínimo/máximo, ordenamiento y vectores dinámicos de `struct Alumno`) sobre memoria dinámica.
+    - Menú interactivo de crecimiento con `realloc()` y checklist completo de preparación para el examen del 2do Bimestre.
 
 ---
 
 ### 📗 2do Cuatrimestre: Funciones Avanzadas, Strings, Punteros y Estructuras (13 Unidades)
 🔗 **Portal del Cuatrimestre:** [programacion/2do-cuatrimestre/index.html](programacion/2do-cuatrimestre/index.html)
+📄 **Apunte Teórico Oficial:** [Apunte teorico - Lab. Algoritmos y Estructura de Datos p3.pdf](programacion/2do-cuatrimestre/Apunte%20teorico%20-%20Lab.%20Algoritmos%20y%20Estructura%20de%20Datos%20p3.pdf)
 
 1. **[Unidad 01: Funciones con Retorno y Arreglos como Parámetros](programacion/2do-cuatrimestre/presentaciones/01-funciones-retorno-arreglos-parametros.html)**
    - Funciones `void` vs funciones con retorno (`int`, `float`, `double`).

@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 1C - 01: ¿Qué es Programar? | Clases Particulares</title>
+  <title>Programación 1C 1B - 01: ¿Qué es Programar? | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
-  
-  <!-- Reveal.js Styles -->
+
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
   <link rel="stylesheet" href="../../../assets/css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 1er Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../index.html">← Índice 1er Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 1er Bimestre • Unidad 01</span>
   </div>
@@ -33,418 +39,1388 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-cyan">1er Cuatrimestre • 1er Bimestre • Unidad 1</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">¿Qué es Programar?</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            El arte de transformar ideas y problemas cotidianos en instrucciones precisas para una computadora
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-cyan">1er Cuatrimestre • 1er Bimestre • Unidad 01</span>
+          <h1 style="font-size: 2.65rem; margin-bottom: 12px;">¿Qué es Programar?</h1>
+          <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px;">
+            El arte de enseñarle a una computadora qué hacer paso a paso mediante instrucciones precisas
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-indigo">Algoritmos</span>
-            <span class="badge badge-emerald">Secuencia de Pasos</span>
-            <span class="badge badge-amber">Precisión y Lógica</span>
-            <span class="badge badge-purple">Primer Código C</span>
+            <span class="badge badge-indigo">1. Definición y Mentalidad</span>
+            <span class="badge badge-emerald">2. Algoritmos y Pasos</span>
+            <span class="badge badge-amber">3. Entrada • Proceso • Salida</span>
+            <span class="badge badge-purple">4. CPU, RAM y Lenguaje C</span>
+            <span class="badge badge-rose">5. Primeros Cálculos en C</span>
           </div>
 
-          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 34 diapositivas de esta primera clase.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: BIENVENIDA Y HOJA DE RUTA -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Bienvenida y Hoja de Ruta del 1er Bimestre</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué aprender a programar hoy?</h4>
-            <p>Una computadora es la máquina más poderosa que inventó la humanidad, pero por sí sola <b>no tiene iniciativa ni inteligencia propia</b>. Solo hace exactamente lo que un ser humano le indica.</p>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
-              Aprender a programar no es memorizar comandos raros: es entrenar tu cerebro para <b>pensar de forma estructurada, descomponer problemas complejos y crear soluciones automáticas</b>.
+            <h4 style="color: #818cf8;">¿Dónde estamos parados?</h4>
+            <p style="font-size: 0.86rem; line-height: 1.55;">
+              Hoy empezamos <b>desde cero absoluto</b> en <i>Laboratorio de Algoritmos y Estructura de Datos</i>. No necesitás ningún conocimiento previo: vamos a construir cada pieza paso a paso.
+            </p>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px; margin-top: 8px;">
+              <li><b>Unidad 01 (Hoy):</b> ¿Qué es programar? y primer contacto con C.</li>
+              <li><b>Unidad 02:</b> Estructura básica de un programa en C.</li>
+              <li><b>Unidad 03 y 04:</b> Variables y Tipos de datos.</li>
+              <li><b>Unidades 05 a 13:</b> Entrada/salida, operadores, condicionales, funciones y bucles.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vas a aprender en esta Unidad 01</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>La definición formal y sencilla de <b>programar</b> según la cátedra.</li>
+              <li>Por qué la computadora <b>no piensa, no interpreta y no supone</b>.</li>
+              <li>Qué es un <b>algoritmo</b> y el modelo <b>Entrada → Proceso → Salida</b>.</li>
+              <li>Cómo trabajan juntos el <b>procesador (CPU)</b> y la <b>memoria RAM</b>.</li>
+              <li>Cómo se lee y funciona línea por línea el ejemplo del apunte: calcular el <b>doble de un número</b> en lenguaje C.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🎯 <b>Meta de hoy:</b> Cambiar el chip de "usuario de computadora" a <b>"creador de instrucciones"</b>, entendiendo cómo razona exactamente la máquina.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: EL PROBLEMA QUE RESUELVE LA PROGRAMACIÓN -->
+      <section>
+        <h2><span class="section-num">02</span> El Punto de Partida: Una Máquina Poderosa pero Vacía</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Miramos a nuestro alrededor y todo funciona con software: celulares, videojuegos, cajeros automáticos, semáforos y redes sociales. Pero ¿qué es una computadora recién fabricada sin programas?
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-rose">
+            <h4 style="color: #fb7185;">Sin instrucciones (Hardware solo)</h4>
+            <p style="font-size: 0.86rem; line-height: 1.55;">
+              Una computadora sin programas es como una cocina profesional llena de hornos y batidoras, pero <b>sin cocinero ni recetario</b>. Tiene circuitos rapidísimos, pero <b>no tiene iniciativa propia</b>: no sabe ni siquiera sumar $2 + 2$ si nadie se lo ordena.
             </p>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
-            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
-              <li>Comprender con exactitud <b>qué significa programar</b>.</li>
-              <li>Entender cómo la computadora ejecuta instrucciones a nivel físico.</li>
-              <li>Distinguir entre una <b>instrucción aislada</b> y una <b>secuencia ordenada</b>.</li>
-              <li>Reconocer por qué las instrucciones deben ser 100% precisas.</li>
-              <li>Identificar qué ocurre ante un error de sintaxis y ante un "bug" de lógica.</li>
-              <li>Leer y analizar tu <b>primer fragmento de código real en C</b> línea por línea.</li>
-            </ul>
+            <h4 style="color: #34d399;">Con instrucciones (Software)</h4>
+            <p style="font-size: 0.86rem; line-height: 1.55;">
+              Cuando un ser humano escribe una lista precisa de órdenes, esa misma máquina puede resolver millones de cálculos matemáticos en un parpadeo, mostrar gráficos o automatizar tareas repetitivas sin cansarse jamás.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.88rem;">
+            💡 <b>Necesidad que resuelve programar:</b> Transformar una máquina electrónica inerte en una herramienta capaz de resolver cualquier problema que podamos explicar paso a paso.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: DEFINICIÓN DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">03</span> ¿Qué es Programar? (Definición del Apunte)</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Veamos las dos definiciones fundamentales de nuestro apunte teórico:
+        </p>
+
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <h4 style="color: #818cf8; margin-bottom: 6px;">📘 Definición Formal</h4>
+          <p style="font-size: 1.02rem; margin: 0; color: #f8fafc;">
+            <b>Programar</b> consiste en <b>escribir instrucciones</b> para que una computadora realice una <b>tarea determinada</b>.
+          </p>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 14px;">
+          <h4 style="color: #34d399; margin-bottom: 6px;">💬 En palabras simples</h4>
+          <p style="font-size: 1.02rem; margin: 0; color: #f8fafc;">
+            Programar es <b>enseñarle a una computadora qué hacer paso a paso</b>.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Escribir instrucciones</h4>
+            <p style="font-size: 0.82rem; margin: 0;">Cada orden individual que le damos a la máquina para que ejecute una acción concreta.</p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Paso a paso</h4>
+            <p style="font-size: 0.82rem; margin: 0;">En un orden estricto: primero el paso 1, luego el paso 2, después el paso 3.</p>
+          </div>
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">Tarea determinada</h4>
+            <p style="font-size: 0.82rem; margin: 0;">Siempre programamos con un objetivo claro: calcular un resultado, validar un dato o mostrar algo.</p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: DEFINICIÓN DE PROGRAMAR -->
+      <!-- SLIDE 5: LAS 3 REGLAS DE ORO DEL APUNTE -->
       <section>
-        <h2><span class="section-num">02</span> ¿Qué significa realmente programar?</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Desmitifiquemos la programación con palabras sencillas y cotidianas.</p>
+        <h2><span class="section-num">04</span> Las 3 Leyes de la Computadora</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          El apunte remarca tres verdades esenciales que todo programador debe grabarse desde el primer día:
+        </p>
 
-        <div class="box box-cyan" style="margin-bottom: 16px;">
-          <h4 style="margin-bottom: 4px;">Definición Pedagógica</h4>
-          <p style="font-size: 0.94rem; margin: 0;">
-            <b>Programar</b> es el proceso de diseñar, escribir y estructurar un conjunto de <b>instrucciones detalladas y ordenadas</b> (llamado <i>algoritmo</i> o <i>programa</i>) en un lenguaje que una computadora pueda interpretar y ejecutar para resolver un problema o realizar una tarea específica.
-          </p>
-        </div>
-
-        <div class="grid-3">
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">1. El Problema</h4>
-            <p style="font-size: 0.86rem;">
-              Una necesidad real: calcular un promedio, controlar un semáforo, enviar un mensaje o mover un personaje de videojuego.
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-rose">
+            <h4 style="color: #fb7185;">1. La computadora NO piensa</h4>
+            <p style="font-size: 0.84rem; line-height: 1.5;">
+              No tiene cerebro humano, ni creatividad, ni sentido común. No se pregunta <i>"¿estará bien esto?"</i>. Solo obedece órdenes mecánicamente.
             </p>
           </div>
 
           <div class="box box-amber">
-            <h4 style="color: #fbbf24;">2. El Algoritmo</h4>
-            <p style="font-size: 0.86rem;">
-              El plan mental paso a paso: definir qué pasos hacer primero, cuáles después y qué condiciones verificar.
-            </p>
-          </div>
-
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">3. El Código</h4>
-            <p style="font-size: 0.86rem;">
-              Traducir ese plan a un lenguaje de programación formal (como <b>C</b>) para que el procesador lo ejecute a miles de millones de operaciones por segundo.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 4: LA ANALOGÍA DEL ROBOT Y LA RECETA -->
-      <section>
-        <h2><span class="section-num">03</span> La analogía del robot y la receta</h2>
-        <div class="grid-2">
-          <div>
-            <div class="box box-purple">
-              <h4 style="color: #c084fc;">Analogía 1: La Receta de Cocina</h4>
-              <p style="font-size: 0.88rem;">
-                Imaginá que estás cocinando una torta. Si la receta dice:
-              </p>
-              <ol style="font-size: 0.84rem; line-height: 1.5; margin-left: 18px; margin-top: 6px;">
-                <li>1. Mezclar harina y azúcar.</li>
-                <li>2. Agregar huevos y leche.</li>
-                <li>3. Hornear durante 40 minutos a 180°C.</li>
-              </ol>
-              <p style="font-size: 0.84rem; color: #cbd5e1; margin-top: 8px;">
-                Si horneás antes de mezclar los ingredientes, ¡el resultado es un desastre! En programación, el <b>orden cronológico</b> es inquebrantable.
-              </p>
-            </div>
-          </div>
-
-          <div>
-            <div class="box box-rose">
-              <h4 style="color: #f87171;">Analogía 2: El Robot Hiper-Literal</h4>
-              <p style="font-size: 0.88rem;">
-                Las personas deducimos intenciones por sentido común. Si a un amigo le decís <i>"pasame la sal"</i>, él estira el brazo y te da el salero.
-              </p>
-              <p style="font-size: 0.88rem; color: #cbd5e1;">
-                Un robot o una computadora <b>no tiene sentido común</b>. Si solo le decís "pasame la sal", no sabrá qué sal, cuánta fuerza usar, en qué dirección mover el brazo ni si debe soltarla. Necesita cada micro-paso detallado explícitamente.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 5: CÓMO EJECUTA INSTRUCCIONES LA COMPUTADORA -->
-      <section>
-        <h2><span class="section-num">04</span> ¿Cómo ejecuta instrucciones una computadora?</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Un vistazo simplificado al interior del hardware que hace la magia:</p>
-
-        <div class="grid-3" style="margin-top: 14px;">
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">1. Memoria RAM</h4>
-            <p style="font-size: 0.85rem;">
-              Es la <b>mesa de trabajo rápida</b>. Aquí se cargan temporalmente las instrucciones de tu programa y los datos (variables) que están en uso en este instante. Al apagar la PC, se vacía.
+            <h4 style="color: #fbbf24;">2. NO interpreta</h4>
+            <p style="font-size: 0.84rem; line-height: 1.5;">
+              Entre personas entendemos indirectas o frases incompletas. La computadora es <b>100% literal</b>: no lee entre líneas ni adivina tu intención.
             </p>
           </div>
 
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">2. CPU (Procesador)</h4>
-            <p style="font-size: 0.85rem;">
-              Es el <b>motor ejecutor</b>. Funciona con un ciclo incansable:
-            </p>
-            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #a5b4fc; background: rgba(0,0,0,0.3); padding: 6px; border-radius: 6px; margin-top: 6px;">
-              Fetch (Buscar) → Decode (Entender) → Execute (Ejecutar)
-            </div>
-          </div>
-
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">3. Dispositivos E/S</h4>
-            <p style="font-size: 0.85rem;">
-              Entrada: teclado, mouse (capturan datos del usuario).<br>
-              Salida: monitor, terminal (muestran los resultados calculados).
+            <h4 style="color: #818cf8;">3. NO supone</h4>
+            <p style="font-size: 0.84rem; line-height: 1.5;">
+              Jamás va a decir <i>"seguro quiso multiplicar por 2"</i>. Si te olvidás de especificar un detalle, la computadora no lo va a asumir por su cuenta.
             </p>
           </div>
         </div>
 
-        <div class="box box-amber" style="margin-top: 14px;">
-          <p style="margin: 0; font-size: 0.88rem;">
-            ⚡ <b>Velocidad asombrosa:</b> Un procesador actual ejecuta más de <b>3.000 millones de instrucciones por segundo</b> (3 GHz). Por eso, si tus instrucciones son correctas, el resultado es instantáneo; pero si tu lógica está equivocada, cometerá millones de errores por segundo.
+        <div class="box box-cyan" style="margin-top: 14px; text-align: center;">
+          <p style="margin: 0; font-size: 0.94rem; color: #f8fafc;">
+            ⚡ <b>Conclusión del apunte:</b> <i>"Hace exactamente lo que le indicamos. Si le damos instrucciones incorrectas, hará algo incorrecto."</i>
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 6: INSTRUCCIÓN VS SECUENCIA -->
+      <!-- SLIDE 6: ANALOGÍA COTIDIANA 1: EL ROBOT PREPARANDO UN SÁNDWICH -->
       <section>
-        <h2><span class="section-num">05</span> Instrucción individual vs Secuencia</h2>
-        <div class="grid-2">
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Instrucción Individual</h4>
-            <p style="font-size: 0.88rem;">
-              Es la <b>unidad mínima de acción</b> ejecutable. Una sola orden atómica que la computadora sabe llevar a cabo.
+        <h2><span class="section-num">05</span> Analogía Cotidiana: El Robot Hiper-Literal</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Imaginá que tenés un robot en tu cocina y querés que te prepare un sándwich de jamón y queso:
+        </p>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Orden ambigua (como hablamos entre humanos)</div>
+            <p style="font-size: 0.84rem; color: #fecaca; margin: 6px 0;">
+              <i>"Robot, poné el jamón y el queso arriba del pan."</i>
             </p>
-            <div class="code-window">
-              <div class="code-header">
-                <span class="code-title">ejemplo_instruccion.c</span>
-                <span class="code-badge">Instrucción</span>
-              </div>
-              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;</div>
-            </div>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">
-              "Reservá una caja de memoria llamada <code>numero</code> y guardale el valor <code>5</code>".
+            <p style="font-size: 0.82rem; color: #cbd5e1; margin: 6px 0 0;">
+              <b>¿Qué hace el robot literal?</b><br>
+              Agarra el paquete cerrado de pan de molde, y apoya encima el paquete plástico cerrado de jamón y la horma entera de queso sin cortar. ¡Hizo exactamente lo que le dijiste, pero no lo que querías!
             </p>
           </div>
 
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">Secuencia de Instrucciones</h4>
-            <p style="font-size: 0.88rem;">
-              Es una <b>cadena ordenada de instrucciones</b> que colaboran para lograr un objetivo mayor. La computadora las ejecuta estrictamente de arriba hacia abajo.
+          <div class="correct-card">
+            <div class="correct-title">✅ Instrucciones paso a paso (pensamiento de programador)</div>
+            <ol style="font-size: 0.82rem; line-height: 1.55; margin-left: 18px; color: #a7f3d0;">
+              <li>Abrir la bolsa de pan de molde.</li>
+              <li>Sacar 2 rebanadas de pan y apoyarlas sobre el plato.</li>
+              <li>Abrir el paquete de jamón y sacar 1 feta.</li>
+              <li>Colocar la feta de jamón sobre la rebanada de pan #1.</li>
+              <li>Colocar 1 feta de queso encima del jamón.</li>
+              <li>Tapar con la rebanada de pan #2.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: ANALOGÍA COTIDIANA 2: LA RECETA Y EL ORDEN DE LOS PASOS -->
+      <section>
+        <h2><span class="section-num">06</span> ¿Por Qué Importa Tanto el Orden de los Pasos?</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          En programación no solo importa <b>qué</b> instrucciones damos, sino también <b>en qué orden exacto</b> las escribimos.
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Pasos correctos en orden INCORRECTO</div>
+            <ol style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; color: #fecaca;">
+              <li>Meter el molde al horno durante 40 minutos.</li>
+              <li>Romper los huevos y batir con azúcar.</li>
+              <li>Agregar la harina en el molde.</li>
+            </ol>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 8px;">
+              Aunque las 3 acciones sean válidas, ejecutar el horneado antes de mezclar los ingredientes arruina el resultado.
             </p>
-            <div class="code-window">
-              <div class="code-header">
-                <span class="code-title">ejemplo_secuencia.c</span>
-                <span class="code-badge">Secuencia</span>
-              </div>
-              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;
-<span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;</div>
-            </div>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">
-              La segunda línea depende del valor creado en la primera. Si invirtiéramos el orden, la computadora fallaría.
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Ejecución secuencial correcta (de arriba hacia abajo)</div>
+            <ol style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; color: #a7f3d0;">
+              <li>Romper los huevos y batir con azúcar.</li>
+              <li>Agregar la harina y verter en el molde.</li>
+              <li>Meter el molde al horno durante 40 minutos.</li>
+            </ol>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 8px;">
+              La computadora lee y ejecuta tu programa <b>línea por línea, de arriba hacia abajo</b>, sin saltearse ni reordenar nada.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 7: PRIMER CÓDIGO C EN DETALLE -->
+      <!-- SLIDE 8: ¿QUÉ ES UN ALGORITMO? -->
       <section>
-        <h2><span class="section-num">06</span> Análisis línea por línea: El doble de un número</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Veamos el ejemplo canónico propuesto para calcular el doble de 5:</p>
+        <h2><span class="section-num">07</span> El Concepto de Algoritmo</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Nuestra materia se llama <b>Laboratorio de Algoritmos y Estructura de Datos</b>. Pero ¿qué significa la palabra <b>algoritmo</b>?
+        </p>
 
-        <div class="code-window" style="margin-bottom: 14px;">
-          <div class="code-header">
-            <div class="code-dots">
-              <span class="code-dot dot-red"></span>
-              <span class="code-dot dot-yellow"></span>
-              <span class="code-dot dot-green"></span>
-            </div>
-            <span class="code-title">calculo_doble.c</span>
-            <span class="code-badge">C99</span>
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición de Algoritmo</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Un <b>algoritmo</b> es una <b>secuencia ordenada, precisa y finita de pasos</b> que permite resolver un problema o realizar una tarea sin ambigüedades.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. Preciso</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Cada paso debe ser claro y no dejar lugar a dudas ni dobles interpretaciones.
+            </p>
           </div>
-          <div class="code-body"><span class="c-cmt">// Línea 1: Creamos la primera variable</span>
-<span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Ordenado (Definido)</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Si lo seguimos dos veces con los mismos datos iniciales, debe producir siempre el mismo resultado.
+            </p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">3. Finito</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Debe tener un inicio y un final claros: en algún momento tiene que terminar de ejecutarse.
+            </p>
+          </div>
+        </div>
 
-<span class="c-cmt">// Línea 2: Realizamos el cálculo y guardamos el resultado</span>
+        <div class="box box-purple" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🔑 <b>Diferencia clave:</b> El <b>algoritmo</b> es la idea o receta paso a paso (podés escribirla en papel en castellano). El <b>programa</b> es ese mismo algoritmo traducido a un lenguaje de programación como <b>C</b>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: MODELO ENTRADA -> PROCESO -> SALIDA -->
+      <section>
+        <h2><span class="section-num">08</span> El Modelo Mental: Entrada → Proceso → Salida</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Casi todos los programas del mundo se dividen en estas <b>3 etapas fundamentales</b>:
+        </p>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. ENTRADA (Input)</h4>
+            <p style="font-size: 0.84rem; line-height: 1.5;">
+              Los <b>datos iniciales</b> que necesita el programa para trabajar.
+            </p>
+            <p style="font-size: 0.8rem; color: #7dd3fc; margin: 6px 0 0;">
+              Ej: El número <code>5</code> al que queremos calcularle el doble.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. PROCESO</h4>
+            <p style="font-size: 0.84rem; line-height: 1.5;">
+              Las <b>operaciones y cálculos</b> que transforman los datos de entrada.
+            </p>
+            <p style="font-size: 0.8rem; color: #fde68a; margin: 6px 0 0;">
+              Ej: Multiplicar ese número por <code>2</code> ($5 \times 2$).
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. SALIDA (Output)</h4>
+            <p style="font-size: 0.84rem; line-height: 1.5;">
+              El <b>resultado final</b> obtenido luego del procesamiento.
+            </p>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              Ej: Guardar o mostrar por pantalla el resultado <code>10</code>.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 <b>Truco para resolver cualquier ejercicio:</b> Antes de escribir código, preguntate siempre: 1) ¿Qué datos tengo de <b>entrada</b>?, 2) ¿Qué cuenta o <b>proceso</b> debo hacer?, y 3) ¿Qué <b>resultado</b> debo obtener?
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: FUNCIONAMIENTO INTERNO: CPU Y MEMORIA RAM -->
+      <section>
+        <h2><span class="section-num">09</span> Funcionamiento Interno: ¿Quién Ejecuta Nuestras Órdenes?</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Cuando ejecutamos un programa en la computadora, hay dos componentes físicos (hardware) que hacen todo el trabajo en equipo:
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">🧠 El Procesador (CPU)</h4>
+            <p style="font-size: 0.85rem; line-height: 1.55;">
+              Es el <b>obrero calculista ultrarrápido</b>. Lee una instrucción a la vez, hace las cuentas matemáticas ($+$, $-$, $\times$, $\div$) y coordina todo.
+            </p>
+            <p style="font-size: 0.82rem; color: #a5b4fc; margin-top: 6px;">
+              Ejecuta miles de millones de operaciones por segundo, pero necesita un lugar donde anotar los números con los que trabaja.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">📦 La Memoria RAM</h4>
+            <p style="font-size: 0.85rem; line-height: 1.55;">
+              Es el <b>pizarrón o estantería de cajitas</b> de trabajo. Ahí se guardan los números y resultados mientras el programa está funcionando.
+            </p>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin-top: 6px;">
+              Cada dato que nuestro programa necesita recordar se guarda en una "cajita" de la memoria RAM llamada <b>variable</b>.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🔄 <b>Trabajo en equipo:</b> Cada línea de código que escribimos le dice a la <b>CPU</b> qué cuenta hacer y en qué cajita de la <b>RAM</b> guardar el resultado.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: CÓMO HABLA LA COMPUTADORA VS CÓMO HABLAMOS NOSOTROS -->
+      <section>
+        <h2><span class="section-num">10</span> El Problema del Idioma: Humanos vs. Máquinas</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Si queremos darle instrucciones a la computadora, ¿en qué idioma se las escribimos?
+        </p>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-rose">
+            <h4 style="color: #fb7185;">1. Lenguaje Humano</h4>
+            <p style="font-size: 0.82rem; line-height: 1.5;">
+              <i>"Calculá el doble de cinco."</i><br><br>
+              Para nosotros es clarísimo, pero para una computadora es <b>demasiado ambiguo</b> y lleno de sinónimos. Los circuitos no entienden castellano.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. Lenguaje Máquina</h4>
+            <p style="font-size: 0.82rem; line-height: 1.5;">
+              <code>10110000 00000101</code><br><br>
+              El procesador solo entiende electricidad (encendido = <code>1</code>, apagado = <code>0</code>). Pero escribir programas en ceros y unos es <b>imposible para un humano</b>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Lenguaje C (El Puente)</h4>
+            <p style="font-size: 0.82rem; line-height: 1.5;">
+              <code>int numero = 5;</code><br><br>
+              Un <b>lenguaje de programación</b> intermedio: suficientemente claro para que lo escribamos nosotros y 100% exacto para traducirlo a binario.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🛠️ <b>¿Quién traduce de C a ceros y unos?</b> Un programa especial llamado <b>compilador</b>. Nosotros escribimos en C y el compilador lo traduce al lenguaje de la CPU.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: EL EJEMPLO DEL APUNTE: EL PROBLEMA DEL "DOBLE" -->
+      <section>
+        <h2><span class="section-num">11</span> El Ejemplo del Apunte: Calcular el Doble de un Número</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Leamos con mucha atención el ejemplo central de la Página 1 de nuestro apunte:
+        </p>
+
+        <div class="box box-amber" style="margin-top: 10px;">
+          <h4 style="color: #fbbf24; margin-bottom: 6px;">📌 Planteo del Apunte</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <i>"Queremos calcular el doble de un número. <b>La computadora no sabe qué significa 'doble'</b>."</i>
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px; align-items: center;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Lo que NO existe en C</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// Esto NO lo entiende la PC:</span>
+calcular el doble de <span class="c-num">5</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 4px 0 0;">
+              La computadora no tiene un diccionario escolar para saber que "el doble" equivale a multiplicar por 2.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Cómo debemos decírselo en C (Apunte)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;
 <span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 4px 0 0;">
+              Traducimos la palabra "doble" a una operación matemática exacta: <b>multiplicar por 2 (<code>* 2</code>)</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: DESGLOSE PIEZA POR PIEZA DE LA LÍNEA 1 -->
+      <section>
+        <h2><span class="section-num">12</span> Desglose Pieza por Pieza — Línea 1</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Miremos con lupa la primera instrucción del ejemplo del apunte. Cada palabra y símbolo cumple una función exacta:
+        </p>
+
+        <div class="code-window" style="margin: 10px 0;">
+          <div class="code-header">
+            <span class="code-title">Primera instrucción</span>
+            <span class="code-badge">Paso 1</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;</div>
         </div>
 
         <div class="step-list">
           <div class="step-item">
             <span class="step-num">1</span>
-            <div class="step-content">
-              <b><code>int numero = 5;</code></b><br>
-              • <code>int</code> le avisa al compilador que la caja guardará un <b>número entero</b>.<br>
-              • <code>numero</code> es el nombre identificador para encontrar esa caja en memoria.<br>
-              • <code>=</code> (asignación) coloca el número <code>5</code> dentro de la caja.<br>
-              • <code>;</code> finaliza la instrucción obligatoriamente.
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b><code>int</code> (Tipo de dato):</b> Le avisa a la computadora que vamos a guardar un <b>número entero</b> (sin decimales).
             </div>
           </div>
-
           <div class="step-item">
             <span class="step-num">2</span>
-            <div class="step-content">
-              <b><code>int resultado = numero * 2;</code></b><br>
-              • Se reserva otra caja entera llamada <code>resultado</code>.<br>
-              • La CPU busca qué hay dentro de <code>numero</code> (encuentra un 5).<br>
-              • Multiplica <code>5 * 2</code> obteniendo <code>10</code>.<br>
-              • El valor <code>10</code> se almacena en la caja <code>resultado</code>.
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b><code>numero</code> (Nombre de la variable):</b> Es la etiqueta que le ponemos a la cajita de memoria para poder encontrarla después.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b><code>= 5</code> (Asignación de valor):</b> Guarda el número <code>5</code> adentro de la cajita llamada <code>numero</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b><code>;</code> (Punto y coma):</b> Es el punto final obligatorio que le indica a C: <i>"acá terminó esta instrucción"</i>.
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 8: REPRESENTACIÓN DE MEMORIA RAM -->
+      <!-- SLIDE 14: DESGLOSE PIEZA POR PIEZA DE LA LÍNEA 2 -->
       <section>
-        <h2><span class="section-num">07</span> ¿Cómo se ve en la Memoria RAM?</h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem;">Visualicemos las "cajas con etiqueta" en la memoria de la computadora:</p>
+        <h2><span class="section-num">13</span> Desglose Pieza por Pieza — Línea 2</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Ahora analicemos la segunda instrucción del apunte, donde ocurre el cálculo del doble:
+        </p>
 
-        <div class="memory-diagram">
-          <div class="memory-box">
-            <div class="memory-address">Dirección: 0x7ffd01</div>
-            <div class="memory-label">
-              numero <span class="memory-type">int</span>
-            </div>
-            <div class="memory-value">5</div>
+        <div class="code-window" style="margin: 10px 0;">
+          <div class="code-header">
+            <span class="code-title">Segunda instrucción</span>
+            <span class="code-badge">Paso 2</span>
           </div>
+          <div class="code-body"><span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;</div>
+        </div>
 
-          <div style="display: flex; align-items: center; font-size: 1.5rem; color: var(--accent-cyan);">
-            * 2 ➔
-          </div>
-
-          <div class="memory-box">
-            <div class="memory-address">Dirección: 0x7ffd05</div>
-            <div class="memory-label">
-              resultado <span class="memory-type">int</span>
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b><code>int resultado</code>:</b> Crea una <b>segunda cajita</b> de memoria para números enteros llamada <code>resultado</code>.
             </div>
-            <div class="memory-value">10</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b><code>numero * 2</code> (Se resuelve primero el lado derecho del <code>=</code>):</b> La CPU mira qué valor hay guardado en <code>numero</code> (encuentra un <code>5</code>) y lo multiplica por <code>2</code> usando el asterisco <code>*</code>. Obtiene <code>10</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b><code>=</code> (Guardar en la izquierda):</b> Ese <code>10</code> recién calculado se guarda adentro de la cajita <code>resultado</code>.
+            </div>
           </div>
         </div>
 
-        <div class="box box-emerald" style="margin-top: 14px;">
-          <h4 style="color: #34d399; margin-bottom: 4px;">Punto clave de comprensión</h4>
-          <p style="margin: 0; font-size: 0.88rem;">
-            Nota que la variable <code>numero</code> <b>no se destruye ni se modifica</b> al multiplicar. Sigue valiendo 5. La computadora simplemente leyó su contenido para calcular el 10 que depositó en la nueva variable <code>resultado</code>.
+        <div class="box box-amber" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            ⚠️ <b>Detalle clave de C:</b> En matemática a veces escribimos la multiplicación con una $\times$ o un punto $\cdot$, pero en programación siempre se usa el <b>asterisco <code>*</code></b>.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 9: MÁS PROBLEMAS RESUELTOS CON INSTRUCCIONES -->
+      <!-- SLIDE 15: REPRESENTACIÓN EN MEMORIA RAM DEL EJEMPLO DEL APUNTE -->
       <section>
-        <h2><span class="section-num">08</span> Problemas cotidianos traducidos a pasos</h2>
-        <div class="grid-2">
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Problema 1: Sumar Dos Números</h4>
-            <p style="font-size: 0.84rem; color: var(--text-muted);">Calcular el total a pagar sumando un producto y su envío:</p>
-            <div class="code-window">
-              <div class="code-body"><span class="c-kw">int</span> precioProducto = <span class="c-num">1200</span>;
-<span class="c-kw">int</span> costoEnvio = <span class="c-num">350</span>;
-<span class="c-kw">int</span> totalAPagar = precioProducto + costoEnvio;</div>
+        <h2><span class="section-num">14</span> ¿Qué Pasó en la Memoria RAM Paso a Paso?</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Dibujemos las cajitas de la memoria RAM y la tabla de seguimiento al ejecutar las dos líneas del apunte:
+        </p>
+
+        <div class="memory-diagram" style="margin: 12px 0;">
+          <div class="memory-box">
+            <div class="memory-address">Paso 1: int numero = 5;</div>
+            <div class="memory-label">numero <span class="memory-type">int</span></div>
+            <div class="memory-value">5</div>
+          </div>
+
+          <div style="display: flex; align-items: center; font-size: 1.3rem; color: var(--accent-cyan); font-weight: 700;">
+            numero * 2 ➔
+          </div>
+
+          <div class="memory-box">
+            <div class="memory-address">Paso 2: int resultado = numero * 2;</div>
+            <div class="memory-label">resultado <span class="memory-type">int</span></div>
+            <div class="memory-value">10</div>
+          </div>
+        </div>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Paso</th>
+              <th>Instrucción Ejecutada</th>
+              <th>¿Qué hace la CPU?</th>
+              <th>Caja <code>numero</code></th>
+              <th>Caja <code>resultado</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><code>int numero = 5;</code></td>
+              <td>Crea <code>numero</code> y guarda <code>5</code></td>
+              <td><b>5</b></td>
+              <td><i>(todavía no existe)</i></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><code>int resultado = numero * 2;</code></td>
+              <td>Lee <code>5</code>, calcula $5 \times 2 = 10$ y lo guarda en <code>resultado</code></td>
+              <td><b>5</b> (sigue intacto)</td>
+              <td><b>10</b></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            ✅ <b>Observá:</b> Usar <code>numero</code> en la cuenta <code>numero * 2</code> <b>no gasta ni modifica</b> a la variable <code>numero</code>: sigue valiendo <code>5</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: ¿Y SI QUEREMOS EL DOBLE DE OTRO NÚMERO? -->
+      <section>
+        <h2><span class="section-num">15</span> El Poder de Usar Variables en Nuestras Instrucciones</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          ¿Por qué escribimos <code>int resultado = numero * 2;</code> en lugar de poner directamente <code>5 * 2</code>?
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Caso A: Si <code>numero</code> empieza en 5</h4>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+<span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;</div>
             </div>
-            <p style="font-size: 0.82rem; color: #a5b4fc;">
-              Resultado en memoria: <code>totalAPagar = 1550</code>.
+            <p style="font-size: 0.84rem; margin: 0;">
+              La segunda línea multiplica $5 \times 2$ y guarda <b><code>10</code></b> en <code>resultado</code>.
             </p>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Problema 2: Calcular una Edad Futura</h4>
-            <p style="font-size: 0.84rem; color: var(--text-muted);">Calcular cuántos años tendrá un alumno dentro de 5 años:</p>
-            <div class="code-window">
-              <div class="code-body"><span class="c-kw">int</span> edadActual = <span class="c-num">16</span>;
-<span class="c-kw">int</span> aniosAdelante = <span class="c-num">5</span>;
-<span class="c-kw">int</span> edadFutura = edadActual + aniosAdelante;</div>
+            <h4 style="color: #34d399;">Caso B: Si cambiamos <code>numero</code> a 14</h4>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">14</span>;
+<span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;</div>
             </div>
-            <p style="font-size: 0.82rem; color: #a7f3d0;">
-              Resultado en memoria: <code>edadFutura = 21</code>.
+            <p style="font-size: 0.84rem; margin: 0;">
+              ¡La segunda línea <b>es exactamente igual</b>! Pero ahora calcula $14 \times 2$ y guarda <b><code>28</code></b>.
             </p>
           </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🚀 <b>Ventaja clave:</b> La instrucción <code>int resultado = numero * 2;</code> es una <b>fórmula general</b> que sabe calcular el doble de <i>cualquier</i> valor que pongamos adentro de <code>numero</code>.
+          </p>
         </div>
       </section>
 
-      <!-- SLIDE 10: QUÉ OCURRE ANTE UN ERROR -->
+      <!-- SLIDE 17: EJEMPLO NIVEL 1 (INTRODUCTORIO MUY SENCILLO) -->
       <section>
-        <h2><span class="section-num">09</span> ¿Qué ocurre cuando una instrucción es incorrecta?</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Los programadores conviven a diario con errores. Hay dos grandes familias:</p>
-
-        <div class="comparison-box">
-          <div class="wrong-card">
-            <div class="wrong-title">⚠️ 1. Error de Sintaxis (Gramática)</div>
-            <p style="font-size: 0.85rem; color: #fecaca;">
-              Escribiste mal una palabra del lenguaje o te olvidaste un símbolo obligatorio (como un punto y coma <code>;</code>).
-            </p>
-            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.78rem; color: #f87171; margin-top: 6px;">
-              int x = 5   // ¡Falta el punto y coma!
-            </div>
-            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 6px;">
-              <b>Efecto:</b> El programa <b>no compila</b>. La computadora avisa antes de ejecutarse y se niega a arrancar.
-            </p>
-          </div>
-
-          <div class="wrong-card" style="border-color: rgba(251, 191, 36, 0.4); background: rgba(45, 35, 18, 0.7);">
-            <div class="wrong-title" style="color: var(--accent-amber);">🐛 2. Error de Lógica ("Bug")</div>
-            <p style="font-size: 0.85rem; color: #fef08a;">
-              El código está perfectamente escrito según las reglas, pero el razonamiento matemático o lógico es erróneo.
-            </p>
-            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.78rem; color: #fbbf24; margin-top: 6px;">
-              // Querías el doble y pusiste suma:<br>
-              int resultado = numero + 2;
-            </div>
-            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 6px;">
-              <b>Efecto:</b> Compila y ejecuta, pero el resultado <b>es incorrecto</b>. ¡Son los más difíciles y divertidos de cazar!
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 11: PREGUNTA DE PREDICCIÓN INTERACTIVA -->
-      <section>
-        <h2><span class="section-num">10</span> Desafío de Predicción: Pensá como la CPU</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Mirá el siguiente fragmento de código sin mirar la respuesta:</p>
-
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">desafio_secuencia.c</span>
-            <span class="code-badge">¿Qué valor queda?</span>
-          </div>
-          <div class="code-body"><span class="c-kw">int</span> puntos = <span class="c-num">10</span>;
-<span class="c-kw">int</span> bonus = <span class="c-num">5</span>;
-<span class="c-kw">int</span> total = puntos + bonus;
-puntos = <span class="c-num">20</span>;</div>
-        </div>
-
-        <p style="font-weight: 600; color: #ffffff; font-size: 0.95rem; margin-top: 10px;">
-          🔮 Pregunta: Al terminar de ejecutarse la última línea, ¿cuánto vale la variable <code>total</code>? ¿15 o 25?
+        <h2><span class="section-num">16</span> Ejemplo Nivel 1: El Triple y la Mitad de un Número</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Siguiendo la misma idea del apunte: la computadora tampoco sabe qué significa "el triple" ni "el siguiente". ¿Cómo se lo indicamos paso a paso?
         </p>
 
-        <details class="code-solution">
-          <summary>👉 Clic acá para ver la solución y la explicación</summary>
-          <div class="solution-content">
-            <p style="font-size: 0.92rem; color: var(--accent-emerald); font-weight: 700; margin-bottom: 6px;">
-              ¡Respuesta correcta: 15!
-            </p>
-            <p style="font-size: 0.86rem; color: #cbd5e1; margin: 0;">
-              <b>¿Por qué?</b> Porque cuando se ejecutó la línea <code>int total = puntos + bonus;</code>, la variable <code>puntos</code> valía 10 y <code>bonus</code> valía 5. La computadora calculó <code>10 + 5 = 15</code> y lo guardó en <code>total</code>.
-              Cambiar <code>puntos = 20</code> en la línea posterior <b>no actualiza mágicamente las variables calculadas en el pasado</b>, a menos que volvamos a indicarlo explícitamente. Las instrucciones se ejecutan paso a paso en el tiempo.
+        <div class="code-window" style="margin: 10px 0;">
+          <div class="code-header">
+            <span class="code-title">nivel1_operaciones_basicas.c</span>
+            <span class="code-badge">Nivel 1 • Introductorio</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">6</span>;
+<span class="c-kw">int</span> doble = numero * <span class="c-num">2</span>;
+<span class="c-kw">int</span> triple = numero * <span class="c-num">3</span>;
+<span class="c-kw">int</span> siguiente = numero + <span class="c-num">1</span>;</div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">El doble</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              <code>numero * 2</code><br>
+              Calcula $6 \times 2 = 12$ y lo guarda en <code>doble</code>.
             </p>
           </div>
-        </details>
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">El triple</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              <code>numero * 3</code><br>
+              Calcula $6 \times 3 = 18$ y lo guarda en <code>triple</code>.
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">El siguiente</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              <code>numero + 1</code><br>
+              Calcula $6 + 1 = 7$ y lo guarda en <code>siguiente</code>.
+            </p>
+          </div>
+        </div>
       </section>
 
-      <!-- SLIDE 12: RESUMEN Y AUTOEVALUACIÓN -->
+      <!-- SLIDE 18: TRAZA DEL EJEMPLO NIVEL 1 -->
       <section>
-        <h2><span class="section-num">11</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">17</span> Seguimiento Paso a Paso del Ejemplo Nivel 1</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Veamos cómo van naciendo las 4 cajitas en la memoria RAM a medida que la CPU avanza de la línea 1 a la 4:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Línea</th>
+              <th>Instrucción</th>
+              <th><code>numero</code></th>
+              <th><code>doble</code></th>
+              <th><code>triple</code></th>
+              <th><code>siguiente</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><code>int numero = 6;</code></td>
+              <td><b>6</b></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><code>int doble = numero * 2;</code></td>
+              <td>6</td>
+              <td><b>12</b></td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><code>int triple = numero * 3;</code></td>
+              <td>6</td>
+              <td>12</td>
+              <td><b>18</b></td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><code>int siguiente = numero + 1;</code></td>
+              <td>6</td>
+              <td>12</td>
+              <td>18</td>
+              <td><b>7</b></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            📌 <b>Notá cómo funciona la tabla de seguimiento (traza):</b> Cada fila representa un instante de tiempo después de ejecutar una línea. Los guiones <code>-</code> indican que esa variable todavía no fue creada.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: EJEMPLO NIVEL 2 (PROGRAMA COMPLETO CON SALIDA POR PANTALLA) -->
+      <section>
+        <h2><span class="section-num">18</span> Ejemplo Nivel 2: El Ejemplo del Apunte en un Programa Completo</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          En la próxima unidad estudiaremos a fondo el esqueleto completo de C, pero veamos ya mismo cómo luce nuestro cálculo del doble dentro de un programa real que muestra el resultado en pantalla:
+        </p>
+
+        <div class="code-window" style="margin: 8px 0;">
+          <div class="code-header">
+            <span class="code-title">nivel2_doble_completo.c</span>
+            <span class="code-badge">Nivel 2 • Programa Ejecutable</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+    <span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"El doble es: %d\n"</span>, resultado);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-header">Salida en Consola (Terminal)</div>
+          <div class="terminal-body"><span class="terminal-prompt">$ ./nivel2_doble_completo</span>
+El doble es: 10</div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            👀 <b>Vistazo rápido:</b> <code>int main() { ... }</code> envuelve nuestras instrucciones, y <code>printf(...)</code> muestra en pantalla el valor <code>10</code> que calculamos adentro de <code>resultado</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: EJEMPLO NIVEL 2 - COMPRA EN EL KIOSCO -->
+      <section>
+        <h2><span class="section-num">19</span> Ejemplo Nivel 2 (Aplicación): Compra en el Kiosco</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Queremos calcular cuánto gastamos si compramos un alfajor de <code>800</code> pesos y un jugo de <code>600</code> pesos:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">compra_kiosco.c</span>
+              <span class="code-badge">Programa C</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> alfajor = <span class="c-num">800</span>;
+    <span class="c-kw">int</span> jugo = <span class="c-num">600</span>;
+    <span class="c-kw">int</span> total = alfajor + jugo;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Total a pagar: %d\n"</span>, total);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th><code>alfajor</code></th>
+                  <th><code>jugo</code></th>
+                  <th><code>total</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Línea 4</td>
+                  <td><b>800</b></td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>Línea 5</td>
+                  <td>800</td>
+                  <td><b>600</b></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>Línea 6</td>
+                  <td>800</td>
+                  <td>600</td>
+                  <td><b>1400</b></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 8px;">
+              <div class="terminal-header">Terminal</div>
+              <div class="terminal-body">Total a pagar: 1400</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: EJEMPLO NIVEL 3 (ENCADENANDO VARIOS CÁLCULOS) -->
+      <section>
+        <h2><span class="section-num">20</span> Ejemplo Nivel 3: Encadenando Pasos (Precio, Cantidad y Vuelto)</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          ¿Qué pasa cuando un problema necesita <b>varios cálculos intermedios</b> donde un paso usa el resultado del paso anterior? Imaginá que comprás <code>3</code> cuadernos a <code>1500</code> pesos cada uno y pagás con un billete de <code>5000</code>:
+        </p>
+
+        <div class="code-window" style="margin: 8px 0;">
+          <div class="code-header">
+            <span class="code-title">nivel3_compra_y_vuelto.c</span>
+            <span class="code-badge">Nivel 3 • Pasos Encadenados</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> precioCuaderno = <span class="c-num">1500</span>;
+    <span class="c-kw">int</span> cantidad = <span class="c-num">3</span>;
+    <span class="c-kw">int</span> pagoConBillete = <span class="c-num">5000</span>;
+
+    <span class="c-kw">int</span> costoTotal = precioCuaderno * cantidad;
+    <span class="c-kw">int</span> vuelto = pagoConBillete - costoTotal;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Costo total: %d\n"</span>, costoTotal);
+    <span class="c-fn">printf</span>(<span class="c-str">"Su vuelto es: %d\n"</span>, vuelto);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: ANÁLISIS Y TRAZA DEL EJEMPLO NIVEL 3 -->
+      <section>
+        <h2><span class="section-num">21</span> Seguimiento en Memoria del Ejemplo Nivel 3</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Mirá cómo la línea del <code>vuelto</code> necesita que <code>costoTotal</code> ya haya sido calculado en la línea anterior:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Paso</th>
+              <th>Instrucción</th>
+              <th><code>precioCuaderno</code></th>
+              <th><code>cantidad</code></th>
+              <th><code>pagoConBillete</code></th>
+              <th><code>costoTotal</code></th>
+              <th><code>vuelto</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><code>int precioCuaderno = 1500;</code></td>
+              <td><b>1500</b></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><code>int cantidad = 3;</code></td>
+              <td>1500</td>
+              <td><b>3</b></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><code>int pagoConBillete = 5000;</code></td>
+              <td>1500</td>
+              <td>3</td>
+              <td><b>5000</b></td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><code>int costoTotal = precioCuaderno * cantidad;</code></td>
+              <td>1500</td>
+              <td>3</td>
+              <td>5000</td>
+              <td><b>4500</b></td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><code>int vuelto = pagoConBillete - costoTotal;</code></td>
+              <td>1500</td>
+              <td>3</td>
+              <td>5000</td>
+              <td>4500</td>
+              <td><b>500</b></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="terminal-window" style="margin-top: 8px;">
+          <div class="terminal-header">Salida en Consola</div>
+          <div class="terminal-body">Costo total: 4500
+Su vuelto es: 500</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: EJEMPLO NIVEL 4 (CÓMO PENSAR UN PROBLEMA DESDE CERO) -->
+      <section>
+        <h2><span class="section-num">22</span> Ejemplo Nivel 4: ¿Cómo Pensar y Construir una Solución?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Supongamos que nos dan este enunciado de examen o guía práctica:
+        </p>
+
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">📝 Enunciado del Problema</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            <i>"Un rectángulo tiene una base de 8 cm y una altura de 5 cm. Escribir las instrucciones necesarias para calcular tanto su <b>área</b> como su <b>perímetro</b>."</i>
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Paso 1: Entradas</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              ¿Qué datos me da el problema?<br>
+              • <code>base = 8</code><br>
+              • <code>altura = 5</code>
+            </p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Paso 2: Fórmulas (Proceso)</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              La PC no sabe qué es "área" ni "perímetro". Debemos darle las cuentas:<br>
+              • $\text{Área} = \text{base} \times \text{altura}$<br>
+              • $\text{Perímetro} = \text{base} \times 2 + \text{altura} \times 2$
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Paso 3: Salidas</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Guardar los resultados en dos variables:<br>
+              • <code>area</code> (debe dar <code>40</code>)<br>
+              • <code>perimetro</code> (debe dar <code>26</code>)
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: CÓDIGO Y SALIDA DEL EJEMPLO NIVEL 4 -->
+      <section>
+        <h2><span class="section-num">23</span> Ejemplo Nivel 4: Traducción al Código en C</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Una vez que desarmamos el problema en Entrada, Proceso y Salida, escribir el código C es directo:
+        </p>
+
+        <div class="code-window" style="margin: 8px 0;">
+          <div class="code-header">
+            <span class="code-title">nivel4_rectangulo.c</span>
+            <span class="code-badge">Nivel 4 • Razonamiento Lógico</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-cmt">// 1. ENTRADA: Guardamos los datos conocidos</span>
+    <span class="c-kw">int</span> base = <span class="c-num">8</span>;
+    <span class="c-kw">int</span> altura = <span class="c-num">5</span>;
+
+    <span class="c-cmt">// 2. PROCESO: Traducimos area y perimetro a operaciones exactas</span>
+    <span class="c-kw">int</span> area = base * altura;
+    <span class="c-kw">int</span> perimetro = base * <span class="c-num">2</span> + altura * <span class="c-num">2</span>;
+
+    <span class="c-cmt">// 3. SALIDA: Mostramos los resultados calculados</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Area: %d\n"</span>, area);
+    <span class="c-fn">printf</span>(<span class="c-str">"Perimetro: %d\n"</span>, perimetro);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-header">Salida en Consola</div>
+          <div class="terminal-body">Area: 40
+Perimetro: 26</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: DOS TIPOS DE ERRORES AL PROGRAMAR -->
+      <section>
+        <h2><span class="section-num">24</span> ¿Qué Pasa Cuando nos Equivocamos al Programar?</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Equivocarse al programar es completamente normal. Existen <b>dos grandes tipos de errores</b> que debés distinguir:
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="wrong-card">
+            <div class="wrong-title">🛑 1. Error de Sintaxis (Reglas del idioma C)</div>
+            <p style="font-size: 0.84rem; color: #fecaca; margin: 6px 0;">
+              Ocurre cuando escribís mal una palabra clave o te olvidás un símbolo obligatorio como el punto y coma <code>;</code>.
+            </p>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>
+<span class="c-cmt">// Falta el ; al final de la linea</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin: 4px 0 0;">
+              <b>Consecuencia:</b> El compilador te frena con un mensaje de error y <b>el programa no llega a ejecutarse</b> hasta que lo arregles.
+            </p>
+          </div>
+
+          <div class="wrong-card" style="border-color: rgba(251, 191, 36, 0.45); background: rgba(45, 35, 18, 0.7);">
+            <div class="wrong-title" style="color: var(--accent-amber);">🐛 2. Error de Lógica o "Bug" (Instrucción equivocada)</div>
+            <p style="font-size: 0.84rem; color: #fef08a; margin: 6px 0;">
+              El código respeta todas las reglas de C, pero <b>le diste una orden matemática equivocada</b>.
+            </p>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+<span class="c-cmt">// Queriamos el doble pero sumamos 2:</span>
+<span class="c-kw">int</span> resultado = numero + <span class="c-num">2</span>;</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin: 4px 0 0;">
+              <b>Consecuencia:</b> El programa arranca sin quejarse, pero calcula <code>7</code> en vez de <code>10</code>. Como dice el apunte: <i>"Si le damos instrucciones incorrectas, hará algo incorrecto"</i>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: ERROR FRECUENTE #1: USAR UNA VARIABLE ANTES DE CREARLA -->
+      <section>
+        <h2><span class="section-num">25</span> Error Frecuente #1: Invertir el Orden de las Instrucciones</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          ¿Qué pasa si en el ejemplo del apunte escribimos las dos líneas al revés?
+        </p>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Calcular antes de tener el dato</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;
+<span class="c-kw">int</span> numero = <span class="c-num">5</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin: 6px 0 0;">
+              <b>¿Por qué falla?</b> Al llegar a la primera línea, la computadora busca la cajita <code>numero</code> para multiplicarla por 2, ¡pero <code>numero</code> todavía no existe porque recién se crea abajo!
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Primero definir el dato, luego usarlo</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+<span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin: 6px 0 0;">
+              <b>Regla de oro:</b> Como la computadora lee de arriba hacia abajo, toda variable debe crearse y tener valor <b>antes</b> de ser usada en una cuenta.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: ERROR FRECUENTE #2: CREER QUE LAS VARIABLES SON FÓRMULAS DE EXCEL -->
+      <section>
+        <h2><span class="section-num">26</span> Error Frecuente #2: Pensar que un Cálculo se Actualiza Solo</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Muchos principiantes creen que al escribir <code>int resultado = numero * 2;</code> queda conectada una "fórmula permanente" para siempre. ¡Mirá lo que ocurre realmente!
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px; align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">no_es_excel.c</span>
+              <span class="code-badge">¡Atención al orden!</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+<span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;
+numero = <span class="c-num">10</span>;</div>
+          </div>
+
+          <table class="trace-table">
+            <thead>
+              <tr>
+                <th>Paso</th>
+                <th>Instrucción</th>
+                <th><code>numero</code></th>
+                <th><code>resultado</code></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><code>int numero = 5;</code></td>
+                <td><b>5</b></td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><code>int resultado = numero * 2;</code></td>
+                <td>5</td>
+                <td><b>10</b></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><code>numero = 10;</code></td>
+                <td><b>10</b></td>
+                <td><b>10</b> (¡NO cambia a 20!)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box box-rose" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🚨 <b>¿Por qué <code>resultado</code> sigue valiendo 10 y no 20?</b> Porque la línea 2 ya se ejecutó en el pasado cuando <code>numero</code> valía 5. Cambiar <code>numero</code> después no vuelve el tiempo atrás.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: ERROR FRECUENTE #3: OMITIR EL OPERADOR DE MULTIPLICACIÓN -->
+      <section>
+        <h2><span class="section-num">27</span> Error Frecuente #3: Escribir Cuentas Como en el Pizarrón</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          En la carpeta de matemática solemos escribir $2x$ o $2(\text{numero})$ sin poner ningún símbolo de multiplicación en el medio. En C, como la computadora <b>no supone nada</b>, eso es un error:
+        </p>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Omitir el símbolo * o usar x</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+<span class="c-cmt">// Mal: en C no existe multiplicacion implicita</span>
+<span class="c-kw">int</span> r1 = <span class="c-num">2</span>numero;
+<span class="c-cmt">// Mal: la letra x NO multiplica</span>
+<span class="c-kw">int</span> r2 = numero x <span class="c-num">2</span>;</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              El compilador no adivina que entre el <code>2</code> y <code>numero</code> querías multiplicar, ni entiende la letra <code>x</code> como operador.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Usar siempre el asterisco *</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+<span class="c-kw">int</span> r1 = <span class="c-num">2</span> * numero;
+<span class="c-kw">int</span> r2 = numero * <span class="c-num">2</span>;</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              Siempre debemos explicitar el operador <code>*</code> entre los dos valores que queremos multiplicar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: BUENAS PRÁCTICAS DESDE EL DÍA 1 -->
+      <section>
+        <h2><span class="section-num">28</span> Buenas Prácticas de Programación desde el Día 1</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">✅ Hábitos de buen programador</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.65; margin-left: 18px;">
+              <li><b>Una instrucción por línea:</b> Hace que el código sea limpio y fácil de seguir paso a paso.</li>
+              <li><b>Nombres claros:</b> Llamar a las variables <code>numero</code> y <code>resultado</code> (como en el apunte) en lugar de letras sueltas confusas.</li>
+              <li><b>Pensar antes de codificar:</b> Escribir primero en borrador qué datos entran y qué cuenta hay que hacer.</li>
+              <li><b>Hacer prueba de escritorio:</b> Simular en papel cuánto vale cada cajita línea por línea.</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">💬 Comentarios en el código (<code>//</code>)</h4>
+            <p style="font-size: 0.84rem; line-height: 1.55;">
+              En C, todo lo que escribimos después de dos barras <code>//</code> en una línea es un <b>comentario para humanos</b>. La computadora lo ignora por completo:
+            </p>
+            <div class="code-window" style="margin-top: 8px;">
+              <div class="code-body"><span class="c-cmt">// Guardamos el valor inicial:</span>
+<span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+<span class="c-cmt">// Calculamos su doble multiplicando por 2:</span>
+<span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: EJERCICIO DE APLICACIÓN 1 -->
+      <section>
+        <h2><span class="section-num">29</span> Ejercicio 1: Traducir Palabras a Instrucciones en C</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Recordá que la computadora no sabe qué significa "el cuádruple" ni "el anterior". ¡Pensá cómo escribirlo antes de abrir la solución!
+        </p>
+
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 6px;">📝 Enunciado</h4>
+          <p style="font-size: 0.88rem; margin: 0 0 10px;">
+            1. Creá una variable entera llamada <code>numero</code> con el valor <code>7</code>.<br>
+            2. Creá una variable llamada <code>cuadruple</code> que guarde el cuádruple de <code>numero</code>.<br>
+            3. Creá una variable llamada <code>anterior</code> que guarde el número anterior a <code>numero</code>.<br>
+            ¿Qué valores quedan guardados en cada una de las 3 variables?
+          </p>
+
+          <details class="code-solution">
+            <summary>👁️ Ver código solución y valores en memoria</summary>
+            <div class="solution-content">
+              <div class="code-window" style="margin-bottom: 8px;">
+                <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">7</span>;
+<span class="c-kw">int</span> cuadruple = numero * <span class="c-num">4</span>;
+<span class="c-kw">int</span> anterior = numero - <span class="c-num">1</span>;</div>
+              </div>
+              <p style="margin: 0; font-size: 0.84rem; color: #a7f3d0;">
+                • <code>numero</code> queda con <b><code>7</code></b>.<br>
+                • <code>cuadruple</code> queda con <b><code>28</code></b> (porque $7 \times 4 = 28$).<br>
+                • <code>anterior</code> queda con <b><code>6</code></b> (porque $7 - 1 = 6$).
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: EJERCICIO DE APLICACIÓN 2 -->
+      <section>
+        <h2><span class="section-num">30</span> Ejercicio 2: Seguir el Rastro como el Procesador</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Hacé de cuenta que sos la CPU ejecutando este programa línea por línea de arriba hacia abajo:
+        </p>
+
+        <div class="code-window" style="margin: 8px 0;">
+          <div class="code-header">
+            <span class="code-title">ejercicio_traza.c</span>
+            <span class="code-badge">Desafío de Seguimiento</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> puntos = <span class="c-num">10</span>;
+<span class="c-kw">int</span> doblePuntos = puntos * <span class="c-num">2</span>;
+<span class="c-kw">int</span> bonus = <span class="c-num">5</span>;
+<span class="c-kw">int</span> puntajeFinal = doblePuntos + bonus;</div>
+        </div>
+
+        <div class="box box-emerald">
+          <p style="font-size: 0.88rem; margin: 0 0 8px;">
+            🔮 <b>Pregunta:</b> Al terminar las 4 líneas, ¿qué número quedó guardado dentro de <code>puntajeFinal</code>?
+          </p>
+          <details class="code-solution">
+            <summary>👁️ Ver respuesta paso a paso</summary>
+            <div class="solution-content">
+              <p style="margin: 0; font-size: 0.84rem;">
+                1. <code>puntos</code> arranca valiendo <b><code>10</code></b>.<br>
+                2. <code>doblePuntos</code> calcula $10 \times 2 = \mathbf{20}$.<br>
+                3. <code>bonus</code> arranca valiendo <b><code>5</code></b>.<br>
+                4. <code>puntajeFinal</code> suma <code>doblePuntos + bonus</code> ($20 + 5$) y guarda <b><code>25</code></b>.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: EJERCICIO DE APLICACIÓN 3 -->
+      <section>
+        <h2><span class="section-num">31</span> Ejercicio 3: Encontrar el Error de Lógica (Bug)</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Un estudiante quiso hacer un programa que convierta <code>4</code> horas a minutos, pero el resultado le dio <code>24</code> en lugar de <code>240</code>. Mirá su código:
+        </p>
+
+        <div class="code-window" style="margin: 8px 0;">
+          <div class="code-header">
+            <span class="code-title">horas_a_minutos_con_bug.c</span>
+            <span class="code-badge">Cazar el Bug</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> horas = <span class="c-num">4</span>;
+<span class="c-kw">int</span> minutos = horas * <span class="c-num">6</span>;</div>
+        </div>
+
+        <div class="box box-amber">
+          <p style="font-size: 0.88rem; margin: 0 0 8px;">
+            🕵️ <b>Pregunta:</b> ¿Por qué la computadora no se dio cuenta de que una hora tiene 60 minutos y no 6? ¿Cómo se corrige el programa completo?
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver explicación y programa corregido</summary>
+            <div class="solution-content">
+              <p style="font-size: 0.83rem; margin: 0 0 8px;">
+                Porque <b>la computadora no piensa ni supone</b>: solo multiplicó por <code>6</code> porque eso decía la instrucción. Para convertir horas a minutos debemos multiplicar por <code>60</code>:
+              </p>
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> horas = <span class="c-num">4</span>;
+    <span class="c-kw">int</span> minutos = horas * <span class="c-num">60</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Minutos totales: %d\n"</span>, minutos);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: SÍNTESIS VISUAL DE LA SECCIÓN 1 DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">32</span> Mapa Conceptual de la Unidad 01</h2>
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. ¿Qué es programar?</h4>
+            <p style="font-size: 0.83rem; line-height: 1.5; margin: 0;">
+              Escribir instrucciones para que una computadora realice una tarea determinada. En palabras simples: <b>enseñarle qué hacer paso a paso</b>.
+            </p>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #fb7185;">2. Cómo es la PC</h4>
+            <p style="font-size: 0.83rem; line-height: 1.5; margin: 0;">
+              • <b>No piensa</b><br>
+              • <b>No interpreta</b><br>
+              • <b>No supone</b><br>
+              Hace exactamente lo que le indicamos.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Ejemplo Canónico</h4>
+            <div class="code-window" style="margin: 4px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numero = <span class="c-num">5</span>;
+<span class="c-kw">int</span> resultado = numero * <span class="c-num">2</span>;</div>
+            </div>
+            <p style="font-size: 0.78rem; margin: 4px 0 0; color: #a7f3d0;">
+              Traduce "el doble" a multiplicar por 2.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🔗 <b>Puente hacia la Unidad 02:</b> Ya sabemos cómo escribir nuestras primeras instrucciones de cálculo (<code>int numero = 5;</code>). En la próxima clase veremos el <b>esqueleto completo de un programa en C</b> (<code>#include</code>, <code>int main()</code>, llaves <code>{ }</code> y <code>return 0;</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: RESUMEN FINAL, CHECKLIST Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">33</span> Resumen Final y Checklist de Autoevaluación</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Conceptos Fundamentales</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>Programar:</b> Comunicar un algoritmo a la máquina mediante código.</li>
-              <li><b>Computadora:</b> Ejecutor hiper-rápido, pero 100% literal y sin iniciativa.</li>
-              <li><b>Orden secuencial:</b> El procesador ejecuta de arriba a abajo.</li>
-              <li><b>Instrucción:</b> Orden mínima que termina con punto y coma <code>;</code>.</li>
-              <li><b>Memoria RAM:</b> Cajas nombradas donde se guardan los datos.</li>
+            <h4 style="color: #818cf8;">Ideas Clave que te Llevás Hoy</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Programar:</b> Escribir instrucciones paso a paso para resolver una tarea.</li>
+              <li><b>Literalidad absoluta:</b> Si damos instrucciones incorrectas, la PC hará algo incorrecto.</li>
+              <li><b>Algoritmo:</b> Plan ordenado, preciso y finito de pasos (Entrada → Proceso → Salida).</li>
+              <li><b>Orden secuencial:</b> La CPU ejecuta de arriba hacia abajo y guarda datos en la RAM.</li>
+              <li><b>Primer código C:</b> <code>int numero = 5; int resultado = numero * 2;</code></li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar con mis palabras qué es un algoritmo?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué <code>numero * 2</code> no altera el valor de <code>numero</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Distingo entre un error de sintaxis y un error de lógica (bug)?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Comprendo por qué el orden de las instrucciones cambia el resultado?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar con mis palabras qué significa programar?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo las 3 cosas que la computadora NO hace (pensar, interpretar, suponer)?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué la computadora no sabe qué significa "el doble" si no escribimos <code>* 2</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar qué hace cada parte de <code>int numero = 5;</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Distingo un error de sintaxis de un error de lógica (bug)?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
-          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
-            ← Volver al 1er Bimestre
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+            ← Índice 1er Bimestre
           </a>
-          <a href="02-estructura-programa-c.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 12px;">
-            Siguiente: Estructura de un Programa en C →
+          <a href="02-estructura-programa-c.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 12px;">
+            Siguiente Unidad: Estructura de un Programa en C →
           </a>
         </div>
       </section>
@@ -452,8 +1428,9 @@ puntos = <span class="c-num">20</span>;</div>
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -463,8 +1440,20 @@ puntos = <span class="c-num">20</span>;</div>
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>
+
 </html>

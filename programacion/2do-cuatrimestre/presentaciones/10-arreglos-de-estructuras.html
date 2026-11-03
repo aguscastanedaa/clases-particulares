@@ -7,9 +7,10 @@
   <title>Programación 2C - 10: Arreglos de Estructuras | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
 
-  <!-- Reveal.js Styles -->
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,60 +20,14 @@
     rel="stylesheet">
 
   <!-- Custom Design System -->
-  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
-  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
-  <style>
-    .reveal .code-body,
-    .reveal pre.code-body,
-    .reveal .code-window pre {
-      font-size: 1.05rem !important;
-      line-height: 1.38 !important;
-      width: 100% !important;
-      margin: 0 !important;
-      box-shadow: none !important;
-      padding: 10px 18px !important;
-      box-sizing: border-box !important;
-    }
-    .grid-2 .code-body,
-    .grid-1-2 .code-body,
-    .grid-2-1 .code-body,
-    .grid-2 pre.code-body,
-    .grid-1-2 pre.code-body,
-    .grid-2-1 pre.code-body,
-    .grid-2 .code-window pre,
-    .grid-1-2 .code-window pre,
-    .grid-2-1 .code-window pre {
-      font-size: 1.00rem !important;
-      padding: 10px 14px !important;
-      line-height: 1.38 !important;
-    }
-    .grid-3 .code-body,
-    .grid-3 pre.code-body,
-    .grid-3 .code-window pre {
-      font-size: 0.80rem !important;
-      padding: 8px 10px !important;
-      line-height: 1.34 !important;
-    }
-    .terminal-body {
-      font-size: 1.05rem !important;
-      padding: 12px 16px !important;
-      line-height: 1.40 !important;
-    }
-    .reveal code:not(.code-body *) {
-      font-size: 0.88em !important;
-      border: none !important;
-      padding: 1px 5px !important;
-      box-decoration-break: clone !important;
-      -webkit-box-decoration-break: clone !important;
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
 </head>
 
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../index.html">← Índice 2do Cuatrimestre</a>
       <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">2do Cuatrimestre • Unidad 10</span>
@@ -83,91 +38,160 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-purple">2do Cuatrimestre • Colecciones de Registros • Unidad 10</span>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-purple">2do Cuatrimestre • Unidad 10</span>
           <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Arreglos de Estructuras</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            Bases de datos en memoria RAM: vectores donde cada celda es un registro completo, búsquedas de mejor
-            promedio y mutación en masa de colecciones.
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 24px;">
+            Cómo almacenar y procesar listas completas de registros en memoria RAM con ciclos y funciones
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-purple">struct Alumno clase[30]</span>
-            <span class="badge badge-cyan">clase[i].campo</span>
-            <span class="badge badge-emerald">mejorPromedio</span>
-            <span class="badge badge-amber">actualizarKilometraje</span>
+            <span class="badge badge-cyan">32. Arreglos de Structs</span>
+            <span class="badge badge-indigo">33. Recorrido con for</span>
+            <span class="badge badge-emerald">34. Funciones y mejorPromedio</span>
+            <span class="badge badge-amber">38. Modificación Directa</span>
+            <span class="badge badge-rose">Búsqueda y Ordenamiento</span>
           </div>
 
-          <div class="box box-purple" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
-              para avanzar diapositiva por diapositiva.
+          <div class="box box-purple" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar por las 34 diapositivas de esta unidad.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Conexión con la Unidad 09</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Construyendo colecciones realistas</h4>
-            <p>Tener un solo alumno o un solo empleado es insuficiente. Los sistemas del mundo real procesan listas:
-              cursos enteros, catálogos de productos, inventarios o nóminas de personal.</p>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
-              Un arreglo de estructuras combina la potencia del orden y los índices de un vector con la riqueza de datos
-              de una <code>struct</code>.
-            </p>
+            <h4 style="color: #818cf8;">Lo que aprendimos hasta ahora</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Una <code>struct</code> agrupa varios datos distintos (ej: nombre, legajo, promedio) bajo un solo molde.</li>
+              <li>Con el operador punto (<code>.</code>) accedemos a los campos de una variable estructura.</li>
+              <li>Con un puntero a estructura y el operador flecha (<code>-&gt;</code>) modificamos una estructura original desde una función.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
-            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
-              <li>Declarar vectores de estructuras: <code>struct Alumno clase[30]</code>.</li>
-              <li>Entender la anatomía de acceso: <code>clase[i].promedio</code>.</li>
-              <li>Recorrer e imprimir colecciones completas con bucles <code>for</code>.</li>
-              <li>Enviar arreglos de structs a funciones para análisis estadístico.</li>
-              <li>Implementar algoritmos de búsqueda del máximo registro (<code>mejorPromedio</code>).</li>
-              <li>Mutar campos de registros almacenados en arreglos (caso <code>Vehiculo</code>).</li>
+            <h4 style="color: #34d399;">Lo que vamos a dominar hoy (Secciones 32, 33, 34 y 38)</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Declarar un <b>arreglo de Structs</b> como <code>struct Alumno clase[30];</code>.</li>
+              <li>Acceder a cada casillero y campo mediante <code>clase[i].campo</code>.</li>
+              <li>Recorrer, cargar y mostrar listas de registros con ciclos <code>for</code>.</li>
+              <li>Pasar arreglos de structs a funciones: <code>mejorPromedio</code> y <code>actualizarKilometraje</code>.</li>
+              <li>Buscar por legajo o nombre (con <code>strcmp</code>) y ordenar un arreglo de estructuras.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: QUÉ ES UN ARREGLO DE STRUCTS -->
+      <!-- SLIDE 3: EL PROBLEMA QUE RESUELVE -->
       <section>
-        <h2><span class="section-num">02</span> ¿Qué es un Arreglo de Estructuras?</h2>
-        <div class="box box-purple">
-          <p style="font-size: 1rem; margin: 0;">
-            Es un vector ordinario donde cada casillero individual contiene una <b>instancia completa de la
-              estructura</b>.
+        <h2><span class="section-num">02</span> El Problema: ¿Qué Pasa Cuando Tenemos 30 Alumnos?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 10px;">
+          Con una sola estructura pudimos representar a <b>un alumno</b>. Pero en una escuela real tenemos un curso de 30 alumnos. Sin arreglos de estructuras, tendríamos dos malas opciones:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Opción 1: 30 variables sueltas</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">struct</span> Alumno alu1;
+<span class="c-kw">struct</span> Alumno alu2;
+<span class="c-kw">struct</span> Alumno alu3;
+<span class="c-cmt">// ... ¡así hasta alu30!</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 8px;">
+              No se pueden recorrer con un <code>for</code>. Tendríamos que repetir 30 veces cada <code>printf</code> o comparación.
+            </p>
+          </div>
+
+          <div class="wrong-card">
+            <div class="card-title">❌ Opción 2: Vectores paralelos sueltos</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">char</span> nombres[<span class="c-num">30</span>][<span class="c-num">50</span>];
+<span class="c-kw">int</span> legajos[<span class="c-num">30</span>];
+<span class="c-kw">float</span> promedios[<span class="c-num">30</span>];</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 8px;">
+              Los datos de un mismo alumno quedan desparramados en 3 arreglos distintos. Si ordenamos uno y olvidamos otro, ¡se mezclan los datos!
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            ✅ <b>La solución profesional:</b> Crear un <b>único vector</b> donde cada casillero guarde un <code>struct Alumno</code> completo.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: SECCIÓN 32 - DEFINICIÓN DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">03</span> 32. Arreglos de Structs: Definición del Apunte</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición del Apunte</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <b>Podemos tener un vector donde cada posición sea una Struct.</b> Así combinamos el orden numerado de los vectores con la capacidad de las estructuras de agrupar distintos tipos de datos.
           </p>
         </div>
 
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">declaracion_arreglo_structs.c</span>
-            <span class="code-badge">Vector 1D de Structs</span>
-          </div>
-          <div class="code-body"><span class="c-kw">struct</span> Alumno 
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">arreglo_structs.c</span>
+              <span class="code-badge">Sección 32</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> Alumno 
 { 
     <span class="c-kw">char</span> nombre[<span class="c-num">50</span>]; 
     <span class="c-kw">int</span> legajo; 
     <span class="c-kw">float</span> promedio; 
 }; 
 
-<span class="c-cmt">// Arreglo con 30 alumnos completos:</span>
+<span class="c-cmt">// Creamos el arreglo de 30 alumnos:</span>
 <span class="c-kw">struct</span> Alumno clase[<span class="c-num">30</span>];</div>
-        </div>
+          </div>
 
-        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Qué acabamos de crear?</h4>
+            <p style="font-size: 0.85rem; line-height: 1.55;">
+              Ahora tenemos 30 posiciones numeradas desde la <code>0</code> hasta la <code>29</code>:
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.84rem; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 6px; margin: 6px 0;">
+              clase[0]<br>
+              clase[1]<br>
+              clase[2]<br>
+              ...<br>
+              clase[29]
+            </div>
+            <p style="font-size: 0.83rem; margin: 0; color: #cbd5e1;">
+              Y <b>cada posición</b> tiene adentro sus propios 3 campos: <code>nombre</code>, <code>legajo</code> y <code>promedio</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: ANALOGÍA Y MODELO MENTAL EN RAM -->
+      <section>
+        <h2><span class="section-num">04</span> Analogía y Representación en Memoria RAM</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Imaginá un <b>fichero escolar con 30 carpetas numeradas del 0 al 29</b>. Cada carpeta es una posición del vector, y al abrir una carpeta encontrás una ficha con tres renglones: <code>nombre</code>, <code>legajo</code> y <code>promedio</code>.
+        </p>
+
+        <div class="grid-3">
           <div class="struct-container">
-            <div class="struct-header"><span>clase[0]</span></div>
+            <div class="struct-header"><span>Carpeta clase[0]</span></div>
             <div class="struct-fields">
               <div class="struct-field">
+                <div class="struct-field-name">.nombre</div>
+                <div class="struct-field-val">"Ana"</div>
+              </div>
+              <div class="struct-field">
                 <div class="struct-field-name">.legajo</div>
-                <div class="struct-field-val">1001</div>
+                <div class="struct-field-val">1234</div>
               </div>
               <div class="struct-field">
                 <div class="struct-field-name">.promedio</div>
@@ -177,78 +201,427 @@
           </div>
 
           <div class="struct-container">
-            <div class="struct-header"><span>clase[1]</span></div>
+            <div class="struct-header"><span>Carpeta clase[1]</span></div>
             <div class="struct-fields">
               <div class="struct-field">
+                <div class="struct-field-name">.nombre</div>
+                <div class="struct-field-val">"Bruno"</div>
+              </div>
+              <div class="struct-field">
                 <div class="struct-field-name">.legajo</div>
-                <div class="struct-field-val">1002</div>
+                <div class="struct-field-val">1235</div>
               </div>
               <div class="struct-field">
                 <div class="struct-field-name">.promedio</div>
-                <div class="struct-field-val">9.20</div>
+                <div class="struct-field-val">9.25</div>
               </div>
             </div>
           </div>
 
           <div class="struct-container">
-            <div class="struct-header"><span>clase[2]</span></div>
+            <div class="struct-header"><span>Carpeta clase[2]</span></div>
             <div class="struct-fields">
               <div class="struct-field">
+                <div class="struct-field-name">.nombre</div>
+                <div class="struct-field-val">"Carla"</div>
+              </div>
+              <div class="struct-field">
                 <div class="struct-field-name">.legajo</div>
-                <div class="struct-field-val">1003</div>
+                <div class="struct-field-val">1236</div>
               </div>
               <div class="struct-field">
                 <div class="struct-field-name">.promedio</div>
-                <div class="struct-field-val">7.40</div>
+                <div class="struct-field-val">7.00</div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            🧠 <b>En la memoria RAM:</b> Cada <code>struct Alumno</code> ocupa 58 bytes (50 del <code>char[50]</code> + 4 del <code>int</code> + 4 del <code>float</code>, más alineación). Las 30 estructuras se guardan <b>una inmediatamente después de la otra</b> en un bloque contiguo.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: SINTAXIS Y DESGLOSE PIEZA POR PIEZA -->
+      <section>
+        <h2><span class="section-num">05</span> Desglose Sintáctico: ¿Cómo Accedemos a un Campo?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 10px;">
+          Miremos el ejemplo exacto de la página 32 del apunte para cargar datos en el primer alumno:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">acceso_elemento.c</span>
+            <span class="code-badge">Ejemplo del Apunte</span>
+          </div>
+          <div class="code-body">clase[<span class="c-num">0</span>].legajo = <span class="c-num">1234</span>; 
+clase[<span class="c-num">0</span>].promedio = <span class="c-num">8.5</span>;</div>
+        </div>
+
+        <div class="step-list" style="margin-top: 12px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div><code>clase</code> → Es el nombre del arreglo completo (las 30 carpetas).</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div><code>clase[0]</code> → Con el corchete elegimos <b>qué alumno</b> queremos (el de la posición <code>0</code>). El resultado de <code>clase[0]</code> ya es una variable de tipo <code>struct Alumno</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div><code>.legajo</code> → Como <code>clase[0]</code> es una struct normal, usamos el <b>operador punto (<code>.</code>)</b> para entrar a su campo <code>legajo</code> y guardarle <code>1234</code>.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: CÓMO CARGAR EL CAMPO NOMBRE (STRING) -->
+      <section>
+        <h2><span class="section-num">06</span> ¿Y Cómo Cargamos el Campo <code>nombre</code>?</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Recordá lo que vimos en la unidad de Strings: en C no podemos asignar un arreglo de caracteres con <code>=</code> después de declararlo. Tenemos tres formas válidas:
+        </p>
+
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8; font-size: 0.92rem;">1. Con <code>strcpy</code></h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">strcpy</span>(clase[<span class="c-num">0</span>].nombre, <span class="c-str">"Ana"</span>);</div>
+            </div>
+            <p style="font-size: 0.78rem; margin-top: 6px; color: #cbd5e1;">
+              Copia el texto <code>"Ana"</code> y su <code>'\0'</code> dentro del campo <code>nombre</code> del alumno 0.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399; font-size: 0.92rem;">2. Al inicializar con <code>{ }</code></h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">struct</span> Alumno clase[<span class="c-num">2</span>] = {
+    {<span class="c-str">"Ana"</span>, <span class="c-num">1234</span>, <span class="c-num">8.5</span>},
+    {<span class="c-str">"Luis"</span>, <span class="c-num">1235</span>, <span class="c-num">9.0</span>}
+};</div>
+            </div>
+            <p style="font-size: 0.78rem; margin-top: 6px; color: #cbd5e1;">
+              Cada llave interna <code>{...}</code> inicializa un alumno completo en orden.
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8; font-size: 0.92rem;">3. Leyendo con <code>scanf</code></h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">scanf</span>(<span class="c-str">"%s"</span>, clase[<span class="c-num">0</span>].nombre);</div>
+            </div>
+            <p style="font-size: 0.78rem; margin-top: 6px; color: #cbd5e1;">
+              Como <code>nombre</code> es un arreglo de <code>char</code>, ya representa su dirección (no lleva <code>&amp;</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: EJEMPLO NIVEL 1 (INTRODUCTORIO) -->
+      <section>
+        <h2><span class="section-num">07</span> Ejemplo Nivel 1: Cargar y Mostrar 2 Alumnos</h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel1_dos_alumnos.c</span>
+              <span class="code-badge">Nivel 1</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;string.h&gt;</span>
+
+<span class="c-kw">struct</span> Alumno {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> legajo;
+    <span class="c-kw">float</span> promedio;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Alumno clase[<span class="c-num">2</span>];
+
+    <span class="c-fn">strcpy</span>(clase[<span class="c-num">0</span>].nombre, <span class="c-str">"Ana"</span>);
+    clase[<span class="c-num">0</span>].legajo = <span class="c-num">1234</span>;
+    clase[<span class="c-num">0</span>].promedio = <span class="c-num">8.5</span>;
+
+    <span class="c-fn">strcpy</span>(clase[<span class="c-num">1</span>].nombre, <span class="c-str">"Bruno"</span>);
+    clase[<span class="c-num">1</span>].legajo = <span class="c-num">1235</span>;
+    clase[<span class="c-num">1</span>].promedio = <span class="c-num">9.2</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"%s - Leg: %d - Prom: %.2f\n"</span>,
+           clase[<span class="c-num">0</span>].nombre, clase[<span class="c-num">0</span>].legajo, clase[<span class="c-num">0</span>].promedio);
+    <span class="c-fn">printf</span>(<span class="c-str">"%s - Leg: %d - Prom: %.2f\n"</span>,
+           clase[<span class="c-num">1</span>].nombre, clase[<span class="c-num">1</span>].legajo, clase[<span class="c-num">1</span>].promedio);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="box box-cyan">
+              <h4 style="color: #38bdf8;">Explicación línea por línea</h4>
+              <ul style="font-size: 0.82rem; line-height: 1.55; margin-left: 16px;">
+                <li>Definimos el molde <code>struct Alumno</code> afuera de <code>main</code>.</li>
+                <li>Reservamos lugar para 2 alumnos con <code>struct Alumno clase[2];</code>.</li>
+                <li>Llenamos los 3 campos de <code>clase[0]</code> y luego los 3 campos de <code>clase[1]</code>.</li>
+                <li>Vemos que repetir esto a mano para 30 alumnos sería larguísimo: necesitamos un ciclo <code>for</code>.</li>
+              </ul>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Salida en consola</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">Ana - Leg: 1234 - Prom: 8.50
+Bruno - Leg: 1235 - Prom: 9.20</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: ACCEDER Y RECORRER -->
+      <!-- SLIDE 9: SECCIÓN 33 - RECORRER UN ARREGLO DE STRUCTS -->
       <section>
-        <h2><span class="section-num">03</span> Acceder y Recorrer con un Bucle <code>for</code></h2>
-        <div class="box box-indigo" style="margin-bottom: 12px;">
-          <h4 style="color: #818cf8; margin-bottom: 2px;">Regla de Acceso: <code>clase[i].campo</code></h4>
-          <p style="font-size: 0.88rem; margin: 0; color: #cbd5e1;">
-            Primero especificamos qué elemento del vector queremos con <code>[i]</code>, y luego con el punto
-            <code>.</code> elegimos qué campo de esa estructura queremos leer o escribir.
+        <h2><span class="section-num">08</span> 33. Recorrer un Arreglo de Structs con <code>for</code></h2>
+        <div class="box box-cyan" style="margin-bottom: 12px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Explicación del Apunte (Sección 33)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Para recorrer el arreglo utilizamos un <code>for</code>. La idea es visitar <code>clase[0]</code>, <code>clase[1]</code>, <code>clase[2]</code>, <code>clase[3]</code>... y en cada vuelta acceder a sus campos usando <code>clase[i].campo</code>.
           </p>
         </div>
 
         <div class="code-window">
           <div class="code-header">
-            <span class="code-title">mostrar_clase.c</span>
-            <span class="code-badge">for loop</span>
+            <span class="code-title">recorrer_arreglo_structs.c</span>
+            <span class="code-badge">Código del Apunte</span>
           </div>
-          <div class="code-body"><span class="c-type">void</span> <span class="c-fn">mostrarClase</span>(<span class="c-kw">struct</span> Alumno clase[], <span class="c-kw">int</span> tamano)
-{
-    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) 
-    { 
-        <span class="c-fn">printf</span>(<span class="c-str">"Alumno %d:\n"</span>, i + <span class="c-num">1</span>);
-        <span class="c-fn">printf</span>(<span class="c-str">"  Nombre:   %s\n"</span>, clase[i].nombre); 
-        <span class="c-fn">printf</span>(<span class="c-str">"  Legajo:   %d\n"</span>, clase[i].legajo); 
-        <span class="c-fn">printf</span>(<span class="c-str">"  Promedio: %.2f\n"</span>, clase[i].promedio); 
-    } 
+          <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) 
+{ 
+    <span class="c-fn">printf</span>(<span class="c-str">"%s\n"</span>, clase[i].nombre); 
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, clase[i].legajo); 
+    <span class="c-fn">printf</span>(<span class="c-str">"%.2f\n"</span>, clase[i].promedio); 
 }</div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <p style="margin: 0; font-size: 0.8rem;">
+              <b><code>%s</code> para <code>nombre</code>:</b> Imprime la cadena de caracteres hasta su <code>'\0'</code>.
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <p style="margin: 0; font-size: 0.8rem;">
+              <b><code>%d</code> para <code>legajo</code>:</b> Imprime el número entero del legajo.
+            </p>
+          </div>
+          <div class="box box-amber">
+            <p style="margin: 0; font-size: 0.8rem;">
+              <b><code>%.2f</code> para <code>promedio</code>:</b> Imprime el <code>float</code> con 2 decimales.
+            </p>
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: FUNCIONES QUE BUSCAN EL MEJOR PROMEDIO -->
+      <!-- SLIDE 10: EJEMPLO NIVEL 2 CON TRAZA -->
       <section>
-        <h2><span class="section-num">04</span> Búsqueda de Máximo: <code>mejorPromedio</code></h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Función del apunte que recorre el vector de registros y
-          encuentra la calificación más alta.</p>
+        <h2><span class="section-num">09</span> Ejemplo Nivel 2: Recorrido Completo y Tabla de Seguimiento</h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">recorrido_clase.c</span>
+              <span class="code-badge">Nivel 2</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Alumno {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> legajo;
+    <span class="c-kw">float</span> promedio;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Alumno clase[<span class="c-num">3</span>] = {
+        {<span class="c-str">"Ana"</span>, <span class="c-num">101</span>, <span class="c-num">8.50</span>},
+        {<span class="c-str">"Luis"</span>, <span class="c-num">102</span>, <span class="c-num">6.00</span>},
+        {<span class="c-str">"Sol"</span>, <span class="c-num">103</span>, <span class="c-num">9.75</span>}
+    };
+    <span class="c-kw">int</span> tamano = <span class="c-num">3</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"%s | %d | %.2f\n"</span>,
+               clase[i].nombre,
+               clase[i].legajo,
+               clase[i].promedio);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table" style="font-size: 0.78rem;">
+              <thead>
+                <tr>
+                  <th>Vuelta</th>
+                  <th><code>i</code></th>
+                  <th><code>clase[i].nombre</code></th>
+                  <th><code>clase[i].legajo</code></th>
+                  <th><code>clase[i].promedio</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1°</td>
+                  <td><code>0</code></td>
+                  <td><code>"Ana"</code></td>
+                  <td><code>101</code></td>
+                  <td><code>8.50</code></td>
+                </tr>
+                <tr>
+                  <td>2°</td>
+                  <td><code>1</code></td>
+                  <td><code>"Luis"</code></td>
+                  <td><code>102</code></td>
+                  <td><code>6.00</code></td>
+                </tr>
+                <tr>
+                  <td>3°</td>
+                  <td><code>2</code></td>
+                  <td><code>"Sol"</code></td>
+                  <td><code>103</code></td>
+                  <td><code>9.75</code></td>
+                </tr>
+                <tr>
+                  <td>Fin</td>
+                  <td><code>3</code></td>
+                  <td colspan="3"><code>3 &lt; 3</code> es Falso → termina el <code>for</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">Ana | 101 | 8.50
+Luis | 102 | 6.00
+Sol | 103 | 9.75</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: CARGA POR TECLADO CON SCANF -->
+      <section>
+        <h2><span class="section-num">10</span> Cómo Cargar un Arreglo de Structs con <code>scanf</code></h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Cuando el usuario ingresa los datos por teclado dentro de un ciclo <code>for</code>, prestá especial atención a qué campos llevan el operador dirección <code>&amp;</code>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">cargar_alumnos.c</span>
+            <span class="code-badge">Lectura por teclado</span>
+          </div>
+          <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) 
+{ 
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese nombre del alumno %d: "</span>, i + <span class="c-num">1</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%s"</span>, clase[i].nombre);       <span class="c-cmt">// SIN &amp; porque nombre ya es char[50]</span>
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese legajo: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;clase[i].legajo);      <span class="c-cmt">// CON &amp; porque legajo es un int</span>
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese promedio: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;clase[i].promedio);    <span class="c-cmt">// CON &amp; porque promedio es un float</span>
+}</div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🔑 <b>Regla de oro para <code>scanf</code>:</b> Mirá el tipo del <b>último campo</b> después del punto. Como <code>legajo</code> es <code>int</code> y <code>promedio</code> es <code>float</code>, necesitan <code>&amp;</code> adelante de toda la expresión (<code>&amp;clase[i].legajo</code>). Como <code>nombre</code> es un arreglo <code>char[50]</code>, su nombre ya es la dirección del primer carácter.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: FILTRAR Y CONTAR EN UN ARREGLO DE STRUCTS -->
+      <section>
+        <h2><span class="section-num">11</span> Filtrar y Contar Registros que Cumplen una Condición</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Combinando el recorrido <code>for</code> con un <code>if</code> adentro, podemos filtrar o contar alumnos según cualquiera de sus campos (por ejemplo, cuántos aprobaron con promedio mayor o igual a <code>7.0</code>):
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">contar_aprobados.c</span>
+              <span class="code-badge">Filtro + Contador</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Alumno {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> legajo;
+    <span class="c-kw">float</span> promedio;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Alumno clase[<span class="c-num">4</span>] = {
+        {<span class="c-str">"Ana"</span>, <span class="c-num">101</span>, <span class="c-num">8.5</span>},
+        {<span class="c-str">"Luis"</span>, <span class="c-num">102</span>, <span class="c-num">5.0</span>},
+        {<span class="c-str">"Sol"</span>, <span class="c-num">103</span>, <span class="c-num">9.0</span>},
+        {<span class="c-str">"Juan"</span>, <span class="c-num">104</span>, <span class="c-num">7.0</span>}
+    };
+    <span class="c-kw">int</span> aprobados = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">4</span>; i++) {
+        <span class="c-kw">if</span>(clase[i].promedio &gt;= <span class="c-num">7.0</span>) {
+            <span class="c-fn">printf</span>(<span class="c-str">"Aprobo: %s\n"</span>, clase[i].nombre);
+            aprobados++;
+        }
+    }
+    <span class="c-fn">printf</span>(<span class="c-str">"Total aprobados: %d\n"</span>, aprobados);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="box box-emerald">
+              <h4 style="color: #34d399;">¿Qué ventaja nos da la Struct acá?</h4>
+              <p style="font-size: 0.84rem; line-height: 1.55;">
+                Evaluamos la condición sobre <b>un campo</b> (<code>clase[i].promedio &gt;= 7.0</code>), pero cuando se cumple tenemos acceso inmediato a <b>todos los demás datos</b> de esa misma persona (como <code>clase[i].nombre</code> o <code>clase[i].legajo</code>) en el mismo índice <code>i</code>.
+              </p>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">Aprobo: Ana
+Aprobo: Sol
+Aprobo: Juan
+Total aprobados: 3</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: SECCIÓN 34 - FUNCIONES CON ARREGLOS DE STRUCTS -->
+      <section>
+        <h2><span class="section-num">12</span> 34. Funciones con Arreglos de Structs</h2>
+        <div class="box box-cyan" style="margin-bottom: 12px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Concepto del Apunte (Sección 34)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            <b>También podemos enviar un arreglo de Structs a una función.</b> Igual que con los vectores de enteros, pasamos el arreglo indicando los corchetes vacíos <code>struct Alumno clase[]</code> y un segundo parámetro <code>int tamano</code> con la cantidad de elementos.
+          </p>
+        </div>
 
         <div class="code-window">
           <div class="code-header">
             <span class="code-title">mejor_promedio.c</span>
-            <span class="code-badge">Búsqueda de Extremos</span>
+            <span class="code-badge">Sección 34 del Apunte</span>
           </div>
           <div class="code-body"><span class="c-kw">float</span> <span class="c-fn">mejorPromedio</span>(<span class="c-kw">struct</span> Alumno clase[], <span class="c-kw">int</span> tamano) 
 { 
-    <span class="c-cmt">// Asumimos que el primer alumno tiene el mayor promedio:</span>
     <span class="c-kw">float</span> mayor = clase[<span class="c-num">0</span>].promedio; 
 
     <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; tamano; i++) 
@@ -263,91 +636,953 @@
 }</div>
         </div>
 
-        <div class="box box-emerald">
-          <p style="margin: 0; font-size: 0.88rem; color: #86efac;">
-            💡 <b>Uso en <code>main</code>:</b> <code>float mejor = mejorPromedio(clase, 30);</code>. ¡Funciona igual
-            que con un vector de números simples, pero accediendo a <code>clase[i].promedio</code>!
+        <div class="box box-indigo" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            📌 <b>Cómo se llama desde <code>main</code> (según el apunte):</b> <code>float mejor = mejorPromedio(clase, 30);</code> (pasamos solo el nombre del arreglo <code>clase</code>, sin corchetes).
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 6: MODIFICAR REGISTROS (VEHICULOS) -->
+      <!-- SLIDE 14: DESGLOSE PASO A PASO DE MEJORPROMEDIO -->
       <section>
-        <h2><span class="section-num">05</span> Modificación Masiva: Flota de Vehículos</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Al pasar un arreglo de estructuras a una función,
-          <b>sus campos se pueden modificar directamente</b>.</p>
+        <h2><span class="section-num">13</span> Desglose Paso a Paso de <code>mejorPromedio</code></h2>
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div>
+              <b>Firma de la función:</b> <code>float mejorPromedio(struct Alumno clase[], int tamano)</code><br>
+              Recibe el arreglo <code>clase[]</code> y su cantidad de elementos <code>tamano</code>. Devuelve un <code>float</code> porque el promedio es un número con decimales.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div>
+              <b>Inicialización con el primero:</b> <code>float mayor = clase[0].promedio;</code><br>
+              Tomamos el promedio del alumno en la posición <code>0</code> como campeón provisorio. ¡Nunca inicialices con <code>0</code> o con <code>clase[0]</code> a secas!
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div>
+              <b>Ciclo desde <code>i = 1</code>:</b> <code>for(int i = 1; i &lt; tamano; i++)</code><br>
+              Arrancamos en <code>1</code> porque el alumno <code>0</code> ya está guardado en <code>mayor</code>. Si el promedio del alumno <code>i</code> supera a <code>mayor</code>, actualizamos <code>mayor = clase[i].promedio;</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div>
+              <b>Retorno del resultado:</b> <code>return mayor;</code><br>
+              Al terminar de revisar todos los alumnos, devolvemos el mayor promedio encontrado.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: TRAZA COMPLETA DE MEJORPROMEDIO -->
+      <section>
+        <h2><span class="section-num">14</span> Traza Completa de <code>mejorPromedio</code></h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">main_mejor_promedio.c</span>
+              <span class="code-badge">Programa Completo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Alumno {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> legajo;
+    <span class="c-kw">float</span> promedio;
+};
+
+<span class="c-kw">float</span> <span class="c-fn">mejorPromedio</span>(<span class="c-kw">struct</span> Alumno clase[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">float</span> mayor = clase[<span class="c-num">0</span>].promedio;
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; tamano; i++) {
+        <span class="c-kw">if</span>(clase[i].promedio &gt; mayor) {
+            mayor = clase[i].promedio;
+        }
+    }
+    <span class="c-kw">return</span> mayor;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Alumno clase[<span class="c-num">4</span>] = {
+        {<span class="c-str">"Ana"</span>, <span class="c-num">101</span>, <span class="c-num">7.50</span>},
+        {<span class="c-str">"Bruno"</span>, <span class="c-num">102</span>, <span class="c-num">9.20</span>},
+        {<span class="c-str">"Carla"</span>, <span class="c-num">103</span>, <span class="c-num">8.40</span>},
+        {<span class="c-str">"Diego"</span>, <span class="c-num">104</span>, <span class="c-num">9.80</span>}
+    };
+    <span class="c-kw">float</span> mejor = <span class="c-fn">mejorPromedio</span>(clase, <span class="c-num">4</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Mejor promedio: %.2f\n"</span>, mejor);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table" style="font-size: 0.76rem;">
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th><code>i</code></th>
+                  <th><code>clase[i].promedio</code></th>
+                  <th><code>&gt; mayor</code></th>
+                  <th><code>mayor</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Inicio</td>
+                  <td>-</td>
+                  <td><code>clase[0] = 7.50</code></td>
+                  <td>-</td>
+                  <td><b>7.50</b></td>
+                </tr>
+                <tr>
+                  <td>i = 1</td>
+                  <td><code>1</code></td>
+                  <td><code>9.20</code> (Bruno)</td>
+                  <td><code>9.20 &gt; 7.50</code> (Sí)</td>
+                  <td><b>9.20</b></td>
+                </tr>
+                <tr>
+                  <td>i = 2</td>
+                  <td><code>2</code></td>
+                  <td><code>8.40</code> (Carla)</td>
+                  <td><code>8.40 &gt; 9.20</code> (No)</td>
+                  <td><b>9.20</b></td>
+                </tr>
+                <tr>
+                  <td>i = 3</td>
+                  <td><code>3</code></td>
+                  <td><code>9.80</code> (Diego)</td>
+                  <td><code>9.80 &gt; 9.20</code> (Sí)</td>
+                  <td><b>9.80</b></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">Mejor promedio: 9.80</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: ¿Y SI QUEREMOS SABER QUIÉN ES EL ALUMNO CON MEJOR PROMEDIO? -->
+      <section>
+        <h2><span class="section-num">15</span> Variante Clave: ¿Cómo Saber <i>Quién</i> Tuvo el Mejor Promedio?</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          <code>mejorPromedio</code> nos devuelve el número <code>9.80</code>, pero ¿cómo hacemos si en un examen nos piden imprimir el <b>nombre y el legajo</b> del mejor alumno? Devolvemos la <b>posición (índice)</b> donde está ese alumno:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">indice_mejor_alumno.c</span>
+              <span class="code-badge">Devolver índice</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">indiceMejorAlumno</span>(<span class="c-kw">struct</span> Alumno clase[], <span class="c-kw">int</span> tamano) 
+{ 
+    <span class="c-kw">int</span> posMayor = <span class="c-num">0</span>; 
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; tamano; i++) 
+    { 
+        <span class="c-kw">if</span>(clase[i].promedio &gt; clase[posMayor].promedio) 
+        { 
+            posMayor = i; 
+        } 
+    } 
+
+    <span class="c-kw">return</span> posMayor; 
+}</div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Uso en <code>main()</code></h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> idx = <span class="c-fn">indiceMejorAlumno</span>(clase, <span class="c-num">4</span>);
+
+<span class="c-fn">printf</span>(<span class="c-str">"Abanderado: %s\n"</span>, clase[idx].nombre);
+<span class="c-fn">printf</span>(<span class="c-str">"Legajo: %d\n"</span>, clase[idx].legajo);
+<span class="c-fn">printf</span>(<span class="c-str">"Promedio: %.2f\n"</span>, clase[idx].promedio);</div>
+            </div>
+            <p style="font-size: 0.82rem; margin-top: 8px; color: #cbd5e1;">
+              💡 Conocer el índice ganador <code>idx</code> nos abre la carpeta completa <code>clase[idx]</code> con todos sus datos.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: SECCIÓN 38 - ARREGLOS DE STRUCTS + PUNTEROS -->
+      <section>
+        <h2><span class="section-num">16</span> 38. Arreglos de Structs + Punteros: Modificación Directa</h2>
+        <div class="box box-cyan" style="margin-bottom: 12px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Explicación del Apunte (Sección 38, pág. 35)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            <b>También podemos modificar directamente elementos de un arreglo de Structs dentro de una función.</b> La función recorre <code>flota[0]</code>, <code>flota[1]</code>, <code>flota[2]</code>... y modifica directamente los datos originales.
+          </p>
+        </div>
 
         <div class="code-window">
           <div class="code-header">
-            <span class="code-title">flota_vehiculos.c</span>
-            <span class="code-badge">Modificación Directa</span>
+            <span class="code-title">actualizar_kilometraje.c</span>
+            <span class="code-badge">Sección 38 del Apunte</span>
           </div>
-          <div class="code-body"><span class="c-kw">struct</span> Vehiculo 
-{ 
-    <span class="c-kw">char</span> patente[<span class="c-num">10</span>]; 
-    <span class="c-kw">int</span> anio; 
-    <span class="c-kw">int</span> kilometraje; 
-}; 
-
-<span class="c-type">void</span> <span class="c-fn">actualizarKilometraje</span>(<span class="c-kw">struct</span> Vehiculo flota[], <span class="c-kw">int</span> tamano) 
+          <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">actualizarKilometraje</span>(<span class="c-kw">struct</span> Vehiculo flota[], <span class="c-kw">int</span> tamano) 
 { 
     <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) 
     { 
-        <span class="c-cmt">// Condicional sobre el año del vehículo:</span>
         <span class="c-kw">if</span>(flota[i].anio &lt; <span class="c-num">2015</span>) 
         { 
-            flota[i].kilometraje += <span class="c-num">1000</span>; <span class="c-cmt">// Modifica la celda real</span>
+            flota[i].kilometraje += <span class="c-num">1000</span>; 
         } 
     } 
 }</div>
         </div>
+      </section>
 
-        <div class="box box-cyan">
-          <p style="margin: 0; font-size: 0.85rem; color: #cbd5e1;">
-            ¿Por qué se modifican sin usar <code>*</code> ni <code>-&gt;</code>? Porque <code>flota</code> es un
-            arreglo, y al pasarlo a la función se pasa la dirección de su primer elemento. <code>flota[i]</code> ya
-            resuelve la memoria exacta del vehículo <code>i</code>.
+      <!-- SLIDE 18: ¿POR QUÉ SE MODIFICA EL ARREGLO ORIGINAL SIN USAR * NI ->? -->
+      <section>
+        <h2><span class="section-num">17</span> ¿Por Qué Modifica el Original y Por Qué Usamos Punto (<code>.</code>)?</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Esta es una de las preguntas más importantes para entender cómo conecta la Sección 25 (Punteros y Arreglos) con la Sección 38:
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. ¿Por qué modifica el arreglo original?</h4>
+            <p style="font-size: 0.83rem; line-height: 1.55;">
+              Cuando pasamos una sola struct (<code>void f(struct Vehiculo v)</code>), C hace una copia. Pero cuando pasamos un <b>arreglo</b> (<code>struct Vehiculo flota[]</code>), el nombre del arreglo envía la <b>dirección de memoria de su primer elemento</b> (es un puntero encubierto). Por eso <code>flota[i]</code> toca las celdas reales de <code>main</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. ¿Por qué usamos <code>.</code> y no <code>-&gt;</code> en <code>flota[i].anio</code>?</h4>
+            <p style="font-size: 0.83rem; line-height: 1.55;">
+              Porque los corchetes <code>[i]</code> <b>ya desreferencian el puntero</b> (recordá que <code>flota[i]</code> equivale a <code>*(flota + i)</code>). Entonces <code>flota[i]</code> ya no es un puntero, sino la estructura <code>Vehiculo</code> número <code>i</code> en persona. Y a una estructura directa se le aplica el punto <code>.</code>.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            💡 <b>Compará:</b> Puntero a un solo vehículo: <code>vehiculoPtr-&gt;anio</code> (usa flecha). Arreglo de vehículos indexado en <code>i</code>: <code>flota[i].anio</code> (usa punto después de <code>[i]</code>).
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 7: AUTOEVALUACIÓN Y CIERRE -->
+      <!-- SLIDE 19: TRAZA COMPLETA DE ACTUALIZARKILOMETRAJE -->
       <section>
-        <h2><span class="section-num">06</span> Resumen y Autoevaluación</h2>
+        <h2><span class="section-num">18</span> Programa Completo y Traza de <code>actualizarKilometraje</code></h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">flota_completa.c</span>
+              <span class="code-badge">Sección 38 en Acción</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Vehiculo {
+    <span class="c-kw">char</span> marca[<span class="c-num">30</span>];
+    <span class="c-kw">int</span> anio;
+    <span class="c-kw">int</span> kilometraje;
+};
+
+<span class="c-kw">void</span> <span class="c-fn">actualizarKilometraje</span>(<span class="c-kw">struct</span> Vehiculo flota[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        <span class="c-kw">if</span>(flota[i].anio &lt; <span class="c-num">2015</span>) {
+            flota[i].kilometraje += <span class="c-num">1000</span>;
+        }
+    }
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Vehiculo flota[<span class="c-num">3</span>] = {
+        {<span class="c-str">"Ford"</span>, <span class="c-num">2012</span>, <span class="c-num">85000</span>},
+        {<span class="c-str">"Toyota"</span>, <span class="c-num">2019</span>, <span class="c-num">40000</span>},
+        {<span class="c-str">"Fiat"</span>, <span class="c-num">2010</span>, <span class="c-num">120000</span>}
+    };
+    <span class="c-fn">actualizarKilometraje</span>(flota, <span class="c-num">3</span>);
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"%s (%d): %d km\n"</span>,
+               flota[i].marca, flota[i].anio, flota[i].kilometraje);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table" style="font-size: 0.76rem;">
+              <thead>
+                <tr>
+                  <th><code>i</code></th>
+                  <th>Vehículo</th>
+                  <th><code>anio &lt; 2015</code></th>
+                  <th>Km Antes</th>
+                  <th>Km Después</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>0</code></td>
+                  <td>Ford (2012)</td>
+                  <td>Verdadero</td>
+                  <td>85000</td>
+                  <td><b>86000</b> (+1000)</td>
+                </tr>
+                <tr>
+                  <td><code>1</code></td>
+                  <td>Toyota (2019)</td>
+                  <td>Falso</td>
+                  <td>40000</td>
+                  <td><b>40000</b> (igual)</td>
+                </tr>
+                <tr>
+                  <td><code>2</code></td>
+                  <td>Fiat (2010)</td>
+                  <td>Verdadero</td>
+                  <td>120000</td>
+                  <td><b>121000</b> (+1000)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">Ford (2012): 86000 km
+Toyota (2019): 40000 km
+Fiat (2010): 121000 km</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: PASAR UN SOLO ELEMENTO DEL ARREGLO POR PUNTERO -->
+      <section>
+        <h2><span class="section-num">19</span> ¿Y Si Queremos Modificar <i>Un Solo</i> Elemento con una Función?</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Supongamos que ya tenemos una función que recibe el puntero a <b>un solo alumno</b>: <code>void cambiarPromedio(struct Alumno *a, float nuevo)</code>. ¿Cómo le mandamos el alumno de la posición <code>2</code> del arreglo?
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">pasar_un_elemento.c</span>
+              <span class="code-badge">&amp;clase[i]</span>
+            </div>
+            <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">cambiarPromedio</span>(<span class="c-kw">struct</span> Alumno *a, <span class="c-kw">float</span> nuevo) 
+{ 
+    a-&gt;promedio = nuevo; 
+} 
+
+<span class="c-cmt">// En main, para modificar solo al alumno 2:</span>
+<span class="c-fn">cambiarPromedio</span>(&amp;clase[<span class="c-num">2</span>], <span class="c-num">9.50</span>);</div>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">Mirá la diferencia</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 16px;">
+              <li><code>clase</code> solo → Es la dirección de todo el arreglo.</li>
+              <li><code>clase[2]</code> → Es la estructura del alumno 2 (por valor).</li>
+              <li><code>&amp;clase[2]</code> → Es la <b>dirección de memoria de la casilla 2</b> (de tipo <code>struct Alumno *</code>). Adentro de esa función sí usamos <code>a-&gt;promedio</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: EJEMPLO NIVEL 3 - BÚSQUEDA POR LEGAJO -->
+      <section>
+        <h2><span class="section-num">20</span> Ejemplo Nivel 3: Buscar un Alumno por su Legajo</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Una operación fundamental en cualquier sistema es buscar un registro por su número identificador (<code>legajo</code>) y devolver en qué posición está (o <code>-1</code> si no existe):
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">buscar_por_legajo.c</span>
+              <span class="code-badge">Nivel 3</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">buscarPorLegajo</span>(<span class="c-kw">struct</span> Alumno clase[], <span class="c-kw">int</span> tamano, <span class="c-kw">int</span> legajoBuscado) 
+{ 
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) 
+    { 
+        <span class="c-kw">if</span>(clase[i].legajo == legajoBuscado) 
+        { 
+            <span class="c-kw">return</span> i; <span class="c-cmt">// Lo encontró en la posición i</span>
+        } 
+    } 
+
+    <span class="c-kw">return</span> -<span class="c-num">1</span>; <span class="c-cmt">// Terminó el for y no estaba</span>
+}</div>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿Por qué devolvemos <code>i</code> o <code>-1</code>?</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 16px;">
+              <li>Las posiciones válidas de un vector van de <code>0</code> a <code>tamano - 1</code>.</li>
+              <li>Si encontramos que <code>clase[i].legajo == legajoBuscado</code>, el <code>return i;</code> corta la función en el acto y nos da su casillero.</li>
+              <li>Si el ciclo termina sin éxito, retorna <code>-1</code> (un índice imposible) para avisar que ese legajo no figura en el curso.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: PROGRAMA COMPLETO DE BÚSQUEDA POR LEGAJO -->
+      <section>
+        <h2><span class="section-num">21</span> Uso de <code>buscarPorLegajo</code> en un Programa Completo</h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">main_buscar_legajo.c</span>
+              <span class="code-badge">Programa Completo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Alumno {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> legajo;
+    <span class="c-kw">float</span> promedio;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">buscarPorLegajo</span>(<span class="c-kw">struct</span> Alumno clase[], <span class="c-kw">int</span> tamano, <span class="c-kw">int</span> buscado) {
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        <span class="c-kw">if</span>(clase[i].legajo == buscado) {
+            <span class="c-kw">return</span> i;
+        }
+    }
+    <span class="c-kw">return</span> -<span class="c-num">1</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Alumno clase[<span class="c-num">3</span>] = {
+        {<span class="c-str">"Ana"</span>, <span class="c-num">1001</span>, <span class="c-num">8.5</span>},
+        {<span class="c-str">"Bruno"</span>, <span class="c-num">1005</span>, <span class="c-num">9.0</span>},
+        {<span class="c-str">"Carla"</span>, <span class="c-num">1009</span>, <span class="c-num">7.5</span>}
+    };
+    <span class="c-kw">int</span> pos = <span class="c-fn">buscarPorLegajo</span>(clase, <span class="c-num">3</span>, <span class="c-num">1005</span>);
+    <span class="c-kw">if</span>(pos != -<span class="c-num">1</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Encontrado: %s (Prom: %.2f)\n"</span>,
+               clase[pos].nombre, clase[pos].promedio);
+    } <span class="c-kw">else</span> {
+        <span class="c-fn">printf</span>(<span class="c-str">"Legajo inexistente.\n"</span>);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="box box-indigo">
+              <h4 style="color: #818cf8;">Seguimiento de la llamada</h4>
+              <p style="font-size: 0.83rem; line-height: 1.55;">
+                1. Llamamos a <code>buscarPorLegajo(clase, 3, 1005)</code>.<br>
+                2. En <code>i = 0</code>: <code>1001 == 1005</code> es Falso.<br>
+                3. En <code>i = 1</code>: <code>1005 == 1005</code> es Verdadero → retorna <code>1</code>.<br>
+                4. En <code>main</code>, <code>pos</code> vale <code>1</code> (distinto de <code>-1</code>), así que imprimimos <code>clase[1].nombre</code> y <code>clase[1].promedio</code>.
+              </p>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">Encontrado: Bruno (Prom: 9.00)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: BÚSQUEDA POR NOMBRE CON STRCMP -->
+      <section>
+        <h2><span class="section-num">22</span> Búsqueda por Nombre Combinando Structs + <code>strcmp</code></h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          ¿Y si queremos buscar a un alumno por su <code>nombre</code>? Como <code>clase[i].nombre</code> es un String, <b>no podemos usar <code>==</code></b>; usamos <code>strcmp</code> de <code>&lt;string.h&gt;</code>:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">buscar_por_nombre.c</span>
+              <span class="code-badge">Structs + Strings</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;string.h&gt;</span>
+
+<span class="c-kw">struct</span> Alumno {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> legajo;
+    <span class="c-kw">float</span> promedio;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">buscarPorNombre</span>(<span class="c-kw">struct</span> Alumno clase[], <span class="c-kw">int</span> tamano, <span class="c-kw">char</span> buscado[]) {
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        <span class="c-kw">if</span>(<span class="c-fn">strcmp</span>(clase[i].nombre, buscado) == <span class="c-num">0</span>) {
+            <span class="c-kw">return</span> i;
+        }
+    }
+    <span class="c-kw">return</span> -<span class="c-num">1</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Alumno clase[<span class="c-num">2</span>] = {
+        {<span class="c-str">"Ana"</span>, <span class="c-num">101</span>, <span class="c-num">8.5</span>},
+        {<span class="c-str">"Carla"</span>, <span class="c-num">102</span>, <span class="c-num">9.1</span>}
+    };
+    <span class="c-kw">int</span> pos = <span class="c-fn">buscarPorNombre</span>(clase, <span class="c-num">2</span>, <span class="c-str">"Carla"</span>);
+    <span class="c-kw">if</span>(pos != -<span class="c-num">1</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Carla tiene legajo %d\n"</span>, clase[pos].legajo);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">¡Atención a esta combinación!</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 16px;">
+              <li><code>clase[i].nombre</code> es el arreglo de caracteres del alumno <code>i</code>.</li>
+              <li><code>strcmp(clase[i].nombre, buscado) == 0</code> compara letra por letra ambos textos y devuelve <code>0</code> cuando son exactamente iguales.</li>
+              <li>Esta es una pregunta clásica de examen porque evalúa vectores, structs y strings al mismo tiempo.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: EJEMPLO NIVEL 4 - ORDENAR UN ARREGLO DE STRUCTS -->
+      <section>
+        <h2><span class="section-num">23</span> Ejemplo Nivel 4: ¿Cómo Ordenar un Arreglo de Structs?</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Supongamos que queremos armar el ranking del curso ordenando a los alumnos de mayor a menor promedio. ¿Cómo adaptamos el método burbuja que aprendimos con vectores?
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. ¿Qué comparamos en el <code>if</code>?</h4>
+            <p style="font-size: 0.84rem;">
+              Comparamos el campo por el cual queremos ordenar:<br>
+              <code>if (clase[j].promedio &lt; clase[j + 1].promedio)</code>
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. ¿Qué intercambiamos con <code>aux</code>?</h4>
+            <p style="font-size: 0.84rem;">
+              ¡Intercambiamos la <b>estructura completa</b>! Declaramos <code>struct Alumno aux;</code> y movemos toda la carpeta de una vez.
+            </p>
+          </div>
+        </div>
+
+        <div class="code-window" style="margin-top: 10px;">
+          <div class="code-header">
+            <span class="code-title">intercambio_struct.c</span>
+            <span class="code-badge">Swap de Struct Completa</span>
+          </div>
+          <div class="code-body"><span class="c-kw">struct</span> Alumno aux = clase[j];
+clase[j] = clase[j + <span class="c-num">1</span>];
+clase[j + <span class="c-num">1</span>] = aux; <span class="c-cmt">// Se copian nombre, legajo y promedio juntos</span></div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: CÓDIGO COMPLETO DE ORDENAMIENTO DE STRUCTS -->
+      <section>
+        <h2><span class="section-num">24</span> Programa Completo: Ranking Ordenado por Promedio</h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">ordenar_alumnos.c</span>
+              <span class="code-badge">Burbuja con Structs</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Alumno {
+    <span class="c-kw">char</span> nombre[<span class="c-num">50</span>];
+    <span class="c-kw">int</span> legajo;
+    <span class="c-kw">float</span> promedio;
+};
+
+<span class="c-kw">void</span> <span class="c-fn">ordenarPorPromedio</span>(<span class="c-kw">struct</span> Alumno clase[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano - <span class="c-num">1</span>; i++) {
+        <span class="c-kw">for</span>(<span class="c-kw">int</span> j = <span class="c-num">0</span>; j &lt; tamano - <span class="c-num">1</span> - i; j++) {
+            <span class="c-kw">if</span>(clase[j].promedio &lt; clase[j + <span class="c-num">1</span>].promedio) {
+                <span class="c-kw">struct</span> Alumno aux = clase[j];
+                clase[j] = clase[j + <span class="c-num">1</span>];
+                clase[j + <span class="c-num">1</span>] = aux;
+            }
+        }
+    }
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Alumno clase[<span class="c-num">3</span>] = {
+        {<span class="c-str">"Ana"</span>, <span class="c-num">101</span>, <span class="c-num">7.50</span>},
+        {<span class="c-str">"Sol"</span>, <span class="c-num">102</span>, <span class="c-num">9.80</span>},
+        {<span class="c-str">"Luis"</span>, <span class="c-num">103</span>, <span class="c-num">8.40</span>}
+    };
+    <span class="c-fn">ordenarPorPromedio</span>(clase, <span class="c-num">3</span>);
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d) %s - %.2f\n"</span>, i + <span class="c-num">1</span>, clase[i].nombre, clase[i].promedio);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="box box-indigo">
+              <h4 style="color: #818cf8;">¿Por qué no hay que intercambiar campo por campo?</h4>
+              <p style="font-size: 0.83rem; line-height: 1.55;">
+                En C, una variable estructura se puede asignar a otra del mismo tipo con <code>=</code> (copia todos sus bytes, incluido el arreglo <code>char nombre[50]</code> que vive adentro). Así jamás se desfasan el nombre, el legajo y el promedio.
+              </p>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">1) Sol - 9.80
+2) Luis - 8.40
+3) Ana - 7.50</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: ERRORES FRECUENTES DE PRINCIPIANTES (PARTE 1) -->
+      <section>
+        <h2><span class="section-num">25</span> Errores Frecuentes de Principiantes (Parte 1)</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Error #1: Poner el corchete <code>[i]</code> al final del campo en lugar de ponerlo en el arreglo de estructuras.
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Incorrecto: Corchete en el campo</div>
+            <div class="code-window">
+              <div class="code-body">clase.legajo[<span class="c-num">0</span>] = <span class="c-num">1234</span>;
+clase.promedio[i] = <span class="c-num">8.5</span>;</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 8px;">
+              <b>Error de compilación:</b> <code>clase</code> es un arreglo (no tiene punto directamente), y <code>legajo</code> es un simple <code>int</code>, no un vector.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Correcto: Primero <code>[i]</code>, luego <code>.campo</code></div>
+            <div class="code-window">
+              <div class="code-body">clase[<span class="c-num">0</span>].legajo = <span class="c-num">1234</span>;
+clase[i].promedio = <span class="c-num">8.5</span>;</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 8px;">
+              <b>Regla:</b> Como <code>clase</code> es el arreglo de 30 alumnos, el índice <code>[i]</code> siempre va pegado a <code>clase</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: ERRORES FRECUENTES DE PRINCIPIANTES (PARTE 2) -->
+      <section>
+        <h2><span class="section-num">26</span> Errores Frecuentes de Principiantes (Parte 2)</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Error #2: Intentar imprimir o comparar la estructura entera sin especificar el campo.
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Incorrecto: Olvidar el campo</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"%f"</span>, clase[i]);
+
+<span class="c-kw">if</span>(clase[i] &gt; mayor) {
+    mayor = clase[i];
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 8px;">
+              <b>Error:</b> <code>clase[i]</code> es toda la ficha del alumno (nombre + legajo + promedio). C no sabe cuál de los tres datos querés imprimir o comparar con <code>&gt;</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Correcto: Especificar <code>.promedio</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"%.2f"</span>, clase[i].promedio);
+
+<span class="c-kw">if</span>(clase[i].promedio &gt; mayor) {
+    mayor = clase[i].promedio;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 8px;">
+              <b>Correcto:</b> Indicamos explícitamente el campo numérico <code>.promedio</code> para mostrarlo o compararlo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: ERRORES FRECUENTES DE PRINCIPIANTES (PARTE 3) -->
+      <section>
+        <h2><span class="section-num">27</span> Errores Frecuentes de Principiantes (Parte 3)</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Error #3: Confundir cuándo usar <code>.</code> y cuándo usar <code>-&gt;</code> al recibir un arreglo de structs en una función.
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Incorrecto: Usar flecha después de <code>[i]</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">actualizar</span>(<span class="c-kw">struct</span> Vehiculo flota[], <span class="c-kw">int</span> n) {
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; n; i++) {
+        flota[i]-&gt;kilometraje += <span class="c-num">1000</span>;
+    }
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 8px;">
+              <b>Error de compilación:</b> <code>flota[i]</code> no es un puntero, ya es el <code>struct Vehiculo</code> de la posición <code>i</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Correcto: Usar punto después de <code>[i]</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">actualizar</span>(<span class="c-kw">struct</span> Vehiculo flota[], <span class="c-kw">int</span> n) {
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; n; i++) {
+        flota[i].kilometraje += <span class="c-num">1000</span>;
+    }
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 8px;">
+              <b>Correcto:</b> Después de indexar con <code>[i]</code>, tenemos una estructura directa y accedemos con <code>.kilometraje</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: BUENAS PRÁCTICAS DE PROGRAMACIÓN -->
+      <section>
+        <h2><span class="section-num">28</span> Buenas Prácticas con Arreglos de Estructuras</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Hábitos recomendados</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 16px;">
+              <li>Definir el <code>struct</code> una sola vez arriba de todas las funciones para que tanto <code>main</code> como las funciones auxiliares conozcan el tipo.</li>
+              <li>Pasar siempre la cantidad de elementos reales <code>int tamano</code> junto con el arreglo.</li>
+              <li>Al buscar máximos o mínimos (como en <code>mejorPromedio</code>), inicializar con el elemento <code>[0]</code> y arrancar el ciclo en <code>i = 1</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Modularizar por responsabilidad</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 16px;">
+              <li>Una función para mostrar la lista (<code>mostrarClase</code>).</li>
+              <li>Una función para calcular estadísticas (<code>mejorPromedio</code>, <code>contarAprobados</code>).</li>
+              <li>Una función para actualizar datos en bloque (<code>actualizarKilometraje</code>).</li>
+              <li>Así <code>main()</code> queda limpio, corto y fácil de leer.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: TABLA COMPARATIVA DE ACCESOS -->
+      <section>
+        <h2><span class="section-num">29</span> Cuadro Comparativo: ¿Qué Tipo Tiene Cada Expresión?</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Dado <code>struct Alumno clase[30];</code>, repasemos qué representa exactamente cada expresión:
+        </p>
+
+        <table class="trace-table" style="font-size: 0.8rem;">
+          <thead>
+            <tr>
+              <th>Expresión</th>
+              <th>¿Qué tipo de dato es?</th>
+              <th>¿Para qué se usa?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>clase</code></td>
+              <td><code>struct Alumno []</code> (dirección de <code>clase[0]</code>)</td>
+              <td>Pasar todo el arreglo a una función: <code>mejorPromedio(clase, 30)</code></td>
+            </tr>
+            <tr>
+              <td><code>clase[i]</code></td>
+              <td><code>struct Alumno</code> (una estructura entera)</td>
+              <td>Pasar un alumno por copia o intercambiar con <code>aux = clase[i]</code></td>
+            </tr>
+            <tr>
+              <td><code>&amp;clase[i]</code></td>
+              <td><code>struct Alumno *</code> (puntero a un alumno)</td>
+              <td>Pasar la dirección de un alumno para modificarlo con <code>-&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>clase[i].legajo</code></td>
+              <td><code>int</code> (el entero del legajo)</td>
+              <td>Leer, comparar o asignar: <code>clase[i].legajo = 1234;</code></td>
+            </tr>
+            <tr>
+              <td><code>&amp;clase[i].legajo</code></td>
+              <td><code>int *</code> (dirección del entero)</td>
+              <td>Leer ese campo con <code>scanf("%d", &amp;clase[i].legajo);</code></td>
+            </tr>
+            <tr>
+              <td><code>clase[i].nombre</code></td>
+              <td><code>char[50]</code> (arreglo de caracteres)</td>
+              <td>Usar en <code>printf("%s", ...)</code>, <code>scanf("%s", ...)</code> o <code>strcmp</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 31: EJERCICIO 1 DESPLEGABLE -->
+      <section>
+        <h2><span class="section-num">30</span> Ejercicio 1: Promedio General de Todo el Curso</h2>
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0 0 10px;">
+            Dada la estructura <code>struct Alumno { char nombre[50]; int legajo; float promedio; };</code>, escribí una función <code>float promedioDelCurso(struct Alumno clase[], int tamano)</code> que sume los promedios de todos los alumnos del arreglo y devuelva el promedio general del curso.
+          </p>
+
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-kw">float</span> <span class="c-fn">promedioDelCurso</span>(<span class="c-kw">struct</span> Alumno clase[], <span class="c-kw">int</span> tamano) 
+{ 
+    <span class="c-kw">float</span> suma = <span class="c-num">0</span>; 
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) 
+    { 
+        suma += clase[i].promedio; 
+    } 
+
+    <span class="c-kw">return</span> suma / tamano; 
+}</div>
+              </div>
+              <p style="font-size: 0.82rem; color: #86efac; margin-top: 8px;">
+                💡 Acumulamos <code>clase[i].promedio</code> en la variable <code>suma</code> durante todo el ciclo <code>for</code> y al final dividimos por <code>tamano</code>.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: EJERCICIO 2 DESPLEGABLE -->
+      <section>
+        <h2><span class="section-num">31</span> Ejercicio 2: Descuento en Productos con Mucho Stock</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0 0 10px;">
+            Se tiene <code>struct Producto { char nombre[40]; float precio; int stock; };</code>. Escribí una función <code>void aplicarLiquidacion(struct Producto lista[], int tamano)</code> que recorra el arreglo y, a todos los productos cuyo <code>stock</code> sea mayor a <code>100</code>, les reduzca el <code>precio</code> en un 20% (multiplicándolo por <code>0.80</code>).
+          </p>
+
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">aplicarLiquidacion</span>(<span class="c-kw">struct</span> Producto lista[], <span class="c-kw">int</span> tamano) 
+{ 
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) 
+    { 
+        <span class="c-kw">if</span>(lista[i].stock &gt; <span class="c-num">100</span>) 
+        { 
+            lista[i].precio = lista[i].precio * <span class="c-num">0.80f</span>; 
+        } 
+    } 
+}</div>
+              </div>
+              <p style="font-size: 0.82rem; color: #86efac; margin-top: 8px;">
+                💡 Igual que en <code>actualizarKilometraje</code> del apunte, la función modifica directamente el campo <code>lista[i].precio</code> del arreglo original.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: EJERCICIO 3 DESPLEGABLE (INTEGRADOR) -->
+      <section>
+        <h2><span class="section-num">32</span> Ejercicio 3: Vehículo con Menor Kilometraje</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0 0 10px;">
+            Usando <code>struct Vehiculo { char patente[10]; int anio; int kilometraje; };</code>, escribí una función <code>int menorKilometraje(struct Vehiculo flota[], int tamano)</code> que devuelva el menor kilometraje de toda la flota, y mostrá un <code>main()</code> de prueba con 3 vehículos.
+          </p>
+
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Vehiculo {
+    <span class="c-kw">char</span> patente[<span class="c-num">10</span>];
+    <span class="c-kw">int</span> anio;
+    <span class="c-kw">int</span> kilometraje;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">menorKilometraje</span>(<span class="c-kw">struct</span> Vehiculo flota[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">int</span> menor = flota[<span class="c-num">0</span>].kilometraje;
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; tamano; i++) {
+        <span class="c-kw">if</span>(flota[i].kilometraje &lt; menor) {
+            menor = flota[i].kilometraje;
+        }
+    }
+    <span class="c-kw">return</span> menor;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Vehiculo flota[<span class="c-num">3</span>] = {
+        {<span class="c-str">"AA111BB"</span>, <span class="c-num">2018</span>, <span class="c-num">62000</span>},
+        {<span class="c-str">"AF222CC"</span>, <span class="c-num">2022</span>, <span class="c-num">15000</span>},
+        {<span class="c-str">"AB333DD"</span>, <span class="c-num">2016</span>, <span class="c-num">94000</span>}
+    };
+    <span class="c-fn">printf</span>(<span class="c-str">"Menor km: %d\n"</span>, <span class="c-fn">menorKilometraje</span>(flota, <span class="c-num">3</span>));
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: RESUMEN FINAL Y CHECKLIST -->
+      <section>
+        <h2><span class="section-num">33</span> Resumen de la Unidad 10 y Checklist</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Puntos Clave del Módulo</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
-              <li>Un arreglo de structs almacena múltiples registros contiguos en memoria.</li>
-              <li>La sintaxis canónica de acceso es <code>vector[indice].campo</code>.</li>
-              <li>Al enviar el vector a una función enviamos <code>tipo vector[]</code> y su <code>tamano</code>.</li>
-              <li>Los campos de los registros pueden modificarse directamente en las funciones.</li>
+            <h4 style="color: #818cf8;">Conceptos Clave (Secciones 32, 33, 34 y 38)</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Declaración:</b> <code>struct Alumno clase[30];</code> crea 30 estructuras numeradas de <code>0</code> a <code>29</code>.</li>
+              <li><b>Acceso:</b> <code>clase[i].campo</code> (primero elegimos el índice <code>[i]</code> y luego el campo con <code>.</code>).</li>
+              <li><b>Recorrido:</b> Un ciclo <code>for(int i = 0; i &lt; tamano; i++)</code> procesa todos los registros.</li>
+              <li><b>Funciones:</b> Reciben <code>struct Alumno clase[], int tamano</code>. Pueden calcular valores (<code>mejorPromedio</code>) o modificar el arreglo original directamente (<code>actualizarKilometraje</code>).</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué diferencia hay entre <code>clase[0]</code> y
-              <code>clase[0].legajo</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué en flota[i].anio usamos punto y no flecha?
-              (Porque flota[i] es la struct directa).</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo escribir la función para buscar al alumno con
-              mejor nota?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué se escribe <code>clase[0].legajo</code> y nunca <code>clase.legajo[0]</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo cómo funciona <code>mejorPromedio(clase, 30)</code> línea por línea?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué <code>actualizarKilometraje</code> modifica el arreglo original sin usar <code>-&gt;</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé buscar en un arreglo de structs por número (<code>==</code>) y por nombre (<code>strcmp</code>)?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 24px;">
-          <a href="09-punteros-a-estructuras-operador-flecha.html" class="badge badge-cyan"
-            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
-            ← Anterior: Punteros a Structs y ->
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="09-punteros-a-estructuras-operador-flecha.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
+            ← Unidad 09: Punteros a Structs y -&gt;
           </a>
-          <a href="../index.html" class="badge badge-indigo"
-            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
-            Índice 2do Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            ← Índice 2do Cuatrimestre
           </a>
           <a href="11-estructuras-arreglos-internos-anidadas.html" class="badge badge-emerald"
-            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
-            Siguiente: Estructuras Anidadas →
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Siguiente Unidad: Estructuras Anidadas →
           </a>
         </div>
       </section>
@@ -355,8 +1590,9 @@
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -366,7 +1602,18 @@
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>

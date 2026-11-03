@@ -23,7 +23,8 @@
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
       <a href="../index.html">← Volver al 2do Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 2do Bimestre • Unidad 07</span>
   </div>
@@ -33,222 +34,1218 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-cyan">2do Cuatrimestre • Gestión de Memoria • Unidad 7</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Memoria Dinámica y Punteros</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            El verdadero poder de C: la diferencia entre Stack y Heap, direcciones de memoria, punteros y el valor seguro NULL
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-cyan">1er Cuatrimestre • 2do Bimestre • Unidad 07</span>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Introducción a la Memoria Dinámica</h1>
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 22px;">
+            Cómo funciona la memoria RAM por dentro, por qué los vectores fijos no siempre alcanzan, qué son el Stack y el Heap, y cómo usamos direcciones y punteros desde cero
           </p>
 
-          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-indigo">Stack vs Heap</span>
-            <span class="badge badge-emerald">Direcciones de Memoria</span>
-            <span class="badge badge-amber">Punteros (*ptr)</span>
-            <span class="badge badge-rose">Puntero NULL</span>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-indigo">Estática vs Dinámica</span>
+            <span class="badge badge-emerald">Stack vs Heap</span>
+            <span class="badge badge-amber">Direcciones (&amp;) y Punteros (*)</span>
+            <span class="badge badge-purple">Las 4 funciones de &lt;stdlib.h&gt;</span>
           </div>
 
-          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-cyan" style="max-width: 780px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.92rem; color: #cbd5e1;">
+              💡 <b>Enfoque paso a paso:</b> Antes de escribir funciones nuevas, en esta unidad vamos a construir el <b>modelo mental completo de la memoria RAM</b> para entender qué pasa detrás de cada variable.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: OBJETIVOS Y HOJA DE RUTA -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Objetivos y Hoja de Ruta de la Unidad</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué la memoria estática no alcanza?</h4>
-            <p style="font-size: 0.88rem;">
-              En los arreglos estáticos estamos obligados a fijar el tamaño de antemano: <code>int alumnos[100];</code>.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Si el usuario necesita registrar 5 alumnos, desperdiciamos 95 casilleros de RAM. Si vienen 101 alumnos, el programa colapsa. La <b>memoria dinámica</b> le permite a tu programa solicitarle al sistema operativo la cantidad exacta de memoria que necesita en tiempo de ejecución.
-            </p>
+            <h4 style="color: #818cf8;">Lo que vas a comprender hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.62; margin-left: 18px;">
+              <li>Qué es la <b>memoria RAM</b> y qué son el nombre, valor y dirección de una variable.</li>
+              <li>Cuál es el <b>problema real</b> de los vectores estáticos como <code>int numeros[100];</code>.</li>
+              <li>La analogía cotidiana de <b>organizar una fiesta</b> (sillas fijas vs sillas a medida).</li>
+              <li>Diferencias entre <b>Memoria Estática (Stack)</b> y <b>Memoria Dinámica (Heap)</b>.</li>
+              <li>Qué es un <b>puntero</b> (<code>int *vector;</code>) explicado desde cero sin conocimientos previos.</li>
+              <li>Panorama general de las 4 funciones: <code>malloc()</code>, <code>free()</code>, <code>calloc()</code> y <code>realloc()</code>.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Comprender la diferencia vital entre el <b>Stack (Pila)</b> y el <b>Heap (Montón)</b>.</li>
-              <li>Aprender qué es una <b>dirección de memoria hexadecimal</b>.</li>
-              <li>Entender qué es un <b>puntero</b> con la analogía de la brújula.</li>
-              <li>Dominar el operador <code>&amp;</code> (dirección) y el operador <code>*</code> (desreferenciación).</li>
-              <li>Aprender por qué inicializar siempre con <b><code>NULL</code></b> salva vidas.</li>
+            <h4 style="color: #34d399;">¿Por qué este tema es tan importante?</h4>
+            <p style="font-size: 0.86rem; color: #cbd5e1;">
+              Hasta la Unidad 06, todas nuestras estructuras tenían un tamaño fijo decidido antes de compilar. Si creábamos un vector de 100 elementos, ese tamaño quedaba grabado en piedra.
+            </p>
+            <p style="font-size: 0.86rem; color: #cbd5e1; margin-top: 8px;">
+              En los programas reales (juegos, sistemas escolares, tiendas online), <b>nunca sabemos de antemano cuántos datos ingresará el usuario</b>. La memoria dinámica nos da el poder de crear vectores a medida mientras el programa está funcionando.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: QUÉ ES LA MEMORIA RAM -->
+      <section>
+        <h2><span class="section-num">02</span> ¿Qué es la Memoria RAM por Dentro?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">La Gran Avenida de Casilleros Numerados</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Imaginá la <b>Memoria RAM</b> de tu computadora como una larguísima calle llena de millones de pequeños casilleros o buzones, uno al lado del otro. Cada casillero guarda <b>1 byte</b> y tiene un <b>número de puerta único</b>.
+          </p>
+        </div>
+
+        <div class="array-container" style="margin: 18px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">0x1000</span>
+            <div class="array-cell" style="font-size: 0.9rem;">Byte</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">0x1001</span>
+            <div class="array-cell" style="font-size: 0.9rem;">Byte</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">0x1002</span>
+            <div class="array-cell" style="font-size: 0.9rem;">Byte</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">0x1003</span>
+            <div class="array-cell" style="font-size: 0.9rem;">Byte</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">0x1004</span>
+            <div class="array-cell highlight" style="font-size: 0.9rem;">16</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">0x1008</span>
+            <div class="array-cell" style="font-size: 0.9rem;">...</div>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="box box-indigo">
+            <h4 style="font-size: 0.92rem;">1. El Casillero</h4>
+            <p style="font-size: 0.8rem; margin: 0; color: #cbd5e1;">Es el espacio físico en la memoria RAM donde se guardan los unos y ceros de nuestros datos.</p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="font-size: 0.92rem; color: #34d399;">2. El Contenido (Valor)</h4>
+            <p style="font-size: 0.8rem; margin: 0; color: #cbd5e1;">Es el dato que guardamos adentro del casillero (por ejemplo, el número <code>16</code> o la letra <code>'A'</code>).</p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="font-size: 0.92rem; color: #fbbf24;">3. El Número de Puerta</h4>
+            <p style="font-size: 0.8rem; margin: 0; color: #cbd5e1;">Se llama <b>dirección de memoria</b> (ej. <code>0x1004</code>) e identifica exactamente dónde está ese casillero.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: ANATOMÍA DE UNA VARIABLE EN RAM -->
+      <section>
+        <h2><span class="section-num">03</span> ¿Qué Pasa Cuando Creamos una Variable?</h2>
+        <p style="font-size: 0.9rem; color: #cbd5e1;">
+          Cuando escribimos <code>int edad = 16;</code> en nuestro programa, el lenguaje C hace un trabajo automático por nosotros: busca un casillero libre en la RAM y asocia <b>tres elementos</b>:
+        </p>
+
+        <div class="grid-1-2" style="margin-top: 14px; align-items: center;">
+          <div class="memory-diagram">
+            <div class="memory-box" style="min-width: 210px; padding: 16px;">
+              <div class="memory-address">Dirección: 0x1000</div>
+              <div class="memory-label">edad <span class="memory-type">int (4 bytes)</span></div>
+              <div class="memory-value">16</div>
+            </div>
+          </div>
+
+          <div class="step-list">
+            <div class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-content" style="font-size: 0.85rem;">
+                <b>Nombre (Etiqueta para humanos):</b> <code>edad</code>. Nos permite usar la variable fácilmente sin memorizar números raros.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-content" style="font-size: 0.85rem;">
+                <b>Valor (El dato guardado):</b> <code>16</code>. Es el número entero que está almacenado adentro de la caja.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-content" style="font-size: 0.85rem;">
+                <b>Dirección de memoria (Ubicación en RAM):</b> <code>0x1000</code>. Es la coordenada real que usa el procesador para encontrar la caja.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🔑 <b>Idea clave:</b> Mientras usamos variables comunes o vectores estáticos, nos manejamos con el <b>nombre</b>. Pero en la memoria dinámica, los bloques que pedimos <b>no tienen nombre propio</b>: ¡solo tienen su <b>dirección de memoria</b>!
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: EL PROBLEMA QUE INTENTA RESOLVER LA MEMORIA DINÁMICA (APUNTE PÁG 28) -->
+      <section>
+        <h2><span class="section-num">04</span> El Problema de los Vectores Estáticos</h2>
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Recordemos cómo declarábamos un vector hasta ahora</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Hasta ahora, cuando creábamos un vector común (estático), teníamos que <b>decidir su tamaño antes de ejecutar el programa</b>, en el momento de escribir el código:
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 12px;">
+          <div class="code-header">
+            <span class="code-title">vector_fijo.c</span>
+            <span class="code-badge">Memoria Estática</span>
+          </div>
+          <div class="code-body"><span class="c-cmt">// Tenemos que poner un número fijo sí o sí al programar:</span>
+<span class="c-kw">int</span> numeros[<span class="c-num">100</span>];</div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Qué pasa internamente?</h4>
+            <p style="font-size: 0.85rem; margin: 0; color: #cbd5e1;">
+              Apenas arranca el programa, se reservan exactamente <b>100 casilleros fijos</b> en la memoria. Ese tamaño no se puede achicar ni agrandar mientras el programa está corriendo.
+            </p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">¿Cuál es el problema real?</h4>
+            <p style="font-size: 0.85rem; margin: 0; color: #cbd5e1;">
+              Muchas veces <b>no sabemos cuántos datos vamos a necesitar</b> hasta que el usuario se sienta frente a la pantalla y ejecuta el programa.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: EJEMPLO DEL APUNTE: ¿CUÁNTOS ALUMNOS HAY? -->
+      <section>
+        <h2><span class="section-num">05</span> Ejemplo del Apunte: "¿Cuántos alumnos hay?"</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Supongamos que nuestro programa pregunta por pantalla: <b>"¿Cuántos alumnos hay?"</b> y nosotros habíamos programado de antemano un vector fijo <code>int alumnos[100];</code>. El usuario podría responder <code>5</code>, <code>50</code> o <code>500</code>:
+        </p>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">⚠️ Caso A: El usuario ingresa 5 alumnos</div>
+            <p style="font-size: 0.84rem; color: #cbd5e1; margin-bottom: 8px;">
+              Usamos solo las primeras 5 casillas (índices <code>0</code> a <code>4</code>) y las otras <b>95 casillas quedan vacías pero ocupando memoria RAM inútilmente</b>.
+            </p>
+            <div class="array-container" style="margin: 8px 0; justify-content: flex-start;">
+              <div class="array-cell match" style="height: 38px; min-width: 42px; font-size: 0.85rem;">8</div>
+              <div class="array-cell match" style="height: 38px; min-width: 42px; font-size: 0.85rem;">9</div>
+              <div class="array-cell match" style="height: 38px; min-width: 42px; font-size: 0.85rem;">7</div>
+              <div class="array-cell empty" style="height: 38px; min-width: 150px; font-size: 0.78rem;">95 lugares desperdiciados...</div>
+            </div>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">💥 Caso B: El usuario ingresa 500 alumnos</div>
+            <p style="font-size: 0.84rem; color: #cbd5e1; margin-bottom: 8px;">
+              Nuestro vector de 100 lugares <b>no alcanza</b>. A partir del alumno 101 desbordamos el vector (<i>Out of Bounds</i>) y el programa falla o pisa memoria ajena.
+            </p>
+            <div class="array-container" style="margin: 8px 0; justify-content: flex-start;">
+              <div class="array-cell highlight" style="height: 38px; min-width: 110px; font-size: 0.78rem;">100 lugares llenos</div>
+              <div class="array-cell out-of-bounds" style="height: 38px; min-width: 130px; font-size: 0.78rem;">¡Faltan 400 lugares!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.88rem;">
+            🎯 <b>La pregunta del millón:</b> ¿Cómo creamos un vector del <b>tamaño exacto</b> que pidió el usuario mientras el programa ya se está ejecutando? ¡Para eso existe la <b>Memoria Dinámica</b>!
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: QUÉ ES LA MEMORIA DINÁMICA (CONCEPTO CENTRAL) -->
+      <section>
+        <h2><span class="section-num">06</span> ¿Qué es entonces la Memoria Dinámica?</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Definición Clara (Apunte Teórico)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            La <b>memoria dinámica</b> es la capacidad de pedirle memoria al sistema operativo <b>mientras el programa se está ejecutando</b> (en tiempo de ejecución), reservando exactamente la cantidad de espacio que necesitamos en ese momento.
+          </p>
+        </div>
+
+        <div class="step-list" style="margin-top: 14px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>Primero preguntamos:</b> El programa arranca y le pregunta al usuario: <i>"¿Cuántos datos querés cargar hoy?"</i>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>El usuario responde:</b> Por ejemplo, ingresa <code>20</code> por teclado con <code>scanf</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>Pedimos a medida:</b> Recién en ese instante, nuestro programa le pide a la memoria RAM espacio exacto para <code>20</code> enteros. ¡No sobra ni falta ni un solo lugar!
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>Devolvemos al terminar:</b> Cuando terminamos de usar esos datos, liberamos la memoria para que la computadora pueda reutilizarla.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: LA ANALOGÍA COTIDIANA DEL APUNTE: ORGANIZAR UNA FIESTA (PÁG. 29) -->
+      <section>
+        <h2><span class="section-num">07</span> Analogía del Apunte: Organizar una Fiesta</h2>
+        <p style="font-size: 0.9rem; color: #cbd5e1;">
+          Para no olvidarte nunca la diferencia entre memoria estática y memoria dinámica, pensá que estás <b>organizando una fiesta en tu casa</b>:
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-rose">
+            <span class="badge badge-rose">Memoria Estática</span>
+            <h4 style="color: #f87171;">Alquilar 10 sillas a ciegas</h4>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              Ponés <b>10 sillas fijas</b> en el comedor un día antes, sin saber cuánta gente va a venir realmente:
+            </p>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px; color: #e2e8f0;">
+              <li><b>Si vienen 5 personas:</b> te sobran 5 sillas vacías ocupando lugar en el salón (desperdicio de memoria).</li>
+              <li><b>Si vienen 20 personas:</b> te faltan 10 sillas y la mitad de los invitados queda parada (el vector no alcanza).</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <span class="badge badge-emerald">Memoria Dinámica</span>
+            <h4 style="color: #34d399;">Pedir las sillas cuando llegan</h4>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              Esperás a que confirmen o lleguen los invitados a la puerta para saber cuántos son realmente:
+            </p>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px; color: #e2e8f0;">
+              <li><b>¿Llegaron 20 personas?</b> En ese mismo momento sacás del depósito exactamente <b>20 sillas</b>.</li>
+              <li><b>Resultado perfecto:</b> nadie queda parado y no hay ni una sola silla vacía estorbando en el salón.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: STACK VS HEAP -->
+      <!-- SLIDE 9: COMPARACIÓN DEL APUNTE: ESTÁTICA VS DINÁMICA (PÁG. 28) -->
       <section>
-        <h2><span class="section-num">02</span> Las Dos Zonas de Memoria: Stack vs Heap</h2>
+        <h2><span class="section-num">08</span> Memoria Estática vs Memoria Dinámica</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Memoria Estática (lo que ya conocíamos)</h4>
+            <div class="code-window" style="margin: 10px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numeros[<span class="c-num">10</span>];</div>
+            </div>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; color: #cbd5e1;">
+              <li>El tamaño (<code>10</code>) se define <b>al escribir el programa</b>.</li>
+              <li><b>No puede cambiar</b> durante la ejecución del programa.</li>
+              <li>La memoria se reserva y se libera <b>automáticamente</b> sin que hagamos nada.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Memoria Dinámica (lo que aprendemos ahora)</h4>
+            <div class="code-window" style="margin: 10px 0;">
+              <div class="code-body"><span class="c-kw">int</span> *numeros;</div>
+            </div>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; color: #cbd5e1;">
+              <li>El tamaño se decide <b>mientras el programa se ejecuta</b>.</li>
+              <li>Se puede <b>redimensionar</b> (agrandar o achicar) si hace falta.</li>
+              <li>La memoria se reserva y se libera <b>manualmente</b> por el programador.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            👀 <b>Observá la diferencia en el código:</b> En lugar de escribir corchetes fijos <code>int numeros[10];</code>, escribimos un asterisco <code>int *numeros;</code>. Enseguida vamos a descubrir qué significa ese asterisco.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: TABLA COMPARATIVA INTEGRAL -->
+      <section>
+        <h2><span class="section-num">09</span> Cuadro Comparativo Resumen</h2>
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>Memoria Estática (<code>int v[10];</code>)</th>
+              <th>Memoria Dinámica (<code>int *v;</code>)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>¿Cuándo se decide el tamaño?</b></td>
+              <td>Al escribir el código (antes de ejecutar).</td>
+              <td>Mientras el programa corre (tiempo de ejecución).</td>
+            </tr>
+            <tr>
+              <td><b>¿Puede cambiar su tamaño?</b></td>
+              <td>No, es 100% fijo de principio a fin.</td>
+              <td>Sí, se puede ajustar con <code>realloc()</code>.</td>
+            </tr>
+            <tr>
+              <td><b>¿Dónde se guarda en la RAM?</b></td>
+              <td>En el <b>Stack</b> (Pila).</td>
+              <td>En el <b>Heap</b> (Montículo / Depósito libre).</td>
+            </tr>
+            <tr>
+              <td><b>¿Quién reserva el espacio?</b></td>
+              <td>El compilador automáticamente.</td>
+              <td>El programador usando <code>malloc()</code> o <code>calloc()</code>.</td>
+            </tr>
+            <tr>
+              <td><b>¿Quién libera el espacio?</b></td>
+              <td>Se destruye sola al terminar la función.</td>
+              <td>El programador usando <code>free()</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 11: DÓNDE SE GUARDA CADA UNA: STACK VS HEAP (APUNTE PÁG 29) -->
+      <section>
+        <h2><span class="section-num">10</span> ¿Dónde se Guarda cada una? Stack vs Heap</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          La memoria RAM que usa nuestro programa está dividida en distintas zonas de trabajo. Las dos zonas fundamentales que tenés que conocer son el <b>Stack</b> y el <b>Heap</b>:
+        </p>
+
         <div class="memory-architecture">
           <div class="memory-zone stack">
-            <h4 style="color: var(--accent-cyan); margin-bottom: 6px;">1. El Stack (Pila)</h4>
-            <ul style="font-size: 0.82rem; line-height: 1.5; margin-left: 16px; color: #cbd5e1;">
-              <li>Memoria <b>automática</b> gestionada por C.</li>
-              <li>Aquí viven las variables locales y funciones.</li>
-              <li>Ultrarrápida, pero de <b>tamaño pequeño y fijo</b>.</li>
-              <li>Las variables mueren automáticamente al salir de la función.</li>
+            <h4 style="color: var(--accent-cyan); margin-bottom: 6px;">📦 Zona 1: El Stack (Pila)</h4>
+            <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">Donde viven las variables comunes y vectores estáticos</p>
+            <ul style="font-size: 0.82rem; line-height: 1.55; margin-left: 16px; color: #cbd5e1;">
+              <li>Aquí se crean <code>int edad;</code> y <code>int notas[10];</code>.</li>
+              <li>Es <b>totalmente automática</b> y muy ordenada.</li>
+              <li>Tiene un tamaño limitado y <b>rígido</b>.</li>
+              <li>También guarda las variables puntero (ej. <code>int *numeros;</code>).</li>
             </ul>
           </div>
 
           <div class="pointer-arrow">
             <span>puntero</span>
-            <span style="font-size: 1.5rem;">➔</span>
+            <span style="font-size: 1.6rem;">➔</span>
             <span>apunta al</span>
           </div>
 
           <div class="memory-zone heap">
-            <h4 style="color: var(--accent-emerald); margin-bottom: 6px;">2. El Heap (Montículo)</h4>
-            <ul style="font-size: 0.82rem; line-height: 1.5; margin-left: 16px; color: #cbd5e1;">
-              <li>El gran <b>depósito de memoria libre</b> del sistema operativo.</li>
-              <li>Enorme capacidad bajo demanda.</li>
-              <li>El programador decide <b>cuándo pedir memoria y cuándo liberarla</b>.</li>
-              <li>Persiste en el tiempo hasta que uses <code>free()</code>.</li>
+            <h4 style="color: var(--accent-emerald); margin-bottom: 6px;">🏗️ Zona 2: El Heap (Montículo)</h4>
+            <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">Donde se reserva toda la Memoria Dinámica</p>
+            <ul style="font-size: 0.82rem; line-height: 1.55; margin-left: 16px; color: #cbd5e1;">
+              <li>Es el <b>gran depósito libre</b> de la memoria RAM.</li>
+              <li>Tiene muchísimo espacio disponible a pedido.</li>
+              <li>Podemos pedir bloques de cualquier tamaño en vivo.</li>
+              <li>Queda reservado hasta que lo liberemos manualmente.</li>
             </ul>
           </div>
         </div>
-      </section>
 
-      <!-- SLIDE 4: QUÉ ES UN PUNTERO -->
-      <section>
-        <h2><span class="section-num">03</span> ¿Qué es un Puntero?</h2>
-        <div class="box box-cyan">
-          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición Sencilla</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            Un <b>puntero</b> es una variable común y corriente cuya única misión en la vida es <b>guardar la dirección de memoria de otra variable</b>.
+        <div class="box box-emerald" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            📌 <b>Regla del Apunte (pág. 29):</b> <i>"No hace falta profundizar mucho en la arquitectura física, simplemente pensá: <b>Heap = lugar donde se guarda la memoria dinámica</b>."</i>
           </p>
         </div>
+      </section>
 
-        <div class="grid-2" style="margin-top: 14px;">
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">La Analogía del Papel con la Dirección</h4>
-            <p style="font-size: 0.86rem;">
-              Imaginá que tu amigo tiene una caja con dinero guardada en su casa.
-            </p>
+      <!-- SLIDE 12: EL STACK EN DETALLE -->
+      <section>
+        <h2><span class="section-num">11</span> Entendiendo el Stack (La Pila Automática)</h2>
+        <div class="grid-1-2" style="align-items: center;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿Por qué es tan cómodo pero limitado?</h4>
             <p style="font-size: 0.84rem; color: #cbd5e1;">
-              Un puntero no es la caja con el dinero: es un <b>papelito donde anotaste la dirección de la casa de tu amigo</b> (ej. <i>"Calle Rivadavia 450"</i>). Con ese papelito podés llegar a la casa, mirar qué hay adentro de la caja o cambiar su contenido.
+              En el <b>Stack</b>, cada vez que empieza una función (como <code>main</code>), C apila prolijamente todas las variables que declaraste con su nombre y tamaño fijo.
+            </p>
+            <p style="font-size: 0.84rem; color: #cbd5e1; margin-top: 8px;">
+              Como todo está encajado uno arriba del otro como una pila de cajas, <b>ninguna caja del medio puede estirarse</b> sin chocar con las demás. Por eso en el Stack los tamaños tienen que ser fijos.
             </p>
           </div>
 
-          <div class="memory-diagram">
-            <div class="memory-box">
-              <div class="memory-address">&amp;x = 0x1000</div>
-              <div class="memory-label">int x</div>
-              <div class="memory-value">42</div>
-            </div>
-            <div style="display: flex; align-items: center; color: var(--accent-amber); font-weight: bold;">
-              ▲ apuntado por
-            </div>
-            <div class="memory-box" style="border-color: var(--accent-amber);">
-              <div class="memory-address">&amp;ptr = 0x2000</div>
-              <div class="memory-label">int *ptr</div>
-              <div class="memory-value" style="color: var(--accent-amber); font-size: 0.88rem;">0x1000</div>
+          <div>
+            <div class="memory-diagram" style="flex-direction: column; align-items: center; gap: 8px;">
+              <div class="memory-box" style="width: 340px; padding: 8px 14px;">
+                <div class="memory-address">Stack • 0x1008</div>
+                <div class="memory-label">int cantidad = 5</div>
+              </div>
+              <div class="memory-box" style="width: 340px; padding: 8px 14px;">
+                <div class="memory-address">Stack • 0x1004</div>
+                <div class="memory-label">float promedio = 8.5</div>
+              </div>
+              <div class="memory-box" style="width: 340px; padding: 8px 14px;">
+                <div class="memory-address">Stack • 0x1000</div>
+                <div class="memory-label">int edad = 16</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: LOS DOS OPERADORES: & Y * -->
+      <!-- SLIDE 13: EL HEAP EN DETALLE Y POR QUÉ NECESITA DIRECCIONES -->
       <section>
-        <h2><span class="section-num">04</span> Los Dos Operadores Mágicos: <code>&amp;</code> y <code>*</code></h2>
-        <div class="comparison-box">
-          <div class="correct-card" style="background: rgba(18, 30, 52, 0.85); border-color: var(--accent-cyan);">
-            <div class="correct-title" style="color: var(--accent-cyan); font-size: 1rem;">
-              Operador Dirección: &amp; (Address-of)
-            </div>
-            <p style="font-size: 0.86rem; color: #cbd5e1;">
-              Se lee: <b>"la dirección de..."</b>. Averigua en qué celda de la memoria RAM vive una variable.
-            </p>
-            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; color: #38bdf8;">
-              int x = 10;<br>
-              int *ptr = &amp;x; // Guarda la dirección de x
-            </div>
-          </div>
-
-          <div class="correct-card" style="background: rgba(20, 40, 32, 0.85); border-color: var(--accent-emerald);">
-            <div class="correct-title" style="color: var(--accent-emerald); font-size: 1rem;">
-              Operador Desreferencia: * (Indirection)
-            </div>
-            <p style="font-size: 0.86rem; color: #cbd5e1;">
-              Se lee: <b>"el valor que está en la dirección apuntada por..."</b>. Te permite viajar a la celda y cambiarla.
-            </p>
-            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; color: #34d399;">
-              *ptr = 25; // Modifica 'x' indirectamente.<br>
-              // ¡Ahora x vale 25!
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 6: EL PUNTERO SEGURO NULL -->
-      <section>
-        <h2><span class="section-num">05</span> El Puntero Seguro: <code>NULL</code></h2>
-        <div class="box box-rose">
-          <h4 style="color: #f87171; margin-bottom: 4px;">Peligro: Punteros Salvajes (Wild Pointers)</h4>
+        <h2><span class="section-num">12</span> Entendiendo el Heap (El Gran Depósito Libre)</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Un galpón gigante sin etiquetas de nombres</h4>
           <p style="font-size: 0.88rem; margin: 0;">
-            Si declarás un puntero sin inicializar: <code>int *ptr;</code>, la variable contiene <b>basura</b>. Apunta a cualquier sector aleatorio de tu computadora. Si intentás escribir <code>*ptr = 5;</code>, podés corromper memoria vital del sistema operativo y congelar tu PC.
+            El <b>Heap</b> es una zona inmensa de la RAM donde hay espacio de sobra para pedir 10, 500 o 10.000 casilleros seguidos en cualquier momento. Pero tiene una particularidad muy importante:
           </p>
         </div>
 
-        <div class="code-window" style="margin-top: 14px;">
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">1. En el Heap las cajas NO tienen nombre</h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1; margin: 0;">
+              Como los bloques en el Heap se crean mientras el programa ya está corriendo, no tienen un nombre de variable propio escrito en el código. Solo tienen su <b>dirección de memoria</b> (por ejemplo, <i>"el bloque que empieza en la puerta <code>0x5000</code>"</i>).
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">2. ¿Cómo llegamos entonces al Heap?</h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1; margin: 0;">
+              Cuando le pedimos un bloque de memoria al Heap, el sistema nos responde: <i>"Listo, te reservé el espacio a partir de la dirección <code>0x5000</code>"</i>. Nosotros guardamos esa dirección en un <b>puntero</b> en el Stack.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: QUÉ ES UNA DIRECCIÓN DE MEMORIA -->
+      <section>
+        <h2><span class="section-num">13</span> ¿Qué es Exactamente una Dirección de Memoria?</h2>
+        <div class="grid-2" style="align-items: center;">
+          <div>
+            <p style="font-size: 0.88rem; color: #cbd5e1;">
+              Toda celda de la memoria RAM tiene un número que indica su posición exacta, empezando desde el byte 0 hasta varios miles de millones.
+            </p>
+            <p style="font-size: 0.88rem; color: #cbd5e1; margin-top: 8px;">
+              Para que esos números largos sean más cortos y cómodos de leer, las computadoras los escriben en <b>notación hexadecimal</b>, que siempre empieza con el prefijo <b><code>0x</code></b>:
+            </p>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; color: #e2e8f0; margin-top: 8px;">
+              <li><code>0x1000</code>, <code>0x1004</code>, <code>0x1008</code> (como los números de una cuadra).</li>
+              <li>No tenés que hacer cuentas con ellos: solo pensalos como <b>el código postal o número de puerta</b> de una casilla en la RAM.</li>
+            </ul>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8; text-align: center;">¿Por qué avanzan de 4 en 4 en un <code>int</code>?</h4>
+            <div class="memory-diagram" style="flex-direction: column; align-items: center; gap: 6px; margin-top: 10px;">
+              <div class="memory-box" style="width: 240px; padding: 6px 12px;">
+                <div class="memory-address">Dirección: 0x5000 (ocupa 5000 a 5003)</div>
+                <div class="memory-label">Primer int: 10</div>
+              </div>
+              <div class="memory-box" style="width: 240px; padding: 6px 12px;">
+                <div class="memory-address">Dirección: 0x5004 (ocupa 5004 a 5007)</div>
+                <div class="memory-label">Segundo int: 20</div>
+              </div>
+              <div class="memory-box" style="width: 240px; padding: 6px 12px;">
+                <div class="memory-address">Dirección: 0x5008 (ocupa 5008 a 5011)</div>
+                <div class="memory-label">Tercer int: 30</div>
+              </div>
+            </div>
+            <p style="font-size: 0.78rem; color: #94a3b8; text-align: center; margin: 6px 0 0;">
+              Como cada <code>int</code> ocupa 4 bytes, cada entero empieza 4 casilleros después del anterior.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: EL OPERADOR & CONECTANDO CON SCANF -->
+      <section>
+        <h2><span class="section-num">14</span> ¡Ya Usabas Direcciones de Memoria con <code>scanf</code>!</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">El misterio del símbolo <code>&amp;</code> (Ampersand) develado</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Desde tu primera clase de programación en C, cada vez que leías un número por teclado escribías un símbolo <b><code>&amp;</code></b> adelante de la variable. ¿Por qué era obligatorio?
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 12px;">
           <div class="code-header">
-            <span class="code-title">puntero_seguro.c</span>
-            <span class="code-badge">Buena Práctica</span>
+            <span class="code-title">repaso_scanf.c</span>
+            <span class="code-badge">El operador &amp;</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> edad;
+<span class="c-fn">printf</span>(<span class="c-str">"Ingrese su edad: "</span>);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad); <span class="c-cmt">// &amp;edad significa: "la dirección de memoria de edad"</span></div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;"><code>edad</code> (sin el <code>&amp;</code>)</h4>
+            <p style="font-size: 0.85rem; margin: 0; color: #cbd5e1;">
+              Significa <b>el valor guardado adentro</b> de la caja (por ejemplo, <code>16</code>). Eso es lo que necesita <code>printf("%d", edad);</code> para mostrarlo en pantalla.
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;"><code>&amp;edad</code> (con el <code>&amp;</code>)</h4>
+            <p style="font-size: 0.85rem; margin: 0; color: #cbd5e1;">
+              Significa <b>la dirección de memoria donde vive la caja</b> (por ejemplo, <code>0x1000</code>). <code>scanf</code> necesita la dirección de la casa para poder ir hasta ahí y guardar el dato que escribió el usuario.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: QUÉ ES UN PUNTERO EXPLICADO DESDE CERO -->
+      <section>
+        <h2><span class="section-num">15</span> ¿Qué es un Puntero? (Explicado desde Cero)</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">El puente entre nuestro programa y el Heap</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Un <b>puntero</b> es simplemente una variable que, en lugar de guardar un número común (como <code>16</code>) o una letra (como <code>'A'</code>), <b>guarda una dirección de memoria</b> (como <code>0x5000</code>).
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Variable <code>int</code> común</h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              <code>int cantidad = 5;</code><br>
+              Guarda un <b>número entero</b> directamente adentro de su caja.
+            </p>
+          </div>
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">Variable <code>float</code> común</h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              <code>float nota = 8.5;</code><br>
+              Guarda un <b>número con coma</b> directamente adentro de su caja.
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Variable Puntero <code>int *</code></h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              <code>int *numeros;</code><br>
+              Guarda <b>la dirección de memoria</b> donde están los números enteros.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 <b>¿Por qué se llama "puntero"?</b> Porque al tener anotada la dirección de otro lugar de la RAM, actúa como una flecha que <b>apunta hacia ese lugar</b>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: ANALOGÍA DEL PUNTERO: EL PAPELITO CON LA DIRECCIÓN -->
+      <section>
+        <h2><span class="section-num">16</span> La Analogía del Papelito con la Dirección</h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">El Depósito vs El Papelito</h4>
+            <p style="font-size: 0.86rem; color: #cbd5e1;">
+              Imaginá que alquilás un depósito grande en las afueras de la ciudad (en el <b>Heap</b>) para guardar mercadería.
+            </p>
+            <p style="font-size: 0.86rem; color: #cbd5e1; margin-top: 8px;">
+              El depósito no entra en tu bolsillo. Lo que vos llevás en tu bolsillo (en el <b>Stack</b>) es un <b>papelito donde anotaste la dirección del depósito</b>: <i>"Av. Memoria 0x5000"</i>.
+            </p>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px; color: #e2e8f0; margin-top: 8px;">
+              <li><b>El papelito</b> = tu variable puntero (<code>int *vector</code>).</li>
+              <li><b>El depósito real</b> = el bloque de memoria en el Heap.</li>
+              <li>Mirando el papelito, podés ir al depósito cuantas veces quieras a guardar o leer datos.</li>
+            </ul>
+          </div>
+
+          <div class="memory-diagram" style="flex-direction: column; align-items: center; gap: 12px;">
+            <div class="memory-box" style="border-color: var(--accent-amber); width: 270px;">
+              <div class="memory-address">En tu bolsillo (Stack • 0x1000)</div>
+              <div class="memory-label">int *vector <span class="memory-type">Puntero</span></div>
+              <div class="memory-value" style="color: var(--accent-amber); border-color: rgba(251,191,36,0.4);">0x5000</div>
+            </div>
+            <div style="color: var(--accent-amber); font-weight: 700; font-family: var(--font-mono); font-size: 0.9rem;">
+              ▼ Apunta a la dirección 0x5000 ▼
+            </div>
+            <div class="memory-box" style="border-color: var(--accent-emerald); width: 270px;">
+              <div class="memory-address">En el Depósito (Heap • 0x5000)</div>
+              <div class="memory-label">Bloque de enteros reservados</div>
+              <div class="memory-value">[ 10 | 20 | 30 | 40 | 50 ]</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: CÓMO DECLARAR UN PUNTERO EN C (APUNTE PÁG 28-29) -->
+      <section>
+        <h2><span class="section-num">17</span> ¿Cómo se Declara un Puntero en C?</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Tal como muestra el apunte en las páginas 28 y 29, para declarar un puntero escribimos el <b>tipo de dato al que va a apuntar</b>, seguido de un <b>asterisco <code>*</code></b> y el <b>nombre de la variable</b>:
+        </p>
+
+        <div class="code-window" style="margin-top: 10px;">
+          <div class="code-header">
+            <span class="code-title">declaracion_punteros.c</span>
+            <span class="code-badge">Sintaxis en C</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> *numeros;     <span class="c-cmt">// Puntero que apuntará a números enteros (int)</span>
+<span class="c-kw">int</span> *vector;      <span class="c-cmt">// Otro puntero a enteros (muy usado en el apunte)</span>
+<span class="c-kw">float</span> *precios;   <span class="c-cmt">// Puntero que apuntará a números con coma (float)</span>
+<span class="c-kw">char</span> *letras;     <span class="c-cmt">// Puntero que apuntará a caracteres (char)</span></div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿Qué significa el <code>*</code> en <code>int *vector;</code>?</h4>
+            <p style="font-size: 0.84rem; margin: 0; color: #cbd5e1;">
+              El asterisco en la declaración le avisa al compilador: <i>"Atención: <code>vector</code> no es un entero común, es una variable que guarda la <b>dirección de memoria</b> donde empiezan uno o varios enteros"</i>.
+            </p>
+          </div>
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué hay que indicar el tipo (<code>int</code>, <code>float</code>)?</h4>
+            <p style="font-size: 0.84rem; margin: 0; color: #cbd5e1;">
+              Porque aunque todas las direcciones son números de puerta, C necesita saber <b>qué tipo de dato vive en esa puerta</b> y cuántos bytes ocupa cada casillero cuando avancemos al siguiente.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: DIFERENCIA VISUAL EN RAM: VARIABLE COMÚN VS PUNTERO -->
+      <section>
+        <h2><span class="section-num">18</span> Diferencia Visual: Variable Común vs Puntero</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Comparemos lado a lado qué ocurre en la memoria cuando declaramos una variable entera común frente a cuando usamos un puntero conectado a otra celda:
+        </p>
+
+        <div class="code-window" style="margin: 10px 0;">
+          <div class="code-body"><span class="c-kw">int</span> x = <span class="c-num">10</span>;     <span class="c-cmt">// Variable común: guarda el número 10</span>
+<span class="c-kw">int</span> *p = &amp;x;    <span class="c-cmt">// Puntero: guarda la dirección de memoria donde vive x</span></div>
+        </div>
+
+        <div class="memory-diagram" style="margin-top: 16px; align-items: center;">
+          <div class="memory-box" style="min-width: 190px;">
+            <div class="memory-address">Dirección: 0x1000</div>
+            <div class="memory-label">x <span class="memory-type">int</span></div>
+            <div class="memory-value">10</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; align-items: center; color: var(--accent-amber); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700;">
+            <span>◀── apunta a 0x1000</span>
+          </div>
+
+          <div class="memory-box" style="min-width: 190px; border-color: var(--accent-amber);">
+            <div class="memory-address">Dirección: 0x2000</div>
+            <div class="memory-label">p <span class="memory-type">int *</span></div>
+            <div class="memory-value" style="color: var(--accent-amber); border-color: rgba(251,191,36,0.4);">0x1000</div>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🔍 <b>Lectura del diagrama:</b> La variable <code>x</code> vive en la puerta <code>0x1000</code> y adentro tiene el valor <code>10</code>. El puntero <code>p</code> vive en su propia puerta (<code>0x2000</code>), pero adentro tiene anotado <code>0x1000</code> (la dirección de <code>x</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: LOS DOS ROLES DEL ASTERISCO -->
+      <section>
+        <h2><span class="section-num">19</span> Los Dos Usos del Asterisco <code>*</code></h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          A los principiantes suele confundirles ver el asterisco <code>*</code> en dos momentos distintos. Es muy fácil si distinguís <b>cuándo estás creando el puntero</b> y <b>cuándo lo estás usando para viajar a la celda</b>:
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-cyan">
+            <span class="badge badge-cyan">Uso 1: En la Declaración</span>
+            <h4 style="color: #38bdf8;"><code>int *p;</code> ➔ Crear la variable puntero</h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Cuando tiene el tipo <code>int</code> adelante, solo estamos creando la variable que guardará direcciones.
+            </p>
+            <div class="code-window" style="margin-top: 8px;">
+              <div class="code-body"><span class="c-kw">int</span> *p; <span class="c-cmt">// Crea el puntero 'p'</span>
+p = &amp;x; <span class="c-cmt">// Sin *: guarda la dirección</span></div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <span class="badge badge-emerald">Uso 2: Seguir la Flecha</span>
+            <h4 style="color: #34d399;"><code>*p = 25;</code> ➔ Ir al casillero apuntado</h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Cuando escribimos <code>*p</code> en una instrucción, significa: <b>"seguí la flecha de <code>p</code> y accedé al dato que está en ese destino"</b>.
+            </p>
+            <div class="code-window" style="margin-top: 8px;">
+              <div class="code-body">*p = <span class="c-num">25</span>; <span class="c-cmt">// Viaja a 'x' y guarda 25</span>
+<span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, *p); <span class="c-cmt">// Muestra 25</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: PUNTEROS Y CORCHETES: USARLO IGUAL QUE UN VECTOR -->
+      <section>
+        <h2><span class="section-num">20</span> ¡La Mejor Noticia! Podés Usar Corchetes <code>vector[i]</code></h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Punteros y vectores hablan el mismo idioma en C</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Cuando nuestro puntero <code>int *vector;</code> apunta a un bloque de varios enteros seguidos en el <b>Heap</b>, ¡no necesitamos complicarnos con símbolos raros para recorrerlo! Podemos usar los mismos corchetes <b><code>vector[0]</code>, <code>vector[1]</code>, <code>vector[i]</code></b> que ya dominás de la Unidad 01.
+          </p>
+        </div>
+
+        <div class="array-container" style="margin: 16px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">vector[0]</span>
+            <div class="array-cell match">10</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">vector[1]</span>
+            <div class="array-cell match">20</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">vector[2]</span>
+            <div class="array-cell match">30</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">vector[3]</span>
+            <div class="array-cell match">40</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">vector[4]</span>
+            <div class="array-cell match">50</div>
+          </div>
+        </div>
+
+        <div class="code-window">
+          <div class="code-body"><span class="c-cmt">// Una vez que 'vector' apunta al bloque en el Heap, se usa igual que siempre:</span>
+vector[<span class="c-num">0</span>] = <span class="c-num">10</span>;
+vector[<span class="c-num">1</span>] = <span class="c-num">20</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"Primer elemento: %d\n"</span>, vector[<span class="c-num">0</span>]);</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: EL PUNTERO NULL Y EL PELIGRO DE NO INICIALIZAR -->
+      <section>
+        <h2><span class="section-num">21</span> El Valor Especial <code>NULL</code> ("No Apunta a Nada")</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Puntero sin inicializar (Peligroso)</div>
+            <p style="font-size: 0.83rem; color: #cbd5e1;">
+              Si declarás <code>int *vector;</code> suelto y todavía no le asignaste una dirección válida, adentro tiene <b>basura aleatoria</b> (una dirección cualquiera de la RAM).
+            </p>
+            <div class="memory-box uninitialized" style="margin-top: 8px;">
+              <div class="memory-label">int *vector</div>
+              <div class="memory-value garbage">??? (Dirección Basura)</div>
+            </div>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Puntero inicializado en <code>NULL</code></div>
+            <p style="font-size: 0.83rem; color: #cbd5e1;">
+              <b><code>NULL</code></b> es un valor especial de C que significa <b>"este puntero está vacío y no apunta a ningún lugar todavía"</b> (o que falló la reserva de memoria).
+            </p>
+            <div class="memory-box" style="margin-top: 8px; border-color: var(--accent-emerald);">
+              <div class="memory-label">int *vector = NULL</div>
+              <div class="memory-value">NULL (0x0)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🛡️ <b>Buena costumbre desde hoy:</b> Si declarás un puntero y no le vas a asignar memoria en esa misma línea, inicializalo en <code>int *vector = NULL;</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: LAS 4 FUNCIONES DE <STDLIB.H> (APUNTE PÁG 29) -->
+      <section>
+        <h2><span class="section-num">22</span> Las 4 Funciones de la Memoria Dinámica</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          En la página 29 del apunte se presentan las <b>4 herramientas fundamentales</b> que nos brinda la biblioteca <code>&lt;stdlib.h&gt;</code> para controlar la memoria dinámica en C:
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-emerald">
+            <span class="badge badge-emerald">1. malloc() • Unidad 08</span>
+            <h4 style="color: #34d399;">Reservar memoria</h4>
+            <p style="font-size: 0.83rem; margin: 0; color: #cbd5e1;">
+              Pide un bloque de memoria de un tamaño determinado en el Heap y nos devuelve la dirección donde empieza.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <span class="badge badge-amber">2. free() • Unidad 08</span>
+            <h4 style="color: #fbbf24;">Liberar memoria</h4>
+            <p style="font-size: 0.83rem; margin: 0; color: #cbd5e1;">
+              Devuelve al sistema operativo la memoria que habíamos reservado cuando ya terminamos de usarla.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <span class="badge badge-cyan">3. calloc() • Unidad 09</span>
+            <h4 style="color: #38bdf8;">Reservar memoria inicializada en 0</h4>
+            <p style="font-size: 0.83rem; margin: 0; color: #cbd5e1;">
+              Reserva memoria para un vector en el Heap y además limpia todas sus casillas dejándolas en <code>0</code> automáticamente.
+            </p>
+          </div>
+
+          <div class="box box-purple">
+            <span class="badge badge-purple">4. realloc() • Unidad 09</span>
+            <h4 style="color: #c084fc;">Cambiar el tamaño de la memoria</h4>
+            <p style="font-size: 0.83rem; margin: 0; color: #cbd5e1;">
+              Permite agrandar o achicar un bloque de memoria dinámica que ya teníamos reservado sin perder los datos cargados.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: EL CICLO DE VIDA DE LA MEMORIA DINÁMICA -->
+      <section>
+        <h2><span class="section-num">23</span> Las 4 Etapas de Todo Programa con Memoria Dinámica</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Siempre que trabajemos con memoria dinámica en las próximas clases, vamos a respetar este orden lógico de 4 pasos:
+        </p>
+
+        <div class="step-list" style="margin-top: 12px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>Declarar el puntero:</b> Creamos la variable puntero que guardará la dirección (ej. <code>int *vector;</code>) y averiguamos cuántos datos quiere el usuario (<code>cantidad</code>).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>Reservar en el Heap:</b> Pedimos el bloque exacto de memoria con <code>malloc()</code> o <code>calloc()</code> y verificamos que no sea <code>NULL</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>Usar el vector normalmente:</b> Cargamos datos con <code>scanf</code>, recorremos con <code>for</code>, buscamos o mostramos usando <code>vector[i]</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>Liberar la memoria:</b> Antes de terminar el programa, devolvemos el bloque al Heap con <code>free(vector);</code>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: QUÉ PASA CUANDO NO SE ADMINISTRA BIEN LA MEMORIA -->
+      <section>
+        <h2><span class="section-num">24</span> ¿Qué Pasa si Administramos Mal la Memoria Dinámica?</h2>
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Con gran poder viene una gran responsabilidad</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Como en el Heap la memoria <b>no se maneja sola</b>, hay dos situaciones críticas que un buen programador siempre debe evitar:
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">1. Olvidarse de liberar (Fuga de Memoria)</h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1; margin: 0;">
+              Si pedís memoria en el Heap y nunca la liberás con <code>free()</code>, ese espacio queda <b>ocupado e inutilizable</b> mientras el programa siga abierto. En programas largos o juegos, esto va llenando la RAM hasta trabar la computadora.
+            </p>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">2. Perder la dirección del papelito</h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1; margin: 0;">
+              El puntero es el <b>único mapa</b> que sabe dónde está nuestro bloque en el Heap. Si borramos o cambiamos la dirección guardada en el puntero antes de liberar el bloque, nunca más podremos acceder a esos datos ni liberarlos.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: EJEMPLO PROGRESIVO NIVEL 1 -->
+      <section>
+        <h2><span class="section-num">25</span> Ejemplo Nivel 1: Ver el Valor y la Dirección de una Variable</h2>
+        <p style="font-size: 0.86rem; color: #cbd5e1;">
+          Comprobemos con un programa real que toda variable tiene tanto un <b>valor</b> (<code>edad</code>) como una <b>dirección de memoria en la RAM</b> (<code>&amp;edad</code>), que se puede mostrar con el formato <code>%p</code>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">nivel1_direcciones.c</span>
+            <span class="code-badge">Nivel 1 • Básico</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Valor guardado en edad: %d\n"</span>, edad);
+    <span class="c-fn">printf</span>(<span class="c-str">"Direccion de memoria de edad (&amp;edad): %p\n"</span>, &amp;edad);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <span>Consola / Salida de ejecución</span>
+            <span>bash</span>
+          </div>
+          <div class="terminal-body">Valor guardado en edad: 16
+Direccion de memoria de edad (&amp;edad): 0x7ffd42a1b8fc</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: EJEMPLO PROGRESIVO NIVEL 2 -->
+      <section>
+        <h2><span class="section-num">26</span> Ejemplo Nivel 2: Conectar un Puntero a una Variable</h2>
+        <p style="font-size: 0.86rem; color: #cbd5e1;">
+          Veamos cómo un puntero <code>int *p;</code> guarda la dirección de <code>numero</code> y cómo podemos leer o cambiar el valor de <code>numero</code> siguiendo la flecha con <code>*p</code>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">nivel2_puntero_basico.c</span>
+            <span class="code-badge">Nivel 2 • Punteros</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numero = <span class="c-num">10</span>;
+    <span class="c-kw">int</span> *p;          <span class="c-cmt">// Declaramos un puntero a entero</span>
+
+    p = &amp;numero;     <span class="c-cmt">// Guardamos en 'p' la direccion de 'numero'</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Valor leido a traves del puntero (*p): %d\n"</span>, *p);
+
+    *p = <span class="c-num">50</span>;         <span class="c-cmt">// Seguimos la flecha y cambiamos el valor a 50</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Nuevo valor de la variable numero: %d\n"</span>, numero);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-body">Valor leido a traves del puntero (*p): 10
+Nuevo valor de la variable numero: 50</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: EJEMPLO PROGRESIVO NIVEL 3 -->
+      <section>
+        <h2><span class="section-num">27</span> Ejemplo Nivel 3: Puntero Inicializado en <code>NULL</code></h2>
+        <p style="font-size: 0.86rem; color: #cbd5e1;">
+          Antes de usar un puntero, podemos consultar con un simple <code>if</code> si está vacío (<code>NULL</code>) o si ya apunta a una dirección válida de memoria:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">nivel3_puntero_null.c</span>
+            <span class="code-badge">Nivel 3 • Seguridad</span>
           </div>
           <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 <span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
 
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-{
-    <span class="c-cmt">// Siempre inicializar los punteros a NULL (dirección 0 segura):</span>
-    <span class="c-kw">int</span> *ptr = <span class="c-kw">NULL</span>;
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> *vector = <span class="c-kw">NULL</span>; <span class="c-cmt">// Todavia no apunta a ningun bloque de memoria</span>
 
-    <span class="c-kw">if</span> (ptr == <span class="c-kw">NULL</span>)
-    {
-        <span class="c-fn">printf</span>(<span class="c-str">"El puntero está vacío, no apunta a ningún lado todavía.\n"</span>);
+    <span class="c-kw">if</span> (vector == <span class="c-kw">NULL</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"El puntero vector esta en NULL: aun no reservamos memoria.\n"</span>);
     }
 
     <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
         </div>
+
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            📌 <b>Nota:</b> La constante <code>NULL</code> viene incluida tanto en <code>&lt;stdio.h&gt;</code> como en <code>&lt;stdlib.h&gt;</code>.
+          </p>
+        </div>
       </section>
 
-      <!-- SLIDE 7: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <!-- SLIDE 29: EJEMPLO PROGRESIVO NIVEL 4 (VISTA PREVIA INTEGRAL DEL APUNTE) -->
       <section>
-        <h2><span class="section-num">06</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">28</span> Ejemplo Nivel 4: Primer Vistazo a la Memoria Dinámica en Acción</h2>
+        <p style="font-size: 0.85rem; color: #cbd5e1;">
+          Mirá cómo se unen todas las piezas que aprendimos hoy para resolver el problema del apunte (lo estudiaremos a fondo línea por línea en la Unidad 08):
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">nivel4_adelanto_dinamico.c</span>
+            <span class="code-badge">Nivel 4 • Integración</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> cantidad;
+    <span class="c-fn">printf</span>(<span class="c-str">"Cuantos alumnos hay?: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;cantidad);
+
+    <span class="c-cmt">// 1. Declaramos el puntero y pedimos 'cantidad' lugares en el Heap:</span>
+    <span class="c-kw">int</span> *numeros;
+    numeros = <span class="c-fn">malloc</span>(cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+    <span class="c-cmt">// 2. Lo usamos con corchetes igual que un vector comun:</span>
+    numeros[<span class="c-num">0</span>] = <span class="c-num">10</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Primer dato guardado en el Heap: %d\n"</span>, numeros[<span class="c-num">0</span>]);
+
+    <span class="c-cmt">// 3. Liberamos la memoria al terminar:</span>
+    <span class="c-fn">free</span>(numeros);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: ERRORES CONCEPTUALES FRECUENTES -->
+      <section>
+        <h2><span class="section-num">29</span> Los 3 Errores Conceptuales más Frecuentes</h2>
+        <div class="grid-3">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 1: Creer que <code>int *v;</code> ya creó un vector</div>
+            <p style="font-size: 0.8rem; color: #cbd5e1;">
+              Escribir <code>int *vector;</code> <b>solo crea el papelito vacío</b> (el puntero), pero todavía no reservó ningún casillero en el Heap. Si hacés <code>vector[0] = 5;</code> sin pedir memoria antes, el programa falla.
+            </p>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 2: Confundir <code>p</code> con <code>*p</code></div>
+            <p style="font-size: 0.8rem; color: #cbd5e1;">
+              Recordá siempre: <code>p</code> (sin asterisco) es la <b>dirección de la puerta</b>. En cambio, <code>*p</code> (con asterisco) o <code>p[0]</code> es <b>el dato guardado adentro</b> de esa puerta.
+            </p>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 3: Guardar un número suelto en un puntero</div>
+            <p style="font-size: 0.8rem; color: #cbd5e1;">
+              Hacer <code>int *p = 15;</code> está mal porque <code>15</code> no es una dirección de memoria válida. Un puntero solo debe recibir una dirección (con <code>&amp;</code>, con <code>malloc</code>) o <code>NULL</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: EJERCICIO DE RAZONAMIENTO 1 -->
+      <section>
+        <h2><span class="section-num">30</span> Ejercicio de Razonamiento 1: Seguir la Flecha</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Analizá con atención las siguientes líneas de código y predecí <b>qué número se mostrará por pantalla</b> antes de abrir la solución:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">desafio_1.c</span>
+            <span class="code-badge">Razonamiento en RAM</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> a = <span class="c-num">20</span>;
+<span class="c-kw">int</span> *ptr = &amp;a;
+*ptr = <span class="c-num">35</span>;
+a = a + <span class="c-num">5</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"Resultado: %d\n"</span>, *ptr);</div>
+        </div>
+
+        <details class="code-solution">
+          <summary>🔍 Ver respuesta paso a paso</summary>
+          <div class="solution-content">
+            <ol style="margin-left: 18px; line-height: 1.6;">
+              <li><code>int a = 20;</code> crea la variable <code>a</code> con valor <code>20</code>.</li>
+              <li><code>int *ptr = &amp;a;</code> hace que el puntero <code>ptr</code> apunte a la dirección de <code>a</code>.</li>
+              <li><code>*ptr = 35;</code> sigue la flecha hasta <code>a</code> y cambia su valor de <code>20</code> a <code>35</code>.</li>
+              <li><code>a = a + 5;</code> le suma 5 a <code>a</code>, por lo que ahora <code>a</code> vale <code>40</code>.</li>
+              <li>Como <code>ptr</code> sigue apuntando a <code>a</code>, al imprimir <code>*ptr</code> se muestra: <b><code>Resultado: 40</code></b>.</li>
+            </ol>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 32: EJERCICIO DE RAZONAMIENTO 2 -->
+      <section>
+        <h2><span class="section-num">31</span> Ejercicio de Razonamiento 2: ¿Estática o Dinámica?</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Para cada una de estas tres situaciones, decidí si conviene usar un <b>vector estático</b> o <b>memoria dinámica</b> y por qué:
+        </p>
+
+        <div class="grid-3" style="margin-top: 10px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Situación A</h4>
+            <p style="font-size: 0.82rem; margin: 0; color: #cbd5e1;">
+              Guardar las recaudaciones de los <b>12 meses del año</b> de un comercio.
+            </p>
+          </div>
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Situación B</h4>
+            <p style="font-size: 0.82rem; margin: 0; color: #cbd5e1;">
+              Cargar los precios de los productos de un carrito de compras cuya cantidad <b>ingresa el cliente</b>.
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Situación C</h4>
+            <p style="font-size: 0.82rem; margin: 0; color: #cbd5e1;">
+              Un sistema donde un club agrega socios nuevos todos los días sin límite fijo.
+            </p>
+          </div>
+        </div>
+
+        <details class="code-solution">
+          <summary>🔍 Ver solución justificada</summary>
+          <div class="solution-content">
+            <ul style="margin-left: 18px; line-height: 1.6;">
+              <li><b>Situación A ➔ Memoria Estática (<code>float meses[12];</code>):</b> El año siempre tiene exactamente 12 meses. El tamaño se conoce antes de ejecutar y nunca cambia.</li>
+              <li><b>Situación B ➔ Memoria Dinámica (<code>float *precios;</code>):</b> No sabemos si el cliente comprará 2 productos o 150 hasta que usa el programa.</li>
+              <li><b>Situación C ➔ Memoria Dinámica (<code>Socio *socios;</code>):</b> La cantidad crece durante el uso del programa y necesitamos pedir y redimensionar la memoria en el Heap.</li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 33: EJERCICIO DE RAZONAMIENTO 3 -->
+      <section>
+        <h2><span class="section-num">32</span> Ejercicio de Razonamiento 3: Detectá el Error</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Un estudiante quiso crear su primer vector con punteros y escribió este código, pero al ejecutarlo el programa se cierra con un error grave. <b>¿Por qué falla?</b>
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">codigo_con_error.c</span>
+            <span class="code-badge">¿Qué falta acá?</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> *numeros;
+    numeros[<span class="c-num">0</span>] = <span class="c-num">100</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, numeros[<span class="c-num">0</span>]);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <details class="code-solution">
+          <summary>🔍 Ver diagnóstico del error</summary>
+          <div class="solution-content">
+            <p style="margin: 0;">
+              <b>Diagnóstico:</b> La línea <code>int *numeros;</code> únicamente declara el puntero (el papelito), pero <b>nunca se reservó memoria en el Heap</b> (falta llamar a <code>malloc</code>). Como <code>numeros</code> no fue inicializado, contiene una dirección basura aleatoria, y al intentar escribir <code>numeros[0] = 100;</code> el programa intenta pisar una zona prohibida de la RAM. En la <b>Unidad 08</b> aprenderemos a reservar ese espacio con <code>malloc()</code>.
+            </p>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 34: RESUMEN FINAL Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">33</span> Resumen de la Unidad 07 y Próximo Paso</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Puntos Clave</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>Stack:</b> Memoria rápida, automática, para variables locales.</li>
-              <li><b>Heap:</b> Depósito de memoria libre para asignación dinámica.</li>
-              <li><b>Puntero:</b> Variable que guarda la dirección de otra celda.</li>
-              <li><b>&amp; (Ampersand):</b> Averigua la dirección de una variable.</li>
-              <li><b>* (Asterisco):</b> Accede al contenido de la celda apuntada.</li>
-              <li><b>NULL:</b> Dirección nula segura para evitar punteros salvajes.</li>
+            <h4 style="color: #818cf8;">Conceptos Clave del Apunte</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.58; margin-left: 18px;">
+              <li><b>Memoria Estática (<code>int numeros[10];</code>):</b> Tamaño fijo al programar, vive en el Stack, se gestiona sola.</li>
+              <li><b>Memoria Dinámica (<code>int *numeros;</code>):</b> Tamaño decidido al ejecutar (como pedir las sillas cuando llegan los invitados a la fiesta).</li>
+              <li><b>Heap:</b> La zona de la RAM donde se guarda la memoria dinámica.</li>
+              <li><b>Puntero (<code>*</code>):</b> Variable que guarda la dirección de memoria donde empieza nuestro bloque en el Heap.</li>
+              <li><b>Las 4 funciones de <code>&lt;stdlib.h&gt;</code>:</b> <code>malloc()</code>, <code>free()</code>, <code>calloc()</code> y <code>realloc()</code>.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar con el ejemplo de los alumnos o de la fiesta por qué un vector fijo no siempre sirve?</div>
             <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué diferencia hay entre el Stack y el Heap?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Qué se almacena adentro de una variable declarada con <code>*</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Para qué sirve el operador <code>&amp;</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué nunca debemos dejar un puntero sin inicializar a <code>NULL</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo qué guarda adentro una variable declarada como <code>int *vector;</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Conozco para qué sirven cada una de las 4 funciones de <code>&lt;stdlib.h&gt;</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
+        <div style="text-align: center; margin-top: 16px;">
           <a href="06-estructuras-struct.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
             ← Anterior: Estructuras (struct)
           </a>
           <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            Índice 2do Cuatrimestre
+            Índice 2do Bimestre
           </a>
           <a href="08-reserva-liberacion-malloc-free.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
             Siguiente: malloc(), free() y sizeof() →

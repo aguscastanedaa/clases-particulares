@@ -4,14 +4,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 1C - 04: Tipos de Datos Fundamentales | Clases Particulares</title>
+  <title>Programación 1C 1B - 04: Tipos de Datos en C | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
 
-  <!-- Reveal.js Styles -->
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
@@ -25,9 +27,9 @@
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 1er Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a
-        href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../index.html">← Índice 1er Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 1er Bimestre • Unidad 04</span>
   </div>
@@ -37,411 +39,1334 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-emerald">1er Cuatrimestre • Tipos de Datos • Unidad 4</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Tipos de Datos en C</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            Enteros, decimales, caracteres y booleanos: cómo representar el mundo real en la memoria digital
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-cyan">1er Cuatrimestre • 1er Bimestre • Unidad 04</span>
+          <h1 style="font-size: 2.65rem; margin-bottom: 12px;">Tipos de Datos en C</h1>
+          <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px;">
+            Qué clase de información puede guardar cada "cajita" en memoria: enteros, decimales, caracteres y valores lógicos
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">int (Enteros)</span>
-            <span class="badge badge-amber">float (Decimales)</span>
-            <span class="badge badge-purple">char (Letras y Símbolos)</span>
-            <span class="badge badge-emerald">bool (stdbool.h)</span>
+            <span class="badge badge-indigo">int (Números Enteros)</span>
+            <span class="badge badge-amber">float (Decimales con Punto)</span>
+            <span class="badge badge-purple">char (Un Único Carácter)</span>
+            <span class="badge badge-emerald">bool (true / false)</span>
+            <span class="badge badge-rose">Truncamiento y Memoria</span>
           </div>
 
-          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
-              para avanzar diapositiva por diapositiva.
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por los 34 temas y ejemplos de esta clase.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN CON LA UNIDAD ANTERIOR -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Conexión con Variables</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué C exige tipos de datos?</h4>
-            <p style="font-size: 0.88rem;">
-              En la memoria física de la computadora <b>todo son unos y ceros (bits)</b>. Para la RAM, la secuencia
-              <code>01000001</code> es idéntica si representa el número 65, la letra 'A' o una porción de color.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              C es un lenguaje de <b>tipado estático</b>: el compilador necesita saber con precisión <b>cuántos bytes de
-                memoria reservar</b> y <b>cómo interpretar esos bits</b> cuando el programa los use.
-            </p>
+            <h4 style="color: #818cf8;">Lo que ya sabemos (Unidades 01 a 03)</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Un programa en C arranca siempre en <code>int main()</code> y termina con <code>return 0;</code>.</li>
+              <li>Una <b>variable</b> es una "cajita" en la memoria donde guardamos un dato.</li>
+              <li>Toda cajita tiene una <b>etiqueta (nombre)</b> y un <b>tipo de dato</b>.</li>
+              <li>El signo <code>=</code> guarda el valor de la derecha adentro de la variable de la izquierda.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <h4 style="color: #34d399;">Lo que vamos a aprender hoy (Sección 4 del Apunte)</h4>
             <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Comprender los 4 tipos elementales: <b><code>int</code>, <code>float</code>, <code>char</code>,
-                  <code>bool</code></b>.</li>
-              <li>Entender por qué en C se usa el <b>punto decimal <code>.</code></b> y nunca la coma.</li>
-              <li>Aprender por qué los caracteres usan comillas simples <code>' '</code>.</li>
-              <li>Conocer la naturaleza de la <b>precisión finita</b> de <code>float</code>.</li>
-              <li>Usar <code>#include &lt;stdbool.h&gt;</code> para manejar <code>true</code> y <code>false</code>.</li>
-              <li>Diferenciar asignaciones válidas de errores de compilación.</li>
+              <li>Qué es exactamente un <b>tipo de dato</b> y por qué C nos obliga a elegirlo.</li>
+              <li>Cómo funciona <code>int</code> para números enteros negativos, cero y positivos.</li>
+              <li>Cómo funciona <code>float</code> para decimales y la regla de oro del <b>punto <code>.</code></b> en lugar de la coma <code>,</code>.</li>
+              <li>Cómo funciona <code>char</code> para guardar un único símbolo entre comillas simples <code>' '</code>.</li>
+              <li>Cómo funciona <code>bool</code> (<code>true</code> / <code>false</code>) con <code>&lt;stdbool.h&gt;</code>.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🎯 <b>Meta de la clase:</b> Que frente a cualquier dato del mundo real (una edad, un precio, una inicial o si un alumno aprobó) sepas elegir al instante el tipo de dato exacto en C sin perder información.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: EL PROBLEMA QUE RESUELVEN LOS TIPOS DE DATOS -->
+      <section>
+        <h2><span class="section-num">02</span> El Problema: En la Memoria Todo son Ceros y Unos</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Adentro de la memoria RAM de la computadora no existen letras ni comas flotantes: <b>solo existen circuitos eléctricos encendidos (<code>1</code>) y apagados (<code>0</code>)</b>.
+        </p>
+
+        <div class="grid-2" style="align-items: center; margin-top: 10px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">El mismo código binario, distintos significados</h4>
+            <p style="font-size: 0.86rem; margin-bottom: 8px;">
+              Imaginá que en una celda de la memoria RAM está guardada la secuencia de bits <code>01000001</code>:
+            </p>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li>Si la leemos como <b>número entero</b>, representa el número <b><code>65</code></b>.</li>
+              <li>Si la leemos como <b>carácter de texto</b>, representa la letra mayúscula <b><code>'A'</code></b>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿Cómo sabe C cómo interpretarlo?</h4>
+            <p style="font-size: 0.86rem; margin: 0;">
+              La computadora <b>no adivina ni supone</b>. Al declarar el <b>tipo de dato</b> delante del nombre de la variable, le damos dos órdenes vitales al compilador:
+            </p>
+            <ol style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; margin-top: 6px;">
+              <li><b>Cuántos bytes de espacio</b> reservar en la memoria RAM.</li>
+              <li><b>Con qué reglas codificar y leer</b> los datos guardados ahí adentro.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: DEFINICIÓN DEL APUNTE Y ANALOGÍA DE LAS CAJAS -->
+      <section>
+        <h2><span class="section-num">03</span> Definición: ¿Qué son los Tipos de Datos?</h2>
+        <div class="box box-emerald" style="margin-bottom: 14px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">📖 Definición del Apunte (Sección 4)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <b>"Los tipos de datos determinan qué clase de información puede almacenar una variable, o sea, qué cosa puedo almacenar en cada «caja»."</b>
+          </p>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 10px;">
+          Pensalo como los envases de tu cocina: no usás el mismo recipiente para guardar líquidos, huevos o una sola pastilla:
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">📦 Cada "caja" tiene su formato</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Caja para Enteros (<code>int</code>):</b> Solo acepta cantidades exactas sin coma (ej. cantidad de sillas, edad).</li>
+              <li><b>Caja para Decimales (<code>float</code>):</b> Acepta números con parte fraccionaria (ej. estatura en metros, peso).</li>
+            </ul>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">🏷️ Regla estricta en C</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Caja para un Carácter (<code>char</code>):</b> Tiene lugar para una sola letra o símbolo individual.</li>
+              <li><b>Caja Lógica (<code>bool</code>):</b> Funciona como una llave de luz que solo admite <i>encendido</i> (<code>true</code>) o <i>apagado</i> (<code>false</code>).</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: LOS CUATRO TIPOS FUNDAMENTALES -->
+      <!-- SLIDE 5: PANORAMA GENERAL DE LOS 4 TIPOS DEL APUNTE -->
       <section>
-        <h2><span class="section-num">02</span> Los 4 Ejemplos Obligatorios</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">El póquer fundamental de datos en C moderno:</p>
-
-        <div class="code-window">
-          <div class="code-header">
-            <div class="code-dots">
-              <span class="code-dot dot-red"></span>
-              <span class="code-dot dot-yellow"></span>
-              <span class="code-dot dot-green"></span>
-            </div>
-            <span class="code-title">tipos_fundamentales.c</span>
-            <span class="code-badge">C99 con stdbool.h</span>
-          </div>
-          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
-
-            <span class="c-kw">int</span> edad = <span class="c-num">16</span>;
-            <span class="c-kw">float</span> altura = <span class="c-num">1.75f</span>;
-            <span class="c-kw">char</span> letra = <span class="c-char">'A'</span>;
-            <span class="c-kw">bool</span> aprobado = <span class="c-kw">true</span>;
-          </div>
-        </div>
-
-        <div class="grid-4" style="margin-top: 12px;">
-          <div class="box box-cyan" style="padding: 10px 12px;">
-            <h4 style="color: #38bdf8; font-size: 0.95rem; margin-bottom: 2px;">int</h4>
-            <p style="font-size: 0.8rem; margin: 0;">Enteros sin decimales (edad, año, vidas).</p>
-          </div>
-          <div class="box box-amber" style="padding: 10px 12px;">
-            <h4 style="color: #fbbf24; font-size: 0.95rem; margin-bottom: 2px;">float</h4>
-            <p style="font-size: 0.8rem; margin: 0;">Reales con coma (altura, precio, peso).</p>
-          </div>
-          <div class="box box-purple" style="padding: 10px 12px;">
-            <h4 style="color: #c084fc; font-size: 0.95rem; margin-bottom: 2px;">char</h4>
-            <p style="font-size: 0.8rem; margin: 0;">Un solo símbolo entre <code>' '</code> ('A', '#', '9').</p>
-          </div>
-          <div class="box box-emerald" style="padding: 10px 12px;">
-            <h4 style="color: #34d399; font-size: 0.95rem; margin-bottom: 2px;">bool</h4>
-            <p style="font-size: 0.8rem; margin: 0;">Verdad lógica (<code>true</code> o <code>false</code>).</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 4: TABLA COMPARATIVA DE TIPOS -->
-      <section>
-        <h2><span class="section-num">03</span> Tabla Comparativa en Memoria</h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem;">¿Cuánto ocupa y qué almacena cada tipo en una
-          arquitectura típica actual?</p>
+        <h2><span class="section-num">04</span> Los 4 Tipos de Datos Fundamentales del Curso</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          En nuestro recorrido por el lenguaje C trabajaremos con estos <b>4 tipos de datos esenciales</b>:
+        </p>
 
         <table class="trace-table">
           <thead>
             <tr>
+              <th>Palabra Clave en C</th>
+              <th>Nombre Completo</th>
+              <th>¿Qué almacena en la caja?</th>
+              <th>Ejemplo del Apunte</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><span class="c-kw">int</span></code></td>
+              <td><i>Integer</i> (Entero)</td>
+              <td>Números enteros (negativos, el cero y positivos)</td>
+              <td><code>int edad = 16;</code></td>
+            </tr>
+            <tr>
+              <td><code><span class="c-kw">float</span></code></td>
+              <td><i>Floating point</i> (Punto flotante)</td>
+              <td>Números con decimales escritos con punto (<code>.</code>)</td>
+              <td><code>float altura = 1.75;</code></td>
+            </tr>
+            <tr>
+              <td><code><span class="c-kw">char</span></code></td>
+              <td><i>Character</i> (Carácter)</td>
+              <td>Un único carácter entre comillas simples (<code>' '</code>)</td>
+              <td><code>char letra = 'A';</code></td>
+            </tr>
+            <tr>
+              <td><code><span class="c-kw">bool</span></code></td>
+              <td><i>Boolean</i> (Booleano / Lógico)</td>
+              <td>Verdadero (<code>true</code>) o Falso (<code>false</code>)</td>
+              <td><code>bool aprobado = true;</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            ⚠️ <b>Importante:</b> En C las palabras clave de los tipos se escriben <b>siempre en minúscula</b>: <code>int</code>, <code>float</code>, <code>char</code> y <code>bool</code>. Si escribís <code>Int</code> o <code>Float</code> con mayúscula, el compilador dará error.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: TIPO 1 - INT (ENTEROS) -->
+      <section>
+        <h2><span class="section-num">05</span> 1. Tipo <code>int</code>: Números Enteros</h2>
+        <div class="box box-indigo" style="margin-bottom: 12px;">
+          <p style="margin: 0; font-size: 0.9rem;">
+            📖 <b>Apunte:</b> <b>"Int → Almacena números enteros. (<code>-10, -3, 0, 2, 7</code>, etc…)"</b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">ejemplo_int.c</span>
+              <span class="code-badge">Del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+<span class="c-kw">int</span> temperaturaBajoCero = <span class="c-num">-3</span>;
+<span class="c-kw">int</span> goles = <span class="c-num">0</span>;
+<span class="c-kw">int</span> puntos = <span class="c-num">250</span>;</div>
+          </div>
+
+          <div class="memory-diagram" style="margin: 0; flex-direction: column; gap: 10px;">
+            <div class="memory-box">
+              <div class="memory-address">4 bytes en RAM</div>
+              <div class="memory-label">edad <span class="memory-type">int</span></div>
+              <div class="memory-value">16</div>
+            </div>
+            <div class="memory-box">
+              <div class="memory-address">4 bytes en RAM</div>
+              <div class="memory-label">temperaturaBajoCero <span class="memory-type">int</span></div>
+              <div class="memory-value">-3</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">¿Cuándo usamos <code>int</code>?</h4>
+          <p style="font-size: 0.85rem; margin: 0;">
+            Siempre que contemos cosas que <b>no se pueden partir en pedazos decimales</b>: edades cumplidas, cantidad de alumnos, vidas de un jugador, años, pisos de un edificio (incluyendo subsuelos como <code>-1</code> o <code>-2</code>) o saldos enteros.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: DESGLOSE SINTÁCTICO Y DETALLES DE INT -->
+      <section>
+        <h2><span class="section-num">06</span> Desglose Pieza por Pieza de un <code>int</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Analicemos cada símbolo de la instrucción del apunte <code>int edad = 16;</code> y qué reglas debemos respetar al escribir números enteros:
+        </p>
+
+        <div class="code-window">
+          <div class="code-body"><span class="c-kw">int</span>   edad   =   <span class="c-num">16</span>  ;
+<span class="c-cmt">// 1     2     3    4  5</span></div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Las 5 partes de la línea</h4>
+            <ol style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li><b><code>int</code>:</b> Reserva una caja para un número entero (típicamente 4 bytes, capaz de guardar desde $-2.147.483.648$ hasta $2.147.483.647$).</li>
+              <li><b><code>edad</code>:</b> Etiqueta o identificador de la caja.</li>
+              <li><b><code>=</code>:</b> Operador de asignación (guardar adentro).</li>
+              <li><b><code>16</code>:</b> Valor literal entero.</li>
+              <li><b><code>;</code>:</b> Fin de la instrucción.</li>
+            </ol>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #fb7185;">🚫 Prohibido usar puntos de miles</h4>
+            <p style="font-size: 0.84rem; margin-bottom: 6px;">
+              Si querés guardar el número <b>diez mil</b> en un <code>int</code>, debés escribir los dígitos seguidos sin puntos ni espacios:
+            </p>
+            <p style="font-size: 0.84rem; margin: 0;">
+              ❌ <code>int sueldo = 10.000;</code> (C cree que es $10$ con decimales)<br>
+              ✅ <code>int sueldo = 10000;</code> (¡Correcto!)
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: TIPO 2 - FLOAT (DECIMALES) -->
+      <section>
+        <h2><span class="section-num">07</span> 2. Tipo <code>float</code>: Números con Decimales</h2>
+        <div class="box box-amber" style="margin-bottom: 12px;">
+          <p style="margin: 0; font-size: 0.9rem;">
+            📖 <b>Apunte:</b> <b>"Float → Almacena números con decimales. (<code>-3.5, 2.7, 4.8</code>, etc..)"</b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">ejemplo_float.c</span>
+              <span class="code-badge">Del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;
+<span class="c-kw">float</span> temperatura = <span class="c-num">-3.5</span>;
+<span class="c-kw">float</span> promedio = <span class="c-num">8.25</span>;
+<span class="c-kw">float</span> precio = <span class="c-num">149.99</span>;</div>
+          </div>
+
+          <div class="memory-diagram" style="margin: 0; flex-direction: column; gap: 10px;">
+            <div class="memory-box">
+              <div class="memory-address">4 bytes (IEEE 754)</div>
+              <div class="memory-label">altura <span class="memory-type">float</span></div>
+              <div class="memory-value" style="color: var(--accent-amber);">1.75</div>
+            </div>
+            <div class="memory-box">
+              <div class="memory-address">4 bytes (IEEE 754)</div>
+              <div class="memory-label">temperatura <span class="memory-type">float</span></div>
+              <div class="memory-value" style="color: var(--accent-amber);">-3.5</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Por qué se llama <code>float</code>?</h4>
+          <p style="font-size: 0.85rem; margin: 0;">
+            Viene del inglés <i>floating point</i> ("punto flotante"), porque el punto decimal puede "flotar" a cualquier posición para representar tanto números pequeños como <code>0.005</code> como números con varios dígitos enteros como <code>1250.75</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: REGLA CRÍTICA DEL APUNTE: PUNTO (.) EN VEZ DE COMA (,) -->
+      <section>
+        <h2><span class="section-num">08</span> Regla de Oro del Apunte: Punto (<code>.</code>) y NO Coma (<code>,</code>)</h2>
+        <div class="box box-rose" style="margin-bottom: 12px;">
+          <h4 style="color: #fb7185; margin-bottom: 4px;">🚨 Advertencia textual del Apunte</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <b>"NOTACIÓN: en programación los números decimales no se escriben con coma (<code>,</code>) como en matemática, sino en su lugar con un punto (<code>.</code>).<br>
+            <code>1.5</code> NO es lo mismo que <code>1,5</code>"</b>
+          </p>
+        </div>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Con coma (Error en C)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// En el cuaderno de matemática escribimos 1,75</span>
+<span class="c-cmt">// Pero en C la coma separa elementos:</span>
+<span class="c-kw">float</span> altura = <span class="c-num">1</span>,<span class="c-num">75</span>; <span class="c-cmt">// ❌ ¡ERROR DE SINTAXIS!</span></div>
+            </div>
+            <p style="font-size: 0.81rem; color: #fecaca; margin: 6px 0 0;">
+              Para el compilador de C, la coma <code>,</code> es un <b>separador de lista</b>. Cree que estás declarando <code>altura = 1</code> y luego otro elemento suelto llamado <code>75</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Con punto decimal (Estándar C)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// En C SIEMPRE usamos el punto (.)</span>
+<span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;
+<span class="c-kw">float</span> mitad = <span class="c-num">1.5</span>;</div>
+            </div>
+            <p style="font-size: 0.81rem; color: #a7f3d0; margin: 6px 0 0;">
+              El punto <code>.</code> une la parte entera (<code>1</code>) con la parte fraccionaria (<code>75</code>) formando un único número decimal válido.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: QUÉ PASA SI GUARDAMOS DECIMALES EN UN INT (TRUNCAMIENTO) -->
+      <section>
+        <h2><span class="section-num">09</span> ¿Qué Pasa si Guardamos un Decimal en un <code>int</code>?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Como dijimos en la Unidad 03, no deberíamos guardar una "altura" en una caja para enteros. Pero si por descuido escribimos <code>int nota = 8.9;</code>, ¿qué hace la computadora?
+        </p>
+
+        <div class="grid-2" style="align-items: center; margin-top: 10px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">truncamiento.c</span>
+              <span class="code-badge">¡Cuidado!</span>
+            </div>
+            <div class="code-body"><span class="c-cmt">// Intentamos meter 8.9 en una caja int:</span>
+<span class="c-kw">int</span> nota = <span class="c-num">8.9</span>;
+
+<span class="c-cmt">// Adentro de 'nota' se guarda 8 (NO 9)</span></div>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">✂️ Ocurre un "Truncamiento"</h4>
+            <p style="font-size: 0.85rem; margin-bottom: 6px;">
+              La computadora <b>NO redondea</b> a <code>9</code>. Simplemente agarra una tijera y <b>corta (descarta) todo lo que está después del punto decimal</b>:
+            </p>
+            <ul style="font-size: 0.83rem; line-height: 1.5; margin-left: 18px;">
+              <li><code>1.75</code> guardado en un <code>int</code> se convierte en <b><code>1</code></b>.</li>
+              <li><code>8.99</code> guardado en un <code>int</code> se convierte en <b><code>8</code></b>.</li>
+              <li><code>-3.5</code> guardado en un <code>int</code> se convierte en <b><code>-3</code></b>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            💡 <b>Moraleja:</b> Si un dato puede llegar a tener parte decimal (como un promedio o una estatura), su caja debe declararse desde el principio como <b><code>float</code></b>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: TIPO 3 - CHAR (CARÁCTER) -->
+      <section>
+        <h2><span class="section-num">10</span> 3. Tipo <code>char</code>: Un Único Carácter</h2>
+        <div class="box box-indigo" style="margin-bottom: 12px;">
+          <p style="margin: 0; font-size: 0.9rem;">
+            📖 <b>Apunte:</b> <b>"Char → Almacena un único carácter. <code>char letra = 'A';</code>"</b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">ejemplo_char.c</span>
+              <span class="code-badge">Del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-kw">char</span> letra = <span class="c-str">'A'</span>;
+<span class="c-kw">char</span> division = <span class="c-str">'B'</span>;
+<span class="c-kw">char</span> simbolo = <span class="c-str">'$'</span>;
+<span class="c-kw">char</span> digitoComoTexto = <span class="c-str">'7'</span>;</div>
+          </div>
+
+          <div class="memory-diagram" style="margin: 0; flex-direction: column; gap: 10px;">
+            <div class="memory-box">
+              <div class="memory-address">1 byte en RAM</div>
+              <div class="memory-label">letra <span class="memory-type">char</span></div>
+              <div class="memory-value" style="color: var(--accent-purple);">'A'</div>
+            </div>
+            <div class="memory-box">
+              <div class="memory-address">1 byte en RAM</div>
+              <div class="memory-label">simbolo <span class="memory-type">char</span></div>
+              <div class="memory-value" style="color: var(--accent-purple);">'$'</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">¿Qué cosas cuentan como "un carácter"?</h4>
+          <p style="font-size: 0.85rem; margin: 0;">
+            Cualquier tecla individual del teclado: una letra mayúscula (<code>'A'</code>), una minúscula (<code>'a'</code>), un signo de puntuación (<code>'?'</code>, <code>'@'</code>, <code>'+'</code>), un dígito suelto (<code>'9'</code>) o incluso un espacio en blanco (<code>' '</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: REGLAS DE ORO DE CHAR (COMILLAS SIMPLES Y TABLA ASCII) -->
+      <section>
+        <h2><span class="section-num">11</span> Reglas de <code>char</code>: Comillas Simples <code>' '</code> y Código ASCII</h2>
+        <div class="grid-2">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">1. Siempre entre comillas simples <code>' '</code></h4>
+            <p style="font-size: 0.84rem; margin-bottom: 8px;">
+              En C, un carácter individual se encierra obligatoriamente entre <b>comillas simples</b> (apóstrofos):
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">char</span> letra = <span class="c-str">'A'</span>; <span class="c-cmt">// ✅ Comillas simples</span></div>
+            </div>
+            <p style="font-size: 0.81rem; color: var(--text-muted); margin-top: 8px;">
+              Si no ponés comillas (<code>char letra = A;</code>), C buscará una variable llamada <code>A</code>. Y las comillas dobles <code>"A"</code> se reservan para textos largos (<i>strings</i>).
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">2. ¿Cómo se guarda <code>'A'</code> en memoria? (ASCII)</h4>
+            <p style="font-size: 0.84rem; margin-bottom: 6px;">
+              Internamente, la computadora usa una tabla universal llamada <b>ASCII</b> donde cada símbolo tiene asignado un número entero de 1 byte:
+            </p>
+            <ul style="font-size: 0.82rem; line-height: 1.5; margin-left: 18px;">
+              <li><code>'A'</code> se guarda como el número <b><code>65</code></b> (y <code>'B'</code> es <code>66</code>).</li>
+              <li><code>'a'</code> minúscula se guarda como el número <b><code>97</code></b>.</li>
+              <li>Para C, <b><code>'A'</code> y <code>'a'</code> son caracteres totalmente distintos</b>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: TIPO 4 - BOOL (BOOLEANOS) -->
+      <section>
+        <h2><span class="section-num">12</span> 4. Tipo <code>bool</code>: Verdadero o Falso</h2>
+        <div class="box box-emerald" style="margin-bottom: 12px;">
+          <p style="margin: 0; font-size: 0.9rem;">
+            📖 <b>Apunte (Secciones 4 y 11):</b> <b>"Bool → Almacena verdadero o falso. (True o False). <code>bool aprobado = true;</code>"</b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">ejemplo_bool.c</span>
+              <span class="code-badge">Con stdbool.h</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">bool</span> aprobado = <span class="c-kw">true</span>;
+    <span class="c-kw">bool</span> tieneDeuda = <span class="c-kw">false</span>;
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="box box-indigo">
+              <h4 style="color: #818cf8;">Recordatorio de la Unidad 02</h4>
+              <p style="font-size: 0.84rem; margin-bottom: 6px;">
+                Tal como vimos en la Sección 2 del apunte, para poder usar las palabras <code>bool</code>, <code>true</code> y <code>false</code> en C debemos incluir arriba de todo la biblioteca:
+              </p>
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span></div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; margin-bottom: 0;">
+                Internamente en la memoria RAM, <code>true</code> se guarda como un <b><code>1</code></b> y <code>false</code> se guarda como un <b><code>0</code></b>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: CÓMO VIVEN LOS 4 TIPOS EN LA MEMORIA RAM -->
+      <section>
+        <h2><span class="section-num">13</span> Modelo Mental: Los 4 Tipos en la Memoria RAM</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Cuando declaramos las 4 variables del apunte dentro de un programa, así se organizan sus "cajitas" en la memoria:
+        </p>
+
+        <div class="code-window" style="margin-bottom: 14px;">
+          <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+<span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;
+<span class="c-kw">char</span> letra = <span class="c-str">'A'</span>;
+<span class="c-kw">bool</span> aprobado = <span class="c-kw">true</span>;</div>
+        </div>
+
+        <div class="memory-diagram" style="margin: 10px 0;">
+          <div class="memory-box">
+            <div class="memory-address">4 bytes • Entero</div>
+            <div class="memory-label">edad <span class="memory-type">int</span></div>
+            <div class="memory-value">16</div>
+          </div>
+          <div class="memory-box">
+            <div class="memory-address">4 bytes • Decimal</div>
+            <div class="memory-label">altura <span class="memory-type">float</span></div>
+            <div class="memory-value" style="color: var(--accent-amber);">1.75</div>
+          </div>
+          <div class="memory-box">
+            <div class="memory-address">1 byte • ASCII 65</div>
+            <div class="memory-label">letra <span class="memory-type">char</span></div>
+            <div class="memory-value" style="color: var(--accent-purple);">'A'</div>
+          </div>
+          <div class="memory-box">
+            <div class="memory-address">1 byte • Lógico (1)</div>
+            <div class="memory-label">aprobado <span class="memory-type">bool</span></div>
+            <div class="memory-value" style="color: var(--accent-emerald);">true</div>
+          </div>
+        </div>
+
+        <div class="box box-cyan">
+          <p style="margin: 0; font-size: 0.84rem;">
+            Observá cómo cada caja guarda un formato distinto: sin comillas ni puntos para <code>int</code>, con punto <code>.</code> para <code>float</code>, con comillas simples <code>' '</code> para <code>char</code> y palabra clave <code>true</code>/<code>false</code> para <code>bool</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: TABLA COMPARATIVA DE SINTAXIS Y MEMORIA -->
+      <section>
+        <h2><span class="section-num">14</span> Resumen Técnico de Tamaño, Rango y Escritura</h2>
+        <table class="trace-table">
+          <thead>
+            <tr>
               <th>Tipo</th>
-              <th>Bytes en RAM</th>
-              <th>Qué puede guardar</th>
-              <th>Rango aproximado</th>
-              <th>Ejemplo Correcto</th>
+              <th>Tamaño típico</th>
+              <th>¿Cómo se escribe el valor en C?</th>
+              <th>Ejemplos Válidos</th>
+              <th>Ejemplos Inválidos (Error)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><code>int</code></td>
               <td>4 bytes (32 bits)</td>
-              <td>Números enteros positivos y negativos</td>
-              <td>-2.147.483.648 a +2.147.483.647</td>
-              <td><code>int goles = 3;</code></td>
+              <td>Solo dígitos (y signo <code>-</code> opcional)</td>
+              <td><code>-10</code>, <code>0</code>, <code>16</code>, <code>2500</code></td>
+              <td><code>2.500</code> (punto de mil)</td>
             </tr>
             <tr>
               <td><code>float</code></td>
               <td>4 bytes (32 bits)</td>
-              <td>Números decimales (coma flotante)</td>
-              <td>±3.4 × 10<sup>38</sup> (~7 decimales)</td>
-              <td><code>float pi = 3.14159f;</code></td>
+              <td>Dígitos separados por <b>punto <code>.</code></b></td>
+              <td><code>-3.5</code>, <code>1.75</code>, <code>0.5</code></td>
+              <td><code>1,75</code> (coma en vez de punto)</td>
             </tr>
             <tr>
               <td><code>char</code></td>
               <td>1 byte (8 bits)</td>
-              <td>Un único carácter del mapa ASCII</td>
-              <td>Código 0 a 127 (o -128 a 127)</td>
-              <td><code>char seccion = 'B';</code></td>
+              <td><b>Un solo símbolo</b> entre <code>' '</code></td>
+              <td><code>'A'</code>, <code>'z'</code>, <code>'5'</code>, <code>'@'</code></td>
+              <td><code>"A"</code> (dobles) o <code>'Hola'</code> (varios)</td>
             </tr>
             <tr>
               <td><code>bool</code></td>
               <td>1 byte (8 bits)</td>
-              <td>Valores de verdad lógica</td>
-              <td><code>true</code> (1) o <code>false</code> (0)</td>
-              <td><code>bool activo = false;</code></td>
+              <td>Palabras <code>true</code> o <code>false</code> en minúscula</td>
+              <td><code>true</code>, <code>false</code></td>
+              <td><code>True</code>, <code>FALSE</code> o <code>"true"</code></td>
             </tr>
           </tbody>
         </table>
+
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            📌 <b>Dato curioso:</b> 1 byte equivale a 8 bits (8 ceros o unos). Por eso un <code>char</code> ocupa apenas 1 byte ($2^8 = 256$ combinaciones posibles), mientras que un <code>int</code> o un <code>float</code> usan 4 bytes (32 bits).
+          </p>
+        </div>
       </section>
 
-      <!-- SLIDE 5: EL TIPO INT -->
+      <!-- SLIDE 16: DIFERENCIA ENTRE 7, 7.0 Y '7' -->
       <section>
-        <h2><span class="section-num">04</span> Profundizando en <code>int</code> (Enteros)</h2>
+        <h2><span class="section-num">15</span> ¡Ojo! No es lo Mismo <code>7</code>, <code>7.0</code> y <code>'7'</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Una duda muy común al empezar es qué diferencia hay entre escribir el número siete de estas tres maneras en C:
+        </p>
+
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-body"><span class="c-kw">int</span>   entero   = <span class="c-num">7</span>;     <span class="c-cmt">// El número entero 7</span>
+<span class="c-kw">float</span> decimal  = <span class="c-num">7.0</span>;   <span class="c-cmt">// El número real 7.000000 con punto flotante</span>
+<span class="c-kw">char</span>  caracter = <span class="c-str">'7'</span>;   <span class="c-cmt">// El dibujo del símbolo '7' (código ASCII 55)</span></div>
+        </div>
+
         <div class="grid-2">
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">Propiedades de int</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li>Almacena cantidades discretas que <b>no tienen fracción ni decimales</b>.</li>
-              <li>Puede ser <b>positivo, negativo o cero</b>:
-                <div style="font-family: var(--font-mono); font-size: 0.82rem; margin: 4px 0; color: #a5f3fc;">
-                  int temp = -10; int cero = 0; int nivel = 42;
-                </div>
-              </li>
-              <li>Las operaciones entre dos <code>int</code> siempre dan un <code>int</code> exacto (se trunca la
-                fracción sin redondear).</li>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;"><code>7</code> y <code>7.0</code> sirven para calcular</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Tanto <code>int entero = 7;</code> como <code>float decimal = 7.0;</code> guardan cantidades matemáticas reales. Si les sumás <code>1</code>, obtendrás <code>8</code> y <code>8.0</code> respectivamente.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;"><code>'7'</code> es un dibujo tipográfico</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              En cambio, <code>char caracter = '7';</code> guarda el carácter de texto <code>'7'</code> (como la patente de un auto). En la tabla ASCII el símbolo <code>'7'</code> tiene el código numérico <code>55</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: CÓMO ELEGIR EL TIPO DE DATO CORRECTO -->
+      <section>
+        <h2><span class="section-num">16</span> Guía Práctica: ¿Cómo Elegir el Tipo para cada Dato?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Antes de declarar una variable en C, hacete estas 4 preguntas en orden:
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content" style="font-size: 0.85rem;">
+              <b>¿El dato solo puede responderse con "Sí / No" o "Verdadero / Falso"?</b><br>
+              👉 Usá <b><code>bool</code></b> (con <code>#include &lt;stdbool.h&gt;</code>). Ejemplos: <code>esMayor</code>, <code>aprobado</code>, <code>estaLloviendo</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content" style="font-size: 0.85rem;">
+              <b>¿Es una sola letra, inicial o símbolo individual?</b><br>
+              👉 Usá <b><code>char</code></b> entre comillas simples. Ejemplos: <code>inicial = 'M'</code>, <code>turno = 'T'</code>, <code>talle = 'L'</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content" style="font-size: 0.85rem;">
+              <b>¿Es un número que puede tener coma/decimales (mediciones, precios, promedios)?</b><br>
+              👉 Usá <b><code>float</code></b> escribiendo punto <code>.</code>. Ejemplos: <code>altura = 1.75</code>, <code>peso = 68.4</code>, <code>precio = 1250.50</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content" style="font-size: 0.85rem;">
+              <b>¿Es un número exacto para contar unidades enteras?</b><br>
+              👉 Usá <b><code>int</code></b>. Ejemplos: <code>edad = 16</code>, <code>cantidadMaterias = 9</code>, <code>anio = 2026</code>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: EJEMPLO NIVEL 1 (LAS 4 VARIABLES DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">17</span> Ejemplo Nivel 1: Declarando los 4 Tipos del Apunte</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Reunamos exactamente los 4 ejemplos de la Sección 4 del apunte dentro de un programa en C completo y válido:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">nivel1_tipos_apunte.c</span>
+            <span class="code-badge">Nivel 1 • Introductorio</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+    <span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;
+    <span class="c-kw">char</span> letra = <span class="c-str">'A'</span>;
+    <span class="c-kw">bool</span> aprobado = <span class="c-kw">true</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Variables creadas correctamente en memoria.\n"</span>);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            ✅ <b>Observá los encabezados:</b> Incluimos <code>&lt;stdio.h&gt;</code> para poder usar <code>printf()</code> y <code>&lt;stdbool.h&gt;</code> para habilitar el tipo <code>bool</code> y el valor <code>true</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: EXPLICACIÓN LÍNEA POR LÍNEA DEL NIVEL 1 -->
+      <section>
+        <h2><span class="section-num">18</span> Desglose Línea por Línea del Ejemplo Nivel 1</h2>
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Línea de Código</th>
+              <th>¿Qué hace internamente la computadora?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>#include &lt;stdbool.h&gt;</code></td>
+              <td>Incorpora la biblioteca estándar booleana para que C reconozca <code>bool</code>, <code>true</code> y <code>false</code>.</td>
+            </tr>
+            <tr>
+              <td><code>int edad = 16;</code></td>
+              <td>Crea la caja entera <code>edad</code> y guarda adentro el número exacto <code>16</code>.</td>
+            </tr>
+            <tr>
+              <td><code>float altura = 1.75;</code></td>
+              <td>Crea la caja decimal <code>altura</code> y guarda <code>1.75</code> (usando punto decimal).</td>
+            </tr>
+            <tr>
+              <td><code>char letra = 'A';</code></td>
+              <td>Crea la caja de 1 byte <code>letra</code> y guarda el carácter <code>'A'</code> entre comillas simples.</td>
+            </tr>
+            <tr>
+              <td><code>bool aprobado = true;</code></td>
+              <td>Crea la caja lógica <code>aprobado</code> y guarda el estado verdadero (<code>1</code> interno).</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            💡 <b>Pregunta lógica:</b> Ya tenemos los datos guardados en sus cajas... ¿cómo hacemos para verlos en la pantalla con <code>printf()</code>? ¡Veamos un adelanto práctico!
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: ADELANTO PRÁCTICO: MOSTRAR CADA TIPO CON PRINTF -->
+      <section>
+        <h2><span class="section-num">19</span> ¿Cómo Mostramos cada Tipo por Pantalla?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          En la <b>Unidad 05 (Entrada y Salida)</b> estudiaremos a fondo <code>printf()</code>, pero ya podemos conocer qué "comodín" (especificador) usa cada tipo de dato para mostrarse en consola:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">El comodín de cada caja</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.65; margin-left: 18px;">
+              <li><b><code>%d</code></b> → Muestra un número entero <b><code>int</code></b> (y también sirve para ver un <code>bool</code> como <code>1</code> o <code>0</code>).</li>
+              <li><b><code>%f</code></b> (o <b><code>%.2f</code></b> para 2 decimales) → Muestra un <b><code>float</code></b>.</li>
+              <li><b><code>%c</code></b> → Muestra un carácter <b><code>char</code></b>.</li>
             </ul>
           </div>
 
-          <div class="box box-rose">
-            <h4 style="color: #f87171;">¿Qué pasa si le asignás decimales a un int?</h4>
-            <p style="font-size: 0.85rem;">Si escribís:</p>
-            <div class="code-window">
-              <div class="code-body"><span class="c-kw">int</span> precio = <span class="c-num">9.99f</span>;</div>
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">mostrar_tipos.c</span>
+              <span class="code-badge">Vista previa</span>
             </div>
-            <p style="font-size: 0.82rem; color: #fecaca;">
-              ⚠️ El compilador descarta completamente el <code>.99</code> y guarda <b>9</b>. ¡No redondea a 10,
-              simplemente mutila los decimales (truncamiento)!
-            </p>
+            <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"Edad: %d\n"</span>, edad);
+<span class="c-fn">printf</span>(<span class="c-str">"Altura: %.2f\n"</span>, altura);
+<span class="c-fn">printf</span>(<span class="c-str">"Letra: %c\n"</span>, letra);
+<span class="c-fn">printf</span>(<span class="c-str">"Aprobado: %d\n"</span>, aprobado);</div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 6: EL TIPO FLOAT -->
+      <!-- SLIDE 21: EJEMPLO NIVEL 2 (PROGRAMA COMPLETO + CONSOLA + TRAZA) -->
       <section>
-        <h2><span class="section-num">05</span> <code>float</code>: Decimales y Precisión Finita</h2>
-        <div class="grid-2">
-          <div class="box box-amber">
-            <h4 style="color: #fbbf24;">Regla Sagrada: Punto, NO Coma</h4>
-            <p style="font-size: 0.88rem;">
-              En español escribimos <code>1,75</code>, pero en el lenguaje C internacional <b>se utiliza
-                exclusivamente
-                el punto decimal <code>.</code></b>:
-            </p>
-            <div
-              style="font-family: var(--font-mono); font-size: 0.82rem; color: #fef08a; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
-              float altura = 1.75f; // ¡CORRECTO!<br>
-              float error = 1,75; // ¡ERROR FATAL DE SINTAXIS!
+        <h2><span class="section-num">20</span> Ejemplo Nivel 2: Ficha de Estudiante en Consola</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Veamos un programa completo que declara los 4 tipos de datos, los muestra por pantalla y luego actualiza dos de ellos:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel2_ficha_alumno.c</span>
+              <span class="code-badge">Nivel 2 • Completo</span>
             </div>
-            <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 6px;">
-              En C, la coma <code>,</code> es un operador de separación, no un signo numérico. El sufijo <code>f</code>
-              le indica al compilador que es un <code>float</code> de precisión simple.
-            </p>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+    <span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;
+    <span class="c-kw">char</span> letra = <span class="c-str">'A'</span>;
+    <span class="c-kw">bool</span> aprobado = <span class="c-kw">true</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Edad: %d | Altura: %.2f\n"</span>, edad, altura);
+    <span class="c-fn">printf</span>(<span class="c-str">"Curso: %c | Aprobado: %d\n"</span>, letra, aprobado);
+
+    edad = <span class="c-num">17</span>;
+    altura = <span class="c-num">1.78</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Nuevo anio -> Edad: %d | Altura: %.2f\n"</span>, edad, altura);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
           </div>
 
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">La Precisión Finita</h4>
-            <p style="font-size: 0.85rem;">
-              La memoria de la computadora es finita (32 bits). Ciertas fracciones decimales simples como
-              <code>0,1</code> no
-              tienen representación binaria finita exacta (son números periódicos en base 2).
-            </p>
-            <p style="font-size: 0.82rem; color: #cbd5e1;">
-              Por eso, <code>float</code> tiene una precisión aproximada de <b>6 a 7 dígitos significativos</b>. En la
-              unidad de entrada y salida aprenderemos cuándo conviene usar <code>float</code> y cuándo
-              <code>double</code>.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 7: EL TIPO CHAR -->
-      <section>
-        <h2><span class="section-num">06</span> <code>char</code>: Caracteres y Comillas Simples</h2>
-        <div class="grid-2">
-          <div class="box box-purple">
-            <h4 style="color: #c084fc;">Un único símbolo entre ' '</h4>
-            <p style="font-size: 0.88rem;">
-              El tipo <code>char</code> almacena <b>un único carácter</b>: una letra, un dígito o un signo especial.
-            </p>
-            <div
-              style="background: rgba(0,0,0,0.35); padding: 8px 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.82rem; margin: 8px 0;">
-              <span class="c-kw">char</span> nota = <span class="c-char">'A'</span>;<br>
-              <span class="c-kw">char</span> digito = <span class="c-char">'7'</span>;<br>
-              <span class="c-kw">char</span> simbolo = <span class="c-char">'#'</span>;
-            </div>
-            <p style="font-size: 0.82rem; color: #cbd5e1;">
-              ¡Atención!: <code>'7'</code> como carácter no es el número 7 para hacer cuentas, es el dibujo gráfico de
-              la tecla 7.
-            </p>
-          </div>
-
-          <div class="box box-rose">
-            <h4 style="color: #f87171;">La Gran Diferencia: ' ' vs " "</h4>
-            <div class="comparison-box" style="margin: 6px 0;">
-              <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
-                <b style="color: var(--accent-emerald); font-size: 0.82rem;">Comillas simples ' '</b>
-                <p style="font-size: 0.78rem; margin: 2px 0;">Para <b>un solo char</b>.</p>
-                <code>char c = 'A';</code>
+          <div>
+            <div class="terminal-window" style="margin-bottom: 10px;">
+              <div class="terminal-header">
+                <span>Salida en Consola</span>
+                <span>stdout</span>
               </div>
-              <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
-                <b style="color: var(--accent-rose); font-size: 0.82rem;">Comillas dobles " "</b>
-                <p style="font-size: 0.78rem; margin: 2px 0;">Para <b>cadenas de texto (strings)</b>.</p>
-                <code>"Hola mundo"</code>
-              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel2_ficha_alumno</span>
+Edad: 16 | Altura: 1.75
+Curso: A | Aprobado: 1
+Nuevo anio -> Edad: 17 | Altura: 1.78</div>
             </div>
-            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px;">
-              ⚠️ Escribir <code>char letra = "A";</code> provocará error de compilación por incompatibilidad de tipos.
-            </p>
+
+            <table class="trace-table" style="font-size: 0.76rem;">
+              <thead>
+                <tr>
+                  <th>Momento</th>
+                  <th><code>edad</code></th>
+                  <th><code>altura</code></th>
+                  <th><code>letra</code></th>
+                  <th><code>aprobado</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Inicialización</td>
+                  <td><code>16</code></td>
+                  <td><code>1.75</code></td>
+                  <td><code>'A'</code></td>
+                  <td><code>1 (true)</code></td>
+                </tr>
+                <tr>
+                  <td>Tras reasignar</td>
+                  <td><b><code>17</code></b></td>
+                  <td><b><code>1.78</code></b></td>
+                  <td><code>'A'</code></td>
+                  <td><code>1 (true)</code></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 8: EL TIPO BOOL Y STDBOOL.H -->
+      <!-- SLIDE 22: EJEMPLO NIVEL 3 (CLIMA Y TEMPERATURAS NEGATIVAS/DECIMALES) -->
       <section>
-        <h2><span class="section-num">07</span> <code>bool</code>: Valores Lógicos con &lt;stdbool.h&gt;</h2>
-        <div class="box box-emerald">
-          <h4 style="color: #34d399; margin-bottom: 6px;">Álgebra de Boole: Sí o No, Blanco o Negro</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            Nombrado en honor al matemático <b>George Boole</b>. Una variable booleana solo puede tener uno de dos
-            estados posibles: <b><code>true</code> (verdadero)</b> o <b><code>false</code> (falso)</b>.
+        <h2><span class="section-num">21</span> Ejemplo Nivel 3: Estación Meteorológica</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Recordá que el apunte destaca que <code>int</code> y <code>float</code> también almacenan <b>números negativos</b> como <code>-10</code>, <code>-3</code> o <code>-3.5</code>. Modelémoslo en un reporte climático de invierno:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel3_clima.c</span>
+              <span class="code-badge">Nivel 3 • Negativos y Decimales</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> tempMinimaEntera = <span class="c-num">-10</span>;
+    <span class="c-kw">float</span> sensacionTermica = <span class="c-num">-3.5</span>;
+    <span class="c-kw">float</span> tempTarde = <span class="c-num">4.8</span>;
+    <span class="c-kw">char</span> escala = <span class="c-str">'C'</span>;
+    <span class="c-kw">bool</span> hayHelada = <span class="c-kw">true</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Minima: %d %c\n"</span>, tempMinimaEntera, escala);
+    <span class="c-fn">printf</span>(<span class="c-str">"Sensacion: %.1f %c\n"</span>, sensacionTermica, escala);
+    <span class="c-fn">printf</span>(<span class="c-str">"Tarde: %.1f %c | Helada: %d\n"</span>, tempTarde, escala, hayHelada);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Salida en Consola</span>
+                <span>stdout</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel3_clima</span>
+Minima: -10 C
+Sensacion: -3.5 C
+Tarde: 4.8 C | Helada: 1</div>
+            </div>
+
+            <div class="box box-amber" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.82rem;">
+                🔍 Usamos exactamente los valores del apunte: <code>-10</code> en un <code>int</code> y <code>-3.5</code> y <code>4.8</code> en variables <code>float</code>. El signo menos <code>-</code> va pegado adelante del número.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: EJEMPLO NIVEL 4 - PLANTEAMIENTO DEL PROBLEMA -->
+      <section>
+        <h2><span class="section-num">22</span> Ejemplo Nivel 4: ¿Cómo Pensar el Diseño de Datos?</h2>
+        <div class="box box-indigo" style="margin-bottom: 12px;">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">📋 Enunciado del Problema</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Un comercio necesita representar en un programa en C la información de un artículo en oferta:
+            su <b>código numérico</b> (<code>405</code>), la <b>categoría</b> (letra <code>'E'</code> de Electro), el <b>precio exacto con centavos</b> (<code>1250.75</code>), el <b>precio sin centavos</b> para un cartel rápido, y si <b>tiene stock disponible</b> (verdadero).
           </p>
         </div>
 
-        <div class="grid-2" style="margin-top: 14px;">
-          <div class="code-window">
-            <div class="code-header">
-              <span class="code-title">ejemplo_booleano.c</span>
-              <span class="code-badge">stdbool.h</span>
-            </div>
-            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 8px;">
+          <b>Razonamiento paso a paso antes de tocar el teclado:</b>
+        </p>
 
-              <span class="c-kw">bool</span> aprobado = <span class="c-kw">true</span>;
-              <span class="c-kw">bool</span> mayorDeEdad = <span class="c-kw">false</span>;
-              <span class="c-kw">bool</span> tienePermiso = <span class="c-kw">true</span>;
-            </div>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Código (405):</b> Es un número entero sin decimales ➔ <code>int codigo = 405;</code></li>
+              <li><b>Categoría ('E'):</b> Es una única letra ➔ <code>char categoria = 'E';</code></li>
+              <li><b>Precio exacto (1250.75):</b> Tiene centavos, requiere punto decimal ➔ <code>float precioExacto = 1250.75;</code></li>
+            </ul>
           </div>
 
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Cómo lo entiende C por dentro?</h4>
-            <p style="font-size: 0.85rem;">
-              En el estándar C moderno:
-            </p>
-            <ul style="font-size: 0.82rem; line-height: 1.6; margin-left: 18px;">
-              <li><code>true</code> se traduce internamente al número entero <b>1</b>.</li>
-              <li><code>false</code> se traduce al número entero <b>0</b>.</li>
-              <li>Requiere siempre incluir <code>#include &lt;stdbool.h&gt;</code> al principio de tu archivo.</li>
+          <div class="box box-emerald">
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Precio cartel entero:</b> Si asignamos <code>int precioCartel = precioExacto;</code>, C trunca los centavos y deja <code>1250</code>.</li>
+              <li><b>Stock disponible:</b> Es un estado lógico Sí/No ➔ <code>bool enStock = true;</code></li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 9: EJEMPLOS CORRECTOS E INCORRECTOS -->
+      <!-- SLIDE 24: EJEMPLO NIVEL 4 - CÓDIGO COMPLETO Y TRAZA -->
       <section>
-        <h2><span class="section-num">08</span> Galería: Correctos vs Incorrectos</h2>
+        <h2><span class="section-num">23</span> Ejemplo Nivel 4: Código Completo y Seguimiento</h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel4_producto.c</span>
+              <span class="code-badge">Nivel 4 • Integrador</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> codigo = <span class="c-num">405</span>;
+    <span class="c-kw">char</span> categoria = <span class="c-str">'E'</span>;
+    <span class="c-kw">float</span> precioExacto = <span class="c-num">1250.75</span>;
+    <span class="c-kw">int</span> precioSinCentavos = precioExacto;
+    <span class="c-kw">bool</span> enStock = <span class="c-kw">true</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Art #%d [Cat %c]\n"</span>, codigo, categoria);
+    <span class="c-fn">printf</span>(<span class="c-str">"Precio real: $%.2f\n"</span>, precioExacto);
+    <span class="c-fn">printf</span>(<span class="c-str">"Precio truncado (int): $%d\n"</span>, precioSinCentavos);
+    <span class="c-fn">printf</span>(<span class="c-str">"Disponible: %d\n"</span>, enStock);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window" style="margin-bottom: 10px;">
+              <div class="terminal-header">
+                <span>Salida en Consola</span>
+                <span>stdout</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel4_producto</span>
+Art #405 [Cat E]
+Precio real: $1250.75
+Precio truncado (int): $1250
+Disponible: 1</div>
+            </div>
+
+            <table class="trace-table" style="font-size: 0.76rem;">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Tipo</th>
+                  <th>Valor Guardado</th>
+                  <th>Observación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>precioExacto</code></td>
+                  <td><code>float</code></td>
+                  <td><code>1250.75</code></td>
+                  <td>Conserva los decimales</td>
+                </tr>
+                <tr>
+                  <td><code>precioSinCentavos</code></td>
+                  <td><code>int</code></td>
+                  <td><code>1250</code></td>
+                  <td>Descarta el <code>.75</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: ERROR FRECUENTE #1 (COMA DECIMAL EN LUGAR DE PUNTO) -->
+      <section>
+        <h2><span class="section-num">24</span> Error Frecuente #1: Escribir Decimales con Coma (<code>,</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Es el error número uno en las primeras semanas de programación en Argentina y Latinoamérica porque en matemática escolar usamos la coma decimal:
+        </p>
+
         <div class="comparison-box">
           <div class="wrong-card">
-            <div class="wrong-title">❌ Asignaciones Inválidas</div>
-            <p style="font-size: 0.82rem; line-height: 1.5; color: #fecaca;">
-              • <code>int num = "10";</code> ➔ Intentar meter texto en un entero.<br>
-              • <code>float pi = 3,14f;</code> ➔ Usar coma en lugar de punto.<br>
-              • <code>char vocal = 'aeiou';</code> ➔ Meter más de 1 letra en un char.<br>
-              • <code>char vocal = "a";</code> ➔ Usar comillas dobles para un char.<br>
-              • <code>bool flag = Verdadero;</code> ➔ No existe en C, debe ser <code>true</code>.
+            <div class="wrong-title">❌ Incorrecto: Usar coma <code>,</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">float</span> nota = <span class="c-num">8</span>,<span class="c-num">5</span>;
+<span class="c-kw">float</span> altura = <span class="c-num">1</span>,<span class="c-num">75</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin: 6px 0 0;">
+              <b>¿Qué ocurre?</b> El compilador falla con <code>error: expected identifier or '(' before numeric constant</code> porque interpreta la coma como separador de dos variables distintas.
             </p>
           </div>
 
           <div class="correct-card">
-            <div class="correct-title">✅ Asignaciones Válidas e Impecables</div>
-            <p style="font-size: 0.82rem; line-height: 1.5; color: #a7f3d0;">
-              • <code>int num = 10;</code><br>
-              • <code>float pi = 3.14f;</code><br>
-              • <code>char vocal = 'a';</code><br>
-              • <code>char digito = '9';</code><br>
-              • <code>bool flag = true;</code> (con <code>&lt;stdbool.h&gt;</code>)
+            <div class="correct-title">✅ Correcto: Usar punto <code>.</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">float</span> nota = <span class="c-num">8.5</span>;
+<span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin: 6px 0 0;">
+              <b>¿Por qué funciona?</b> Tal como remarca el apunte: <b><code>1.5</code> NO es lo mismo que <code>1,5</code></b>. En C los decimales llevan siempre punto.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 10: EJERCICIO PRÁCTICO INTERACTIVO -->
+      <!-- SLIDE 26: ERROR FRECUENTE #2 (COMILLAS EN CHAR) -->
       <section>
-        <h2><span class="section-num">09</span> Desafío: Elegí el Tipo Adecuado</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">¿Qué tipo de dato de C usarías para modelar cada una de
-          estas 4 situaciones reales?</p>
+        <h2><span class="section-num">25</span> Error Frecuente #2: Comillas Dobles o Múltiples Letras en <code>char</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Una variable <code>char</code> es una cajita diminuta de 1 solo byte diseñada para <b>un único carácter entre comillas simples</b>:
+        </p>
 
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Comillas dobles o palabras</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// Error A: usar comillas dobles " "</span>
+<span class="c-kw">char</span> letra = <span class="c-str">"A"</span>;
+
+<span class="c-cmt">// Error B: querer guardar toda una palabra</span>
+<span class="c-kw">char</span> nombre = <span class="c-str">'Juan'</span>;
+
+<span class="c-cmt">// Error C: olvidar las comillas</span>
+<span class="c-kw">char</span> division = B;</div>
+            </div>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Un carácter entre <code>' '</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// Siempre 1 solo símbolo entre comillas simples:</span>
+<span class="c-kw">char</span> letra = <span class="c-str">'A'</span>;
+<span class="c-kw">char</span> inicialNombre = <span class="c-str">'J'</span>;
+<span class="c-kw">char</span> division = <span class="c-str">'B'</span>;</div>
+            </div>
+            <p style="font-size: 0.81rem; color: #a7f3d0; margin: 8px 0 0;">
+              💡 <i>Nota:</i> Más adelante en el año veremos cómo guardar palabras enteras como <code>"Juan"</code> usando vectores de caracteres (<i>strings</i>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: ERROR FRECUENTE #3 (BOOL SIN STDBOOL O CON MAYÚSCULA) -->
+      <section>
+        <h2><span class="section-num">26</span> Error Frecuente #3: Olvidar <code>&lt;stdbool.h&gt;</code> o Escribir <code>True</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Aunque en el lenguaje cotidiano o en otros lenguajes (como Python) se escribe <code>True</code> con mayúscula, <b>en C todo va en minúscula</b>:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Sin biblioteca o con mayúscula</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// Si falta #include &lt;stdbool.h&gt; arriba:</span>
+<span class="c-kw">bool</span> aprobado = True; <span class="c-cmt">// ❌ Error: 'True' undeclared</span>
+<span class="c-kw">bool</span> activo = <span class="c-str">"true"</span>; <span class="c-cmt">// ❌ Error: no lleva comillas</span></div>
+            </div>
+            <p style="font-size: 0.81rem; color: #fecaca; margin: 6px 0 0;">
+              C distingue mayúsculas de minúsculas (es <i>case-sensitive</i>): no conoce <code>True</code> ni <code>False</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Con <code>&lt;stdbool.h&gt;</code> y minúsculas</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-cmt">// Dentro de main():</span>
+<span class="c-kw">bool</span> aprobado = <span class="c-kw">true</span>;
+<span class="c-kw">bool</span> activo = <span class="c-kw">false</span>;</div>
+            </div>
+            <p style="font-size: 0.81rem; color: #a7f3d0; margin: 6px 0 0;">
+              Tanto el tipo <code>bool</code> como los valores <code>true</code> y <code>false</code> van sin comillas y 100% en minúsculas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: ERROR FRECUENTE #4 (PÉRDIDA DE DECIMALES EN INT) -->
+      <section>
+        <h2><span class="section-num">27</span> Error Frecuente #4: Declarar como <code>int</code> un Dato con Decimales</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Usar <code>int</code> para estatura o peso</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> altura = <span class="c-num">1.75</span>;
+<span class="c-kw">int</span> promedio = <span class="c-num">7.5</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin: 6px 0 0;">
+              <b>Consecuencia silenciosa:</b> El programa compila y corre, ¡pero <code>altura</code> queda valiendo <code>1</code> metro y <code>promedio</code> queda en <code>7</code>! Perdiste toda la precisión decimal sin que el programa se detenga.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Usar <code>float</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;
+<span class="c-kw">float</span> promedio = <span class="c-num">7.5</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin: 6px 0 0;">
+              <b>Solución:</b> Antes de escribir <code>int</code> por costumbre, preguntate siempre: <i>"¿Este dato en la vida real puede dar con coma?"</i>. Si la respuesta es sí, usá <code>float</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: BUENAS PRÁCTICAS DE PROGRAMACIÓN -->
+      <section>
+        <h2><span class="section-num">28</span> Buenas Prácticas al Elegir Tipos de Datos</h2>
         <div class="grid-2">
-          <div class="box box-cyan">
-            <b>1.</b> La cantidad de goles en un partido de fútbol.
-          </div>
-          <div class="box box-amber">
-            <b>2.</b> La temperatura corporal de un paciente (ej. 36.8 °C).
-          </div>
-          <div class="box box-purple">
-            <b>3.</b> El tipo de sangre de una persona ('A', 'B', 'O').
-          </div>
           <div class="box box-emerald">
-            <b>4.</b> Saber si la puerta del laboratorio está abierta o cerrada.
+            <h4 style="color: #34d399;">✅ Lo que hacen los buenos programadores</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Nombres que reflejen el tipo:</b> A las variables <code>bool</code> poneles nombres que suenen a pregunta o afirmación: <code>aprobado</code>, <code>esPar</code>, <code>tienePermiso</code>.</li>
+              <li><b>Inicializar al declarar:</b> Siempre que conozcas el valor inicial, asignalo en el momento (ej. <code>int puntos = 0;</code>) para no dejar "basura" en la caja.</li>
+              <li><b>No usar <code>float</code> si el dato es estrictamente entero:</b> Para edades o contadores usá siempre <code>int</code>, que es exacto y más rápido.</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">🔍 Regla rápida visual</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-cmt">// Un vistazo alcanza para saber qué guarda cada una:</span>
+<span class="c-kw">int</span> cantidadAlumnos = <span class="c-num">28</span>;
+<span class="c-kw">float</span> precioUnitario = <span class="c-num">450.50</span>;
+<span class="c-kw">char</span> turnoCurso = <span class="c-str">'M'</span>;
+<span class="c-kw">bool</span> inscripcionAbierta = <span class="c-kw">true</span>;</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: EJERCICIO DE APLICACIÓN 1 -->
+      <section>
+        <h2><span class="section-num">29</span> Ejercicio 1: ¿Qué Tipo de Dato Elegirías?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Para cada uno de los siguientes 4 datos del mundo real, indicá qué tipo (<code>int</code>, <code>float</code>, <code>char</code> o <code>bool</code>) usarías y escribí un ejemplo de declaración con asignación en C:
+        </p>
+
+        <div class="grid-2" style="margin-bottom: 12px;">
+          <div class="box box-indigo" style="font-size: 0.85rem;">
+            <b>A.</b> La cantidad de materias que cursás este cuatrimestre.<br>
+            <b>B.</b> El peso de un paquete de correo en kilogramos (ej: dos kilos y medio).
+          </div>
+          <div class="box box-amber" style="font-size: 0.85rem;">
+            <b>C.</b> El talle de una remera expresado con una letra (S, M o L).<br>
+            <b>D.</b> Indicar si un socio del club tiene la cuota al día o no.
           </div>
         </div>
 
         <details class="code-solution">
-          <summary>👉 Clic acá para ver la respuesta técnica justificada</summary>
+          <summary>👁️ Ver solución explicada paso a paso</summary>
           <div class="solution-content">
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px; color: #cbd5e1;">
-              <li><b>1. Goles: <code>int</code></b> ➔ No existen los medios goles, es un valor entero discreto (ej.
-                <code>int goles = 2;</code>).
-              </li>
-              <li><b>2. Temperatura: <code>float</code></b> ➔ Requiere precisión decimal con punto (ej.
-                <code>float temp = 36.8f;</code>).
-              </li>
-              <li><b>3. Tipo de sangre: <code>char</code></b> ➔ Es una única letra mayúscula (ej.
-                <code>char sangre = 'A';</code>).
-              </li>
-              <li><b>4. Puerta abierta: <code>bool</code></b> ➔ Es un estado binario verdadero/falso (ej.
-                <code>bool puertaAbierta = true;</code>).
-              </li>
-            </ul>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> materias = <span class="c-num">6</span>;            <span class="c-cmt">// A: int (cantidad entera exacta)</span>
+<span class="c-kw">float</span> pesoPaquete = <span class="c-num">2.5</span>;     <span class="c-cmt">// B: float (decimal escrito con punto .)</span>
+<span class="c-kw">char</span> talle = <span class="c-str">'M'</span>;            <span class="c-cmt">// C: char (una sola letra entre comillas simples)</span>
+<span class="c-kw">bool</span> cuotaAlDia = <span class="c-kw">true</span>;      <span class="c-cmt">// D: bool (verdadero o falso con &lt;stdbool.h&gt;)</span></div>
+            </div>
           </div>
         </details>
       </section>
 
-      <!-- SLIDE 11: RESUMEN Y NAVEGACIÓN -->
+      <!-- SLIDE 31: EJERCICIO DE APLICACIÓN 2 (CAZADOR DE ERRORES) -->
       <section>
-        <h2><span class="section-num">10</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">30</span> Ejercicio 2: Encontrá los 4 Errores en el Código</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Un compañero quiso declarar 4 variables pero cometió un error en cada línea. Descubrí cuáles son antes de desplegar la solución:
+        </p>
+
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-header">
+            <span class="code-title">codigo_con_errores.c</span>
+            <span class="code-badge">Desafío de Depuración</span>
+          </div>
+          <div class="code-body"><span class="c-cmt">// Línea 1:</span>
+Int edad = <span class="c-num">16</span>;
+<span class="c-cmt">// Línea 2:</span>
+<span class="c-kw">float</span> altura = <span class="c-num">1</span>,<span class="c-num">75</span>;
+<span class="c-cmt">// Línea 3:</span>
+<span class="c-kw">char</span> letra = <span class="c-str">"A"</span>;
+<span class="c-cmt">// Línea 4:</span>
+<span class="c-kw">bool</span> aprobado = True;</div>
+        </div>
+
+        <details class="code-solution">
+          <summary>💻 Ver los 4 errores corregidos</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-cmt">// 1. 'int' va en minúscula (no 'Int'):</span>
+<span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+<span class="c-cmt">// 2. Los decimales en C llevan punto '.' y no coma ',':</span>
+<span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;
+<span class="c-cmt">// 3. Un char lleva comillas simples 'A', no dobles "A":</span>
+<span class="c-kw">char</span> letra = <span class="c-str">'A'</span>;
+<span class="c-cmt">// 4. 'true' va en minúscula (con #include &lt;stdbool.h&gt;):</span>
+<span class="c-kw">bool</span> aprobado = <span class="c-kw">true</span>;</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 32: EJERCICIO DE APLICACIÓN 3 (ESCRIBIR PROGRAMA COMPLETO) -->
+      <section>
+        <h2><span class="section-num">31</span> Ejercicio 3: Escribí tu Propio Programa Completo</h2>
+        <div class="box box-emerald" style="margin-bottom: 10px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">📝 Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Escribí un programa completo en C (con sus <code>#include</code> y <code>main</code>) que guarde los datos de un videojuego:
+            nivel actual del personaje (<code>12</code>), porcentaje de energía (<code>85.5</code>), rango del jugador (<code>'S'</code>) y si tiene escudo activo (<code>true</code>). Mostrá los 4 valores por pantalla con <code>printf</code>.
+          </p>
+        </div>
+
+        <details class="code-solution">
+          <summary>💻 Ver código solución completo</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> nivel = <span class="c-num">12</span>;
+    <span class="c-kw">float</span> energia = <span class="c-num">85.5</span>;
+    <span class="c-kw">char</span> rango = <span class="c-str">'S'</span>;
+    <span class="c-kw">bool</span> escudoActivo = <span class="c-kw">true</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Nivel: %d | Rango: %c\n"</span>, nivel, rango);
+    <span class="c-fn">printf</span>(<span class="c-str">"Energia: %.1f | Escudo: %d\n"</span>, energia, escudoActivo);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 33: REPASO RÁPIDO DE LAS 4 CAJAS DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">32</span> Síntesis Visual de la Sección 4 del Apunte</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">El Catálogo de Tipos</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>int:</b> Enteros sin decimales (4 bytes).</li>
-              <li><b>float:</b> Decimales con punto <code>.</code> (4 bytes).</li>
-              <li><b>char:</b> Un solo carácter entre comillas simples <code>' '</code> (1 byte).</li>
-              <li><b>bool:</b> <code>true</code> o <code>false</code> con <code>&lt;stdbool.h&gt;</code> (1 byte).</li>
+            <h4 style="color: #818cf8;"><code>int</code> — Números Enteros</h4>
+            <p style="font-size: 0.83rem; margin: 0 0 6px;">
+              Almacena enteros negativos, cero y positivos (<code>-10, -3, 0, 2, 7...</code>).
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">16</span>;</div>
+            </div>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;"><code>float</code> — Números con Decimales</h4>
+            <p style="font-size: 0.83rem; margin: 0 0 6px;">
+              Almacena decimales con <b>punto <code>.</code></b> (<code>-3.5, 2.7, 4.8...</code>). <code>1.5</code> NO es <code>1,5</code>.
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;</div>
+            </div>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;"><code>char</code> — Un Único Carácter</h4>
+            <p style="font-size: 0.83rem; margin: 0 0 6px;">
+              Almacena una sola letra o símbolo entre comillas simples <code>' '</code>.
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">char</span> letra = <span class="c-str">'A'</span>;</div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;"><code>bool</code> — Verdadero o Falso</h4>
+            <p style="font-size: 0.83rem; margin: 0 0 6px;">
+              Almacena <code>true</code> o <code>false</code> (requiere <code>#include &lt;stdbool.h&gt;</code>).
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">bool</span> aprobado = <span class="c-kw">true</span>;</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: RESUMEN FINAL, CHECKLIST Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">33</span> Resumen de la Unidad 04 y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Ideas Clave que te Llevás Hoy</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>¿Qué es un tipo de dato?:</b> Define qué clase de información entra en cada variable ("caja").</li>
+              <li><b><code>int</code> vs <code>float</code>:</b> Si guardás un decimal en un <code>int</code>, se trunca (pierde los decimales sin redondear).</li>
+              <li><b>Notación decimal:</b> En C se usa siempre el <b>punto <code>.</code></b> (<code>1.75</code>) y jamás la coma <code>,</code>.</li>
+              <li><b>Comillas en <code>char</code>:</b> Un carácter lleva siempre comillas simples <code>'A'</code>.</li>
+              <li><b>Booleanos:</b> <code>bool</code> usa <code>true</code> (1) y <code>false</code> (0) con <code>&lt;stdbool.h&gt;</code>.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué en C se usa el punto decimal y no la
-              coma?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo que <code>'A'</code> es un char pero
-              <code>"A"</code> es un string?
-            </div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué biblioteca incluir para usar
-              <code>bool</code>?
-            </div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo qué le pasa a los decimales si se guardan
-              en un <code>int</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar por qué <code>1.5</code> no es lo mismo que <code>1,5</code> en C?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué diferencia hay entre <code>7</code>, <code>7.0</code> y <code>'7'</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo qué pasa si hago <code>int x = 3.9;</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué biblioteca incluir para usar <code>bool</code>, <code>true</code> y <code>false</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Elijo sin dudar el tipo adecuado para cualquier dato cotidiano?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
+        <div style="text-align: center; margin-top: 16px;">
           <a href="03-variables.html" class="badge badge-indigo"
             style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
             ← Anterior: Variables
           </a>
           <a href="../index.html" class="badge badge-cyan"
             style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            1er Cuatrimestre
+            ← Índice 1er Bimestre
           </a>
           <a href="05-entrada-salida.html" class="badge badge-emerald"
             style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
@@ -453,8 +1378,9 @@
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -464,7 +1390,18 @@
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>

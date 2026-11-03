@@ -1,75 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Programación 2C - 04: Algoritmos y Procesamiento de Strings | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
-  
+
   <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
-  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
-  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
-  <style>
-    .reveal .code-body,
-    .reveal pre.code-body,
-    .reveal .code-window pre {
-      font-size: 1.05rem !important;
-      line-height: 1.38 !important;
-      width: 100% !important;
-      margin: 0 !important;
-      box-shadow: none !important;
-      padding: 10px 18px !important;
-      box-sizing: border-box !important;
-    }
-    .grid-2 .code-body,
-    .grid-1-2 .code-body,
-    .grid-2-1 .code-body,
-    .grid-2 pre.code-body,
-    .grid-1-2 pre.code-body,
-    .grid-2-1 pre.code-body,
-    .grid-2 .code-window pre,
-    .grid-1-2 .code-window pre,
-    .grid-2-1 .code-window pre {
-      font-size: 1.00rem !important;
-      padding: 10px 14px !important;
-      line-height: 1.38 !important;
-    }
-    .grid-3 .code-body,
-    .grid-3 pre.code-body,
-    .grid-3 .code-window pre {
-      font-size: 0.80rem !important;
-      padding: 8px 10px !important;
-      line-height: 1.34 !important;
-    }
-    .terminal-body {
-      font-size: 1.05rem !important;
-      padding: 12px 16px !important;
-      line-height: 1.40 !important;
-    }
-    .reveal code:not(.code-body *) {
-      font-size: 0.88em !important;
-      border: none !important;
-      padding: 1px 5px !important;
-      box-decoration-break: clone !important;
-      -webkit-box-decoration-break: clone !important;
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../index.html">← Índice 2do Cuatrimestre</a>
       <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">2do Cuatrimestre • Unidad 04</span>
@@ -80,364 +38,1397 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-cyan">2do Cuatrimestre • Algoritmos Fundamentales • Unidad 04</span>
-          <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Procesamiento y Algoritmos con Strings</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            Aprender a pensar en texto: comparación manual, conteo, reemplazo, conversión de mayúsculas/minúsculas, inversión y palíndromos en C.
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-cyan">2do Cuatrimestre • Unidad 04</span>
+          <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Algoritmos y Procesamiento de Strings</h1>
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 24px;">
+            Dominando los algoritmos manuales carácter por carácter: comparación, búsqueda, reemplazo, ASCII, inversión y palíndromos
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-indigo">Comparación manual</span>
-            <span class="badge badge-emerald">Contar y Reemplazar</span>
-            <span class="badge badge-amber">ASCII mayúsculas / minúsculas (+32)</span>
-            <span class="badge badge-purple">Inversión y Palíndromos</span>
+            <span class="badge badge-indigo">8. Comparación Manual</span>
+            <span class="badge badge-emerald">9. Contar Caracteres</span>
+            <span class="badge badge-amber">10. Subcadenas y Prefijos</span>
+            <span class="badge badge-purple">11–12. Modificar y ASCII (+32)</span>
+            <span class="badge badge-rose">13–14. Invertir y Palíndromos</span>
           </div>
 
-          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar por las 35 diapositivas de esta unidad.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Conexión con la Unidad 03</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué programar algoritmos manuales?</h4>
-            <p>Usar funciones de biblioteca es genial, pero para ser un buen programador tenés que ser capaz de <b>implementar la lógica subyacente con tus propias manos</b>.</p>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
-              Estos ejercicios integran: arreglos, caracteres <code>char</code>, ciclos <code>for/while</code>, bifurcaciones <code>if</code>, aritmética de índices, contadores y funciones booleanas.
-            </p>
+            <h4 style="color: #818cf8;">Lo que ya sabemos sobre Strings</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Un String en C es un <b>arreglo de caracteres</b> (<code>char[]</code>) terminado en <code>'\0'</code>.</li>
+              <li>El carácter nulo <code>'\0'</code> marca exactamente dónde termina el texto útil.</li>
+              <li>Recorremos cualquier cadena con el patrón: <code>for(int i = 0; cadena[i] != '\0'; i++)</code>.</li>
+              <li>Conocemos las funciones de <code>&lt;string.h&gt;</code>, pero en los exámenes nos piden <b>programar la lógica manualmente</b>.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
-            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
-              <li>Comparar dos strings manualmente posición por posición.</li>
-              <li>Contar las ocurrencias de un carácter específico.</li>
-              <li>Comprobar si una palabra comienza con un prefijo dado.</li>
-              <li>Sustituir caracteres recorriendo el arreglo.</li>
-              <li>Alternar mayúsculas y minúsculas con la constante ASCII 32.</li>
-              <li>Invertir una cadena hacia un nuevo búfer con <code>'\0'</code>.</li>
-              <li>Determinar si una palabra es un palíndromo con $O(N/2)$.</li>
+            <h4 style="color: #34d399;">Lo que vamos a dominar hoy (Secciones 8 a 14)</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>8. Comparar Strings:</b> función manual <code>sonIguales(a, b)</code>.</li>
+              <li><b>9. Buscar caracteres:</b> función <code>contarCaracter(cadena, c)</code>.</li>
+              <li><b>10. Subcadenas:</b> comprobar prefijos con <code>comienzaCon(cadena, sub)</code>.</li>
+              <li><b>11–12. Modificar Strings y ASCII:</b> reemplazo y conversión mayúsculas/minúsculas (<code>±32</code>).</li>
+              <li><b>13–14. Inversión y Palíndromos:</b> <code>invertirString</code> y <code>esPalindromo</code>.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: COMPARACIÓN MANUAL -->
+      <!-- SLIDE 3: 8. COMPARAR STRINGS: EL PROBLEMA CON == -->
       <section>
-        <h2><span class="section-num">02</span> Comparación Manual de Cadenas</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Comprobar posición por posición si dos arreglos de caracteres son idénticos.</p>
-
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">son_iguales.c</span>
-            <span class="code-badge">bool manual</span>
-          </div>
-          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
-
-<span class="c-kw">bool</span> <span class="c-fn">sonIguales</span>(<span class="c-kw">char</span> a[], <span class="c-kw">char</span> b[]) 
-{ 
-    <span class="c-kw">int</span> i = <span class="c-num">0</span>; 
-
-    <span class="c-kw">while</span>(a[i] != <span class="c-str">'\0'</span> &amp;&amp; b[i] != <span class="c-str">'\0'</span>) 
-    { 
-        <span class="c-kw">if</span>(a[i] != b[i]) 
-        { 
-            <span class="c-kw">return</span> <span class="c-kw">false</span>; <span class="c-cmt">// Al primer carácter distinto, aborta</span>
-        } 
-        i++; 
-    } 
-
-    <span class="c-cmt">// Son iguales si y solo si ambas alcanzaron el '\0' al mismo tiempo</span>
-    <span class="c-kw">return</span> a[i] == b[i]; 
-}</div>
+        <h2><span class="section-num">02</span> 8. Comparar Strings: ¿Por Qué No Usar <code>==</code>?</h2>
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Diferencia MUY importante respecto a los números</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Con variables numéricas podemos hacer <code>if (a == b)</code>. Pero con Strings <b>no debemos comparar directamente</b> con <code>if (nombre1 == nombre2)</code> porque los Strings son arreglos.
+          </p>
         </div>
 
-        <div class="box box-amber">
-          <p style="margin: 0; font-size: 0.88rem; color: #fde68a;">
-            💡 <b>Detalle del <code>return a[i] == b[i];</code> final:</b> Si una palabra es <code>"hola"</code> y la otra es <code>"holas"</code>, el bucle termina en <code>i=4</code>. Ahí <code>a[4] == '\0'</code> pero <code>b[4] == 's'</code>. La comparación final devuelve <code>false</code> de forma impecable.
+        <div class="comparison-grid" style="margin-top: 14px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Comparación Directa de Arreglos</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">char</span> palabra1[] = <span class="c-str">"hola"</span>;
+<span class="c-kw">char</span> palabra2[] = <span class="c-str">"hola"</span>;
+
+<span class="c-kw">if</span> (palabra1 == palabra2) {
+    <span class="c-cmt">// ¡FALSO! No compara las letras</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 6px;">
+              El nombre de un arreglo representa su ubicación en memoria. Como son dos vectores distintos en RAM, <code>palabra1 == palabra2</code> da falso aunque tengan las mismas letras.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Idea Conceptual del Apunte</div>
+            <p style="font-size: 0.84rem; color: #cbd5e1; margin-bottom: 8px;">
+              Para comparar su contenido manualmente debemos recorrer ambos arreglos <b>carácter por carácter</b>:
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; background: rgba(0,0,0,0.35); padding: 8px 12px; border-radius: 6px; color: #86efac;">
+              posición 0 → 'h' == 'h' ✔️<br>
+              posición 1 → 'o' == 'o' ✔️<br>
+              posición 2 → 'l' == 'l' ✔️<br>
+              posición 3 → 'a' == 'a' ✔️<br>
+              posición 4 → '\0' == '\0' ✔️
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: MODELO VISUAL DE COMPARACIÓN -->
+      <section>
+        <h2><span class="section-num">03</span> Modelo Visual: Comparación Posición por Posición</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Usemos un mismo índice <code>i</code> para mirar la misma casilla en ambos vectores simultáneamente:
+        </p>
+
+        <div style="margin: 12px 0;">
+          <div style="font-size: 0.82rem; color: #38bdf8; font-weight: 600; margin-bottom: 4px;">Arreglo <code>a[] = "hola"</code></div>
+          <div class="array-container" style="margin: 4px 0 12px;">
+            <div class="array-cell-wrapper"><span class="array-index">i = 0</span><div class="array-cell match">'h'</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">i = 1</span><div class="array-cell match">'o'</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">i = 2</span><div class="array-cell match">'l'</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">i = 3</span><div class="array-cell match">'a'</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">i = 4</span><div class="array-cell highlight">'\0'</div></div>
+          </div>
+
+          <div style="font-size: 0.82rem; color: #34d399; font-weight: 600; margin-bottom: 4px;">Arreglo <code>b[] = "hola"</code></div>
+          <div class="array-container" style="margin: 4px 0;">
+            <div class="array-cell-wrapper"><span class="array-index">i = 0</span><div class="array-cell match">'h'</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">i = 1</span><div class="array-cell match">'o'</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">i = 2</span><div class="array-cell match">'l'</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">i = 3</span><div class="array-cell match">'a'</div></div>
+            <div class="array-cell-wrapper"><span class="array-index">i = 4</span><div class="array-cell highlight">'\0'</div></div>
+          </div>
+        </div>
+
+        <div class="box box-indigo">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🔑 <b>Regla de decisión:</b> Mientras ninguno de los dos haya terminado (<code>a[i] != '\0' &amp;&amp; b[i] != '\0'</code>), si encontramos una sola posición donde <code>a[i] != b[i]</code>, devolvemos <code>false</code> de inmediato.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 4: CONTAR CARACTERES -->
+      <!-- SLIDE 5: FUNCIÓN sonIguales DEL APUNTE -->
       <section>
-        <h2><span class="section-num">03</span> Contar Apariciones de un Carácter</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Recorrer una palabra y contar cuántas veces se repite una letra (ej. 'a' en "banana").</p>
-
-        <div class="grid-2">
+        <h2><span class="section-num">04</span> Algoritmo del Apunte: <code>sonIguales</code></h2>
+        <div class="grid-2-1" style="align-items: center;">
           <div class="code-window">
             <div class="code-header">
-              <span class="code-title">contar_caracter.c</span>
-              <span class="code-badge">Contador</span>
+              <span class="code-title">son_iguales.c</span>
+              <span class="code-badge">Sección 8 del Apunte</span>
             </div>
-            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">contarCaracter</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">char</span> caracter) 
-{ 
-    <span class="c-kw">int</span> contador = <span class="c-num">0</span>; 
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
 
-    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; cadena[i] != <span class="c-str">'\0'</span>; i++) 
-    { 
-        <span class="c-kw">if</span>(cadena[i] == caracter) 
-        { 
-            contador++; 
-        } 
-    } 
+<span class="c-kw">bool</span> <span class="c-fn">sonIguales</span>(<span class="c-kw">char</span> a[], <span class="c-kw">char</span> b[])
+{
+    <span class="c-kw">int</span> i = <span class="c-num">0</span>;
 
-    <span class="c-kw">return</span> contador; 
+    <span class="c-kw">while</span>(a[i] != <span class="c-str">'\0'</span> &amp;&amp; b[i] != <span class="c-str">'\0'</span>)
+    {
+        <span class="c-kw">if</span>(a[i] != b[i])
+        {
+            <span class="c-kw">return</span> <span class="c-kw">false</span>;
+        }
+
+        i++;
+    }
+
+    <span class="c-kw">return</span> a[i] == b[i];
 }</div>
           </div>
 
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Desglose pieza por pieza</h4>
+            <ul style="font-size: 0.8rem; line-height: 1.55; margin-left: 16px;">
+              <li><code>while(a[i] != '\0' &amp;&amp; b[i] != '\0')</code>: sigue iterando mientras <b>ambas</b> cadenas tengan letras por comparar.</li>
+              <li><code>if(a[i] != b[i]) return false;</code>: apenas difiere un carácter, corta y retorna falso.</li>
+              <li><code>i++;</code>: avanza a la siguiente casilla.</li>
+              <li><code>return a[i] == b[i];</code>: comprueba que ambas hayan llegado al <code>'\0'</code> al mismo tiempo.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: ¿POR QUÉ return a[i] == b[i] AL FINAL? -->
+      <section>
+        <h2><span class="section-num">05</span> El Secreto de <code>return a[i] == b[i];</code></h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          ¿Por qué no ponemos simplemente <code>return true;</code> al salir del <code>while</code>? Analicemos dos trazas:
+        </p>
+
+        <div class="grid-2">
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Traza de Ejecución: "banana", 'a'</h4>
-            <div class="array-container" style="justify-content: flex-start; margin: 10px 0;">
-              <div class="array-cell-wrapper"><span class="array-index">0</span><div class="array-cell">'b'</div></div>
-              <div class="array-cell-wrapper"><span class="array-index">1</span><div class="array-cell match">'a'</div></div>
-              <div class="array-cell-wrapper"><span class="array-index">2</span><div class="array-cell">'n'</div></div>
-              <div class="array-cell-wrapper"><span class="array-index">3</span><div class="array-cell match">'a'</div></div>
-              <div class="array-cell-wrapper"><span class="array-index">4</span><div class="array-cell">'n'</div></div>
-              <div class="array-cell-wrapper"><span class="array-index">5</span><div class="array-cell match">'a'</div></div>
-              <div class="array-cell-wrapper"><span class="array-index">6</span><div class="array-cell">'\0'</div></div>
-            </div>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              Las posiciones 1, 3 y 5 coinciden con <code>'a'</code>.
-              <br><b>Resultado:</b> <code>contador = 3</code>.
+            <h4 style="color: #34d399; margin-bottom: 6px;">Caso 1: <code>"hola"</code> vs <code>"hola"</code></h4>
+            <table class="trace-table">
+              <thead>
+                <tr><th>i</th><th>a[i]</th><th>b[i]</th><th>¿Sigue el while?</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>0..3</td><td>'h','o','l','a'</td><td>'h','o','l','a'</td><td>Sí (iguales, i++)</td></tr>
+                <tr><td>4</td><td><code>'\0'</code></td><td><code>'\0'</code></td><td>No (ambos son '\0')</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size: 0.8rem; margin: 8px 0 0;">
+              Al salir con <code>i = 4</code>: evalúa <code>a[4] == b[4]</code> ➔ <code>'\0' == '\0'</code> ➔ devuelve <b><code>true</code></b>.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24; margin-bottom: 6px;">Caso 2: <code>"hola"</code> vs <code>"holas"</code></h4>
+            <table class="trace-table">
+              <thead>
+                <tr><th>i</th><th>a[i]</th><th>b[i]</th><th>¿Sigue el while?</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>0..3</td><td>'h','o','l','a'</td><td>'h','o','l','a'</td><td>Sí (iguales, i++)</td></tr>
+                <tr><td>4</td><td><code>'\0'</code></td><td><code>'s'</code></td><td>No (<code>a[4]</code> llegó a '\0')</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size: 0.8rem; margin: 8px 0 0;">
+              Al salir con <code>i = 4</code>: evalúa <code>a[4] == b[4]</code> ➔ <code>'\0' == 's'</code> ➔ devuelve <b><code>false</code></b>. ¡Detecta distinta longitud!
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: COMIENZA CON -->
+      <!-- SLIDE 7: PROGRAMA COMPLETO DE COMPARACIÓN MANUAL -->
       <section>
-        <h2><span class="section-num">04</span> Comprobar si Comienza con una Subcadena</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">¿Empieza "programacion" con el prefijo "pro"? Algoritmo de verificación inicial.</p>
+        <h2><span class="section-num">06</span> Programa Completo: Probando <code>sonIguales</code></h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">main_son_iguales.c</span>
+              <span class="code-badge">C99 Completo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
 
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">comienza_con.c</span>
-            <span class="code-badge">Prefijos</span>
-          </div>
-          <div class="code-body"><span class="c-kw">bool</span> <span class="c-fn">comienzaCon</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">char</span> subcadena[]) 
-{ 
-    <span class="c-kw">int</span> i = <span class="c-num">0</span>; 
-    
-    <span class="c-cmt">// Recorremos hasta que termine la subcadena que queremos buscar</span>
-    <span class="c-kw">while</span>(subcadena[i] != <span class="c-str">'\0'</span>) 
-    { 
-        <span class="c-kw">if</span>(cadena[i] != subcadena[i]) 
-        { 
-            <span class="c-kw">return</span> <span class="c-kw">false</span>; 
-        } 
-        i++; 
-    } 
-    <span class="c-kw">return</span> <span class="c-kw">true</span>; 
+<span class="c-kw">bool</span> <span class="c-fn">sonIguales</span>(<span class="c-kw">char</span> a[], <span class="c-kw">char</span> b[]) {
+    <span class="c-kw">int</span> i = <span class="c-num">0</span>;
+    <span class="c-kw">while</span> (a[i] != <span class="c-str">'\0'</span> &amp;&amp; b[i] != <span class="c-str">'\0'</span>) {
+        <span class="c-kw">if</span> (a[i] != b[i]) {
+            <span class="c-kw">return</span> <span class="c-kw">false</span>;
+        }
+        i++;
+    }
+    <span class="c-kw">return</span> a[i] == b[i];
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> p1[] = <span class="c-str">"hola"</span>;
+    <span class="c-kw">char</span> p2[] = <span class="c-str">"hola"</span>;
+    <span class="c-kw">char</span> p3[] = <span class="c-str">"holas"</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"p1 y p2: %d\n"</span>, <span class="c-fn">sonIguales</span>(p1, p2));
+    <span class="c-fn">printf</span>(<span class="c-str">"p1 y p3: %d\n"</span>, <span class="c-fn">sonIguales</span>(p1, p3));
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./son_iguales</span>
+p1 y p2: 1
+p1 y p3: 0</div>
+            </div>
+            <div class="box box-indigo" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.8rem;">
+                Recordá que en C <code>true</code> se imprime como <code>1</code> y <code>false</code> como <code>0</code> al usar <code>%d</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: 9. BUSCAR CARACTERES DENTRO DE UN STRING -->
+      <section>
+        <h2><span class="section-num">07</span> 9. Buscar y Contar Caracteres en un String</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Problema del Apunte</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Pedir una cadena y un carácter y mostrar <b>cuántas veces aparece ese carácter</b> dentro del String.
+          </p>
         </div>
 
-        <div class="box box-indigo">
-          <h4 style="color: #818cf8; margin-bottom: 4px;">Lógica del Algoritmo</h4>
-          <p style="font-size: 0.88rem; margin: 0; color: #cbd5e1;">
-            Comparamos <code>cadena[0] == subcadena[0]</code> ('p' == 'p'), luego <code>cadena[1] == subcadena[1]</code> ('r' == 'r'), luego <code>cadena[2] == subcadena[2]</code> ('o' == 'o'). Como <code>subcadena[3] == '\0'</code>, el bucle finaliza con éxito y devuelve <code>true</code>.
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin: 12px 0 6px;">
+          Por ejemplo, si tenemos <b>Cadena:</b> <code>"banana"</code> y <b>Carácter:</b> <code>'a'</code>:
+        </p>
+
+        <div class="array-container" style="margin: 10px 0;">
+          <div class="array-cell-wrapper"><span class="array-index">Pos 0</span><div class="array-cell">'b'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">Pos 1 ↑</span><div class="array-cell match">'a'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">Pos 2</span><div class="array-cell">'n'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">Pos 3 ↑</span><div class="array-cell match">'a'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">Pos 4</span><div class="array-cell">'n'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">Pos 5 ↑</span><div class="array-cell match">'a'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">Pos 6</span><div class="array-cell">'\0'</div></div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.88rem;">
+            ✅ Las posiciones <code>1</code>, <code>3</code> y <code>5</code> coinciden con <code>'a'</code> ➔ <b>Aparece: 3 veces</b>.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 6: SUSTITUIR CARÁCTER -->
+      <!-- SLIDE 9: FUNCIÓN contarCaracter Y QUÉ COMBINAMOS -->
       <section>
-        <h2><span class="section-num">05</span> Modificar un String: Sustituir Caracteres</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Como un String es un arreglo mutable en C, podemos alterar sus casillas directamente.</p>
-
-        <div class="grid-2">
+        <h2><span class="section-num">08</span> Función <code>contarCaracter</code> y Conceptos Integrados</h2>
+        <div class="grid-2" style="align-items: center;">
           <div class="code-window">
             <div class="code-header">
-              <span class="code-title">reemplazar.c</span>
-              <span class="code-badge">Mutación</span>
+              <span class="code-title">contar_caracter.c</span>
+              <span class="code-badge">Sección 9 del Apunte</span>
             </div>
-            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span> 
+            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">contarCaracter</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">char</span> caracter)
+{
+    <span class="c-kw">int</span> contador = <span class="c-num">0</span>;
 
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>) 
-{ 
-    <span class="c-kw">char</span> cadena[] = <span class="c-str">"banana"</span>; 
-    <span class="c-kw">char</span> buscar = <span class="c-char">'a'</span>; 
-    <span class="c-kw">char</span> reemplazar = <span class="c-char">'o'</span>; 
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; cadena[i] != <span class="c-str">'\0'</span>; i++)
+    {
+        <span class="c-kw">if</span>(cadena[i] == caracter)
+        {
+            contador++;
+        }
+    }
 
-    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; cadena[i] != <span class="c-str">'\0'</span>; i++) 
-    { 
-        <span class="c-kw">if</span>(cadena[i] == buscar) 
-        { 
-            cadena[i] = reemplazar; 
-        } 
-    } 
-    
-    <span class="c-fn">printf</span>(<span class="c-str">"Resultado: %s\n"</span>, cadena); 
-    <span class="c-kw">return</span> <span class="c-num">0</span>; 
+    <span class="c-kw">return</span> contador;
+}</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Qué estamos combinando acá?</h4>
+            <p style="font-size: 0.83rem; color: #cbd5e1; margin-bottom: 6px;">
+              Como destaca el apunte, acá ya estamos mezclando <b>8 conceptos fundamentales</b>:
+            </p>
+            <ul style="font-size: 0.8rem; line-height: 1.5; margin-left: 18px;">
+              <li><b>Strings</b> y <b>arreglos</b> (<code>char cadena[]</code>).</li>
+              <li>Tipo <b><code>char</code></b> individual (<code>char caracter</code>).</li>
+              <li>Ciclo <b><code>for</code></b> hasta <code>'\0'</code>.</li>
+              <li>Condicional <b><code>if</code></b> y <b>comparación</b> (<code>==</code>).</li>
+              <li>Variable <b>contador</b> (<code>contador++</code>).</li>
+              <li><b>Funciones</b> con retorno entero (<code>return contador;</code>).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: TRAZA COMPLETA DE contarCaracter -->
+      <section>
+        <h2><span class="section-num">09</span> Seguimiento Paso a Paso: <code>contarCaracter("banana", 'a')</code></h2>
+        <div class="grid-1-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">uso_contar.c</span>
+              <span class="code-badge">Programa</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">contarCaracter</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">char</span> c) {
+    <span class="c-kw">int</span> contador = <span class="c-num">0</span>;
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; cadena[i] != <span class="c-str">'\0'</span>; i++) {
+        <span class="c-kw">if</span> (cadena[i] == c) {
+            contador++;
+        }
+    }
+    <span class="c-kw">return</span> contador;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> cant = <span class="c-fn">contarCaracter</span>(<span class="c-str">"banana"</span>, <span class="c-char">'a'</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Resultado: %d\n"</span>, cant);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr><th>Vuelta (i)</th><th>cadena[i]</th><th>¿Es == 'a'?</th><th>contador</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Inicio</td><td>—</td><td>—</td><td><code>0</code></td></tr>
+                <tr><td><code>i = 0</code></td><td><code>'b'</code></td><td>No</td><td><code>0</code></td></tr>
+                <tr><td><code>i = 1</code></td><td><code>'a'</code></td><td><b>Sí (+1)</b></td><td><b><code>1</code></b></td></tr>
+                <tr><td><code>i = 2</code></td><td><code>'n'</code></td><td>No</td><td><code>1</code></td></tr>
+                <tr><td><code>i = 3</code></td><td><code>'a'</code></td><td><b>Sí (+1)</b></td><td><b><code>2</code></b></td></tr>
+                <tr><td><code>i = 4</code></td><td><code>'n'</code></td><td>No</td><td><code>2</code></td></tr>
+                <tr><td><code>i = 5</code></td><td><code>'a'</code></td><td><b>Sí (+1)</b></td><td><b><code>3</code></b></td></tr>
+                <tr><td><code>i = 6</code></td><td><code>'\0'</code></td><td>Termina el <code>for</code></td><td>Retorna <b><code>3</code></b></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: 10. BUSCAR SUBCADENAS Y PREFIJOS -->
+      <section>
+        <h2><span class="section-num">10</span> 10. Buscar Subcadenas vs. Comprobar Prefijo</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Qué es una subcadena?</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Una <b>subcadena</b> es una cadena más corta que aparece adentro de otra. Por ejemplo, en <code>"Hola mundo"</code> la subcadena <code>"mundo"</code> está contenida; y en <code>"programacion"</code> la subcadena <code>"gram"</code> también está contenida.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Caso A: ¿Comienza con <code>"pro"</code>?</h4>
+            <div style="font-family: var(--font-mono); font-size: 0.9rem; background: rgba(0,0,0,0.35); padding: 8px 12px; border-radius: 6px; margin: 6px 0;">
+              Cadena: &nbsp;&nbsp;&nbsp;<span style="color: #34d399; font-weight: bold;">p r o</span> g r a m a c i o n<br>
+              Subcadena: <span style="color: #34d399; font-weight: bold;">p r o</span>
+            </div>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Comparamos los caracteres iniciales: <code>'p'=='p'</code>, <code>'r'=='r'</code>, <code>'o'=='o'</code>. Todos coinciden ➔ <b>Resultado: Sí (<code>true</code>)</b>.
+            </p>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">Caso B: ¿Comienza con <code>"gram"</code>?</h4>
+            <div style="font-family: var(--font-mono); font-size: 0.9rem; background: rgba(0,0,0,0.35); padding: 8px 12px; border-radius: 6px; margin: 6px 0;">
+              Cadena: &nbsp;&nbsp;&nbsp;<span style="color: #f87171; font-weight: bold;">p</span> r o <span style="color: #fbbf24;">g r a m</span> a c i o n<br>
+              Subcadena: <span style="color: #f87171; font-weight: bold;">g</span> r a m
+            </div>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Aunque <code>"gram"</code> está adentro de la palabra, en la posición 0 tenemos <code>'p' != 'g'</code>. No empieza con <code>"gram"</code> ➔ <b>Resultado: No (<code>false</code>)</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: ALGORITMO comienzaCon DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">11</span> Algoritmo del Apunte: <code>comienzaCon</code></h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">comienza_con.c</span>
+              <span class="code-badge">Sección 10 del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">bool</span> <span class="c-fn">comienzaCon</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">char</span> subcadena[])
+{
+    <span class="c-kw">int</span> i = <span class="c-num">0</span>;
+    <span class="c-kw">while</span>(subcadena[i] != <span class="c-str">'\0'</span>)
+    {
+        <span class="c-kw">if</span>(cadena[i] != subcadena[i])
+        {
+            <span class="c-kw">return</span> <span class="c-kw">false</span>;
+        }
+        i++;
+    }
+    <span class="c-kw">return</span> <span class="c-kw">true</span>;
+}</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué el <code>while</code> mira a <code>subcadena[i]</code>?</h4>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">
+              Solo necesitamos verificar tantas letras como tenga el prefijo buscado (<code>subcadena</code>):
+            </p>
+            <ul style="font-size: 0.8rem; line-height: 1.5; margin-left: 16px;">
+              <li>Si <code>subcadena</code> es <code>"pro"</code>, el ciclo da 3 vueltas (índices 0, 1 y 2).</li>
+              <li>Cuando llega a <code>subcadena[3]</code> que es <code>'\0'</code>, significa que todas las letras del prefijo coincidieron.</li>
+              <li>¿Y si <code>cadena</code> era más corta (ej. <code>"pr"</code>)? En <code>i = 2</code>, <code>cadena[2]</code> es <code>'\0'</code>, que es distinto de <code>'o'</code>, y retorna <code>false</code> sin salirse de memoria.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: TRAZA Y PROGRAMA COMPLETO DE comienzaCon -->
+      <section>
+        <h2><span class="section-num">12</span> Trazas Comparativas: <code>"pro"</code> vs <code>"gram"</code></h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">main_comienza_con.c</span>
+              <span class="code-badge">C99 Completo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">bool</span> <span class="c-fn">comienzaCon</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">char</span> sub[]) {
+    <span class="c-kw">int</span> i = <span class="c-num">0</span>;
+    <span class="c-kw">while</span> (sub[i] != <span class="c-str">'\0'</span>) {
+        <span class="c-kw">if</span> (cadena[i] != sub[i]) {
+            <span class="c-kw">return</span> <span class="c-kw">false</span>;
+        }
+        i++;
+    }
+    <span class="c-kw">return</span> <span class="c-kw">true</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> texto[] = <span class="c-str">"programacion"</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Con pro:  %d\n"</span>, <span class="c-fn">comienzaCon</span>(texto, <span class="c-str">"pro"</span>));
+    <span class="c-fn">printf</span>(<span class="c-str">"Con gram: %d\n"</span>, <span class="c-fn">comienzaCon</span>(texto, <span class="c-str">"gram"</span>));
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr><th>Llamada</th><th>i</th><th>cadena[i]</th><th>sub[i]</th><th>Acción</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>("programacion","pro")</code></td><td>0</td><td><code>'p'</code></td><td><code>'p'</code></td><td>Iguales ➔ <code>i=1</code></td></tr>
+                <tr><td><code>("programacion","pro")</code></td><td>1</td><td><code>'r'</code></td><td><code>'r'</code></td><td>Iguales ➔ <code>i=2</code></td></tr>
+                <tr><td><code>("programacion","pro")</code></td><td>2</td><td><code>'o'</code></td><td><code>'o'</code></td><td>Iguales ➔ <code>i=3</code></td></tr>
+                <tr><td><code>("programacion","pro")</code></td><td>3</td><td><code>'g'</code></td><td><code>'\0'</code></td><td>Fin while ➔ <b><code>true</code></b></td></tr>
+                <tr><td><code>("programacion","gram")</code></td><td>0</td><td><code>'p'</code></td><td><code>'g'</code></td><td>Distintos ➔ <b><code>false</code></b></td></tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 8px;">
+              <div class="terminal-body"><span class="terminal-prompt">$ ./prefijo</span>
+Con pro:  1
+Con gram: 0</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: 11. MODIFICAR STRINGS -->
+      <section>
+        <h2><span class="section-num">13</span> 11. Modificar Strings Directamente</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Propiedad clave de los arreglos <code>char[]</code></h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Como un String en C es un arreglo de <code>char</code> en memoria, <b>podemos modificar cualquiera de sus posiciones</b> asignando un nuevo carácter entre comillas simples.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px; align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">modificar_letra.c</span>
+              <span class="code-badge">Sección 11</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> palabra[] = <span class="c-str">"hola"</span>;
+
+    palabra[<span class="c-num">0</span>] = <span class="c-char">'H'</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"%s\n"</span>, palabra); <span class="c-cmt">// Hola</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Antes y después en RAM</h4>
+            <p style="font-size: 0.82rem; margin-bottom: 4px;">Antes de <code>palabra[0] = 'H';</code>:</p>
+            <div class="array-container" style="margin: 4px 0 10px;">
+              <div class="array-cell-wrapper"><span class="array-index">0</span><div class="array-cell">'h'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">1</span><div class="array-cell">'o'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">2</span><div class="array-cell">'l'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">3</span><div class="array-cell">'a'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">4</span><div class="array-cell">'\0'</div></div>
+            </div>
+            <p style="font-size: 0.82rem; margin-bottom: 4px;">Después de <code>palabra[0] = 'H';</code>:</p>
+            <div class="array-container" style="margin: 4px 0;">
+              <div class="array-cell-wrapper"><span class="array-index">0</span><div class="array-cell match">'H'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">1</span><div class="array-cell">'o'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">2</span><div class="array-cell">'l'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">3</span><div class="array-cell">'a'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">4</span><div class="array-cell">'\0'</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: SUSTITUIR UN CARÁCTER POR OTRO -->
+      <section>
+        <h2><span class="section-num">14</span> Sustituir Todas las Apariciones de un Carácter</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Uno de los ejercicios clásicos del apunte pide: <b>Sustituir la aparición de un carácter por otro</b>.
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Ejemplo del Apunte</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 16px;">
+              <li><b>Cadena original:</b> <code>"banana"</code></li>
+              <li><b>Carácter a buscar:</b> <code>'a'</code></li>
+              <li><b>Carácter para reemplazar:</b> <code>'o'</code></li>
+              <li><b>Resultado esperado:</b> <code>"bonono"</code></li>
+            </ul>
+            <p style="font-size: 0.83rem; margin-top: 8px; color: #cbd5e1;">
+              <b>La idea en cada casilla <code>i</code> es:</b><br>
+              ¿Este carácter <code>cadena[i]</code> es el que estoy buscando?<br>
+              • <b>SÍ</b> → lo reemplazo (<code>cadena[i] = reemplazar;</code>)<br>
+              • <b>NO</b> → sigo de largo
+            </p>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">reemplazar_banana.c</span>
+              <span class="code-badge">Sección 11 del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">char</span> cadena[] = <span class="c-str">"banana"</span>;
+    <span class="c-kw">char</span> buscar = <span class="c-char">'a'</span>;
+    <span class="c-kw">char</span> reemplazar = <span class="c-char">'o'</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; cadena[i] != <span class="c-str">'\0'</span>; i++)
+    {
+        <span class="c-kw">if</span>(cadena[i] == buscar)
+        {
+            cadena[i] = reemplazar;
+        }
+    }
+    <span class="c-fn">printf</span>(<span class="c-str">"Resultado: %s\n"</span>, cadena);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: TRAZA DE SUSTITUCIÓN EN "banana" -->
+      <section>
+        <h2><span class="section-num">15</span> Traza de Memoria: De <code>"banana"</code> a <code>"bonono"</code></h2>
+        <table class="trace-table">
+          <thead>
+            <tr><th>Paso (i)</th><th>Carácter leído</th><th>¿<code>cadena[i] == 'a'</code>?</th><th>Acción ejecutada</th><th>Estado del arreglo <code>cadena</code></th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>i = 0</code></td><td><code>'b'</code></td><td>Falso</td><td>No hace nada</td><td><code>[ 'b', 'a', 'n', 'a', 'n', 'a', '\0' ]</code></td></tr>
+            <tr><td><code>i = 1</code></td><td><code>'a'</code></td><td><b>Verdadero</b></td><td><code>cadena[1] = 'o'</code></td><td><code>[ 'b', <b>'o'</b>, 'n', 'a', 'n', 'a', '\0' ]</code></td></tr>
+            <tr><td><code>i = 2</code></td><td><code>'n'</code></td><td>Falso</td><td>No hace nada</td><td><code>[ 'b', 'o', 'n', 'a', 'n', 'a', '\0' ]</code></td></tr>
+            <tr><td><code>i = 3</code></td><td><code>'a'</code></td><td><b>Verdadero</b></td><td><code>cadena[3] = 'o'</code></td><td><code>[ 'b', 'o', 'n', <b>'o'</b>, 'n', 'a', '\0' ]</code></td></tr>
+            <tr><td><code>i = 4</code></td><td><code>'n'</code></td><td>Falso</td><td>No hace nada</td><td><code>[ 'b', 'o', 'n', 'o', 'n', 'a', '\0' ]</code></td></tr>
+            <tr><td><code>i = 5</code></td><td><code>'a'</code></td><td><b>Verdadero</b></td><td><code>cadena[5] = 'o'</code></td><td><code>[ 'b', 'o', 'n', 'o', 'n', <b>'o'</b>, '\0' ]</code></td></tr>
+            <tr><td><code>i = 6</code></td><td><code>'\0'</code></td><td>Fin del ciclo</td><td>Imprime <code>%s</code></td><td><b>Resultado: <code>bonono</code></b></td></tr>
+          </tbody>
+        </table>
+
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            ⚠️ <b>Cuidado con los signos:</b> Para comparar usamos doble igual <code>if (cadena[i] == buscar)</code> y para modificar usamos un solo igual <code>cadena[i] = reemplazar;</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: 12. CONVERTIR MAYÚSCULAS Y MINÚSCULAS -->
+      <section>
+        <h2><span class="section-num">16</span> 12. Convertir Mayúsculas y Minúsculas (Tabla ASCII)</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Objetivo del Ejercicio</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Recorrer una cadena y <b>convertir las mayúsculas en minúsculas y las minúsculas en mayúsculas</b>. Por ejemplo: <code>"Hola Mundo"</code> se transforma en <code>"hOLA mUNDO"</code>.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Cómo sabemos si es mayúscula o minúscula?</h4>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">
+              En C, cada carácter tiene un <b>código numérico ASCII</b> asociado y las letras del alfabeto inglés están ordenadas en rangos continuos:
+            </p>
+            <ul style="font-size: 0.8rem; line-height: 1.55; margin-left: 16px;">
+              <li>Mayúsculas <code>'A'</code>, <code>'B'</code>, ..., <code>'Z'</code> ➔ van del <b>65 al 90</b>.<br>
+                Comprobación: <code>if (cadena[i] &gt;= 'A' &amp;&amp; cadena[i] &lt;= 'Z')</code></li>
+              <li>Minúsculas <code>'a'</code>, <code>'b'</code>, ..., <code>'z'</code> ➔ van del <b>97 al 122</b>.<br>
+                Comprobación: <code>if (cadena[i] &gt;= 'a' &amp;&amp; cadena[i] &lt;= 'z')</code></li>
+            </ul>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">La Constante Mágica: 32</h4>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">
+              La distancia entre cualquier letra mayúscula y su correspondiente minúscula en la tabla ASCII <b>siempre es exactamente 32</b>:
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 6px; color: #fde68a;">
+              'A' = 65 &nbsp;&nbsp;──(+32)──►&nbsp;&nbsp; 'a' = 97<br>
+              'H' = 72 &nbsp;&nbsp;──(+32)──►&nbsp;&nbsp; 'h' = 104<br>
+              'o' = 111 &nbsp;──(-32)──►&nbsp;&nbsp; 'O' = 79
+            </div>
+            <p style="font-size: 0.8rem; margin: 6px 0 0;">
+              • Mayúscula a minúscula: <b><code>+ 32</code></b> &nbsp;|&nbsp; Minúscula a mayúscula: <b><code>- 32</code></b>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: FUNCIÓN cambiarMayusculasMinusculas Y TRAZA -->
+      <section>
+        <h2><span class="section-num">17</span> Algoritmo <code>cambiarMayusculasMinusculas</code></h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">cambiar_mayus_minus.c</span>
+              <span class="code-badge">Sección 12 del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-type">void</span> <span class="c-fn">cambiarMayusculasMinusculas</span>(<span class="c-kw">char</span> cadena[])
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; cadena[i] != <span class="c-str">'\0'</span>; i++)
+    {
+        <span class="c-kw">if</span>(cadena[i] &gt;= <span class="c-char">'A'</span> &amp;&amp; cadena[i] &lt;= <span class="c-char">'Z'</span>)
+        {
+            cadena[i] = cadena[i] + <span class="c-num">32</span>;
+        }
+        <span class="c-kw">else if</span>(cadena[i] &gt;= <span class="c-char">'a'</span> &amp;&amp; cadena[i] &lt;= <span class="c-char">'z'</span>)
+        {
+            cadena[i] = cadena[i] - <span class="c-num">32</span>;
+        }
+    }
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr><th>i</th><th>Original</th><th>Rango detectado</th><th>Operación</th><th>Nuevo</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>0</td><td><code>'H'</code></td><td><code>'A'..'Z'</code></td><td><code>'H' + 32</code></td><td><b><code>'h'</code></b></td></tr>
+                <tr><td>1</td><td><code>'o'</code></td><td><code>'a'..'z'</code></td><td><code>'o' - 32</code></td><td><b><code>'O'</code></b></td></tr>
+                <tr><td>2</td><td><code>'l'</code></td><td><code>'a'..'z'</code></td><td><code>'l' - 32</code></td><td><b><code>'L'</code></b></td></tr>
+                <tr><td>3</td><td><code>'a'</code></td><td><code>'a'..'z'</code></td><td><code>'a' - 32</code></td><td><b><code>'A'</code></b></td></tr>
+                <tr><td>4</td><td><code>' '</code></td><td>Ninguno (espacio)</td><td>No entra al if</td><td><b><code>' '</code></b></td></tr>
+                <tr><td>5</td><td><code>'M'</code></td><td><code>'A'..'Z'</code></td><td><code>'M' + 32</code></td><td><b><code>'m'</code></b></td></tr>
+              </tbody>
+            </table>
+            <div class="box box-emerald" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                💡 <b>¿Por qué es clave usar <code>else if</code>?</b> Si usáramos dos <code>if</code> separados, la <code>'H'</code> pasaría a <code>'h'</code> en el primer <code>if</code> y enseguida entraría al segundo <code>if</code> volviendo a <code>'H'</code>. Y los espacios o signos quedan intactos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: 13. INVERTIR UN STRING: IDEA Y FÓRMULA -->
+      <section>
+        <h2><span class="section-num">18</span> 13. Invertir un String: La Idea del Espejo</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Problema del Apunte</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Dada una cadena original (ej. <code>"Hola"</code>), generar otra cadena resultado de invertir la primera (<code>"aloH"</code>).
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px; align-items: center;">
+          <div>
+            <p style="font-size: 0.82rem; color: #38bdf8; font-weight: 600; margin-bottom: 4px;">Cadena Original (<code>longitud = 4</code>):</p>
+            <div class="array-container" style="margin: 4px 0 12px;">
+              <div class="array-cell-wrapper"><span class="array-index">Pos 0</span><div class="array-cell">'H'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">Pos 1</span><div class="array-cell">'o'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">Pos 2</span><div class="array-cell">'l'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">Pos 3</span><div class="array-cell highlight">'a'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">Pos 4</span><div class="array-cell">'\0'</div></div>
+            </div>
+
+            <p style="font-size: 0.82rem; color: #34d399; font-weight: 600; margin-bottom: 4px;">Cadena Invertida (copiando de atrás hacia adelante):</p>
+            <div class="array-container" style="margin: 4px 0;">
+              <div class="array-cell-wrapper"><span class="array-index">Pos 0</span><div class="array-cell match">'a'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">Pos 1</span><div class="array-cell match">'l'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">Pos 2</span><div class="array-cell match">'o'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">Pos 3</span><div class="array-cell match">'H'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">Pos 4</span><div class="array-cell highlight">'\0'</div></div>
+            </div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿De dónde sale <code>longitud - 1 - i</code>?</h4>
+            <p style="font-size: 0.82rem; color: #cbd5e1;">
+              Si <code>longitud = 4</code>, la última letra válida está en <code>longitud - 1 = 3</code> (porque en la posición 4 está el <code>'\0'</code>). A medida que <code>i</code> sube (0, 1, 2, 3), restamos <code>i</code> para bajar (3, 2, 1, 0):
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; background: rgba(0,0,0,0.35); padding: 8px 12px; border-radius: 6px; color: #c7d2fe;">
+              i = 0 → invertida[0] = cadena[4 - 1 - 0] = cadena[3] ('a')<br>
+              i = 1 → invertida[1] = cadena[4 - 1 - 1] = cadena[2] ('l')<br>
+              i = 2 → invertida[2] = cadena[4 - 1 - 2] = cadena[1] ('o')<br>
+              i = 3 → invertida[3] = cadena[4 - 1 - 3] = cadena[0] ('H')
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: ALGORITMO invertirString Y PROGRAMA -->
+      <section>
+        <h2><span class="section-num">19</span> Algoritmo del Apunte: <code>invertirString</code></h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">invertir_string.c</span>
+              <span class="code-badge">Sección 13 del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;string.h&gt;</span>
+
+<span class="c-type">void</span> <span class="c-fn">invertirString</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">char</span> invertida[], <span class="c-kw">int</span> longitud)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; longitud; i++)
+    {
+        invertida[i] = cadena[longitud - <span class="c-num">1</span> - i];
+    }
+
+    invertida[longitud] = <span class="c-str">'\0'</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> orig[] = <span class="c-str">"Hola"</span>;
+    <span class="c-kw">char</span> inv[<span class="c-num">10</span>];
+    <span class="c-fn">invertirString</span>(orig, inv, <span class="c-num">4</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Original:  %s\n"</span>, orig);
+    <span class="c-fn">printf</span>(<span class="c-str">"Invertida: %s\n"</span>, inv);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./invertir</span>
+Original:  Hola
+Invertida: aloH</div>
+            </div>
+
+            <div class="box box-rose" style="margin-top: 12px;">
+              <h4 style="color: #f87171; margin-bottom: 4px;">¡Nunca olvides <code>invertida[longitud] = '\0';</code>!</h4>
+              <p style="font-size: 0.82rem; margin: 0;">
+                El ciclo <code>for</code> copia únicamente las 4 letras (posiciones 0, 1, 2 y 3). Si no agregás manualmente el <code>'\0'</code> en la posición <code>longitud</code> (4), <code>invertida</code> no tendrá marca de fin y <code>printf("%s", inv)</code> imprimirá basura de la memoria.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: 14. PALÍNDROMOS: CONCEPTO Y EJEMPLOS -->
+      <section>
+        <h2><span class="section-num">20</span> 14. Palíndromos: Definición y Ejemplos del Apunte</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Qué es una palabra palíndroma?</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Una palabra <b>palíndroma</b> es aquella que se lee exactamente igual de adelante hacia atrás que de atrás hacia adelante.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-emerald" style="text-align: center;">
+            <h4 style="color: #34d399;"><code>"radar"</code></h4>
+            <p style="font-family: var(--font-mono); font-size: 0.85rem; margin: 6px 0;">
+              → r a d a r<br>
+              ← r a d a r
+            </p>
+            <span class="badge badge-emerald">Es Palíndromo (5 letras)</span>
+          </div>
+
+          <div class="box box-indigo" style="text-align: center;">
+            <h4 style="color: #818cf8;"><code>"reconocer"</code></h4>
+            <p style="font-family: var(--font-mono); font-size: 0.85rem; margin: 6px 0;">
+              → r e c o n o c e r<br>
+              ← r e c o n o c e r
+            </p>
+            <span class="badge badge-indigo">Es Palíndromo (9 letras)</span>
+          </div>
+
+          <div class="box box-amber" style="text-align: center;">
+            <h4 style="color: #fbbf24;"><code>"neuquen"</code></h4>
+            <p style="font-family: var(--font-mono); font-size: 0.85rem; margin: 6px 0;">
+              → n e u q u e n<br>
+              ← n e u q u e n
+            </p>
+            <span class="badge badge-amber">Es Palíndromo (7 letras)</span>
+          </div>
+        </div>
+
+        <div class="box box-purple" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 <b>Estrategia sin usar otro vector:</b> En vez de gastar memoria creando una cadena invertida, comparamos directamente los <b>extremos simétricos</b> de la misma palabra acercándonos hacia el centro.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: ALGORITMO esPalindromo Y POR QUÉ longitud / 2 -->
+      <section>
+        <h2><span class="section-num">21</span> Algoritmo del Apunte: <code>esPalindromo</code></h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">es_palindromo.c</span>
+              <span class="code-badge">Sección 14 del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">bool</span> <span class="c-fn">esPalindromo</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">int</span> longitud)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; longitud / <span class="c-num">2</span>; i++)
+    {
+        <span class="c-kw">if</span>(cadena[i] != cadena[longitud - <span class="c-num">1</span> - i])
+        {
+            <span class="c-kw">return</span> <span class="c-kw">false</span>;
+        }
+    }
+
+    <span class="c-kw">return</span> <span class="c-kw">true</span>;
+}</div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Cómo funciona sobre <code>"radar"</code> (longitud 5)?</h4>
+            <div class="array-container" style="margin: 8px 0;">
+              <div class="array-cell-wrapper"><span class="array-index">0</span><div class="array-cell match">'r'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">1</span><div class="array-cell highlight">'a'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">2</span><div class="array-cell">'d'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">3</span><div class="array-cell highlight">'a'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">4</span><div class="array-cell match">'r'</div></div>
+            </div>
+            <ul style="font-size: 0.8rem; line-height: 1.5; margin-left: 16px;">
+              <li><b>Vuelta <code>i = 0</code>:</b> compara <code>cadena[0]</code> (<code>'r'</code>) con <code>cadena[4]</code> (<code>'r'</code>) ➔ Iguales.</li>
+              <li><b>Vuelta <code>i = 1</code>:</b> compara <code>cadena[1]</code> (<code>'a'</code>) con <code>cadena[3]</code> (<code>'a'</code>) ➔ Iguales.</li>
+              <li><b>¿Por qué <code>i &lt; longitud / 2</code>?</b> En división entera <code>5 / 2 = 2</code>. No hace falta comparar el centro (<code>'d'</code>) ni volver a comparar los lados ya revisados.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: TRAZA DE PALÍNDROMOS EN "reconocer", "neuquen" Y "hola" -->
+      <section>
+        <h2><span class="section-num">22</span> Trazas: <code>"neuquen"</code>, <code>"reconocer"</code> y <code>"hola"</code></h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8; margin-bottom: 4px;">Traza exitosa: <code>"neuquen"</code> (longitud = 7, mitad = 3)</h4>
+            <table class="trace-table">
+              <thead>
+                <tr><th>i</th><th>Izquierda <code>[i]</code></th><th>Derecha <code>[6 - i]</code></th><th>¿Son iguales?</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>0</code></td><td><code>cadena[0] = 'n'</code></td><td><code>cadena[6] = 'n'</code></td><td>Sí ✔️</td></tr>
+                <tr><td><code>1</code></td><td><code>cadena[1] = 'e'</code></td><td><code>cadena[5] = 'e'</code></td><td>Sí ✔️</td></tr>
+                <tr><td><code>2</code></td><td><code>cadena[2] = 'u'</code></td><td><code>cadena[4] = 'u'</code></td><td>Sí ✔️</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size: 0.78rem; margin: 6px 0 0;">
+              La <code>'q'</code> central (posición 3) queda en medio. Termina el <code>for</code> y ejecuta <b><code>return true;</code></b> (lo mismo ocurre en las 4 comparaciones de <code>"reconocer"</code>).
+            </p>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #f87171; margin-bottom: 4px;">Corte inmediato: <code>"hola"</code> (longitud = 4, mitad = 2)</h4>
+            <div class="array-container" style="margin: 6px 0;">
+              <div class="array-cell-wrapper"><span class="array-index">0</span><div class="array-cell highlight">'h'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">1</span><div class="array-cell">'o'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">2</span><div class="array-cell">'l'</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">3</span><div class="array-cell highlight">'a'</div></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 6px 0 0;">
+              En la primera vuelta (<code>i = 0</code>), compara:<br>
+              <code>cadena[0]</code> (<code>'h'</code>) con <code>cadena[3]</code> (<code>'a'</code>).<br>
+              Como <code>'h' != 'a'</code>, entra al <code>if</code> y ejecuta <b><code>return false;</code></b> inmediatamente sin perder tiempo revisando el resto.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: PROGRAMA COMPLETO DE PALÍNDROMOS -->
+      <section>
+        <h2><span class="section-num">23</span> Ejemplo Nivel 2: Probando los 4 Casos del Apunte</h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">main_palindromos.c</span>
+              <span class="code-badge">C99 Completo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;string.h&gt;</span>
+
+<span class="c-kw">bool</span> <span class="c-fn">esPalindromo</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">int</span> longitud) {
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; longitud / <span class="c-num">2</span>; i++) {
+        <span class="c-kw">if</span> (cadena[i] != cadena[longitud - <span class="c-num">1</span> - i]) {
+            <span class="c-kw">return</span> <span class="c-kw">false</span>;
+        }
+    }
+    <span class="c-kw">return</span> <span class="c-kw">true</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-fn">printf</span>(<span class="c-str">"radar:     %d\n"</span>, <span class="c-fn">esPalindromo</span>(<span class="c-str">"radar"</span>, <span class="c-num">5</span>));
+    <span class="c-fn">printf</span>(<span class="c-str">"reconocer: %d\n"</span>, <span class="c-fn">esPalindromo</span>(<span class="c-str">"reconocer"</span>, <span class="c-num">9</span>));
+    <span class="c-fn">printf</span>(<span class="c-str">"neuquen:   %d\n"</span>, <span class="c-fn">esPalindromo</span>(<span class="c-str">"neuquen"</span>, <span class="c-num">7</span>));
+    <span class="c-fn">printf</span>(<span class="c-str">"hola:      %d\n"</span>, <span class="c-fn">esPalindromo</span>(<span class="c-str">"hola"</span>, <span class="c-num">4</span>));
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
           </div>
 
           <div class="terminal-window">
             <div class="terminal-header">
-              <span>Salida del Programa</span>
-              <span>bash</span>
+              <span>Terminal</span>
+              <span>Salida</span>
             </div>
-            <div class="terminal-body">
-Resultado: bonono
-            </div>
+            <div class="terminal-body"><span class="terminal-prompt">$ ./palindromos</span>
+radar:     1
+reconocer: 1
+neuquen:   1
+hola:      0</div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 7: MAYÚSCULAS Y MINÚSCULAS CON ASCII -->
+      <!-- SLIDE 25: EJEMPLO NIVEL 3: INVERTIR IN-PLACE (EN EL MISMO ARREGLO) -->
       <section>
-        <h2><span class="section-num">06</span> Inversión de Mayúsculas y Minúsculas (ASCII +32)</h2>
-        <div class="grid-1-2">
-          <div class="box box-amber">
-            <h4 style="color: #fbbf24;">El Secreto de la Tabla ASCII</h4>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              En la codificación ASCII estándar, las letras mayúsculas ('A'-'Z') van del valor 65 al 90, y las minúsculas ('a'-'z') del 97 al 122.
-            </p>
-            <div style="font-family: var(--font-mono); font-size: 0.88rem; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 6px; margin: 8px 0; color: #fde68a;">
-              'a' (97) - 'A' (65) = 32
+        <h2><span class="section-num">24</span> Ejemplo Nivel 3: Invertir sobre el Mismo Vector</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          ¿Y si combinamos la idea de <code>esPalindromo</code> (ir hasta <code>longitud / 2</code>) con una variable auxiliar <code>aux</code> para invertir el String sin usar otro arreglo?
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">invertir_in_place.c</span>
+              <span class="code-badge">Nivel 3</span>
             </div>
-            <ul style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5; margin-left: 14px;">
-              <li>Para pasar de <b>MAYÚSCULA a minúscula</b>: <code>c + 32</code>.</li>
-              <li>Para pasar de <b>minúscula a MAYÚSCULA</b>: <code>c - 32</code>.</li>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-type">void</span> <span class="c-fn">invertirEnSitio</span>(<span class="c-kw">char</span> cad[], <span class="c-kw">int</span> lon) {
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; lon / <span class="c-num">2</span>; i++) {
+        <span class="c-kw">char</span> aux = cad[i];
+        cad[i] = cad[lon - <span class="c-num">1</span> - i];
+        cad[lon - <span class="c-num">1</span> - i] = aux;
+    }
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> palabra[] = <span class="c-str">"Hola"</span>;
+    <span class="c-fn">invertirEnSitio</span>(palabra, <span class="c-num">4</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Invertida: %s\n"</span>, palabra);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué también frena en <code>lon / 2</code>?</h4>
+            <p style="font-size: 0.83rem; color: #cbd5e1;">
+              En <code>"Hola"</code> (longitud 4):
+            </p>
+            <ul style="font-size: 0.8rem; line-height: 1.55; margin-left: 16px;">
+              <li><code>i = 0</code>: intercambia <code>cad[0]</code> (<code>'H'</code>) con <code>cad[3]</code> (<code>'a'</code>) ➔ <code>"aolH"</code>.</li>
+              <li><code>i = 1</code>: intercambia <code>cad[1]</code> (<code>'o'</code>) con <code>cad[2]</code> (<code>'l'</code>) ➔ <code>"aloH"</code>.</li>
+              <li>Si siguiera hasta <code>lon</code>, ¡volvería a intercambiarlos dejándola como al principio!</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: EJEMPLO NIVEL 4: PALÍNDROMO IGNORANDO MAYÚSCULAS -->
+      <section>
+        <h2><span class="section-num">25</span> Ejemplo Nivel 4: Cómo Pensar un Problema Combinado</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Desafío de Integración (Secciones 12 + 14)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Si probamos <code>esPalindromo("Neuquen", 7)</code> da <code>false</code> porque <code>'N'</code> (78) es distinto de <code>'n'</code> (110). ¿Cómo diseñamos un verificador de palíndromos que no distinga mayúsculas de minúsculas?
+          </p>
+        </div>
+
+        <div class="step-list" style="margin-top: 12px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div><b>Dividir el problema:</b> Creamos una pequeña función auxiliar <code>char aMinuscula(char c)</code> que, si recibe una letra entre <code>'A'</code> y <code>'Z'</code>, devuelve <code>c + 32</code>; si no, devuelve <code>c</code> sin cambios.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div><b>Reutilizar la lógica de extremos:</b> En el ciclo <code>for (int i = 0; i &lt; longitud / 2; i++)</code>, tomamos el carácter izquierdo y el derecho pasándolos por <code>aMinuscula</code> antes de compararlos.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div><b>Sin alterar el original:</b> Así <code>"Neuquen"</code> o <code>"Radar"</code> dan <code>true</code> sin modificar el vector original.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: SOLUCIÓN COMPLETA NIVEL 4 -->
+      <section>
+        <h2><span class="section-num">26</span> Código Nivel 4: Palíndromo Sin Importar Mayúsculas</h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">palindromo_insensible.c</span>
+              <span class="code-badge">ASCII + Palíndromo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">char</span> <span class="c-fn">aMinuscula</span>(<span class="c-kw">char</span> c) {
+    <span class="c-kw">if</span> (c &gt;= <span class="c-char">'A'</span> &amp;&amp; c &lt;= <span class="c-char">'Z'</span>) {
+        <span class="c-kw">return</span> c + <span class="c-num">32</span>;
+    }
+    <span class="c-kw">return</span> c;
+}
+
+<span class="c-kw">bool</span> <span class="c-fn">esPalindromoFlex</span>(<span class="c-kw">char</span> cad[], <span class="c-kw">int</span> lon) {
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; lon / <span class="c-num">2</span>; i++) {
+        <span class="c-kw">if</span> (<span class="c-fn">aMinuscula</span>(cad[i]) != <span class="c-fn">aMinuscula</span>(cad[lon - <span class="c-num">1</span> - i])) {
+            <span class="c-kw">return</span> <span class="c-kw">false</span>;
+        }
+    }
+    <span class="c-kw">return</span> <span class="c-kw">true</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-fn">printf</span>(<span class="c-str">"Neuquen: %d\n"</span>, <span class="c-fn">esPalindromoFlex</span>(<span class="c-str">"Neuquen"</span>, <span class="c-num">7</span>));
+    <span class="c-fn">printf</span>(<span class="c-str">"Radar:   %d\n"</span>, <span class="c-fn">esPalindromoFlex</span>(<span class="c-str">"Radar"</span>, <span class="c-num">5</span>));
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <span>Terminal</span>
+              <span>Salida</span>
+            </div>
+            <div class="terminal-body"><span class="terminal-prompt">$ ./palindromo_flex</span>
+Neuquen: 1
+Radar:   1</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: ERRORES FRECUENTES 1: RETURN PREMATURO -->
+      <section>
+        <h2><span class="section-num">27</span> Errores Frecuentes #1: El <code>return true</code> Prematuro</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Uno de los errores más comunes en exámenes al programar <code>sonIguales</code>, <code>comienzaCon</code> o <code>esPalindromo</code>:
+        </p>
+
+        <div class="comparison-grid">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Poner <code>else return true;</code> adentro del ciclo</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; longitud / <span class="c-num">2</span>; i++) {
+    <span class="c-kw">if</span>(cadena[i] != cadena[longitud - <span class="c-num">1</span> - i]) {
+        <span class="c-kw">return</span> <span class="c-kw">false</span>;
+    } <span class="c-kw">else</span> {
+        <span class="c-kw">return</span> <span class="c-kw">true</span>; <span class="c-cmt">// ¡ERROR GRAVE!</span>
+    }
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 6px;">
+              Si probás <code>"rabanor"</code>, en <code>i = 0</code> compara <code>'r' == 'r'</code> y ¡devuelve <code>true</code> en la primera vuelta sin mirar el resto de las letras!
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Retornar <code>true</code> recién al terminar el ciclo</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; longitud / <span class="c-num">2</span>; i++) {
+    <span class="c-kw">if</span>(cadena[i] != cadena[longitud - <span class="c-num">1</span> - i]) {
+        <span class="c-kw">return</span> <span class="c-kw">false</span>; <span class="c-cmt">// Corta si falla</span>
+    }
+}
+<span class="c-kw">return</span> <span class="c-kw">true</span>; <span class="c-cmt">// Recién tras revisar TODO</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 6px;">
+              Para saber que una propiedad falla basta <b>un</b> contraejemplo; para afirmar que se cumple hay que <b>terminar todo el recorrido</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: ERRORES FRECUENTES 2: OLVIDAR EL '\0' O COMILLAS -->
+      <section>
+        <h2><span class="section-num">28</span> Errores Frecuentes #2: El <code>'\0'</code> y el Índice Final</h2>
+        <div class="comparison-grid">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Usar <code>longitud - i</code> y olvidar <code>'\0'</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; longitud; i++) {
+    <span class="c-cmt">// En i=0 copia cadena[longitud], ¡que es '\0'!</span>
+    invertida[i] = cadena[longitud - i];
+}
+<span class="c-cmt">// Y encima olvida cerrar con '\0' al final</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 6px;">
+              Si en <code>i = 0</code> copiás <code>cadena[longitud]</code> en <code>invertida[0]</code>, colocás el <code>'\0'</code> al principio y la cadena invertida queda vacía (<code>""</code>).
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Usar <code>longitud - 1 - i</code> y cerrar con <code>'\0'</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; longitud; i++) {
+    invertida[i] = cadena[longitud - <span class="c-num">1</span> - i];
+}
+invertida[longitud] = <span class="c-str">'\0'</span>;</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 6px;">
+              La última letra visible siempre está en <code>longitud - 1</code>, y el terminador nulo se escribe afuera del ciclo en <code>invertida[longitud]</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: BUENAS PRÁCTICAS CON ALGORITMOS DE STRINGS -->
+      <section>
+        <h2><span class="section-num">29</span> Buenas Prácticas al Procesar Strings</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Hábitos recomendados</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.6; margin-left: 18px;">
+              <li>Usá literales de carácter (<code>'A'</code>, <code>'Z'</code>, <code>'a'</code>, <code>'z'</code>) en las condiciones <code>if</code> en vez de memorizar números como 65 o 122: es mucho más legible.</li>
+              <li>Distinguí siempre comilla simple <code>'a'</code> (un <code>char</code> para comparar una casilla <code>cadena[i]</code>) de comilla doble <code>"a"</code> (un String).</li>
+              <li>Cuando generes una nueva cadena en otro arreglo, verificá que tenga capacidad suficiente para las letras <b>más el <code>'\0'</code></b>.</li>
             </ul>
           </div>
 
-          <div class="code-window">
-            <div class="code-header">
-              <span class="code-title">toggle_case.c</span>
-              <span class="code-badge">ASCII 32</span>
-            </div>
-            <div class="code-body"><span class="c-type">void</span> <span class="c-fn">cambiarMayusMinus</span>(<span class="c-kw">char</span> cadena[]) 
-{ 
-    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; cadena[i] != <span class="c-str">'\0'</span>; i++) 
-    { 
-        <span class="c-kw">if</span>(cadena[i] &gt;= <span class="c-char">'A'</span> &amp;&amp; cadena[i] &lt;= <span class="c-char">'Z'</span>) 
-        { 
-            cadena[i] = cadena[i] + <span class="c-num">32</span>; 
-        } 
-        <span class="c-kw">else if</span>(cadena[i] &gt;= <span class="c-char">'a'</span> &amp;&amp; cadena[i] &lt;= <span class="c-char">'z'</span>) 
-        { 
-            cadena[i] = cadena[i] - <span class="c-num">32</span>; 
-        } 
-    } 
-}</div>
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Resumen de Fórmulas de Índices</h4>
+            <table class="trace-table">
+              <thead>
+                <tr><th>Operación</th><th>Condición del Ciclo</th><th>Índice Clave</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Recorrido general</td><td><code>cadena[i] != '\0'</code></td><td><code>cadena[i]</code></td></tr>
+                <tr><td>Comparar dos strings</td><td><code>a[i]!='\0' &amp;&amp; b[i]!='\0'</code></td><td>Retorno: <code>a[i] == b[i]</code></td></tr>
+                <tr><td>Comprobar prefijo</td><td><code>subcadena[i] != '\0'</code></td><td><code>cadena[i] != sub[i]</code></td></tr>
+                <tr><td>Invertir string</td><td><code>i &lt; longitud</code></td><td><code>longitud - 1 - i</code></td></tr>
+                <tr><td>Es palíndromo</td><td><code>i &lt; longitud / 2</code></td><td><code>[i]</code> vs <code>[longitud - 1 - i]</code></td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 8: INVERTIR UN STRING -->
+      <!-- SLIDE 31: EJERCICIO 1 CON SOLUCIÓN DESPLEGABLE -->
       <section>
-        <h2><span class="section-num">07</span> Invertir un String</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Dada una cadena, generar otra cadena con sus caracteres en orden inverso ("Hola" ➔ "aloH").</p>
-
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">invertir_string.c</span>
-            <span class="code-badge">Espejo</span>
-          </div>
-          <div class="code-body"><span class="c-type">void</span> <span class="c-fn">invertirString</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">char</span> invertida[], <span class="c-kw">int</span> longitud) 
-{ 
-    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; longitud; i++) 
-    { 
-        invertida[i] = cadena[longitud - <span class="c-num">1</span> - i]; 
-    } 
-
-    <span class="c-cmt">// Obligatorio: colocar el carácter terminador al final</span>
-    invertida[longitud] = <span class="c-str">'\0'</span>; 
-}</div>
-        </div>
-
+        <h2><span class="section-num">30</span> Ejercicio 1: Contar Vocales Minúsculas</h2>
         <div class="box box-indigo">
-          <h4 style="color: #818cf8; margin-bottom: 4px;">Explicación de la fórmula <code>longitud - 1 - i</code></h4>
-          <p style="font-size: 0.88rem; margin: 0; color: #cbd5e1;">
-            Si la longitud es 4 ("Hola", índices 0 a 3):
-            <br>Para <code>i = 0</code> ➔ toma <code>cadena[4 - 1 - 0] = cadena[3]</code> ('a').
-            <br>Para <code>i = 1</code> ➔ toma <code>cadena[4 - 1 - 1] = cadena[2]</code> ('l').
-            <br>Para <code>i = 2</code> ➔ toma <code>cadena[4 - 1 - 2] = cadena[1]</code> ('o').
-            <br>Para <code>i = 3</code> ➔ toma <code>cadena[4 - 1 - 3] = cadena[0]</code> ('H').
-            <br>Finalmente, en la posición 4 se escribe el <code>'\0'</code>.
+          <h4 style="color: #818cf8; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0 0 10px;">
+            Escribí una función <code>int contarVocales(char cadena[])</code> que reciba un String y devuelva cuántas vocales minúsculas (<code>'a'</code>, <code>'e'</code>, <code>'i'</code>, <code>'o'</code>, <code>'u'</code>) contiene. Probala en <code>main()</code> con la palabra <code>"programacion"</code> (debe devolver <code>5</code>).
           </p>
-        </div>
-      </section>
 
-      <!-- SLIDE 9: PALÍNDROMOS -->
-      <section>
-        <h2><span class="section-num">08</span> Detección de Palíndromos</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Una palabra es palíndroma si se lee igual de izquierda a derecha que de derecha a izquierda ("radar", "reconocer", "neuquen").</p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 
-        <div class="grid-2-1">
-          <div class="code-window">
-            <div class="code-header">
-              <span class="code-title">es_palindromo.c</span>
-              <span class="code-badge">O(N/2)</span>
-            </div>
-            <div class="code-body"><span class="c-kw">bool</span> <span class="c-fn">esPalindromo</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">int</span> longitud) 
-{ 
-    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; longitud / <span class="c-num">2</span>; i++) 
-    { 
-        <span class="c-kw">if</span>(cadena[i] != cadena[longitud - <span class="c-num">1</span> - i]) 
-        { 
-            <span class="c-kw">return</span> <span class="c-kw">false</span>; <span class="c-cmt">// Corte temprano</span>
-        } 
-    } 
+<span class="c-kw">int</span> <span class="c-fn">contarVocales</span>(<span class="c-kw">char</span> cadena[]) {
+    <span class="c-kw">int</span> contador = <span class="c-num">0</span>;
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; cadena[i] != <span class="c-str">'\0'</span>; i++) {
+        <span class="c-kw">char</span> c = cadena[i];
+        <span class="c-kw">if</span> (c == <span class="c-char">'a'</span> || c == <span class="c-char">'e'</span> || c == <span class="c-char">'i'</span> || c == <span class="c-char">'o'</span> || c == <span class="c-char">'u'</span>) {
+            contador++;
+        }
+    }
+    <span class="c-kw">return</span> contador;
+}
 
-    <span class="c-kw">return</span> <span class="c-kw">true</span>; 
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> palabra[] = <span class="c-str">"programacion"</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Vocales: %d\n"</span>, <span class="c-fn">contarVocales</span>(palabra)); <span class="c-cmt">// Muestra 5</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: EJERCICIO 2 CON SOLUCIÓN DESPLEGABLE -->
+      <section>
+        <h2><span class="section-num">31</span> Ejercicio 2: Pasar Todo un Texto a Mayúsculas</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0 0 10px;">
+            Basándote en la Sección 12 del apunte, escribí una función <code>void pasarAMayusculas(char cadena[])</code> que convierta únicamente las letras minúsculas (<code>'a'..'z'</code>) a mayúsculas restando <code>32</code>, dejando intactas las que ya eran mayúsculas, los espacios o los signos. Probala con <code>"Hola C 2025!"</code> (debe quedar <code>"HOLA C 2025!"</code>).
+          </p>
+
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-type">void</span> <span class="c-fn">pasarAMayusculas</span>(<span class="c-kw">char</span> cadena[]) {
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; cadena[i] != <span class="c-str">'\0'</span>; i++) {
+        <span class="c-kw">if</span> (cadena[i] &gt;= <span class="c-char">'a'</span> &amp;&amp; cadena[i] &lt;= <span class="c-char">'z'</span>) {
+            cadena[i] = cadena[i] - <span class="c-num">32</span>;
+        }
+    }
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> texto[] = <span class="c-str">"Hola C 2025!"</span>;
+    <span class="c-fn">pasarAMayusculas</span>(texto);
+    <span class="c-fn">printf</span>(<span class="c-str">"%s\n"</span>, texto); <span class="c-cmt">// HOLA C 2025!</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: EJERCICIO 3 CON SOLUCIÓN DESPLEGABLE -->
+      <section>
+        <h2><span class="section-num">32</span> Ejercicio 3: Comprobar si Termina con un Sufijo</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0 0 10px;">
+            En el apunte hicimos <code>comienzaCon</code>. Ahora escribí <code>bool terminaCon(char cadena[], int lonCad, char sufijo[], int lonSuf)</code> que compruebe si los últimos caracteres de <code>cadena</code> coinciden con <code>sufijo</code>. Por ejemplo, <code>"archivo.txt"</code> (11) termina con <code>".txt"</code> (4) ➔ <code>true</code>.
+          </p>
+
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdbool.h&gt;</span>
+
+<span class="c-kw">bool</span> <span class="c-fn">terminaCon</span>(<span class="c-kw">char</span> cadena[], <span class="c-kw">int</span> lonCad, <span class="c-kw">char</span> sufijo[], <span class="c-kw">int</span> lonSuf) {
+    <span class="c-kw">if</span> (lonSuf &gt; lonCad) {
+        <span class="c-kw">return</span> <span class="c-kw">false</span>;
+    }
+    <span class="c-kw">int</span> inicio = lonCad - lonSuf;
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; lonSuf; i++) {
+        <span class="c-kw">if</span> (cadena[inicio + i] != sufijo[i]) {
+            <span class="c-kw">return</span> <span class="c-kw">false</span>;
+        }
+    }
+    <span class="c-kw">return</span> <span class="c-kw">true</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-fn">printf</span>(<span class="c-str">"Es .txt: %d\n"</span>, <span class="c-fn">terminaCon</span>(<span class="c-str">"archivo.txt"</span>, <span class="c-num">11</span>, <span class="c-str">".txt"</span>, <span class="c-num">4</span>));
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: REPASO COMPARATIVO DE LOS 7 ALGORITMOS -->
+      <section>
+        <h2><span class="section-num">33</span> Mapa Completo de las Secciones 8 a 14</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Algoritmos de Consulta (No modifican)</h4>
+            <ul style="font-size: 0.82rem; line-height: 1.55; margin-left: 16px;">
+              <li><b>8. <code>sonIguales(a, b)</code>:</b> recorre mientras ninguno sea <code>'\0'</code>; al final retorna <code>a[i] == b[i]</code>.</li>
+              <li><b>9. <code>contarCaracter(cad, c)</code>:</b> acumula en un <code>contador</code> cada vez que <code>cad[i] == c</code>.</li>
+              <li><b>10. <code>comienzaCon(cad, sub)</code>:</b> recorre hasta que <code>sub[i] == '\0'</code> verificando igualdad inicial.</li>
+              <li><b>14. <code>esPalindromo(cad, lon)</code>:</b> compara <code>cad[i]</code> con <code>cad[lon - 1 - i]</code> hasta <code>lon / 2</code>.</li>
+            </ul>
           </div>
 
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">¿Por qué solo iteramos hasta <code>longitud / 2</code>?</h4>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              En <code>"radar"</code> (longitud 5):
-            </p>
-            <div style="font-family: var(--font-mono); font-size: 0.88rem; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 6px; margin: 8px 0;">
-              i = 0 ➔ compara cad[0] ('r') con cad[4] ('r') ✔️
-              <br>i = 1 ➔ compara cad[1] ('a') con cad[3] ('a') ✔️
-            </div>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">
-              Como <code>longitud / 2 = 5 / 2 = 2</code>, el bucle se detiene ahí. La letra central <code>'d'</code> no necesita compararse consigo misma.
-            </p>
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">Algoritmos de Transformación (Modifican)</h4>
+            <ul style="font-size: 0.82rem; line-height: 1.55; margin-left: 16px;">
+              <li><b>11. Sustituir carácter:</b> recorre el String y si <code>cad[i] == buscar</code> asigna <code>cad[i] = reemplazar</code>.</li>
+              <li><b>12. <code>cambiarMayusculasMinusculas(cad)</code>:</b> suma <code>32</code> si está en <code>'A'..'Z'</code> y resta <code>32</code> si está en <code>'a'..'z'</code>.</li>
+              <li><b>13. <code>invertirString(cad, inv, lon)</code>:</b> copia <code>inv[i] = cad[lon - 1 - i]</code> y cierra con <code>inv[lon] = '\0'</code>.</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 10: AUTOEVALUACIÓN Y CIERRE -->
+      <!-- SLIDE 35: RESUMEN FINAL Y CHECKLIST -->
       <section>
-        <h2><span class="section-num">09</span> Resumen y Autoevaluación</h2>
+        <h2><span class="section-num">34</span> Resumen de la Unidad 04 y Checklist</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Puntos Clave del Módulo</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
-              <li>Para recorrer texto usamos siempre <code>cadena[i] != '\0'</code>.</li>
-              <li>Al invertir un string, nunca olvides colocar el <code>'\0'</code> al final.</li>
-              <li>La diferencia entre mayúsculas y minúsculas en ASCII es constante: 32.</li>
-              <li>Para palíndromos, basta con comparar los extremos hasta la mitad <code>longitud / 2</code>.</li>
+            <h4 style="color: #818cf8;">Ideas Clave para el Examen</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li>Nunca uses <code>==</code> para comparar dos arreglos <code>char[]</code>; recorrelos posición por posición.</li>
+              <li>La diferencia ASCII entre una letra minúscula y su mayúscula siempre es <code>32</code>.</li>
+              <li>La fórmula <code>longitud - 1 - i</code> recorre los índices desde la última letra hacia la primera.</li>
+              <li>En toda cadena nueva construida a mano, agregá siempre el <code>'\0'</code> final.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué <code>invertida[longitud] = '\0';</code> es obligatorio?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo qué hace la expresión <code>longitud - 1 - i</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar cómo funciona el algoritmo de palíndromos?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué <code>sonIguales</code> termina con <code>return a[i] == b[i];</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo la diferencia entre buscar <code>"gram"</code> adentro de <code>"programacion"</code> y comprobar si comienza con <code>"pro"</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé usar los rangos <code>'A'..'Z'</code> y <code>'a'..'z'</code> con <code>+32</code> y <code>-32</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar por qué <code>esPalindromo</code> solo itera hasta <code>longitud / 2</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 24px;">
-          <a href="03-libreria-string-h.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
-            ← Anterior: Biblioteca string.h
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="03-libreria-string-h.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
+            ← Anterior: Librería string.h
           </a>
-          <a href="../index.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
-            Índice 2do Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            ← Índice 2do Cuatrimestre
           </a>
-          <a href="05-introduccion-punteros-direcciones-memoria.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+          <a href="05-introduccion-punteros-direcciones-memoria.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
             Siguiente: Punteros y Memoria →
           </a>
         </div>
@@ -473,4 +1464,5 @@ Resultado: bonono
     });
   </script>
 </body>
+
 </html>

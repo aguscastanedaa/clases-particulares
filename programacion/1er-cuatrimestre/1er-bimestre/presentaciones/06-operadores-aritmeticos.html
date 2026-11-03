@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 1C - 06: Operadores Aritméticos | Clases Particulares</title>
+  <title>Programación 1C 1B - 06: Operadores Aritméticos en C | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
 
   <!-- Reveal.js & KaTeX Styles -->
@@ -27,9 +27,9 @@
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 1er Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a
-        href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../index.html">← Índice 1er Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 1er Bimestre • Unidad 06</span>
   </div>
@@ -39,365 +39,1359 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-cyan">1er Cuatrimestre • Aritmética • Unidad 6</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Operadores Aritméticos</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            Haciendo cuentas en C: suma, resta, producto, la división entera y el poderoso operador módulo %
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-cyan">1er Cuatrimestre • 1er Bimestre • Unidad 06</span>
+          <h1 style="font-size: 2.65rem; margin-bottom: 12px;">Operadores Aritméticos en C</h1>
+          <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px;">
+            Suma, resta, multiplicación, el secreto de la división entera <code>/</code> y el poder del operador módulo <code>%</code>
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-indigo">+, -, *, /</span>
+            <span class="badge badge-indigo">+, -, *</span>
             <span class="badge badge-emerald">División Entera (7 / 2 = 3)</span>
-            <span class="badge badge-amber">Módulo % (7 % 2 = 1)</span>
-            <span class="badge badge-rose">Criterio de Divisibilidad</span>
+            <span class="badge badge-amber">Módulo o Resto (7 % 2 = 1)</span>
+            <span class="badge badge-purple">Divisibilidad y Paridad</span>
+            <span class="badge badge-rose">Jerarquía y Paréntesis</span>
           </div>
 
-          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
-              para avanzar diapositiva por diapositiva.
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por los 34 temas y ejemplos de esta clase.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Conexión con Entrada/Salida</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">La computadora como supercalculadora</h4>
-            <p style="font-size: 0.88rem;">
-              En el corazón de todo programa (desde la física de un videojuego 3D hasta un sistema contable) hay
-              operaciones aritméticas constantes.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Sin embargo, las computadoras no hacen matemáticas exactamente igual que un ser humano con lápiz y papel.
-              Hay reglas estrictas sobre cómo se dividen números enteros y cómo se calcula el resto.
-            </p>
+            <h4 style="color: #818cf8;">Lo que ya sabemos (Unidades 01 a 05)</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Declarar variables <code>int</code>, <code>float</code>, <code>char</code> y <code>bool</code>.</li>
+              <li>Mostrar mensajes y valores con <code>printf()</code>.</li>
+              <li>Pedirle datos en vivo al usuario por teclado con <code>scanf()</code> y <code>&amp;</code>.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <h4 style="color: #34d399;">Lo que vamos a aprender hoy (Sección 6 del Apunte)</h4>
             <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Utilizar los 5 operadores aritméticos: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>,
-                <code>%</code>.
-              </li>
-              <li>Entender por qué <code>7 / 2</code> da <b>3</b> y cómo obtener <b>3.5</b>.</li>
-              <li>Comprender el operador módulo <code>%</code> y por qué es tan valioso.</li>
-              <li>Aplicar el criterio de divisibilidad <code>numero % divisor == 0</code>.</li>
-              <li>Determinar matemáticamente si un número es par o impar.</li>
-              <li>Dominar la precedencia y el uso de paréntesis.</li>
+              <li>Los 5 operadores aritméticos del lenguaje C: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> y <code>%</code>.</li>
+              <li>Por qué <code>7 / 2</code> da <b><code>3</code></b> en lugar de <code>3.5</code> (división entera vs decimal).</li>
+              <li>Qué es el operador <b>módulo <code>%</code></b> (el resto de la división) con los ejemplos <code>7 % 2</code> y <code>15 % 7</code>.</li>
+              <li>El criterio de <b>divisibilidad</b> (<code>numero % divisor == 0</code>), números pares/impares y orden de evaluación.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🎯 <b>Meta de la clase:</b> Que puedas transformar los datos que ingresa el usuario mediante fórmulas matemáticas exactas, dominando la división entera y el resto.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: EL PROBLEMA: DE GUARDAR DATOS A PROCESARLOS -->
+      <section>
+        <h2><span class="section-num">02</span> El Problema: Ya Sabemos Leer Datos, ¡Ahora Hay que Calcular!</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          En la unidad anterior aprendimos a pedirle datos al usuario (como el precio de un producto y la cantidad comprada). Pero un programa útil no se limita a repetir lo que ingresaste: <b>tiene que hacer cuentas con esos datos</b>.
+        </p>
+
+        <div class="grid-2" style="align-items: center; margin-top: 10px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Preguntas que todo programa necesita responder</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px; margin-bottom: 0;">
+              <li>¿Cuánto es el total a pagar si llevo 3 entradas? (<b>Multiplicación</b>)</li>
+              <li>¿Cuál es el promedio de dos exámenes? (<b>Suma y División</b>)</li>
+              <li>Si reparto 15 caramelos entre 7 amigos en partes iguales, ¿cuántos recibe cada uno y <b>cuántos sobran</b>? (<b>División entera y Módulo</b>)</li>
+            </ul>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿La computadora calcula igual que la calculadora del celular?</h4>
+            <p style="font-size: 0.85rem; margin: 0;">
+              En la suma, resta y multiplicación sí. ¡Pero en la <b>división</b> C tiene una regla especial cuando trabaja con números enteros (<code>int</code>) que sorprende a todos los que recién empiezan!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: TABLA GENERAL DE LOS 5 OPERADORES DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">03</span> Los 5 Operadores Aritméticos del Apunte (Sección 6)</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Esta es la tabla oficial de operadores aritméticos con los ejemplos exactos de la Sección 6 del apunte:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Símbolo en C</th>
+              <th>Operación</th>
+              <th>Ejemplo del Apunte</th>
+              <th>Resultado</th>
+              <th>Observación Clave</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b><code>+</code></b></td>
+              <td>Suma</td>
+              <td><code>3 + 5</code></td>
+              <td><b><code>8</code></b></td>
+              <td>Suma ambos valores</td>
+            </tr>
+            <tr>
+              <td><b><code>-</code></b></td>
+              <td>Resta</td>
+              <td><code>3 - 5</code></td>
+              <td><b><code>-2</code></b></td>
+              <td>Puede dar resultado negativo si el 2° es mayor</td>
+            </tr>
+            <tr>
+              <td><b><code>*</code></b></td>
+              <td>Multiplicación</td>
+              <td><code>3 * 5</code></td>
+              <td><b><code>15</code></b></td>
+              <td>Se usa el asterisco <code>*</code> (jamás la letra <code>x</code> ni el punto)</td>
+            </tr>
+            <tr>
+              <td><b><code>/</code></b></td>
+              <td>División entera</td>
+              <td><code>7 / 2</code></td>
+              <td><b><code>3</code></b></td>
+              <td>Entre dos <code>int</code>, <b>descarta el resto</b> (no da 3.5)</td>
+            </tr>
+            <tr>
+              <td><b><code>%</code></b></td>
+              <td>Módulo (Resto)</td>
+              <td><code>7 % 2</code></td>
+              <td><b><code>1</code></b></td>
+              <td>Devuelve el <b>resto de la división</b> (lo que sobra)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 5: SUMA (+), RESTA (-) Y MULTIPLICACIÓN (*) -->
+      <section>
+        <h2><span class="section-num">04</span> Suma (<code>+</code>), Resta (<code>-</code>) y Multiplicación (<code>*</code>)</h2>
+        <div class="box box-indigo" style="margin-bottom: 12px;">
+          <p style="margin: 0; font-size: 0.88rem;">
+            📖 <b>Apunte:</b> <b><code>+ → Suma (3 + 5 = 8)</code> &nbsp;|&nbsp; <code>- → Resta (3 - 5 = -2)</code> &nbsp;|&nbsp; <code>* → Multiplicación (3 * 5 = 15)</code></b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">operaciones_basicas.c</span>
+              <span class="code-badge">Ejemplos del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> a = <span class="c-num">3</span>;
+<span class="c-kw">int</span> b = <span class="c-num">5</span>;
+
+<span class="c-kw">int</span> suma = a + b;      <span class="c-cmt">// Guarda 8</span>
+<span class="c-kw">int</span> resta = a - b;     <span class="c-cmt">// Guarda -2</span>
+<span class="c-kw">int</span> producto = a * b;  <span class="c-cmt">// Guarda 15</span></div>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">⚠️ ¿Por qué se usa <code>*</code> para multiplicar?</h4>
+            <p style="font-size: 0.84rem; margin-bottom: 6px;">
+              En matemática escribimos $3 \times 5$ o $3 \cdot 5$, pero en programación:
+            </p>
+            <ul style="font-size: 0.82rem; line-height: 1.5; margin-left: 18px; margin-bottom: 0;">
+              <li>Si escribís <code>3 x 5</code>, C cree que <code>x</code> es el nombre de una variable.</li>
+              <li>Si escribís <code>3.5</code> con punto, C sabe que es el número decimal tres coma cinco.</li>
+              <li>Por eso el símbolo universal de multiplicación en C es el <b>asterisco <code>*</code></b>.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: LOS EJEMPLOS OBLIGATORIOS -->
+      <!-- SLIDE 6: LA DIVISIÓN ENTERA (/) EN DETALLE -->
       <section>
-        <h2><span class="section-num">02</span> Los 3 Ejemplos Canónicos</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Analicemos los tres casos fundamentales en C:</p>
+        <h2><span class="section-num">05</span> El Gran Secreto: La División Entera (<code>/</code>)</h2>
+        <div class="box box-emerald" style="margin-bottom: 12px;">
+          <p style="margin: 0; font-size: 0.92rem;">
+            📖 <b>Apunte:</b> <b>"<code>/ → División entera (7 / 2 = 3)</code>, es decir descarta el resto"</b>
+          </p>
+        </div>
 
-        <div class="code-window">
-          <div class="code-header">
-            <div class="code-dots">
-              <span class="code-dot dot-red"></span>
-              <span class="code-dot dot-yellow"></span>
-              <span class="code-dot dot-green"></span>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Cuando en C dividís un número entero (<code>int</code>) por otro número entero (<code>int</code>), el resultado es <b>obligatoriamente otro número entero</b>:
+        </p>
+
+        <div class="grid-2" style="align-items: center; margin-top: 10px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">division_entera.c</span>
+              <span class="code-badge">int / int</span>
             </div>
-            <span class="code-title">operaciones_basicas.c</span>
-            <span class="code-badge">Aritmética C</span>
+            <div class="code-body"><span class="c-kw">int</span> resultado = <span class="c-num">7</span> / <span class="c-num">2</span>;
+
+<span class="c-cmt">// En matemática: 7 dividido 2 es 3.5</span>
+<span class="c-cmt">// En C (entre enteros): da 3 (descarta el .5)</span></div>
           </div>
-          <div class="code-body"><span class="c-kw">int</span> resultado = <span class="c-num">3</span> + <span
-              class="c-num">5</span>;
-            <span class="c-kw">int</span> division = <span class="c-num">7</span> / <span class="c-num">2</span>;
-            <span class="c-kw">int</span> resto = <span class="c-num">7</span> % <span class="c-num">2</span>;
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">🍕 Analogía de las pizzas enteras</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Imaginá que tenés <b>7 cajas cerradas</b> y las querés repartir entre <b>2 personas</b> sin abrir ni romper ninguna caja:
+              cada persona recibe <b><code>3</code> cajas enteras</b> (cociente entero), y queda 1 caja sin repartir.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: DIVISIÓN ENTERA VS DIVISIÓN CON DECIMALES -->
+      <section>
+        <h2><span class="section-num">06</span> División Entera (<code>7 / 2</code>) vs División Decimal (<code>7.0 / 2.0</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          ¿Y qué hacemos cuando sí queremos que $7 \div 2$ nos dé <b><code>3.5</code></b> con decimales? Para que el operador <code>/</code> calcule los decimales, <b>al menos uno de los dos números debe ser de tipo <code>float</code></b> (tener punto decimal):
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card" style="border-color: rgba(56, 189, 248, 0.4); background: rgba(15, 23, 42, 0.7);">
+            <div class="wrong-title" style="color: #38bdf8;">🔢 División Entera (ambos son <code>int</code>)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> cociente = <span class="c-num">7</span> / <span class="c-num">2</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, cociente); <span class="c-cmt">// Muestra: 3</span></div>
+            </div>
+            <p style="font-size: 0.81rem; color: #cbd5e1; margin: 6px 0 0;">
+              Tanto <code>7</code> como <code>2</code> son enteros sin punto. C hace división entera y descarta la parte fraccionaria.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">🎯 División con Decimales (usando <code>float</code>)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">float</span> exacto = <span class="c-num">7.0</span> / <span class="c-num">2.0</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"%.1f\n"</span>, exacto); <span class="c-cmt">// Muestra: 3.5</span></div>
+            </div>
+            <p style="font-size: 0.81rem; color: #a7f3d0; margin: 6px 0 0;">
+              Al escribir <code>7.0 / 2.0</code> (o dividir variables <code>float</code>), C activa la división con punto flotante y conserva el <code>.5</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: EL OPERADOR MÓDULO (%) - DEFINICIÓN DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">07</span> El Operador Módulo (<code>%</code>): Lo que Sobra de la División</h2>
+        <div class="box box-amber" style="margin-bottom: 12px;">
+          <p style="margin: 0; font-size: 0.92rem;">
+            📖 <b>Apunte (Sección 6):</b> <b>"<code>% → Módulo (Resto de la división, lo que sobra) (7 % 2 = 1)</code>"</b>
+          </p>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          ¡Ojo con el símbolo! En programación el signo <code>%</code> entre dos números <b>NO calcula porcentajes</b>: calcula el <b>resto de la división entera</b> (como cuando hacías divisiones a mano en la escuela primaria):
+        </p>
+
+        <div class="grid-2" style="align-items: center; margin-top: 10px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">División a mano de $7 \div 2$</h4>
+            <p style="font-size: 0.88rem; margin-bottom: 6px;">
+              Buscamos qué número multiplicado por $2$ se acerca a $7$ sin pasarse:
+            </p>
+            <p style="font-size: 0.92rem; margin: 0;">
+              $$7 = 2 \times \underbrace{3}_{\text{Cociente } (7 / 2)} + \underbrace{1}_{\text{Resto } (7 \% 2)}$$
+            </p>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">cociente_y_resto.c</span>
+              <span class="code-badge">/ vs %</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> cociente = <span class="c-num">7</span> / <span class="c-num">2</span>; <span class="c-cmt">// Vale 3</span>
+<span class="c-kw">int</span> resto    = <span class="c-num">7</span> % <span class="c-num">2</span>; <span class="c-cmt">// Vale 1 (lo que sobra)</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: EJEMPLO DEL APUNTE: 15 % 7 PASO A PASO -->
+      <section>
+        <h2><span class="section-num">08</span> Ejemplo Paso a Paso del Apunte: <code>15 % 7</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Analicemos en detalle el ejemplo que desarrolla el apunte en la página 5 para calcular <b><code>15 % 7</code></b>:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">📖 Desarrollo del Apunte</h4>
+            <div class="step-list" style="margin-top: 8px;">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content" style="font-size: 0.85rem;">
+                  Operación pedida: <b><code>15 % 7</code></b>
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content" style="font-size: 0.85rem;">
+                  Hacemos la división entera: <b>$15 \div 7 = 2$</b> (porque $7 \times 2 = 14$).
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content" style="font-size: 0.85rem;">
+                  Del $14$ para llegar al $15$, <b>sobra <code>1</code></b>.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">4</span>
+                <div class="step-content" style="font-size: 0.85rem;">
+                  <b>Resultado final de <code>15 % 7</code>: <code>1</code></b>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">quince_modulo_siete.c</span>
+              <span class="code-badge">Del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> cociente = <span class="c-num">15</span> / <span class="c-num">7</span>;
+    <span class="c-kw">int</span> resto = <span class="c-num">15</span> % <span class="c-num">7</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"15 / 7 = %d\n"</span>, cociente);
+    <span class="c-fn">printf</span>(<span class="c-str">"15 %% 7 = %d (sobra 1)\n"</span>, resto);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: MÁS EJEMPLOS DE DIVISIÓN ENTERA Y MÓDULO -->
+      <section>
+        <h2><span class="section-num">09</span> Entrenando el Ojo: Tabla de Cociente (<code>/</code>) y Resto (<code>%</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Verificá cómo se complementan <code>/</code> y <code>%</code> con distintos pares de números enteros:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Números</th>
+              <th>División Entera (<code>/</code>)</th>
+              <th>Multiplicación ($divisor \times cociente$)</th>
+              <th>Módulo o Resto (<code>%</code>)</th>
+              <th>¿Por qué sobra eso?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>7</code> y <code>2</code></td>
+              <td><code>7 / 2 = 3</code></td>
+              <td>$2 \times 3 = 6$</td>
+              <td><b><code>7 % 2 = 1</code></b></td>
+              <td>$7 - 6 = 1$</td>
+            </tr>
+            <tr>
+              <td><code>15</code> y <code>7</code></td>
+              <td><code>15 / 7 = 2</code></td>
+              <td>$7 \times 2 = 14$</td>
+              <td><b><code>15 % 7 = 1</code></b></td>
+              <td>$15 - 14 = 1$</td>
+            </tr>
+            <tr>
+              <td><code>17</code> y <code>5</code></td>
+              <td><code>17 / 5 = 3</code></td>
+              <td>$5 \times 3 = 15$</td>
+              <td><b><code>17 % 5 = 2</code></b></td>
+              <td>$17 - 15 = 2$</td>
+            </tr>
+            <tr>
+              <td><code>14</code> y <code>7</code></td>
+              <td><code>14 / 7 = 2</code></td>
+              <td>$7 \times 2 = 14$</td>
+              <td><b><code>14 % 7 = 0</code></b></td>
+              <td>División exacta (no sobra nada)</td>
+            </tr>
+            <tr>
+              <td><code>20</code> y <code>2</code></td>
+              <td><code>20 / 2 = 10</code></td>
+              <td>$2 \times 10 = 20$</td>
+              <td><b><code>20 % 2 = 0</code></b></td>
+              <td>División exacta (no sobra nada)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 11: CRITERIO DE DIVISIBILIDAD DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">10</span> Divisibilidad: ¿Cuándo un Número es Divisible por Otro?</h2>
+        <div class="box box-emerald" style="margin-bottom: 12px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">📖 Regla de Divisibilidad del Apunte (Sección 6)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            <b>"Si: <code>numero % divisor == 0</code> entonces el número es divisible."</b>
+          </p>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 10px;">
+          Veamos los 3 ejemplos textuales del apunte:
+        </p>
+
+        <div class="grid-2">
+          <div class="correct-card">
+            <div class="correct-title">✅ Cuando el resto da <code>0</code> (SÍ son divisibles)</div>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; color: #a7f3d0; margin-bottom: 0;">
+              <li><b><code>14 % 7 = 0</code></b> → <i>(no hay resto en esta división)</i>. Por lo tanto, $14$ es divisible por $7$.</li>
+              <li><b><code>20 % 2 = 0</code></b> → <i>(no hay resto en esta división)</i>. Por lo tanto, $20$ es divisible por $2$.</li>
+            </ul>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Cuando el resto NO es <code>0</code> (NO son divisibles)</div>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; color: #fecaca; margin-bottom: 0;">
+              <li><b><code>15 % 7 = 1</code></b> → <i>(NO son divisibles, porque hay resto)</i>. Al dividir $15$ por $7$ sobra $1$.</li>
+            </ul>
           </div>
         </div>
 
-        <div class="grid-3" style="margin-top: 14px;">
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">1. Suma</h4>
-            <p style="font-size: 0.85rem;"><code>3 + 5</code> suma dos enteros.</p>
-            <div style="font-family: var(--font-mono); color: #7dd3fc; font-weight: 700;">resultado = 8</div>
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            💡 Recordá de la Unidad 03: el doble igual <b><code>==</code></b> pregunta <i>"¿es igual a?"</i>. Así que <code>numero % divisor == 0</code> pregunta: <i>"¿el resto de dividir <code>numero</code> por <code>divisor</code> es igual a cero?"</i>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: APLICACIÓN CLÁSICA 1: SABER SI UN NÚMERO ES PAR O IMPAR -->
+      <section>
+        <h2><span class="section-num">11</span> Aplicación Clásica #1: Números Pares e Impares con <code>% 2</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          En matemática, un número es <b>par</b> cuando es divisible por $2$ (como $4, 10, 20$). Gracias al operador módulo <code>%</code>, en programación es facilísimo detectar si cualquier número entero es par o impar:
+        </p>
+
+        <div class="grid-2" style="align-items: center; margin-top: 10px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">🟢 Número PAR → <code>numero % 2 == 0</code></h4>
+            <p style="font-size: 0.85rem; margin-bottom: 6px;">
+              Al dividir un número par por $2$, no sobra nada (el resto es <b><code>0</code></b>):
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-num">20</span> % <span class="c-num">2</span>  <span class="c-cmt">// Da 0 -> 20 es PAR</span>
+<span class="c-num">8</span>  % <span class="c-num">2</span>  <span class="c-cmt">// Da 0 -> 8 es PAR</span></div>
+            </div>
           </div>
 
           <div class="box box-amber">
-            <h4 style="color: #fbbf24;">2. División Entera</h4>
-            <p style="font-size: 0.85rem;"><code>7 / 2</code> trunca la parte fraccionaria.</p>
-            <div style="font-family: var(--font-mono); color: #fef08a; font-weight: 700;">division = 3</div>
-          </div>
-
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">3. Módulo (Resto)</h4>
-            <p style="font-size: 0.85rem;"><code>7 % 2</code> entrega lo que sobra.</p>
-            <div style="font-family: var(--font-mono); color: #a7f3d0; font-weight: 700;">resto = 1</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 4: DIVISIÓN ENTERA VS DECIMAL -->
-      <section>
-        <h2><span class="section-num">03</span> ¿Por qué 7 / 2 produce 3?</h2>
-        <div class="grid-2">
-          <div class="box box-rose">
-            <h4 style="color: #f87171;">La Regla de la División Entera</h4>
-            <p style="font-size: 0.88rem;">
-              En C, cuando <b>ambos operandos son de tipo entero (<code>int</code>)</b>, el operador <code>/</code>
-              realiza una división matemática entera (cociente euclidiano):
+            <h4 style="color: #fbbf24;">🟠 Número IMPAR → <code>numero % 2 == 1</code></h4>
+            <p style="font-size: 0.85rem; margin-bottom: 6px;">
+              Al dividir un número impar positivo por $2$, siempre sobra <b><code>1</code></b>:
             </p>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              $7 \div 2 = 3$ y sobra $1$.<br>
-              C simplemente se queda con el <b>cociente entero (3)</b> y descarta/trunca cualquier decimal. No redondea
-              al más cercano: $7 / 2$ es $3$, y $9 / 10$ es $0$.
-            </p>
-          </div>
-
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">¿Cómo obtener el 3.5 con decimales?</h4>
-            <p style="font-size: 0.88rem;">
-              Para que la división calcule decimales, <b>al menos uno de los números debe ser de tipo decimal
-                (<code>float</code> o <code>double</code>)</b>:
-            </p>
-            <div class="code-window" style="margin: 8px 0;">
-              <div class="code-body" style="font-size: 0.82rem;"><span class="c-kw">float</span> divDecimal = <span
-                  class="c-num">7.0f</span> / <span class="c-num">2.0f</span>; <span class="c-cmt">// Da 3.5</span>
-                <span class="c-kw">float</span> divDecimal2 = <span class="c-num">7.0f</span> / <span
-                  class="c-num">2</span>; <span class="c-cmt">// Da 3.5</span>
-              </div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-num">7</span>  % <span class="c-num">2</span>  <span class="c-cmt">// Da 1 -> 7 es IMPAR</span>
+<span class="c-num">15</span> % <span class="c-num">2</span>  <span class="c-cmt">// Da 1 -> 15 es IMPAR</span></div>
             </div>
-            <p style="font-size: 0.82rem; color: #a7f3d0;">
-              Al haber al menos un decimal, C convierte automáticamente toda la cuenta al dominio de números reales.
-            </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: EL OPERADOR MÓDULO % -->
+      <!-- SLIDE 13: APLICACIÓN CLÁSICA 2: EXTRAER EL ÚLTIMO DÍGITO CON % 10 -->
       <section>
-        <h2><span class="section-num">04</span> El Operador Módulo <code>%</code> (El Resto)</h2>
-        <div class="box box-cyan">
-          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Qué hace exactamente?</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            El operador <b><code>%</code></b> no calcula un porcentaje. En programación, calcula el <b>RESTO (sobrante)
-              de la división entera</b> entre dos números.
-          </p>
-        </div>
+        <h2><span class="section-num">12</span> Aplicación Clásica #2: Desarmar Dígitos con <code>% 10</code> y <code>/ 10</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Otra propiedad mágica de la aritmética entera en base 10 es lo que ocurre cuando dividimos o aplicamos módulo por <b><code>10</code></b> a cualquier número entero (por ejemplo <code>148</code>):
+        </p>
 
-        <div class="grid-3" style="margin-top: 14px;">
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">10 % 3 = 1</h4>
-            <p style="font-size: 0.82rem; color: #cbd5e1;">
-              3 entra 3 veces en 10 (hace 9). Para llegar a 10 sobra <b>1</b>.
+        <div class="grid-2" style="align-items: center; margin-top: 10px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;"><code>numero % 10</code> → Extrae el último dígito</h4>
+            <p style="font-size: 0.84rem; margin-bottom: 6px;">
+              Como $148 = 10 \times 14 + 8$, el resto de dividir por $10$ es siempre <b>la última cifra de la derecha</b>:
             </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> ultimoDigito = <span class="c-num">148</span> % <span class="c-num">10</span>; <span class="c-cmt">// Vale 8</span></div>
+            </div>
           </div>
+
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">14 % 5 = 4</h4>
-            <p style="font-size: 0.82rem; color: #cbd5e1;">
-              5 entra 2 veces en 14 (hace 10). Para llegar a 14 sobran <b>4</b>.
+            <h4 style="color: #818cf8;"><code>numero / 10</code> → Quita el último dígito</h4>
+            <p style="font-size: 0.84rem; margin-bottom: 6px;">
+              La división entera por $10$ descarta la última cifra y nos deja el resto del número:
             </p>
-          </div>
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">12 % 4 = 0</h4>
-            <p style="font-size: 0.82rem; color: #a7f3d0;">
-              4 entra exactamente 3 veces en 12. ¡No sobra nada! Resto <b>0</b>.
-            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> sinUltimo = <span class="c-num">148</span> / <span class="c-num">10</span>; <span class="c-cmt">// Vale 14</span></div>
+            </div>
           </div>
         </div>
 
-        <div class="box box-amber" style="margin-top: 10px;">
-          <p style="margin: 0; font-size: 0.86rem;">
-            ⚠️ <b>Regla estricta de C:</b> El operador <code>%</code> <b>solo funciona con enteros
-              (<code>int</code>)</b>. Intentar hacer <code>7.5 % 2</code> causará un error de compilación.
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            💡 <b>Truco profesional:</b> Este par de operaciones (<code>% 10</code> y <code>/ 10</code>) te servirá durante toda la carrera para separar las cifras de un DNI, una fecha o un código numérico.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 6: CRITERIO DE DIVISIBILIDAD -->
+      <!-- SLIDE 14: JERARQUÍA DE OPERADORES (PRECEDENCIA) -->
       <section>
-        <h2><span class="section-num">05</span> El Criterio de Divisibilidad</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Una de las herramientas lógicas más utilizadas en la
-          informática:</p>
+        <h2><span class="section-num">13</span> Jerarquía de Operadores: ¿Qué Cuenta se Hace Primero?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Si en una misma línea combinás varias operaciones, como <code>int x = 3 + 5 * 2;</code>, ¿el resultado es <code>16</code> o <code>13</code>? C respeta estrictamente la <b>separación en términos de la matemática</b>:
+        </p>
 
-        <div class="code-window">
-          <div class="code-body" style="font-size: 1.1rem; text-align: center; color: #38bdf8;">
-            numero % divisor == <span class="c-num">0</span>
-          </div>
-        </div>
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Prioridad</th>
+              <th>Operadores</th>
+              <th>Regla de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1° (Máxima)</b></td>
+              <td><b><code>( )</code></b> Paréntesis</td>
+              <td>Lo que está entre paréntesis se resuelve siempre primero de todo.</td>
+            </tr>
+            <tr>
+              <td><b>2° (Media)</b></td>
+              <td><b><code>*</code> &nbsp; <code>/</code> &nbsp; <code>%</code></b></td>
+              <td>Multiplicación, división y módulo tienen la misma prioridad (se evalúan de izquierda a derecha).</td>
+            </tr>
+            <tr>
+              <td><b>3° (Baja)</b></td>
+              <td><b><code>+</code> &nbsp; <code>-</code></b></td>
+              <td>Suma y resta se resuelven al final.</td>
+            </tr>
+          </tbody>
+        </table>
 
-        <div class="step-list" style="margin-top: 12px;">
-          <div class="step-item">
-            <span class="step-num">1</span>
-            <div class="step-content">
-              <b>¿Por qué funciona?</b><br>
-              Si el resto de dividir un número por otro es exactamente cero, significa que la división es <b>exacta</b>,
-              es decir, no sobró nada. Por ende, <code>numero</code> es divisible por <code>divisor</code> (siempre que
-              el
-              divisor no sea cero).
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">2</span>
-            <div class="step-content">
-              <b>El detector de Números Pares e Impares:</b><br>
-              • Un número es <b>par</b> si al dividirlo por 2 sobra 0: <code>numero % 2 == 0</code>.<br>
-              • Un número es <b>impar</b> si al dividirlo por 2 sobra 1: <code>numero % 2 != 0</code>.
-            </div>
-          </div>
+        <div class="code-window" style="margin-top: 12px;">
+          <div class="code-body"><span class="c-kw">int</span> sinParentesis = <span class="c-num">3</span> + <span class="c-num">5</span> * <span class="c-num">2</span>;    <span class="c-cmt">// Primero hace 5 * 2 (10) y luego suma 3 -> Da 13</span>
+<span class="c-kw">int</span> conParentesis = (<span class="c-num">3</span> + <span class="c-num">5</span>) * <span class="c-num">2</span>;  <span class="c-cmt">// Primero hace (3 + 5) (8) y luego * 2  -> Da 16</span></div>
         </div>
       </section>
 
-      <!-- SLIDE 7: APLICACIONES PRÁCTICAS COTIDIANAS -->
+      <!-- SLIDE 15: EL CASO CLÁSICO DEL PROMEDIO Y LOS PARÉNTESIS -->
       <section>
-        <h2><span class="section-num">06</span> Aplicaciones Prácticas de / y %</h2>
-        <div class="grid-2">
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Descomponer Segundos en Minutos y Segundos</h4>
-            <p style="font-size: 0.84rem; color: var(--text-muted);">
-              Si pasaron 135 segundos, ¿cuántos minutos y segundos son?
-            </p>
-            <div class="code-window">
-              <div class="code-body"><span class="c-kw">int</span> totalSeg = <span class="c-num">135</span>;
-                <span class="c-kw">int</span> minutos = totalSeg / <span class="c-num">60</span>; <span class="c-cmt">//
-                  135 / 60 = 2</span>
-                <span class="c-kw">int</span> segundos = totalSeg % <span class="c-num">60</span>; <span
-                  class="c-cmt">// 135 % 60 = 15</span>
-              </div>
-            </div>
-            <p style="font-size: 0.82rem; color: #a5b4fc;">
-              Resultado: <b>2 minutos y 15 segundos</b>. ¡Combinación perfecta de <code>/</code> y <code>%</code>!
-            </p>
-          </div>
+        <h2><span class="section-num">14</span> El Caso Clásico del Promedio: Por Qué Faltan Paréntesis</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Imaginá que un alumno sacó un <code>8</code> y un <code>10</code>, y queremos calcular su promedio (que sabemos que tiene que dar <code>9.0</code>). Mirá qué pasa si olvidamos los paréntesis:
+        </p>
 
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">Reparto Equitativo y Sobrante</h4>
-            <p style="font-size: 0.84rem; color: var(--text-muted);">
-              Repartir 23 caramelos entre 4 amigos:
-            </p>
-            <div class="code-window">
-              <div class="code-body"><span class="c-kw">int</span> caramelos = <span class="c-num">23</span>, amigos =
-                <span class="c-num">4</span>;
-                <span class="c-kw">int</span> porAmigo = caramelos / amigos; <span class="c-cmt">// 5</span>
-                <span class="c-kw">int</span> sobran = caramelos % amigos; <span class="c-cmt">// 3</span>
-              </div>
-            </div>
-            <p style="font-size: 0.82rem; color: #a7f3d0;">
-              Cada amigo recibe 5 caramelos y sobran 3 en el paquete.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 8: PRECEDENCIA DE OPERADORES Y PARÉNTESIS -->
-      <section>
-        <h2><span class="section-num">07</span> Precedencia: El Orden de las Operaciones</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">C respeta la jerarquía matemática universal PEMDAS:</p>
-
-        <div class="step-list">
-          <div class="step-item">
-            <span class="step-num">1</span>
-            <div class="step-content">
-              <b>1º Paréntesis <code>( )</code>:</b> Tienen máxima prioridad absoluta. Todo lo encerrado adentro se
-              resuelve primero.
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">2</span>
-            <div class="step-content">
-              <b>2º Multiplicación <code>*</code>, División <code>/</code> y Módulo <code>%</code>:</b> Se resuelven de
-              izquierda a derecha.
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">3</span>
-            <div class="step-content">
-              <b>3º Suma <code>+</code> y Resta <code>-</code>:</b> Se resuelven al final, de izquierda a derecha.
-            </div>
-          </div>
-        </div>
-
-        <div class="comparison-box" style="margin-top: 10px;">
-          <div class="wrong-card">
-            <div class="wrong-title">❌ Error clásico en promedios</div>
-            <code>float prom = nota1 + nota2 / 2.0f;</code>
-            <p style="font-size: 0.78rem; color: #fecaca; margin-top: 4px;">
-              Divide solo <code>nota2</code> por 2 y luego le suma <code>nota1</code>. ¡Resultado completamente erróneo!
-            </p>
-          </div>
-          <div class="correct-card">
-            <div class="correct-title">✅ Uso correcto de paréntesis</div>
-            <code>float prom = (nota1 + nota2) / 2.0f;</code>
-            <p style="font-size: 0.78rem; color: #a7f3d0; margin-top: 4px;">
-              Suma primero las dos notas y luego divide el total por 2.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 9: ERRORES FRECUENTES -->
-      <section>
-        <h2><span class="section-num">08</span> Errores Peligrosos con Operadores</h2>
         <div class="comparison-box">
           <div class="wrong-card">
-            <div class="wrong-title">💥 División por Cero</div>
-            <div
-              style="font-family: var(--font-mono); font-size: 0.82rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
-              int x = 10 / 0; // O num % 0;
+            <div class="wrong-title">❌ Sin paréntesis: ¡Da 13.0 en vez de 9.0!</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">float</span> nota1 = <span class="c-num">8.0</span>;
+<span class="c-kw">float</span> nota2 = <span class="c-num">10.0</span>;
+
+<span class="c-kw">float</span> prom = nota1 + nota2 / <span class="c-num">2.0</span>; <span class="c-cmt">// Da 13.0 😱</span></div>
             </div>
-            <p style="font-size: 0.82rem; color: #fecaca; margin-top: 6px;">
-              <b>Consecuencia:</b> Dividir por cero no existe en matemáticas. En C produce un fallo crítico instantáneo
-              (<i>Floating Point Exception / Crash</i>) que congela el programa.
+            <p style="font-size: 0.81rem; color: #fecaca; margin: 6px 0 0;">
+              Como la división <code>/</code> tiene más prioridad que la suma <code>+</code>, C divide solo <code>nota2 / 2.0</code> ($10 / 2 = 5$) y se lo suma a $8$, dando $8 + 5 = 13.0$.
             </p>
           </div>
 
-          <div class="wrong-card" style="border-color: rgba(251, 191, 36, 0.4); background: rgba(45, 35, 18, 0.7);">
-            <div class="wrong-title" style="color: var(--accent-amber);">⚠️ Guardar int / int en un float</div>
-            <div
-              style="font-family: var(--font-mono); font-size: 0.82rem; color: #fbbf24; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
-              float x = 7 / 2; // ¡Dará 3.000000, no 3.5!
+          <div class="correct-card">
+            <div class="correct-title">✅ Con paréntesis: Da 9.0 exacto</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">float</span> nota1 = <span class="c-num">8.0</span>;
+<span class="c-kw">float</span> nota2 = <span class="c-num">10.0</span>;
+
+<span class="c-kw">float</span> prom = (nota1 + nota2) / <span class="c-num">2.0</span>; <span class="c-cmt">// Da 9.0 ✅</span></div>
             </div>
-            <p style="font-size: 0.82rem; color: #fef08a; margin-top: 6px;">
-              <b>¿Por qué?</b> Primero C evalúa <code>7 / 2</code> entre enteros (da 3), y recién después convierte ese
-              3 a float (3.0f). Para tener 3.5 usá <code>7.0f / 2</code>.
+            <p style="font-size: 0.81rem; color: #a7f3d0; margin: 6px 0 0;">
+              Los paréntesis obligan a sumar primero <code>(8.0 + 10.0 = 18.0)</code> y recién después dividir ese total por <code>2.0</code>.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 10: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <!-- SLIDE 16: OPERAR CON VARIABLES VS GUARDAR EN UNA NUEVA VARIABLE -->
       <section>
-        <h2><span class="section-num">09</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">15</span> ¿Cómo Funciona una Cuenta en la Memoria RAM?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Cuando escribimos <code>int total = precio * cantidad;</code>, la computadora sigue siempre estos <b>2 pasos de derecha a izquierda</b>:
+        </p>
+
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-body"><span class="c-kw">int</span> precio = <span class="c-num">500</span>;
+<span class="c-kw">int</span> cantidad = <span class="c-num">3</span>;
+<span class="c-kw">int</span> total = precio * cantidad; <span class="c-cmt">// 1° Calcula 500 * 3 -> 2° Guarda 1500 en 'total'</span></div>
+        </div>
+
+        <div class="memory-diagram" style="margin: 10px 0;">
+          <div class="memory-box">
+            <div class="memory-address">Operando 1</div>
+            <div class="memory-label">precio <span class="memory-type">int</span></div>
+            <div class="memory-value">500</div>
+          </div>
+          <div class="memory-box">
+            <div class="memory-address">Operando 2</div>
+            <div class="memory-label">cantidad <span class="memory-type">int</span></div>
+            <div class="memory-value">3</div>
+          </div>
+          <div class="memory-box">
+            <div class="memory-address">Resultado de 500 * 3</div>
+            <div class="memory-label">total <span class="memory-type">int</span></div>
+            <div class="memory-value" style="color: var(--accent-emerald);">1500</div>
+          </div>
+        </div>
+
+        <div class="box box-cyan">
+          <p style="margin: 0; font-size: 0.84rem;">
+            📌 Observá que usar <code>precio</code> y <code>cantidad</code> en una multiplicación <b>no modifica sus valores</b>: <code>precio</code> sigue valiendo <code>500</code> y <code>cantidad</code> sigue valiendo <code>3</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: EJEMPLO NIVEL 1 (LAS 5 CUENTAS DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">16</span> Ejemplo Nivel 1: Probando los 5 Operadores del Apunte</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Escribamos un programa completo en C que ejecute exactamente todas las operaciones numéricas de la Sección 6 del apunte:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel1_operadores.c</span>
+              <span class="code-badge">Nivel 1 • Del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> suma = <span class="c-num">3</span> + <span class="c-num">5</span>;
+    <span class="c-kw">int</span> resta = <span class="c-num">3</span> - <span class="c-num">5</span>;
+    <span class="c-kw">int</span> mult = <span class="c-num">3</span> * <span class="c-num">5</span>;
+    <span class="c-kw">int</span> divEntera = <span class="c-num">7</span> / <span class="c-num">2</span>;
+    <span class="c-kw">int</span> modulo1 = <span class="c-num">7</span> % <span class="c-num">2</span>;
+    <span class="c-kw">int</span> modulo2 = <span class="c-num">15</span> % <span class="c-num">7</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"3 + 5 = %d\n"</span>, suma);
+    <span class="c-fn">printf</span>(<span class="c-str">"3 - 5 = %d\n"</span>, resta);
+    <span class="c-fn">printf</span>(<span class="c-str">"3 * 5 = %d\n"</span>, mult);
+    <span class="c-fn">printf</span>(<span class="c-str">"7 / 2 = %d\n"</span>, divEntera);
+    <span class="c-fn">printf</span>(<span class="c-str">"7 %% 2 = %d\n"</span>, modulo1);
+    <span class="c-fn">printf</span>(<span class="c-str">"15 %% 7 = %d\n"</span>, modulo2);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <span>Salida en Consola</span>
+              <span>stdout</span>
+            </div>
+            <div class="terminal-body"><span class="terminal-prompt">$ ./nivel1_operadores</span>
+3 + 5 = 8
+3 - 5 = -2
+3 * 5 = 15
+7 / 2 = 3
+7 % 2 = 1
+15 % 7 = 1</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: DESGLOSE LÍNEA POR LÍNEA DEL NIVEL 1 -->
+      <section>
+        <h2><span class="section-num">17</span> Desglose Línea por Línea del Ejemplo Nivel 1</h2>
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Instrucción</th>
+              <th>Cálculo Realizado</th>
+              <th>Valor Guardado</th>
+              <th>Detalle Técnico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>int suma = 3 + 5;</code></td>
+              <td>$3 + 5$</td>
+              <td><code>8</code></td>
+              <td>Suma entera directa</td>
+            </tr>
+            <tr>
+              <td><code>int resta = 3 - 5;</code></td>
+              <td>$3 - 5$</td>
+              <td><code>-2</code></td>
+              <td>El tipo <code>int</code> admite resultados negativos</td>
+            </tr>
+            <tr>
+              <td><code>int mult = 3 * 5;</code></td>
+              <td>$3 \times 5$</td>
+              <td><code>15</code></td>
+              <td>Producto entero con asterisco <code>*</code></td>
+            </tr>
+            <tr>
+              <td><code>int divEntera = 7 / 2;</code></td>
+              <td>Cociente entero de $7 \div 2$</td>
+              <td><code>3</code></td>
+              <td>Descarta el resto porque ambos son <code>int</code></td>
+            </tr>
+            <tr>
+              <td><code>int modulo1 = 7 % 2;</code></td>
+              <td>Resto de $7 \div 2$</td>
+              <td><code>1</code></td>
+              <td>$7 = 2 \times 3 + 1$ (sobra $1$)</td>
+            </tr>
+            <tr>
+              <td><code>int modulo2 = 15 % 7;</code></td>
+              <td>Resto de $15 \div 7$</td>
+              <td><code>1</code></td>
+              <td>$15 = 7 \times 2 + 1$ (sobra $1$)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-indigo" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.83rem;">
+            💡 <b>Detalle de <code>printf</code>:</b> Como adentro de <code>printf</code> el símbolo <code>%</code> se usa para comodines (<code>%d</code>), cuando queremos dibujar literalmente el signo porcentaje en pantalla escribimos doble porcentaje: <b><code>%%</code></b> (ej. <code>"7 %% 2 = %d\n"</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: EJEMPLO NIVEL 2 (REPARTO INTERACTIVO CON SCANF, / Y %) -->
+      <section>
+        <h2><span class="section-num">18</span> Ejemplo Nivel 2: Reparto de Caramelos (<code>/</code> y <code>%</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Hagamos un programa interactivo que pida por teclado cuántos caramelos tenemos y entre cuántos amigos los vamos a repartir en partes iguales:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel2_reparto.c</span>
+              <span class="code-badge">Nivel 2 • Con scanf y Traza</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> caramelos, amigos;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Cantidad de caramelos: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;caramelos);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Cantidad de amigos: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;amigos);
+
+    <span class="c-kw">int</span> paraCadaUno = caramelos / amigos;
+    <span class="c-kw">int</span> sobran = caramelos % amigos;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Cada amigo recibe: %d\n"</span>, paraCadaUno);
+    <span class="c-fn">printf</span>(<span class="c-str">"Sobran en la bolsa: %d\n"</span>, sobran);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window" style="margin-bottom: 10px;">
+              <div class="terminal-header">
+                <span>Consola Interactiva</span>
+                <span>stdin / stdout</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel2_reparto</span>
+Cantidad de caramelos: <span style="color: #34d399; font-weight: bold;">15</span>
+Cantidad de amigos: <span style="color: #34d399; font-weight: bold;">7</span>
+Cada amigo recibe: 2
+Sobran en la bolsa: 1</div>
+            </div>
+
+            <table class="trace-table" style="font-size: 0.76rem;">
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th><code>caramelos</code></th>
+                  <th><code>amigos</code></th>
+                  <th><code>paraCadaUno</code></th>
+                  <th><code>sobran</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Lectura</td>
+                  <td><code>15</code></td>
+                  <td><code>7</code></td>
+                  <td><code>?</code></td>
+                  <td><code>?</code></td>
+                </tr>
+                <tr>
+                  <td><code>15 / 7</code></td>
+                  <td><code>15</code></td>
+                  <td><code>7</code></td>
+                  <td><b><code>2</code></b></td>
+                  <td><code>?</code></td>
+                </tr>
+                <tr>
+                  <td><code>15 % 7</code></td>
+                  <td><code>15</code></td>
+                  <td><code>7</code></td>
+                  <td><code>2</code></td>
+                  <td><b><code>1</code></b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: EJEMPLO NIVEL 3 (CALCULADORA DE PROMEDIO Y COMPRA CON FLOAT) -->
+      <section>
+        <h2><span class="section-num">19</span> Ejemplo Nivel 3: Promedio Exacto con Decimales</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Combinemos <code>scanf</code>, paréntesis <code>( )</code> y división con decimales para pedir dos notas enteras y calcular tanto la suma como el promedio con coma:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel3_promedio.c</span>
+              <span class="code-badge">Nivel 3 • int a float</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> nota1, nota2;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese la primera nota: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;nota1);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese la segunda nota: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;nota2);
+
+    <span class="c-kw">int</span> suma = nota1 + nota2;
+    <span class="c-kw">float</span> promedio = (nota1 + nota2) / <span class="c-num">2.0</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Suma de puntos: %d\n"</span>, suma);
+    <span class="c-fn">printf</span>(<span class="c-str">"Promedio exacto: %.2f\n"</span>, promedio);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window" style="margin-bottom: 10px;">
+              <div class="terminal-header">
+                <span>Consola Interactiva</span>
+                <span>stdin / stdout</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel3_promedio</span>
+Ingrese la primera nota: <span style="color: #34d399; font-weight: bold;">7</span>
+Ingrese la segunda nota: <span style="color: #34d399; font-weight: bold;">8</span>
+Suma de puntos: 15
+Promedio exacto: 7.50</div>
+            </div>
+
+            <div class="box box-emerald">
+              <p style="margin: 0; font-size: 0.82rem;">
+                🔑 <b>¿Por qué dio <code>7.50</code> y no <code>7.00</code>?</b> Porque dividimos por <b><code>2.0</code></b> (con punto decimal). Si hubiéramos dividido por <code>2</code> entero, <code>15 / 2</code> habría dado <code>7</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: EJEMPLO NIVEL 4 - PLANTEAMIENTO LÓGICO (CONVERSOR DE MINUTOS) -->
+      <section>
+        <h2><span class="section-num">20</span> Ejemplo Nivel 4: ¿Cómo Pensar un Problema con <code>/</code> y <code>%</code>?</h2>
+        <div class="box box-indigo" style="margin-bottom: 12px;">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">📋 Enunciado Clásico de Examen</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+             Una película dura en total <b><code>135</code> minutos</b>. Escribí un programa que pida la duración total en minutos y calcule a cuántas <b>horas completas</b> y cuántos <b>minutos sueltos</b> equivale (por ejemplo: <code>135 minutos = 2 horas y 15 minutos</code>).
+          </p>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 8px;">
+          <b>¿Cómo descubrimos qué operador usar para cada dato?</b>
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Calcular las horas completas</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Sabemos que $1\text{ hora} = 60\text{ minutos}$. Para saber cuántos bloques enteros de $60$ entran en $135$, usamos la <b>división entera</b>:<br>
+              <code>horas = minutosTotales / 60;</code><br>
+              ($135 / 60 = \mathbf{2}$ horas completas).
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. Calcular los minutos que sobran</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Los minutos que no llegaron a completar otra hora son exactamente el <b>resto de dividir por 60</b>:<br>
+              <code>minutosRestantes = minutosTotales % 60;</code><br>
+              ($135 \% 60 = \mathbf{15}$ minutos sobrantes, porque $60 \times 2 = 120$ y al $135$ sobran $15$).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: EJEMPLO NIVEL 4 - CÓDIGO COMPLETO Y TRAZA -->
+      <section>
+        <h2><span class="section-num">21</span> Ejemplo Nivel 4: Conversor de Minutos a Horas y Minutos</h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel4_reloj.c</span>
+              <span class="code-badge">Nivel 4 • Integrador</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> totalMinutos;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese duracion en minutos: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;totalMinutos);
+
+    <span class="c-kw">int</span> horas = totalMinutos / <span class="c-num">60</span>;
+    <span class="c-kw">int</span> minutos = totalMinutos % <span class="c-num">60</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Equivale a: %d horas y %d minutos.\n"</span>, horas, minutos);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window" style="margin-bottom: 10px;">
+              <div class="terminal-header">
+                <span>Consola Interactiva</span>
+                <span>stdin / stdout</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel4_reloj</span>
+Ingrese duracion en minutos: <span style="color: #34d399; font-weight: bold;">135</span>
+Equivale a: 2 horas y 15 minutos.</div>
+            </div>
+
+            <table class="trace-table" style="font-size: 0.76rem;">
+              <thead>
+                <tr>
+                  <th>Instrucción</th>
+                  <th><code>totalMinutos</code></th>
+                  <th><code>horas</code></th>
+                  <th><code>minutos</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>scanf</code></td>
+                  <td><b><code>135</code></b></td>
+                  <td><code>?</code></td>
+                  <td><code>?</code></td>
+                </tr>
+                <tr>
+                  <td><code>135 / 60</code></td>
+                  <td><code>135</code></td>
+                  <td><b><code>2</code></b></td>
+                  <td><code>?</code></td>
+                </tr>
+                <tr>
+                  <td><code>135 % 60</code></td>
+                  <td><code>135</code></td>
+                  <td><code>2</code></td>
+                  <td><b><code>15</code></b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: ERROR FRECUENTE #1 (GUARDAR INT / INT EN UN FLOAT) -->
+      <section>
+        <h2><span class="section-num">22</span> Error Frecuente #1: La Trampa de <code>float x = 7 / 2;</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Muchos estudiantes piensan: <i>"Como guardé el resultado en una variable <code>float</code>, entonces <code>7 / 2</code> me va a dar <code>3.5</code>"</i>. ¡Mirá por qué eso es falso en C!
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Trampa clásica: Da <code>3.00</code> (pierde el <code>.5</code>)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">float</span> mitad = <span class="c-num">7</span> / <span class="c-num">2</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"%.2f\n"</span>, mitad); <span class="c-cmt">// Imprime: 3.00</span></div>
+            </div>
+            <p style="font-size: 0.81rem; color: #fecaca; margin: 6px 0 0;">
+              <b>¿Por qué pasa?</b> Primero C resuelve la derecha del <code>=</code> sin mirar la izquierda. Como <code>7</code> y <code>2</code> son enteros, calcula <code>7 / 2 = 3</code>, y recién después guarda ese <code>3</code> como <code>3.00</code> en <code>mitad</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Solución: Poner <code>.0</code> en al menos un número</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">float</span> mitad = <span class="c-num">7.0</span> / <span class="c-num">2</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"%.2f\n"</span>, mitad); <span class="c-cmt">// Imprime: 3.50</span></div>
+            </div>
+            <p style="font-size: 0.81rem; color: #a7f3d0; margin: 6px 0 0;">
+              Al escribir <code>7.0 / 2</code> (o <code>7 / 2.0</code>), la cuenta ya se realiza en modo decimal antes de guardarse en la caja.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: ERROR FRECUENTE #2 (USAR % CON FLOAT) -->
+      <section>
+        <h2><span class="section-num">23</span> Error Frecuente #2: Querer Usar Módulo (<code>%</code>) con <code>float</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          El operador módulo <code>%</code> ("lo que sobra de la división entera") <b>solo existe para números enteros (<code>int</code>)</b>. No se puede usar con variables ni números <code>float</code>:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error de compilación: <code>%</code> con decimales</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">float</span> a = <span class="c-num">7.5</span>;
+<span class="c-kw">float</span> b = <span class="c-num">2.0</span>;
+<span class="c-kw">float</span> r = a % b; <span class="c-cmt">// ❌ Error: invalid operands to %</span></div>
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin: 6px 0 0;">
+              El compilador rechaza el programa porque en una división con decimales no existe el concepto de "resto entero".
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Ambos operandos de <code>%</code> deben ser <code>int</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> a = <span class="c-num">7</span>;
+<span class="c-kw">int</span> b = <span class="c-num">2</span>;
+<span class="c-kw">int</span> r = a % b; <span class="c-cmt">// ✅ Válido: guarda 1</span></div>
+            </div>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin: 6px 0 0;">
+              Siempre que necesites usar <code>%</code> (para divisibilidad, paridad o restos), declarálos como <code>int</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: ERROR FRECUENTE #3 (DIVIDIR POR CERO) -->
+      <section>
+        <h2><span class="section-num">24</span> Error Frecuente #3: La Prohibición de Dividir por Cero (<code>/ 0</code> o <code>% 0</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Tanto en matemática como en computación, <b>no se puede dividir por cero</b>. Mirá lo que ocurre si el divisor vale <code>0</code>:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">💥 Crash instantáneo: Dividir o hacer módulo por <code>0</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> a = <span class="c-num">15</span> / <span class="c-num">0</span>; <span class="c-cmt">// 💥 El programa colapsa</span>
+<span class="c-kw">int</span> b = <span class="c-num">15</span> % <span class="c-num">0</span>; <span class="c-cmt">// 💥 El programa colapsa</span></div>
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin: 6px 0 0;">
+              Como <code>%</code> también hace una división interna para hallar el resto, hacer <code>numero % 0</code> produce exactamente el mismo fallo grave que <code>numero / 0</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Pero <code>0</code> arriba (en el numerador) SÍ es válido</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> a = <span class="c-num">0</span> / <span class="c-num">7</span>; <span class="c-cmt">// ✅ Da 0</span>
+<span class="c-kw">int</span> b = <span class="c-num">0</span> % <span class="c-num">7</span>; <span class="c-cmt">// ✅ Da 0</span></div>
+            </div>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin: 6px 0 0;">
+              Si tengo <code>0</code> caramelos para repartir entre <code>7</code> amigos, cada uno recibe <code>0</code> y sobran <code>0</code>. Lo único prohibido es que el número de la derecha sea cero.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: ERROR FRECUENTE #4 (ESCRIBIR MULTIPLICACIONES COMO EN ÁLGEBRA) -->
+      <section>
+        <h2><span class="section-num">25</span> Error Frecuente #4: Omitir el Símbolo <code>*</code> al Multiplicar</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          En el pizarrón de matemática solemos escribir $2a$ o $2(x + y)$ sin poner ningún signo en el medio. En C, <b>la multiplicación implícita no existe</b>:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Pegar números y variables</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> base = <span class="c-num">10</span>;
+<span class="c-kw">int</span> altura = <span class="c-num">5</span>;
+
+<span class="c-cmt">// ❌ Error de sintaxis: falta el *</span>
+<span class="c-kw">int</span> perimetro = <span class="c-num">2</span>(base + altura);
+<span class="c-kw">int</span> doble = <span class="c-num">2</span>base;</div>
+            </div>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Escribir siempre el asterisco <code>*</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> base = <span class="c-num">10</span>;
+<span class="c-kw">int</span> altura = <span class="c-num">5</span>;
+
+<span class="c-cmt">// ✅ El * es obligatorio en toda multiplicación:</span>
+<span class="c-kw">int</span> perimetro = <span class="c-num">2</span> * (base + altura);
+<span class="c-kw">int</span> doble = <span class="c-num">2</span> * base;</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: ¿QUÉ PASA CUANDO A < B EN EL OPERADOR MÓDULO? -->
+      <section>
+        <h2><span class="section-num">26</span> Caso Especial de Examen: ¿Cuánto da <code>3 % 10</code>?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          ¿Qué pasa cuando el número de la izquierda es <b>más chico</b> que el divisor de la derecha, por ejemplo <code>3 / 10</code> y <code>3 % 10</code>?
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Pensalo con caramelos</h4>
+            <p style="font-size: 0.85rem; margin: 0;">
+              Si tenés solo <b><code>3</code> caramelos</b> y querés darle la misma cantidad entera a <b><code>10</code> amigos</b>:<br><br>
+              • ¿Cuántos caramelos enteros recibe cada amigo? <b><code>0</code></b> (no alcanza ni para darle 1 a cada uno). Por eso <b><code>3 / 10 = 0</code></b>.<br>
+              • ¿Y cuántos caramelos te quedan sin repartir en la mano? ¡Los mismos <b><code>3</code></b>! Por eso <b><code>3 % 10 = 3</code></b>.
+            </p>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">menor_que_divisor.c</span>
+              <span class="code-badge">Regla General</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> cociente = <span class="c-num">3</span> / <span class="c-num">10</span>; <span class="c-cmt">// Da 0</span>
+<span class="c-kw">int</span> resto    = <span class="c-num">3</span> % <span class="c-num">10</span>; <span class="c-cmt">// Da 3</span>
+
+<span class="c-cmt">// Siempre que a &lt; b (positivos):</span>
+<span class="c-cmt">// a / b da 0</span>
+<span class="c-cmt">// a % b da el mismo 'a'</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: BUENAS PRÁCTICAS CON OPERADORES ARITMÉTICOS -->
+      <section>
+        <h2><span class="section-num">27</span> Buenas Prácticas al Escribir Fórmulas en C</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">✅ Claridad y seguridad en tus cálculos</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Usá paréntesis ante la duda:</b> Aunque conozcas la jerarquía de operadores, escribir <code>(a * b) + (c * d)</code> hace que tu código sea mucho más fácil de leer sin equivocaciones.</li>
+              <li><b>Guardá resultados intermedios en variables con buen nombre:</b> En vez de una cuenta gigante en una sola línea, separala en pasos claros (<code>subtotal</code>, <code>descuento</code>, <code>total</code>).</li>
+              <li><b>Dejá espacios alrededor de los operadores:</b> Escribí <code>a + b * c</code> en vez de <code>a+b*c</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">📐 Código limpio vs Código amontonado</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-cmt">// ✅ Claro, legible y fácil de verificar:</span>
+<span class="c-kw">int</span> sumaNotas = nota1 + nota2 + nota3;
+<span class="c-kw">float</span> promedio = sumaNotas / <span class="c-num">3.0</span>;</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: EJERCICIO DE APLICACIÓN 1 (CALCULAR MENTALMENTE) -->
+      <section>
+        <h2><span class="section-num">28</span> Ejercicio 1: Calculá Mentalmente los 5 Resultados</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Sin usar la computadora, determiná qué valor entero queda guardado en cada una de estas 5 variables y luego abrí la solución para comprobarlo:
+        </p>
+
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-body"><span class="c-kw">int</span> a = <span class="c-num">19</span> / <span class="c-num">5</span>;
+<span class="c-kw">int</span> b = <span class="c-num">19</span> % <span class="c-num">5</span>;
+<span class="c-kw">int</span> c = <span class="c-num">24</span> % <span class="c-num">6</span>;
+<span class="c-kw">int</span> d = <span class="c-num">10</span> + <span class="c-num">4</span> * <span class="c-num">3</span>;
+<span class="c-kw">int</span> e = (<span class="c-num">10</span> + <span class="c-num">4</span>) * <span class="c-num">3</span>;</div>
+        </div>
+
+        <details class="code-solution">
+          <summary>👁️ Ver resultados explicados uno por uno</summary>
+          <div class="solution-content">
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; margin-bottom: 0;">
+              <li><b><code>a = 3</code></b> → Porque $5 \times 3 = 15$ (el $5$ entra $3$ veces enteras en $19$).</li>
+              <li><b><code>b = 4</code></b> → Porque de $15$ para llegar a $19$ sobran $4$.</li>
+              <li><b><code>c = 0</code></b> → Porque $24 = 6 \times 4$ exacto ($24$ es divisible por $6$, no hay resto).</li>
+              <li><b><code>d = 22</code></b> → Primero multiplica $4 \times 3 = 12$ y luego suma $10 + 12 = 22$.</li>
+              <li><b><code>e = 42</code></b> → Primero resuelve el paréntesis $(10 + 4 = 14)$ y luego $14 \times 3 = 42$.</li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 30: EJERCICIO DE APLICACIÓN 2 (DIVISIBILIDAD DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">29</span> Ejercicio 2: Comprobando Divisibilidad en C</h2>
+        <div class="box box-indigo" style="margin-bottom: 10px;">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">📝 Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Usando la regla del apunte (<code>numero % divisor</code>), escribí un programa que pida un número entero al usuario y muestre por pantalla:
+            1) El resto de dividirlo por <code>2</code>, y
+            2) El resto de dividirlo por <code>7</code> (recordando que si da <code>0</code> significa que es divisible).
+          </p>
+        </div>
+
+        <details class="code-solution">
+          <summary>💻 Ver código solución completo</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numero;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese un numero entero: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;numero);
+
+    <span class="c-kw">int</span> restoPor2 = numero % <span class="c-num">2</span>;
+    <span class="c-kw">int</span> restoPor7 = numero % <span class="c-num">7</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Resto al dividir por 2: %d (0 = par, 1 = impar)\n"</span>, restoPor2);
+    <span class="c-fn">printf</span>(<span class="c-str">"Resto al dividir por 7: %d (0 = divisible por 7)\n"</span>, restoPor7);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 31: EJERCICIO DE APLICACIÓN 3 (DESARMAR EN DOCENAS Y UNIDADES) -->
+      <section>
+        <h2><span class="section-num">30</span> Ejercicio 3: Empaquetadora de Docenas de Empanadas</h2>
+        <div class="box box-emerald" style="margin-bottom: 10px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">📝 Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Una casa de comidas recibe un pedido con una cantidad total de empanadas (por ejemplo <code>29</code>). Escribí un programa que lea esa cantidad y calcule cuántas <b>cajas de una docena (12)</b> se arman completas y cuántas <b>empanadas sueltas</b> quedan fuera de las cajas.
+          </p>
+        </div>
+
+        <details class="code-solution">
+          <summary>💻 Ver código solución completo</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> totalEmpanadas;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese cantidad total de empanadas: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;totalEmpanadas);
+
+    <span class="c-kw">int</span> docenas = totalEmpanadas / <span class="c-num">12</span>;
+    <span class="c-kw">int</span> sueltas = totalEmpanadas % <span class="c-num">12</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Se arman %d docenas completas y quedan %d sueltas.\n"</span>, docenas, sueltas);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 32: RESUMEN COMPARATIVO / VS % -->
+      <section>
+        <h2><span class="section-num">31</span> El Dúo Dinámico de C: <code>/</code> (Cociente) y <code>%</code> (Resto)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Siempre que tengas un problema de repartir, agrupar o convertir unidades enteras, pensá en esta pareja:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Problema Práctico</th>
+              <th>Con División Entera (<code>/</code>) obtenés...</th>
+              <th>Con Módulo (<code>%</code>) obtenés...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Repartir <code>15</code> entre <code>7</code></td>
+              <td><code>15 / 7 = 2</code> (cuánto recibe cada uno)</td>
+              <td><code>15 % 7 = 1</code> (cuánto sobra sin repartir)</td>
+            </tr>
+            <tr>
+              <td>Pasar <code>135</code> min a horas</td>
+              <td><code>135 / 60 = 2</code> (las horas completas)</td>
+              <td><code>135 % 60 = 15</code> (los minutos sobrantes)</td>
+            </tr>
+            <tr>
+              <td>Agrupar <code>29</code> en docenas</td>
+              <td><code>29 / 12 = 2</code> (las docenas completas)</td>
+              <td><code>29 % 12 = 5</code> (las unidades sueltas)</td>
+            </tr>
+            <tr>
+              <td>Analizar el número <code>148</code></td>
+              <td><code>148 / 10 = 14</code> (el número sin la última cifra)</td>
+              <td><code>148 % 10 = 8</code> (la última cifra sola)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 33: SÍNTESIS DE LA SECCIÓN 6 DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">32</span> Síntesis Visual de la Sección 6 del Apunte</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Arsenal Aritmético</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>+ , - , *:</b> Operaciones directas.</li>
-              <li><b>int / int:</b> Da cociente entero truncado (7 / 2 = 3).</li>
-              <li><b>float / float:</b> Da resultado con decimales (7.0f / 2 = 3.5f).</li>
-              <li><b>%:</b> Módulo, da el resto entero (7 % 2 = 1).</li>
-              <li><b>x % n == 0:</b> Criterio infalible de divisibilidad.</li>
-              <li><b>( ):</b> Prioridad absoluta en el orden de evaluación.</li>
+            <h4 style="color: #818cf8;">Operaciones Directas</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; margin-bottom: 0;">
+              <li><b><code>+</code> → Suma:</b> <code>3 + 5 = 8</code></li>
+              <li><b><code>-</code> → Resta:</b> <code>3 - 5 = -2</code></li>
+              <li><b><code>*</code> → Multiplicación:</b> <code>3 * 5 = 15</code></li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">División Entera y Módulo</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; margin-bottom: 0;">
+              <li><b><code>/</code> → División entera:</b> <code>7 / 2 = 3</code> (descarta el resto).</li>
+              <li><b><code>%</code> → Módulo (resto):</b> <code>7 % 2 = 1</code> y <code>15 % 7 = 1</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-cyan" style="grid-column: span 2;">
+            <h4 style="color: #38bdf8; margin-bottom: 4px;">Criterio de Divisibilidad del Apunte</h4>
+            <p style="font-size: 0.85rem; margin: 0;">
+              Si <b><code>numero % divisor == 0</code></b>, entonces el número es divisible:<br>
+              • <code>14 % 7 = 0</code> (divisible, no hay resto) &nbsp;|&nbsp;
+              <code>20 % 2 = 0</code> (divisible, es par) &nbsp;|&nbsp;
+              <code>15 % 7 = 1</code> (NO es divisible, porque sobra <code>1</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: RESUMEN FINAL, CHECKLIST Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">33</span> Resumen de la Unidad 06 y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Ideas Clave que te Llevás Hoy</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>División entre enteros:</b> <code>int / int</code> trunca los decimales (<code>7 / 2</code> da <code>3</code>). Para conservar decimales usá <code>7.0 / 2.0</code>.</li>
+              <li><b>Operador Módulo <code>%</code>:</b> Calcula lo que sobra en una división entera (solo válido entre <code>int</code>).</li>
+              <li><b>Divisibilidad:</b> Un número es divisible por otro si y solo si el resto <code>%</code> da exactamente <code>0</code>.</li>
+              <li><b>Precedencia:</b> <code>*</code>, <code>/</code> y <code>%</code> se resuelven antes que <code>+</code> y <code>-</code>, salvo que uses paréntesis <code>( )</code>.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué <code>5 / 2</code> da 2 y no 2.5?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé para qué sirve el operador <code>%</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Cómo compruebo si un número es par o impar?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué nunca se debe dividir por cero?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar por qué <code>7 / 2</code> da <code>3</code> y cómo lograr que dé <code>3.5</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo calcular mentalmente cuánto da <code>15 % 7</code> y por qué?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cómo usar <code>%</code> para saber si un número es divisible por otro o si es par?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo por qué el promedio de dos notas necesita paréntesis <code>(n1 + n2) / 2.0</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué jamás se puede dividir ni hacer módulo por <code>0</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
+        <div style="text-align: center; margin-top: 16px;">
           <a href="05-entrada-salida.html" class="badge badge-indigo"
             style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
             ← Anterior: Entrada y Salida
           </a>
           <a href="../index.html" class="badge badge-cyan"
             style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            1er Cuatrimestre
+            ← Índice 1er Bimestre
           </a>
           <a href="07-incremento-variables.html" class="badge badge-emerald"
             style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">

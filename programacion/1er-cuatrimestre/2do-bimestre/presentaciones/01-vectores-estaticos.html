@@ -28,8 +28,8 @@
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
       <a href="../index.html">← Volver al 2do Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a
-        href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 2do Bimestre • Unidad 01</span>
   </div>
@@ -39,355 +39,1491 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-cyan">1er Cuatrimestre • 2do Bimestre • Unidad 1</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Vectores y Vectores Estáticos</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            El salto a las colecciones de datos: cómo almacenar decenas de valores en memoria contigua con arreglos
-            unidimensionales
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-cyan">1er Cuatrimestre • 2do Bimestre • Unidad 01</span>
+          <h1 style="font-size: 2.65rem; margin-bottom: 12px;">Vectores y Vectores Estáticos en C</h1>
+          <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px;">
+            De guardar un único valor a organizar colecciones completas de datos bajo un mismo nombre
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-indigo">¿Qué es un Vector?</span>
-            <span class="badge badge-emerald">Índices Base Cero (0 a N-1)</span>
-            <span class="badge badge-amber">Memoria Contigua</span>
-            <span class="badge badge-rose">Peligro Out of Bounds</span>
+            <span class="badge badge-indigo">1. ¿Qué es un Vector?</span>
+            <span class="badge badge-emerald">2. Vectores Estáticos</span>
+            <span class="badge badge-amber">Índices Base Cero (0 a N-1)</span>
+            <span class="badge badge-purple">Carga e Inicialización</span>
+            <span class="badge badge-rose">Límites de Memoria</span>
           </div>
 
-          <div class="box box-cyan" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
-              para avanzar diapositiva por diapositiva.
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por los 35 temas y ejemplos de esta clase.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN CON EL 1ER BIMESTRE -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Conexión con el 1er Bimestre</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué las variables simples ya no alcanzan?</h4>
-            <p style="font-size: 0.88rem;">
-              En el 1er cuatrimestre trabajamos con variables individuales: <code>int edad;</code>,
-              <code>float precio;</code>.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Pero imaginá que te piden calcular el promedio de <b>50 alumnos</b>. ¿Declararías
-              <code>nota1, nota2, ..., nota50;</code>? Sería una pesadilla inmanejable. No podrías usar bucles para
-              procesarlas ni ordenarlas.
-            </p>
-          </div>
-
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
+            <h4 style="color: #818cf8;">Lo que ya sabemos del 1er Bimestre</h4>
             <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Comprender qué es un <b>vector (array / arreglo unidimensional)</b>.</li>
-              <li>Declarar e inicializar vectores estáticos en C.</li>
-              <li>Entender la <b>regla de oro de los índices: base cero (0 a N-1)</b>.</li>
-              <li>Visualizar cómo se almacenan las celdas en la memoria RAM.</li>
-              <li>Aprender a acceder y modificar elementos individuales.</li>
-              <li>Evitar el error más grave de C: el <b>desbordamiento de límites (<i>out of bounds</i>)</b>.</li>
+              <li>Declarar variables simples: <code>int</code>, <code>float</code>, <code>char</code>.</li>
+              <li>Mostrar mensajes y valores con <code>printf()</code>.</li>
+              <li>Leer datos del teclado con <code>scanf()</code> usando <code>&amp;</code>.</li>
+              <li>Tomar decisiones con <code>if</code> / <code>else</code>.</li>
+              <li>Repetir instrucciones con ciclos <code>while</code> y <code>for</code>.</li>
             </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 3: QUÉ ES UN VECTOR -->
-      <section>
-        <h2><span class="section-num">02</span> ¿Qué es un Vector en C?</h2>
-        <div class="box box-cyan">
-          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición Formal</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            Un <b>vector</b> (también llamado <i>array</i> o <i>arreglo unidimensional</i>) es una estructura de datos
-            que permite almacenar una <b>colección ordenada de elementos del mismo tipo</b> en posiciones de memoria
-            contiguas bajo un único nombre identificador.
-          </p>
-        </div>
-
-        <div class="grid-3" style="margin-top: 14px;">
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">1. Homogéneo</h4>
-            <p style="font-size: 0.85rem;">
-              Todos sus casilleros deben guardar el <b>mismo tipo de dato</b> (todos <code>int</code>, o todos
-              <code>float</code>, o todos <code>char</code>).
-            </p>
-          </div>
-
-          <div class="box box-amber">
-            <h4 style="color: #fbbf24;">2. Tamaño Fijo (Estático)</h4>
-            <p style="font-size: 0.85rem;">
-              En un vector estático, la cantidad de elementos se define al programarlo y <b>no puede crecer ni
-                achicarse</b> en ejecución.
-            </p>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">3. Memoria Contigua</h4>
-            <p style="font-size: 0.85rem;">
-              En la RAM, los elementos están pegados uno al lado del otro en una hilera perfecta, sin huecos
-              intermedios.
-            </p>
+            <h4 style="color: #34d399;">Lo que vamos a aprender desde cero hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Por qué las variables sueltas no alcanzan cuando tenemos muchos datos.</li>
+              <li>Qué es un <b>vector</b> y cómo se organiza internamente.</li>
+              <li>Cómo declarar un <b>vector estático</b> de tamaño fijo.</li>
+              <li>Qué son las <b>posiciones o índices</b> y por qué empiezan en <code>0</code>.</li>
+              <li>Cómo guardar, leer, modificar e inicializar elementos sin errores.</li>
+            </ul>
           </div>
         </div>
-      </section>
-
-      <!-- SLIDE 4: LA ANALOGÍA VISUAL -->
-      <section>
-        <h2><span class="section-num">03</span> Analogía: El Casillero Postal Numerado</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Un vector es como una hilera de casilleros postales en
-          un edificio:</p>
-
-        <div class="array-container">
-          <div class="array-cell-wrapper">
-            <span class="array-index">Índice [0]</span>
-            <div class="array-cell">8</div>
-          </div>
-          <div class="array-cell-wrapper">
-            <span class="array-index">Índice [1]</span>
-            <div class="array-cell">7</div>
-          </div>
-          <div class="array-cell-wrapper">
-            <span class="array-index">Índice [2]</span>
-            <div class="array-cell highlight">10</div>
-          </div>
-          <div class="array-cell-wrapper">
-            <span class="array-index">Índice [3]</span>
-            <div class="array-cell">6</div>
-          </div>
-          <div class="array-cell-wrapper">
-            <span class="array-index">Índice [4]</span>
-            <div class="array-cell">9</div>
-          </div>
-        </div>
-
-        <div class="box box-purple" style="margin-top: 14px;">
-          <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
-            <li>El nombre de todo el mueble es <b><code>notas</code></b>.</li>
-            <li>El número entre corchetes <code>[ ]</code> es el <b>índice o posición</b>.</li>
-            <li>Lo que está adentro de cada casillero es el <b>valor almacenado</b>.</li>
-            <li>Para cambiar o consultar el casillero 2: <code>notas[2] = 10;</code></li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- SLIDE 5: DECLARACIÓN E INICIALIZACIÓN -->
-      <section>
-        <h2><span class="section-num">04</span> Declaración e Inicialización en C</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Las diferentes maneras de dar vida a un vector en
-          código:</p>
-
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">declaracion_vectores.c</span>
-            <span class="code-badge">Sintaxis C</span>
-          </div>
-          <div class="code-body"><span class="c-cmt">// 1. Declarar sin inicializar (los 5 casilleros tienen
-              'basura'):</span>
-            <span class="c-kw">int</span> edades[<span class="c-num">5</span>];
-
-            <span class="c-cmt">// 2. Declarar con valores iniciales explícitos usando llaves { }:</span>
-            <span class="c-kw">int</span> notas[<span class="c-num">5</span>] = {<span class="c-num">8</span>, <span
-              class="c-num">7</span>, <span class="c-num">10</span>, <span class="c-num">6</span>, <span
-              class="c-num">9</span>};
-
-            <span class="c-cmt">// 3. Inicializar TODO el vector a ceros (buena práctica profesional):</span>
-            <span class="c-kw">int</span> ceros[<span class="c-num">10</span>] = {<span class="c-num">0</span>};
-
-            <span class="c-cmt">// 4. El compilador cuenta los elementos por vos:</span>
-            <span class="c-kw">int</span> pares[] = {<span class="c-num">2</span>, <span class="c-num">4</span>, <span
-              class="c-num">6</span>, <span class="c-num">8</span>}; <span class="c-cmt">// Reserva automáticamente 4
-              elementos</span>
-          </div>
-        </div>
-
-        <div class="box box-amber">
+        <div class="box box-amber" style="margin-top: 12px;">
           <p style="margin: 0; font-size: 0.86rem;">
-            ⚠️ <b>¡Cuidado con el tamaño estático!:</b> En C estándar convencional, el número dentro de los corchetes al
-            declarar un vector estático debe ser una constante o valor conocido al compilar (ej:
-            <code>#define TAM 10</code> o un número literal como <code>5</code>).
+            🎯 <b>Meta de la clase:</b> Que al terminar puedas crear vectores de números enteros, decimales o letras, acceder a cualquier casilla con seguridad y entender exactamente qué pasa en la memoria de la computadora.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 6: LA REGLA DE ORO: BASE CERO -->
+      <!-- SLIDE 3: EL PUNTO DE PARTIDA: UNA VARIABLE COMÚN -->
       <section>
-        <h2><span class="section-num">05</span> La Regla de Oro: Índices en Base Cero</h2>
-        <div class="box box-rose">
-          <h4 style="color: #f87171; margin-bottom: 4px;">¡En C siempre se empieza a contar desde el 0!</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            Si un vector tiene <b>5 elementos</b>, sus posiciones válidas son <b>0, 1, 2, 3 y 4</b>. ¡El índice 5 NO
-            pertenece al vector!
-          </p>
-        </div>
+        <h2><span class="section-num">02</span> El Punto de Partida: ¿Cómo Guardábamos un Dato?</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Hasta ahora, cuando queríamos guardar un dato en C (por ejemplo, la edad de una persona), usábamos una <b>variable común</b>:
+        </p>
 
-        <div class="grid-2" style="margin-top: 14px;">
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué desde 0 y no desde 1?</h4>
-            <p style="font-size: 0.85rem;">
-              En C, el nombre del vector representa la <b>dirección del primer casillero en RAM</b>. El índice indica el
-              <b>desplazamiento (offset)</b>:
-            </p>
-            <div
-              style="font-family: var(--font-mono); font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; color: #a5b4fc; margin-top: 6px;">
-              Dirección = Inicio + (índice × 4 bytes)
+        <div class="grid-2" style="align-items: center; margin-top: 10px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">variable_simple.c</span>
+              <span class="code-badge">1 Solo Valor</span>
             </div>
-            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 6px;">
-              Para el primer elemento nos desplazamos 0 bytes. Por eso es <code>vector[0]</code>.
-            </p>
+            <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">16</span>;</div>
           </div>
 
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">El resumen de límites</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li>Primer elemento: <code>vector[0]</code></li>
-              <li>Segundo elemento: <code>vector[1]</code></li>
-              <li>Tercer elemento: <code>vector[2]</code></li>
-              <li><b>Último elemento de tamaño N: <code>vector[N - 1]</code></b></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 7: EL ERROR OUT OF BOUNDS -->
-      <section>
-        <h2><span class="section-num">06</span> El Peligro Mortal: Desbordamiento (Out of Bounds)</h2>
-        <div class="comparison-box">
-          <div class="wrong-card">
-            <div class="wrong-title">❌ Acceso Fuera de Límites</div>
-            <div
-              style="font-family: var(--font-mono); font-size: 0.82rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
-              int notas[5] = {8, 7, 10, 6, 9};<br><br>
-              // ¡ERROR GRAVÍSIMO!<br>
-              notas[5] = 10;
+          <div class="memory-diagram" style="margin: 0;">
+            <div class="memory-box">
+              <div class="memory-address">Cajita individual en RAM</div>
+              <div class="memory-label">edad <span class="memory-type">int</span></div>
+              <div class="memory-value">16</div>
             </div>
-            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px;">
-              <b>¿Qué hace C?:</b> C <b>NO comprueba los límites</b> para ser ultrarrápido. Intentará escribir en el
-              casillero 6 de la memoria, sobreescribiendo otra variable o destruyendo datos del programa (<i>Buffer
-                Overflow / Crash</i>).
-            </p>
-          </div>
-
-          <div class="correct-card">
-            <div class="correct-title">✅ Rango Correcto y Seguro</div>
-            <div
-              style="font-family: var(--font-mono); font-size: 0.82rem; color: #a7f3d0; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
-              int notas[5] = {8, 7, 10, 6, 9};<br><br>
-              // El último es el índice 4:<br>
-              notas[4] = 10;
-            </div>
-            <p style="font-size: 0.8rem; color: #a7f3d0; margin-top: 6px;">
-              Cualquier índice $0 \le i \le 4$ es 100% seguro y válido en un vector de tamaño 5.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 8: CÓMO SE VE EN LA RAM -->
-      <section>
-        <h2><span class="section-num">07</span> El Vector en la Memoria RAM Física</h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem;">Si declaramos <code>int arr[3] = {15, 20, 25};</code>
-          en una máquina de 32 bits (4 bytes por int):</p>
-
-        <div class="memory-diagram">
-          <div class="memory-box">
-            <div class="memory-address">Dirección: 0x1000</div>
-            <div class="memory-label">arr[0] <span class="memory-type">4B</span></div>
-            <div class="memory-value">15</div>
-          </div>
-          <div class="memory-box">
-            <div class="memory-address">Dirección: 0x1004</div>
-            <div class="memory-label">arr[1] <span class="memory-type">4B</span></div>
-            <div class="memory-value">20</div>
-          </div>
-          <div class="memory-box">
-            <div class="memory-address">Dirección: 0x1008</div>
-            <div class="memory-label">arr[2] <span class="memory-type">4B</span></div>
-            <div class="memory-value">25</div>
           </div>
         </div>
 
         <div class="box box-cyan" style="margin-top: 14px;">
-          <p style="margin: 0; font-size: 0.86rem;">
-            🔍 <b>Observá las direcciones:</b> <code>0x1000</code>, <code>0x1004</code>, <code>0x1008</code>... ¡Avanzan
-            exactamente de a 4 bytes! Cada elemento se aloja inmediatamente al lado del anterior. El operador
-            <code>sizeof(arr)</code> devolverá $3 \times 4 = 12\text{ bytes}$.
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Qué limitación tiene una variable común?</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Una variable común es como una <b>cajita individual</b>: adentro de <code>edad</code> <b>solo entra un único número a la vez</b>. Si luego escribimos <code>edad = 18;</code>, el <code>16</code> anterior se borra para siempre y es reemplazado por el <code>18</code>.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 9: PROGRAMA COMPLETO DE EJEMPLO -->
+      <!-- SLIDE 4: EL PROBLEMA DE LOS 30 ALUMNOS -->
       <section>
-        <h2><span class="section-num">08</span> Programa Completo: Carga y Acceso Manual</h2>
+        <h2><span class="section-num">03</span> El Problema: ¿Y si Tenemos 30 Alumnos?</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Imaginá que el profesor te pide hacer un programa que guarde las edades de los <b>30 alumnos</b> de un curso sin perder ninguna. Con lo que sabíamos hasta hoy, tendríamos que hacer esto:
+        </p>
+
         <div class="code-window">
           <div class="code-header">
-            <span class="code-title">vector_basico.c</span>
-            <span class="code-badge">Programa Completo</span>
+            <span class="code-title">treinta_variables.c</span>
+            <span class="code-badge">¡Enfoque Impracticable!</span>
           </div>
-          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+          <div class="code-body"><span class="c-kw">int</span> edad1 = <span class="c-num">16</span>;
+<span class="c-kw">int</span> edad2 = <span class="c-num">15</span>;
+<span class="c-kw">int</span> edad3 = <span class="c-num">17</span>;
+<span class="c-kw">int</span> edad4 = <span class="c-num">16</span>;
+<span class="c-kw">int</span> edad5 = <span class="c-num">18</span>;
+<span class="c-cmt">// ... seguir declarando edad6, edad7, edad8 ...</span>
+<span class="c-kw">int</span> edad29 = <span class="c-num">15</span>;
+<span class="c-kw">int</span> edad30 = <span class="c-num">17</span>;</div>
+        </div>
 
-            <span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-            {
-            <span class="c-cmt">// Declaramos un vector de 3 temperaturas</span>
-            <span class="c-kw">float</span> temp[<span class="c-num">3</span>];
+        <div class="box box-rose" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.88rem;">
+            😱 <b>Pensalo un segundo:</b> Si para 30 alumnos ya es incómodo, ¿qué pasaría si fuera una escuela con <b>500 alumnos</b> o una empresa con <b>10.000 productos</b>? ¡Escribir 10.000 variables a mano es imposible!
+          </p>
+        </div>
+      </section>
 
-            temp[<span class="c-num">0</span>] = <span class="c-num">18.5f</span>;
-            temp[<span class="c-num">1</span>] = <span class="c-num">22.0f</span>;
-            temp[<span class="c-num">2</span>] = <span class="c-num">15.3f</span>;
+      <!-- SLIDE 5: POR QUÉ LAS VARIABLES SUELTAS NO ESCALAN -->
+      <section>
+        <h2><span class="section-num">04</span> ¿Por Qué Declarar Variables Sueltas No Sirve?</h2>
+        <div class="grid-2">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Con 5 variables separadas</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> nota1, nota2, nota3, nota4, nota5;
 
-            <span class="c-fn">printf</span>(<span class="c-str">"Temperatura inicial: %.1f °C\n"</span>, temp[<span
-              class="c-num">0</span>]);
-            <span class="c-fn">printf</span>(<span class="c-str">"Temperatura final: %.1f °C\n"</span>, temp[<span
-              class="c-num">2</span>]);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;nota1);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;nota2);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;nota3);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;nota4);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;nota5);</div>
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin: 6px 0 0;">
+              Como cada variable tiene un nombre distinto (<code>nota1</code>, <code>nota2</code>...), <b>no podemos usar un ciclo <code>for</code></b> para automatizar la lectura ni la impresión.
+            </p>
+          </div>
 
-            <span class="c-cmt">// Modificamos el segundo casillero:</span>
-            temp[<span class="c-num">1</span>] = <span class="c-num">25.0f</span>;
-            <span class="c-fn">printf</span>(<span class="c-str">"Temperatura corregida: %.1f °C\n"</span>, temp[<span
-              class="c-num">1</span>]);
-
-            <span class="c-kw">return</span> <span class="c-num">0</span>;
-            }
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Las 3 grandes desventajas</h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div class="step-content" style="font-size: 0.83rem;">
+                  <b>Es incómodo y repetitivo:</b> Hay que copiar y pegar decenas de líneas casi idénticas.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div class="step-content" style="font-size: 0.83rem;">
+                  <b>Es poco práctico para mantener:</b> Si cambian de 30 a 50 datos, hay que reescribir todo el programa.
+                </div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div class="step-content" style="font-size: 0.83rem;">
+                  <b>No se puede recorrer con un ciclo:</b> C no permite hacer <code>nota + i</code> sobre nombres de variables sueltas.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 10: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <!-- SLIDE 6: ¿QUÉ ES UN VECTOR? -->
       <section>
-        <h2><span class="section-num">09</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">05</span> 1. ¿Qué es un Vector en C?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición del Apunte</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Un <b>vector</b> (también llamado <i>arreglo</i> o <i>array</i>) es una estructura que permite <b>guardar muchos datos del mismo tipo bajo un único nombre</b>.
+          </p>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">En palabras simples: la fila de cajitas pegadas</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Si una variable común es una <b>cajita individual</b> donde guardamos un solo valor, un vector es como <b>una fila de cajitas pegadas</b> (o una caja grande con varias divisiones internas), donde en cada casillero podemos guardar un valor distinto sin que se mezclen.
+          </p>
+        </div>
+
+        <div class="array-container" style="margin-top: 16px;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 0</span>
+            <div class="array-cell">16</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 1</span>
+            <div class="array-cell">15</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 2</span>
+            <div class="array-cell">17</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 3</span>
+            <div class="array-cell">16</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 4</span>
+            <div class="array-cell">18</div>
+          </div>
+        </div>
+        <p style="text-align: center; font-size: 0.84rem; color: var(--text-muted); margin: 0;">
+          Todo este conjunto completo se llama <code>edades</code> y guarda <b>5 números enteros</b> al mismo tiempo.
+        </p>
+      </section>
+
+      <!-- SLIDE 7: COMPARACIÓN VISUAL DIRECTA -->
+      <section>
+        <h2><span class="section-num">06</span> Variable Común vs. Vector</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Comparemos lado a lado cómo se ven en nuestro código y en nuestra mente:
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-indigo" style="text-align: center;">
+            <h4 style="color: #818cf8;">Variable Común (1 solo valor)</h4>
+            <div class="code-window" style="text-align: left;">
+              <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">16</span>;</div>
+            </div>
+            <div class="array-container" style="margin: 18px 0 10px;">
+              <div class="array-cell-wrapper">
+                <span class="array-index">edad</span>
+                <div class="array-cell">16</div>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">
+              Solo tiene 1 compartimento. No lleva corchetes.
+            </p>
+          </div>
+
+          <div class="box box-emerald" style="text-align: center;">
+            <h4 style="color: #34d399;">Vector (Varios valores en fila)</h4>
+            <div class="code-window" style="text-align: left;">
+              <div class="code-body"><span class="c-kw">int</span> edades[<span class="c-num">5</span>] = {<span class="c-num">16</span>, <span class="c-num">15</span>, <span class="c-num">17</span>, <span class="c-num">16</span>, <span class="c-num">18</span>};</div>
+            </div>
+            <div class="array-container" style="margin: 18px 0 10px;">
+              <div class="array-cell-wrapper">
+                <span class="array-index">[0]</span>
+                <div class="array-cell">16</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[1]</span>
+                <div class="array-cell">15</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[2]</span>
+                <div class="array-cell">17</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[3]</span>
+                <div class="array-cell">16</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[4]</span>
+                <div class="array-cell">18</div>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">
+              Un único nombre (<code>edades</code>) con 5 casillas numeradas de <code>0</code> a <code>4</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: LAS 3 PROPIEDADES FUNDAMENTALES -->
+      <section>
+        <h2><span class="section-num">07</span> Las 3 Reglas de Todo Vector Estático</h2>
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <span class="badge badge-cyan">Regla 1</span>
+            <h4 style="color: #38bdf8;">Mismo Tipo de Dato (Homogéneo)</h4>
+            <p style="font-size: 0.84rem;">
+              Todos los elementos dentro de un vector tienen que ser del <b>mismo tipo</b>:
+            </p>
+            <ul style="font-size: 0.8rem; margin-left: 16px; color: #cbd5e1;">
+              <li>Todos <code>int</code> (enteros), o</li>
+              <li>Todos <code>float</code> (decimales), o</li>
+              <li>Todos <code>char</code> (caracteres).</li>
+            </ul>
+            <p style="font-size: 0.78rem; color: var(--accent-rose); margin-top: 6px;">
+              ❌ No podés mezclar un número con una letra en el mismo vector.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <span class="badge badge-amber">Regla 2</span>
+            <h4 style="color: #fbbf24;">Tamaño Fijo (Estático)</h4>
+            <p style="font-size: 0.84rem;">
+              Un vector se llama <b>estático</b> porque su cantidad de casillas se define cuando escribimos el programa y <b>no puede cambiar</b> mientras el programa se ejecuta.
+            </p>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 6px;">
+              Si lo creaste de tamaño 5, tendrá exactamente 5 lugares de principio a fin.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <span class="badge badge-emerald">Regla 3</span>
+            <h4 style="color: #34d399;">Ordenado por Posición</h4>
+            <p style="font-size: 0.84rem;">
+              Las casillas están <b>pegadas una al lado de la otra</b> en la memoria RAM y cada una tiene un número de posición único llamado <b>índice</b>.
+            </p>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 6px;">
+              Gracias a ese número podemos ir directo a cualquier casillero al instante.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: ANALOGÍA COTIDIANA -->
+      <section>
+        <h2><span class="section-num">08</span> Analogía: El Locker o Pastillero Numerado</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Para no confundir nunca las partes de un vector, pensalo como un mueble de casilleros numerados:
+        </p>
+
+        <div class="array-container" style="margin: 14px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Casillero [0]</span>
+            <div class="array-cell">16</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Casillero [1]</span>
+            <div class="array-cell">15</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Casillero [2]</span>
+            <div class="array-cell highlight">17</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Casillero [3]</span>
+            <div class="array-cell">16</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Casillero [4]</span>
+            <div class="array-cell">18</div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">1. Nombre del Vector</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              <code>edades</code> es el nombre de <b>todo el mueble entero</b>.
+            </p>
+          </div>
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">2. Índice o Posición</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              El número entre corchetes <code>[2]</code> es la <b>etiqueta de la puerta</b> del casillero (cuál casilla abrimos).
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Elemento o Valor</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              El número <code>17</code> es el <b>contenido guardado adentro</b> de ese casillero (<code>edades[2]</code> vale <code>17</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: DECLARACIÓN DE UN VECTOR ESTÁTICO Y DESGLOSE SINTÁCTICO -->
+      <section>
+        <h2><span class="section-num">09</span> 2. Cómo Declarar un Vector Estático en C</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Para crear un vector en C debemos indicarle tres cosas a la computadora siguiendo esta estructura exacta:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">Estructura general de declaración</span>
+            <span class="code-badge">Sintaxis</span>
+          </div>
+          <div class="code-body"><span class="c-kw">tipo</span> nombre[<span class="c-num">tamaño</span>];</div>
+        </div>
+
+        <div class="step-list" style="margin-top: 12px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b><code>tipo</code>:</b> Indica qué tipo de datos se van a guardar en todas las casillas (por ejemplo: <code>int</code> para enteros, <code>float</code> para decimales o <code>char</code> para caracteres).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b><code>nombre</code>:</b> Es el identificador que elegimos para llamar al vector (por ejemplo: <code>edades</code>, <code>notas</code>, <code>precios</code>).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b><code>[tamaño]</code>:</b> Entre <b>corchetes</b> va un número entero positivo que indica <b>cuántos casilleros en total</b> queremos reservar en la memoria. Finaliza siempre con punto y coma <code>;</code>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: EJEMPLOS DE DECLARACIÓN SEGÚN EL TIPO DE DATO -->
+      <section>
+        <h2><span class="section-num">10</span> Ejemplos de Declaración (del Apunte)</h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">declaraciones_ejemplo.c</span>
+            <span class="code-badge">Ejemplos Reales</span>
+          </div>
+          <div class="code-body"><span class="c-cmt">// Vector para guardar 30 números enteros:</span>
+<span class="c-kw">int</span> edades[<span class="c-num">30</span>];
+
+<span class="c-cmt">// Vector para guardar 10 números con coma (decimales):</span>
+<span class="c-kw">float</span> notas[<span class="c-num">10</span>];
+
+<span class="c-cmt">// Vector para guardar 5 letras o símbolos individuales:</span>
+<span class="c-kw">char</span> letras[<span class="c-num">5</span>];</div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;"><code>int edades[30];</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Crea una fila de <b>30 casilleros</b> donde solo entran números enteros (como <code>15</code>, <code>18</code>, <code>-3</code>, <code>0</code>).
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;"><code>float notas[10];</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Crea una fila de <b>10 casilleros</b> donde entran números con decimales (como <code>8.5</code>, <code>7.25</code>, <code>10.0</code>).
+            </p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;"><code>char letras[5];</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Crea una fila de <b>5 casilleros</b> donde entra un carácter por casilla (como <code>'A'</code>, <code>'e'</code>, <code>'?'</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: ¿QUÉ OCURRE EN MEMORIA AL DECLARAR SIN INICIALIZAR? -->
+      <section>
+        <h2><span class="section-num">11</span> ¿Qué Pasa en la Memoria al Declarar <code>int edades[5];</code>?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Cuando escribimos solamente <code>int edades[5];</code> dentro de <code>main()</code>, la computadora reserva los 5 lugares, pero <b>todavía no les pusimos ningún valor</b>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-body"><span class="c-kw">int</span> edades[<span class="c-num">5</span>]; <span class="c-cmt">// Se crean 5 lugares vacíos (con valores desconocidos)</span></div>
+        </div>
+
+        <div class="array-container" style="margin: 16px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 0</span>
+            <div class="array-cell empty">?</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 1</span>
+            <div class="array-cell empty">?</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 2</span>
+            <div class="array-cell empty">?</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 3</span>
+            <div class="array-cell empty">?</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 4</span>
+            <div class="array-cell empty">?</div>
+          </div>
+        </div>
+
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">⚠️ ¡Cuidado con la "Basura de Memoria"!</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            En lenguaje C, esos signos <code>?</code> no son ceros mágicos: contienen <b>basura residual</b> (números raros como <code>-858993460</code> o <code>32767</code> que quedaron de otros programas). <b>Nunca debés imprimir una casilla antes de guardarle un valor.</b>
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: POSICIONES (ÍNDICES) Y LA REGLA DE ORO -->
+      <section>
+        <h2><span class="section-num">12</span> Posiciones o Índices: ¡La Regla de Oro!</h2>
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Regla Fundamental de C</h4>
+          <p style="font-size: 0.94rem; margin: 0;">
+            Cada elemento del vector tiene una <b>posición</b> (llamada <b>índice</b>). En lenguaje C, <b>las posiciones SIEMPRE empiezan a contarse desde <code>0</code>, y NUNCA desde <code>1</code></b>.
+          </p>
+        </div>
+
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin: 12px 0 6px;">
+          Por lo tanto, si declaramos <code>int edades[5];</code>, sus 5 casilleros se numeran así:
+        </p>
+
+        <div class="array-container" style="margin: 10px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">edades[0]</span>
+            <div class="array-cell highlight">1°</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">edades[1]</span>
+            <div class="array-cell">2°</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">edades[2]</span>
+            <div class="array-cell">3°</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">edades[3]</span>
+            <div class="array-cell">4°</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">edades[4]</span>
+            <div class="array-cell match">5°</div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-cyan">
+            <p style="margin: 0; font-size: 0.85rem;">
+              🟢 El <b>primer lugar</b> del vector es siempre la posición <b><code>0</code></b> (<code>edades[0]</code>).
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <p style="margin: 0; font-size: 0.85rem;">
+              🏁 En un vector de tamaño <b>5</b>, el <b>último lugar</b> es la posición <b><code>4</code></b> (<code>edades[4]</code>). ¡La posición <code>5</code> NO existe!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: ¿POR QUÉ EMPIEZA EN 0 Y NO EN 1? -->
+      <section>
+        <h2><span class="section-num">13</span> ¿Por Qué C Empieza a Contar desde 0?</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Puntos Cardinales</h4>
+            <h4 style="color: #818cf8;">1. Explicación Intuitiva (La Planta Baja)</h4>
+            <p style="font-size: 0.85rem;">
+              Pensá en los pisos de un edificio en Argentina: cuando entrás desde la calle estás en el <b>Piso 0 (Planta Baja)</b>.
+            </p>
+            <p style="font-size: 0.84rem; color: #cbd5e1; margin-top: 6px;">
+              Si el edificio tiene 5 niveles en total contando la Planta Baja, los botones del ascensor son: <b>0, 1, 2, 3 y 4</b>. Hay 5 niveles, pero el último botón dice <b>4</b>.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">2. Explicación Técnica (Distancia desde el inicio)</h4>
+            <p style="font-size: 0.85rem;">
+              Para la computadora, el número entre corchetes indica <b>"cuántos casilleros debo caminar desde el principio del vector"</b>:
+            </p>
+            <ul style="font-size: 0.82rem; margin-left: 16px; color: #cbd5e1;">
+              <li>Para llegar al 1° casillero: camino <b>0 pasos</b> ➔ <code>[0]</code>.</li>
+              <li>Para llegar al 2° casillero: camino <b>1 paso</b> ➔ <code>[1]</code>.</li>
+              <li>Para llegar al 5° casillero: camino <b>4 pasos</b> ➔ <code>[4]</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: TABLA DE TAMAÑO N VS ÍNDICES VÁLIDOS -->
+      <section>
+        <h2><span class="section-num">14</span> Fórmula General: De Tamaño $N$ a Índice $N - 1$</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Si un vector se declara con tamaño $N$, sus índices válidos van desde $0$ hasta $N - 1$:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Declaración en C</th>
+              <th>Cantidad de Elementos ($N$)</th>
+              <th>Primer Índice</th>
+              <th>Último Índice ($N - 1$)</th>
+              <th>Todos los Índices Válidos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>int par[2];</code></td>
+              <td>2 elementos</td>
+              <td><code>[0]</code></td>
+              <td><code>[1]</code></td>
+              <td><code>0, 1</code></td>
+            </tr>
+            <tr>
+              <td><code>int edades[5];</code></td>
+              <td>5 elementos</td>
+              <td><code>[0]</code></td>
+              <td><code>[4]</code></td>
+              <td><code>0, 1, 2, 3, 4</code></td>
+            </tr>
+            <tr>
+              <td><code>float notas[10];</code></td>
+              <td>10 elementos</td>
+              <td><code>[0]</code></td>
+              <td><code>[9]</code></td>
+              <td><code>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</code></td>
+            </tr>
+            <tr>
+              <td><code>int curso[30];</code></td>
+              <td>30 elementos</td>
+              <td><code>[0]</code></td>
+              <td><code>[29]</code></td>
+              <td>Desde <code>0</code> hasta <code>29</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-amber" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            📌 <b>Truco infalible para exámenes:</b> El número que pusiste al declarar (por ejemplo <code>[5]</code>) indica la <b>cantidad total</b>, pero ese mismo número <b>jamás puede usarse como índice</b>. El último índice siempre es uno menos: <code>[4]</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: GUARDAR VALORES EN EL VECTOR (ASIGNACIÓN MANUAL) -->
+      <section>
+        <h2><span class="section-num">15</span> Guardar Valores Posición por Posición</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Una vez declarado el vector, podemos guardar datos en cada casillero indicando su <b>índice entre corchetes</b> y usando el signo igual <code>=</code>:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">carga_manual.c</span>
+              <span class="code-badge">Asignación</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> edades[<span class="c-num">5</span>];
+
+edades[<span class="c-num">0</span>] = <span class="c-num">16</span>;
+edades[<span class="c-num">1</span>] = <span class="c-num">15</span>;
+edades[<span class="c-num">2</span>] = <span class="c-num">17</span>;
+edades[<span class="c-num">3</span>] = <span class="c-num">16</span>;
+edades[<span class="c-num">4</span>] = <span class="c-num">18</span>;</div>
+          </div>
+
+          <div>
+            <p style="font-size: 0.84rem; color: var(--text-muted); text-align: center; margin-bottom: 6px;">
+              <b>Estado del vector después de las 5 asignaciones:</b>
+            </p>
+            <div class="array-container" style="margin: 8px 0;">
+              <div class="array-cell-wrapper">
+                <span class="array-index">Pos 0</span>
+                <div class="array-cell">16</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">Pos 1</span>
+                <div class="array-cell">15</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">Pos 2</span>
+                <div class="array-cell">17</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">Pos 3</span>
+                <div class="array-cell">16</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">Pos 4</span>
+                <div class="array-cell">18</div>
+              </div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.82rem;">
+                Cada instrucción <code>edades[pos] = valor;</code> funciona exactamente igual que una variable común, pero apuntando solo a esa casilla.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: MODIFICAR UN ELEMENTO YA GUARDADO -->
+      <section>
+        <h2><span class="section-num">16</span> ¿Cómo Modificar un Valor ya Guardado?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Si un alumno cumplió años y queremos actualizar solamente la casilla <code>[2]</code> (que tenía un <code>17</code>) para que ahora valga <code>18</code>, simplemente volvemos a asignarle un valor a esa posición:
+        </p>
+
+        <div class="code-window">
+          <div class="code-body"><span class="c-cmt">// Antes: edades tiene {16, 15, 17, 16, 18}</span>
+edades[<span class="c-num">2</span>] = <span class="c-num">18</span>; <span class="c-cmt">// Sobreescribe SOLO la posición 2</span>
+
+<span class="c-cmt">// También podemos sumarle 1 al valor que ya tenía adentro:</span>
+edades[<span class="c-num">0</span>] = edades[<span class="c-num">0</span>] + <span class="c-num">1</span>; <span class="c-cmt">// 16 + 1 -> ahora edades[0] vale 17</span></div>
+        </div>
+
+        <div class="array-container" style="margin: 14px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">edades[0]</span>
+            <div class="array-cell match">17</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">edades[1]</span>
+            <div class="array-cell">15</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">edades[2]</span>
+            <div class="array-cell highlight">18</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">edades[3]</span>
+            <div class="array-cell">16</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">edades[4]</span>
+            <div class="array-cell">18</div>
+          </div>
+        </div>
+
+        <p style="text-align: center; font-size: 0.84rem; color: var(--text-muted); margin: 0;">
+          Las posiciones <code>[1]</code>, <code>[3]</code> y <code>[4]</code> permanecen intactas porque no las tocamos.
+        </p>
+      </section>
+
+      <!-- SLIDE 18: MOSTRAR UN ELEMENTO CON PRINTF -->
+      <section>
+        <h2><span class="section-num">17</span> Mostrar un Elemento por Pantalla con <code>printf</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Para mostrar en pantalla el valor guardado en una posición específica, usamos <code>printf</code> indicando el nombre del vector y el índice entre corchetes:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">mostrar_elemento.c</span>
+            <span class="code-badge">Lectura</span>
+          </div>
+          <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, edades[<span class="c-num">2</span>]);</div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px; align-items: center;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿Por qué muestra <code>17</code>?</h4>
+            <p style="font-size: 0.85rem; margin: 0;">
+              En nuestro vector <code>{16, 15, 17, 16, 18}</code>:
+            </p>
+            <ul style="font-size: 0.83rem; margin-left: 18px; margin-top: 6px;">
+              <li><code>edades[0]</code> es el 1° elemento (<code>16</code>)</li>
+              <li><code>edades[1]</code> es el 2° elemento (<code>15</code>)</li>
+              <li><b><code>edades[2]</code> es el 3° elemento (<code>17</code>)</b></li>
+            </ul>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <span>Salida en Consola</span>
+              <span>stdout</span>
+            </div>
+            <div class="terminal-body"><span class="terminal-prompt">$ ./programa</span>
+17</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: EJEMPLO COMPLETO DEL APUNTE (CARGA Y LECTURA) -->
+      <section>
+        <h2><span class="section-num">18</span> Ejemplo Completo del Apunte: Carga y Muestra</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Analicemos línea por línea el primer programa completo del apunte oficial:
+        </p>
+
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">ejemplo_apunte_1.c</span>
+              <span class="code-badge">Programa Completo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edades[<span class="c-num">5</span>];
+
+    edades[<span class="c-num">0</span>] = <span class="c-num">16</span>;
+    edades[<span class="c-num">1</span>] = <span class="c-num">15</span>;
+    edades[<span class="c-num">2</span>] = <span class="c-num">17</span>;
+    edades[<span class="c-num">3</span>] = <span class="c-num">16</span>;
+    edades[<span class="c-num">4</span>] = <span class="c-num">18</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, edades[<span class="c-num">0</span>]); <span class="c-cmt">// Muestra 16</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, edades[<span class="c-num">2</span>]); <span class="c-cmt">// Muestra 17</span>
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Ejecución</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./ejemplo_apunte_1</span>
+16
+17</div>
+            </div>
+            <div class="box box-indigo" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.82rem;">
+                Observá cómo <code>\n</code> dentro del <code>printf</code> hace un salto de línea para que el <code>16</code> y el <code>17</code> no salgan pegados como <code>1617</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: LEER UN ELEMENTO CON SCANF -->
+      <section>
+        <h2><span class="section-num">19</span> Guardar un Dato Leído por Teclado con <code>scanf</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          ¿Y si en vez de escribir los números fijos en el código queremos que el usuario los ingrese con el teclado? Usamos <code>scanf</code> igual que con una variable común:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">lectura_teclado.c</span>
+            <span class="code-badge">scanf + &amp;</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> edades[<span class="c-num">5</span>];
+
+<span class="c-fn">printf</span>(<span class="c-str">"Ingrese la primera edad: "</span>);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edades[<span class="c-num">0</span>]); <span class="c-cmt">// Guarda lo tipeado en la casilla 0</span>
+
+<span class="c-fn">printf</span>(<span class="c-str">"Ingrese la segunda edad: "</span>);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edades[<span class="c-num">1</span>]); <span class="c-cmt">// Guarda lo tipeado en la casilla 1</span></div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 12px;">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">🔑 ¿Por qué lleva el símbolo <code>&amp;</code> (ampersand) adelante?</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Porque <code>edades[0]</code> es una cajita entera individual, igual que cuando hacíamos <code>scanf("%d", &amp;edad);</code> en el 1er Bimestre. El símbolo <code>&amp;</code> le indica a <code>scanf</code> la <b>dirección de memoria exacta de ese casillero</b> para depositar ahí el número ingresado.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: INICIALIZACIÓN DIRECTA DE VECTORES -->
+      <section>
+        <h2><span class="section-num">20</span> Inicialización Directa de un Vector con Llaves <code>{ }</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Si ya conocemos desde el principio qué valores queremos guardar, C nos permite <b>declarar el vector y cargarlo en una sola línea</b> encerrando los valores entre <b>llaves <code>{ }</code></b> y separados por comas:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">inicializacion_directa.c</span>
+            <span class="code-badge">Atajo en 1 Línea</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">40</span>, <span class="c-num">50</span>};</div>
+        </div>
+
+        <p style="font-size: 0.86rem; color: var(--text-muted); text-align: center; margin: 12px 0 6px;">
+          Automáticamente, C coloca cada número en su posición en orden de izquierda a derecha:
+        </p>
+
+        <div class="array-container" style="margin: 10px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 0</span>
+            <div class="array-cell highlight">10</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 1</span>
+            <div class="array-cell">20</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 2</span>
+            <div class="array-cell">30</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 3</span>
+            <div class="array-cell">40</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Posición 4</span>
+            <div class="array-cell match">50</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: PROGRAMA COMPLETO DE INICIALIZACIÓN DIRECTA (DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">21</span> Ejemplo Completo con Inicialización Directa</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Veamos el segundo programa completo del apunte teórico y su resultado en pantalla:
+        </p>
+
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">ejemplo_apunte_2.c</span>
+              <span class="code-badge">Programa Completo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">40</span>, <span class="c-num">50</span>};
+
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, numeros[<span class="c-num">0</span>]); <span class="c-cmt">// Muestra 10</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, numeros[<span class="c-num">4</span>]); <span class="c-cmt">// Muestra 50</span>
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Ejecución</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./ejemplo_apunte_2</span>
+10
+50</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.82rem;">
+                <code>numeros[0]</code> imprime el <b>primer</b> valor (<code>10</code>) y <code>numeros[4]</code> imprime el <b>último</b> valor (<code>50</code>).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: VARIANTES ÚTILES DE INICIALIZACIÓN -->
+      <section>
+        <h2><span class="section-num">22</span> Variantes Útiles al Inicializar con Llaves</h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">variantes_inicializacion.c</span>
+            <span class="code-badge">Trucos de C</span>
+          </div>
+          <div class="code-body"><span class="c-cmt">// 1. Limpiar TODO el vector a cero de una sola vez:</span>
+<span class="c-kw">int</span> puntos[<span class="c-num">5</span>] = {<span class="c-num">0</span>}; <span class="c-cmt">// Queda: {0, 0, 0, 0, 0} (¡sin basura!)</span>
+
+<span class="c-cmt">// 2. Inicialización parcial (los que faltan se rellenan con 0):</span>
+<span class="c-kw">int</span> datos[<span class="c-num">5</span>] = {<span class="c-num">7</span>, <span class="c-num">9</span>}; <span class="c-cmt">// Queda: {7, 9, 0, 0, 0}</span>
+
+<span class="c-cmt">// 3. Dejar los corchetes vacíos para que C cuente solo:</span>
+<span class="c-kw">int</span> pares[] = {<span class="c-num">2</span>, <span class="c-num">4</span>, <span class="c-num">6</span>, <span class="c-num">8</span>}; <span class="c-cmt">// C cuenta 4 valores y crea int pares[4]</span></div>
+        </div>
+
+        <div class="box box-rose" style="margin-top: 12px;">
+          <h4 style="color: #f87171; margin-bottom: 4px;">⚠️ Importante: Las llaves <code>{ }</code> solo valen en la línea de declaración</h4>
+          <p style="font-size: 0.85rem; margin: 0;">
+            Podés hacer <code>int v[3] = {1, 2, 3};</code> al crearlo, pero <b>NO</b> podés hacer en dos pasos separados:<br>
+            <code>int v[3];</code> y abajo <code>v = {1, 2, 3};</code> ❌ (eso da error de compilación). Si ya fue declarado antes, se carga casilla por casilla.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: DEL ACCESO MANUAL AL RECORRIDO CON FOR -->
+      <section>
+        <h2><span class="section-num">23</span> Del Acceso Manual al Ciclo <code>for</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          ¿Cómo hacemos para mostrar los 5 elementos del vector sin tener que escribir 5 veces <code>printf</code>? ¡Conectando el ciclo <code>for</code> que vimos en el 1er Bimestre con el índice del vector!
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">🐢 Forma Manual (Sin ciclo)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, numeros[<span class="c-num">0</span>]);
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, numeros[<span class="c-num">1</span>]);
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, numeros[<span class="c-num">2</span>]);
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, numeros[<span class="c-num">3</span>]);
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, numeros[<span class="c-num">4</span>]);</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 4px 0 0;">
+              Fijate que lo único que cambia en cada línea es el número adentro del corchete: <code>0, 1, 2, 3, 4</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">🚀 Forma Automática (Con ciclo <code>for</code>)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, numeros[i]);
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 4px 0 0;">
+              La variable <code>i</code> arranca en <code>0</code> y en cada vuelta vale <code>0, 1, 2, 3, 4</code>. Al escribir <code>numeros[i]</code>, visitamos todas las casillas automáticamente.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: TABLA DE SEGUIMIENTO DEL CICLO FOR -->
+      <section>
+        <h2><span class="section-num">24</span> Seguimiento Vuelta por Vuelta de <code>numeros[i]</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Sigamos paso a paso qué hace la computadora con <code>int numeros[5] = {10, 20, 30, 40, 50};</code>:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Vuelta</th>
+              <th>Valor de <code>i</code></th>
+              <th>¿Se cumple <code>i &lt; 5</code>?</th>
+              <th>Qué accede <code>numeros[i]</code></th>
+              <th>Qué muestra en pantalla</th>
+              <th>Al final de la vuelta (<code>i++</code>)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1° vuelta</td>
+              <td><code>0</code></td>
+              <td><code>0 &lt; 5</code> (Sí ✅)</td>
+              <td><code>numeros[0]</code></td>
+              <td><b>10</b></td>
+              <td><code>i</code> pasa a valer <code>1</code></td>
+            </tr>
+            <tr>
+              <td>2° vuelta</td>
+              <td><code>1</code></td>
+              <td><code>1 &lt; 5</code> (Sí ✅)</td>
+              <td><code>numeros[1]</code></td>
+              <td><b>20</b></td>
+              <td><code>i</code> pasa a valer <code>2</code></td>
+            </tr>
+            <tr>
+              <td>3° vuelta</td>
+              <td><code>2</code></td>
+              <td><code>2 &lt; 5</code> (Sí ✅)</td>
+              <td><code>numeros[2]</code></td>
+              <td><b>30</b></td>
+              <td><code>i</code> pasa a valer <code>3</code></td>
+            </tr>
+            <tr>
+              <td>4° vuelta</td>
+              <td><code>3</code></td>
+              <td><code>3 &lt; 5</code> (Sí ✅)</td>
+              <td><code>numeros[3]</code></td>
+              <td><b>40</b></td>
+              <td><code>i</code> pasa a valer <code>4</code></td>
+            </tr>
+            <tr>
+              <td>5° vuelta</td>
+              <td><code>4</code></td>
+              <td><code>4 &lt; 5</code> (Sí ✅)</td>
+              <td><code>numeros[4]</code></td>
+              <td><b>50</b></td>
+              <td><code>i</code> pasa a valer <code>5</code></td>
+            </tr>
+            <tr>
+              <td>Fin</td>
+              <td><code>5</code></td>
+              <td><code>5 &lt; 5</code> (No ❌)</td>
+              <td><i>No entra al ciclo</i></td>
+              <td><i>Termina el for</i></td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 26: NIVEL 1 (INTRODUCTORIO): OPERACIONES CON CASILLAS ENTERAS -->
+      <section>
+        <h2><span class="section-num">25</span> Nivel 1 (Introductorio): Operar con Casillas de <code>int</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Con los elementos de un vector podemos hacer cuentas matemáticas (sumar, restar, multiplicar) igual que con cualquier variable entera:
+        </p>
+
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel1_enteros.c</span>
+              <span class="code-badge">Nivel 1</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> goles[<span class="c-num">3</span>] = {<span class="c-num">2</span>, <span class="c-num">0</span>, <span class="c-num">3</span>};
+    <span class="c-kw">int</span> total;
+
+    <span class="c-cmt">// Sumamos las 3 casillas del vector:</span>
+    total = goles[<span class="c-num">0</span>] + goles[<span class="c-num">1</span>] + goles[<span class="c-num">2</span>];
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Partido 1: %d goles\n"</span>, goles[<span class="c-num">0</span>]);
+    <span class="c-fn">printf</span>(<span class="c-str">"Partido 3: %d goles\n"</span>, goles[<span class="c-num">2</span>]);
+    <span class="c-fn">printf</span>(<span class="c-str">"Total de goles: %d\n"</span>, total);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel1_enteros</span>
+Partido 1: 2 goles
+Partido 3: 3 goles
+Total de goles: 5</div>
+            </div>
+            <div class="box box-cyan" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.8rem;">
+                <code>goles[0] + goles[1] + goles[2]</code> toma los valores <code>2 + 0 + 3</code> y guarda el resultado <code>5</code> en <code>total</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: NIVEL 2 (EXPLICADO LÍNEA POR LÍNEA): VECTOR DE FLOAT -->
+      <section>
+        <h2><span class="section-num">26</span> Nivel 2 (Paso a Paso): Vector de Decimales (<code>float</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Si necesitamos guardar precios o temperaturas con coma, declaramos un vector de tipo <code>float</code> y usamos <code>%f</code> (o <code>%.2f</code> para ver 2 decimales):
+        </p>
+
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel2_decimales.c</span>
+              <span class="code-badge">Nivel 2</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-cmt">// 1. Vector de 4 precios con decimales</span>
+    <span class="c-kw">float</span> precios[<span class="c-num">4</span>] = {<span class="c-num">150.50</span>, <span class="c-num">200.00</span>, <span class="c-num">99.90</span>, <span class="c-num">320.25</span>};
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Precio inicial pos 2: $%.2f\n"</span>, precios[<span class="c-num">2</span>]);
+
+    <span class="c-cmt">// 2. Aumentamos $50 al producto de la posición 2</span>
+    precios[<span class="c-num">2</span>] = precios[<span class="c-num">2</span>] + <span class="c-num">50.00</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Precio actualizado pos 2: $%.2f\n"</span>, precios[<span class="c-num">2</span>]);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel2_decimales</span>
+Precio inicial pos 2: $99.90
+Precio actualizado pos 2: $149.90</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.8rem;">
+                Recordá que en el código de C los números decimales se escriben siempre con <b>punto</b> (<code>99.90</code>) y no con coma.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: NIVEL 3 (APLICACIÓN): VECTORES DE CARACTERES (CHAR) -->
+      <section>
+        <h2><span class="section-num">27</span> Nivel 3 (Aplicación): Vectores de Caracteres (<code>char</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          También podemos crear un vector de tipo <code>char</code> para guardar <b>letras individuales</b>. Cada letra se escribe entre <b>comillas simples <code>' '</code></b> y se muestra con <code>%c</code>:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel3_caracteres.c</span>
+              <span class="code-badge">Nivel 3 • char</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> vocales[<span class="c-num">5</span>] = {<span class="c-char">'A'</span>, <span class="c-char">'E'</span>, <span class="c-char">'I'</span>, <span class="c-char">'O'</span>, <span class="c-char">'U'</span>};
+    <span class="c-kw">char</span> nombre[<span class="c-num">4</span>] = {<span class="c-char">'J'</span>, <span class="c-char">'U'</span>, <span class="c-char">'A'</span>, <span class="c-char">'N'</span>};
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Primera vocal: %c\n"</span>, vocales[<span class="c-num">0</span>]);
+    <span class="c-fn">printf</span>(<span class="c-str">"Tercera vocal: %c\n"</span>, vocales[<span class="c-num">2</span>]);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Nombre: "</span>);
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">4</span>; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"%c"</span>, nombre[i]);
+    }
+    <span class="c-fn">printf</span>(<span class="c-str">"\n"</span>);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="array-container" style="margin: 6px 0 12px;">
+              <div class="array-cell-wrapper">
+                <span class="array-index">nombre[0]</span>
+                <div class="array-cell">'J'</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">nombre[1]</span>
+                <div class="array-cell">'U'</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">nombre[2]</span>
+                <div class="array-cell">'A'</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">nombre[3]</span>
+                <div class="array-cell">'N'</div>
+              </div>
+            </div>
+
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel3_caracteres</span>
+Primera vocal: A
+Tercera vocal: I
+Nombre: JUAN</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: NIVEL 4 (RAZONAMIENTO): INTERCAMBIAR DOS CASILLAS -->
+      <section>
+        <h2><span class="section-num">28</span> Nivel 4 (Razonamiento): Intercambiar Dos Casillas</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          <b>Desafío clásico de examen:</b> Tenemos <code>int v[2] = {10, 99};</code> y queremos intercambiar sus valores para que quede <code>{99, 10}</code>. ¿Por qué necesitamos una variable auxiliar <code>aux</code>?
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error: Pisamos el primer valor</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> v[<span class="c-num">2</span>] = {<span class="c-num">10</span>, <span class="c-num">99</span>};
+
+v[<span class="c-num">0</span>] = v[<span class="c-num">1</span>]; <span class="c-cmt">// Ahora v[0] vale 99 (¡se perdió el 10!)</span>
+v[<span class="c-num">1</span>] = v[<span class="c-num">0</span>]; <span class="c-cmt">// Copia el 99. Queda {99, 99}</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 4px 0 0;">
+              Al guardar <code>99</code> encima de <code>v[0]</code> sin haber hecho una copia antes, el <code>10</code> desapareció.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Solución: Usar una variable <code>aux</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> v[<span class="c-num">2</span>] = {<span class="c-num">10</span>, <span class="c-num">99</span>};
+<span class="c-kw">int</span> aux;
+
+aux = v[<span class="c-num">0</span>];  <span class="c-cmt">// 1. Resguardo el 10 en aux</span>
+v[<span class="c-num">0</span>] = v[<span class="c-num">1</span>]; <span class="c-cmt">// 2. Paso el 99 a v[0]</span>
+v[<span class="c-num">1</span>] = aux;  <span class="c-cmt">// 3. Recupero el 10 en v[1]</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 4px 0 0;">
+              Es como pasar agua de un vaso lleno a otro: necesitamos un tercer vaso vacío temporal (<code>aux</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: EL VECTOR EN LA MEMORIA RAM Y SIZEOF -->
+      <section>
+        <h2><span class="section-num">29</span> ¿Cómo se Aloja el Vector en la Memoria RAM?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          En la memoria RAM de la computadora, cada variable de tipo <code>int</code> ocupa <b>4 bytes</b>. Cuando declaramos <code>int numeros[4] = {10, 20, 30, 40};</code>, se reservan 4 bloques de 4 bytes <b>uno pegado al lado del otro</b>:
+        </p>
+
+        <div class="memory-diagram">
+          <div class="memory-box">
+            <div class="memory-address">Dir: 0x1000</div>
+            <div class="memory-label">numeros[0] <span class="memory-type">4B</span></div>
+            <div class="memory-value">10</div>
+          </div>
+          <div class="memory-box">
+            <div class="memory-address">Dir: 0x1004</div>
+            <div class="memory-label">numeros[1] <span class="memory-type">4B</span></div>
+            <div class="memory-value">20</div>
+          </div>
+          <div class="memory-box">
+            <div class="memory-address">Dir: 0x1008</div>
+            <div class="memory-label">numeros[2] <span class="memory-type">4B</span></div>
+            <div class="memory-value">30</div>
+          </div>
+          <div class="memory-box">
+            <div class="memory-address">Dir: 0x100C</div>
+            <div class="memory-label">numeros[3] <span class="memory-type">4B</span></div>
+            <div class="memory-value">40</div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🔍 <b>Dato curioso:</b> Las direcciones avanzan de 4 en 4 bytes (<code>1000</code>, <code>1004</code>, <code>1008</code>...). En total, este vector de 4 enteros ocupa $4 \times 4\text{ bytes} = 16\text{ bytes}$ en la memoria RAM.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: VENTAJAS, DESVENTAJAS Y LÍMITES DEL VECTOR ESTÁTICO (DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">30</span> Ventajas y Desventajas de los Vectores Estáticos</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Tal como explica el apunte teórico, usar vectores de tamaño fijo tiene puntos muy fuertes y una limitación importante:
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">✅ Ventajas</h4>
             <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>Vector:</b> Colección contigua y homogénea de datos.</li>
-              <li><b>Declaración:</b> <code>tipo nombre[TAMANIO];</code></li>
-              <li><b>Índices:</b> Siempre van desde <code>0</code> hasta <code>TAMANIO - 1</code>.</li>
-              <li><b>Vector estático:</b> Tamaño inmutable tras compilar.</li>
-              <li><b>Out of bounds:</b> Desbordamiento no advertido por C; causa bugs graves.</li>
+              <li><b>Son muy simples de usar:</b> Se declaran en una sola línea.</li>
+              <li><b>Son rápidos:</b> La computadora accede a cualquier posición en forma instantánea.</li>
+              <li><b>No requieren manejo complejo de memoria:</b> Se crean y se liberan solos al terminar <code>main()</code>.</li>
+              <li><b>Ideales cuando sabemos de antemano cuántos datos habrá:</b> Por ejemplo, si un curso tiene 30 alumnos: <code>int notas[30];</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">⚠️ Desventajas y Límites</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Su tamaño es fijo y no puede cambiarse:</b> Una vez que el programa arrancó, el vector no puede agrandarse ni achicarse.</li>
+              <li><b>¿Qué pasa si aparecen más datos?:</b> Si declaramos <code>int notas[30];</code> para 30 alumnos y a mitad de año se inscriben <b>5 alumnos más</b> (35 en total), ¡el vector ya no alcanza! Habría que cambiar el código a <code>notas[35]</code> y volver a compilar.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: ERROR FRECUENTE #1 (DEL APUNTE): SALIRSE DEL TAMAÑO -->
+      <section>
+        <h2><span class="section-num">31</span> Error Muy Común #1: Salirse del Tamaño del Vector</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Mirá con mucha atención este error destacado en el apunte oficial:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">error_fuera_de_rango.c</span>
+            <span class="code-badge">¡ERROR GRAVE!</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> edades[<span class="c-num">5</span>];
+
+edades[<span class="c-num">5</span>] = <span class="c-num">20</span>; <span class="c-cmt">// ❌ ERROR: ¡La posición 5 NO EXISTE!</span></div>
+        </div>
+
+        <div class="array-container" style="margin: 14px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 0</span>
+            <div class="array-cell">16</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 1</span>
+            <div class="array-cell">15</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 2</span>
+            <div class="array-cell">17</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 3</span>
+            <div class="array-cell">16</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 4 (Última)</span>
+            <div class="array-cell">18</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index" style="color: var(--accent-rose);">Pos 5 (¡PROHIBIDO!)</span>
+            <div class="array-cell out-of-bounds">20 💥</div>
+          </div>
+        </div>
+
+        <div class="box box-rose">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🚨 <b>¿Por qué es tan peligroso?</b> Porque si el vector tiene tamaño <code>5</code>, sus posiciones válidas son únicamente <b><code>0, 1, 2, 3 y 4</code></b>. Al escribir en <code>edades[5]</code> estás invadiendo memoria ajena fuera del vector, lo que puede dar resultados locos o hacer que el programa se cierre de golpe (<i>crash</i>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: ERRORES FRECUENTES #2 Y #3 -->
+      <section>
+        <h2><span class="section-num">32</span> Otros Dos Errores Clásicos de Principiante</h2>
+        <div class="grid-2">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error #2: Pensar que el 1° elemento es [1]</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> notas[<span class="c-num">3</span>] = {<span class="c-num">10</span>, <span class="c-num">8</span>, <span class="c-num">9</span>};
+
+<span class="c-cmt">// Quiero mostrar la primera nota (el 10):</span>
+<span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, notas[<span class="c-num">1</span>]); <span class="c-cmt">// ¡Muestra 8, no 10!</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              <b>Corrección:</b> <code>notas[1]</code> es la <b>segunda</b> nota. La primera nota está siempre en <b><code>notas[0]</code></b>.
+            </p>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error #3: Querer imprimir todo el vector sin [ ]</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> edades[<span class="c-num">5</span>] = {<span class="c-num">16</span>, <span class="c-num">15</span>, <span class="c-num">17</span>, <span class="c-num">16</span>, <span class="c-num">18</span>};
+
+<span class="c-cmt">// Intentar imprimir todo el vector de golpe:</span>
+<span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, edades); <span class="c-cmt">// ❌ ¡Mal! No imprime los 5 números</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              <b>Corrección:</b> En C no se puede imprimir un vector entero de una sola vez sin corchetes. Siempre debés indicar qué casilla querés (ej. <code>edades[0]</code>) o recorrerlo con un <code>for</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: EJERCICIOS DE APLICACIÓN EN CLASE -->
+      <section>
+        <h2><span class="section-num">33</span> Ejercicios de Práctica (¡Pensalos antes de abrir!)</h2>
+
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">Ejercicio 1: Predicción de salida</h4>
+          <p style="font-size: 0.84rem; margin: 0 0 6px;">
+            Dado el vector <code>int puntos[4] = {15, 30, 45, 60};</code>, ¿qué número muestra <code>printf("%d", puntos[2]);</code> y cuál es el índice del número <code>60</code>?
+          </p>
+          <details class="code-solution">
+            <summary>👁️ Ver respuesta explicada</summary>
+            <div class="solution-content">
+              <p style="margin: 0;">
+                • <code>puntos[2]</code> muestra <b><code>45</code></b> (porque <code>[0]</code> es 15, <code>[1]</code> es 30 y <code>[2]</code> es 45).<br>
+                • El número <code>60</code> está en el índice <b><code>[3]</code></b> (el último lugar de un vector de tamaño 4).
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Ejercicio 2: Escribir el código en C</h4>
+          <p style="font-size: 0.84rem; margin: 0 0 6px;">
+            Declarar un vector de 3 números enteros llamado <code>temperaturas</code>, cargarle manualmente los valores <code>18</code>, <code>24</code> y <code>21</code>, y mostrar por pantalla la suma del primero y el último.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver código solución completo</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> temperaturas[<span class="c-num">3</span>];
+    temperaturas[<span class="c-num">0</span>] = <span class="c-num">18</span>;
+    temperaturas[<span class="c-num">1</span>] = <span class="c-num">24</span>;
+    temperaturas[<span class="c-num">2</span>] = <span class="c-num">21</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Suma de extremos: %d\n"</span>, temperaturas[<span class="c-num">0</span>] + temperaturas[<span class="c-num">2</span>]);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 35: RESUMEN FINAL Y CHECKLIST -->
+      <section>
+        <h2><span class="section-num">34</span> Resumen de la Unidad 01 y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Ideas Clave que te Llevás Hoy</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>¿Qué es un vector?:</b> Una estructura que guarda muchos datos del <b>mismo tipo</b> bajo un único nombre.</li>
+              <li><b>Declaración:</b> <code>tipo nombre[tamaño];</code> (ej: <code>int edades[5];</code>).</li>
+              <li><b>Regla de oro:</b> Las posiciones empiezan en <b><code>0</code></b> y terminan en <b><code>tamaño - 1</code></b>.</li>
+              <li><b>Inicialización rápida:</b> <code>int v[3] = {10, 20, 30};</code></li>
+              <li><b>Vector estático:</b> Su tamaño es fijo y no puede agrandarse mientras corre el programa.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cuál es el primer y el último índice de un
-              vector de 10 elementos?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué no es posible guardar un float adentro de
-              un vector de enteros?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Qué peligro tiene intentar acceder a arr[5] si fue
-              declarado de tamaño 5?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Cómo inicializo todos los casilleros de un vector
-              en cero?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo la diferencia entre una variable común y un vector?</div>
+            <div class="checklist-item"><span class="icon">✓</span> Si declaro <code>int v[8];</code>, ¿sé que los índices van de <code>0</code> a <code>7</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué <code>v[8]</code> sería un error fuera de rango?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé guardar un valor con <code>=</code> y leerlo del teclado con <code>scanf("%d", &amp;v[0])</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo crear vectores de <code>int</code>, de <code>float</code> y de <code>char</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
+        <div style="text-align: center; margin-top: 16px;">
           <a href="../index.html" class="badge badge-cyan"
             style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
             ← Volver al 2do Bimestre
           </a>
           <a href="02-recorridos-busquedas-vectores.html" class="badge badge-emerald"
             style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 12px;">
-            Siguiente: Recorridos y Búsquedas →
+            Siguiente Unidad: Recorridos y Búsquedas →
           </a>
         </div>
       </section>

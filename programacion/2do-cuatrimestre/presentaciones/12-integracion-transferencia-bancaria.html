@@ -1,74 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 2C - 12: Integración: Transferencia Bancaria con Punteros y Structs | Clases Particulares</title>
+  <title>Programación 2C - 12: Integración: Transferencia Bancaria | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
-  
-  <!-- Reveal.js Styles -->
+
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
-  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
-  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
-  <style>
-    .reveal .code-body,
-    .reveal pre.code-body,
-    .reveal .code-window pre {
-      font-size: 1.05rem !important;
-      line-height: 1.38 !important;
-      width: 100% !important;
-      margin: 0 !important;
-      box-shadow: none !important;
-      padding: 10px 18px !important;
-      box-sizing: border-box !important;
-    }
-    .grid-2 .code-body,
-    .grid-1-2 .code-body,
-    .grid-2-1 .code-body,
-    .grid-2 pre.code-body,
-    .grid-1-2 pre.code-body,
-    .grid-2-1 pre.code-body,
-    .grid-2 .code-window pre,
-    .grid-1-2 .code-window pre,
-    .grid-2-1 .code-window pre {
-      font-size: 1.00rem !important;
-      padding: 10px 14px !important;
-      line-height: 1.38 !important;
-    }
-    .grid-3 .code-body,
-    .grid-3 pre.code-body,
-    .grid-3 .code-window pre {
-      font-size: 0.80rem !important;
-      padding: 8px 10px !important;
-      line-height: 1.34 !important;
-    }
-    .terminal-body {
-      font-size: 1.05rem !important;
-      padding: 12px 16px !important;
-      line-height: 1.40 !important;
-    }
-    .reveal code:not(.code-body *) {
-      font-size: 0.88em !important;
-      border: none !important;
-      padding: 1px 5px !important;
-      box-decoration-break: clone !important;
-      -webkit-box-decoration-break: clone !important;
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../index.html">← Índice 2do Cuatrimestre</a>
       <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">2do Cuatrimestre • Unidad 12</span>
@@ -79,217 +38,1462 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-emerald">2do Cuatrimestre • Proyecto Integrador • Unidad 12</span>
-          <h1 style="font-size: 2.4rem; margin-bottom: 12px;">Integración: Transferencia Bancaria</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            El ejercicio maestro: structs, punteros, operador <code>-&gt;</code>, lógica defensiva, validaciones atómicas e integridad transaccional en C.
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-emerald">2do Cuatrimestre • Unidad 12</span>
+          <h1 style="font-size: 2.4rem; margin-bottom: 12px;">Caso Integrador: Transferencia Bancaria</h1>
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 24px;">
+            El ejercicio más completo del apunte desarrollado desde cero: Structs, Punteros, <code>-&gt;</code>, Validaciones y Retorno de Estado
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">struct CuentaBancaria</span>
-            <span class="badge badge-emerald">Punteros *origen y *destino</span>
-            <span class="badge badge-amber">Validaciones de seguridad</span>
-            <span class="badge badge-purple">Integridad atómica (return 1 / 0)</span>
+            <span class="badge badge-cyan">39. Transferencia Bancaria</span>
+            <span class="badge badge-indigo">struct CuentaBancaria</span>
+            <span class="badge badge-emerald">*origen y *destino</span>
+            <span class="badge badge-amber">Validaciones y Atomicidad</span>
+            <span class="badge badge-purple">Banco con Arreglo de Cuentas</span>
           </div>
 
-          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-emerald" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar por las 34 diapositivas de esta unidad.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y POR QUÉ ES EL EJERCICIO MÁS INTEGRADOR -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <h2><span class="section-num">01</span> 39. ¿Por Qué Es el Ejercicio Más Integrador del Apunte?</h2>
+        <div class="box box-cyan" style="margin-bottom: 12px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Destacado del Apunte (Sección 39, págs. 36–37)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            <i>"Este es prácticamente el ejercicio más integrador del primer PDF."</i> Porque para resolver una transferencia bancaria real necesitamos unir en una sola función <b>8 herramientas fundamentales</b> del lenguaje C.
+          </p>
+        </div>
+
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">La culminación práctica del apunte</h4>
-            <p>Este es el ejercicio integrador más completo de la materia. Conecta de manera armónica todos los conceptos aprendidos a lo largo del cuatrimestre.</p>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
-              Resolver una transferencia bancaria requiere rigor profesional: dos cuentas deben modificarse en RAM de forma simultánea, pero <b>si una sola validación de negocio falla, el estado de ambas cuentas debe quedar intacto</b>.
-            </p>
+            <h4 style="color: #818cf8;">Las 8 piezas que junta este ejercicio</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>1. Structs:</b> para modelar cada cuenta bancaria.</li>
+              <li><b>2. Punteros:</b> para modificar dos cuentas a la vez.</li>
+              <li><b>3. Operador <code>-&gt;</code>:</b> para acceder a los campos apuntados.</li>
+              <li><b>4. Condicionales <code>if</code>:</b> para verificar reglas antes de mover plata.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
-            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
-              <li>Modelar la entidad financiera <code>struct CuentaBancaria</code>.</li>
-              <li>Diseñar una función que recibe dos punteros a estructura simultáneos.</li>
-              <li>Implementar validaciones defensivas: monto positivo, cuentas activas y saldo.</li>
-              <li>Garantizar integridad transaccional (todo o nada).</li>
-              <li>Usar el valor de retorno (<code>1</code> o <code>0</code>) para informar éxito o fallo.</li>
+            <h4 style="color: #34d399;">Y además...</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>5. Operadores lógicos (<code>&amp;&amp;</code>, <code>||</code>):</b> para combinar requisitos.</li>
+              <li><b>6. Comparación (<code>==</code>, <code>&gt;=</code>, <code>&lt;</code>):</b> para chequear estado y saldo.</li>
+              <li><b>7. Modificación (<code>-=</code>, <code>+=</code>):</b> para restar y sumar el monto.</li>
+              <li><b>8. <code>return</code>:</b> devuelve <code>1</code> (éxito) o <code>0</code> (error).</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: EL MODELO DE DATOS -->
+      <!-- SLIDE 3: PLANTEAMIENTO DEL PROBLEMA COTIDIANO -->
       <section>
-        <h2><span class="section-num">02</span> El Modelo: <code>struct CuentaBancaria</code></h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Definición de la entidad bancaria con saldo y estado lógico.</p>
+        <h2><span class="section-num">02</span> El Problema: ¿Qué Ocurre Cuando Hacés una Transferencia?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 10px;">
+          Pensá en cuando abrís una billetera virtual o aplicación del banco en tu celular y le transferís <b>$3000</b> a un amigo:
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Cuenta Origen (Tu cuenta)</h4>
+            <div style="font-family: var(--font-mono); font-size: 0.9rem; text-align: center; background: rgba(0,0,0,0.35); padding: 12px; border-radius: 8px;">
+              saldo = $10000<br>
+              ↓<br>
+              <span style="color: #f87171;">transferir $3000 (-$3000)</span><br>
+              ↓<br>
+              <b>saldo = $7000</b>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Cuenta Destino (Tu amigo)</h4>
+            <div style="font-family: var(--font-mono); font-size: 0.9rem; text-align: center; background: rgba(0,0,0,0.35); padding: 12px; border-radius: 8px;">
+              saldo = $5000<br>
+              ↓<br>
+              <span style="color: #34d399;">recibe $3000 (+$3000)</span><br>
+              ↓<br>
+              <b>saldo = $8000</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🤔 <b>Pregunta clave:</b> ¿El dinero se crea o se destruye? ¡No! La suma total antes ($\$10000 + \$5000 = \$15000$) debe ser exactamente igual a la suma total después ($\$7000 + \$8000 = \$15000$).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: PASO 1 - MODELADO DE STRUCT CUENTABANCARIA -->
+      <section>
+        <h2><span class="section-num">03</span> Paso 1: Modelar <code>struct CuentaBancaria</code></h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 10px;">
+          Miremos la estructura exacta definida en la página 36 del apunte:
+        </p>
 
         <div class="grid-2">
           <div class="code-window">
             <div class="code-header">
-              <span class="code-title">cuenta.h</span>
-              <span class="code-badge">Modelo</span>
+              <span class="code-title">cuenta_bancaria.c</span>
+              <span class="code-badge">Sección 39 del Apunte</span>
             </div>
             <div class="code-body"><span class="c-kw">struct</span> CuentaBancaria 
 { 
     <span class="c-kw">int</span> numero; 
     <span class="c-kw">float</span> saldo; 
-    <span class="c-kw">int</span> estado; <span class="c-cmt">// 1 = activa, 0 = inactiva</span>
+    <span class="c-kw">int</span> estado; 
 };</div>
           </div>
 
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Significado de los Campos</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; color: #cbd5e1; margin-left: 14px;">
-              <li><code>numero</code>: Identificador único de cuenta (ej. 1001, 2002).</li>
-              <li><code>saldo</code>: Dinero disponible en la cuenta corriente.</li>
-              <li><code>estado</code>: Bandera booleana (flag). Si vale <code>1</code>, la cuenta puede operar; si vale <code>0</code>, está bloqueada o inactiva y no puede enviar ni recibir transferencias.</li>
+            <h4 style="color: #818cf8;">¿Qué representa cada campo?</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 16px;">
+              <li><code>int numero;</code> → El número único que identifica a la cuenta (ej: <code>101</code>, <code>102</code>).</li>
+              <li><code>float saldo;</code> → Cuánta plata tiene disponible actualmente (ej: <code>10000.0</code>).</li>
+              <li><code>int estado;</code> → Indica si la cuenta está habilitada para operar:<br>
+                • <code>estado = 1</code> → <b>activa</b> (puede enviar y recibir)<br>
+                • <code>estado = 0</code> → <b>inactiva</b> (bloqueada o cerrada)</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: ANATOMÍA DEL ALGORITMO -->
+      <!-- SLIDE 5: ¿QUÉ ES EL CAMPO ESTADO (BANDERA / FLAG)? -->
       <section>
-        <h2><span class="section-num">03</span> Diagrama y Reglas de Negocio</h2>
+        <h2><span class="section-num">04</span> Entendiendo el Campo <code>estado</code> (1 = Activa, 0 = Inactiva)</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          En sistemas reales, cuando una cuenta se suspende o se bloquea por seguridad, no se borra de la memoria sino que se cambia su campo <code>estado</code> de <code>1</code> a <code>0</code>:
+        </p>
+
         <div class="grid-2">
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">Flujo Transaccional</h4>
-            <div style="font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.6; color: #cbd5e1; margin: 10px 0;">
-              Cuenta Origen ($10.000)<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;↓ debita $3.000<br>
-              Nuevo saldo: $7.000<br><br>
-              Cuenta Destino ($5.000)<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;↓ acredita $3.000<br>
-              Nuevo saldo: $8.000
+          <div class="struct-container">
+            <div class="struct-header"><span>Cuenta Activa (Puede operar)</span></div>
+            <div class="struct-fields">
+              <div class="struct-field">
+                <div class="struct-field-name">.numero</div>
+                <div class="struct-field-val">101</div>
+              </div>
+              <div class="struct-field">
+                <div class="struct-field-name">.saldo</div>
+                <div class="struct-field-val">10000.00</div>
+              </div>
+              <div class="struct-field">
+                <div class="struct-field-name">.estado</div>
+                <div class="struct-field-val" style="color: #34d399; font-weight: 700;">1 (Activa)</div>
+              </div>
             </div>
+          </div>
+
+          <div class="struct-container">
+            <div class="struct-header"><span>Cuenta Inactiva (Bloqueada)</span></div>
+            <div class="struct-fields">
+              <div class="struct-field">
+                <div class="struct-field-name">.numero</div>
+                <div class="struct-field-val">102</div>
+              </div>
+              <div class="struct-field">
+                <div class="struct-field-name">.saldo</div>
+                <div class="struct-field-val">5000.00</div>
+              </div>
+              <div class="struct-field">
+                <div class="struct-field-name">.estado</div>
+                <div class="struct-field-val" style="color: #f87171; font-weight: 700;">0 (Inactiva)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            💡 Una cuenta con <code>estado == 0</code> <b>no puede enviar dinero ni tampoco recibir dinero</b>. Cualquier intento de transferencia que involucre una cuenta inactiva debe rechazarse.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: PASO 2 - ¿POR QUÉ LA FUNCIÓN NECESITA PUNTEROS? -->
+      <section>
+        <h2><span class="section-num">05</span> Paso 2: ¿Por Qué <code>transferir</code> Necesita Recibir Punteros?</h2>
+        <div class="box box-cyan" style="margin-bottom: 12px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Explicación del Apunte (Página 36)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            La función recibe <code>struct CuentaBancaria *origen</code> y <code>struct CuentaBancaria *destino</code> <b>porque necesitamos modificar los saldos originales</b> de ambas cuentas en <code>main</code>.
+          </p>
+        </div>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Si recibiera las Structs por valor (sin <code>*</code>)</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">transferirMal</span>(<span class="c-kw">struct</span> CuentaBancaria origen,
+                  <span class="c-kw">struct</span> CuentaBancaria destino,
+                  <span class="c-kw">float</span> monto) {
+    origen.saldo -= monto;
+    destino.saldo += monto;
+    <span class="c-kw">return</span> <span class="c-num">1</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.79rem; color: #fca5a5; margin-top: 8px;">
+              Modifica dos <b>copias</b> temporales que se destruyen al terminar la función. En <code>main</code> las cuentas siguen en $10000 y $5000.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Recibiendo punteros (<code>*origen</code> y <code>*destino</code>)</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">transferir</span>(<span class="c-kw">struct</span> CuentaBancaria *origen,
+               <span class="c-kw">struct</span> CuentaBancaria *destino,
+               <span class="c-kw">float</span> monto) {
+    origen-&gt;saldo -= monto;
+    destino-&gt;saldo += monto;
+    <span class="c-kw">return</span> <span class="c-num">1</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.79rem; color: #86efac; margin-top: 8px;">
+              Con <code>*origen</code> y <code>*destino</code> apuntamos a las variables reales de <code>main</code> y modificamos sus saldos con <code>-&gt;</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: MODELO EN MEMORIA RAM DE LOS DOS PUNTEROS -->
+      <section>
+        <h2><span class="section-num">06</span> Cómo Apuntan <code>origen</code> y <code>destino</code> en Memoria RAM</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Cuando desde <code>main</code> llamamos a <code>transferir(&amp;cuenta1, &amp;cuenta2, 3000);</code>, ocurre esto en la memoria RAM:
+        </p>
+
+        <div class="grid-2">
+          <div class="memory-box">
+            <div style="font-size: 0.8rem; color: #38bdf8; margin-bottom: 6px;">En <code>transferir()</code>: Puntero <code>origen</code></div>
+            <div class="memory-address">Guarda: 0x1000 (&amp;cuenta1)</div>
+            <div style="margin: 8px 0; color: #94a3b8;">↓ apunta con <code>origen-&gt;saldo</code> a ↓</div>
+            <div class="memory-label">cuenta1 en main (0x1000)</div>
+            <div class="memory-value">$10000 ➔ $7000</div>
+          </div>
+
+          <div class="memory-box">
+            <div style="font-size: 0.8rem; color: #34d399; margin-bottom: 6px;">En <code>transferir()</code>: Puntero <code>destino</code></div>
+            <div class="memory-address">Guarda: 0x2000 (&amp;cuenta2)</div>
+            <div style="margin: 8px 0; color: #94a3b8;">↓ apunta con <code>destino-&gt;saldo</code> a ↓</div>
+            <div class="memory-label">cuenta2 en main (0x2000)</div>
+            <div class="memory-value">$5000 ➔ $8000</div>
+          </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            📌 Además, recordá la Sección 23 del apunte: un <code>return</code> solo puede devolver <b>un valor</b> (usaremos <code>return 1</code> o <code>return 0</code> para informar si salió bien), mientras que las <b>dos cuentas</b> se actualizan por referencia mediante los punteros.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: EJEMPLO NIVEL 1 - DEPOSITAR Y EXTRAER EN UNA SOLA CUENTA -->
+      <section>
+        <h2><span class="section-num">07</span> Ejemplo Nivel 1: Depositar en una Sola Cuenta con Puntero</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Antes de juntar dos cuentas, calentemos motores modificando <b>una sola cuenta</b> mediante un puntero si está activa:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel1_depositar.c</span>
+              <span class="code-badge">Nivel 1</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> CuentaBancaria {
+    <span class="c-kw">int</span> numero;
+    <span class="c-kw">float</span> saldo;
+    <span class="c-kw">int</span> estado;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">depositar</span>(<span class="c-kw">struct</span> CuentaBancaria *cta, <span class="c-kw">float</span> monto) {
+    <span class="c-kw">if</span>(cta-&gt;estado == <span class="c-num">1</span> &amp;&amp; monto &gt; <span class="c-num">0</span>) {
+        cta-&gt;saldo += monto;
+        <span class="c-kw">return</span> <span class="c-num">1</span>;
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> CuentaBancaria miCuenta = {<span class="c-num">101</span>, <span class="c-num">5000.0</span>, <span class="c-num">1</span>};
+    <span class="c-fn">depositar</span>(&amp;miCuenta, <span class="c-num">2000.0</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Nuevo saldo: %.2f\n"</span>, miCuenta.saldo);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="box box-emerald">
+              <h4 style="color: #34d399;">¿Qué hicimos acá?</h4>
+              <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 16px;">
+                <li>Mandamos la dirección <code>&amp;miCuenta</code>.</li>
+                <li>Adentro de <code>depositar</code> chequeamos que la cuenta esté activa (<code>cta-&gt;estado == 1</code>) y el monto sea positivo.</li>
+                <li>Sumamos al saldo con <code>cta-&gt;saldo += monto;</code> y devolvemos <code>1</code>.</li>
+              </ul>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">Nuevo saldo: 7000.00</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: PASO 3 - ¿QUÉ DEBEMOS COMPROBAR ANTES DE TRANSFERIR? -->
+      <section>
+        <h2><span class="section-num">08</span> Paso 3: ¿Qué Debemos Comprobar Antes de Transferir?</h2>
+        <div class="box box-amber" style="margin-bottom: 12px;">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Las Preguntas del Apunte (Página 36)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Antes de restar o sumar un solo peso, el apunte nos marca el orden lógico de comprobaciones que debemos hacer:
+          </p>
+        </div>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div>
+              <b>Primero: ¿Origen activa?</b><br>
+              Comprobamos si <code>origen-&gt;estado == 1</code> (si vale <code>0</code>, la cuenta que quiere mandar plata está inactiva).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div>
+              <b>Después: ¿Destino activa?</b><br>
+              Comprobamos si <code>destino-&gt;estado == 1</code> (si vale <code>0</code>, la cuenta receptora está inactiva y no puede recibir plata).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div>
+              <b>Después: ¿Origen tiene suficiente saldo? (y monto positivo)</b><br>
+              Comprobamos si <code>origen-&gt;saldo &gt;= monto</code> (y <code>monto &gt; 0</code>). No podemos transferir $3000 si en la cuenta solo hay $1500.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: EL CONCEPTO DE ATOMICIDAD (TODO O NADA) -->
+      <section>
+        <h2><span class="section-num">09</span> Regla de Oro Bancaria: Si Algo Falla, No Modificamos Nada</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          En la página 37 del apunte dice: <b>"Si algo falla: <code>return 0;</code> Y no modificamos nada."</b> En informática bancaria esto se llama <b>atomicidad</b> (la operación se hace entera o no se hace nada). Mirá qué grave sería descontar antes de validar:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Peligro Mortal: Restar antes de validar destino</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">if</span>(origen-&gt;estado == <span class="c-num">1</span> &amp;&amp; origen-&gt;saldo &gt;= monto) {
+    origen-&gt;saldo -= monto; <span class="c-cmt">// ¡Ya le sacó la plata!</span>
+    <span class="c-kw">if</span>(destino-&gt;estado == <span class="c-num">1</span>) {
+        destino-&gt;saldo += monto;
+        <span class="c-kw">return</span> <span class="c-num">1</span>;
+    }
+}
+<span class="c-kw">return</span> <span class="c-num">0</span>;</div>
+            </div>
+            <p style="font-size: 0.79rem; color: #fca5a5; margin-top: 8px;">
+              Si <code>destino</code> estaba inactiva, a <code>origen</code> ya le restaste $3000 y a <code>destino</code> no se los sumaste. ¡Desaparecieron $3000 del sistema!
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Correcto: Validar TODO antes de tocar los saldos</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-cmt">// 1° Verificamos TODAS las condiciones:</span>
+<span class="c-kw">if</span>(origen-&gt;estado != <span class="c-num">1</span>) <span class="c-kw">return</span> <span class="c-num">0</span>;
+<span class="c-kw">if</span>(destino-&gt;estado != <span class="c-num">1</span>) <span class="c-kw">return</span> <span class="c-num">0</span>;
+<span class="c-kw">if</span>(monto &lt;= <span class="c-num">0</span> || origen-&gt;saldo &lt; monto) <span class="c-kw">return</span> <span class="c-num">0</span>;
+
+<span class="c-cmt">// 2° Recién acá tocamos ambos saldos juntos:</span>
+origen-&gt;saldo -= monto;
+destino-&gt;saldo += monto;
+<span class="c-kw">return</span> <span class="c-num">1</span>;</div>
+            </div>
+            <p style="font-size: 0.79rem; color: #86efac; margin-top: 8px;">
+              Si cualquier validación falla, la función sale con <code>return 0;</code> sin haber tocado ni un centavo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: PASO 4 - ACTUALIZACIÓN DE SALDOS Y RETORNO -->
+      <section>
+        <h2><span class="section-num">10</span> Paso 4: Actualización de Saldos y <code>return 1</code> / <code>return 0</code></h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Si todo está bien (Págs. 36–37)</h4>
+            <div class="code-window">
+              <div class="code-body">origen-&gt;saldo -= monto;
+destino-&gt;saldo += monto;
+
+<span class="c-kw">return</span> <span class="c-num">1</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; margin-top: 8px; color: #cbd5e1;">
+              • <code>origen-&gt;saldo -= monto;</code> equivale a <code>origen-&gt;saldo = origen-&gt;saldo - monto;</code>.<br>
+              • <code>destino-&gt;saldo += monto;</code> equivale a <code>destino-&gt;saldo = destino-&gt;saldo + monto;</code>.<br>
+              • Nota: en el esquema conceptual de la pág. 36 aparece escrito como idea <code>origen.saldo -= monto</code>, pero en código C usamos la flecha <code>-&gt;</code> porque <code>origen</code> y <code>destino</code> son punteros.
+            </p>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">Si algo falla</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">return</span> <span class="c-num">0</span>;</div>
+            </div>
+            <p style="font-size: 0.82rem; margin-top: 8px; color: #cbd5e1;">
+              • Devolver <code>0</code> significa <b>Falso / Operación rechazada</b>.<br>
+              • Devolver <code>1</code> significa <b>Verdadero / Operación realizada con éxito</b>.<br>
+              • Así, quien llamó a <code>transferir(...)</code> desde <code>main</code> puede usar un <code>if</code> para mostrar un mensaje al usuario.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: LAS DOS FORMAS DE ESCRIBIR LA FUNCIÓN TRANSFERIR -->
+      <section>
+        <h2><span class="section-num">11</span> Dos Formas Equivalentes de Escribir <code>transferir</code></h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Tanto en clase como en el examen podés escribir las validaciones paso a paso o en un solo <code>if</code> con <code>&amp;&amp;</code>. Ambas son 100% válidas:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">Forma A: Paso a paso (Guard clauses)</span>
+              <span class="code-badge">Muy clara</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">transferir</span>(<span class="c-kw">struct</span> CuentaBancaria *origen,
+               <span class="c-kw">struct</span> CuentaBancaria *destino,
+               <span class="c-kw">float</span> monto) 
+{
+    <span class="c-kw">if</span>(origen-&gt;estado != <span class="c-num">1</span>) {
+        <span class="c-kw">return</span> <span class="c-num">0</span>;
+    }
+    <span class="c-kw">if</span>(destino-&gt;estado != <span class="c-num">1</span>) {
+        <span class="c-kw">return</span> <span class="c-num">0</span>;
+    }
+    <span class="c-kw">if</span>(monto &lt;= <span class="c-num">0</span> || origen-&gt;saldo &lt; monto) {
+        <span class="c-kw">return</span> <span class="c-num">0</span>;
+    }
+
+    origen-&gt;saldo -= monto;
+    destino-&gt;saldo += monto;
+    <span class="c-kw">return</span> <span class="c-num">1</span>;
+}</div>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">Forma B: Con operador lógico &amp;&amp;</span>
+              <span class="code-badge">Compacta</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">transferir</span>(<span class="c-kw">struct</span> CuentaBancaria *origen,
+               <span class="c-kw">struct</span> CuentaBancaria *destino,
+               <span class="c-kw">float</span> monto) 
+{
+    <span class="c-kw">if</span>(origen-&gt;estado == <span class="c-num">1</span> &amp;&amp;
+       destino-&gt;estado == <span class="c-num">1</span> &amp;&amp;
+       monto &gt; <span class="c-num">0</span> &amp;&amp;
+       origen-&gt;saldo &gt;= monto) 
+    {
+        origen-&gt;saldo -= monto;
+        destino-&gt;saldo += monto;
+        <span class="c-kw">return</span> <span class="c-num">1</span>;
+    }
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: EJEMPLO NIVEL 2 - PROGRAMA COMPLETO CON LOS VALORES DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">12</span> Ejemplo Nivel 2: Programa Completo ($10000 ➔ $7000 y $5000 ➔ $8000)</h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">transferencia_apunte.c</span>
+              <span class="code-badge">Nivel 2</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> CuentaBancaria {
+    <span class="c-kw">int</span> numero;
+    <span class="c-kw">float</span> saldo;
+    <span class="c-kw">int</span> estado;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">transferir</span>(<span class="c-kw">struct</span> CuentaBancaria *origen,
+               <span class="c-kw">struct</span> CuentaBancaria *destino,
+               <span class="c-kw">float</span> monto) {
+    <span class="c-kw">if</span>(origen-&gt;estado != <span class="c-num">1</span>) <span class="c-kw">return</span> <span class="c-num">0</span>;
+    <span class="c-kw">if</span>(destino-&gt;estado != <span class="c-num">1</span>) <span class="c-kw">return</span> <span class="c-num">0</span>;
+    <span class="c-kw">if</span>(monto &lt;= <span class="c-num">0</span> || origen-&gt;saldo &lt; monto) <span class="c-kw">return</span> <span class="c-num">0</span>;
+
+    origen-&gt;saldo -= monto;
+    destino-&gt;saldo += monto;
+    <span class="c-kw">return</span> <span class="c-num">1</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> CuentaBancaria origen = {<span class="c-num">101</span>, <span class="c-num">10000.0</span>, <span class="c-num">1</span>};
+    <span class="c-kw">struct</span> CuentaBancaria destino = {<span class="c-num">102</span>, <span class="c-num">5000.0</span>, <span class="c-num">1</span>};
+
+    <span class="c-kw">int</span> ok = <span class="c-fn">transferir</span>(&amp;origen, &amp;destino, <span class="c-num">3000.0</span>);
+    <span class="c-kw">if</span>(ok == <span class="c-num">1</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Origen: $%.2f | Destino: $%.2f\n"</span>,
+               origen.saldo, destino.saldo);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table" style="font-size: 0.76rem;">
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th>Chequeo / Acción</th>
+                  <th><code>origen.saldo</code></th>
+                  <th><code>destino.saldo</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Inicio</td>
+                  <td>Cuentas creadas en <code>main</code></td>
+                  <td>$10000.00</td>
+                  <td>$5000.00</td>
+                </tr>
+                <tr>
+                  <td>Validación 1</td>
+                  <td><code>origen-&gt;estado == 1</code> (OK)</td>
+                  <td>$10000.00</td>
+                  <td>$5000.00</td>
+                </tr>
+                <tr>
+                  <td>Validación 2</td>
+                  <td><code>destino-&gt;estado == 1</code> (OK)</td>
+                  <td>$10000.00</td>
+                  <td>$5000.00</td>
+                </tr>
+                <tr>
+                  <td>Validación 3</td>
+                  <td><code>10000 &gt;= 3000</code> (OK)</td>
+                  <td>$10000.00</td>
+                  <td>$5000.00</td>
+                </tr>
+                <tr>
+                  <td>Débito</td>
+                  <td><code>origen-&gt;saldo -= 3000</code></td>
+                  <td><b>$7000.00</b></td>
+                  <td>$5000.00</td>
+                </tr>
+                <tr>
+                  <td>Crédito</td>
+                  <td><code>destino-&gt;saldo += 3000</code></td>
+                  <td><b>$7000.00</b></td>
+                  <td><b>$8000.00</b></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">Origen: $7000.00 | Destino: $8000.00</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: TRAZA DE CASOS FALLIDOS (CUENTA INACTIVA Y SALDO INSUFICIENTE) -->
+      <section>
+        <h2><span class="section-num">13</span> Tabla de Seguimiento: ¿Qué Pasa Cuando Falla una Condición?</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Probemos mentalmente 4 llamadas distintas a <code>transferir(&amp;c1, &amp;c2, monto)</code> y veamos en qué línea termina cada una:
+        </p>
+
+        <table class="trace-table" style="font-size: 0.78rem;">
+          <thead>
+            <tr>
+              <th>Escenario</th>
+              <th><code>c1</code> (Origen)</th>
+              <th><code>c2</code> (Destino)</th>
+              <th><code>monto</code></th>
+              <th>¿Dónde corta?</th>
+              <th>Retorno y Saldos Finales</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Caso 1: Exitoso</b></td>
+              <td>$10000, est=1</td>
+              <td>$5000, est=1</td>
+              <td>$3000</td>
+              <td>Pasa todos los <code>if</code></td>
+              <td>Retorna <b>1</b> ($7000 y $8000)</td>
+            </tr>
+            <tr>
+              <td><b>Caso 2: Origen inactiva</b></td>
+              <td>$10000, <b>est=0</b></td>
+              <td>$5000, est=1</td>
+              <td>$3000</td>
+              <td>1° <code>if (origen-&gt;estado != 1)</code></td>
+              <td>Retorna <b>0</b> ($10000 y $5000)</td>
+            </tr>
+            <tr>
+              <td><b>Caso 3: Destino inactiva</b></td>
+              <td>$10000, est=1</td>
+              <td>$5000, <b>est=0</b></td>
+              <td>$3000</td>
+              <td>2° <code>if (destino-&gt;estado != 1)</code></td>
+              <td>Retorna <b>0</b> ($10000 y $5000)</td>
+            </tr>
+            <tr>
+              <td><b>Caso 4: Sin fondos</b></td>
+              <td>$10000, est=1</td>
+              <td>$5000, est=1</td>
+              <td><b>$15000</b></td>
+              <td>3° <code>if (origen-&gt;saldo &lt; monto)</code></td>
+              <td>Retorna <b>0</b> ($10000 y $5000)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            ✅ En los Casos 2, 3 y 4 la función devuelve <code>0</code> y los saldos quedan intactos en <code>$10000</code> y <code>$5000</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: VALIDACIÓN EXTRA PROFESIONAL: ¿Y SI ORIGEN Y DESTINO SON LA MISMA CUENTA? -->
+      <section>
+        <h2><span class="section-num">14</span> Validación Defensiva Extra: ¿Y Si Se Transfiere a Sí Misma?</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          ¿Qué pasa si alguien llama por error a <code>transferir(&amp;cta1, &amp;cta1, 3000)</code> pasando dos veces la misma cuenta?
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">misma_cuenta.c</span>
+              <span class="code-badge">Chequeo extra</span>
+            </div>
+            <div class="code-body"><span class="c-cmt">// Si ambos punteros apuntan a la misma dirección</span>
+<span class="c-cmt">// o tienen el mismo número de cuenta:</span>
+<span class="c-kw">if</span>(origen == destino || origen-&gt;numero == destino-&gt;numero) 
+{ 
+    <span class="c-kw">return</span> <span class="c-num">0</span>; <span class="c-cmt">// No tiene sentido transferirse a sí mismo</span>
+}</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Qué compara <code>origen == destino</code>?</h4>
+            <p style="font-size: 0.84rem; line-height: 1.55;">
+              Como <code>origen</code> y <code>destino</code> son punteros, <code>origen == destino</code> compara si ambos guardan la <b>misma dirección de memoria RAM</b>. Y <code>origen-&gt;numero == destino-&gt;numero</code> verifica si tienen el mismo número de cuenta.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: CÓDIGOS DE ERROR DETALLADOS -->
+      <section>
+        <h2><span class="section-num">15</span> Variante: Informar <i>Por Qué</i> Falló la Transferencia</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          El apunte pide devolver <code>1</code> si salió bien y <code>0</code> si algo falla. ¿Y si en un sistema real quisiéramos saber exactamente cuál fue la causa del rechazo? Podemos usar códigos negativos:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">codigos_retorno.c</span>
+              <span class="code-badge">Diagnóstico</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">transferirDetallado</span>(<span class="c-kw">struct</span> CuentaBancaria *origen,
+                        <span class="c-kw">struct</span> CuentaBancaria *destino,
+                        <span class="c-kw">float</span> monto) {
+    <span class="c-kw">if</span>(origen-&gt;estado != <span class="c-num">1</span>) <span class="c-kw">return</span> -<span class="c-num">1</span>;
+    <span class="c-kw">if</span>(destino-&gt;estado != <span class="c-num">1</span>) <span class="c-kw">return</span> -<span class="c-num">2</span>;
+    <span class="c-kw">if</span>(monto &lt;= <span class="c-num">0</span>) <span class="c-kw">return</span> -<span class="c-num">3</span>;
+    <span class="c-kw">if</span>(origen-&gt;saldo &lt; monto) <span class="c-kw">return</span> -<span class="c-num">4</span>;
+
+    origen-&gt;saldo -= monto;
+    destino-&gt;saldo += monto;
+    <span class="c-kw">return</span> <span class="c-num">1</span>;
+}</div>
           </div>
 
           <div class="box box-amber">
-            <h4 style="color: #fbbf24;">Protocolo de Validaciones Obligatorias</h4>
-            <div class="step-list">
-              <div class="step-item"><span class="step-num">1</span><div>¿Monto positivo? (<code>monto &gt; 0</code>).</div></div>
-              <div class="step-item"><span class="step-num">2</span><div>¿Cuenta origen activa? (<code>origen-&gt;estado == 1</code>).</div></div>
-              <div class="step-item"><span class="step-num">3</span><div>¿Cuenta destino activa? (<code>destino-&gt;estado == 1</code>).</div></div>
-              <div class="step-item"><span class="step-num">4</span><div>¿Saldo suficiente? (<code>origen-&gt;saldo &gt;= monto</code>).</div></div>
-              <div class="step-item"><span class="step-num">5</span><div>¿Son cuentas distintas? (<code>origen != destino</code>).</div></div>
+            <h4 style="color: #fbbf24;">Tabla de códigos</h4>
+            <ul style="font-size: 0.82rem; line-height: 1.55; margin-left: 16px;">
+              <li><code>1</code> → Transferencia exitosa.</li>
+              <li><code>-1</code> → Error: Cuenta origen inactiva.</li>
+              <li><code>-2</code> → Error: Cuenta destino inactiva.</li>
+              <li><code>-3</code> → Error: Monto inválido (menor o igual a 0).</li>
+              <li><code>-4</code> → Error: Saldo insuficiente en origen.</li>
+            </ul>
+            <p style="font-size: 0.78rem; margin-top: 6px; color: #cbd5e1;">
+              ⚠️ <b>Nota para el examen:</b> Si la consigna pide devolver <code>1</code> o <code>0</code> como en el apunte, usá siempre <code>return 1;</code> y <code>return 0;</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: EJEMPLO NIVEL 3 - AMPLIACIÓN CON TITULAR (CHAR NOMBRE[50]) -->
+      <section>
+        <h2><span class="section-num">16</span> Ejemplo Nivel 3: Ampliar la Cuenta con el Nombre del Titular</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Agreguemos ahora un campo <code>char titular[50];</code> a <code>struct CuentaBancaria</code> y una función <code>mostrarCuenta</code> para imprimir el estado antes y después de transferir:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">cuenta_con_titular.c</span>
+              <span class="code-badge">Nivel 3</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> CuentaBancaria {
+    <span class="c-kw">int</span> numero;
+    <span class="c-kw">char</span> titular[<span class="c-num">50</span>];
+    <span class="c-kw">float</span> saldo;
+    <span class="c-kw">int</span> estado;
+};
+
+<span class="c-kw">void</span> <span class="c-fn">mostrarCuenta</span>(<span class="c-kw">struct</span> CuentaBancaria c) {
+    <span class="c-fn">printf</span>(<span class="c-str">"Cta #%d (%s) | Saldo: $%.2f | Est: %d\n"</span>,
+           c.numero, c.titular, c.saldo, c.estado);
+}
+
+<span class="c-kw">int</span> <span class="c-fn">transferir</span>(<span class="c-kw">struct</span> CuentaBancaria *origen,
+               <span class="c-kw">struct</span> CuentaBancaria *destino,
+               <span class="c-kw">float</span> monto) {
+    <span class="c-kw">if</span>(origen-&gt;estado == <span class="c-num">1</span> &amp;&amp; destino-&gt;estado == <span class="c-num">1</span> &amp;&amp;
+       monto &gt; <span class="c-num">0</span> &amp;&amp; origen-&gt;saldo &gt;= monto) {
+        origen-&gt;saldo -= monto;
+        destino-&gt;saldo += monto;
+        <span class="c-kw">return</span> <span class="c-num">1</span>;
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> CuentaBancaria c1 = {<span class="c-num">101</span>, <span class="c-str">"Ana"</span>, <span class="c-num">10000.0</span>, <span class="c-num">1</span>};
+    <span class="c-kw">struct</span> CuentaBancaria c2 = {<span class="c-num">102</span>, <span class="c-str">"Bruno"</span>, <span class="c-num">5000.0</span>, <span class="c-num">1</span>};
+    <span class="c-fn">transferir</span>(&amp;c1, &amp;c2, <span class="c-num">3000.0</span>);
+    <span class="c-fn">mostrarCuenta</span>(c1);
+    <span class="c-fn">mostrarCuenta</span>(c2);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="box box-cyan">
+              <h4 style="color: #38bdf8;">Por valor vs Por puntero en el mismo programa</h4>
+              <p style="font-size: 0.83rem; line-height: 1.55;">
+                • <code>mostrarCuenta(c1)</code> recibe la estructura <b>por valor</b> (con punto <code>c.saldo</code>) porque solo necesita leerla e imprimirla.<br>
+                • <code>transferir(&amp;c1, &amp;c2, 3000.0)</code> recibe <b>punteros</b> (con flecha <code>origen-&gt;saldo</code>) porque necesita modificar los saldos reales.
+              </p>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">Cta #101 (Ana) | Saldo: $7000.00 | Est: 1
+Cta #102 (Bruno) | Saldo: $8000.00 | Est: 1</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: CÓDIGO COMPLETO DE LA FUNCIÓN -->
+      <!-- SLIDE 18: EJEMPLO NIVEL 4 - UN BANCO COMPLETO (ARREGLO DE CUENTAS) -->
       <section>
-        <h2><span class="section-num">04</span> Código de la Función: <code>transferir</code></h2>
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">transferencia.c</span>
-            <span class="code-badge">Lógica Defensiva</span>
+        <h2><span class="section-num">17</span> Ejemplo Nivel 4: Combinando con Arreglos de Structs (El Banco)</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          En un banco real no tenemos dos variables sueltas <code>c1</code> y <code>c2</code>, sino un <b>arreglo de cuentas</b> <code>struct CuentaBancaria banco[100];</code>. ¿Cómo transferimos si solo conocemos el <code>numero</code> de cuenta origen y el <code>numero</code> de cuenta destino?
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div><b>Buscamos la posición de la cuenta origen:</b> <code>int idxOrigen = buscarCuenta(banco, tamano, numOrigen);</code></div>
           </div>
-          <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">transferir</span>(<span class="c-kw">struct</span> CuentaBancaria *origen, 
-               <span class="c-kw">struct</span> CuentaBancaria *destino, 
-               <span class="c-kw">float</span> monto) 
-{ 
-    <span class="c-cmt">// Validaciones previas de seguridad:</span>
-    <span class="c-kw">if</span> (monto &lt;= <span class="c-num">0</span>) {
-        <span class="c-kw">return</span> <span class="c-num">0</span>; <span class="c-cmt">// Monto inválido</span>
-    }
-    <span class="c-kw">if</span> (origen-&gt;estado != <span class="c-num">1</span> || destino-&gt;estado != <span class="c-num">1</span>) {
-        <span class="c-kw">return</span> <span class="c-num">0</span>; <span class="c-cmt">// Al menos una cuenta está inactiva</span>
-    }
-    <span class="c-kw">if</span> (origen-&gt;saldo &lt; monto) {
-        <span class="c-kw">return</span> <span class="c-num">0</span>; <span class="c-cmt">// Saldo insuficiente</span>
-    }
-
-    <span class="c-cmt">// Si todas las validaciones pasaron, ejecutamos la transacción atómica:</span>
-    origen-&gt;saldo  -= monto; 
-    destino-&gt;saldo += monto; 
-
-    <span class="c-kw">return</span> <span class="c-num">1</span>; <span class="c-cmt">// Éxito total</span>
-}</div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div><b>Buscamos la posición de la cuenta destino:</b> <code>int idxDestino = buscarCuenta(banco, tamano, numDestino);</code></div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div><b>Verificamos que ambas existan:</b> Si <code>idxOrigen != -1 &amp;&amp; idxDestino != -1</code>, llamamos a:<br>
+            <code>transferir(&amp;banco[idxOrigen], &amp;banco[idxDestino], monto);</code></div>
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 6: SIMULACIÓN EN MAIN -->
+      <!-- SLIDE 19: CÓDIGO COMPLETO DEL BANCO CON BÚSQUEDA Y TRANSFERENCIA -->
       <section>
-        <h2><span class="section-num">05</span> Simulación Completa en <code>main()</code></h2>
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">simulacion.c</span>
-            <span class="code-badge">Ejecución</span>
-          </div>
-          <div class="code-body" style="font-size: 1.12rem; line-height: 1.4; padding: 12px 18px;"><span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-{
-    <span class="c-kw">struct</span> CuentaBancaria cta1 = {<span class="c-num">101</span>, <span class="c-num">10000.0f</span>, <span class="c-num">1</span>}; <span class="c-cmt">// Activa con $10.000</span>
-    <span class="c-kw">struct</span> CuentaBancaria cta2 = {<span class="c-num">102</span>, <span class="c-num">5000.0f</span>, <span class="c-num">1</span>};  <span class="c-cmt">// Activa con $5.000</span>
+        <h2><span class="section-num">18</span> Código Completo: Búsqueda en el Arreglo + <code>transferir</code></h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">banco_completo.c</span>
+              <span class="code-badge">Nivel 4 Integrador</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 
-    <span class="c-fn">printf</span>(<span class="c-str">"Antes: Cta1 = $%.2f | Cta2 = $%.2f\n"</span>, cta1.saldo, cta2.saldo);
+<span class="c-kw">struct</span> CuentaBancaria {
+    <span class="c-kw">int</span> numero;
+    <span class="c-kw">float</span> saldo;
+    <span class="c-kw">int</span> estado;
+};
 
-    <span class="c-kw">int</span> exito = <span class="c-fn">transferir</span>(&amp;cta1, &amp;cta2, <span class="c-num">3000.0f</span>);
-
-    <span class="c-kw">if</span> (exito) {
-        <span class="c-fn">printf</span>(<span class="c-str">"✅ Transferencia exitosa!\n"</span>);
-    } <span class="c-kw">else</span> {
-        <span class="c-fn">printf</span>(<span class="c-str">"❌ La transferencia fue rechazada.\n"</span>);
+<span class="c-kw">int</span> <span class="c-fn">buscarCuenta</span>(<span class="c-kw">struct</span> CuentaBancaria b[], <span class="c-kw">int</span> n, <span class="c-kw">int</span> num) {
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; n; i++) {
+        <span class="c-kw">if</span>(b[i].numero == num) <span class="c-kw">return</span> i;
     }
+    <span class="c-kw">return</span> -<span class="c-num">1</span>;
+}
 
-    <span class="c-fn">printf</span>(<span class="c-str">"Despues: Cta1 = $%.2f | Cta2 = $%.2f\n"</span>, cta1.saldo, cta2.saldo);
+<span class="c-kw">int</span> <span class="c-fn">transferir</span>(<span class="c-kw">struct</span> CuentaBancaria *orig,
+               <span class="c-kw">struct</span> CuentaBancaria *dest, <span class="c-kw">float</span> monto) {
+    <span class="c-kw">if</span>(orig-&gt;estado == <span class="c-num">1</span> &amp;&amp; dest-&gt;estado == <span class="c-num">1</span> &amp;&amp;
+       monto &gt; <span class="c-num">0</span> &amp;&amp; orig-&gt;saldo &gt;= monto) {
+        orig-&gt;saldo -= monto;
+        dest-&gt;saldo += monto;
+        <span class="c-kw">return</span> <span class="c-num">1</span>;
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> CuentaBancaria banco[<span class="c-num">3</span>] = {
+        {<span class="c-num">101</span>, <span class="c-num">10000.0</span>, <span class="c-num">1</span>},
+        {<span class="c-num">205</span>, <span class="c-num">2000.0</span>, <span class="c-num">0</span>},
+        {<span class="c-num">309</span>, <span class="c-num">5000.0</span>, <span class="c-num">1</span>}
+    };
+    <span class="c-kw">int</span> p1 = <span class="c-fn">buscarCuenta</span>(banco, <span class="c-num">3</span>, <span class="c-num">101</span>);
+    <span class="c-kw">int</span> p2 = <span class="c-fn">buscarCuenta</span>(banco, <span class="c-num">3</span>, <span class="c-num">309</span>);
+    <span class="c-kw">if</span>(p1 != -<span class="c-num">1</span> &amp;&amp; p2 != -<span class="c-num">1</span>) {
+        <span class="c-fn">transferir</span>(&amp;banco[p1], &amp;banco[p2], <span class="c-num">3000.0</span>);
+    }
+    <span class="c-fn">printf</span>(<span class="c-str">"101: $%.0f | 309: $%.0f\n"</span>, banco[<span class="c-num">0</span>].saldo, banco[<span class="c-num">2</span>].saldo);
     <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
-        </div>
-
-        <div class="terminal-window">
-          <div class="terminal-header">
-            <span>Terminal de salida</span>
-            <span>bash</span>
           </div>
-          <div class="terminal-body">
-Antes: Cta1 = $10000.00 | Cta2 = $5000.00
-✅ Transferencia exitosa!
-Despues: Cta1 = $7000.00 | Cta2 = $8000.00
+
+          <div>
+            <div class="box box-purple">
+              <h4 style="color: #c084fc;">Analicemos <code>&amp;banco[p1]</code></h4>
+              <p style="font-size: 0.83rem; line-height: 1.55;">
+                1. <code>buscarCuenta(banco, 3, 101)</code> devuelve <code>p1 = 0</code>.<br>
+                2. <code>buscarCuenta(banco, 3, 309)</code> devuelve <code>p2 = 2</code>.<br>
+                3. <code>&amp;banco[0]</code> es la dirección de memoria del casillero <code>0</code> del arreglo, y <code>&amp;banco[2]</code> es la dirección del casillero <code>2</code>.<br>
+                4. ¡No tuvimos que cambiar ni una coma de la función <code>transferir</code>!
+              </p>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">101: $7000 | 309: $8000</div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 7: AUTOEVALUACIÓN Y CIERRE -->
+      <!-- SLIDE 20: ACTIVAR O DESACTIVAR UNA CUENTA POR PUNTERO -->
       <section>
-        <h2><span class="section-num">06</span> Resumen y Autoevaluación</h2>
+        <h2><span class="section-num">19</span> Funciones Auxiliares: Bloquear y Reactivar Cuentas</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Así como modificamos el campo <code>saldo</code> con un puntero, también podemos escribir funciones pequeñas para cambiar el campo <code>estado</code>:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">cambiar_estado.c</span>
+              <span class="code-badge">Gestión de Estado</span>
+            </div>
+            <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">bloquearCuenta</span>(<span class="c-kw">struct</span> CuentaBancaria *cta) 
+{ 
+    cta-&gt;estado = <span class="c-num">0</span>; <span class="c-cmt">// Pasa a inactiva</span>
+} 
+
+<span class="c-kw">void</span> <span class="c-fn">activarCuenta</span>(<span class="c-kw">struct</span> CuentaBancaria *cta) 
+{ 
+    cta-&gt;estado = <span class="c-num">1</span>; <span class="c-cmt">// Pasa a activa</span>
+}</div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Ejemplo de flujo</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">bloquearCuenta</span>(&amp;cta2);
+<span class="c-cmt">// Esta transferencia falla (retorna 0):</span>
+<span class="c-fn">transferir</span>(&amp;cta1, &amp;cta2, <span class="c-num">1000.0</span>);
+
+<span class="c-fn">activarCuenta</span>(&amp;cta2);
+<span class="c-cmt">// Ahora sí funciona (retorna 1):</span>
+<span class="c-fn">transferir</span>(&amp;cta1, &amp;cta2, <span class="c-num">1000.0</span>);</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: HISTORIAL DE TRANSFERENCIAS CON STRUCT ANIDADA -->
+      <section>
+        <h2><span class="section-num">20</span> Ampliación: Guardar un Comprobante / Historial de Transferencias</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          ¿Cómo registran los bancos cada movimiento? Creando una estructura <code>struct Movimiento</code> y guardándola en un arreglo de historial cada vez que <code>transferir</code> devuelve <code>1</code>:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">historial_movimientos.c</span>
+              <span class="code-badge">Comprobante</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> Movimiento {
+    <span class="c-kw">int</span> ctaOrigen;
+    <span class="c-kw">int</span> ctaDestino;
+    <span class="c-kw">float</span> monto;
+};
+
+<span class="c-cmt">// Si la transferencia fue exitosa, la anotamos:</span>
+<span class="c-kw">if</span>(<span class="c-fn">transferir</span>(&amp;c1, &amp;c2, <span class="c-num">3000.0</span>) == <span class="c-num">1</span>) {
+    historial[cant].ctaOrigen = c1.numero;
+    historial[cant].ctaDestino = c2.numero;
+    historial[cant].monto = <span class="c-num">3000.0</span>;
+    cant++;
+}</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Por qué es tan útil</h4>
+            <p style="font-size: 0.83rem; line-height: 1.55;">
+              Al final del día podemos recorrer el arreglo <code>historial</code> con un ciclo <code>for</code> para imprimir todos los movimientos exitosos o sumar cuánto dinero total se transfirió en la jornada.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: ERRORES FRECUENTES DE PRINCIPIANTES (PARTE 1) -->
+      <section>
+        <h2><span class="section-num">21</span> Errores Frecuentes de Principiantes (Parte 1)</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Error #1: Usar el operador punto (<code>.</code>) en lugar de la flecha (<code>-&gt;</code>) dentro de <code>transferir</code>, u olvidar el <code>&amp;</code> al llamar desde <code>main</code>.
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Incorrecto: Punto en puntero y llamada sin <code>&amp;</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">transferir</span>(<span class="c-kw">struct</span> CuentaBancaria *origen,
+               <span class="c-kw">struct</span> CuentaBancaria *destino, <span class="c-kw">float</span> m) {
+    origen.saldo -= m; <span class="c-cmt">// Error: origen es puntero</span>
+}
+<span class="c-cmt">// En main:</span>
+<span class="c-fn">transferir</span>(cta1, cta2, <span class="c-num">3000</span>); <span class="c-cmt">// Falta &amp;</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 8px;">
+              El compilador rechaza <code>origen.saldo</code> porque un puntero requiere <code>-&gt;</code>, y rechaza <code>cta1</code> sin <code>&amp;</code> porque espera una dirección.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Correcto: Flecha <code>-&gt;</code> adentro y <code>&amp;</code> al llamar</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">transferir</span>(<span class="c-kw">struct</span> CuentaBancaria *origen,
+               <span class="c-kw">struct</span> CuentaBancaria *destino, <span class="c-kw">float</span> m) {
+    origen-&gt;saldo -= m;
+    destino-&gt;saldo += m;
+    <span class="c-kw">return</span> <span class="c-num">1</span>;
+}
+<span class="c-cmt">// En main:</span>
+<span class="c-fn">transferir</span>(&amp;cta1, &amp;cta2, <span class="c-num">3000</span>);</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 8px;">
+              En <code>main</code> mandamos direcciones con <code>&amp;</code> y en la función accedemos con <code>-&gt;</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: ERRORES FRECUENTES DE PRINCIPIANTES (PARTE 2) -->
+      <section>
+        <h2><span class="section-num">22</span> Errores Frecuentes de Principiantes (Parte 2)</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Error #2: Confundir comparación (<code>==</code>) con asignación (<code>=</code>) al verificar el estado de la cuenta, o usar <code>&gt;</code> en vez de <code>&gt;=</code> para el saldo.
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Incorrecto: <code>=</code> en el <code>if</code> y <code>&gt;</code> estricto</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-cmt">// ¡Activa la cuenta a la fuerza en vez de preguntar!</span>
+<span class="c-kw">if</span>(origen-&gt;estado = <span class="c-num">1</span>) { ... }
+
+<span class="c-cmt">// No deja transferir todo tu saldo ($10000 de $10000):</span>
+<span class="c-kw">if</span>(origen-&gt;saldo &gt; monto) { ... }</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 8px;">
+              <code>origen-&gt;estado = 1</code> le asigna 1 a una cuenta bloqueada y siempre da verdadero. Y si tenés $10000, tenés derecho a transferir los $10000 completos.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Correcto: <code>== 1</code> para estado y <code>&gt;= monto</code> para saldo</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">if</span>(origen-&gt;estado == <span class="c-num">1</span> &amp;&amp;
+   destino-&gt;estado == <span class="c-num">1</span> &amp;&amp;
+   origen-&gt;saldo &gt;= monto) { ... }</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 8px;">
+              Con <code>==</code> comparamos sin alterar el estado, y con <code>&gt;=</code> permitimos transferir hasta el último peso disponible (quedando el saldo en <code>0.00</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: ERRORES FRECUENTES DE PRINCIPIANTES (PARTE 3) -->
+      <section>
+        <h2><span class="section-num">23</span> Errores Frecuentes de Principiantes (Parte 3)</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Error #3: Reemplazar el saldo con <code>=</code> en lugar de restar y sumar con <code>-=</code> y <code>+=</code>.
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="card-title">❌ Incorrecto: Sobrescribir el saldo con <code>=</code></div>
+            <div class="code-window">
+              <div class="code-body">origen-&gt;saldo = monto;
+destino-&gt;saldo = monto;</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 8px;">
+              Si ambas cuentas quedan con <code>$3000</code>, perdiste el saldo anterior que tenían ($10000 y $5000).
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="card-title">✅ Correcto: Restar con <code>-=</code> y sumar con <code>+=</code></div>
+            <div class="code-window">
+              <div class="code-body">origen-&gt;saldo -= monto;
+destino-&gt;saldo += monto;</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 8px;">
+              Descuenta <code>monto</code> de lo que ya tenía <code>origen</code> ($10000 - $3000 = $7000) y lo suma a lo que ya tenía <code>destino</code> ($5000 + $3000 = $8000).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: DESGLOSE DE CADA SÍMBOLO DENTRO DE TRANSFERIR -->
+      <section>
+        <h2><span class="section-num">24</span> Radiografía Sintáctica de la Función <code>transferir</code></h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Repasemos qué papel juega cada símbolo en este ejercicio integrador:
+        </p>
+
+        <table class="trace-table" style="font-size: 0.8rem;">
+          <thead>
+            <tr>
+              <th>Fragmento de código</th>
+              <th>Qué significa exactamente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>struct CuentaBancaria *origen</code></td>
+              <td>Recibe la dirección de memoria de la cuenta desde donde sale el dinero</td>
+            </tr>
+            <tr>
+              <td><code>struct CuentaBancaria *destino</code></td>
+              <td>Recibe la dirección de memoria de la cuenta que recibirá el dinero</td>
+            </tr>
+            <tr>
+              <td><code>origen-&gt;estado == 1</code></td>
+              <td>Entra al campo <code>estado</code> de la cuenta apuntada por <code>origen</code> y verifica que sea 1</td>
+            </tr>
+            <tr>
+              <td><code>origen-&gt;saldo &gt;= monto</code></td>
+              <td>Verifica que el dinero en la cuenta origen alcance para cubrir el <code>monto</code></td>
+            </tr>
+            <tr>
+              <td><code>origen-&gt;saldo -= monto;</code></td>
+              <td>Resta <code>monto</code> directamente en el saldo original de la primera cuenta</td>
+            </tr>
+            <tr>
+              <td><code>destino-&gt;saldo += monto;</code></td>
+              <td>Suma <code>monto</code> directamente en el saldo original de la segunda cuenta</td>
+            </tr>
+            <tr>
+              <td><code>return 1;</code> / <code>return 0;</code></td>
+              <td>Informa al programa principal si la operación se concretó (1) o se canceló (0)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 26: ¿CÓMO APLICAR ESTE MISMO PATRÓN A OTROS PROBLEMAS DE EXAMEN? -->
+      <section>
+        <h2><span class="section-num">25</span> El Mismo Patrón en Otros Ejercicios de Examen</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 10px;">
+          Una vez que entendés <code>transferir</code>, podés resolver cualquier ejercicio donde dos estructuras interactúan entre sí:
+        </p>
+
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8; font-size: 0.92rem;">1. Venta entre Depósitos</h4>
+            <p style="font-size: 0.8rem; color: #cbd5e1;">
+              <code>moverStock(struct Deposito *orig, struct Deposito *dest, int cant)</code><br>
+              Verifica stock suficiente y hace <code>orig-&gt;stock -= cant; dest-&gt;stock += cant;</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399; font-size: 0.92rem;">2. Videojuego (Ataque / Cura)</h4>
+            <p style="font-size: 0.8rem; color: #cbd5e1;">
+              <code>curarAliado(struct Jugador *medico, struct Jugador *herido, int energia)</code><br>
+              Resta maná al médico y suma vida al herido si ambos están vivos.
+            </p>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: #c084fc; font-size: 0.92rem;">3. Compra de un Cliente</h4>
+            <p style="font-size: 0.8rem; color: #cbd5e1;">
+              <code>comprar(struct Cliente *cli, struct Producto *prod, int unidades)</code><br>
+              Verifica stock y saldo del cliente; descuenta stock y descuenta saldo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: EJEMPLO DE COMPRA CLIENTE-PRODUCTO -->
+      <section>
+        <h2><span class="section-num">26</span> Ejemplo Espejo: Compra entre <code>Cliente</code> y <code>Producto</code></h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 8px;">
+          Mirá cómo el mismo razonamiento de <code>transferir</code> sirve incluso cuando los dos punteros apuntan a <b>dos tipos de Structs distintos</b>:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">comprar_producto.c</span>
+              <span class="code-badge">Dos Structs Distintas</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> Cliente {
+    <span class="c-kw">char</span> nombre[<span class="c-num">40</span>];
+    <span class="c-kw">float</span> billetera;
+};
+
+<span class="c-kw">struct</span> Producto {
+    <span class="c-kw">char</span> nombre[<span class="c-num">40</span>];
+    <span class="c-kw">float</span> precio;
+    <span class="c-kw">int</span> stock;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">comprar</span>(<span class="c-kw">struct</span> Cliente *c, <span class="c-kw">struct</span> Producto *p, <span class="c-kw">int</span> cant) {
+    <span class="c-kw">float</span> total = p-&gt;precio * cant;
+    <span class="c-kw">if</span>(cant &lt;= <span class="c-num">0</span> || p-&gt;stock &lt; cant || c-&gt;billetera &lt; total) {
+        <span class="c-kw">return</span> <span class="c-num">0</span>;
+    }
+    p-&gt;stock -= cant;
+    c-&gt;billetera -= total;
+    <span class="c-kw">return</span> <span class="c-num">1</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> Cliente cli = {<span class="c-str">"Ana"</span>, <span class="c-num">5000.0</span>};
+    <span class="c-kw">struct</span> Producto prod = {<span class="c-str">"Cuaderno"</span>, <span class="c-num">1500.0</span>, <span class="c-num">10</span>};
+    <span class="c-kw">if</span>(<span class="c-fn">comprar</span>(&amp;cli, &amp;prod, <span class="c-num">2</span>)) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Saldo: $%.0f | Stock: %d\n"</span>, cli.billetera, prod.stock);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="box box-emerald">
+              <h4 style="color: #34d399;">Misma estructura mental</h4>
+              <ol style="font-size: 0.83rem; line-height: 1.6; margin-left: 16px;">
+                <li>Calculamos el costo <code>total = p-&gt;precio * cant</code>.</li>
+                <li>Validamos todo antes de modificar: cantidad positiva, stock suficiente y billetera suficiente.</li>
+                <li>Si todo cumple, descontamos stock y billetera y devolvemos <code>1</code>.</li>
+              </ol>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Salida</span>
+                <span>bash</span>
+              </div>
+              <div class="terminal-body">Saldo: $2000 | Stock: 8</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: BUENAS PRÁCTICAS EN FUNCIONES TRANSACCIONALES -->
+      <section>
+        <h2><span class="section-num">27</span> Buenas Prácticas en Funciones de Modificación con Punteros</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Conceptos Integrados en este Ejercicio</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
-              <li>Estructuras para empaquetar saldo, número y estado.</li>
-              <li>Punteros dobles para mutar dos entidades distintas.</li>
-              <li>Operador flecha <code>-&gt;</code> para modificar saldos remotos.</li>
-              <li>Lógica booleana y condicionales para blindar la operación.</li>
-              <li>Retorno de estado numérico (1/0) como señal de éxito.</li>
+            <h4 style="color: #818cf8;">1. Validar primero, modificar al final</h4>
+            <p style="font-size: 0.84rem; line-height: 1.55;">
+              Colocá todos los chequeos de error al comienzo de la función. Solo cuando estés 100% seguro de que todas las condiciones se cumplen, ejecutá las líneas que alteran los campos apuntados.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Separar lógica de negocio e impresión</h4>
+            <p style="font-size: 0.84rem; line-height: 1.55;">
+              Fijate que en el apunte la función <code>transferir</code> no tiene ningún <code>printf</code> adentro: hace su trabajo en silencio y devuelve <code>1</code> o <code>0</code>. Luego <code>main()</code> decide qué mensaje mostrar en pantalla.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: RESUMEN PASO A PASO DEL ALGORITMO DE TRANSFERENCIA -->
+      <section>
+        <h2><span class="section-num">28</span> El Algoritmo del Apunte en 5 Pasos Claros</h2>
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div><b>Recibir punteros:</b> <code>struct CuentaBancaria *origen, struct CuentaBancaria *destino, float monto</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div><b>Comprobar cuenta origen:</b> ¿<code>origen-&gt;estado == 1</code>? Si no, <code>return 0;</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div><b>Comprobar cuenta destino:</b> ¿<code>destino-&gt;estado == 1</code>? Si no, <code>return 0;</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div><b>Comprobar monto y saldo:</b> ¿<code>monto &gt; 0</code> y <code>origen-&gt;saldo &gt;= monto</code>? Si no, <code>return 0;</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">5</span>
+            <div><b>Actualizar y confirmar:</b> <code>origen-&gt;saldo -= monto; destino-&gt;saldo += monto; return 1;</code>.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: AUTOEVALUACIÓN RÁPIDA DE TRAZA -->
+      <section>
+        <h2><span class="section-num">29</span> Poné a Prueba tu Ojo Clínico: ¿Qué Imprime este Código?</h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">desafio_traza.c</span>
+              <span class="code-badge">Desafío</span>
+            </div>
+            <div class="code-body"><span class="c-kw">struct</span> CuentaBancaria a = {<span class="c-num">1</span>, <span class="c-num">4000.0</span>, <span class="c-num">1</span>};
+<span class="c-kw">struct</span> CuentaBancaria b = {<span class="c-num">2</span>, <span class="c-num">1000.0</span>, <span class="c-num">1</span>};
+
+<span class="c-kw">int</span> r1 = <span class="c-fn">transferir</span>(&amp;a, &amp;b, <span class="c-num">2500.0</span>);
+<span class="c-kw">int</span> r2 = <span class="c-fn">transferir</span>(&amp;a, &amp;b, <span class="c-num">2000.0</span>);
+
+<span class="c-fn">printf</span>(<span class="c-str">"r1=%d r2=%d\n"</span>, r1, r2);
+<span class="c-fn">printf</span>(<span class="c-str">"a=%.0f b=%.0f\n"</span>, a.saldo, b.saldo);</div>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Seguimiento paso a paso</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 16px;">
+              <li><b>1° llamada (<code>2500.0</code>):</b> <code>a</code> tiene $4000 (alcanza). Se transfieren $2500 → <code>a</code> queda en <b>$1500</b>, <code>b</code> queda en <b>$3500</b> y <code>r1 = 1</code>.</li>
+              <li><b>2° llamada (<code>2000.0</code>):</b> Ahora <code>a</code> solo tiene $1500. Como $1500 &lt; $2000, falla la validación → no toca los saldos y <code>r2 = 0</code>.</li>
+              <li><b>Imprime:</b> <code>r1=1 r2=0</code> y <code>a=1500 b=3500</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: EJERCICIO 1 DESPLEGABLE -->
+      <section>
+        <h2><span class="section-num">30</span> Ejercicio 1: Función <code>extraer</code> con Límite y Estado</h2>
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0 0 10px;">
+            Dada <code>struct CuentaBancaria { int numero; float saldo; int estado; };</code>, escribí una función <code>int extraer(struct CuentaBancaria *cuenta, float monto)</code> que verifique que la cuenta esté activa (<code>1</code>), que el monto sea mayor a <code>0</code> y que el saldo alcance. Si todo se cumple, resta el monto del saldo y retorna <code>1</code>; si no, retorna <code>0</code>.
+          </p>
+
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">extraer</span>(<span class="c-kw">struct</span> CuentaBancaria *cuenta, <span class="c-kw">float</span> monto) 
+{ 
+    <span class="c-kw">if</span>(cuenta-&gt;estado != <span class="c-num">1</span>) 
+    { 
+        <span class="c-kw">return</span> <span class="c-num">0</span>; 
+    } 
+    <span class="c-kw">if</span>(monto &lt;= <span class="c-num">0</span> || cuenta-&gt;saldo &lt; monto) 
+    { 
+        <span class="c-kw">return</span> <span class="c-num">0</span>; 
+    } 
+
+    cuenta-&gt;saldo -= monto; 
+    <span class="c-kw">return</span> <span class="c-num">1</span>; 
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: EJERCICIO 2 DESPLEGABLE -->
+      <section>
+        <h2><span class="section-num">31</span> Ejercicio 2: Transferencia con Comisión Bancaria del 2%</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0 0 10px;">
+            Escribí una variante <code>int transferirConComision(struct CuentaBancaria *origen, struct CuentaBancaria *destino, float monto)</code> donde el banco le cobra a la cuenta <code>origen</code> una comisión del 2% adicional sobre el <code>monto</code> (es decir, <code>origen</code> debe tener saldo suficiente para cubrir <code>monto * 1.02f</code>, y a <code>destino</code> le llega exactamente <code>monto</code>).
+          </p>
+
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-kw">int</span> <span class="c-fn">transferirConComision</span>(<span class="c-kw">struct</span> CuentaBancaria *origen,
+                          <span class="c-kw">struct</span> CuentaBancaria *destino,
+                          <span class="c-kw">float</span> monto) 
+{ 
+    <span class="c-kw">float</span> costoTotal = monto * <span class="c-num">1.02f</span>; 
+
+    <span class="c-kw">if</span>(origen-&gt;estado == <span class="c-num">1</span> &amp;&amp;
+       destino-&gt;estado == <span class="c-num">1</span> &amp;&amp;
+       monto &gt; <span class="c-num">0</span> &amp;&amp;
+       origen-&gt;saldo &gt;= costoTotal) 
+    { 
+        origen-&gt;saldo -= costoTotal; 
+        destino-&gt;saldo += monto; 
+        <span class="c-kw">return</span> <span class="c-num">1</span>; 
+    } 
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>; 
+}</div>
+              </div>
+              <p style="font-size: 0.82rem; color: #86efac; margin-top: 8px;">
+                💡 Observá que validamos <code>origen-&gt;saldo &gt;= costoTotal</code> para asegurarnos de que le alcance tanto para el monto como para el 2% de comisión.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: EJERCICIO 3 DESPLEGABLE -->
+      <section>
+        <h2><span class="section-num">32</span> Ejercicio 3: Sumar el Saldo Total de las Cuentas Activas del Banco</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0 0 10px;">
+            Dado un arreglo <code>struct CuentaBancaria banco[]</code> de tamaño <code>tamano</code>, escribí una función <code>float saldoTotalActivo(struct CuentaBancaria banco[], int tamano)</code> que sume y devuelva únicamente el saldo de las cuentas que estén activas (<code>estado == 1</code>), junto con un <code>main()</code> de prueba.
+          </p>
+
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">struct</span> CuentaBancaria {
+    <span class="c-kw">int</span> numero;
+    <span class="c-kw">float</span> saldo;
+    <span class="c-kw">int</span> estado;
+};
+
+<span class="c-kw">float</span> <span class="c-fn">saldoTotalActivo</span>(<span class="c-kw">struct</span> CuentaBancaria banco[], <span class="c-kw">int</span> tamano) {
+    <span class="c-kw">float</span> suma = <span class="c-num">0</span>;
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamano; i++) {
+        <span class="c-kw">if</span>(banco[i].estado == <span class="c-num">1</span>) {
+            suma += banco[i].saldo;
+        }
+    }
+    <span class="c-kw">return</span> suma;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">struct</span> CuentaBancaria banco[<span class="c-num">3</span>] = {
+        {<span class="c-num">101</span>, <span class="c-num">10000.0</span>, <span class="c-num">1</span>},
+        {<span class="c-num">102</span>, <span class="c-num">99000.0</span>, <span class="c-num">0</span>},
+        {<span class="c-num">103</span>, <span class="c-num">5000.0</span>, <span class="c-num">1</span>}
+    };
+    <span class="c-fn">printf</span>(<span class="c-str">"Total en cuentas activas: $%.2f\n"</span>,
+           <span class="c-fn">saldoTotalActivo</span>(banco, <span class="c-num">3</span>));
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: RESUMEN FINAL Y CHECKLIST -->
+      <section>
+        <h2><span class="section-num">33</span> Resumen de la Unidad 12 y Checklist</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Claves del Caso Integrador (Sección 39)</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Modelo:</b> <code>struct CuentaBancaria { int numero; float saldo; int estado; };</code>.</li>
+              <li><b>Parámetros:</b> Dos punteros <code>*origen</code> y <code>*destino</code> para modificar ambas cuentas originales.</li>
+              <li><b>Validaciones:</b> 1° origen activa, 2° destino activa, 3° monto positivo y saldo suficiente.</li>
+              <li><b>Atomicidad:</b> Si todo se cumple, <code>origen-&gt;saldo -= monto; destino-&gt;saldo += monto; return 1;</code>. Si algo falla, <code>return 0;</code> sin tocar nada.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué es fundamental que la función reciba punteros y no structs por valor?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Qué pasaría si debitáramos antes de verificar si la cuenta destino está activa? (¡Fuga de dinero!).</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo cómo se garantiza que ante un error ninguna cuenta se modifique?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar por qué <code>transferir</code> no funcionaría sin punteros?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué hay que validar <code>destino-&gt;estado == 1</code> antes de restarle a <code>origen</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo escribir la función <code>transferir</code> completa de memoria sin mirar el apunte?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé llamar a <code>transferir(&amp;cta1, &amp;cta2, 3000)</code> y verificar su valor de retorno en <code>main</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 24px;">
-          <a href="11-estructuras-arreglos-internos-anidadas.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
-            ← Anterior: Estructuras Anidadas
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="11-estructuras-arreglos-internos-anidadas.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
+            ← Unidad 11: Estructuras Anidadas
           </a>
-          <a href="../index.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
-            Índice 2do Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            ← Índice 2do Cuatrimestre
           </a>
-          <a href="13-resumen-simbolos-repaso-integrador.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
-            Siguiente: Resumen de Símbolos y Repaso →
+          <a href="13-resumen-simbolos-repaso-integrador.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Siguiente Unidad: Resumen de Símbolos y Repaso →
           </a>
         </div>
       </section>
@@ -297,8 +1501,9 @@ Despues: Cta1 = $7000.00 | Cta2 = $8000.00
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -308,8 +1513,20 @@ Despues: Cta1 = $7000.00 | Cta2 = $8000.00
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>
+
 </html>

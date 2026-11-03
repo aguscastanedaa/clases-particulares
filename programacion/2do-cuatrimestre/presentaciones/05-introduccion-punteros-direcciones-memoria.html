@@ -1,74 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Programación 2C - 05: Introducción a los Punteros y Direcciones de Memoria | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
-  
-  <!-- Reveal.js Styles -->
+
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
-  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
-  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
-  <style>
-    .reveal .code-body,
-    .reveal pre.code-body,
-    .reveal .code-window pre {
-      font-size: 1.05rem !important;
-      line-height: 1.38 !important;
-      width: 100% !important;
-      margin: 0 !important;
-      box-shadow: none !important;
-      padding: 10px 18px !important;
-      box-sizing: border-box !important;
-    }
-    .grid-2 .code-body,
-    .grid-1-2 .code-body,
-    .grid-2-1 .code-body,
-    .grid-2 pre.code-body,
-    .grid-1-2 pre.code-body,
-    .grid-2-1 pre.code-body,
-    .grid-2 .code-window pre,
-    .grid-1-2 .code-window pre,
-    .grid-2-1 .code-window pre {
-      font-size: 1.00rem !important;
-      padding: 10px 14px !important;
-      line-height: 1.38 !important;
-    }
-    .grid-3 .code-body,
-    .grid-3 pre.code-body,
-    .grid-3 .code-window pre {
-      font-size: 0.80rem !important;
-      padding: 8px 10px !important;
-      line-height: 1.34 !important;
-    }
-    .terminal-body {
-      font-size: 1.05rem !important;
-      padding: 12px 16px !important;
-      line-height: 1.40 !important;
-    }
-    .reveal code:not(.code-body *) {
-      font-size: 0.88em !important;
-      border: none !important;
-      padding: 1px 5px !important;
-      box-decoration-break: clone !important;
-      -webkit-box-decoration-break: clone !important;
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../index.html">← Índice 2do Cuatrimestre</a>
       <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">2do Cuatrimestre • Unidad 05</span>
@@ -79,282 +38,1352 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-indigo">2do Cuatrimestre • Arquitectura y Memoria • Unidad 05</span>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-indigo">2do Cuatrimestre • Unidad 05</span>
           <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Punteros y Direcciones de Memoria</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            El núcleo del poder en C: cómo ubicar variables en la memoria RAM, los operadores <code>&amp;</code> y <code>*</code>, y el control directo de direcciones.
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 24px;">
+            Cómo funcionan las variables adentro de la memoria RAM, el especificador <code>%p</code> y la pareja fundamental <code>&amp;</code> y <code>*</code>
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">Dirección &variable</span>
-            <span class="badge badge-emerald">Desreferenciación *ptr</span>
-            <span class="badge badge-amber">Formato %p</span>
-            <span class="badge badge-purple">Analogía de la casa</span>
+            <span class="badge badge-cyan">15. ¿Qué es un Puntero?</span>
+            <span class="badge badge-amber">16. Direcciones y %p</span>
+            <span class="badge badge-emerald">17. Operador &amp;</span>
+            <span class="badge badge-purple">18. Operador *</span>
+            <span class="badge badge-rose">19. &amp; vs * y Analogía de la Casa</span>
           </div>
 
-          <div class="box box-indigo" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-indigo" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar por las 35 diapositivas de esta unidad.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN CON EL 2DO BIMESTRE -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos Pedagógicos</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Conexión con Memoria Dinámica</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">El tema cumbre del programador en C</h4>
-            <p>Los punteros son considerados habitualmente el tema más desafiante de la programación inicial. Sin embargo, cuando se explican desde la arquitectura física de la memoria, se vuelven completamente intuitivos.</p>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 8px;">
-              Un puntero no es magia: es simplemente una variable ordinaria que, en vez de guardar una edad o un precio, <b>guarda un número que representa una casilla de la RAM</b>.
-            </p>
+            <h4 style="color: #818cf8;">Conexión con el 2do Bimestre</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li>En el 2do Bimestre vimos que cuando pedíamos <b>Memoria Dinámica</b> con <code>malloc</code>, la computadora nos devolvía la ubicación de ese bloque en RAM y la guardábamos en un <code>int *vector</code>.</li>
+              <li>También usamos el símbolo <code>&amp;</code> cada vez que hacíamos <code>scanf("%d", &amp;edad);</code> para que <code>scanf</code> supiera <b>dónde</b> guardar el dato leído.</li>
+              <li>Hoy vamos a comprender desde cero cómo funcionan por dentro las <b>direcciones de memoria</b> y los <b>punteros</b>.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
-            <ul style="font-size: 0.88rem; line-height: 1.6; margin-left: 18px;">
-              <li>Comprender qué es físicamente una dirección de memoria en la RAM.</li>
-              <li>Aprender a imprimir direcciones reales con el especificador <code>%p</code>.</li>
-              <li>Dominar el operador de dirección <code>&amp;</code> ("dame la dirección de...").</li>
-              <li>Declarar variables puntero con <code>tipo *nombre</code>.</li>
-              <li>Dominar el operador de indirección <code>*</code> ("dame el valor que hay en...").</li>
-              <li>Comprender la analogía didáctica de la casa y el papel con la dirección.</li>
+            <h4 style="color: #34d399;">Lo que vamos a dominar hoy (Secciones 15 a 19)</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>15. Punteros:</b> qué es una variable que guarda una dirección de memoria (ej. <code>1000</code>).</li>
+              <li><b>16. Direcciones de memoria:</b> <code>edad</code> (¿QUÉ hay?) vs <code>&amp;edad</code> (¿DÓNDE está?) y por qué <code>%p</code> = <i>pointer</i>.</li>
+              <li><b>17. Operador <code>&amp;</code>:</b> "Dame la dirección de memoria de esta variable".</li>
+              <li><b>18. Operador <code>*</code>:</b> declarar <code>int *puntero = &amp;edad;</code> y usar <code>*puntero</code>.</li>
+              <li><b>19. Diferencia fundamental:</b> la analogía de la casa y el cuadro comparativo completo.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: DIRECCIONES DE MEMORIA -->
+      <!-- SLIDE 3: 15. PUNTEROS: INTRODUCCIÓN DEL APUNTE -->
       <section>
-        <h2><span class="section-num">02</span> Direcciones de Memoria en la RAM</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Toda variable vive en una celda física de la memoria del computador.</p>
+        <h2><span class="section-num">02</span> 15. Punteros: El Tema Más Importante del Material</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición del Apunte</h4>
+          <p style="font-size: 0.94rem; margin: 0;">
+            Ahora viene probablemente uno de los temas más importantes y más difíciles de todo el material:<br>
+            <b>Un puntero es una variable que guarda una dirección de memoria.</b>
+          </p>
+        </div>
 
-        <div class="grid-2">
+        <div class="grid-2" style="margin-top: 14px; align-items: center;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Lo que conocíamos hasta ahora</h4>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              Hasta ahora, cuando declarábamos una variable común como:
+            </p>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">19</span>;</div>
+            </div>
+            <p style="font-size: 0.83rem; color: var(--text-muted); margin: 0;">
+              Nos imaginábamos simplemente una cajita llamada <code>edad</code> que adentro guarda el número <code>19</code>.
+            </p>
+          </div>
+
+          <div class="memory-diagram" style="justify-content: center;">
+            <div class="memory-box" style="border-color: var(--accent-cyan); width: 220px;">
+              <div class="memory-label">edad <span class="memory-type">int</span></div>
+              <div class="memory-value">19</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EL MODELO DE LA MEMORIA RAM (DIRECCIÓN 1000) -->
+      <section>
+        <h2><span class="section-num">03</span> ¿Dónde Vive Realmente <code>int edad = 19;</code>?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Esa cajita llamada <code>edad</code> no flota en el aire: está guardada en algún casillero físico de la memoria RAM. Cada casillero tiene un número de ubicación llamado <b>dirección de memoria</b>.
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px; align-items: center;">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Ejemplo Imaginario del Apunte</h4>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              Supongamos imaginariamente que la variable <code>edad</code> cayó en el casillero número <b>1000</b> de la memoria:
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.9rem; background: rgba(0,0,0,0.4); padding: 10px 14px; border-radius: 6px; color: #fde68a; margin: 8px 0;">
+              Dirección: 1000<br>
+              Valor: &nbsp;&nbsp;&nbsp;&nbsp;19<br><br>
+              edad ↓<br>
+              1000 → 19
+            </div>
+            <p style="font-size: 0.84rem; margin: 0; color: #cbd5e1;">
+              👉 <b>Un puntero nos permite guardar ese número <code>1000</code></b> (la dirección) adentro de otra variable.
+            </p>
+          </div>
+
+          <div class="memory-diagram" style="flex-direction: column; align-items: center; gap: 12px;">
+            <div class="memory-box" style="border-color: var(--accent-cyan); width: 250px;">
+              <div class="memory-address">Dirección: 1000</div>
+              <div class="memory-label">edad <span class="memory-type">int</span></div>
+              <div class="memory-value">19</div>
+            </div>
+            <div style="font-size: 0.84rem; color: #94a3b8; text-align: center;">
+              La variable tiene dos datos clave:<br>
+              su <b>valor (<code>19</code>)</b> y su <b>dirección (<code>1000</code>)</b>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: 16. DIRECCIONES DE MEMORIA -->
+      <section>
+        <h2><span class="section-num">04</span> 16. Direcciones de Memoria y cómo Obtenerlas</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Regla del Apunte</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Cada variable está almacenada en una posición de memoria. Podemos obtener su dirección utilizando el símbolo ampersand: <b><code>&amp;</code></b>.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px; align-items: center;">
           <div class="code-window">
             <div class="code-header">
-              <span class="code-title">direccion_memoria.c</span>
-              <span class="code-badge">%d vs %p</span>
+              <span class="code-title">imprimir_direccion.c</span>
+              <span class="code-badge">Sección 16 del Apunte</span>
             </div>
             <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
 {
     <span class="c-kw">int</span> edad = <span class="c-num">19</span>;
-    
-    <span class="c-fn">printf</span>(<span class="c-str">"Valor:     %d\n"</span>, edad);
-    <span class="c-fn">printf</span>(<span class="c-str">"Direccion: %p\n"</span>, &amp;edad);
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, edad);  <span class="c-cmt">// 19</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"%p\n"</span>, &amp;edad); <span class="c-cmt">// dirección de memoria</span>
     <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
           </div>
 
           <div class="terminal-window">
             <div class="terminal-header">
-              <span>Terminal de salida</span>
-              <span>bash</span>
+              <span>Terminal</span>
+              <span>Salida Real</span>
             </div>
-            <div class="terminal-body">
-Valor:     19
-Direccion: 0x7ffe1234abcd
-            </div>
+            <div class="terminal-body"><span class="terminal-prompt">$ ./direccion</span>
+19
+0x7ffe1234abcd</div>
           </div>
         </div>
 
-        <div class="box box-cyan" style="margin-top: 12px;">
-          <h4 style="color: var(--accent-cyan); margin-bottom: 4px;">¿Por qué <code>%p</code> y no <code>%d</code>?</h4>
-          <p style="font-size: 0.88rem; margin: 0; color: #cbd5e1;">
-            <code>%d</code> imprime un número entero ordinario en base 10. <code>%p</code> (de <i>pointer</i>) está diseñado específicamente para imprimir direcciones de memoria en formato <b>hexadecimal</b> (ej. <code>0x7ffe1234abcd</code>), que es la dirección física de la celda de RAM donde el sistema operativo guardó a <code>edad</code>.
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🔍 <b>¿Qué es ese <code>0x7ffe1234abcd</code>?</b> No es el contenido de <code>edad</code>, sino la <b>ubicación física</b> de <code>edad</code> en la memoria RAM expresada en sistema hexadecimal (por eso empieza con <code>0x</code>).
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 4: QUÉ ES UN PUNTERO -->
+      <!-- SLIDE 6: ¿POR QUÉ %p Y NO %d? -->
       <section>
-        <h2><span class="section-num">03</span> ¿Qué es un Puntero?</h2>
-        <div class="box box-indigo">
-          <h4 style="margin-bottom: 4px;">Definición Concreta</h4>
-          <p style="font-size: 1.05rem; margin: 0;">
-            Un <b>puntero</b> es una variable que almacena como contenido la <b>dirección de memoria</b> de otra variable.
+        <h2><span class="section-num">05</span> ¿Por Qué Usamos <code>%p</code> y No <code>%d</code>?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          La diferencia está en <b>qué tipo de información</b> le estamos pasando a <code>printf</code>:
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;"><code>printf("%d", edad);</code></h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 16px;">
+              <li>Le pasamos <b><code>edad</code></b> (sin <code>&amp;</code>).</li>
+              <li>Contiene el valor numérico entero <b><code>19</code></b>.</li>
+              <li>Usamos <b><code>%d</code></b> porque <code>%d</code> espera recibir un número <code>int</code> común.</li>
+            </ul>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;"><code>printf("%p", &amp;edad);</code></h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 16px;">
+              <li>Le pasamos <b><code>&amp;edad</code></b> (con <code>&amp;</code>).</li>
+              <li>Contiene la <b>dirección de memoria</b> donde está guardada <code>edad</code>.</li>
+              <li>Usamos <b><code>%p</code></b> porque viene del inglés <b><i>pointer</i> (puntero)</b> y está diseñado específicamente para imprimir direcciones de memoria.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 <b>Nota de compatibilidad C99:</b> Muchos compiladores aceptan <code>printf("%p", &amp;edad)</code> directamente, o bien <code>printf("%p", (void*)&amp;edad)</code> para evitar advertencias estrictas de formato.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: ¿QUÉ HAY? VS ¿DÓNDE ESTÁ? -->
+      <section>
+        <h2><span class="section-num">06</span> La Idea Clave del Apunte: ¿QUÉ hay? vs. ¿DÓNDE está?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Para entender el concepto sin confundirte nunca más, quedate con este esquema del apunte:
+        </p>
+
+        <div class="grid-2" style="align-items: center; margin-top: 12px;">
+          <div style="font-family: var(--font-mono); font-size: 0.92rem; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.3); padding: 16px 20px; border-radius: 10px; text-align: center; color: #e2e8f0;">
+            <span style="color: #38bdf8; font-weight: bold;">edad</span> &nbsp;(¿QUÉ hay adentro?)<br>
+            ↓<br>
+            ┌───────────┐<br>
+            │ &nbsp;&nbsp;&nbsp;<span style="color: #34d399; font-weight: bold; font-size: 1.15rem;">19</span> &nbsp;&nbsp;&nbsp; │<br>
+            └───────────┘<br>
+            ↑<br>
+            <span style="color: #fbbf24; font-weight: bold;">&amp;edad</span><br>
+            ↓<br>
+            "¿DÓNDE está esta cajita?" (<code>0x7ffe...</code>)
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Las Dos Preguntas Fundamentales</h4>
+            <table class="trace-table" style="margin-top: 8px;">
+              <thead>
+                <tr><th>Expresión</th><th>Pregunta que responde</th><th>Resultado</th><th>Formato</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b><code>edad</code></b></td>
+                  <td><b>¿QUÉ hay guardado?</b></td>
+                  <td><code>19</code></td>
+                  <td><code>%d</code></td>
+                </tr>
+                <tr>
+                  <td><b><code>&amp;edad</code></b></td>
+                  <td><b>¿DÓNDE está guardado?</b></td>
+                  <td><code>0x7ffe...</code> (o <code>1000</code>)</td>
+                  <td><code>%p</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: 17. OPERADOR & -->
+      <section>
+        <h2><span class="section-num">07</span> 17. El Operador <code>&amp;</code> (Operador de Dirección)</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Definición del Apunte</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            El operador <b><code>&amp;</code></b> significa literalmente: <b>"Dame la dirección de memoria de esta variable."</b>
           </p>
         </div>
 
-        <div class="grid-2-1" style="margin-top: 12px;">
-          <div class="code-window">
-            <div class="code-header">
-              <span class="code-title">puntero_basico.c</span>
-              <span class="code-badge">int *ptr</span>
+        <div class="grid-2" style="margin-top: 14px; align-items: center;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Ejemplo Conceptual del Apunte</h4>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              Si declaramos <code>int edad = 19;</code> y esa variable está alojada en la dirección <code>1000</code>:
+            </p>
+            <div style="font-family: var(--font-mono); font-size: 0.88rem; background: rgba(0,0,0,0.35); padding: 10px 14px; border-radius: 6px; color: #fde68a;">
+              edad<br>
+              ┌──────┐<br>
+              │ &nbsp;19&nbsp; │<br>
+              └──────┘<br>
+              &nbsp;&nbsp;&nbsp;↑ dirección 1000<br><br>
+              Entonces: &amp;edad → 1000
             </div>
-            <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">19</span>;
-
-<span class="c-cmt">// Declaramos el puntero y le asignamos la dirección</span>
-<span class="c-kw">int</span> *puntero = &amp;edad;
-
-<span class="c-fn">printf</span>(<span class="c-str">"edad:     %d\n"</span>, edad);       <span class="c-cmt">// 19</span>
-<span class="c-fn">printf</span>(<span class="c-str">"&amp;edad:    %p\n"</span>, &amp;edad);      <span class="c-cmt">// 0x1000</span>
-<span class="c-fn">printf</span>(<span class="c-str">"puntero:  %p\n"</span>, puntero);    <span class="c-cmt">// 0x1000</span>
-<span class="c-fn">printf</span>(<span class="c-str">"*puntero: %d\n"</span>, *puntero);   <span class="c-cmt">// 19</span></div>
           </div>
 
-          <div class="memory-diagram" style="flex-direction: column; align-items: center;">
-            <div class="memory-box" style="border-color: var(--accent-cyan); width: 220px;">
-              <div class="memory-address">Dirección: 0x1000</div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¡Por eso <code>scanf</code> siempre llevaba <code>&amp;</code>!</h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Desde la primera clase de C escribíamos:
+            </p>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);</div>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">
+              Ahora todo cierra: a <code>scanf</code> no le importaba qué número tenía <code>edad</code> antes, sino que necesitaba <b>la dirección de memoria <code>&amp;edad</code></b> para ir hasta esa casilla y depositar ahí el número que escribiste por teclado.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: 18. OPERADOR * EN LA DECLARACIÓN DE UN PUNTERO -->
+      <section>
+        <h2><span class="section-num">08</span> 18. El Operador <code>*</code>: Declarar un Puntero</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Cómo creamos una variable capaz de guardar una dirección?</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            No podemos guardar una dirección de memoria en un <code>int</code> común. Necesitamos declarar una <b>variable puntero</b> colocando un asterisco <code>*</code> entre el tipo de dato y el nombre.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin: 14px 0;">
+          <div class="code-header">
+            <span class="code-title">declaracion_puntero.c</span>
+            <span class="code-badge">Sección 18 del Apunte</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+<span class="c-kw">int</span> *puntero = &amp;edad;</div>
+        </div>
+
+        <div class="grid-3">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8; font-size: 0.9rem;">1. <code>int *puntero</code></h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Significa: <code>puntero</code> es una variable de tipo <b>puntero a un <code>int</code></b> (solo puede apuntar a variables enteras).
+            </p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24; font-size: 0.9rem;">2. <code>= &amp;edad</code></h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Obtenemos la dirección donde vive <code>edad</code> (<code>1000</code>) y la guardamos adentro de <code>puntero</code>.
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399; font-size: 0.9rem;">3. Resultado</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Decimos que ahora <b><code>puntero</code> apunta a <code>edad</code></b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: DIAGRAMA EN MEMORIA DE edad Y puntero -->
+      <section>
+        <h2><span class="section-num">09</span> Representación en Memoria RAM: <code>puntero → edad</code></h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Veamos qué hay exactamente en la memoria RAM después de ejecutar <code>int edad = 19; int *puntero = &amp;edad;</code>:
+        </p>
+
+        <div class="grid-2" style="align-items: center; margin-top: 14px;">
+          <div class="memory-diagram" style="flex-direction: column; align-items: center; gap: 10px;">
+            <div class="memory-box" style="border-color: var(--accent-cyan); width: 260px;">
+              <div class="memory-address">Dirección: 1000</div>
               <div class="memory-label">edad <span class="memory-type">int</span></div>
               <div class="memory-value">19</div>
             </div>
 
-            <div style="color: var(--accent-amber); font-size: 1.4rem;">▲ apunta a</div>
+            <div style="color: var(--accent-amber); font-weight: bold; font-size: 1.05rem;">▲ apunta a la dirección 1000</div>
 
-            <div class="memory-box" style="border-color: var(--accent-emerald); width: 220px;">
-              <div class="memory-address">Dirección: 0x2050</div>
-              <div class="memory-label">puntero <span class="memory-type" style="background: rgba(52,211,153,0.15); color: var(--accent-emerald);">int*</span></div>
-              <div class="memory-value" style="color: var(--accent-cyan); font-size: 0.95rem;">0x1000</div>
+            <div class="memory-box" style="border-color: var(--accent-emerald); width: 260px;">
+              <div class="memory-address">Dirección propia: 2050</div>
+              <div class="memory-label">puntero <span class="memory-type" style="background: rgba(52,211,153,0.15); color: var(--accent-emerald);">int *</span></div>
+              <div class="memory-value" style="color: var(--accent-cyan); font-size: 1.1rem;">1000</div>
+            </div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Observaciones Clave del Esquema</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.6; margin-left: 18px;">
+              <li>Existen <b>dos cajitas</b> en la memoria RAM: <code>edad</code> y <code>puntero</code>.</li>
+              <li>Adentro de la cajita <code>edad</code> está guardado el número <b><code>19</code></b>.</li>
+              <li>Adentro de la cajita <code>puntero</code> está guardado el número <b><code>1000</code></b> (que es la dirección de <code>edad</code>).</li>
+              <li>Por eso dibujamos una flecha que sale de <code>puntero</code> y llega a <code>edad</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: ¿QUÉ SIGNIFICA *puntero? (DESREFERENCIACIÓN) -->
+      <section>
+        <h2><span class="section-num">10</span> ¿Qué Significa <code>*puntero</code> Cuando Ya Está Creado?</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Definición del Apunte (Sección 18)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Escribir <b><code>*puntero</code></b> significa:<br>
+            <b>"Dame el valor que está guardado en la dirección a la que apunta el puntero."</b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px; align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">leer_con_asterisco.c</span>
+              <span class="code-badge">Desreferenciar</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+    <span class="c-kw">int</span> *puntero = &amp;edad;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, *puntero); <span class="c-cmt">// Imprime 19</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">El viaje paso a paso de <code>*puntero</code></h4>
+            <div class="step-list">
+              <div class="step-item">
+                <span class="step-num">1</span>
+                <div>Mira qué dirección tiene anotada <code>puntero</code> adentro (<code>1000</code>).</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">2</span>
+                <div>El operador <code>*</code> viaja por la memoria RAM hasta la casilla <code>1000</code> (donde vive <code>edad</code>).</div>
+              </div>
+              <div class="step-item">
+                <span class="step-num">3</span>
+                <div>Abre esa casilla y nos devuelve el valor que hay adentro: <b><code>19</code></b>.</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: LOS DOS OPERADORES & Y * -->
+      <!-- SLIDE 12: LOS DOS USOS DEL ASTERISCO * -->
       <section>
-        <h2><span class="section-num">04</span> La Pareja Dinámica: <code>&amp;</code> y <code>*</code></h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Son operaciones complementarias e inversas.</p>
+        <h2><span class="section-num">11</span> ¡Atención! Los Dos Significados del Símbolo <code>*</code></h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Una de las mayores dudas al empezar es ver el símbolo <code>*</code> en dos lugares distintos. Su significado depende de dónde aparezca:
+        </p>
 
-        <div class="grid-2">
-          <div class="box box-amber">
-            <h4 style="color: #fbbf24;">Operador de Dirección: <code>&amp;</code></h4>
-            <div style="font-family: var(--font-mono); font-size: 1.1rem; color: #fde68a; margin: 8px 0;">
-              &amp;variable
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Uso 1: Al Declarar la Variable</h4>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">int</span> *puntero;</div>
             </div>
-            <p style="font-size: 0.88rem; color: #cbd5e1;">
-              Significa: <b>"¿Dónde está esta variable?"</b>
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Toma una variable cualquiera y te entrega su dirección física en la RAM.
+            <p style="font-size: 0.83rem; color: #cbd5e1; margin: 0;">
+              Acá tiene el tipo <code>int</code> adelante. No está buscando ningún valor todavía: solo le avisa a C que la nueva variable <code>puntero</code> es de tipo <b>"puntero a entero"</b>.
             </p>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Operador de Indirección: <code>*</code></h4>
-            <div style="font-family: var(--font-mono); font-size: 1.1rem; color: #86efac; margin: 8px 0;">
-              *puntero
+            <h4 style="color: #34d399;">Uso 2: Al Usar el Puntero (Desreferenciar)</h4>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, *puntero);
+*puntero = <span class="c-num">25</span>;</div>
             </div>
-            <p style="font-size: 0.88rem; color: #cbd5e1;">
-              Significa: <b>"¿Qué valor hay en la dirección a la que apunta?"</b>
+            <p style="font-size: 0.83rem; color: #cbd5e1; margin: 0;">
+              Acá aparece <b>sin el <code>int</code> adelante</b>, en medio de una instrucción. Actúa como el operador que dice: <b>"Andá a la dirección guardada en <code>puntero</code> y accedé al valor de esa variable"</b>.
             </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Viaja hasta la casilla de memoria guardada en el puntero y lee o escribe su contenido.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: MODIFICAR UNA VARIABLE A TRAVÉS DEL PUNTERO -->
+      <section>
+        <h2><span class="section-num">12</span> Modificar el Valor Usando <code>*puntero = 25;</code></h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Con <code>*puntero</code> no solo podemos leer el <code>19</code>: si lo ponemos a la izquierda de un <code>=</code>, ¡modificamos directamente la variable apuntada!
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">modificar_con_puntero.c</span>
+              <span class="code-badge">Escritura Indirecta</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+    <span class="c-kw">int</span> *puntero = &amp;edad;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Antes:   %d\n"</span>, edad);
+
+    *puntero = <span class="c-num">25</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Despues: %d\n"</span>, edad);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./modificar</span>
+Antes:   19
+Despues: 25</div>
+            </div>
+            <div class="box box-cyan" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.82rem;">
+                😮 <b>¡Mirá lo que pasó!</b> Nunca escribimos <code>edad = 25;</code>. Pero como <code>puntero</code> apunta a la dirección <code>1000</code> (la casilla de <code>edad</code>), hacer <code>*puntero = 25;</code> guardó el <code>25</code> en esa casilla y cambió a <code>edad</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: 19. & Y * - LA DIFERENCIA FUNDAMENTAL -->
+      <section>
+        <h2><span class="section-num">13</span> 19. <code>&amp;</code> y <code>*</code> — La Diferencia Fundamental</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Partiendo de las dos líneas del apunte: <code>int edad = 19;</code> e <code>int *puntero = &amp;edad;</code>, repasemos qué significa cada expresión:
+        </p>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;"><code>&amp;edad</code></h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              <b>Significa:</b> ¿Dónde está <code>edad</code>?<br>
+              <b>Devuelve:</b> Su dirección de memoria (<code>1000</code>).
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;"><code>puntero</code></h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              <b>Contiene:</b> La dirección de <code>edad</code>.<br>
+              <b>Devuelve:</b> Esa misma dirección guardada (<code>1000</code>).
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;"><code>*puntero</code></h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              <b>Significa:</b> ¿Qué valor hay en esa dirección?<br>
+              <b>Devuelve:</b> <code>19</code>.
             </p>
           </div>
         </div>
 
-        <div class="box box-purple" style="margin-top: 14px;">
-          <h4 style="color: #c084fc; margin-bottom: 4px;">¡Cuidado con el doble uso del asterisco <code>*</code>!</h4>
-          <p style="font-size: 0.85rem; margin: 0; color: #cbd5e1;">
-            1. En la <b>declaración</b> (<code>int *p;</code>): le avisa al compilador que la variable <code>p</code> será un puntero.<br>
-            2. En una <b>expresión</b> (<code>*p = 50;</code> o <code>x = *p;</code>): es el operador de desreferenciación para acceder al valor apuntado.
+        <div class="box box-indigo" style="margin-top: 14px;">
+          <h4 style="color: #818cf8; margin-bottom: 6px;">En resumen, la diferencia del apunte sería:</h4>
+          <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+            <li><b><code>&amp;</code></b> → obtener la <b>DIRECCIÓN</b> de memoria.</li>
+            <li><b><code>puntero</code></b> → una variable que <b>GUARDA</b> una dirección de memoria.</li>
+            <li><b><code>*</code></b> → ir a esa dirección y <b>"AGARRAR" el VALOR</b> que hay ahí.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: LA ANALOGÍA DE LA CASA DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">14</span> La Analogía de la Casa (Sección 19 del Apunte)</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Imaginemos una casa real para entender las 4 piezas sin ninguna duda:
+        </p>
+
+        <div class="grid-4" style="margin-top: 14px;">
+          <div class="box box-cyan" style="text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 6px;">🏠</div>
+            <h4 style="color: #38bdf8; font-size: 0.92rem;">Casa</h4>
+            <div style="font-family: var(--font-mono); font-size: 0.88rem; color: #fff; margin: 4px 0;">= variable (<code>edad</code>)</div>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 6px 0 0;">
+              Es el lugar físico real donde vive el dato (<code>19</code>).
+            </p>
+          </div>
+
+          <div class="box box-amber" style="text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 6px;">📍</div>
+            <h4 style="color: #fbbf24; font-size: 0.92rem;">Dirección de la casa</h4>
+            <div style="font-family: var(--font-mono); font-size: 0.88rem; color: #fff; margin: 4px 0;">= <code>&amp;variable</code></div>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 6px 0 0;">
+              Las coordenadas exactas donde está ubicada la casa (<code>1000</code>).
+            </p>
+          </div>
+
+          <div class="box box-indigo" style="text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 6px;">📝</div>
+            <h4 style="color: #818cf8; font-size: 0.92rem;">Papel con la dirección</h4>
+            <div style="font-family: var(--font-mono); font-size: 0.88rem; color: #fff; margin: 4px 0;">= <code>puntero</code></div>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 6px 0 0;">
+              Un papelito donde anoté la dirección de la casa para no perderla.
+            </p>
+          </div>
+
+          <div class="box box-emerald" style="text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 6px;">🚪</div>
+            <h4 style="color: #34d399; font-size: 0.92rem;">Entrar a la casa</h4>
+            <div style="font-family: var(--font-mono); font-size: 0.88rem; color: #fff; margin: 4px 0;">= <code>*puntero</code></div>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 6px 0 0;">
+              Seguir el papel, abrir la puerta y ver qué valor almacena la variable (<code>19</code>).
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-purple" style="margin-top: 14px; text-align: center;">
+          <p style="margin: 0; font-size: 0.88rem;">
+            🔑 <b>Regla de oro de la analogía:</b> Si tachás el papelito (<code>puntero</code>) no rompés la casa; pero si vas a la dirección del papelito y pintás el living (<code>*puntero = 25</code>), ¡la casa real (<code>edad</code>) queda pintada!
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 6: ANALOGÍA DE LA CASA -->
+      <!-- SLIDE 16: CUADRO COMPARATIVO DE LAS 4 EXPRESIONES -->
       <section>
-        <h2><span class="section-num">05</span> La Analogía Didáctica de la Casa</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Una metáfora cotidiana para no olvidar jamás estos cuatro conceptos:</p>
+        <h2><span class="section-num">15</span> Cuadro Comparativo Definitivo</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          Dado <code>int edad = 19;</code> (en la dirección <code>1000</code> / <code>0x7ffe1234abcd</code>) e <code>int *puntero = &amp;edad;</code>:
+        </p>
 
-        <div class="grid-4" style="margin-top: 16px;">
-          <div class="box box-cyan" style="text-align: center;">
-            <div style="font-size: 2.2rem; margin-bottom: 6px;">🏠</div>
-            <h4 style="color: var(--accent-cyan); font-size: 0.95rem;">La Casa</h4>
-            <div style="font-family: var(--font-mono); font-size: 0.9rem; color: #fff;">variable (edad)</div>
-            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">El objeto físico real que existe en el mundo.</p>
+        <table class="trace-table" style="margin-top: 10px;">
+          <thead>
+            <tr>
+              <th>Expresión</th>
+              <th>En la Analogía de la Casa</th>
+              <th>¿Qué devuelve?</th>
+              <th>Valor (Imaginario / Real)</th>
+              <th><code>printf</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b><code>edad</code></b></td>
+              <td>Lo que hay adentro de la casa</td>
+              <td>El valor entero de la variable</td>
+              <td><code>19</code></td>
+              <td><code>%d</code></td>
+            </tr>
+            <tr>
+              <td><b><code>&amp;edad</code></b></td>
+              <td>La dirección postal de la casa</td>
+              <td>La dirección de memoria de <code>edad</code></td>
+              <td><code>1000</code> / <code>0x7ffe1234abcd</code></td>
+              <td><code>%p</code></td>
+            </tr>
+            <tr>
+              <td><b><code>puntero</code></b></td>
+              <td>Leer lo escrito en el papelito</td>
+              <td>La dirección guardada en el puntero</td>
+              <td><code>1000</code> / <code>0x7ffe1234abcd</code></td>
+              <td><code>%p</code></td>
+            </tr>
+            <tr>
+              <td><b><code>*puntero</code></b></td>
+              <td>Ir a la dirección del papel y entrar a la casa</td>
+              <td>El valor de la variable apuntada</td>
+              <td><code>19</code></td>
+              <td><code>%d</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            ✅ Fijate que <b><code>edad</code> y <code>*puntero</code></b> valen lo mismo (<code>19</code>), y <b><code>&amp;edad</code> y <code>puntero</code></b> valen lo mismo (<code>0x7ffe1234abcd</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: EJEMPLO NIVEL 1: LAS 4 IMPRESIONES JUNTAS -->
+      <section>
+        <h2><span class="section-num">16</span> Ejemplo Nivel 1: Verificando las 4 Expresiones en C</h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel1_cuatro_expresiones.c</span>
+              <span class="code-badge">Nivel 1</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+    <span class="c-kw">int</span> *puntero = &amp;edad;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"1) edad:     %d\n"</span>, edad);
+    <span class="c-fn">printf</span>(<span class="c-str">"2) &amp;edad:    %p\n"</span>, (<span class="c-type">void</span>*)&amp;edad);
+    <span class="c-fn">printf</span>(<span class="c-str">"3) puntero:  %p\n"</span>, (<span class="c-type">void</span>*)puntero);
+    <span class="c-fn">printf</span>(<span class="c-str">"4) *puntero: %d\n"</span>, *puntero);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
           </div>
 
-          <div class="box box-amber" style="text-align: center;">
-            <div style="font-size: 2.2rem; margin-bottom: 6px;">📍</div>
-            <h4 style="color: var(--accent-amber); font-size: 0.95rem;">Dirección Postal</h4>
-            <div style="font-family: var(--font-mono); font-size: 0.9rem; color: #fff;">&amp;edad</div>
-            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">"Calle Falsa 123": la ubicación exacta donde está la casa.</p>
-          </div>
-
-          <div class="box box-emerald" style="text-align: center;">
-            <div style="font-size: 2.2rem; margin-bottom: 6px;">📝</div>
-            <h4 style="color: var(--accent-emerald); font-size: 0.95rem;">Papel Anotado</h4>
-            <div style="font-family: var(--font-mono); font-size: 0.9rem; color: #fff;">puntero</div>
-            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">Un papel donde escribiste la dirección de la casa.</p>
-          </div>
-
-          <div class="box box-purple" style="text-align: center;">
-            <div style="font-size: 2.2rem; margin-bottom: 6px;">🚪</div>
-            <h4 style="color: var(--accent-purple); font-size: 0.95rem;">Entrar a la Casa</h4>
-            <div style="font-family: var(--font-mono); font-size: 0.9rem; color: #fff;">*puntero</div>
-            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">Ir a la dirección del papel y ver quién vive adentro (19).</p>
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel1</span>
+1) edad:     19
+2) &amp;edad:    0x7ffe1234abcd
+3) puntero:  0x7ffe1234abcd
+4) *puntero: 19</div>
+            </div>
+            <div class="box box-indigo" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                Las líneas 2 y 3 imprimen exactamente la misma dirección hexadecimal porque <code>puntero</code> guarda <code>&amp;edad</code>.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 7: ERRORES FRECUENTES -->
+      <!-- SLIDE 18: EJEMPLO NIVEL 2: MODIFICACIÓN Y TRAZA DE MEMORIA -->
       <section>
-        <h2><span class="section-num">06</span> Errores Frecuentes con Punteros</h2>
-        <div class="grid-2">
-          <div class="wrong-card">
-            <div class="wrong-title">❌ Puntero No Inicializado (Puntero Salvaje)</div>
-            <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body"><span class="c-kw">int</span> *p; <span class="c-cmt">// Contiene basura</span>
-*p = <span class="c-num">50</span>; <span class="c-cmt">// ¡CRASH! Segmentation Fault</span></div>
+        <h2><span class="section-num">17</span> Ejemplo Nivel 2: Seguimiento de Cambios en Memoria</h2>
+        <div class="grid-1-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel2_traza_puntero.c</span>
+              <span class="code-badge">Nivel 2</span>
             </div>
-            <p style="font-size: 0.82rem; color: #fca5a5;">
-              Un puntero recién declarado apunta a una dirección aleatoria de la memoria RAM. Modificarlo es intentar escribir en una dirección desconocida del sistema operativo.
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+    <span class="c-kw">int</span> *puntero = &amp;edad;
+
+    *puntero = <span class="c-num">25</span>;
+    edad = edad + <span class="c-num">5</span>;
+    *puntero = *puntero + <span class="c-num">2</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"edad = %d\n"</span>, edad);
+    <span class="c-fn">printf</span>(<span class="c-str">"*puntero = %d\n"</span>, *puntero);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr><th>Instrucción ejecutada</th><th>Dirección en <code>puntero</code></th><th>Valor en <code>edad</code> (Dir 1000)</th><th>Valor de <code>*puntero</code></th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>int edad = 19;</code></td><td>—</td><td><code>19</code></td><td>—</td></tr>
+                <tr><td><code>int *puntero = &amp;edad;</code></td><td><code>1000</code></td><td><code>19</code></td><td><code>19</code></td></tr>
+                <tr><td><code>*puntero = 25;</code></td><td><code>1000</code></td><td><b><code>25</code></b></td><td><b><code>25</code></b></td></tr>
+                <tr><td><code>edad = edad + 5;</code></td><td><code>1000</code></td><td><b><code>30</code></b></td><td><b><code>30</code></b></td></tr>
+                <tr><td><code>*puntero = *puntero + 2;</code></td><td><code>1000</code></td><td><b><code>32</code></b></td><td><b><code>32</code></b></td></tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 8px;">
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel2</span>
+edad = 32   |   *puntero = 32</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: ¿QUÉ PASA SI CAMBIAMOS A DÓNDE APUNTA EL PUNTERO? -->
+      <section>
+        <h2><span class="section-num">18</span> Ejemplo Nivel 3: Un Puntero Puede Cambiar de Destino</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          En la analogía de la casa, podemos borrar la dirección escrita en el papelito (<code>puntero</code>) y anotar la dirección de <b>otra casa distinta</b>:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel3_cambiar_destino.c</span>
+              <span class="code-badge">Nivel 3</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> a = <span class="c-num">10</span>;
+    <span class="c-kw">int</span> b = <span class="c-num">20</span>;
+    <span class="c-kw">int</span> *p;
+
+    p = &amp;a;        <span class="c-cmt">// p apunta a 'a'</span>
+    *p = <span class="c-num">15</span>;       <span class="c-cmt">// cambia 'a' a 15</span>
+
+    p = &amp;b;        <span class="c-cmt">// ahora p apunta a 'b'</span>
+    *p = <span class="c-num">99</span>;       <span class="c-cmt">// cambia 'b' a 99</span>
+
+    <span class="c-fn">printf</span>(<span class="c-str">"a = %d, b = %d\n"</span>, a, b);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr><th>Línea</th><th>¿A quién apunta <code>p</code>?</th><th><code>a</code></th><th><code>b</code></th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Inicio</td><td>Sin inicializar</td><td><code>10</code></td><td><code>20</code></td></tr>
+                <tr><td><code>p = &amp;a;</code></td><td>Apunta a <b><code>a</code></b></td><td><code>10</code></td><td><code>20</code></td></tr>
+                <tr><td><code>*p = 15;</code></td><td>Apunta a <b><code>a</code></b></td><td><b><code>15</code></b></td><td><code>20</code></td></tr>
+                <tr><td><code>p = &amp;b;</code></td><td>Apunta a <b><code>b</code></b></td><td><code>15</code></td><td><code>20</code></td></tr>
+                <tr><td><code>*p = 99;</code></td><td>Apunta a <b><code>b</code></b></td><td><code>15</code></td><td><b><code>99</code></b></td></tr>
+              </tbody>
+            </table>
+            <div class="box box-amber" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.8rem;">
+                Notá la diferencia: <b><code>p = &amp;b;</code></b> (sin <code>*</code>) cambia la dirección guardada en el papelito; <b><code>*p = 99;</code></b> (con <code>*</code>) modifica la variable apuntada.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: DOS PUNTEROS APUNTANDO A LA MISMA VARIABLE -->
+      <section>
+        <h2><span class="section-num">19</span> ¿Pueden Dos Punteros Apuntar a la Misma Variable?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          ¡Sí! Es como tener <b>dos papelitos distintos</b> donde anotamos la dirección de la misma casa:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">dos_punteros.c</span>
+              <span class="code-badge">Alias en Memoria</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+    <span class="c-kw">int</span> *p1 = &amp;edad;
+    <span class="c-kw">int</span> *p2 = &amp;edad;
+
+    *p1 = <span class="c-num">30</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"edad: %d\n"</span>, edad);
+    <span class="c-fn">printf</span>(<span class="c-str">"*p2:  %d\n"</span>, *p2);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Qué muestra por pantalla?</h4>
+            <div class="terminal-window" style="margin: 8px 0;">
+              <div class="terminal-body"><span class="terminal-prompt">$ ./dos_punteros</span>
+edad: 30
+*p2:  30</div>
+            </div>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Como tanto <code>p1</code> como <code>p2</code> guardan la dirección <code>1000</code> (la de <code>edad</code>), cuando <code>*p1 = 30;</code> modifica esa casilla, al mirar a través de <code>*p2</code> vemos inmediatamente el <code>30</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: PUNTEROS Y TIPOS DE DATOS -->
+      <section>
+        <h2><span class="section-num">20</span> El Tipo del Puntero Debe Coincidir con la Variable</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Por qué declaramos <code>int *</code>, <code>float *</code> o <code>char *</code> si todas son direcciones?</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Porque cuando hacés <code>*puntero</code>, el compilador de C necesita saber <b>cuántos bytes leer</b> a partir de esa dirección y cómo interpretarlos (un <code>char</code> ocupa 1 byte, un <code>int</code> 4 bytes, un <code>double</code> 8 bytes).
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 12px;">
+          <div class="code-header">
+            <span class="code-title">tipos_punteros.c</span>
+            <span class="code-badge">Correspondencia de Tipos</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+    <span class="c-kw">float</span> precio = <span class="c-num">150.5f</span>;
+    <span class="c-kw">char</span> letra = <span class="c-char">'A'</span>;
+
+    <span class="c-kw">int</span> *pEdad = &amp;edad;       <span class="c-cmt">// int*   apunta a int</span>
+    <span class="c-kw">float</span> *pPrecio = &amp;precio; <span class="c-cmt">// float* apunta a float</span>
+    <span class="c-kw">char</span> *pLetra = &amp;letra;    <span class="c-cmt">// char*  apunta a char</span>
+
+    <span class="c-fn">printf</span>(<span class="c-str">"%d | %.1f | %c\n"</span>, *pEdad, *pPrecio, *pLetra);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: OPERACIONES ARITMÉTICAS CON *puntero -->
+      <section>
+        <h2><span class="section-num">21</span> Operaciones Matemáticas Usando <code>*puntero</code></h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Como <code>*puntero</code> representa el valor entero guardado en la variable apuntada, podemos usarlo en cualquier suma, resta, multiplicación o comparación igual que un <code>int</code> normal:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">aritmetica_desreferencia.c</span>
+              <span class="code-badge">Cálculos</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> x = <span class="c-num">10</span>;
+    <span class="c-kw">int</span> y = <span class="c-num">4</span>;
+    <span class="c-kw">int</span> *px = &amp;x;
+    <span class="c-kw">int</span> *py = &amp;y;
+
+    <span class="c-kw">int</span> suma = *px + *py;      <span class="c-cmt">// 10 + 4 = 14</span>
+    *px = *px * <span class="c-num">3</span>;             <span class="c-cmt">// x pasa a valer 30</span>
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Suma: %d, Nuevo x: %d\n"</span>, suma, x);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Cómo leer cada línea en voz alta</h4>
+            <ul style="font-size: 0.82rem; line-height: 1.6; margin-left: 16px;">
+              <li><code>int suma = *px + *py;</code><br>
+                "Sumá el valor apuntado por <code>px</code> (<code>10</code>) más el valor apuntado por <code>py</code> (<code>4</code>)".</li>
+              <li><code>*px = *px * 3;</code><br>
+                "Tomá el valor apuntado por <code>px</code> (<code>10</code>), multiplicalo por <code>3</code> y guardá el resultado (<code>30</code>) en la casilla apuntada por <code>px</code>".</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: EJEMPLO NIVEL 4: RAZONAMIENTO LÓGICO CON PUNTEROS -->
+      <section>
+        <h2><span class="section-num">22</span> Ejemplo Nivel 4: Apuntar al Mayor de Dos Números</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Problema de Razonamiento</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Tenemos dos cuentas o puntajes <code>int a = 40; int b = 75;</code> y queremos usar un único puntero <code>int *pMayor</code> para que apunte a la variable más grande y le sume un premio de <code>100</code> puntos.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px; align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel4_apuntar_mayor.c</span>
+              <span class="code-badge">Nivel 4</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> a = <span class="c-num">40</span>, b = <span class="c-num">75</span>;
+    <span class="c-kw">int</span> *pMayor;
+
+    <span class="c-kw">if</span> (a &gt; b) {
+        pMayor = &amp;a;
+    } <span class="c-kw">else</span> {
+        pMayor = &amp;b;
+    }
+
+    *pMayor += <span class="c-num">100</span>; <span class="c-cmt">// Premia a la variable apuntada</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"a = %d | b = %d\n"</span>, a, b);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./apuntar_mayor</span>
+a = 40 | b = 175</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.8rem;">
+                💡 Una vez que el <code>if</code> decide a qué dirección apunta <code>pMayor</code>, el resto del programa opera sobre <code>*pMayor</code> sin necesitar más condicionales.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: EL PUNTERO NULO (NULL) -->
+      <section>
+        <h2><span class="section-num">23</span> ¿Qué es <code>NULL</code> en un Puntero?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">El papelito en blanco</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            En C existe una constante especial llamada <b><code>NULL</code></b> (definida en <code>&lt;stdio.h&gt;</code> y <code>&lt;stdlib.h&gt;</code>) que vale dirección <code>0</code> y significa: <b>"Este puntero no apunta a ninguna variable válida en este momento"</b>.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px; align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">puntero_null.c</span>
+              <span class="code-badge">Verificación Segura</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> *puntero = NULL;
+
+    <span class="c-kw">if</span> (puntero != NULL) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Valor: %d\n"</span>, *puntero);
+    } <span class="c-kw">else</span> {
+        <span class="c-fn">printf</span>(<span class="c-str">"El puntero no apunta a nada aun.\n"</span>);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Para qué sirve inicializar en <code>NULL</code>?</h4>
+            <ul style="font-size: 0.82rem; line-height: 1.55; margin-left: 16px;">
+              <li>Si todavía no sabés a qué variable va a apuntar un puntero, inicializalo en <code>NULL</code>.</li>
+              <li>Así podés preguntar con un <code>if (puntero != NULL)</code> antes de usar <code>*puntero</code>.</li>
+              <li>Recordá que en <code>strchr</code> y <code>strstr</code> o en <code>malloc</code> también devolvían <code>NULL</code> cuando no encontraban nada.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: ERROR CRÍTICO 1: PUNTERO SIN INICIALIZAR -->
+      <section>
+        <h2><span class="section-num">24</span> Error Crítico #1: Puntero Sin Inicializar (Puntero Salvaje)</h2>
+        <div class="comparison-grid">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Desreferenciar un puntero sin asignarle dirección</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> *puntero; <span class="c-cmt">// Tiene dirección basura</span>
+*puntero = <span class="c-num">19</span>; <span class="c-cmt">// ¡CRASH! Violación de segmento</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 6px;">
+              En la analogía de la casa: tenés un papel con una dirección aleatoria inventada y te metés por la fuerza a esa casa. El sistema operativo detiene tu programa inmediatamente (<i>Segmentation Fault</i>).
             </p>
           </div>
 
           <div class="correct-card">
-            <div class="correct-title">✅ Siempre Inicializar o Asignar NULL</div>
-            <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body"><span class="c-kw">int</span> valor = <span class="c-num">0</span>;
-<span class="c-kw">int</span> *p = &amp;valor; <span class="c-cmt">// Seguro</span>
-<span class="c-cmt">// O si no tiene destino aún:</span>
-<span class="c-kw">int</span> *q = NULL;</div>
+            <div class="correct-title">✅ Primero apuntar a una variable real, luego usar <code>*</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> edad;
+<span class="c-kw">int</span> *puntero = &amp;edad; <span class="c-cmt">// Apunta a una caja válida</span>
+*puntero = <span class="c-num">19</span>;        <span class="c-cmt">// Ahora sí guarda 19 en edad</span></div>
             </div>
-            <p style="font-size: 0.82rem; color: #86efac;">
-              Inicializarlo con la dirección de una variable válida o con <code>NULL</code> (cero) garantiza control y seguridad en la ejecución.
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 6px;">
+              Un puntero necesita que primero exista una variable (o bloque dinámico) a la cual apuntar antes de poder hacer <code>*puntero = ...</code>.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 8: AUTOEVALUACIÓN Y CIERRE -->
+      <!-- SLIDE 26: ERROR CRÍTICO 2: DESREFERENCIAR NULL -->
       <section>
-        <h2><span class="section-num">07</span> Resumen y Autoevaluación</h2>
+        <h2><span class="section-num">25</span> Error Crítico #2: Desreferenciar un Puntero <code>NULL</code></h2>
+        <div class="comparison-grid">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Aplicar <code>*</code> cuando el puntero vale <code>NULL</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> *p = NULL;
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, *p); <span class="c-cmt">// ¡CRASH! Intenta leer la dirección 0</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 6px;">
+              <code>NULL</code> indica explícitamente "ninguna casa". Si hacés <code>*p</code> cuando <code>p</code> es <code>NULL</code>, intentás entrar a la dirección 0 de la RAM, que está prohibida.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Asignar una dirección válida o verificar antes</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+<span class="c-kw">int</span> *p = &amp;edad;
+<span class="c-kw">if</span> (p != NULL) {
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, *p); <span class="c-cmt">// Seguro: imprime 19</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 6px;">
+              Siempre asegurate de que el puntero apunte a una variable antes de aplicarle el operador <code>*</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: ERROR CRÍTICO 3: OLVIDAR EL & O CONFUNDIR p CON *p -->
+      <section>
+        <h2><span class="section-num">26</span> Error Crítico #3: Olvidar el <code>&amp;</code> al Asignar el Puntero</h2>
+        <div class="comparison-grid">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Guardar el valor en vez de la dirección</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+<span class="c-kw">int</span> *puntero = edad; <span class="c-cmt">// ¡MAL! Falta el &amp;</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 6px;">
+              Si escribís <code>puntero = edad</code>, estás guardando el número <code>19</code> como si fuera la dirección de memoria <code>0x00000013</code>, en lugar de la dirección donde vive <code>edad</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Usar siempre <code>&amp;variable</code> para obtener su dirección</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+<span class="c-kw">int</span> *puntero = &amp;edad; <span class="c-cmt">// ¡BIEN! Guarda la dirección</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 6px;">
+              Recordá: un puntero guarda <b>direcciones</b>, por lo tanto del lado derecho de la asignación a un puntero tiene que haber una dirección (como <code>&amp;edad</code> o <code>NULL</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: ERROR CRÍTICO 4: CONFUNDIR %d Y %p -->
+      <section>
+        <h2><span class="section-num">27</span> Error Crítico #4: Confundir <code>%d</code> y <code>%p</code> en <code>printf</code></h2>
+        <div class="comparison-grid">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Usar <code>%d</code> con una dirección o olvidar el <code>*</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+<span class="c-kw">int</span> *puntero = &amp;edad;
+
+<span class="c-cmt">// Quería imprimir 19 pero olvidó el asterisco:</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Edad: %d\n"</span>, puntero);</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fca5a5; margin-top: 6px;">
+              Imprime un número gigante sin sentido (parte de la dirección de memoria convertida a entero) en vez de <code>19</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ <code>%d</code> para valores (<code>edad</code>, <code>*puntero</code>) y <code>%p</code> para direcciones</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">19</span>;
+<span class="c-kw">int</span> *puntero = &amp;edad;
+
+<span class="c-fn">printf</span>(<span class="c-str">"Edad: %d\n"</span>, *puntero);       <span class="c-cmt">// 19</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Dir:  %p\n"</span>, (<span class="c-type">void</span>*)puntero); <span class="c-cmt">// 0x7ffe...</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #86efac; margin-top: 6px;">
+              Si querés ver el número entero apuntado, poné <code>*puntero</code> con <code>%d</code>. Si querés ver la dirección, poné <code>puntero</code> o <code>&amp;edad</code> con <code>%p</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: ¿Y SI HAGO scanf CON UN PUNTERO? -->
+      <section>
+        <h2><span class="section-num">28</span> Curiosidad Clave: <code>scanf</code> con una Variable vs. con un Puntero</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Esta comparación te demuestra si entendiste de verdad qué guarda un puntero:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">scanf_puntero.c</span>
+              <span class="code-badge">Razonamiento</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edad = <span class="c-num">0</span>;
+    <span class="c-kw">int</span> *puntero = &amp;edad;
+
+    <span class="c-cmt">// Ambas líneas hacen EXACTAMENTE lo mismo:</span>
+    <span class="c-cmt">// scanf("%d", &amp;edad);</span>
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, puntero);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Leido: %d\n"</span>, edad);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué <code>scanf("%d", puntero)</code> no lleva <code>&amp;</code>?</h4>
+            <p style="font-size: 0.84rem; color: #cbd5e1;">
+              Porque <code>scanf</code> pide como segundo argumento <b>la dirección de memoria de la variable entera</b> donde debe guardar el dato.
+            </p>
+            <p style="font-size: 0.84rem; color: #cbd5e1; margin-top: 6px;">
+              Como <code>puntero</code> <b>ya es igual a <code>&amp;edad</code></b> (ya contiene esa dirección), pasarle <code>puntero</code> es exactamente lo mismo que pasarle <code>&amp;edad</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: BUENAS PRÁCTICAS CON PUNTEROS -->
+      <section>
+        <h2><span class="section-num">29</span> Buenas Prácticas al Trabajar con Punteros</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Reglas de Seguridad</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Inicializá siempre tus punteros</b> en el momento de declararlos: ya sea con la dirección de una variable (<code>int *p = &amp;x;</code>) o con <code>NULL</code> (<code>int *p = NULL;</code>).</li>
+              <li><b>Dibujá las cajitas y las flechas</b> en una hoja de papel cuando tengas que seguir un código con punteros: ver a qué variable apunta la flecha evita el 99% de las confusiones.</li>
+              <li><b>Leé el código en castellano:</b> leé <code>&amp;x</code> como <i>"la dirección de x"</i> y leé <code>*p</code> como <i>"la variable apuntada por p"</i>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Estilo de Escritura: ¿<code>int *p</code> o <code>int* p</code>?</h4>
+            <p style="font-size: 0.83rem; color: #cbd5e1;">
+              En C ambas formas son válidas, pero en el apunte escribimos el asterisco pegado al nombre:
+            </p>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">int</span> *puntero = &amp;edad;</div>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
+              Escribir <code>int *puntero</code> nos recuerda que <code>*puntero</code> es un <code>int</code>, y evita confusiones si alguien declara varias variables en una misma línea.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: EJERCICIO 1 CON SOLUCIÓN DESPLEGABLE -->
+      <section>
+        <h2><span class="section-num">30</span> Ejercicio 1: Predecir la Salida Paso a Paso</h2>
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Sin ejecutarlo en la computadora, hacé la traza mental del siguiente programa y determiná qué valores exactos de <code>numero</code> y <code>*ptr</code> se imprimen al final:
+          </p>
+          <div class="code-window" style="margin: 8px 0;">
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numero = <span class="c-num">10</span>;
+    <span class="c-kw">int</span> *ptr = &amp;numero;
+    *ptr = *ptr + <span class="c-num">5</span>;
+    numero = numero * <span class="c-num">2</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"numero = %d, *ptr = %d\n"</span>, numero, *ptr);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <details class="code-solution">
+            <summary>💻 Ver solución y explicación paso a paso</summary>
+            <div class="solution-content">
+              <p style="font-size: 0.83rem; margin: 4px 0;">
+                1. <code>numero</code> empieza en <code>10</code> y <code>ptr</code> apunta a <code>numero</code>.<br>
+                2. <code>*ptr = *ptr + 5;</code> le suma 5 a la variable apuntada (<code>numero</code> pasa a valer <code>15</code>).<br>
+                3. <code>numero = numero * 2;</code> multiplica <code>15 * 2</code> (<code>numero</code> pasa a valer <code>30</code>).<br>
+                4. Como <code>ptr</code> sigue apuntando a <code>numero</code>, imprime: <b><code>numero = 30, *ptr = 30</code></b>.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: EJERCICIO 2 CON SOLUCIÓN DESPLEGABLE -->
+      <section>
+        <h2><span class="section-num">31</span> Ejercicio 2: Duplicar un Valor Mediante un Puntero</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0 0 10px;">
+            Declarar una variable <code>int puntos = 50;</code> y un puntero <code>int *p</code> que apunte a <code>puntos</code>. Luego, usando <b>únicamente el puntero <code>p</code></b> (sin volver a nombrar a la variable <code>puntos</code>), duplicá su valor para que valga <code>100</code> y mostralo por pantalla con <code>printf</code>.
+          </p>
+
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> puntos = <span class="c-num">50</span>;
+    <span class="c-kw">int</span> *p = &amp;puntos;
+
+    *p = *p * <span class="c-num">2</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Puntos duplicados: %d\n"</span>, *p); <span class="c-cmt">// Muestra 100</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: EJERCICIO 3 CON SOLUCIÓN DESPLEGABLE -->
+      <section>
+        <h2><span class="section-num">32</span> Ejercicio 3: Intercambiar Dos Variables Usando Punteros</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 6px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0 0 10px;">
+            Dadas dos variables <code>int x = 8, y = 20;</code> y dos punteros <code>int *px = &amp;x, *py = &amp;y;</code>, escribí las instrucciones para intercambiar los valores de <code>x</code> e <code>y</code> usando una variable entera <code>aux</code> y desreferenciando los punteros <code>*px</code> y <code>*py</code>. (¡Este ejercicio nos prepara directamente para la Unidad 06!).
+          </p>
+
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> x = <span class="c-num">8</span>, y = <span class="c-num">20</span>;
+    <span class="c-kw">int</span> *px = &amp;x;
+    <span class="c-kw">int</span> *py = &amp;y;
+
+    <span class="c-kw">int</span> aux = *px;
+    *px = *py;
+    *py = aux;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"x = %d, y = %d\n"</span>, x, y); <span class="c-cmt">// x = 20, y = 8</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: ¿PARA QUÉ NOS VAN A SERVIR LOS PUNTEROS EN LA PRÓXIMA UNIDAD? -->
+      <section>
+        <h2><span class="section-num">33</span> Puente hacia la Unidad 06: ¿Para Qué Queremos Punteros?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">La gran pregunta de todo estudiante</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            <i>"Si estoy adentro de <code>main()</code> y tengo la variable <code>edad</code> ahí mismo, ¿para qué haría <code>*puntero = 25;</code> en vez de escribir directamente <code>edad = 25;</code>?"</i>
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Adentro de la misma función</h4>
+            <p style="font-size: 0.83rem; color: #cbd5e1; margin: 0;">
+              Tenés toda la razón: adentro de <code>main()</code> lo hacemos solo para practicar y entender cómo funcionan los operadores <code>&amp;</code> y <code>*</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Entre distintas funciones (Unidad 06)</h4>
+            <p style="font-size: 0.83rem; color: #cbd5e1; margin: 0;">
+              Cuando llamamos a <b>otra función</b> (ej. <code>cambiar(&amp;x)</code> o <code>dividir(10, 3, &amp;cociente, &amp;resto)</code>), esa función no tiene acceso directo a las variables de <code>main()</code>. ¡Pasarle un <b>puntero con la dirección</b> es la única forma de que la función modifique nuestras variables originales!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 35: RESUMEN FINAL Y CHECKLIST -->
+      <section>
+        <h2><span class="section-num">34</span> Resumen de la Unidad 05 y Checklist</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Puntos Clave del Módulo</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
-              <li><code>&amp;x</code> obtiene la dirección física en memoria de <code>x</code>.</li>
-              <li><code>int *p</code> declara que <code>p</code> es una variable que guardará una dirección.</li>
-              <li><code>*p</code> viaja a la dirección y accede al valor allí guardado.</li>
-              <li>Para imprimir direcciones usamos <code>printf("%p", p);</code>.</li>
-              <li>Nunca desreferencies un puntero que no apunte a una variable real.</li>
+            <h4 style="color: #818cf8;">Conceptos Esenciales (Secciones 15 a 19)</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Puntero:</b> variable que guarda una dirección de memoria (ej. <code>1000</code>).</li>
+              <li><b><code>edad</code> vs <code>&amp;edad</code>:</b> <code>edad</code> es ¿QUÉ hay? (<code>19</code>, <code>%d</code>); <code>&amp;edad</code> es ¿DÓNDE está? (<code>0x7ffe...</code>, <code>%p</code>).</li>
+              <li><b>Operador <code>&amp;</code>:</b> "Dame la dirección de memoria de esta variable".</li>
+              <li><b>Operador <code>*</code>:</b> "Ir a esa dirección y agarrar el valor que hay ahí".</li>
+              <li><b>Analogía:</b> Casa = <code>variable</code> | Dirección = <code>&amp;variable</code> | Papel = <code>puntero</code> | Entrar = <code>*puntero</code>.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar la diferencia entre <code>p</code> y <code>*p</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué operador uso para pasarle la dirección a un puntero? (<code>&amp;</code>).</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué se utiliza <code>%p</code> para direcciones y <code>%d</code> para enteros?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo la analogía de la casa y el papel anotado?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué para imprimir una dirección usamos <code>%p</code> y no <code>%d</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar la diferencia entre <code>puntero</code> y <code>*puntero</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué <code>*puntero = 25;</code> cambia el valor de <code>edad</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué pasa si desreferencio un puntero sin inicializar o en <code>NULL</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 24px;">
-          <a href="04-algoritmos-procesamiento-strings.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="04-algoritmos-procesamiento-strings.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
             ← Anterior: Algoritmos con Strings
           </a>
-          <a href="../index.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
-            Índice 2do Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            ← Índice 2do Cuatrimestre
           </a>
-          <a href="06-paso-por-referencia-punteros-funciones.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
+          <a href="06-paso-por-referencia-punteros-funciones.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
             Siguiente: Paso por Referencia →
           </a>
         </div>
@@ -363,8 +1392,9 @@ Direccion: 0x7ffe1234abcd
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -374,8 +1404,20 @@ Direccion: 0x7ffe1234abcd
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>
+
 </html>

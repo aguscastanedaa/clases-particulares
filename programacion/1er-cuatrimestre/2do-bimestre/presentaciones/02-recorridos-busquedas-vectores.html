@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Programación 1C 2B - 02: Recorridos y Búsquedas en Vectores | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
-  
-  <!-- Reveal.js Styles -->
+
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
   <link rel="stylesheet" href="../../../assets/css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
       <a href="../index.html">← Volver al 2do Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 2do Bimestre • Unidad 02</span>
   </div>
@@ -33,279 +39,1615 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-emerald">1er Cuatrimestre • 2do Bimestre • Unidad 2</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Recorridos y Búsquedas en Vectores</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            El poder de los bucles sobre arreglos: carga interactiva, acumuladores, máximos y el algoritmo de búsqueda lineal
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-emerald">1er Cuatrimestre • 2do Bimestre • Unidad 02</span>
+          <h1 style="font-size: 2.6rem; margin-bottom: 12px;">Recorridos y Búsquedas en Vectores</h1>
+          <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px;">
+            Cómo procesar todas las posiciones con ciclos <code>for</code> y encontrar información clave paso a paso
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">Patrón for (int i = 0; i &lt; N; i++)</span>
-            <span class="badge badge-amber">Suma y Promedio</span>
-            <span class="badge badge-purple">Máximo y Mínimo</span>
-            <span class="badge badge-rose">Búsqueda Lineal</span>
+            <span class="badge badge-cyan">3. Recorrer un Vector</span>
+            <span class="badge badge-indigo">Carga y Modificación</span>
+            <span class="badge badge-amber">Contadores y Acumuladores</span>
+            <span class="badge badge-purple">4. Buscar Menor y Mayor</span>
+            <span class="badge badge-rose">Corte con break y Examen</span>
           </div>
 
-          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-emerald" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar por las 36 diapositivas de esta unidad.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y OBJETIVOS -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Conexión con la Unidad 01</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">La unión mágica: Vectores + Bucles</h4>
-            <p style="font-size: 0.88rem;">
-              En la unidad anterior vimos que acceder a mano a cada casillero (<code>notas[0]</code>, <code>notas[1]</code>, ...) sigue siendo tedioso.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              El verdadero poder de la informática surge al usar la <b>variable contadora de un bucle <code>for</code> como el índice entre corchetes <code>[i]</code></b>. Con solo 3 líneas de código podemos procesar vectores de 10, 1.000 o 1.000.000 de elementos.
-            </p>
+            <h4 style="color: #818cf8;">Lo que aprendimos en la Unidad 01</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Un <b>vector</b> guarda muchos datos del mismo tipo bajo un único nombre.</li>
+              <li>Se declara indicando <code>tipo nombre[tamaño];</code>.</li>
+              <li>Las posiciones (<b>índices</b>) empiezan siempre en <code>0</code> y van hasta <code>tamaño - 1</code>.</li>
+              <li>Podemos acceder a una casilla puntual escribiendo <code>vector[posicion]</code>.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>El <b>patrón universal de recorrido</b> con <code>for</code>.</li>
-              <li>Cargar datos desde el teclado con <code>scanf</code> en un vector.</li>
-              <li>Calcular la suma acumulada y el promedio con decimales.</li>
-              <li>Encontrar el <b>máximo</b> y el <b>mínimo</b> sin caer en la trampa del cero.</li>
-              <li>Implementar el algoritmo de <b>Búsqueda Lineal</b> paso a paso.</li>
+            <h4 style="color: #34d399;">Lo que vamos a dominar hoy (Secciones 3 y 4)</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Qué significa <b>recorrer un vector</b> y cómo automatizarlo con <code>for</code>.</li>
+              <li>Mostrar, cargar con <code>scanf</code> y modificar todos los elementos.</li>
+              <li>Sumar valores y contar cuántos cumplen una condición (ej: pares).</li>
+              <li><b>Buscar elementos:</b> hallar el menor, el mayor, el primer par con <code>break</code> y resolver ejercicios tipo examen.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: EL PATRÓN UNIVERSAL DE RECORRIDO -->
+      <!-- SLIDE 3: 3. ¿QUÉ SIGNIFICA RECORRER UN VECTOR? -->
       <section>
-        <h2><span class="section-num">02</span> El Patrón Universal de Recorrido</h2>
+        <h2><span class="section-num">02</span> 3. ¿Qué Significa "Recorrer un Vector"?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición del Apunte</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <b>Recorrer un vector</b> significa visitar cada una de sus posiciones, <b>desde la primera (<code>0</code>) hasta la última (<code>tamaño - 1</code>)</b>, para leer, mostrar, modificar o procesar los valores almacenados.
+          </p>
+        </div>
+
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin: 14px 0 8px;">
+          Supongamos que tenemos este vector de 5 notas:
+        </p>
+
+        <div class="code-window">
+          <div class="code-body"><span class="c-kw">int</span> notas[<span class="c-num">5</span>] = {<span class="c-num">8</span>, <span class="c-num">10</span>, <span class="c-num">7</span>, <span class="c-num">9</span>, <span class="c-num">6</span>};</div>
+        </div>
+
+        <div class="array-container" style="margin: 14px 0 6px;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 0</span>
+            <div class="array-cell">8</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 1</span>
+            <div class="array-cell">10</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 2</span>
+            <div class="array-cell">7</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 3</span>
+            <div class="array-cell">9</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 4</span>
+            <div class="array-cell">6</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EL PROBLEMA DE MOSTRAR ELEMENTOS SIN CICLO -->
+      <section>
+        <h2><span class="section-num">03</span> ¿Por Qué No Conviene Hacerlo "A Mano"?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Si quisiéramos mostrar todas las notas de <code>int notas[5] = {8, 10, 7, 9, 6};</code> sin usar un ciclo, tendríamos que escribir una línea por cada casilla:
+        </p>
+
         <div class="code-window">
           <div class="code-header">
-            <span class="code-title">patron_recorrido.c</span>
-            <span class="code-badge">El Molde Sagrado</span>
+            <span class="code-title">sin_ciclo.c</span>
+            <span class="code-badge">Repetitivo</span>
           </div>
-          <div class="code-body"><span class="c-pre">#define</span> TAM <span class="c-num">5</span>
+          <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, notas[<span class="c-num">0</span>]);
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, notas[<span class="c-num">1</span>]);
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, notas[<span class="c-num">2</span>]);
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, notas[<span class="c-num">3</span>]);
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, notas[<span class="c-num">4</span>]);</div>
+        </div>
 
-<span class="c-kw">int</span> numeros[TAM] = {<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">40</span>, <span class="c-num">50</span>};
+        <div class="box box-rose" style="margin-top: 12px;">
+          <h4 style="color: #f87171; margin-bottom: 4px;">🤔 Pregunta del Apunte:</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            <b>¿Qué pasa si el vector tiene 100 elementos? ¿Escribirías 100 veces <code>printf</code>?</b><br>
+            Claramente no. Por eso, en programación siempre usamos <b>ciclos</b> para recorrer vectores sin importar si tienen 5, 100 o 10.000 elementos.
+          </p>
+        </div>
+      </section>
 
-<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; TAM; i++)
-{
-    <span class="c-fn">printf</span>(<span class="c-str">"En la posición [%d] está el valor: %d\n"</span>, i, numeros[i]);
+      <!-- SLIDE 5: LA IDEA BÁSICA DEL APUNTE: CAMINAR FRENTE A LOS CASILLEROS -->
+      <section>
+        <h2><span class="section-num">04</span> La Idea Básica: Caminar Frente a los Casilleros</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Imaginá que tenés una fila de casilleros numerados del <code>0</code> al <code>4</code> y vas caminando frente a cada uno en orden:
+        </p>
+
+        <div class="array-container" style="margin: 10px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">🚶 Voy al 0</span>
+            <div class="array-cell highlight">8</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">➔ Voy al 1</span>
+            <div class="array-cell">10</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">➔ Voy al 2</span>
+            <div class="array-cell">7</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">➔ Voy al 3</span>
+            <div class="array-cell">9</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">➔ Voy al 4</span>
+            <div class="array-cell">6</div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">El recorrido paso a paso</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li>1° paso: Voy al casillero <code>0</code></li>
+              <li>2° paso: Voy al casillero <code>1</code></li>
+              <li>3° paso: Voy al casillero <code>2</code></li>
+              <li>4° paso: Voy al casillero <code>3</code></li>
+              <li>5° paso: Voy al casillero <code>4</code></li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Qué puedo hacer frente a cada casillero?</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li>👁️ <b>Leer o mostrar</b> lo que tiene adentro (<code>printf</code>).</li>
+              <li>⌨️ <b>Cargarle</b> un dato nuevo desde el teclado (<code>scanf</code>).</li>
+              <li>✏️ <b>Modificar</b> su valor (ej: sumarle puntos o multiplicarlo).</li>
+              <li>🔍 <b>Compararlo</b> para buscar algo (ej: ver si es par o si es el menor).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: LA HERRAMIENTA IDEAL: EL CICLO FOR -->
+      <section>
+        <h2><span class="section-num">05</span> La Herramienta Ideal: El Ciclo <code>for</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Para dar esos pasos automáticos del casillero <code>0</code> al último, usamos el ciclo <code>for</code> con esta <b>estructura general universal</b>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">Estructura general de recorrido</span>
+            <span class="code-badge">Patrón Fundamental</span>
+          </div>
+          <div class="code-body"><span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamaño; i++) {
+    <span class="c-cmt">// trabajar con vector[i]</span>
 }</div>
         </div>
+
+        <div class="box box-cyan" style="margin-top: 14px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Por qué siempre tiene esta forma?</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Porque la variable <code>i</code> hace el papel de <b>"dedo señalador"</b> (el índice actual): empieza apuntando a la posición <code>0</code>, avanza de uno en uno (<code>i++</code>) en cada vuelta, y se detiene justo antes de llegar a <code>tamaño</code> (es decir, en <code>tamaño - 1</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: DESGLOSE PIEZA POR PIEZA DEL FOR -->
+      <section>
+        <h2><span class="section-num">06</span> Entendiendo Cada Parte del <code>for</code></h2>
+        <div class="code-window">
+          <div class="code-body"><span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, notas[i]);
+}</div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">1. <code>int i = 0;</code> (Inicio)</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Creamos la variable <code>i</code> que representa la <b>posición actual</b> del vector. Empieza en <code>0</code> porque la primera casilla de todo vector en C es la posición <code>0</code>.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. <code>i &lt; 5;</code> (Condición de permanencia)</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              El ciclo se repite mientras <code>i</code> sea <b>menor que 5</b> (<code>0, 1, 2, 3, 4</code>). Cuando <code>i</code> llega a <code>5</code>, la condición <code>5 &lt; 5</code> da falso y el ciclo termina sin salirse del vector.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. <code>i++</code> (Avance al siguiente casillero)</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Al terminar cada vuelta, suma <code>1</code> a <code>i</code> (es lo mismo que <code>i = i + 1</code>). Así pasamos del casillero <code>0</code> al <code>1</code>, luego al <code>2</code>, etc.
+            </p>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">4. <code>notas[i]</code> (Acceso dinámico)</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Adentro del ciclo no escribimos un número fijo como <code>notas[0]</code>, sino <code>notas[i]</code>. En cada vuelta, <code>i</code> cambia y muestra la casilla correspondiente.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: EJEMPLO COMPLETO DEL APUNTE: MOSTRAR TODOS LOS ELEMENTOS -->
+      <section>
+        <h2><span class="section-num">07</span> Ejemplo del Apunte: Mostrar Todos los Elementos</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Veamos el programa completo del apunte para mostrar las 5 notas por pantalla:
+        </p>
+
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">mostrar_vector.c</span>
+              <span class="code-badge">Recorrido de Lectura</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> notas[<span class="c-num">5</span>] = {<span class="c-num">8</span>, <span class="c-num">10</span>, <span class="c-num">7</span>, <span class="c-num">9</span>, <span class="c-num">6</span>};
+
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, notas[i]);
+    }
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./mostrar_vector</span>
+8
+10
+7
+9
+6</div>
+            </div>
+            <div class="box box-cyan" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.8rem;">
+                Con un solo <code>printf</code> adentro del <code>for</code> se imprimieron las 5 notas en orden.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: SIMULACIÓN PASO A PASO DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">08</span> Simulación Paso a Paso (Vuelta por Vuelta)</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Sigamos exactamente lo que ocurre en cada iteración sobre <code>notas[5] = {8, 10, 7, 9, 6}</code>:
+        </p>
+
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8; font-size: 0.92rem;">1° Iteración (<code>i = 0</code>)</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              • ¿<code>0 &lt; 5</code>? Sí.<br>
+              • Evalúa <code>notas[0]</code>.<br>
+              • Muestra en pantalla: <b><code>8</code></b>
+            </p>
+          </div>
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8; font-size: 0.92rem;">2° Iteración (<code>i = 1</code>)</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              • ¿<code>1 &lt; 5</code>? Sí.<br>
+              • Evalúa <code>notas[1]</code>.<br>
+              • Muestra en pantalla: <b><code>10</code></b>
+            </p>
+          </div>
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8; font-size: 0.92rem;">3° Iteración (<code>i = 2</code>)</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              • ¿<code>2 &lt; 5</code>? Sí.<br>
+              • Evalúa <code>notas[2]</code>.<br>
+              • Muestra en pantalla: <b><code>7</code></b>
+            </p>
+          </div>
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8; font-size: 0.92rem;">4° Iteración (<code>i = 3</code>)</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              • ¿<code>3 &lt; 5</code>? Sí.<br>
+              • Evalúa <code>notas[3]</code>.<br>
+              • Muestra en pantalla: <b><code>9</code></b>
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399; font-size: 0.92rem;">5° Iteración (<code>i = 4</code>)</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              • ¿<code>4 &lt; 5</code>? Sí (última casilla).<br>
+              • Evalúa <code>notas[4]</code>.<br>
+              • Muestra en pantalla: <b><code>6</code></b>
+            </p>
+          </div>
+          <div class="box box-rose">
+            <h4 style="color: #f87171; font-size: 0.92rem;">Salida (<code>i = 5</code>)</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              • <code>i++</code> lleva <code>i</code> a <code>5</code>.<br>
+              • ¿<code>5 &lt; 5</code>? <b>Falso</b>.<br>
+              • <b>Termina el ciclo</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: TABLA DE SEGUIMIENTO DEL RECORRIDO -->
+      <section>
+        <h2><span class="section-num">09</span> Tabla de Traza Completa del Recorrido</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          En los exámenes o al hacer una prueba de escritorio en papel, podés organizar el seguimiento en una tabla como esta:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Iteración</th>
+              <th>Valor de <code>i</code></th>
+              <th>Condición <code>i &lt; 5</code></th>
+              <th>Casilla visitada</th>
+              <th>Valor de <code>notas[i]</code></th>
+              <th>Salida impresa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1°</td>
+              <td><code>0</code></td>
+              <td>Verdadero (<code>0 &lt; 5</code>)</td>
+              <td><code>notas[0]</code></td>
+              <td><code>8</code></td>
+              <td><b>8</b></td>
+            </tr>
+            <tr>
+              <td>2°</td>
+              <td><code>1</code></td>
+              <td>Verdadero (<code>1 &lt; 5</code>)</td>
+              <td><code>notas[1]</code></td>
+              <td><code>10</code></td>
+              <td><b>10</b></td>
+            </tr>
+            <tr>
+              <td>3°</td>
+              <td><code>2</code></td>
+              <td>Verdadero (<code>2 &lt; 5</code>)</td>
+              <td><code>notas[2]</code></td>
+              <td><code>7</code></td>
+              <td><b>7</b></td>
+            </tr>
+            <tr>
+              <td>4°</td>
+              <td><code>3</code></td>
+              <td>Verdadero (<code>3 &lt; 5</code>)</td>
+              <td><code>notas[3]</code></td>
+              <td><code>9</code></td>
+              <td><b>9</b></td>
+            </tr>
+            <tr>
+              <td>5°</td>
+              <td><code>4</code></td>
+              <td>Verdadero (<code>4 &lt; 5</code>)</td>
+              <td><code>notas[4]</code></td>
+              <td><code>6</code></td>
+              <td><b>6</b></td>
+            </tr>
+            <tr>
+              <td>Fin</td>
+              <td><code>5</code></td>
+              <td>Falso (<code>5 &lt; 5</code> ❌)</td>
+              <td>—</td>
+              <td>—</td>
+              <td><i>Fin del ciclo</i></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 11: RECORRER PARA CARGAR UN VECTOR CON SCANF -->
+      <section>
+        <h2><span class="section-num">10</span> Recorrer para Cargar un Vector (con <code>scanf</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          También podemos usar el mismo ciclo <code>for</code> para pedirle al usuario que ingrese por teclado todos los valores del vector uno por uno:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">cargar_vector_scanf.c</span>
+            <span class="code-badge">Ejemplo del Apunte</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edades[<span class="c-num">5</span>];
+
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Ingrese una edad: "</span>);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edades[i]);
+    }
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🔑 <b>Detalle clave:</b> En <code>scanf("%d", &amp;edades[i]);</code> nunca olvides el símbolo <b><code>&amp;</code></b> delante de <code>edades[i]</code>, y fijate que adentro de los corchetes va <b><code>[i]</code></b> para que cada lectura se guarde en un casillero distinto.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: QUÉ HACE CADA VUELTA DEL SCANF -->
+      <section>
+        <h2><span class="section-num">11</span> ¿Qué Hace Exactamente el Ciclo de Carga?</h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="step-list">
+            <div class="step-item">
+              <span class="step-num">0</span>
+              <div class="step-content" style="font-size: 0.83rem;">
+                Cuando <code>i = 0</code>: ejecuta <code>scanf("%d", &amp;edades[0]);</code> ➔ guarda el 1° número en la <b>posición 0</b>.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-content" style="font-size: 0.83rem;">
+                Cuando <code>i = 1</code>: ejecuta <code>scanf("%d", &amp;edades[1]);</code> ➔ guarda el 2° número en la <b>posición 1</b>.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-content" style="font-size: 0.83rem;">
+                Cuando <code>i = 2</code>: ejecuta <code>scanf("%d", &amp;edades[2]);</code> ➔ guarda el 3° número en la <b>posición 2</b>.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-content" style="font-size: 0.83rem;">
+                Cuando <code>i = 3</code> y <code>4</code>: guarda en las <b>posiciones 3 y 4</b>.
+              </div>
+            </div>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <span>Consola Interactiva</span>
+              <span>stdin / stdout</span>
+            </div>
+            <div class="terminal-body"><span class="terminal-prompt">$ ./cargar_vector_scanf</span>
+Ingrese una edad: <span class="terminal-user-input">16</span>
+Ingrese una edad: <span class="terminal-user-input">15</span>
+Ingrese una edad: <span class="terminal-user-input">17</span>
+Ingrese una edad: <span class="terminal-user-input">16</span>
+Ingrese una edad: <span class="terminal-user-input">18</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: RECORRER PARA MODIFICAR VALORES (DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">12</span> Recorrer para Modificar Valores del Vector</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          También podemos recorrer un vector para transformar sus valores. Por ejemplo, el apunte muestra cómo <b>multiplicar todos los elementos por 2</b>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">modificar_vector.c</span>
+            <span class="code-badge">Ejemplo del Apunte</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>, <span class="c-num">4</span>, <span class="c-num">5</span>};
+
+<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+    numeros[i] = numeros[i] * <span class="c-num">2</span>;
+}</div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Cómo se lee <code>numeros[i] = numeros[i] * 2;</code>?</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            En C, primero se calcula lo que está a la <b>derecha</b> del signo <code>=</code> (toma el valor actual de <code>numeros[i]</code> y lo multiplica por 2), y ese resultado nuevo se guarda en la <b>izquierda</b> (sobreescribiendo la misma casilla <code>numeros[i]</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: ANTES Y DESPUÉS DE MULTIPLICAR POR 2 -->
+      <section>
+        <h2><span class="section-num">13</span> Antes y Después en Memoria</h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="box box-indigo" style="text-align: center;">
+            <h4 style="color: #818cf8;">Antes del ciclo <code>for</code></h4>
+            <div class="array-container" style="margin: 14px 0;">
+              <div class="array-cell-wrapper">
+                <span class="array-index">[0]</span>
+                <div class="array-cell">1</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[1]</span>
+                <div class="array-cell">2</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[2]</span>
+                <div class="array-cell">3</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[3]</span>
+                <div class="array-cell">4</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[4]</span>
+                <div class="array-cell">5</div>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">
+              Valores originales: <code>1, 2, 3, 4, 5</code>
+            </p>
+          </div>
+
+          <div class="box box-emerald" style="text-align: center;">
+            <h4 style="color: #34d399;">Después del ciclo <code>for</code></h4>
+            <div class="array-container" style="margin: 14px 0;">
+              <div class="array-cell-wrapper">
+                <span class="array-index">[0]</span>
+                <div class="array-cell match">2</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[1]</span>
+                <div class="array-cell match">4</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[2]</span>
+                <div class="array-cell match">6</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[3]</span>
+                <div class="array-cell match">8</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">[4]</span>
+                <div class="array-cell match">10</div>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">
+              Valores duplicados: <code>2, 4, 6, 8, 10</code>
+            </p>
+          </div>
+        </div>
+
+        <table class="trace-table" style="margin-top: 12px;">
+          <thead>
+            <tr>
+              <th><code>i</code></th>
+              <th>Valor viejo de <code>numeros[i]</code></th>
+              <th>Cálculo <code>numeros[i] * 2</code></th>
+              <th>Nuevo valor en <code>numeros[i]</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>0</code></td><td>1</td><td>1 * 2</td><td><b>2</b></td></tr>
+            <tr><td><code>1</code></td><td>2</td><td>2 * 2</td><td><b>4</b></td></tr>
+            <tr><td><code>2</code></td><td>3</td><td>3 * 2</td><td><b>6</b></td></tr>
+            <tr><td><code>3</code></td><td>4</td><td>4 * 2</td><td><b>8</b></td></tr>
+            <tr><td><code>4</code></td><td>5</td><td>5 * 2</td><td><b>10</b></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 15: ERROR MUY COMÚN DEL APUNTE AL RECORRER -->
+      <section>
+        <h2><span class="section-num">14</span> Error Muy Común al Recorrer un Vector</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          El apunte advierte sobre un error que cometen muchísimos alumnos cuando piensan <i>"como tiene 5 elementos, voy del 1 al 5"</i>:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ MAL: Empezar en 1 y usar &lt;= 5</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// ❌ ¡DOBLE ERROR!</span>
+<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++) {
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, vector[i]);
+}</div>
+            </div>
+            <ul style="font-size: 0.8rem; color: #fecaca; margin-left: 16px;">
+              <li><b>Problema 1:</b> Como arranca en <code>i = 1</code>, <b>se saltea e ignora a <code>vector[0]</code></b>.</li>
+              <li><b>Problema 2:</b> En la última vuelta <code>i</code> vale <code>5</code> e <b>intenta acceder a <code>vector[5]</code>, que NO existe</b>.</li>
+            </ul>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ BIEN: Empezar en 0 y usar &lt; 5</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// ✅ SIEMPRE ASÍ:</span>
+<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, vector[i]);
+}</div>
+            </div>
+            <ul style="font-size: 0.8rem; color: #a7f3d0; margin-left: 16px;">
+              <li>Arranca en <code>0</code> (incluye a <code>vector[0]</code>).</li>
+              <li>Usa <code>&lt; 5</code> estricto, por lo que llega hasta <code>4</code> (<code>vector[4]</code>) y frena a tiempo.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: ACUMULADORES: SUMAR TODOS LOS ELEMENTOS -->
+      <section>
+        <h2><span class="section-num">15</span> Sumar Todos los Elementos (Variable Acumuladora)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Una operación muy frecuente al recorrer un vector es <b>sumar todos sus valores</b> (por ejemplo, para saber el total de gastos o el promedio de notas). Para eso usamos una variable <b>acumuladora</b> llamada <code>suma</code>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">sumar_elementos.c</span>
+            <span class="code-badge">Acumulador</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> notas[<span class="c-num">5</span>] = {<span class="c-num">8</span>, <span class="c-num">10</span>, <span class="c-num">7</span>, <span class="c-num">9</span>, <span class="c-num">6</span>};
+    <span class="c-kw">int</span> suma = <span class="c-num">0</span>; <span class="c-cmt">// ¡Obligatorio empezar en 0 antes del for!</span>
+
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+        suma = suma + notas[i];
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"La suma total es: %d\n"</span>, suma); <span class="c-cmt">// Muestra 40</span>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            ⚠️ <b>¿Por qué <code>int suma = 0;</code> va en cero y AFUERA del <code>for</code>?</b> Si no la inicializás en <code>0</code>, empezaría sumando sobre basura de memoria. Y si la pusieras adentro del <code>for</code>, se volvería a poner en <code>0</code> en cada vuelta.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: TRAZA DE LA SUMA Y CÁLCULO DEL PROMEDIO -->
+      <section>
+        <h2><span class="section-num">16</span> Seguimiento de la Suma y Cálculo del Promedio</h2>
+        <div class="grid-2" style="align-items: center;">
+          <table class="trace-table" style="margin: 0;">
+            <thead>
+              <tr>
+                <th><code>i</code></th>
+                <th><code>notas[i]</code></th>
+                <th>Cálculo <code>suma + notas[i]</code></th>
+                <th>Nuevo <code>suma</code></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Inicio</td><td>—</td><td>—</td><td><b>0</b></td></tr>
+              <tr><td><code>0</code></td><td>8</td><td>0 + 8</td><td><b>8</b></td></tr>
+              <tr><td><code>1</code></td><td>10</td><td>8 + 10</td><td><b>18</b></td></tr>
+              <tr><td><code>2</code></td><td>7</td><td>18 + 7</td><td><b>25</b></td></tr>
+              <tr><td><code>3</code></td><td>9</td><td>25 + 9</td><td><b>34</b></td></tr>
+              <tr><td><code>4</code></td><td>6</td><td>34 + 6</td><td><b>40</b></td></tr>
+            </tbody>
+          </table>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Y cómo calculamos el promedio?</h4>
+            <p style="font-size: 0.84rem;">
+              Una vez que terminó el ciclo <code>for</code> y ya tenemos la <code>suma</code> total (<code>40</code>), dividimos por la cantidad de elementos (<code>5</code>):
+            </p>
+            <div class="code-window" style="margin: 8px 0;">
+              <div class="code-body"><span class="c-kw">float</span> promedio = (<span class="c-kw">float</span>)suma / <span class="c-num">5</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"Promedio: %.2f\n"</span>, promedio);</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 0;">
+              Usamos <code>(float)suma</code> para que la división conserve los decimales si la cuenta no da exacta.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: RECORRER CON CONDICIONES (IF DENTRO DEL FOR) -->
+      <section>
+        <h2><span class="section-num">17</span> Combinar Recorrido (<code>for</code>) + Decisión (<code>if</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Muchísimas veces no queremos hacer lo mismo con todos los casilleros, sino <b>revisar cuáles cumplen una condición</b>. Para eso metemos un <code>if</code> <b>adentro</b> del ciclo <code>for</code>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">Estructura de filtro o conteo</span>
+            <span class="code-badge">for + if</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> contador = <span class="c-num">0</span>;
+
+<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+    <span class="c-kw">if</span> (condicion sobre numeros[i]) {
+        contador++; <span class="c-cmt">// Suma 1 solo cuando la casilla cumple la condición</span>
+    }
+}</div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">Repaso rápido: ¿Cómo sabemos si un número es PAR en C?</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Usamos el operador resto de la división <code>%</code>: un número es par cuando al dividirlo por 2 el resto da <code>0</code>. Es decir: <b><code>numeros[i] % 2 == 0</code></b>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: EJEMPLO DEL APUNTE: CONTAR CUÁNTOS NÚMEROS SON PARES -->
+      <section>
+        <h2><span class="section-num">18</span> Ejemplo del Apunte: Contar Cuántos Números son Pares</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Analicemos el ejemplo del apunte sobre el vector <code>{12, 7, 8, 15, 20}</code>:
+        </p>
+
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">contar_pares.c</span>
+              <span class="code-badge">Ejemplo del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">12</span>, <span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">15</span>, <span class="c-num">20</span>};
+    <span class="c-kw">int</span> contador = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+        <span class="c-kw">if</span> (numeros[i] % <span class="c-num">2</span> == <span class="c-num">0</span>) {
+            contador++;
+        }
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Cantidad de pares: %d\n"</span>, contador);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./contar_pares</span>
+Cantidad de pares: 3</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.82rem;">
+                Los números pares encontrados son <b><code>12</code></b>, <b><code>8</code></b> y <b><code>20</code></b>, por lo que al final <code>contador</code> vale <b><code>3</code></b>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: SEGUIMIENTO PASO A PASO DEL CONTADOR DE PARES -->
+      <section>
+        <h2><span class="section-num">19</span> Seguimiento Paso a Paso del Conteo de Pares</h2>
+        <div class="array-container" style="margin: 8px 0 12px;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 0 (Par)</span>
+            <div class="array-cell match">12</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 1 (Impar)</span>
+            <div class="array-cell">7</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 2 (Par)</span>
+            <div class="array-cell match">8</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 3 (Impar)</span>
+            <div class="array-cell">15</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 4 (Par)</span>
+            <div class="array-cell match">20</div>
+          </div>
+        </div>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Iteración</th>
+              <th><code>i</code></th>
+              <th><code>numeros[i]</code></th>
+              <th>¿<code>numeros[i] % 2 == 0</code>?</th>
+              <th>Acción</th>
+              <th>Valor de <code>contador</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Inicio</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>Inicialización</td>
+              <td><code>0</code></td>
+            </tr>
+            <tr>
+              <td>1°</td>
+              <td><code>0</code></td>
+              <td><code>12</code></td>
+              <td><code>12 % 2 == 0</code> (Sí ✅)</td>
+              <td><code>contador++</code></td>
+              <td><b>1</b></td>
+            </tr>
+            <tr>
+              <td>2°</td>
+              <td><code>1</code></td>
+              <td><code>7</code></td>
+              <td><code>7 % 2 == 1</code> (No ❌)</td>
+              <td>No entra al <code>if</code></td>
+              <td><b>1</b> (se mantiene)</td>
+            </tr>
+            <tr>
+              <td>3°</td>
+              <td><code>2</code></td>
+              <td><code>8</code></td>
+              <td><code>8 % 2 == 0</code> (Sí ✅)</td>
+              <td><code>contador++</code></td>
+              <td><b>2</b></td>
+            </tr>
+            <tr>
+              <td>4°</td>
+              <td><code>3</code></td>
+              <td><code>15</code></td>
+              <td><code>15 % 2 == 1</code> (No ❌)</td>
+              <td>No entra al <code>if</code></td>
+              <td><b>2</b> (se mantiene)</td>
+            </tr>
+            <tr>
+              <td>5°</td>
+              <td><code>4</code></td>
+              <td><code>20</code></td>
+              <td><code>20 % 2 == 0</code> (Sí ✅)</td>
+              <td><code>contador++</code></td>
+              <td><b>3</b> (resultado final)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 21: 4. ¿QUÉ SIGNIFICA BUSCAR ELEMENTOS EN UN VECTOR? -->
+      <section>
+        <h2><span class="section-num">20</span> 4. ¿Qué Significa "Buscar en un Vector"?</h2>
+        <div class="box box-purple">
+          <h4 style="color: #c084fc; margin-bottom: 4px;">Definición del Apunte</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <b>Buscar en un vector</b> significa recorrer sus elementos para encontrar uno (o varios) que cumplan una <b>determinada condición</b>.
+          </p>
+        </div>
+
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin: 14px 0 8px;">
+          Por ejemplo, en los problemas de programación nos pueden pedir buscar:
+        </p>
+
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">📉 El Menor o el Mayor</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Encontrar cuál es el número más chico o el número más grande de todo el vector.
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">🥇 El Primero que Cumpla</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Encontrar el <b>primer número par</b> o el primer negativo que aparezca en la fila.
+            </p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">🔎 Si Existe un Valor</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Saber si un número determinado (por ejemplo el <code>25</code>) está adentro del vector o cuántos son positivos.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: HUMANO VS COMPUTADORA AL BUSCAR -->
+      <section>
+        <h2><span class="section-num">21</span> Idea Principal: ¿Cómo Busca la Computadora?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Imaginá este vector del apunte:
+        </p>
+
+        <div class="code-window">
+          <div class="code-body"><span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">12</span>, <span class="c-num">8</span>, <span class="c-num">25</span>, <span class="c-num">3</span>, <span class="c-num">17</span>};</div>
+        </div>
+
+        <div class="array-container" style="margin: 12px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 0</span>
+            <div class="array-cell">12</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 1</span>
+            <div class="array-cell">8</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 2</span>
+            <div class="array-cell">25</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 3</span>
+            <div class="array-cell highlight">3</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 4</span>
+            <div class="array-cell">17</div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">👁️ Cómo lo ve un humano</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Si te preguntan <i>"¿Cuál es el menor?"</i>, vos mirás los 5 números de un vistazo y decís enseguida: <b>"El 3"</b>.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">🤖 Cómo lo ve la computadora</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              La computadora <b>NO puede ver todo el vector de golpe</b>. Está obligada a abrir casillero por casillero (<code>12 ➔ 8 ➔ 25 ➔ 3 ➔ 17</code>) e ir comparando uno por uno.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: EL PATRÓN GENERAL DE BÚSQUEDA DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">22</span> El Patrón General de Búsqueda</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Tal como sintetiza el apunte teórico, <b>casi todos los ejercicios de búsqueda en vectores</b> siguen este mismo molde:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">Patrón General de Búsqueda</span>
+            <span class="code-badge">Molde Maestro</span>
+          </div>
+          <div class="code-body"><span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; tamaño; i++) {
+    <span class="c-kw">if</span> (condicion) {
+        <span class="c-cmt">// hacer algo (actualizar menor/mayor, contar, o cortar con break)</span>
+    }
+}</div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.88rem;">
+            💡 <b>Fórmula mental:</b><br>
+            <b>Recorrido (<code>for</code>)</b> para visitar cada posición + <b>Condición (<code>if</code>)</b> para preguntar si el elemento actual <code>numeros[i]</code> es el que estamos buscando.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: BUSCAR EL MENOR ELEMENTO (LOS 4 PASOS DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">23</span> Buscar el Menor Elemento: Los 4 Pasos</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          ¿Cómo hace la computadora para encontrar el número más chico de <code>{12, 8, 25, 3, 17}</code>? Sigue esta estrategia de 4 pasos del apunte:
+        </p>
 
         <div class="step-list">
           <div class="step-item">
             <span class="step-num">1</span>
-            <div class="step-content">
-              <b><code>int i = 0;</code></b> ➔ El bucle inicia en 0, coincidiendo con el primer casillero del vector.
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>Supongo al principio que el primer elemento es el menor:</b><br>
+              Guardo el valor de la posición <code>0</code> en una variable: <code>int menor = numeros[0];</code>.
             </div>
           </div>
           <div class="step-item">
             <span class="step-num">2</span>
-            <div class="step-content">
-              <b><code>i &lt; TAM;</code></b> ➔ Usamos <code>&lt;</code> estricto (menor a 5), por lo que las vueltas serán exactamente <code>0, 1, 2, 3, 4</code>. ¡Nunca se desborda!
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>Recorro el resto del vector:</b><br>
+              Uso un ciclo <code>for</code> que arranque desde <code>i = 1</code> (porque el <code>0</code> ya lo guardé en <code>menor</code>).
             </div>
           </div>
           <div class="step-item">
             <span class="step-num">3</span>
-            <div class="step-content">
-              <b><code>numeros[i]</code></b> ➔ En cada ciclo, <code>i</code> se reemplaza por su valor actual, accediendo a cada celda de forma automática.
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>Si encuentro un número más chico que el que tenía, lo actualizo:</b><br>
+              Pregunto <code>if (numeros[i] &lt; menor)</code>. Si se cumple, hago <code>menor = numeros[i];</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b>Al finalizar el ciclo, tengo el menor real:</b><br>
+              Recién cuando termina el <code>for</code>, muestro la variable <code>menor</code> con <code>printf</code>.
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: CARGA POR TECLADO CON SCANF -->
+      <!-- SLIDE 25: CÓDIGO COMPLETO DEL APUNTE: BUSCAR EL MENOR -->
       <section>
-        <h2><span class="section-num">03</span> Carga Interactiva con <code>scanf()</code></h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">¿Cómo pedirle al usuario que llene un vector desde la terminal?</p>
+        <h2><span class="section-num">24</span> Código Completo: Buscar el Menor del Vector</h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">buscar_menor.c</span>
+              <span class="code-badge">Ejemplo del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">carga_vector.c</span>
-            <span class="code-badge">scanf + vector</span>
-          </div>
-          <div class="code-body"><span class="c-kw">int</span> valores[<span class="c-num">4</span>];
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">12</span>, <span class="c-num">8</span>, <span class="c-num">25</span>, <span class="c-num">3</span>, <span class="c-num">17</span>};
 
-<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">4</span>; i++)
-{
-    <span class="c-fn">printf</span>(<span class="c-str">"Ingresa el valor para el casillero [%d]: "</span>, i);
-    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;valores[i]); <span class="c-cmt">// ¡Notar el operador &amp;!</span>
+    <span class="c-kw">int</span> menor = numeros[<span class="c-num">0</span>]; <span class="c-cmt">// Paso 1: empiezo con el primero</span>
+
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; <span class="c-num">5</span>; i++) {
+        <span class="c-kw">if</span> (numeros[i] &lt; menor) {
+            menor = numeros[i]; <span class="c-cmt">// Paso 3: actualizo el menor</span>
+        }
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"El menor es: %d\n"</span>, menor);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
-        </div>
-
-        <div class="box box-amber">
-          <h4 style="color: #fbbf24; margin-bottom: 4px;">¿Por qué se pone &amp;valores[i]?</h4>
-          <p style="font-size: 0.88rem; margin: 0;">
-            Porque <code>valores[i]</code> es un número entero común (el contenido de la celda <code>i</code>). Como aprendimos en el 1er cuatrimestre, <code>scanf</code> necesita la <b>dirección de memoria de esa celda concreta</b>, por lo que anteponemos el ampersand <code>&amp;</code>.
-          </p>
-        </div>
-      </section>
-
-      <!-- SLIDE 5: SUMA Y PROMEDIO -->
-      <section>
-        <h2><span class="section-num">04</span> Acumuladores: Suma y Promedio</h2>
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">promedio_vector.c</span>
-            <span class="code-badge">Acumulador</span>
           </div>
-          <div class="code-body"><span class="c-kw">int</span> notas[<span class="c-num">4</span>] = {<span class="c-num">7</span>, <span class="c-num">9</span>, <span class="c-num">8</span>, <span class="c-num">10</span>};
-<span class="c-kw">int</span> suma = <span class="c-num">0</span>; <span class="c-cmt">// ¡Inicializar siempre en 0!</span>
 
-<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">4</span>; i++)
-{
-    suma += notas[i];
-}
-
-<span class="c-cmt">// Casteo a float para no perder decimales:</span>
-<span class="c-kw">float</span> promedio = (<span class="c-kw">float</span>)suma / <span class="c-num">4.0f</span>;
-
-<span class="c-fn">printf</span>(<span class="c-str">"Suma total: %d | Promedio: %.2f\n"</span>, suma, promedio);</div>
-        </div>
-
-        <div class="box box-cyan">
-          <p style="margin: 0; font-size: 0.85rem;">
-            💡 <b>Traza mental:</b> <code>suma</code> arranca en 0. Vuelta 0: 0 + 7 = 7. Vuelta 1: 7 + 9 = 16. Vuelta 2: 16 + 8 = 24. Vuelta 3: 24 + 10 = 34. Promedio: 34 / 4 = 8.50.
-          </p>
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./buscar_menor</span>
+El menor es: 3</div>
+            </div>
+            <div class="box box-cyan" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.8rem;">
+                Observá que el <code>for</code> empieza en <code>i = 1</code> para no comparar inútilmente a <code>numeros[0]</code> consigo mismo.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 6: ENCONTRAR EL MÁXIMO Y EL MÍNIMO -->
+      <!-- SLIDE 26: SIMULACIÓN PASO A PASO DEL APUNTE PARA EL MENOR -->
       <section>
-        <h2><span class="section-num">05</span> Encontrar el Máximo (¡Evitá la Trampa del Cero!)</h2>
+        <h2><span class="section-num">25</span> Simulación Paso a Paso de la Búsqueda del Menor</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Veamos cómo cambia la variable <code>menor</code> en cada vuelta sobre <code>{12, 8, 25, 3, 17}</code>:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Momento</th>
+              <th><code>i</code></th>
+              <th><code>numeros[i]</code></th>
+              <th>Comparación <code>numeros[i] &lt; menor</code></th>
+              <th>¿Actualiza?</th>
+              <th>Valor de <code>menor</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Inicialmente</td>
+              <td>—</td>
+              <td><code>numeros[0] = 12</code></td>
+              <td>—</td>
+              <td>Se asigna el 1°</td>
+              <td><b>12</b></td>
+            </tr>
+            <tr>
+              <td>Iteración 1</td>
+              <td><code>1</code></td>
+              <td><code>8</code></td>
+              <td>¿<code>8 &lt; 12</code>? <b>Sí ✅</b></td>
+              <td><code>menor = 8</code></td>
+              <td><b>8</b></td>
+            </tr>
+            <tr>
+              <td>Iteración 2</td>
+              <td><code>2</code></td>
+              <td><code>25</code></td>
+              <td>¿<code>25 &lt; 8</code>? <b>No ❌</b></td>
+              <td>No cambia</td>
+              <td><b>8</b></td>
+            </tr>
+            <tr>
+              <td>Iteración 3</td>
+              <td><code>3</code></td>
+              <td><code>3</code></td>
+              <td>¿<code>3 &lt; 8</code>? <b>Sí ✅</b></td>
+              <td><code>menor = 3</code></td>
+              <td><b>3</b></td>
+            </tr>
+            <tr>
+              <td>Iteración 4</td>
+              <td><code>4</code></td>
+              <td><code>17</code></td>
+              <td>¿<code>17 &lt; 3</code>? <b>No ❌</b></td>
+              <td>No cambia</td>
+              <td><b>3</b> (Resultado final)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 27: POR QUÉ NUNCA INICIALIZAR MENOR = 0 -->
+      <section>
+        <h2><span class="section-num">26</span> ¡Peligro! ¿Por Qué NUNCA Hacer <code>int menor = 0;</code>?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Muchos estudiantes tienden por costumbre a poner todas las variables en <code>0</code> al principio. Mirá qué desastre ocurre si ponés <code>int menor = 0;</code> al buscar el menor de <code>{12, 8, 25, 3, 17}</code>:
+        </p>
+
         <div class="comparison-box">
           <div class="wrong-card">
-            <div class="wrong-title">❌ La Trampa: int maximo = 0;</div>
-            <p style="font-size: 0.82rem; color: #fecaca;">
-              Si el vector almacena temperaturas de invierno bajo cero: <code>{-5, -2, -8, -12}</code>, tu programa dirá que el máximo es <b>0</b>... ¡un número que ni siquiera existía en el vector!
+            <div class="wrong-title">❌ La Trampa: int menor = 0;</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">12</span>, <span class="c-num">8</span>, <span class="c-num">25</span>, <span class="c-num">3</span>, <span class="c-num">17</span>};
+<span class="c-kw">int</span> menor = <span class="c-num">0</span>; <span class="c-cmt">// ❌ ¡ERROR LÓGICO!</span>
+
+<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+    <span class="c-kw">if</span> (numeros[i] &lt; menor) {
+        menor = numeros[i];
+    }
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 4px 0 0;">
+              Como todos los números del vector son positivos (mayores a 0), ninguno es menor que <code>0</code>. ¡El programa terminará diciendo que el menor es <b><code>0</code></b>, un número que ni siquiera estaba en el vector!
             </p>
           </div>
 
           <div class="correct-card">
-            <div class="correct-title">✅ La Solución: Asumir el primero</div>
-            <p style="font-size: 0.82rem; color: #a7f3d0;">
-              Inicializá con el primer elemento real del vector: <code>int maximo = vector[0];</code>. Y luego compará a partir del índice 1. ¡Funciona para positivos, negativos y ceros!
+            <div class="correct-title">✅ La Regla Segura: int menor = numeros[0];</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">12</span>, <span class="c-num">8</span>, <span class="c-num">25</span>, <span class="c-num">3</span>, <span class="c-num">17</span>};
+<span class="c-kw">int</span> menor = numeros[<span class="c-num">0</span>]; <span class="c-cmt">// ✅ Toma el 12 real</span>
+
+<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; <span class="c-num">5</span>; i++) {
+    <span class="c-kw">if</span> (numeros[i] &lt; menor) {
+        menor = numeros[i];
+    }
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 4px 0 0;">
+              Al empezar con <code>numeros[0]</code>, garantizás que estás comparando contra un elemento que <b>sí pertenece al vector</b>. Funciona siempre (con positivos, negativos o ceros).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: BUSCAR EL MAYOR ELEMENTO Y SU POSICIÓN -->
+      <section>
+        <h2><span class="section-num">27</span> Buscar el Mayor Elemento (y su Posición)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Como indica el apunte, para buscar el <b>mayor</b> es exactamente la misma lógica, solo que cambiamos el signo menor <code>&lt;</code> por el signo <b>mayor <code>&gt;</code></b>. Además, podemos guardar en qué posición estaba:
+        </p>
+
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">buscar_mayor.c</span>
+              <span class="code-badge">Mayor y Posición</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">12</span>, <span class="c-num">8</span>, <span class="c-num">25</span>, <span class="c-num">3</span>, <span class="c-num">17</span>};
+    <span class="c-kw">int</span> mayor = numeros[<span class="c-num">0</span>];
+    <span class="c-kw">int</span> posMayor = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; <span class="c-num">5</span>; i++) {
+        <span class="c-kw">if</span> (numeros[i] &gt; mayor) {
+            mayor = numeros[i];
+            posMayor = i; <span class="c-cmt">// Guardamos en qué casilla estaba</span>
+        }
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"El mayor es %d (posicion %d)\n"</span>, mayor, posMayor);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./buscar_mayor</span>
+El mayor es 25 (posicion 2)</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.8rem;">
+                Cada vez que encontramos un nuevo campeón (<code>numeros[i] &gt; mayor</code>), guardamos tanto el valor como su índice <code>i</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: BUSCAR EL PRIMER NÚMERO PAR CON BREAK (DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">28</span> Buscar el Primer Número Par (Uso de <code>break</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          ¿Qué pasa si solo nos piden mostrar el <b>primer número par</b> que aparezca en el vector y no queremos que siga mostrando los demás? Veamos el ejemplo del apunte:
+        </p>
+
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">primer_par_break.c</span>
+              <span class="code-badge">Ejemplo del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">7</span>, <span class="c-num">11</span>, <span class="c-num">8</span>, <span class="c-num">15</span>, <span class="c-num">20</span>};
+
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+        <span class="c-kw">if</span> (numeros[i] % <span class="c-num">2</span> == <span class="c-num">0</span>) {
+            <span class="c-fn">printf</span>(<span class="c-str">"Primer par encontrado: %d\n"</span>, numeros[i]);
+            <span class="c-kw">break</span>; <span class="c-cmt">// Corta el ciclo inmediatamente</span>
+        }
+    }
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./primer_par_break</span>
+Primer par encontrado: 8</div>
+            </div>
+            <div class="box box-amber" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.8rem;">
+                Aunque el <code>20</code> también es par, el programa solo muestra el <code>8</code> porque el <code>break</code> detuvo la búsqueda apenas halló el primero.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: QUÉ ES BREAK Y TRAZA PASO A PASO -->
+      <section>
+        <h2><span class="section-num">29</span> ¿Qué es <code>break</code> y Cómo Funciona Paso a Paso?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición de <code>break</code></h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            La instrucción <b><code>break;</code></b> significa <b>"salir inmediatamente del ciclo"</b>. Apenas la computadora ejecuta <code>break;</code>, abandona el <code>for</code> sin importar cuántas vueltas faltaban.
+          </p>
+        </div>
+
+        <div class="array-container" style="margin: 12px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 0 (No es par)</span>
+            <div class="array-cell">7</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 1 (No es par)</span>
+            <div class="array-cell">11</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 2 (¡Es par! ➔ break)</span>
+            <div class="array-cell match">8</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 3 (Ni se revisa)</span>
+            <div class="array-cell empty">15</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 4 (Ni se revisa)</span>
+            <div class="array-cell empty">20</div>
+          </div>
+        </div>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th><code>i</code></th>
+              <th><code>numeros[i]</code></th>
+              <th>¿Es par? (<code>% 2 == 0</code>)</th>
+              <th>Qué hace el programa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>0</code></td><td><code>7</code></td><td>No ❌</td><td>Sigue a la siguiente vuelta.</td></tr>
+            <tr><td><code>1</code></td><td><code>11</code></td><td>No ❌</td><td>Sigue a la siguiente vuelta.</td></tr>
+            <tr><td><code>2</code></td><td><code>8</code></td><td><b>Sí ✅</b></td><td>Imprime <b>8</b> y ejecuta <code>break;</code> (termina el ciclo).</td></tr>
+            <tr><td><code>3 y 4</code></td><td><code>15, 20</code></td><td>—</td><td><i>Nunca se llegan a evaluar gracias al break.</i></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 31: BUSCAR SI EXISTE UN VALOR ESPECÍFICO (VARIABLE BANDERA) -->
+      <section>
+        <h2><span class="section-num">30</span> Buscar si Existe un Valor Específico (Bandera)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          ¿Y si buscamos un número puntual (por ejemplo el <code>25</code>) y queremos informar al final si estaba o si <b>NO estaba</b> en el vector? Usamos una variable <b>bandera</b> (<code>encontrado</code>):
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">buscar_valor_especifico.c</span>
+            <span class="code-badge">Bandera (Flag)</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">12</span>, <span class="c-num">8</span>, <span class="c-num">25</span>, <span class="c-num">3</span>, <span class="c-num">17</span>};
+    <span class="c-kw">int</span> buscado = <span class="c-num">25</span>;
+    <span class="c-kw">int</span> encontrado = <span class="c-num">0</span>; <span class="c-cmt">// 0 = Todavía NO lo encontré | 1 = ¡Sí lo encontré!</span>
+
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+        <span class="c-kw">if</span> (numeros[i] == buscado) {
+            encontrado = <span class="c-num">1</span>; <span class="c-cmt">// Levanto la bandera</span>
+            <span class="c-fn">printf</span>(<span class="c-str">"Encontrado en la posicion %d\n"</span>, i);
+            <span class="c-kw">break</span>;
+        }
+    }
+
+    <span class="c-kw">if</span> (encontrado == <span class="c-num">0</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"El numero %d no esta en el vector.\n"</span>, buscado);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: ERROR CLÁSICO AL BUSCAR: EL ELSE ADENTRO DEL FOR -->
+      <section>
+        <h2><span class="section-num">31</span> Error Clásico: Poner <code>"No está"</code> Adentro del <code>for</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Mirá qué pasa si en vez de usar una bandera afuera del ciclo ponés un <code>else</code> adentro del <code>for</code> buscando el <code>25</code> en <code>{12, 8, 25, 3, 17}</code>:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ MAL: Decir "No está" en cada casilla</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+    <span class="c-kw">if</span> (numeros[i] == <span class="c-num">25</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Encontrado!\n"</span>);
+    } <span class="c-kw">else</span> {
+        <span class="c-cmt">// ❌ ¡Se apura a decir que no está!</span>
+        <span class="c-fn">printf</span>(<span class="c-str">"No esta!\n"</span>);
+    }
+}</div>
+            </div>
+            <p style="font-size: 0.78rem; color: #fecaca; margin: 4px 0 0;">
+              En la vuelta 0 mira el <code>12</code> y ya imprime <code>"No está!"</code> sin haber mirado el resto del vector. Imprime: <i>No está, No está, Encontrado, No está, No está</i>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ BIEN: Preguntar recién al salir del for</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> encontrado = <span class="c-num">0</span>;
+<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+    <span class="c-kw">if</span> (numeros[i] == <span class="c-num">25</span>) {
+        encontrado = <span class="c-num">1</span>;
+        <span class="c-kw">break</span>;
+    }
+}
+<span class="c-cmt">// Recién AFUERA del for sacamos la conclusión:</span>
+<span class="c-kw">if</span> (encontrado == <span class="c-num">0</span>) {
+    <span class="c-fn">printf</span>(<span class="c-str">"No esta!\n"</span>);
+}</div>
+            </div>
+            <p style="font-size: 0.78rem; color: #a7f3d0; margin: 4px 0 0;">
+              Solo podemos asegurar que un número <b>no existe</b> después de haber revisado <b>todas</b> las casillas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: RELACIÓN CON EL MODELO DE EXAMEN (DEL APUNTE) -->
+      <section>
+        <h2><span class="section-num">32</span> Relación con el Modelo de Examen (Nivel 4)</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">🎯 El Desafío de Examen del Apunte (Página 12)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            En el examen suele aparecer este ejercicio integrador:<br>
+            <b><i>"Encontrar el menor número par del vector"</i></b>.
+          </p>
+        </div>
+
+        <p style="font-size: 0.86rem; color: var(--text-muted); margin: 10px 0 8px;">
+          Para resolverlo tenemos que combinar las <b>3 herramientas</b> que aprendimos hoy:
+        </p>
+
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Recorrido con <code>for</code></h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Para pasar por todos los elementos del vector de principio a fin.
+            </p>
+          </div>
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">2. Filtro de Paridad</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Verificar primero si el número actual es par: <code>if (numeros[i] % 2 == 0)</code>.
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. Búsqueda de Menor</h4>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Entre los que sí sean pares, quedarnos con el primer par que aparezca y luego actualizar si aparece un par más chico.
             </p>
           </div>
         </div>
 
-        <div class="code-window" style="margin-top: 10px;">
-          <div class="code-body"><span class="c-kw">int</span> maximo = notas[<span class="c-num">0</span>]; <span class="c-cmt">// Asumimos que el primero es el campeón</span>
-
-<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; <span class="c-num">4</span>; i++)
-{
-    <span class="c-kw">if</span> (notas[i] &gt; maximo)
-    {
-        maximo = notas[i]; <span class="c-cmt">// Encontramos a uno más grande</span>
-    }
-}</div>
-        </div>
-      </section>
-
-      <!-- SLIDE 7: ALGORITMO DE BÚSQUEDA LINEAL -->
-      <section>
-        <h2><span class="section-num">06</span> Búsqueda Lineal (Secuencial)</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">¿Cómo saber si un valor buscado existe en el vector y en qué posición está?</p>
-
-        <div class="array-container">
-          <div class="array-cell-wrapper">
-            <span class="array-index">[0]</span>
-            <div class="array-cell">14</div>
-          </div>
-          <div class="array-cell-wrapper">
-            <span class="array-index">[1]</span>
-            <div class="array-cell">9</div>
-          </div>
-          <div class="array-cell-wrapper">
-            <span class="array-index">[2]</span>
-            <div class="array-cell match">42</div>
-          </div>
-          <div class="array-cell-wrapper">
-            <span class="array-index">[3]</span>
-            <div class="array-cell">18</div>
-          </div>
-        </div>
-
-        <div class="box box-purple" style="margin-top: 8px;">
-          <p style="font-size: 0.88rem; margin: 0;">
-            <b>Estrategia:</b> Preguntamos celda por celda: <i>"¿Sos vos el 42?"</i>. Si lo encontramos, guardamos la posición y cortamos con <code>break</code>. Si el bucle termina y nadie respondió, el elemento no existe en el arreglo.
+        <div class="box box-rose" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.83rem;">
+            ⚠️ <b>¡Atención! ¿Por qué acá NO podemos hacer simplemente <code>menorPar = numeros[0]</code>?</b><br>
+            Porque ¿qué pasa si <code>numeros[0]</code> es un número <b>impar</b> chiquito como <code>1</code> o <code>3</code>? ¡Estaríamos metiendo un impar en <code>menorPar</code>! Por eso usamos una bandera <code>hayPar = 0</code> para capturar el <b>primer par real</b> que encontremos.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 8: CÓDIGO COMPLETO DE BÚSQUEDA LINEAL -->
+      <!-- SLIDE 34: SOLUCIÓN COMPLETA DEL DESAFÍO DE EXAMEN -->
       <section>
-        <h2><span class="section-num">07</span> Implementación de Búsqueda Lineal</h2>
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">busqueda_lineal.c</span>
-            <span class="code-badge">Algoritmo Completo</span>
-          </div>
-          <div class="code-body"><span class="c-kw">int</span> datos[<span class="c-num">5</span>] = {<span class="c-num">14</span>, <span class="c-num">9</span>, <span class="c-num">42</span>, <span class="c-num">18</span>, <span class="c-num">7</span>};
-<span class="c-kw">int</span> buscado = <span class="c-num">42</span>;
-<span class="c-kw">int</span> posicionEncontrada = -<span class="c-num">1</span>; <span class="c-cmt">// -1 significa "no encontrado aún"</span>
+        <h2><span class="section-num">33</span> Solución Completa: El Menor Número Par</h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">menor_numero_par_examen.c</span>
+              <span class="code-badge">Modelo de Examen</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 
-<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
-{
-    <span class="c-kw">if</span> (datos[i] == buscado)
-    {
-        posicionEncontrada = i; <span class="c-cmt">// Guardamos la posición</span>
-        <span class="c-kw">break</span>;                  <span class="c-cmt">// Salimos del bucle anticipadamente</span>
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> numeros[<span class="c-num">5</span>] = {<span class="c-num">3</span>, <span class="c-num">14</span>, <span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">20</span>};
+    <span class="c-kw">int</span> menorPar;
+    <span class="c-kw">int</span> hayPar = <span class="c-num">0</span>; <span class="c-cmt">// 0 = Aún no vi ningún par</span>
+
+    <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+        <span class="c-kw">if</span> (numeros[i] % <span class="c-num">2</span> == <span class="c-num">0</span>) { <span class="c-cmt">// Solo miro los pares</span>
+            <span class="c-kw">if</span> (hayPar == <span class="c-num">0</span> || numeros[i] &lt; menorPar) {
+                menorPar = numeros[i];
+                hayPar = <span class="c-num">1</span>;
+            }
+        }
     }
-}
 
-<span class="c-kw">if</span> (posicionEncontrada != -<span class="c-num">1</span>)
-{
-    <span class="c-fn">printf</span>(<span class="c-str">"¡Elemento encontrado en el índice [%d]!\n"</span>, posicionEncontrada);
-}
-<span class="c-kw">else</span>
-{
-    <span class="c-fn">printf</span>(<span class="c-str">"El elemento %d no está en el vector.\n"</span>, buscado);
+    <span class="c-kw">if</span> (hayPar == <span class="c-num">1</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"El menor par es: %d\n"</span>, menorPar);
+    } <span class="c-kw">else</span> {
+        <span class="c-fn">printf</span>(<span class="c-str">"No habia numeros pares.\n"</span>);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./menor_par</span>
+El menor par es: 8</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                • <code>3</code>: impar (lo ignora).<br>
+                • <code>14</code>: 1° par (<code>hayPar == 0</code>) ➔ <code>menorPar = 14</code>, <code>hayPar = 1</code>.<br>
+                • <code>7</code>: impar (lo ignora).<br>
+                • <code>8</code>: par y <code>8 &lt; 14</code> ➔ <code>menorPar = 8</code>.<br>
+                • <code>20</code>: par pero no es menor a 8.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 9: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <!-- SLIDE 35: EJERCICIOS DE PRÁCTICA CON SOLUCIONES DESPLEGABLES -->
       <section>
-        <h2><span class="section-num">08</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">34</span> Ejercicios de Práctica para Resolver</h2>
+
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">Ejercicio 1: Contar cuántos números son positivos (mayores a 0)</h4>
+          <p style="font-size: 0.83rem; margin: 0 0 6px;">
+            Dado el vector <code>int temperaturas[6] = {-3, 12, 0, 8, -1, 15};</code>, escribí un ciclo <code>for</code> que cuente y muestre cuántas temperaturas son estrictamente mayores a <code>0</code>.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-kw">int</span> temperaturas[<span class="c-num">6</span>] = {-<span class="c-num">3</span>, <span class="c-num">12</span>, <span class="c-num">0</span>, <span class="c-num">8</span>, -<span class="c-num">1</span>, <span class="c-num">15</span>};
+<span class="c-kw">int</span> positivos = <span class="c-num">0</span>;
+
+<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">6</span>; i++) {
+    <span class="c-kw">if</span> (temperaturas[i] &gt; <span class="c-num">0</span>) {
+        positivos++;
+    }
+}
+<span class="c-fn">printf</span>(<span class="c-str">"Cantidad de positivos: %d\n"</span>, positivos); <span class="c-cmt">// Muestra 3 (12, 8 y 15)</span></div>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Ejercicio 2: Encontrar el mayor número impar</h4>
+          <p style="font-size: 0.83rem; margin: 0 0 6px;">
+            Dado <code>int v[5] = {20, 7, 15, 4, 9};</code>, ¿cómo adaptarías el código de examen para encontrar el <b>mayor número impar</b>?
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-kw">int</span> v[<span class="c-num">5</span>] = {<span class="c-num">20</span>, <span class="c-num">7</span>, <span class="c-num">15</span>, <span class="c-num">4</span>, <span class="c-num">9</span>};
+<span class="c-kw">int</span> mayorImpar, hayImpar = <span class="c-num">0</span>;
+
+<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+    <span class="c-kw">if</span> (v[i] % <span class="c-num">2</span> != <span class="c-num">0</span>) { <span class="c-cmt">// Condición de impar</span>
+        <span class="c-kw">if</span> (hayImpar == <span class="c-num">0</span> || v[i] &gt; mayorImpar) {
+            mayorImpar = v[i];
+            hayImpar = <span class="c-num">1</span>;
+        }
+    }
+}
+<span class="c-fn">printf</span>(<span class="c-str">"El mayor impar es: %d\n"</span>, mayorImpar); <span class="c-cmt">// Muestra 15</span></div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 36: RESUMEN FINAL Y CHECKLIST -->
+      <section>
+        <h2><span class="section-num">35</span> Resumen de la Unidad 02 y Checklist</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Herramientas del Día</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><code>for (int i = 0; i &lt; N; i++)</code>: El recorrido canónico.</li>
-              <li><code>&amp;vector[i]</code>: Para leer valores con <code>scanf</code>.</li>
-              <li><b>Acumulador:</b> <code>suma += vector[i]</code> (iniciar en 0).</li>
-              <li><b>Máximo/Mínimo:</b> Iniciar con <code>vector[0]</code>.</li>
-              <li><b>Búsqueda Lineal:</b> Centinela <code>pos = -1</code> y <code>break</code> al hallar.</li>
+            <h4 style="color: #818cf8;">Patrones Fundamentales</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Recorrido general:</b> <code>for(int i = 0; i &lt; N; i++)</code>.</li>
+              <li><b>Carga por teclado:</b> <code>scanf("%d", &amp;vector[i]);</code> adentro del <code>for</code>.</li>
+              <li><b>Acumulador y Contador:</b> Se inicializan en <code>0</code> <b>antes</b> del ciclo.</li>
+              <li><b>Menor y Mayor:</b> Se inicializan con el primer elemento <code>vector[0]</code> y se compara desde <code>i = 1</code>.</li>
+              <li><b>Corte anticipado:</b> <code>break;</code> sale del ciclo apenas encuentra el primer elemento buscado.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué el bucle de recorrido usa <code>i &lt; N</code> y no <code>i &lt;= N</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué inicializar el valor máximo en 0 puede provocar un bug?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Qué función cumple <code>break</code> dentro de una búsqueda lineal?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué usamos -1 como valor inicial de posición no encontrada?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué escribir <code>for(int i = 1; i &lt;= 5; i++)</code> es un grave error?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo cómo cambia <code>notas[i]</code> en cada vuelta cuando <code>i</code> avanza?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué nunca hay que inicializar <code>menor = 0</code> sino <code>menor = v[0]</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé usar <code>% 2 == 0</code> para filtrar o contar números pares?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo combinar recorrido + paridad + menor para el examen?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
-          <a href="01-vectores-estaticos.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
-            ← Anterior: Vectores Estáticos
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="01-vectores-estaticos.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
+            ← Unidad 01: Vectores Estáticos
           </a>
-          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            Índice 2do Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Índice 2do Bimestre
           </a>
-          <a href="03-ordenamiento-vectores.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            Siguiente: Ordenamiento de Vectores →
+          <a href="03-ordenamiento-vectores.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Siguiente Unidad: Ordenamiento →
           </a>
         </div>
       </section>
@@ -313,8 +1655,9 @@
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -324,8 +1667,20 @@
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>
+
 </html>

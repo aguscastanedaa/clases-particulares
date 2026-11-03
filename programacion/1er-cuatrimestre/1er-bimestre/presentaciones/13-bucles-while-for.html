@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 1C - 13: Bucles while y for | Clases Particulares</title>
+  <title>Programación 1C 1B - 13: Bucles while y for | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
-  
-  <!-- Reveal.js Styles -->
+
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
   <link rel="stylesheet" href="../../../assets/css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 1er Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../index.html">← Índice 1er Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 1er Bimestre • Unidad 13</span>
   </div>
@@ -33,414 +39,1464 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-amber">1er Cuatrimestre • Bucles • Unidad 13</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Bucles: while y for</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            El superpoder de la repetición: cómo iterar millones de veces sin cansancio, tablas de traza y comparación definitiva
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-amber">1er Cuatrimestre • 1er Bimestre • Unidad 13</span>
+          <h1 style="font-size: 2.6rem; margin-bottom: 12px;">13. Bucles: <code>while</code> y <code>for</code></h1>
+          <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px;">
+            Cómo repetir instrucciones automáticamente sin copiar y pegar código, vuelta por vuelta
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">Bucle while</span>
-            <span class="badge badge-emerald">Bucle for</span>
-            <span class="badge badge-indigo">Tablas de Iteración</span>
-            <span class="badge badge-rose">Bucles Infinitos</span>
+            <span class="badge badge-cyan">13.1. Bucle while</span>
+            <span class="badge badge-emerald">13.2. Bucle for</span>
+            <span class="badge badge-indigo">Tablas de Traza (i = 1..6)</span>
+            <span class="badge badge-amber">Contadores y Acumuladores</span>
+            <span class="badge badge-rose">Puente al 2do Bimestre</span>
           </div>
 
-          <div class="box box-amber" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-amber" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar por las 36 diapositivas de esta unidad.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Qué Vamos a Aprender</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué las computadoras aman repetir?</h4>
-            <p style="font-size: 0.88rem;">
-              A los humanos nos aburre hacer la misma tarea 500 veces seguidas: nos cansamos, nos distraemos y cometemos errores.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Una computadora puede repetir una serie de instrucciones <b>un millón de veces en un pestañeo con 100% de precisión matemática</b>. A esa estructura de repetición la llamamos <b>bucle, ciclo o loop</b>.
-            </p>
+            <h4 style="color: #818cf8;">Herramientas previas que hoy se unen</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Sección 7 (Incremento):</b> <code>i++</code> aumenta en <code>1</code> el valor de la variable <code>i</code> (equivale a <code>i = i + 1;</code>).</li>
+              <li><b>Sección 8 (Comparación):</b> <code>i &lt;= 5</code> pregunta si <code>i</code> es menor o igual a <code>5</code> (devuelve verdadero o falso).</li>
+              <li><b>Sección 9 (Condicionales):</b> evaluar una condición antes de ejecutar un bloque entre llaves <code>{ }</code>.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar en esta clase</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Comprender los 3 pilares de todo bucle: <b>Inicialización, Condición y Actualización</b>.</li>
-              <li>Dominar el bucle <b><code>while</code></b> con seguimiento paso a paso.</li>
-              <li>Dominar el bucle <b><code>for</code></b> y su orden de ejecución interno.</li>
-              <li>Seguir tablas de traza iteración por iteración.</li>
-              <li>Saber exactamente <b>cuándo usar <code>while</code> y cuándo usar <code>for</code></b>.</li>
-              <li>Prevenir y abortar <b>bucles infinitos</b>.</li>
+            <h4 style="color: #34d399;">Lo que vamos a dominar hoy (Sección 13)</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Los <b>3 ingredientes</b> de todo ciclo: inicio, condición y avance.</li>
+              <li><b>13.1 Bucle <code>while</code>:</b> traza de <code>1</code> a <code>5</code>, por qué frena en <code>6</code> y bucle infinito.</li>
+              <li><b>13.2 Bucle <code>for</code>:</b> sus 4 pasos internos y comparación con <code>while</code>.</li>
+              <li>Contadores, acumuladores, lectura con <code>scanf</code> en ciclos y puente al 2do Bimestre.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: LOS 3 PILARES OBLIGATORIOS DE TODO BUCLE -->
+      <!-- SLIDE 3: EL PROBLEMA DE REPETIR MANUALMENTE -->
       <section>
-        <h2><span class="section-num">02</span> La Santísima Trinidad de Todo Bucle</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Todo ciclo de repetición en cualquier lenguaje del mundo necesita estos 3 componentes para no fallar:</p>
+        <h2><span class="section-num">02</span> El Problema: ¿Qué Pasa Si Repetimos a Mano?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Imaginá que nos piden un programa que muestre en pantalla los números del <code>1</code> al <code>5</code>, uno debajo del otro. Sin conocer bucles, tendríamos que escribir esto:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">sin_bucles.c</span>
+            <span class="code-badge">Código repetitivo</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"1\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"2\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"3\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"4\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"5\n"</span>);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <div class="box box-rose" style="margin-top: 12px;">
+          <h4 style="color: #f87171; margin-bottom: 4px;">🤔 Pensá un segundo:</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            ¿Qué pasaría si el profesor te pide mostrar los números del <b><code>1</code> al <code>1000</code></b>? ¿Escribirías 1000 líneas de <code>printf</code>? ¡Imposible! Necesitamos una instrucción que le diga a la computadora: <b>"repetí esta acción mientras se cumpla esta condición"</b>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: QUÉ ES UN BUCLE Y ANALOGÍA COTIDIANA -->
+      <section>
+        <h2><span class="section-num">03</span> ¿Qué es un Bucle (Ciclo) y Cómo Pensarlo?</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Concepto Fundamental</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Un <b>bucle</b> (también llamado <b>ciclo</b> o <i>loop</i>) es una estructura de control que permite <b>repetir un bloque de instrucciones varias veces</b> de forma automática. Cada vuelta completa del bucle se llama <b>iteración</b>.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">🏃 Analogía: Pista de Atletismo</h4>
+            <p style="font-size: 0.84rem; line-height: 1.55; margin: 0;">
+              Imaginá que el profesor de educación física te dice: <i>"Empezá en la vuelta 1. Mientras vayas por la vuelta 5 o menos, corré una vuelta a la pista y sumá 1 a tu contador de vueltas"</i>. Cuando tu contador llega a <b>6</b>, dejás de correr.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Qué significa "Iteración"?</h4>
+            <p style="font-size: 0.84rem; line-height: 1.55; margin: 0;">
+              En el apunte vas a leer la palabra <b>iteración</b> (y el verbo <b>iterar</b>). Significa simplemente <b>"una vuelta del ciclo"</b>:
+              <br>• <b>1ra iteración</b> = 1ra vuelta.
+              <br>• <b>5 iteraciones</b> = 5 vueltas en total.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: LOS 3 INGREDIENTES DE TODO CICLO -->
+      <section>
+        <h2><span class="section-num">04</span> Los 3 Ingredientes de Todo Ciclo</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Para que cualquier bucle funcione bien (empiece, trabaje y sepa cuándo frenar), siempre necesita estos <b>3 ingredientes</b>:
+        </p>
 
         <div class="grid-3" style="margin-top: 14px;">
           <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">1. Inicialización</h4>
-            <p style="font-size: 0.85rem;">
-              Establecer el punto de partida de la variable de control antes de entrar al bucle.
+            <h4 style="color: #38bdf8;">1. Inicio (Inicialización)</h4>
+            <p style="font-size: 0.84rem;">
+              Crear la variable contadora (suele llamarse <code>i</code> por <i>iterador</i>) y darle su valor inicial.
             </p>
-            <div style="font-family: var(--font-mono); color: #7dd3fc; font-size: 0.82rem; margin-top: 6px;">
+            <div style="font-family: var(--font-mono); color: #7dd3fc; font-size: 0.88rem; margin-top: 6px;">
               int i = 1;
             </div>
           </div>
 
           <div class="box box-amber">
-            <h4 style="color: #fbbf24;">2. Condición</h4>
-            <p style="font-size: 0.85rem;">
-              La pregunta que se evalúa <b>antes de cada vuelta</b>. Mientras sea verdadera, el bucle sigue girando.
+            <h4 style="color: #fbbf24;">2. Condición de Continuidad</h4>
+            <p style="font-size: 0.84rem;">
+              La pregunta que se hace <b>antes de cada vuelta</b>. Si da <code>True</code>, entra al ciclo; si da <code>False</code>, termina.
             </p>
-            <div style="font-family: var(--font-mono); color: #fef08a; font-size: 0.82rem; margin-top: 6px;">
+            <div style="font-family: var(--font-mono); color: #fef08a; font-size: 0.88rem; margin-top: 6px;">
               i &lt;= 5
             </div>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">3. Actualización (Paso)</h4>
-            <p style="font-size: 0.85rem;">
-              Modificar la variable hacia el final para que en algún momento la condición se vuelva falsa y el ciclo termine.
+            <h4 style="color: #34d399;">3. Avance (Incremento)</h4>
+            <p style="font-size: 0.84rem;">
+              Aumentar la variable en cada vuelta para acercarnos al final y que el ciclo no sea eterno.
             </p>
-            <div style="font-family: var(--font-mono); color: #a7f3d0; font-size: 0.82rem; margin-top: 6px;">
+            <div style="font-family: var(--font-mono); color: #a7f3d0; font-size: 0.88rem; margin-top: 6px;">
               i++;
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="box box-rose" style="margin-top: 12px;">
-          <p style="margin: 0; font-size: 0.85rem;">
-            ⚠️ <b>¡Si falta la actualización:</b> La variable nunca cambiará, la condición siempre será verdadera y el bucle girará infinitamente hasta congelar el programa!
+      <!-- SLIDE 6: 13.1. BUCLE WHILE — DEFINICIÓN DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">05</span> 13.1. Bucle <code>while</code> (Definición del Apunte)</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición del Apunte</h4>
+          <p style="font-size: 1rem; margin: 0;">
+            <b>Repite instrucciones mientras una condición sea verdadera.</b>
+          </p>
+        </div>
+
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin: 14px 0 8px;">
+          La palabra <b><code>while</code></b> en inglés significa literalmente <b>"mientras"</b>. Su estructura es muy parecida a la de un <code>if</code>, con la diferencia de que cuando termina de ejecutar la última llave <code>}</code>, <b>vuelve arriba a preguntar la condición otra vez</b>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">Sintaxis del bucle while</span>
+            <span class="code-badge">Estructura</span>
+          </div>
+          <div class="code-body"><span class="c-kw">while</span>(condicion)
+{
+    instrucciones;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: EJEMPLO CENTRAL DEL APUNTE PARA WHILE -->
+      <section>
+        <h2><span class="section-num">06</span> El Ejemplo del Apunte: Contar del 1 al 5 con <code>while</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Veamos el ejemplo exacto de la página 10 del apunte:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">Ejemplo 13.1 del Apunte</span>
+            <span class="code-badge">Página 10</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> i = <span class="c-num">1</span>;
+
+<span class="c-kw">while</span>(i &lt;= <span class="c-num">5</span>)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, i);
+    i++;
+}</div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Explicación Textual del Apunte</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            <b>"<code>i</code> empieza con valor = 1, mientras que <code>i</code> sea menor o igual a 5, vamos a printear el valor de <code>i</code>. Y además incrementamos <code>i</code> en 1, ¿qué quiere decir eso? En cada iteración que hace el <code>while</code>, a la variable <code>i</code> se le va a sumar un 1."</b>
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 4: PARTE A: EL BUCLE WHILE -->
+      <!-- SLIDE 8: DESGLOSE LÍNEA POR LÍNEA DEL WHILE -->
       <section>
-        <h2><span class="section-num">03</span> Parte A: El Bucle <code>while</code></h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">En español, <i>while</i> significa <b>"mientras"</b>. Funciona exactamente como un <code>if</code> que se repite:</p>
-
-        <div class="code-window">
-          <div class="code-header">
-            <div class="code-dots">
-              <span class="code-dot dot-red"></span>
-              <span class="code-dot dot-yellow"></span>
-              <span class="code-dot dot-green"></span>
-            </div>
-            <span class="code-title">bucle_while.c</span>
-            <span class="code-badge">Ejemplo Obligatorio</span>
+        <h2><span class="section-num">07</span> Desglose Pieza por Pieza del Ejemplo <code>while</code></h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. <code>int i = 1;</code></h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Se ejecuta <b>antes de llegar al bucle</b>. Crea la cajita <code>i</code> y guarda el número <code>1</code> como punto de partida.
+            </p>
           </div>
-          <div class="code-body"><span class="c-kw">int</span> i = <span class="c-num">1</span>;            <span class="c-cmt">// 1. Inicialización</span>
 
-<span class="c-kw">while</span> (i &lt;= <span class="c-num">5</span>)        <span class="c-cmt">// 2. Condición de permanencia</span>
-{
-    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, i); <span class="c-cmt">// Cuerpo del bucle</span>
-    i++;               <span class="c-cmt">// 3. Actualización indispensable</span>
-}</div>
-        </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. <code>while(i &lt;= 5)</code></h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Es el "guardia de entrada". Antes de cada vuelta pregunta: <i>"¿El valor actual de <code>i</code> es menor o igual a 5?"</i>.
+            </p>
+          </div>
 
-        <div class="terminal-window">
-          <div class="terminal-header">Terminal de Salida</div>
-          <div class="terminal-body"><span class="terminal-prompt">$ ./bucle_while</span>
-1
-2
-3
-4
-5</div>
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">3. <code>printf("%d\n", i);</code></h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Muestra en pantalla el valor que tiene <code>i</code> en esa vuelta y baja un renglón gracias al salto de línea <code>\n</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">4. <code>i++;</code></h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Le suma <code>1</code> a <code>i</code> (equivale a <code>i = i + 1;</code>). Luego llega a la llave <code>}</code> y salta otra vez arriba al <code>while(i &lt;= 5)</code>.
+            </p>
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: TABLA DE SEGUIMIENTO PASO A PASO DEL WHILE -->
+      <!-- SLIDE 9: LA 1RA ITERACIÓN SEGÚN EL APUNTE -->
       <section>
-        <h2><span class="section-num">04</span> Tabla de Traza Iteración por Iteración</h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem;">Veamos con lupa de microscopio cómo se ejecuta cada vuelta:</p>
+        <h2><span class="section-num">08</span> Cómo Ocurre la 1ra Iteración (Paso a Paso del Apunte)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Leamos cómo describe el apunte lo que ocurre en la primera vuelta del bucle:
+        </p>
+
+        <div class="step-list" style="margin-top: 10px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Estado inicial (1ra iteración):</b> La variable entra con <b><code>i = 1</code></b>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Pregunta del <code>while</code>:</b> <i>"¿<code>i</code> es menor o igual que 5?"</i> (<code>1 &lt;= 5</code>). <b>¡Sí! Es menor (Verdadero)</b>, entonces entra al bloque <code>{ }</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>Acción en pantalla:</b> Printea el valor de <code>i</code> ➔ muestra <b><code>1</code></b> en la consola.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b>Incremento:</b> Se incrementa <code>i + 1</code> ➔ <code>1 + 1 = 2</code>. Ahora <code>i</code> vale <b><code>2</code></b> y vuelve a subir al <code>while</code> para la 2da vuelta.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: TABLA DE TRAZA COMPLETA DEL WHILE -->
+      <section>
+        <h2><span class="section-num">09</span> Tabla de Seguimiento Vuelta por Vuelta</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Sigamos todas las iteraciones del ejemplo del apunte hasta que el ciclo termina:
+        </p>
 
         <table class="trace-table">
           <thead>
             <tr>
               <th>Iteración</th>
-              <th>Valor de i al entrar</th>
-              <th>¿Se cumple i &lt;= 5?</th>
-              <th>printf("%d\n", i)</th>
-              <th>Efecto de i++</th>
+              <th>Valor de <code>i</code> al preguntar</th>
+              <th>Evaluación de <code>i &lt;= 5</code></th>
+              <th><code>printf("%d\n", i)</code></th>
+              <th>Luego de <code>i++</code></th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Vuelta 1</td>
+              <td>1ra iteración</td>
               <td><code>i = 1</code></td>
-              <td>1 &lt;= 5 ➔ <b style="color: var(--accent-emerald);">VERDADERO (1)</b></td>
+              <td><code>1 &lt;= 5</code> ➔ <b style="color: var(--accent-emerald);">VERDADERO</b></td>
               <td>Imprime <code>1</code></td>
-              <td><code>i</code> pasa a valer <b>2</b></td>
+              <td><code>i</code> pasa a <b><code>2</code></b></td>
             </tr>
             <tr>
-              <td>Vuelta 2</td>
+              <td>2da iteración</td>
               <td><code>i = 2</code></td>
-              <td>2 &lt;= 5 ➔ <b style="color: var(--accent-emerald);">VERDADERO (1)</b></td>
+              <td><code>2 &lt;= 5</code> ➔ <b style="color: var(--accent-emerald);">VERDADERO</b></td>
               <td>Imprime <code>2</code></td>
-              <td><code>i</code> pasa a valer <b>3</b></td>
+              <td><code>i</code> pasa a <b><code>3</code></b></td>
             </tr>
             <tr>
-              <td>Vuelta 3</td>
+              <td>3ra iteración</td>
               <td><code>i = 3</code></td>
-              <td>3 &lt;= 5 ➔ <b style="color: var(--accent-emerald);">VERDADERO (1)</b></td>
+              <td><code>3 &lt;= 5</code> ➔ <b style="color: var(--accent-emerald);">VERDADERO</b></td>
               <td>Imprime <code>3</code></td>
-              <td><code>i</code> pasa a valer <b>4</b></td>
+              <td><code>i</code> pasa a <b><code>4</code></b></td>
             </tr>
             <tr>
-              <td>Vuelta 4</td>
+              <td>4ta iteración</td>
               <td><code>i = 4</code></td>
-              <td>4 &lt;= 5 ➔ <b style="color: var(--accent-emerald);">VERDADERO (1)</b></td>
+              <td><code>4 &lt;= 5</code> ➔ <b style="color: var(--accent-emerald);">VERDADERO</b></td>
               <td>Imprime <code>4</code></td>
-              <td><code>i</code> pasa a valer <b>5</b></td>
+              <td><code>i</code> pasa a <b><code>5</code></b></td>
             </tr>
             <tr>
-              <td>Vuelta 5</td>
+              <td>5ta iteración</td>
               <td><code>i = 5</code></td>
-              <td>5 &lt;= 5 ➔ <b style="color: var(--accent-emerald);">VERDADERO (1)</b></td>
+              <td><code>5 &lt;= 5</code> ➔ <b style="color: var(--accent-emerald);">VERDADERO</b></td>
               <td>Imprime <code>5</code></td>
-              <td><code>i</code> pasa a valer <b>6</b></td>
+              <td><code>i</code> pasa a <b><code>6</code></b></td>
             </tr>
-            <tr style="background: rgba(248, 113, 113, 0.1);">
-              <td>Salida del bucle</td>
-              <td><code>i = 6</code></td>
-              <td>6 &lt;= 5 ➔ <b style="color: var(--accent-rose);">FALSO (0)</b></td>
-              <td><em>No imprime nada</em></td>
-              <td><b>¡El bucle termina de inmediato!</b></td>
+            <tr style="background: rgba(248, 113, 113, 0.12);">
+              <td>Fin del ciclo</td>
+              <td><b><code>i = 6</code></b></td>
+              <td><code>6 &lt;= 5</code> ➔ <b style="color: var(--accent-rose);">FALSO</b></td>
+              <td><em>No entra al bloque</em></td>
+              <td><b>Sale del <code>while</code></b></td>
             </tr>
           </tbody>
         </table>
-
-        <p style="font-size: 0.84rem; color: var(--accent-cyan); margin-top: 6px;">
-          💡 <b>Pregunta clave de examen:</b> Al finalizar el bucle, ¿cuánto vale la variable <code>i</code> en memoria? <b>¡Vale 6!</b> Es el valor 6 el que hizo fallar la condición y permitió salir.
-        </p>
       </section>
 
-      <!-- SLIDE 6: EL PELIGRO DEL BUCLE INFINITO -->
+      <!-- SLIDE 11: ¿POR QUÉ FRENA CUANDO i LLEGA A 6? -->
       <section>
-        <h2><span class="section-num">05</span> El Peligro del Bucle Infinito</h2>
-        <div class="comparison-box">
-          <div class="wrong-card">
-            <div class="wrong-title">💥 El Bucle que Nunca Termina</div>
-            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
-              int i = 1;<br>
-              while (i &lt;= 5)<br>
-              {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;printf("%d\n", i);<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;// ¡OLVIDASTE i++; !<br>
-              }
-            </div>
-            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px;">
-              Como <code>i</code> sigue valiendo 1 para siempre, la condición <code>1 &lt;= 5</code> es eternamente verdadera. El programa imprimirá '1' miles de millones de veces hasta saturar la CPU.
+        <h2><span class="section-num">10</span> ¿Por Qué Frena Exactamente Cuando <code>i</code> Llega a <code>6</code>?</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 6px;">Explicación Textual del Apunte (Página 10)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            <b>"Entonces repite este proceso hasta que la condición del <code>while</code> (<code>i</code> menor o igual a 5) deje de cumplirse, o sea se repetirá hasta que <code>i</code> sea = 6, ya que cuando <code>i</code> vale 1, 2, 3, 4, 5 la condición de que sea menor O igual a 5 es VERDADERA."</b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Cuándo es VERDADERA (<code>i &lt;= 5</code>)?</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              • Con <code>1, 2, 3, 4</code> es <b>menor</b> a 5 ➔ Verdadera.<br>
+              • Con <code>5</code> es <b>igual</b> a 5 ➔ Verdadera (entra e imprime el <code>5</code>, y luego hace <code>5 + 1 = 6</code>).
             </p>
           </div>
 
-          <div class="correct-card">
-            <div class="correct-title">🛡️ Cómo Abortar un Bucle Infinito</div>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              Si tu programa se queda "colgado" imprimiendo sin parar o sin responder en la terminal:
-            </p>
-            <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.95rem; color: var(--accent-emerald); font-weight: bold; text-align: center; margin: 8px 0;">
-              Presioná: Ctrl + C
-            </div>
-            <p style="font-size: 0.8rem; color: #a7f3d0;">
-              <code>Ctrl + C</code> envía una señal de interrupción al sistema operativo para matar el proceso rebelde de inmediato.
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">¿Cuándo se vuelve FALSA?</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Recién cuando <code>i</code> toma el valor <b><code>6</code></b>. Como <code>6</code> no es ni menor ni igual a <code>5</code>, la condición da <b>Falso</b> y el programa salta debajo de la llave de cierre <code>}</code>.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 7: PARTE B: EL BUCLE FOR -->
+      <!-- SLIDE 12: QUÉ PASA SI OLVIDAMOS i++ (BUCLE INFINITO) -->
       <section>
-        <h2><span class="section-num">06</span> Parte B: El Bucle <code>for</code></h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Diseñado específicamente para repeticiones con <b>contador conocido</b>. Empaqueta los 3 pilares en una sola línea:</p>
+        <h2><span class="section-num">11</span> ¿Qué Pasa Si Olvidamos Escribir <code>i++</code>?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Imaginá que borramos u olvidamos la línea <code>i++;</code> adentro del <code>while</code>:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">💥 Bucle Infinito (Se tilda el programa)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> i = <span class="c-num">1</span>;
+<span class="c-kw">while</span>(i &lt;= <span class="c-num">5</span>)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, i);
+    <span class="c-cmt">// ¡Falta i++;!</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 0;">
+              <code>i</code> empieza en <code>1</code> y <b>nunca cambia</b>. En cada vuelta pregunta <code>1 &lt;= 5</code> (siempre verdadero) e imprime <code>1</code> infinitas veces sin terminar jamás.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">🛟 Cómo Detenerlo y Cómo Prevenirlo</div>
+            <p style="font-size: 0.83rem; color: #cbd5e1;">
+              • <b>Para prevenirlo:</b> Revisá siempre que adentro de las llaves <code>{ }</code> del <code>while</code> haya una instrucción que modifique la variable de la condición.<br><br>
+              • <b>Freno de emergencia:</b> Si ejecutaste un programa con bucle infinito en la consola, presioná <b><code>Ctrl + C</code></b> en el teclado para detenerlo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: EJEMPLO NIVEL 1 COMPLETO CON WHILE -->
+      <section>
+        <h2><span class="section-num">12</span> Ejemplo Nivel 1: Programa Completo con <code>while</code></h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel1_while.c</span>
+              <span class="code-badge">Nivel 1 — Completo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> i = <span class="c-num">1</span>;
+
+    <span class="c-kw">while</span>(i &lt;= <span class="c-num">5</span>)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, i);
+        i++;
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Afuera del while, i vale: %d\n"</span>, i);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">Salida en Consola</div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel1_while</span>
+1
+2
+3
+4
+5
+Afuera del while, i vale: 6</div>
+            </div>
+
+            <div class="box box-cyan" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.83rem;">
+                ¡Mirá la última línea de la consola! Comprueba en vivo lo que explica el apunte: adentro del ciclo se imprimen del <code>1</code> al <code>5</code>, y el ciclo termina cuando <b><code>i</code> llega a <code>6</code></b>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: VARIANTES CON WHILE (CUENTA REGRESIVA Y DE 2 EN 2) -->
+      <section>
+        <h2><span class="section-num">13</span> Variantes con <code>while</code>: De 2 en 2 y Cuenta Regresiva</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Cambiando los 3 ingredientes (inicio, condición y avance), podemos generar cualquier secuencia:
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Saltar de 2 en 2 (<code>i += 2</code>)</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> i = <span class="c-num">2</span>;
+<span class="c-kw">while</span>(i &lt;= <span class="c-num">10</span>)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, i);
+    i += <span class="c-num">2</span>; <span class="c-cmt">// Suma de a 2</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">Muestra: <code>2 4 6 8 10</code> (frena cuando <code>i</code> llega a <code>12</code>).</p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Cuenta Regresiva del 5 al 1 (<code>i--</code>)</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> i = <span class="c-num">5</span>;
+<span class="c-kw">while</span>(i &gt;= <span class="c-num">1</span>)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, i);
+    i--; <span class="c-cmt">// Resta 1 en cada vuelta</span>
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">Muestra: <code>5 4 3 2 1</code> (frena cuando <code>i</code> baja a <code>0</code>).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: WHILE CONTROLADO POR EL USUARIO (CENTINELA) -->
+      <section>
+        <h2><span class="section-num">14</span> El Gran Fuerte del <code>while</code>: Cuando No Sabemos Cuántas Vueltas Son</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Muchas veces no sabemos de antemano cuántas veces se repetirá el ciclo porque depende de lo que ingrese el usuario con <code>scanf</code>. Por ejemplo, pedir una clave o repetir mientras no ingrese <code>0</code>:
+        </p>
 
         <div class="code-window">
           <div class="code-header">
-            <div class="code-dots">
-              <span class="code-dot dot-red"></span>
-              <span class="code-dot dot-yellow"></span>
-              <span class="code-dot dot-green"></span>
-            </div>
-            <span class="code-title">bucle_for.c</span>
-            <span class="code-badge">Ejemplo Obligatorio</span>
+            <span class="code-title">while_interactivo.c</span>
+            <span class="code-badge">Repetición por condición</span>
           </div>
-          <div class="code-body"><span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> numero = <span class="c-num">1</span>; <span class="c-cmt">// Valor inicial distinto de 0 para entrar</span>
+
+    <span class="c-kw">while</span>(numero != <span class="c-num">0</span>)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"Ingrese un numero (0 para terminar): "</span>);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;numero);
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Fin del programa.\n"</span>);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: 13.2. BUCLE FOR — DEFINICIÓN DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">15</span> 13.2. Bucle <code>for</code> (Definición del Apunte)</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Definición del Apunte (Página 10)</h4>
+          <p style="font-size: 1rem; margin: 0;">
+            <b>Permite repetir una cantidad conocida de veces.</b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Por qué se inventó el <code>for</code>?</h4>
+            <p style="font-size: 0.84rem; line-height: 1.55; margin: 0;">
+              En el <code>while</code> teníamos los 3 ingredientes desparramados en distintas líneas (<code>int i = 1;</code> arriba, <code>i &lt;= 5</code> en el medio e <code>i++;</code> al final), con el riesgo de olvidar el <code>i++</code>.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Todo reunido en un solo renglón</h4>
+            <p style="font-size: 0.84rem; line-height: 1.55; margin: 0;">
+              El bucle <b><code>for</code></b> agrupa el <b>inicio</b>, la <b>condición</b> y el <b>incremento</b> adentro del mismo paréntesis, separados por punto y coma (<code>;</code>). ¡De un solo vistazo sabés cuántas veces va a iterar!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: EJEMPLO CENTRAL DEL APUNTE PARA FOR -->
+      <section>
+        <h2><span class="section-num">16</span> El Ejemplo del Apunte: Contar del 1 al 5 con <code>for</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Veamos el ejemplo exacto de las páginas 10 y 11 del apunte:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">Ejemplo 13.2 del Apunte</span>
+            <span class="code-badge">Páginas 10 y 11</span>
+          </div>
+          <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
 {
     <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, i);
 }</div>
         </div>
 
-        <div style="background: rgba(18, 27, 46, 0.95); padding: 14px; border-radius: 10px; border: 1px solid var(--card-border); margin: 12px 0;">
-          <h4 style="color: var(--accent-cyan); margin-bottom: 6px;">El Orden de Ejecución Exacto de un <code>for</code></h4>
-          <ol style="font-size: 0.86rem; line-height: 1.6; margin-left: 20px; color: #cbd5e1;">
-            <li><b>Paso 1 (UNA SOLA VEZ):</b> Se ejecuta la inicialización <code>int i = 1</code>.</li>
-            <li><b>Paso 2:</b> Se evalúa la condición <code>i &lt;= 5</code>. Si es falsa, termina de inmediato.</li>
-            <li><b>Paso 3:</b> Si es verdadera, se ejecuta el cuerpo adentro de las llaves (el <code>printf</code>).</li>
-            <li><b>Paso 4:</b> Se ejecuta la actualización <code>i++</code>.</li>
-            <li><b>Paso 5:</b> Vuelve al <b>Paso 2</b> para comprobar la condición nuevamente.</li>
-          </ol>
+        <div class="box box-amber" style="margin-top: 14px;">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Explicación Textual del Apunte</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            <b>"Acá el bucle se va a repetir con la cantidad de iteraciones que nosotros le digamos, en este caso itera 5 veces:<br>
+            <code>i = 1</code>, <code>i = 2</code>, <code>i = 3</code>, <code>i = 4</code>, <code>i = 5</code> (última)."</b>
+          </p>
         </div>
       </section>
 
-      <!-- SLIDE 8: PARTE C: COMPARACIÓN DIRECTA LADO A LADO -->
+      <!-- SLIDE 18: DESGLOSE PIEZA POR PIEZA DE LA CABECERA DEL FOR -->
       <section>
-        <h2><span class="section-num">07</span> Parte C: Comparación Lado a Lado</h2>
+        <h2><span class="section-num">17</span> Anatomía del <code>for</code>: Las 3 Partes del Paréntesis</h2>
+        <div style="background: rgba(18, 27, 46, 0.95); padding: 16px; border-radius: 12px; border: 1px solid var(--card-border); font-family: var(--font-mono); font-size: 1.15rem; text-align: center; margin: 12px 0;">
+          <span style="color: #f472b6; font-weight: bold;">for</span> (
+          <span style="color: var(--accent-cyan); font-weight: bold;">int i = 1</span> ;
+          <span style="color: var(--accent-amber); font-weight: bold;">i &lt;= 5</span> ;
+          <span style="color: var(--accent-emerald); font-weight: bold;">i++</span> )
+        </div>
+
+        <div class="grid-3">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. <code>int i = 1</code></h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              <b>Inicialización:</b> En qué valor arranca la variable contadora <code>i</code>. Se ejecuta <b>una única vez</b> al principio de todo.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. <code>i &lt;= 5</code></h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              <b>Condición:</b> Hasta dónde sigue iterando. Se evalúa antes de cada vuelta. Mientras sea verdadera, entra a las llaves <code>{ }</code>.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">3. <code>i++</code></h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              <b>Incremento / Paso:</b> Cómo avanza <code>i</code> al terminar cada vuelta (acá suma <code>1</code> por vuelta).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: LOS 4 PASOS DE EJECUCIÓN POR VUELTA DEL FOR -->
+      <section>
+        <h2><span class="section-num">18</span> Los 4 Pasos de Ejecución Interna de un <code>for</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          ¡Atención! Muchos creen que el <code>i++</code> se ejecuta antes del <code>printf</code> porque está escrito arriba. <b>No es así</b>. Mirá el orden real en que la computadora ejecuta un <code>for</code>:
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Paso 1 — Inicialización (<code>int i = 1</code>):</b> Se hace <b>una sola vez</b> al llegar al <code>for</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>Paso 2 — Condición (<code>i &lt;= 5</code>):</b> Pregunta si se cumple. Si da <b>Falso</b>, el <code>for</code> termina inmediatamente. Si da <b>Verdadero</b>, pasa al Paso 3.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>Paso 3 — Cuerpo del bucle (<code>{ printf("%d\n", i); }</code>):</b> Ejecuta todas las instrucciones adentro de las llaves.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b>Paso 4 — Incremento (<code>i++</code>) y repetir:</b> Recién al chocar con la llave de cierre <code>}</code>, aumenta <code>i</code> en 1 y <b>vuelve al Paso 2</b> a evaluar la condición.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: TABLA DE TRAZA DEL EJEMPLO FOR -->
+      <section>
+        <h2><span class="section-num">19</span> Traza Completa de <code>for(int i = 1; i &lt;= 5; i++)</code></h2>
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Iteración (Vuelta)</th>
+              <th>Valor de <code>i</code></th>
+              <th>Paso 2: ¿<code>i &lt;= 5</code>?</th>
+              <th>Paso 3: Cuerpo <code>printf</code></th>
+              <th>Paso 4: <code>i++</code> al cerrar <code>}</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1ra (inicio)</td>
+              <td><code>i = 1</code></td>
+              <td><code>1 &lt;= 5</code> (Verdadero)</td>
+              <td>Muestra <b><code>1</code></b></td>
+              <td><code>i</code> sube a <code>2</code></td>
+            </tr>
+            <tr>
+              <td>2da</td>
+              <td><code>i = 2</code></td>
+              <td><code>2 &lt;= 5</code> (Verdadero)</td>
+              <td>Muestra <b><code>2</code></b></td>
+              <td><code>i</code> sube a <code>3</code></td>
+            </tr>
+            <tr>
+              <td>3ra</td>
+              <td><code>i = 3</code></td>
+              <td><code>3 &lt;= 5</code> (Verdadero)</td>
+              <td>Muestra <b><code>3</code></b></td>
+              <td><code>i</code> sube a <code>4</code></td>
+            </tr>
+            <tr>
+              <td>4ta</td>
+              <td><code>i = 4</code></td>
+              <td><code>4 &lt;= 5</code> (Verdadero)</td>
+              <td>Muestra <b><code>4</code></b></td>
+              <td><code>i</code> sube a <code>5</code></td>
+            </tr>
+            <tr>
+              <td>5ta (última)</td>
+              <td><code>i = 5</code></td>
+              <td><code>5 &lt;= 5</code> (Verdadero)</td>
+              <td>Muestra <b><code>5</code></b></td>
+              <td><code>i</code> sube a <code>6</code></td>
+            </tr>
+            <tr style="background: rgba(248, 113, 113, 0.12);">
+              <td>Chequeo final</td>
+              <td><code>i = 6</code></td>
+              <td><code>6 &lt;= 5</code> (<b>Falso</b>)</td>
+              <td><em>No se ejecuta</em></td>
+              <td><b>Termina el <code>for</code></b></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 21: COMPARACIÓN LADO A LADO WHILE VS FOR -->
+      <section>
+        <h2><span class="section-num">20</span> Comparación Lado a Lado: <code>while</code> vs <code>for</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Mirando los dos ejemplos del apunte uno al lado del otro, vemos que hacen <b>exactamente el mismo trabajo</b> y producen la misma salida (<code>1, 2, 3, 4, 5</code>):
+        </p>
+
         <div class="comparison-box">
           <div class="box box-cyan" style="margin: 0;">
-            <h4 style="color: #38bdf8;">Con bucle while</h4>
+            <h4 style="color: #38bdf8;">13.1. Con Bucle <code>while</code></h4>
             <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body" style="font-size: 0.8rem;"><span class="c-kw">int</span> i = <span class="c-num">1</span>;
-<span class="c-kw">while</span> (i &lt;= <span class="c-num">5</span>)
+              <div class="code-body"><span class="c-kw">int</span> i = <span class="c-num">1</span>;
+
+<span class="c-kw">while</span>(i &lt;= <span class="c-num">5</span>)
 {
     <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, i);
     i++;
 }</div>
             </div>
-            <p style="font-size: 0.8rem; color: #cbd5e1;">
-              Los 3 pilares están separados en líneas distintas. Ideal cuando la repetición depende de un evento imprevisto.
+            <p style="font-size: 0.8rem; margin: 0;">
+              Inicio afuera, condición en el paréntesis e incremento adentro al final.
             </p>
           </div>
 
           <div class="box box-emerald" style="margin: 0;">
-            <h4 style="color: #34d399;">Con bucle for</h4>
+            <h4 style="color: #34d399;">13.2. Con Bucle <code>for</code></h4>
             <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body" style="font-size: 0.8rem;"><span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
 {
     <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, i);
 }</div>
             </div>
-            <p style="font-size: 0.8rem; color: #cbd5e1;">
-              Todo compacto en la cabecera. Es casi imposible olvidar el <code>i++</code> por accidente.
+            <p style="font-size: 0.8rem; margin: 0;">
+              Inicio, condición e incremento compactados en el encabezado del <code>for</code>.
             </p>
           </div>
         </div>
+      </section>
 
-        <div class="box box-amber" style="margin-top: 10px;">
-          <h4 style="color: #fbbf24; margin-bottom: 4px;">¿Cuándo conviene usar cada uno?</h4>
-          <p style="font-size: 0.85rem; margin: 0;">
-            • Usá <b><code>for</code></b> cuando <b>sabés de antemano cuántas vueltas querés dar</b> (ej. contar del 1 al 10, repetir 100 veces).<br>
-            • Usá <b><code>while</code></b> cuando la repetición <b>depende de una condición externa o de lo que ingrese el usuario</b> (ej. mientras no ingrese el número 0, mientras tenga vidas).
-          </p>
+      <!-- SLIDE 22: ¿CUÁNDO ELEGIR CADA UNO? -->
+      <section>
+        <h2><span class="section-num">21</span> ¿Cuándo Conviene Elegir <code>for</code> y Cuándo <code>while</code>?</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">✅ Elegí <code>for</code> cuando...</h4>
+            <p style="font-size: 0.85rem;">
+              <b>Conocés la cantidad exacta de iteraciones</b> antes de empezar el ciclo (tal como define el apunte).
+            </p>
+            <ul style="font-size: 0.82rem; line-height: 1.55; margin-left: 16px;">
+              <li>Mostrar los números del <code>1</code> al <code>100</code>.</li>
+              <li>Pedir exactamente <code>5</code> notas por teclado.</li>
+              <li>Calcular la tabla de multiplicar del <code>1</code> al <code>10</code>.</li>
+              <li>Recorrer las casillas de un vector (2do Bimestre).</li>
+            </ul>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">✅ Elegí <code>while</code> cuando...</h4>
+            <p style="font-size: 0.85rem;">
+              <b>No sabés cuántas vueltas dará</b> porque depende de una condición que cambia durante el programa.
+            </p>
+            <ul style="font-size: 0.82rem; line-height: 1.55; margin-left: 16px;">
+              <li>Pedir números al usuario <i>mientras</i> no ingrese <code>0</code>.</li>
+              <li>Pedir una contraseña <i>mientras</i> sea incorrecta.</li>
+              <li>Seguir jugando <i>mientras</i> el jugador tenga vidas mayores a <code>0</code>.</li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 9: EJEMPLOS PRÁCTICOS DE LA PARTE C -->
+      <!-- SLIDE 23: CONTADORES Y ACUMULADORES EN CICLOS -->
       <section>
-        <h2><span class="section-num">08</span> Galería de Bucles Prácticos</h2>
-        <div class="grid-2">
+        <h2><span class="section-num">22</span> Contadores y Acumuladores Adentro de un Bucle</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Al combinar la Sección 7 (Incremento de variables: <code>+=</code> y <code>++</code>) con los bucles de la Sección 13, nacen dos herramientas fundamentales de la programación:
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">1. Mostrar solo Números Pares del 2 al 20</h4>
+            <h4 style="color: #818cf8;">🔢 Contador (suma una cantidad fija, +1)</h4>
+            <p style="font-size: 0.83rem;">
+              Sirve para <b>contar cuántas veces</b> ocurre algo (ej: cuántos números pares aparecieron).
+            </p>
             <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body" style="font-size: 0.78rem;"><span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">2</span>; i &lt;= <span class="c-num">20</span>; i += <span class="c-num">2</span>)
+              <div class="code-body"><span class="c-kw">int</span> cantidad = <span class="c-num">0</span>; <span class="c-cmt">// Empieza en 0</span>
+<span class="c-cmt">// Adentro del bucle:</span>
+cantidad++; <span class="c-cmt">// Sube de 1 en 1</span></div>
+            </div>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">🧺 Acumulador (suma valores variables)</h4>
+            <p style="font-size: 0.83rem;">
+              Sirve para <b>ir sumando un total</b> (ej: la suma de todos los números o el total de una compra).
+            </p>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> suma = <span class="c-num">0</span>; <span class="c-cmt">// Empieza en 0</span>
+<span class="c-cmt">// Adentro del bucle:</span>
+suma += i; <span class="c-cmt">// Equivale a: suma = suma + i;</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: EJEMPLO NIVEL 2: SUMAR DEL 1 AL 5 CON TRAZA -->
+      <section>
+        <h2><span class="section-num">23</span> Ejemplo Nivel 2: Sumar los Números del 1 al 5</h2>
+        <div class="grid-2">
+          <div>
+            <div class="code-window">
+              <div class="code-header">
+                <span class="code-title">nivel2_acumulador.c</span>
+                <span class="code-badge">Nivel 2</span>
+              </div>
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
+    {
+        suma += i;
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"La suma total es: %d\n"</span>, suma);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+
+            <div class="terminal-window" style="margin-top: 8px;">
+              <div class="terminal-header">Salida en Consola</div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel2_acumulador</span>
+La suma total es: 15</div>
+            </div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Vuelta</th>
+                  <th><code>i</code></th>
+                  <th>Cálculo <code>suma + i</code></th>
+                  <th>Nuevo <code>suma</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Inicio</td>
+                  <td>-</td>
+                  <td><code>int suma = 0;</code></td>
+                  <td><code>0</code></td>
+                </tr>
+                <tr>
+                  <td>1ra</td>
+                  <td><code>1</code></td>
+                  <td><code>0 + 1</code></td>
+                  <td><code>1</code></td>
+                </tr>
+                <tr>
+                  <td>2da</td>
+                  <td><code>2</code></td>
+                  <td><code>1 + 2</code></td>
+                  <td><code>3</code></td>
+                </tr>
+                <tr>
+                  <td>3ra</td>
+                  <td><code>3</code></td>
+                  <td><code>3 + 3</code></td>
+                  <td><code>6</code></td>
+                </tr>
+                <tr>
+                  <td>4ta</td>
+                  <td><code>4</code></td>
+                  <td><code>6 + 4</code></td>
+                  <td><code>10</code></td>
+                </tr>
+                <tr>
+                  <td>5ta</td>
+                  <td><code>5</code></td>
+                  <td><code>10 + 5</code></td>
+                  <td><b><code>15</code></b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: LECTURA DE N NÚMEROS CON SCANF ADENTRO DE UN FOR -->
+      <section>
+        <h2><span class="section-num">24</span> Pedir Varios Números con <code>scanf</code> Adentro de un <code>for</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Si necesitamos pedirle 5 números al usuario para sumarlos, <b>no hace falta declarar 5 variables distintas</b> (<code>n1, n2, n3, n4, n5</code>). Ponemos un único <code>scanf</code> adentro de un <code>for</code> que dé 5 vueltas:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">scanf_en_for.c</span>
+            <span class="code-badge">Patrón clásico</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> valor;
+    <span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"Ingrese el numero %d: "</span>, i);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;valor);
+        suma += valor;
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Suma de los 5 ingresados: %d\n"</span>, suma);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: EJEMPLO NIVEL 3: FOR + SCANF + IF + CONTADOR -->
+      <section>
+        <h2><span class="section-num">25</span> Ejemplo Nivel 3: Filtrar con <code>if</code> Adentro de un <code>for</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">
+          Combinemos bucles (Sección 13) + divisibilidad por 2 (Sección 6) + condicionales (Sección 9): recorremos del <code>1</code> al <code>6</code>, mostramos cuáles son pares y los contamos:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel3_contar_pares.c</span>
+              <span class="code-badge">Nivel 3 — Intermedio</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> pares = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">6</span>; i++)
+    {
+        <span class="c-kw">if</span>(i % <span class="c-num">2</span> == <span class="c-num">0</span>)
+        {
+            <span class="c-fn">printf</span>(<span class="c-str">"%d es par\n"</span>, i);
+            pares++;
+        }
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Total de pares: %d\n"</span>, pares);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th><code>i</code></th>
+                  <th>¿<code>i % 2 == 0</code>?</th>
+                  <th>Acción</th>
+                  <th><code>pares</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>1</code></td>
+                  <td><code>1 % 2 = 1</code> (Falso)</td>
+                  <td>No entra al <code>if</code></td>
+                  <td><code>0</code></td>
+                </tr>
+                <tr>
+                  <td><code>2</code></td>
+                  <td><code>2 % 2 = 0</code> (Verd.)</td>
+                  <td>Imprime y suma 1</td>
+                  <td><code>1</code></td>
+                </tr>
+                <tr>
+                  <td><code>3</code></td>
+                  <td><code>3 % 2 = 1</code> (Falso)</td>
+                  <td>No entra al <code>if</code></td>
+                  <td><code>1</code></td>
+                </tr>
+                <tr>
+                  <td><code>4</code></td>
+                  <td><code>4 % 2 = 0</code> (Verd.)</td>
+                  <td>Imprime y suma 1</td>
+                  <td><code>2</code></td>
+                </tr>
+                <tr>
+                  <td><code>5</code></td>
+                  <td><code>5 % 2 = 1</code> (Falso)</td>
+                  <td>No entra al <code>if</code></td>
+                  <td><code>2</code></td>
+                </tr>
+                <tr>
+                  <td><code>6</code></td>
+                  <td><code>6 % 2 = 0</code> (Verd.)</td>
+                  <td>Imprime y suma 1</td>
+                  <td><b><code>3</code></b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: COMBINANDO FUNCIONES (U12) + BUCLES (U13) -->
+      <section>
+        <h2><span class="section-num">26</span> Integración: Llamar a <code>doble(i)</code> Adentro de un <code>for</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          ¡Unamos los dos grandes temas de cierre del 1er Bimestre! Podemos llamar a la función <code>int doble(int numero)</code> de la Sección 12 en cada vuelta del bucle <code>for</code> de la Sección 13:
+        </p>
+
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">funciones_y_bucles.c</span>
+              <span class="code-badge">Secciones 12 + 13</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
+    {
+        <span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(i);
+        <span class="c-fn">printf</span>(<span class="c-str">"El doble de %d es %d\n"</span>, i, resultado);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">Salida en Consola</div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./funciones_y_bucles</span>
+El doble de 1 es 2
+El doble de 2 es 4
+El doble de 3 es 6
+El doble de 4 es 8
+El doble de 5 es 10</div>
+            </div>
+
+            <div class="box box-emerald" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.82rem;">
+                En cada vuelta, <code>i</code> cambia de valor (<code>1, 2, 3, 4, 5</code>) y se envía como argumento a <code>doble(i)</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: PUENTE AL 2DO BIMESTRE: for(int i = 0; i < 5; i++) -->
+      <section>
+        <h2><span class="section-num">27</span> Puente Hacia el 2do Bimestre: Contar desde <code>0</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          En la próxima unidad (2do Bimestre: <b>Vectores</b>) vas a descubrir que en C las posiciones de un vector se numeran empezando desde <b><code>0</code></b> (<code>0, 1, 2, 3, 4</code>). Por eso, este patrón de <code>for</code> será tu mejor amigo:
+        </p>
+
+        <div class="comparison-box">
+          <div class="box box-cyan" style="margin: 0;">
+            <h4 style="color: #38bdf8;">Del 1 al 5 (<code>i = 1; i &lt;= 5</code>)</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
 {
     <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, i);
 }</div>
             </div>
-            <p style="font-size: 0.78rem; color: #a5b4fc;">Avanza de 2 en 2 con <code>i += 2</code>.</p>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Itera <b>5 veces</b> con valores: <code>1, 2, 3, 4, 5</code> (frena en <code>6</code>).
+            </p>
+          </div>
+
+          <div class="box box-emerald" style="margin: 0;">
+            <h4 style="color: #34d399;">Del 0 al 4 (<code>i = 0; i &lt; 5</code>)</h4>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, i);
+}</div>
+            </div>
+            <p style="font-size: 0.82rem; margin: 0;">
+              ¡También itera <b>5 veces</b>! Con valores: <code>0, 1, 2, 3, 4</code> (frena en <code>5</code> porque usa <code>&lt; 5</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: EJEMPLO NIVEL 4: RAZONAMIENTO LÓGICO PASO A PASO -->
+      <section>
+        <h2><span class="section-num">28</span> Ejemplo Nivel 4: Cómo Pensar y Construir la Solución</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Problema Integrador</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Un profesor quiere ingresar las notas de <b>4 alumnos</b> (entre 1 y 10). Al finalizar la carga, el programa debe informar:<br>
+            1) Cuántos alumnos aprobaron (nota mayor o igual a 6).<br>
+            2) El promedio general de las 4 notas.
+          </p>
+        </div>
+
+        <div class="step-list" style="margin-top: 10px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>¿Qué ciclo elegimos?</b> Como sabemos de antemano que son exactamente 4 alumnos, usamos un <code>for(int i = 1; i &lt;= 4; i++)</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b>¿Qué variables necesitamos antes del ciclo?</b> Un contador <code>int aprobados = 0;</code> y un acumulador <code>int sumaNotas = 0;</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b>¿Qué hacemos en cada vuelta?</b> Leemos la <code>nota</code> con <code>scanf</code>, la sumamos a <code>sumaNotas += nota;</code>, y si <code>nota &gt;= 6</code> incrementamos <code>aprobados++;</code>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: IMPLEMENTACIÓN COMPLETA DEL EJEMPLO NIVEL 4 -->
+      <section>
+        <h2><span class="section-num">29</span> Ejemplo Nivel 4: Código Completo y Traza</h2>
+        <div class="grid-2">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel4_curso.c</span>
+              <span class="code-badge">Nivel 4</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> nota;
+    <span class="c-kw">int</span> aprobados = <span class="c-num">0</span>;
+    <span class="c-kw">int</span> sumaNotas = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">4</span>; i++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"Nota del alumno %d: "</span>, i);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;nota);
+        sumaNotas += nota;
+        <span class="c-kw">if</span>(nota &gt;= <span class="c-num">6</span>) {
+            aprobados++;
+        }
+    }
+
+    <span class="c-kw">float</span> promedio = sumaNotas / <span class="c-num">4.0</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Aprobados: %d\n"</span>, aprobados);
+    <span class="c-fn">printf</span>(<span class="c-str">"Promedio: %.2f\n"</span>, promedio);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">Ejecución de Ejemplo</div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel4_curso</span>
+Nota del alumno 1: 8
+Nota del alumno 2: 5
+Nota del alumno 3: 10
+Nota del alumno 4: 7
+Aprobados: 3
+Promedio: 7.50</div>
+            </div>
+
+            <table class="trace-table" style="margin-top: 8px;">
+              <thead>
+                <tr>
+                  <th><code>i</code></th>
+                  <th><code>nota</code></th>
+                  <th><code>sumaNotas</code></th>
+                  <th><code>aprobados</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>1</code></td>
+                  <td><code>8</code></td>
+                  <td><code>8</code></td>
+                  <td><code>1</code></td>
+                </tr>
+                <tr>
+                  <td><code>2</code></td>
+                  <td><code>5</code></td>
+                  <td><code>13</code></td>
+                  <td><code>1</code></td>
+                </tr>
+                <tr>
+                  <td><code>3</code></td>
+                  <td><code>10</code></td>
+                  <td><code>23</code></td>
+                  <td><code>2</code></td>
+                </tr>
+                <tr>
+                  <td><code>4</code></td>
+                  <td><code>7</code></td>
+                  <td><b><code>30</code></b></td>
+                  <td><b><code>3</code></b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: ERROR FRECUENTE 1: PUNTO Y COMA AL FINAL DE FOR O WHILE -->
+      <section>
+        <h2><span class="section-num">30</span> Error Frecuente #1: El Punto y Coma al Final de <code>while</code> o <code>for</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Uno de los errores más difíciles de detectar a simple vista es poner un <b>punto y coma (<code>;</code>)</b> justo después de cerrar el paréntesis de <code>for(...)</code> o <code>while(...)</code>:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ MAL: Punto y coma después del paréntesis</div>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #f87171; background: rgba(0,0,0,0.45); padding: 10px; border-radius: 8px;">
+              for(int i = 1; i &lt;= 5; i++); // &lt;-- ¡ERROR!<br>
+              {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;printf("%d\n", i);<br>
+              }
+            </div>
+            <p style="font-size: 0.79rem; color: #fecaca; margin-top: 6px;">
+              Ese <code>;</code> le dice a C que el bucle tiene un cuerpo vacío. En un <code>for</code> gira en vacío hasta 6; y en un <code>while(i &lt;= 5);</code> ¡congela el programa en un bucle infinito silencioso porque nunca llega al <code>i++</code> de adentro!
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ BIEN: Sin punto y coma antes de abrir <code>{</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
+{
+    <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, i);
+}</div>
+            </div>
+            <p style="font-size: 0.79rem; color: #a7f3d0; margin-top: 6px;">
+              Los puntos y coma van <b>adentro</b> del paréntesis del <code>for</code> separando sus 3 partes, jamás al final de la línea donde empieza el bloque <code>{</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: ERROR FRECUENTE 2: REINICIAR EL ACUMULADOR ADENTRO DEL CICLO -->
+      <section>
+        <h2><span class="section-num">31</span> Error Frecuente #2: Poner <code>int suma = 0;</code> Adentro del Ciclo</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ MAL: Reiniciar en 0 en cada vuelta</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
+{
+    <span class="c-kw">int</span> suma = <span class="c-num">0</span>; <span class="c-cmt">// ¡Borra lo acumulado!</span>
+    suma += i;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 0;">
+              Si declarás e inicializás <code>suma = 0</code> <b>adentro</b> de las llaves del bucle, en cada vuelta vuelve a cero y pierde todo lo que venía sumando. Además, no existirá afuera del ciclo.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ BIEN: Inicializar ANTES de entrar al ciclo</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> suma = <span class="c-num">0</span>; <span class="c-cmt">// 1 sola vez ANTES del for</span>
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
+{
+    suma += i;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 0;">
+              Todo contador o acumulador se pone en <code>0</code> <b>arriba del bucle</b>, se actualiza <b>adentro</b> y se muestra con <code>printf</code> <b>abajo</b> al terminar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: BUENAS PRÁCTICAS CON BUCLES -->
+      <section>
+        <h2><span class="section-num">32</span> Buenas Prácticas al Programar con Bucles</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. Usá Siempre Llaves <code>{ }</code> e Indentación</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Dejá siempre una sangría (espacios a la izquierda) para las instrucciones que están adentro del <code>while</code> o del <code>for</code>. Así ves de inmediato qué se repite y qué está afuera.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">2. Verificá la Primera y la Última Vuelta</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Revisá siempre el valor inicial (<code>i = 1</code> vs <code>i = 0</code>) y el operador de la condición (<code>&lt;</code> vs <code>&lt;=</code>) para asegurarte de que no falte ni sobre ninguna iteración.
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">3. No Modifiques <code>i</code> por Duplicado en un <code>for</code></h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Si ya pusiste <code>i++</code> en el paréntesis del <code>for(int i = 1; i &lt;= 5; i++)</code>, no vuelvas a escribir <code>i++;</code> adentro de las llaves <code>{ }</code>.
+            </p>
           </div>
 
           <div class="box box-amber">
-            <h4 style="color: #fbbf24;">2. Sumar una Secuencia (Acumulador)</h4>
-            <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body" style="font-size: 0.78rem;"><span class="c-kw">int</span> suma = <span class="c-num">0</span>;
-<span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">10</span>; i++)
-{
-    suma += i; <span class="c-cmt">// Suma 1+2+3+...+10</span>
-}
-<span class="c-fn">printf</span>(<span class="c-str">"Total: %d\n"</span>, suma); <span class="c-cmt">// Da 55</span></div>
-            </div>
-          </div>
-
-          <div class="box box-emerald" style="grid-column: 1 / -1;">
-            <h4 style="color: #34d399;">3. Bucle Centinela con while (Repetir hasta ingresar 0)</h4>
-            <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body" style="font-size: 0.78rem;"><span class="c-kw">int</span> numero = -<span class="c-num">1</span>;
-<span class="c-kw">while</span> (numero != <span class="c-num">0</span>)
-{
-    <span class="c-fn">printf</span>(<span class="c-str">"Ingresa un número (0 para salir): "</span>);
-    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;numero);
-}
-<span class="c-fn">printf</span>(<span class="c-str">"¡Programa finalizado con éxito!\n"</span>);</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 10: ERRORES FRECUENTES EN BUCLES -->
-      <section>
-        <h2><span class="section-num">09</span> Errores Clásicos en Bucles</h2>
-        <div class="comparison-box">
-          <div class="wrong-card">
-            <div class="wrong-title">❌ El Punto y Coma Accidental</div>
-            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
-              for (int i = 1; i &lt;= 5; i++); // ¡PUNTO Y COMA TRÁGICO!
-              {
-                  printf("%d\n", i);
-              }
-            </div>
-            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px;">
-              El <code>;</code> hace que el bucle gire en el vacío 5 veces sin hacer nada, y luego ejecuta el bloque <b>una sola vez</b> mostrando 6.
-            </p>
-          </div>
-
-          <div class="wrong-card" style="border-color: rgba(251, 191, 36, 0.4); background: rgba(45, 35, 18, 0.7);">
-            <div class="wrong-title" style="color: var(--accent-amber);">⚠️ Errores de Límites (Off-by-one)</div>
-            <p style="font-size: 0.8rem; color: #fef08a;">
-              Confundir <code>i &lt; 5</code> con <code>i &lt;= 5</code>.<br>
-              • Con <code>i &lt; 5</code> se ejecuta 4 veces (1, 2, 3, 4).<br>
-              • Con <code>i &lt;= 5</code> se ejecuta 5 veces (1, 2, 3, 4, 5).<br>
-              ¡Prestá siempre atención al signo igual en los límites!
+            <h4 style="color: #fbbf24;">4. Mostrá los Totales Afuera del Ciclo</h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Si solo te piden el resultado final de una suma o conteo, colocá el <code>printf</code> <b>después de la llave de cierre <code>}</code></b> para que se imprima una sola vez al terminar.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 11: RESUMEN FINAL Y AUTOEVALUACIÓN -->
+      <!-- SLIDE 34: EJERCICIOS DE APLICACIÓN 1 Y 2 -->
       <section>
-        <h2><span class="section-num">10</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">33</span> Ejercicios de Aplicación (Parte 1)</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Ejercicio 1: Del 1 al 10 con <code>while</code> y con <code>for</code></h4>
+          <p style="font-size: 0.83rem; margin: 0 0 6px;">
+            Adaptá los ejemplos del apunte para mostrar por pantalla los números del <code>1</code> al <code>10</code> usando primero un bucle <code>while</code> y luego un bucle <code>for</code>. ¿Con qué valor de <code>i</code> frena cada ciclo?
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-cmt">// Con while (frena cuando i llega a 11)</span>
+    <span class="c-kw">int</span> i = <span class="c-num">1</span>;
+    <span class="c-kw">while</span>(i &lt;= <span class="c-num">10</span>)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, i);
+        i++;
+    }
+
+    <span class="c-cmt">// Con for (itera 10 veces: i = 1 hasta i = 10)</span>
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> j = <span class="c-num">1</span>; j &lt;= <span class="c-num">10</span>; j++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, j);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Ejercicio 2: Tabla de Multiplicar del 7</h4>
+          <p style="font-size: 0.83rem; margin: 0 0 6px;">
+            Usando un bucle <code>for</code> que vaya desde <code>i = 1</code> hasta <code>i &lt;= 10</code>, mostrá los resultados de multiplicar <code>7 * i</code> en cada vuelta.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">10</span>; i++)
+    {
+        <span class="c-kw">int</span> resultado = <span class="c-num">7</span> * i;
+        <span class="c-fn">printf</span>(<span class="c-str">"7 x %d = %d\n"</span>, i, resultado);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 35: EJERCICIO DE APLICACIÓN 3 (INTEGRADOR) -->
+      <section>
+        <h2><span class="section-num">34</span> Ejercicio de Aplicación 3 (Integrador Final del 1er Bimestre)</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Ejercicio 3: Función + Bucle <code>for</code> + Condicional</h4>
+          <p style="font-size: 0.85rem; margin: 0 0 8px;">
+            1) Creá una función <code>int doble(int numero)</code> igual a la del apunte.<br>
+            2) En <code>main()</code>, usá un bucle <code>for</code> que pida <b>5 números enteros</b> por teclado con <code>scanf</code>.<br>
+            3) Por cada número ingresado, llamá a <code>doble(numero)</code> y, si el doble obtenido es <b>mayor a 20</b>, sumá <code>1</code> a un contador. Al final mostrá cuántos superaron 20.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución completa</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">doble</span>(<span class="c-kw">int</span> numero)
+{
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> n;
+    <span class="c-kw">int</span> mayoresA20 = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt;= <span class="c-num">5</span>; i++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"Ingrese numero %d: "</span>, i);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;n);
+
+        <span class="c-kw">int</span> resultado = <span class="c-fn">doble</span>(n);
+        <span class="c-kw">if</span>(resultado &gt; <span class="c-num">20</span>)
+        {
+            mayoresA20++;
+        }
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Cantidad cuyo doble supera 20: %d\n"</span>, mayoresA20);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 36: RESUMEN FINAL Y CHECKLIST -->
+      <section>
+        <h2><span class="section-num">35</span> Resumen de la Unidad 13 y Cierre del 1er Bimestre</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Síntesis de Bucles</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>3 Componentes:</b> Inicialización, Condición y Actualización.</li>
-              <li><b>while:</b> Excelente para repeticiones basadas en eventos o centinelas.</li>
-              <li><b>for:</b> Excelente para iteraciones con contador numérico.</li>
-              <li><b>Evitar bucle infinito:</b> Asegurar que la condición cambie hacia falso.</li>
-              <li><b>Ctrl + C:</b> Freno de emergencia en terminal.</li>
+            <h4 style="color: #818cf8;">Conceptos Clave del Apunte</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>13.1 Bucle <code>while</code>:</b> Repite instrucciones mientras una condición sea verdadera.</li>
+              <li><b>Corte del ejemplo:</b> En <code>while(i &lt;= 5)</code> es verdadera para <code>1, 2, 3, 4, 5</code> y frena cuando <code>i</code> llega a <b><code>6</code></b>.</li>
+              <li><b>13.2 Bucle <code>for</code>:</b> Permite repetir una cantidad conocida de veces: <code>for(int i = 1; i &lt;= 5; i++)</code>.</li>
+              <li><b>3 Ingredientes:</b> Inicialización (<code>int i = 1</code>), Condición (<code>i &lt;= 5</code>) e Incremento (<code>i++</code>).</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar los 3 componentes obligatorios de todo bucle?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué <code>i</code> termina valiendo 6 en el bucle del 1 al 5?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cuándo conviene elegir <code>for</code> y cuándo <code>while</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo escribir un bucle que sume los números del 1 al 10?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo vuelta por vuelta qué hace <code>while(i &lt;= 5)</code> y por qué termina cuando <code>i</code> vale <code>6</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué ocurre si olvidamos escribir <code>i++</code> adentro de un <code>while</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Conozco el orden exacto de los 4 pasos de un <code>for</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Estoy listo para usar <code>for(int i = 0; i &lt; 5; i++)</code> con vectores en el 2do Bimestre?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
-          <a href="12-funciones.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
-            ← Anterior: Funciones
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="12-funciones.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
+            ← Anterior: 12. Funciones
           </a>
-          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            1er Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            ← Índice 1er Bimestre
           </a>
-          <a href="../../index.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            Índice General →
+          <a href="../../2do-bimestre/index.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Siguiente: 2do Bimestre (Vectores) →
           </a>
         </div>
       </section>
@@ -448,8 +1504,9 @@
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -459,8 +1516,20 @@
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>
+
 </html>

@@ -4,12 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 1C - 05: Entrada y Salida de Datos | Clases Particulares</title>
+  <title>Programación 1C 1B - 05: Entrada y Salida de Datos | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
 
-  <!-- Reveal.js Styles -->
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,9 +27,9 @@
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 1er Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a
-        href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../index.html">← Índice 1er Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 1er Bimestre • Unidad 05</span>
   </div>
@@ -38,373 +39,1359 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-amber">1er Cuatrimestre • Entrada y Salida • Unidad 5</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Entrada y Salida de Datos</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            Haciendo programas interactivos: comunicación entre el usuario humano y el código mediante printf y scanf
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-cyan">1er Cuatrimestre • 1er Bimestre • Unidad 05</span>
+          <h1 style="font-size: 2.65rem; margin-bottom: 12px;">Entrada y Salida de Datos en C</h1>
+          <p style="color: #94a3b8; font-size: 1.2rem; font-weight: 500; margin-bottom: 24px;">
+            Cómo hacer que el usuario interactúe con nuestro programa usando <code>printf()</code> y <code>scanf()</code>
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">printf() &amp; Formatos</span>
-            <span class="badge badge-emerald">scanf() &amp; Operador &amp;</span>
-            <span class="badge badge-indigo">%d, %f, %c</span>
-            <span class="badge badge-rose">Flujo Completo de Datos</span>
+            <span class="badge badge-indigo">Salida: printf()</span>
+            <span class="badge badge-emerald">Entrada: scanf()</span>
+            <span class="badge badge-amber">Especificadores %d, %f, %c</span>
+            <span class="badge badge-purple">El Operador &amp;</span>
+            <span class="badge badge-rose">Buffer y Salto \n</span>
           </div>
 
-          <div class="box box-amber" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
-              para avanzar diapositiva por diapositiva.
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por los 34 temas y ejemplos de esta clase.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Conexión con Tipos de Datos</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">¿Por qué este salto es emocionante?</h4>
-            <p style="font-size: 0.88rem;">
-              Hasta ahora nuestros programas tenían datos fijos escritos en el código. Para cambiar un número teníamos
-              que editar el archivo y recompilar.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Con la <b>Entrada y Salida (E/S)</b> tus programas cobran vida: le preguntan datos al usuario en vivo,
-              esperan su respuesta por teclado, procesan la información y devuelven respuestas personalizadas en
-              pantalla.
-            </p>
+            <h4 style="color: #818cf8;">Lo que ya sabemos (Unidades 01 a 04)</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
+              <li>Incluir la biblioteca estándar <code>#include &lt;stdio.h&gt;</code>.</li>
+              <li>Declarar variables ("cajitas") con nombre y tipo.</li>
+              <li>Distinguir los 4 tipos: <code>int</code> (enteros), <code>float</code> (decimales con punto), <code>char</code> (un carácter entre <code>' '</code>) y <code>bool</code>.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Metas de hoy</h4>
+            <h4 style="color: #34d399;">Lo que vamos a aprender hoy (Sección 5 del Apunte)</h4>
             <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Distinguir con claridad entre <b>Input</b> (Entrada) y <b>Output</b> (Salida).</li>
-              <li>Dominar <code>printf()</code> para mostrar texto y variables combinadas.</li>
-              <li>Comprender los <b>especificadores de formato</b>: <code>%d</code>, <code>%f</code>, <code>%c</code>.
-              </li>
-              <li>Entender qué significa el operador ampersand <b><code>&amp;</code></b> en <code>scanf()</code>.</li>
-              <li>Seguir el <b>viaje completo del dato</b> desde el teclado a la RAM y al monitor.</li>
-              <li>Detectar y evitar los errores más peligrosos de lectura.</li>
+              <li>Qué son la <b>Salida (<i>output</i>)</b> y la <b>Entrada (<i>input</i>)</b> de un programa.</li>
+              <li>Cómo mostrar textos y variables por pantalla con <code>printf()</code> y <code>\n</code>.</li>
+              <li>Cómo usar los especificadores <code>%d</code>, <code>%f</code> (y <code>%.2f</code>) y <code>%c</code>.</li>
+              <li>Cómo pedir datos por teclado con <code>scanf()</code> y por qué lleva el símbolo <b><code>&amp;</code></b>.</li>
+              <li>Cómo resolver el clásico problema del <i>Enter pendiente</i> al leer un <code>char</code>.</li>
             </ul>
           </div>
         </div>
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🎯 <b>Meta de la clase:</b> Que tus programas dejen de tener valores fijos y puedan dialogar en vivo con cualquier persona que use el teclado y la pantalla.
+          </p>
+        </div>
       </section>
 
-      <!-- SLIDE 3: EL PROGRAMA CANÓNICO COMPLETO -->
+      <!-- SLIDE 3: EL PROBLEMA DE LOS DATOS FIJOS -->
       <section>
-        <h2><span class="section-num">02</span> El Programa Canónico Interactivo</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Leé con atención este programa completo y probalo
-          mentalmente:</p>
+        <h2><span class="section-num">02</span> El Problema: Programas "Sordos" con Valores Fijos</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Hasta ahora, para guardar una edad en una variable la escribíamos fija adentro del código fuente:
+        </p>
 
         <div class="code-window">
           <div class="code-header">
-            <div class="code-dots">
-              <span class="code-dot dot-red"></span>
-              <span class="code-dot dot-yellow"></span>
-              <span class="code-dot dot-green"></span>
-            </div>
-            <span class="code-title">pedir_edad.c</span>
-            <span class="code-badge">C99 con stdio.h</span>
+            <span class="code-title">edad_fija.c</span>
+            <span class="code-badge">Sin interacción</span>
           </div>
           <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 
-            <span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-            {
-            <span class="c-kw">int</span> edad;
-
-            <span class="c-fn">printf</span>(<span class="c-str">"Ingresa tu edad: "</span>);
-            <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);
-
-            <span class="c-fn">printf</span>(<span class="c-str">"Tu edad es %d\n"</span>, edad);
-
-            <span class="c-kw">return</span> <span class="c-num">0</span>;
-            }
-          </div>
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edad = <span class="c-num">16</span>; <span class="c-cmt">// ¡Siempre vale 16!</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Edad guardada: %d\n"</span>, edad);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
         </div>
 
-        <div class="terminal-window">
-          <div class="terminal-header">Simulación en Terminal</div>
-          <div class="terminal-body"><span class="terminal-prompt">$ ./pedir_edad</span>
-            Ingresa tu edad: <span class="terminal-user-input">16</span>
-            Tu edad es 16</div>
+        <div class="box box-rose" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.87rem;">
+            🤔 <b>¿Cuál es el problema?</b> Si viene otra persona que tiene <code>18</code> años, este programa sigue diciendo <code>16</code>. Un usuario común de un cajero automático o de un juego no puede abrir el código en C para cambiar un número: <b>el programa tiene que preguntárselo por pantalla y leer lo que escriba en el teclado</b>.
+          </p>
         </div>
       </section>
 
-      <!-- SLIDE 4: EL VIAJE COMPLETO DEL DATO -->
+      <!-- SLIDE 4: DEFINICIÓN DEL APUNTE Y MODELO ENTRADA/SALIDA -->
       <section>
-        <h2><span class="section-num">03</span> El Viaje Completo de la Información</h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem;">¿Qué pasa exactamente milisegundo a milisegundo al
-          ejecutar este programa?</p>
-
-        <div class="step-list">
-          <div class="step-item">
-            <span class="step-num">1</span>
-            <div class="step-content">
-              <b><code>int edad;</code></b> ➔ El sistema operativo reserva 4 bytes en la RAM (ej. dirección
-              <code>0x7ffd10</code>) etiquetados como <code>edad</code>.
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">2</span>
-            <div class="step-content">
-              <b><code>printf("Ingresa tu edad: ");</code></b> ➔ Envía los caracteres a la pantalla y deja el cursor
-              titilando esperando al usuario.
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">3</span>
-            <div class="step-content">
-              <b><code>scanf("%d", &amp;edad);</code></b> ➔ El programa se <b>pausa por completo</b>. El usuario escribe
-              <code>16</code> y presiona Enter. <code>scanf</code> traduce los caracteres '1' y '6' al número binario
-              entero 16 y lo guarda en la dirección dada por <code>&amp;edad</code>.
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">4</span>
-            <div class="step-content">
-              <b><code>printf("Tu edad es %d\n", edad);</code></b> ➔ La CPU lee el 16 de la caja <code>edad</code>, lo
-              reemplaza donde estaba el comodín <code>%d</code> y lo proyecta en la terminal.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 5: ESPECIFICADORES DE FORMATO -->
-      <section>
-        <h2><span class="section-num">04</span> Especificadores de Formato</h2>
-        <div class="box box-cyan">
-          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Qué es un especificador de formato?</h4>
-          <p style="font-size: 0.9rem; margin: 0;">
-            Es un <b>comodín o marcador de posición</b> que empieza con el símbolo porcentaje <code>%</code>. Le indica
-            a <code>printf</code> y a <code>scanf</code> qué tipo de dato debe esperar y cómo debe transformarlo.
+        <h2><span class="section-num">03</span> Definición: Entrada y Salida de Datos</h2>
+        <div class="box box-emerald" style="margin-bottom: 14px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">📖 Definición del Apunte (Sección 5)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            <b>"Permiten que el usuario interactúe con el programa."</b>
           </p>
         </div>
 
-        <table class="trace-table" style="margin-top: 14px;">
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">📤 Salida de datos (<i>Output</i>) → <code>printf()</code></h4>
+            <p style="font-size: 0.85rem; margin-bottom: 6px;">
+              Es la información que viaja <b>desde el programa hacia afuera</b> (a la pantalla / monitor) para que el usuario la lea.
+            </p>
+            <p style="font-size: 0.83rem; color: var(--text-muted); margin: 0;">
+              <i>Analogía:</i> Es cuando el programa "habla" y te muestra un mensaje o un resultado.
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">📥 Entrada de datos (<i>Input</i>) → <code>scanf()</code></h4>
+            <p style="font-size: 0.85rem; margin-bottom: 6px;">
+              Es la información que viaja <b>desde el usuario (el teclado) hacia adentro del programa</b> para guardarse en una variable.
+            </p>
+            <p style="font-size: 0.83rem; color: var(--text-muted); margin: 0;">
+              <i>Analogía:</i> Es cuando el programa "se queda en silencio escuchando" lo que tipeás.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            📌 Recuerda de la Unidad 02: tanto <code>printf()</code> como <code>scanf()</code> viven adentro de la biblioteca <b><code>#include &lt;stdio.h&gt;</code></b> (<i>Standard Input / Output</i>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: PRINTF() - SALIDA POR PANTALLA -->
+      <section>
+        <h2><span class="section-num">04</span> 1. <code>printf()</code>: Mostrar Información por Pantalla</h2>
+        <div class="box box-cyan" style="margin-bottom: 12px;">
+          <p style="margin: 0; font-size: 0.9rem;">
+            📖 <b>Apunte:</b> <b>"<code>printf()</code> → Muestra información por pantalla. (output)"</b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">hola_mundo.c</span>
+              <span class="code-badge">Del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-fn">printf</span>(<span class="c-str">"Hola mundo"</span>);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <span>Salida en Consola</span>
+              <span>stdout</span>
+            </div>
+            <div class="terminal-body"><span class="terminal-prompt">$ ./hola_mundo</span>
+Hola mundo</div>
+          </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">Desglose pieza por pieza de <code>printf("Hola mundo");</code></h4>
+          <ul style="font-size: 0.84rem; line-height: 1.5; margin-left: 18px; margin-bottom: 0;">
+            <li><b><code>printf</code>:</b> Nombre de la función (significa <i>print formatted</i>, imprimir con formato).</li>
+            <li><b><code>( ... )</code>:</b> Paréntesis donde entregamos lo que queremos mostrar.</li>
+            <li><b><code>"Hola mundo"</code>:</b> Texto literal encerrado siempre entre <b>comillas dobles <code>" "</code></b>.</li>
+            <li><b><code>;</code>:</b> Punto y coma obligatorio al final de la orden.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: EL SALTO DE LÍNEA \n -->
+      <section>
+        <h2><span class="section-num">05</span> El Salto de Línea <code>\n</code>: ¿Por qué se Pegan los Textos?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          <code>printf()</code> NO baja de renglón automáticamente al terminar de escribir. Si ponés dos <code>printf</code> seguidos sin indicarle que baje de línea, ¡salen pegados en el mismo renglón!
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Sin <code>\n</code> (Sale todo pegado)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"Hola"</span>);
+<span class="c-fn">printf</span>(<span class="c-str">"Mundo"</span>);</div>
+            </div>
+            <div class="terminal-window" style="margin-top: 8px;">
+              <div class="terminal-body"><span class="terminal-prompt">$ ./programa</span>
+HolaMundo</div>
+            </div>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Con <code>\n</code> (Cada uno en su renglón)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"Hola\n"</span>);
+<span class="c-fn">printf</span>(<span class="c-str">"Mundo\n"</span>);</div>
+            </div>
+            <div class="terminal-window" style="margin-top: 8px;">
+              <div class="terminal-body"><span class="terminal-prompt">$ ./programa</span>
+Hola
+Mundo</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            💡 <b>¿Qué es <code>\n</code>?</b> Viene de <i>newline</i> (nueva línea). Aunque se escribe con dos teclas (barra invertida <code>\</code> + letra <code>n</code> adentro de las comillas), C lo interpreta como presionar <b>Enter</b> en la pantalla.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: CÓMO MOSTRAR EL VALOR DE UNA VARIABLE CON PRINTF -->
+      <section>
+        <h2><span class="section-num">06</span> ¿Cómo Mostrar el Valor de una Variable con <code>printf()</code>?</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Si escribimos <code>printf("edad");</code> entre comillas, C imprime literalmente las 4 letras de la palabra <code>edad</code>, ¡no el número <code>16</code> que tiene adentro! Para mostrar el contenido de una caja necesitamos un <b>especificador de formato</b> (comodín con <code>%</code>):
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">mostrar_edad.c</span>
+              <span class="code-badge">Con comodín %d</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+
+<span class="c-fn">printf</span>(<span class="c-str">"Tengo %d anios\n"</span>, edad);</div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Cómo funciona el reemplazo?</h4>
+            <ol style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px; margin-bottom: 0;">
+              <li>Adentro de las comillas dejamos el "hueco" <b><code>%d</code></b> donde queremos que aparezca el número entero.</li>
+              <li>Después de cerrar las comillas ponemos una <b>coma <code>,</code></b>.</li>
+              <li>Escribimos el nombre de la variable (<code>edad</code>) cuyo valor rellenará ese hueco.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: LOS ESPECIFICADORES DE FORMATO DEL APUNTE (%d, %f, %c) -->
+      <section>
+        <h2><span class="section-num">07</span> Los Especificadores del Apunte: <code>%d</code>, <code>%f</code> y <code>%c</code></h2>
+        <div class="box box-indigo" style="margin-bottom: 12px;">
+          <p style="margin: 0; font-size: 0.9rem;">
+            📖 <b>Apunte (Sección 5):</b> Cada tipo de dato tiene su propio símbolo con porcentaje (<code>%</code>):<br>
+            <b><code>%d → int</code> &nbsp;|&nbsp; <code>%f → float</code> &nbsp;|&nbsp; <code>%c → char</code></b>
+          </p>
+        </div>
+
+        <table class="trace-table">
           <thead>
             <tr>
               <th>Especificador</th>
               <th>Tipo de Dato</th>
-              <th>Uso en printf()</th>
-              <th>Uso en scanf()</th>
+              <th>¿Por qué lleva esa letra?</th>
+              <th>Ejemplo en <code>printf()</code></th>
+              <th>Salida en Pantalla</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>%d</code> (o <code>%i</code>)</td>
-              <td><code>int</code> (Entero con signo)</td>
-              <td><code>printf("%d", edad);</code></td>
-              <td><code>scanf("%d", &amp;edad);</code></td>
+              <td><b><code>%d</code></b></td>
+              <td><code>int</code></td>
+              <td><i>Decimal integer</i> (entero en base 10)</td>
+              <td><code>printf("Edad: %d", 16);</code></td>
+              <td><code>Edad: 16</code></td>
             </tr>
             <tr>
-              <td><code>%f</code></td>
-              <td><code>float</code> (Decimal)</td>
-              <td><code>printf("%.2f", precio);</code></td>
-              <td><code>scanf("%f", &amp;precio);</code></td>
+              <td><b><code>%f</code></b></td>
+              <td><code>float</code></td>
+              <td><i>Floating point</i> (punto flotante)</td>
+              <td><code>printf("Altura: %f", 1.75);</code></td>
+              <td><code>Altura: 1.750000</code></td>
             </tr>
             <tr>
-              <td><code>%c</code></td>
-              <td><code>char</code> (Carácter único)</td>
-              <td><code>printf("%c", letra);</code></td>
-              <td><code>scanf(" %c", &amp;letra);</code></td>
+              <td><b><code>%.2f</code></b></td>
+              <td><code>float</code></td>
+              <td><i>Float</i> redondeado visualmente a <b>2 decimales</b></td>
+              <td><code>printf("Altura: %.2f", 1.75);</code></td>
+              <td><code>Altura: 1.75</code></td>
             </tr>
             <tr>
-              <td><code>%lf</code> <i>(complemento)</i></td>
-              <td><code>double</code> (Decimal doble precisión)</td>
-              <td><code>printf("%f", d);</code></td>
-              <td><code>scanf("%lf", &amp;d);</code></td>
+              <td><b><code>%c</code></b></td>
+              <td><code>char</code></td>
+              <td><i>Character</i> (un solo carácter)</td>
+              <td><code>printf("Letra: %c", 'A');</code></td>
+              <td><code>Letra: A</code></td>
             </tr>
           </tbody>
         </table>
+      </section>
 
-        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 6px;">
-          💡 <b>Nota pedagógica sobre %f y %lf:</b> Para variables de tipo <code>float</code>, se utiliza siempre
-          <code>%f</code> tanto al leer con <code>scanf</code> como al imprimir con <code>printf</code>. La mención de
-          <code>%lf</code> (<b>long float</b>) aplica solo para variables de tipo <code>double</code> al momento de
-          leer.
+      <!-- SLIDE 9: DETALLE DE %f VS %.2f -->
+      <section>
+        <h2><span class="section-num">08</span> Controlando los Decimales en Pantalla: <code>%f</code> vs <code>%.2f</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Por defecto, cuando usás <code>%f</code> a secas en <code>printf</code>, C muestra siempre <b>6 dígitos después del punto</b> rellenando con ceros (ej. <code>1.750000</code>). Para que la salida sea prolija, podemos indicar cuántos decimales mostrar:
         </p>
-      </section>
 
-      <!-- SLIDE 6: EL OPERADOR & EN SCANF -->
-      <section>
-        <h2><span class="section-num">05</span> El Misterio del Operador <code>&amp;</code> en scanf</h2>
-        <div class="grid-2">
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">Analogía del Cartero</h4>
-            <p style="font-size: 0.88rem;">
-              Imaginá que le pedís al cartero que te entregue un paquete:
-            </p>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              • Si le das <code>edad</code>: le estás dando una foto de lo que hay adentro de tu casa en este
-              momento.<br>
-              • Si le das <code>&amp;edad</code>: le estás dando la <b>dirección postal exacta de tu casa</b> para que
-              vaya y deposite el paquete adentro.
-            </p>
-            <p style="font-size: 0.84rem; color: var(--accent-emerald); font-weight: 600;">
-              <code>scanf</code> necesita guardar un dato nuevo, por lo tanto <b>necesita saber la dirección de memoria
-                dónde guardarlo</b>.
-            </p>
-          </div>
-
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">El Operador de Dirección (Address-of)</h4>
-            <p style="font-size: 0.88rem;">
-              El símbolo <code>&amp;</code> se llama formalmente <b>operador de dirección</b>.
-            </p>
-            <div class="memory-diagram" style="margin: 8px 0;">
-              <div class="memory-box">
-                <div class="memory-address">&amp;edad = 0x7ffd10</div>
-                <div class="memory-label">edad (int)</div>
-                <div class="memory-value">16</div>
-              </div>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">precision_float.c</span>
+              <span class="code-badge">Formato de Salida</span>
             </div>
-            <p style="font-size: 0.8rem; color: #cbd5e1;">
-              <code>&amp;edad</code> le entrega a <code>scanf</code> el puntero <code>0x7ffd10</code> para que escriba
-              directamente en esa celda de memoria RAM.
-            </p>
+            <div class="code-body"><span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;
+
+<span class="c-fn">printf</span>(<span class="c-str">"Con %%f   : %f\n"</span>, altura);
+<span class="c-fn">printf</span>(<span class="c-str">"Con %%.2f : %.2f\n"</span>, altura);
+<span class="c-fn">printf</span>(<span class="c-str">"Con %%.1f : %.1f\n"</span>, altura);</div>
           </div>
-        </div>
-      </section>
 
-      <!-- SLIDE 7: PRINTF CON ESTILO Y DECIMALES -->
-      <section>
-        <h2><span class="section-num">06</span> Dominando <code>printf()</code>: Múltiples Datos</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Podés imprimir varias variables en una misma línea
-          manteniendo el orden exacto:</p>
-
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">multiples_variables.c</span>
-            <span class="code-badge">Interpolación</span>
-          </div>
-          <div class="code-body"><span class="c-kw">int</span> dia = <span class="c-num">25</span>;
-            <span class="c-kw">char</span> mesInicial = <span class="c-char">'M'</span>;
-            <span class="c-kw">float</span> temp = <span class="c-num">22.458f</span>;
-
-            <span class="c-cmt">// Los comodines se reemplazan en orden estricto de izquierda a derecha:</span>
-            <span class="c-fn">printf</span>(<span class="c-str">"Fecha: %d - Mes: %c - Temperatura: %.1f °C\n"</span>,
-            dia, mesInicial, temp);
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <span>Salida en Consola</span>
+              <span>stdout</span>
+            </div>
+            <div class="terminal-body"><span class="terminal-prompt">$ ./precision_float</span>
+Con %f   : 1.750000
+Con %.2f : 1.75
+Con %.1f : 1.8</div>
           </div>
         </div>
 
-        <div class="terminal-window">
-          <div class="terminal-body"><span class="terminal-prompt">Salida:</span>
-            Fecha: 25 - Mes: M - Temperatura: 22.5 °C</div>
-        </div>
-
-        <div class="box box-amber">
-          <p style="margin: 0; font-size: 0.88rem;">
-            🎯 <b>Control de decimales:</b> Con <code>%.1f</code> mostramos solo 1 decimal (redondea visualmente a
-            22.5). Con <code>%.2f</code> mostramos 2 decimales (22.46). Si ponés <code>%f</code> a secas, C mostrará 6
-            decimales por defecto (<code>22.458000</code>).
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            📌 <b>Regla clave:</b> Escribir <code>%.2f</code> en <code>printf</code> solo cambia cómo se dibuja el número en la pantalla; la variable <code>altura</code> en la memoria RAM sigue conservando su valor original intacto.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 8: ERRORES FRECUENTES EN ENTRADA Y SALIDA -->
+      <!-- SLIDE 10: MOSTRAR MÚLTIPLES VARIABLES EN UN SOLO PRINTF -->
       <section>
-        <h2><span class="section-num">07</span> Errores Clásicos con scanf y printf</h2>
-        <div class="comparison-box">
-          <div class="wrong-card">
-            <div class="wrong-title">❌ El Error Más Grave: Olvidar el &amp;</div>
-            <div
-              style="font-family: var(--font-mono); font-size: 0.82rem; color: #f87171; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
-              scanf("%d", edad); // ¡FALTA EL &amp;!
-            </div>
-            <p style="font-size: 0.82rem; color: #fecaca; margin-top: 6px;">
-              <b>Consecuencia:</b> <code>scanf</code> interpretará el valor actual de <code>edad</code> como una
-              dirección de memoria y tratará de escribir en un lugar prohibido. Tu programa colapsará con un
-              <b>Segmentation Fault (Crash)</b> instantáneo.
-            </p>
-          </div>
-
-          <div class="wrong-card" style="border-color: rgba(251, 191, 36, 0.4); background: rgba(45, 35, 18, 0.7);">
-            <div class="wrong-title" style="color: var(--accent-amber);">⚠️ Poner \n dentro de scanf</div>
-            <div
-              style="font-family: var(--font-mono); font-size: 0.82rem; color: #fbbf24; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px;">
-              scanf("%d\n", &amp;edad); // ¡NO PONGAS \n ACÁ!
-            </div>
-            <p style="font-size: 0.82rem; color: #fef08a; margin-top: 6px;">
-              <b>Consecuencia:</b> El <code>\n</code> dentro del texto de <code>scanf</code> hace que el programa quede
-              esperando infinitamente otro espacio o número adicional antes de continuar.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 9: EJERCICIO COMPLETO GUIADO -->
-      <section>
-        <h2><span class="section-num">08</span> Programa Completo: Calculadora de Promedio</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Un programa real que solicita dos notas y calcula el
-          promedio con decimales:</p>
+        <h2><span class="section-num">09</span> Mostrar Varias Variables en un Mismo <code>printf()</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Podemos colocar varios comodines (<code>%d</code>, <code>%.2f</code>, <code>%c</code>) adentro del mismo texto. C los irá completando <b>en estricto orden de izquierda a derecha</b> con las variables que listemos después de las comillas:
+        </p>
 
         <div class="code-window">
           <div class="code-header">
-            <span class="code-title">promedio.c</span>
-            <span class="code-badge">Programa Completo</span>
+            <span class="code-title">multiples_variables.c</span>
+            <span class="code-badge">Orden 1 a 1</span>
           </div>
-          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+          <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+<span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;
+<span class="c-kw">char</span> letra = <span class="c-str">'A'</span>;
 
-            <span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-            {
-            <span class="c-kw">float</span> nota1, nota2;
+<span class="c-cmt">//      1° hueco (%d)   2° hueco (%.2f)   3° hueco (%c)      1°      2°      3°</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Edad: %d      | Altura: %.2f    | Curso: %c\n"</span>, edad, altura, letra);</div>
+        </div>
 
-            <span class="c-fn">printf</span>(<span class="c-str">"Ingresa la primera nota: "</span>);
-            <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;nota1);
+        <div class="terminal-window" style="margin-top: 12px;">
+          <div class="terminal-header">
+            <span>Salida en Consola</span>
+            <span>stdout</span>
+          </div>
+          <div class="terminal-body"><span class="terminal-prompt">$ ./multiples_variables</span>
+Edad: 16      | Altura: 1.75    | Curso: A</div>
+        </div>
 
-            <span class="c-fn">printf</span>(<span class="c-str">"Ingresa la segunda nota: "</span>);
-            <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;nota2);
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            ⚠️ Si ponés 3 símbolos <code>%</code> adentro del texto, tenés que pasar exactamente <b>3 variables</b> separadas por comas, y cada una debe coincidir con el tipo de su comodín.
+          </p>
+        </div>
+      </section>
 
-            <span class="c-kw">float</span> promedio = (nota1 + nota2) / <span class="c-num">2.0f</span>;
+      <!-- SLIDE 11: SCANF() - ENTRADA DE DATOS POR TECLADO -->
+      <section>
+        <h2><span class="section-num">10</span> 2. <code>scanf()</code>: Ingresar Información por Teclado</h2>
+        <div class="box box-emerald" style="margin-bottom: 12px;">
+          <p style="margin: 0; font-size: 0.9rem;">
+            📖 <b>Apunte (Sección 5):</b> <b>"<code>scanf()</code> → Permite ingresar información. (input)<br>
+            <code>scanf("%d", &amp;edad);</code>"</b>
+          </p>
+        </div>
 
-            <span class="c-fn">printf</span>(<span class="c-str">"El promedio final es: %.2f\n"</span>, promedio);
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">lectura_basica.c</span>
+              <span class="code-badge">Del Apunte</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> edad;
 
-            <span class="c-kw">return</span> <span class="c-num">0</span>;
-            }
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);</div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Qué pasa cuando el programa llega a <code>scanf</code>?</h4>
+            <ol style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px; margin-bottom: 0;">
+              <li>El programa <b>se detiene (se congela esperando)</b> y el cursor parpadea en la consola.</li>
+              <li>El usuario escribe un número en el teclado (por ejemplo <code>16</code>) y presiona la tecla <b>Enter</b>.</li>
+              <li><code>scanf</code> toma ese <code>16</code>, lo guarda dentro de la caja <code>edad</code> y el programa sigue con la línea siguiente.</li>
+            </ol>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 10: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <!-- SLIDE 12: DESGLOSE PIEZA POR PIEZA DE SCANF -->
       <section>
-        <h2><span class="section-num">09</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">11</span> Desglose Pieza por Pieza de <code>scanf("%d", &amp;edad);</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Miremos con lupa cada parte de la instrucción del apunte:
+        </p>
+
+        <div class="code-window">
+          <div class="code-body"><span class="c-fn">scanf</span> ( <span class="c-str">"%d"</span> , &amp;edad ) ;
+<span class="c-cmt">// 1     2    3  4 5    6</span></div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <ol style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; margin-bottom: 0;">
+              <li><b><code>scanf</code>:</b> Función de lectura (<i>scan formatted</i>, escanear con formato).</li>
+              <li><b><code>"%d"</code>:</b> Como dice el apunte: <b>"Le indica a <code>scanf</code> que recibirá un entero"</b>.</li>
+              <li><b><code>,</code>:</b> Coma que separa el formato del destino.</li>
+            </ol>
+          </div>
+
+          <div class="box box-amber">
+            <ol start="4" style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px; margin-bottom: 0;">
+              <li><b><code>&amp;</code> (Ampersand):</b> Operador de dirección de memoria (indica <i>dónde</i> está ubicada la caja).</li>
+              <li><b><code>edad</code>:</b> Nombre de la variable donde se guardará el dato leído.</li>
+              <li><b><code>;</code>:</b> Cierre de la instrucción.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: ¿QUÉ SIGNIFICA EL & EN SCANF? -->
+      <section>
+        <h2><span class="section-num">12</span> ¿Qué Significa el Símbolo <code>&amp;</code> (Ampersand)?</h2>
+        <div class="box box-emerald" style="margin-bottom: 12px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">📖 Explicación del Apunte (Sección 5)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            <b>"¿Qué significa el <code>&amp;</code>?<br>
+            Indica qué variable usaremos (y dónde se almacena esa variable).<br>
+            Por ahora podemos pensar: Siempre que usemos <code>scanf</code> con variables numéricas debemos colocar <code>&amp;</code>."</b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">🏠 La analogía del repartidor de correo</h4>
+            <p style="font-size: 0.84rem; margin-bottom: 6px;">
+              Imaginá que <code>scanf</code> es un repartidor que tiene en la mano el paquete que el usuario escribió en el teclado y tiene que meterlo adentro de tu casa (la variable <code>edad</code>):
+            </p>
+            <ul style="font-size: 0.82rem; line-height: 1.5; margin-left: 18px; margin-bottom: 0;">
+              <li><b><code>edad</code> (sin <code>&amp;</code>):</b> Es solo una foto de lo que hay adentro de la casa. Sirve para <code>printf</code> (mirar), pero no para entregar un paquete.</li>
+              <li><b><code>&amp;edad</code> (con <code>&amp;</code>):</b> Es la <b>dirección exacta en la memoria RAM</b> donde vive la caja <code>edad</code> para que <code>scanf</code> pueda abrirla y guardar el dato.</li>
+            </ul>
+          </div>
+
+          <div class="memory-diagram" style="margin: 0; flex-direction: column; gap: 8px;">
+            <div class="memory-box">
+              <div class="memory-address">Dirección: &amp;edad (0x7ffe04)</div>
+              <div class="memory-label">edad <span class="memory-type">int</span></div>
+              <div class="memory-value">16</div>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin: 0;">
+              <code>scanf("%d", &amp;edad)</code> viaja hasta <code>&amp;edad</code> y deposita el <code>16</code> adentro de la caja.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: PATRÓN FUNDAMENTAL: PRINTF ANTES DE SCANF -->
+      <section>
+        <h2><span class="section-num">13</span> El Dúo Inseparable: Siempre un <code>printf</code> antes del <code>scanf</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Si tu programa empieza directamente con <code>scanf("%d", &amp;edad);</code> sin mostrar ningún cartel antes, la pantalla quedará totalmente negra y el usuario pensará que el programa se trabó.
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Mal hábito: <code>scanf</code> a ciegas</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> edad;
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);</div>
+            </div>
+            <p style="font-size: 0.81rem; color: #fecaca; margin: 6px 0 0;">
+              La consola queda muda esperando un dato. El usuario no sabe si debe ingresar su edad, su DNI o su altura.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Buen hábito: Pedir con <code>printf</code> y leer con <code>scanf</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> edad;
+<span class="c-fn">printf</span>(<span class="c-str">"Ingrese su edad: "</span>);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);</div>
+            </div>
+            <p style="font-size: 0.81rem; color: #a7f3d0; margin: 6px 0 0;">
+              Primero el programa pregunta amablemente en pantalla y deja el cursor al lado esperando la respuesta.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: LEER INT, FLOAT Y CHAR CON SCANF -->
+      <section>
+        <h2><span class="section-num">14</span> Cómo Leer cada Tipo de Dato con <code>scanf()</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Usamos los mismos 3 especificadores del apunte (<code>%d</code>, <code>%f</code>, <code>%c</code>) acompañados siempre por el operador <code>&amp;</code>:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Tipo de Variable</th>
+              <th>Declaración</th>
+              <th>Instrucción de Lectura</th>
+              <th>¿Qué escribe el usuario en el teclado?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Entero (<code>int</code>)</td>
+              <td><code>int edad;</code></td>
+              <td><code>scanf("%d", &amp;edad);</code></td>
+              <td>Un entero, ej: <code>16</code> + Enter</td>
+            </tr>
+            <tr>
+              <td>Decimal (<code>float</code>)</td>
+              <td><code>float altura;</code></td>
+              <td><code>scanf("%f", &amp;altura);</code></td>
+              <td>Un decimal con <b>punto</b>, ej: <code>1.75</code> + Enter</td>
+            </tr>
+            <tr>
+              <td>Carácter (<code>char</code>)</td>
+              <td><code>char letra;</code></td>
+              <td><code>scanf(" %c", &amp;letra);</code></td>
+              <td>Una sola tecla (sin comillas), ej: <code>A</code> + Enter</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-amber" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            👀 <b>¿Viste ese espacio en blanco adelante de <code>" %c"</code> en la última fila?</b> ¡No es un error de tipeo! En la siguiente diapositiva vamos a descubrir por qué ese pequeño espacio nos salva de uno de los dolores de cabeza más famosos de C.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: EL PROBLEMA DEL ENTER PENDIENTE EN %c -->
+      <section>
+        <h2><span class="section-num">15</span> El Secreto de <code>" %c"</code>: El Problema del Enter Pendiente</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Cuando el usuario ingresa su edad (por ejemplo escribe <code>16</code> y aprieta <b>Enter</b>), por el cable del teclado viajan 3 cosas al <i>buffer</i> (sala de espera): el <code>'1'</code>, el <code>'6'</code> y el salto de línea <code>'\n'</code> de la tecla Enter.
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Con <code>"%c"</code> pegado (Se saltea la lectura)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);
+<span class="c-cmt">// Quedó el '\n' del Enter flotando...</span>
+<span class="c-fn">scanf</span>(<span class="c-str">"%c"</span>, &amp;letra); <span class="c-cmt">// ¡Se traga el Enter!</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              <code>scanf("%d", ...)</code> consume el <code>16</code> pero deja el <code>'\n'</code> del Enter en la fila. Como <code>'\n'</code> es un carácter, ¡el <code>scanf("%c", ...)</code> siguiente lo lee al instante sin dejarte escribir la letra!
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Con <code>" %c"</code> (Un espacio antes del %)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);
+<span class="c-cmt">// El espacio en " %c" limpia el Enter previo:</span>
+<span class="c-fn">scanf</span>(<span class="c-str">" %c"</span>, &amp;letra); <span class="c-cmt">// ✅ Espera tu letra</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              Poner un espacio en blanco antes de <code>%c</code> (es decir, <b><code>" %c"</code></b>) le ordena a <code>scanf</code> ignorar cualquier Enter o espacio viejo y esperar hasta que presiones una letra real.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: DIFERENCIA CLAVE ENTRE PRINTF Y SCANF -->
+      <section>
+        <h2><span class="section-num">16</span> Cara a Cara: <code>printf()</code> vs <code>scanf()</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Compará lado a lado cómo se escriben ambas funciones para no confundirlas jamás en un examen:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th><code>printf()</code> — Salida (Output)</th>
+              <th><code>scanf()</code> — Entrada (Input)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>¿Qué hace?</b></td>
+              <td>Muestra mensajes y valores en la pantalla</td>
+              <td>Lee lo que el usuario escribe en el teclado</td>
+            </tr>
+            <tr>
+              <td><b>¿Lleva el símbolo <code>&amp;</code>?</b></td>
+              <td><b>NO</b> (solo lee el valor: <code>edad</code>)</td>
+              <td><b>SÍ, OBLIGATORIO</b> (necesita la dirección: <code>&amp;edad</code>)</td>
+            </tr>
+            <tr>
+              <td><b>¿Lleva texto decorativo o <code>\n</code>?</b></td>
+              <td><b>SÍ</b> (ej: <code>"Su edad es: %d\n"</code>)</td>
+              <td><b>NO</b> (solo el comodín limpio: <code>"%d"</code>)</td>
+            </tr>
+            <tr>
+              <td><b>¿Cómo se usa con <code>float</code>?</b></td>
+              <td>Acepta <code>%f</code> o recortado <code>%.2f</code></td>
+              <td>Usa únicamente <b><code>"%f"</code></b> (nunca <code>%.2f</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 18: EJEMPLO NIVEL 1 (PREGUNTAR Y MOSTRAR LA EDAD) -->
+      <section>
+        <h2><span class="section-num">17</span> Ejemplo Nivel 1: Tu Primer Programa Interactivo</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Empecemos con el ejemplo más puro y directo del apunte: pedir la edad por teclado y confirmarla por pantalla:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel1_edad.c</span>
+              <span class="code-badge">Nivel 1 • Introductorio</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edad;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese su edad: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Usted ingreso %d anios.\n"</span>, edad);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <span>Consola Interactiva</span>
+              <span>stdin / stdout</span>
+            </div>
+            <div class="terminal-body"><span class="terminal-prompt">$ ./nivel1_edad</span>
+Ingrese su edad: <span style="color: #34d399; font-weight: bold;">16</span>
+Usted ingreso 16 anios.</div>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            💡 En la consola, el texto blanco <code>Ingrese su edad: </code> lo imprimió <code>printf</code>, mientras que el <b><code>16</code> en verde</b> lo tipeó el usuario humano en su teclado antes de presionar Enter.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: EXPLICACIÓN PASO A PASO DEL NIVEL 1 -->
+      <section>
+        <h2><span class="section-num">18</span> Seguimiento Paso a Paso del Ejemplo Nivel 1</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Veamos qué ocurre en la memoria RAM y en la pantalla en cada una de las 4 líneas de <code>main()</code>:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Paso</th>
+              <th>Instrucción Ejecutada</th>
+              <th>Valor en <code>edad</code></th>
+              <th>¿Qué ve el usuario en la pantalla?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td><code>int edad;</code></td>
+              <td><code>?</code> (sin inicializar)</td>
+              <td><i>(Todavía nada)</i></td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td><code>printf("Ingrese su edad: ");</code></td>
+              <td><code>?</code></td>
+              <td><code>Ingrese su edad: _</code></td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td><code>scanf("%d", &amp;edad);</code> <i>(usuario tipea 16)</i></td>
+              <td><b><code>16</code></b></td>
+              <td><code>Ingrese su edad: 16</code></td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td><code>printf("Usted ingreso %d anios.\n", edad);</code></td>
+              <td><code>16</code></td>
+              <td><code>Usted ingreso 16 anios.</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 20: EJEMPLO NIVEL 2 (ENTEROS Y DECIMALES CON TRAZA) -->
+      <section>
+        <h2><span class="section-num">19</span> Ejemplo Nivel 2: Leyendo Enteros y Decimales</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Ahora combinemos la lectura de un <code>int</code> (<code>edad</code>) y un <code>float</code> (<code>altura</code>) en un mismo programa:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel2_ficha_medica.c</span>
+              <span class="code-badge">Nivel 2 • int y float</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> edad;
+    <span class="c-kw">float</span> altura;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese su edad: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese su altura en metros (ej 1.75): "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;altura);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ficha -> Edad: %d | Altura: %.2f m\n"</span>, edad, altura);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window" style="margin-bottom: 10px;">
+              <div class="terminal-header">
+                <span>Consola Interactiva</span>
+                <span>stdin / stdout</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel2_ficha_medica</span>
+Ingrese su edad: <span style="color: #34d399; font-weight: bold;">16</span>
+Ingrese su altura en metros (ej 1.75): <span style="color: #34d399; font-weight: bold;">1.75</span>
+Ficha -> Edad: 16 | Altura: 1.75 m</div>
+            </div>
+
+            <table class="trace-table" style="font-size: 0.78rem;">
+              <thead>
+                <tr>
+                  <th>Momento</th>
+                  <th>Entrada teclado</th>
+                  <th><code>edad</code></th>
+                  <th><code>altura</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Inicio</td>
+                  <td>—</td>
+                  <td><code>?</code></td>
+                  <td><code>?</code></td>
+                </tr>
+                <tr>
+                  <td>1° <code>scanf</code></td>
+                  <td><code>16</code></td>
+                  <td><b><code>16</code></b></td>
+                  <td><code>?</code></td>
+                </tr>
+                <tr>
+                  <td>2° <code>scanf</code></td>
+                  <td><code>1.75</code></td>
+                  <td><code>16</code></td>
+                  <td><b><code>1.75</code></b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: EJEMPLO NIVEL 3 (COMBINANDO INT, FLOAT Y CHAR) -->
+      <section>
+        <h2><span class="section-num">20</span> Ejemplo Nivel 3: Integrando <code>int</code>, <code>float</code> y <code>char</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Agreguemos la lectura de una letra (<code>char</code>) después de leer números, aplicando la regla de oro del espacio en <b><code>" %c"</code></b>:
+        </p>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel3_inscripcion.c</span>
+              <span class="code-badge">Nivel 3 • Los 3 Formatos</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> legajo;
+    <span class="c-kw">float</span> promedio;
+    <span class="c-kw">char</span> comision;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese su numero de legajo: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;legajo);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese su promedio: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;promedio);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese la letra de su comision (A/B/C): "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">" %c"</span>, &amp;comision);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Alumno #%d - Comision %c - Prom: %.2f\n"</span>, legajo, comision, promedio);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window" style="margin-bottom: 10px;">
+              <div class="terminal-header">
+                <span>Consola Interactiva</span>
+                <span>stdin / stdout</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel3_inscripcion</span>
+Ingrese su numero de legajo: <span style="color: #34d399; font-weight: bold;">1042</span>
+Ingrese su promedio: <span style="color: #34d399; font-weight: bold;">8.5</span>
+Ingrese la letra de su comision (A/B/C): <span style="color: #34d399; font-weight: bold;">B</span>
+Alumno #1042 - Comision B - Prom: 8.50</div>
+            </div>
+
+            <div class="box box-cyan">
+              <p style="margin: 0; font-size: 0.81rem;">
+                🔍 Observá que cuando el usuario ingresa la comisión en la consola, escribe directamente la letra <b><code>B</code> sin comillas</b>. Las comillas simples <code>'B'</code> solo se usan cuando escribimos un carácter fijo dentro del código C.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: EJEMPLO NIVEL 4 - PLANTEAMIENTO PASO A PASO -->
+      <section>
+        <h2><span class="section-num">21</span> Ejemplo Nivel 4: Pensar la Estructura Entrada → Proceso → Salida</h2>
+        <div class="box box-indigo" style="margin-bottom: 12px;">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">📋 Enunciado del Problema</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Necesitamos un programa para una boletería que le pida al cliente la <b>fila elegida</b> (una letra, ej. <code>'F'</code>), el <b>número de asiento</b> (un entero, ej. <code>12</code>) y el <b>valor de la entrada</b> (un decimal, ej. <code>4500.50</code>), y luego imprima un ticket prolijo en varias líneas.
+          </p>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 8px;">
+          Todo programa interactivo se organiza en <b>3 etapas claras</b>:
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b>Declaración de variables:</b> Definir las cajas necesarias (<code>char fila;</code>, <code>int asiento;</code>, <code>float precio;</code>).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b>Entrada de datos (Input):</b> Por cada variable, mostrar un <code>printf</code> orientador seguido de su <code>scanf</code> con <code>&amp;</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b>Salida de resultados (Output):</b> Mostrar el ticket formateado usando <code>%c</code>, <code>%d</code> y <code>%.2f</code> con saltos <code>\n</code>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: EJEMPLO NIVEL 4 - CÓDIGO COMPLETO Y TRAZA -->
+      <section>
+        <h2><span class="section-num">22</span> Ejemplo Nivel 4: Boletería de Cine Completa</h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel4_boleteria.c</span>
+              <span class="code-badge">Nivel 4 • Completo</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> fila;
+    <span class="c-kw">int</span> asiento;
+    <span class="c-kw">float</span> precio;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese letra de fila: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">" %c"</span>, &amp;fila);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese numero de asiento: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;asiento);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese precio de la entrada: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;precio);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"\n--- TICKET EMITIDO ---\n"</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"Ubicacion: Fila %c - Asiento %d\n"</span>, fila, asiento);
+    <span class="c-fn">printf</span>(<span class="c-str">"Total abonado: $%.2f\n"</span>, precio);
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window" style="margin-bottom: 10px;">
+              <div class="terminal-header">
+                <span>Consola Interactiva</span>
+                <span>stdin / stdout</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel4_boleteria</span>
+Ingrese letra de fila: <span style="color: #34d399; font-weight: bold;">F</span>
+Ingrese numero de asiento: <span style="color: #34d399; font-weight: bold;">12</span>
+Ingrese precio de la entrada: <span style="color: #34d399; font-weight: bold;">4500.50</span>
+
+--- TICKET EMITIDO ---
+Ubicacion: Fila F - Asiento 12
+Total abonado: $4500.50</div>
+            </div>
+
+            <table class="trace-table" style="font-size: 0.76rem;">
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th><code>fila</code></th>
+                  <th><code>asiento</code></th>
+                  <th><code>precio</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tras 1° <code>scanf</code></td>
+                  <td><b><code>'F'</code></b></td>
+                  <td><code>?</code></td>
+                  <td><code>?</code></td>
+                </tr>
+                <tr>
+                  <td>Tras 2° <code>scanf</code></td>
+                  <td><code>'F'</code></td>
+                  <td><b><code>12</code></b></td>
+                  <td><code>?</code></td>
+                </tr>
+                <tr>
+                  <td>Tras 3° <code>scanf</code></td>
+                  <td><code>'F'</code></td>
+                  <td><code>12</code></td>
+                  <td><b><code>4500.50</code></b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: ERROR FRECUENTE #1 (OLVIDAR EL & EN SCANF) -->
+      <section>
+        <h2><span class="section-num">23</span> Error Frecuente #1: Olvidar el <code>&amp;</code> en <code>scanf()</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Es el error más peligroso de esta unidad porque muchas veces el código compila igual, pero cuando el usuario ingresa el número y aprieta Enter, <b>el programa explota y se cierra de golpe</b> (<i>Segmentation Fault / Crash</i>):
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Peligro mortal: Sin <code>&amp;</code> en <code>scanf</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> edad;
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, edad); <span class="c-cmt">// ❌ ¡Falta el &amp;!</span></div>
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin: 6px 0 0;">
+              <b>¿Por qué explota?</b> Sin el <code>&amp;</code>, <code>scanf</code> no recibe la dirección de la caja <code>edad</code>, sino el valor basura que había adentro, e intenta escribir en un lugar prohibido de la memoria RAM.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Siempre con <code>&amp;</code> en variables simples</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> edad;
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad); <span class="c-cmt">// ✅ Dirección válida</span></div>
+            </div>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin: 6px 0 0;">
+              Recordá la regla del apunte: <b>siempre que usemos <code>scanf</code> con variables numéricas o caracteres debemos colocar <code>&amp;</code></b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: ERROR FRECUENTE #2 (PONER & EN PRINTF) -->
+      <section>
+        <h2><span class="section-num">24</span> Error Frecuente #2: Poner <code>&amp;</code> por Error Adentro de <code>printf()</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          A veces, por acostumbrarse a poner <code>&amp;</code> en <code>scanf</code>, los principiantes también lo ponen en <code>printf</code>. Mirá lo que pasa en la pantalla cuando hacés eso:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Poner <code>&amp;</code> en <code>printf</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"Edad: %d\n"</span>, &amp;edad); <span class="c-cmt">// ❌ ¡Sobra el &amp;!</span></div>
+            </div>
+            <div class="terminal-window" style="margin-top: 6px;">
+              <div class="terminal-body">Edad: 6422296</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              En lugar de mostrar <code>16</code>, ¡muestra un número rarísimo (como <code>6422296</code>) que es el número de celda de la memoria RAM donde vive la caja!
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: <code>printf</code> va SIN <code>&amp;</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">int</span> edad = <span class="c-num">16</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"Edad: %d\n"</span>, edad); <span class="c-cmt">// ✅ Sin &amp;</span></div>
+            </div>
+            <div class="terminal-window" style="margin-top: 6px;">
+              <div class="terminal-body">Edad: 16</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              A <code>printf</code> solo le interesa el <b>valor</b> guardado adentro de la variable, por eso va el nombre limpio sin <code>&amp;</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: ERROR FRECUENTE #3 (CRUZAR ESPECIFICADORES %d Y %f) -->
+      <section>
+        <h2><span class="section-num">25</span> Error Frecuente #3: Usar el Especificador Equivocado</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          ¿Qué pasa si tenés una variable <code>float</code> pero en el <code>printf</code> o en el <code>scanf</code> ponés <code>%d</code> en lugar de <code>%f</code>?
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: <code>%d</code> para un <code>float</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"Altura: %d\n"</span>, altura); <span class="c-cmt">// ❌ %d es para int</span></div>
+            </div>
+            <p style="font-size: 0.82rem; color: #fecaca; margin: 6px 0 0;">
+              <b>Resultado:</b> Imprime <code>0</code> o un número gigante sin sentido, porque los bits de un <code>float</code> están codificados de forma distinta a los de un <code>int</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Cada tipo con su pareja</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">float</span> altura = <span class="c-num">1.75</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"Altura: %.2f\n"</span>, altura); <span class="c-cmt">// ✅ %f / %.2f</span></div>
+            </div>
+            <p style="font-size: 0.82rem; color: #a7f3d0; margin: 6px 0 0;">
+              Verificá siempre la pareja: <code>int</code> ↔ <code>%d</code>, <code>float</code> ↔ <code>%f</code>, <code>char</code> ↔ <code>%c</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: ERROR FRECUENTE #4 (ENSUCIAR LAS COMILLAS DEL SCANF) -->
+      <section>
+        <h2><span class="section-num">26</span> Error Frecuente #4: Poner Texto, <code>\n</code> o <code>%.2f</code> en <code>scanf()</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Adentro de las comillas de <code>scanf()</code> <b>solo debe ir el especificador</b> (<code>"%d"</code>, <code>"%f"</code> o <code>" %c"</code>). Nunca pongas mensajes ni saltos de línea ahí adentro:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Ensuciar el <code>scanf</code></div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// ❌ No poner mensajes adentro de scanf:</span>
+<span class="c-fn">scanf</span>(<span class="c-str">"Edad: %d"</span>, &amp;edad);
+
+<span class="c-cmt">// ❌ No poner \n ni %.2f en scanf:</span>
+<span class="c-fn">scanf</span>(<span class="c-str">"%.2f\n"</span>, &amp;altura);</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin: 6px 0 0;">
+              Si ponés <code>"Edad: %d"</code> en <code>scanf</code>, el usuario estaría obligado a tipear literalmente las letras <code>Edad: </code> antes del número, o la lectura fallará.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: <code>scanf</code> limpio y puro</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// El mensaje va en printf, y el scanf va limpio:</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Edad: "</span>);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);
+
+<span class="c-fn">printf</span>(<span class="c-str">"Altura: "</span>);
+<span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;altura);</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: BUENAS PRÁCTICAS DE INTERACCIÓN CON EL USUARIO -->
+      <section>
+        <h2><span class="section-num">27</span> Buenas Prácticas de Entrada y Salida</h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">✅ Mensajes claros para el usuario</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li><b>Indicá qué formato esperás:</b> En lugar de decir solo <code>"Altura: "</code>, escribí <code>"Ingrese su altura en metros (ej 1.75): "</code> para que el usuario no ingrese centímetros ni use coma.</li>
+              <li><b>Terminá las salidas con <code>\n</code>:</b> Todo <code>printf</code> que muestre un resultado final debe cerrar con <code>\n</code> para que la consola quede ordenada.</li>
+              <li><b>Usá <code>" %c"</code> por norma:</b> Acostumbrate a poner siempre el espacio delante de <code>%c</code> en <code>scanf(" %c", &amp;variable);</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">📐 El molde estándar de lectura</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-cmt">// 1. Declarar la caja</span>
+<span class="c-kw">int</span> cantidad;
+
+<span class="c-cmt">// 2. Mostrar mensaje orientador</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Ingrese la cantidad de unidades: "</span>);
+
+<span class="c-cmt">// 3. Leer con scanf y &amp;</span>
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;cantidad);</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: EJERCICIO DE APLICACIÓN 1 (DETECTAR ERRORES) -->
+      <section>
+        <h2><span class="section-num">28</span> Ejercicio 1: Encontrá los 3 Errores de Entrada/Salida</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Analizá este fragmento de código que intenta pedir una edad y una altura, y descubrí qué 3 cosas están mal escritas:
+        </p>
+
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-header">
+            <span class="code-title">desafio_errores.c</span>
+            <span class="code-badge">Detectar 3 fallos</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> edad;
+<span class="c-kw">float</span> altura;
+
+<span class="c-fn">printf</span>(<span class="c-str">"Ingrese su edad: "</span>);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, edad);              <span class="c-cmt">// ¿Qué falta acá?</span>
+
+<span class="c-fn">printf</span>(<span class="c-str">"Ingrese su altura: "</span>);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;altura);           <span class="c-cmt">// ¿El especificador es correcto?</span>
+
+<span class="c-fn">printf</span>(<span class="c-str">"Edad: %d\n"</span>, &amp;edad);    <span class="c-cmt">// ¿Qué sobra acá?</span></div>
+        </div>
+
+        <details class="code-solution">
+          <summary>👁️ Ver respuesta explicada</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-cmt">// Error 1 corregido: faltaba el '&amp;' en el primer scanf</span>
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);
+
+<span class="c-cmt">// Error 2 corregido: 'altura' es float, por lo tanto lleva "%f" y no "%d"</span>
+<span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;altura);
+
+<span class="c-cmt">// Error 3 corregido: en printf NO va el '&amp;'</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Edad: %d\n"</span>, edad);</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 30: EJERCICIO DE APLICACIÓN 2 (PREDECIR LA CONSOLA) -->
+      <section>
+        <h2><span class="section-num">29</span> Ejercicio 2: ¿Qué Muestra Exactamente la Pantalla?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Si ejecutamos este programa y el usuario ingresa por teclado primero <code>25</code> y luego <code>199.90</code>, ¿cuál será la última línea impresa en la consola?
+        </p>
+
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> unidades;
+    <span class="c-kw">float</span> precio;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Unidades: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;unidades);
+    <span class="c-fn">printf</span>(<span class="c-str">"Precio: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;precio);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Compraste %d articulos a $%.2f cada uno.\n"</span>, unidades, precio);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <details class="code-solution">
+          <summary>👁️ Ver salida exacta en consola</summary>
+          <div class="solution-content">
+            <div class="terminal-window">
+              <div class="terminal-body">Unidades: 25
+Precio: 199.90
+Compraste 25 articulos a $199.90 cada uno.</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 31: EJERCICIO DE APLICACIÓN 3 (ESCRIBIR PROGRAMA DESDE CERO) -->
+      <section>
+        <h2><span class="section-num">30</span> Ejercicio 3: Escribí el Programa Completo</h2>
+        <div class="box box-emerald" style="margin-bottom: 10px;">
+          <h4 style="color: #34d399; margin-bottom: 4px;">📝 Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Escribí un programa en C que le pida al usuario:
+            1) La inicial de su nombre (<code>char</code>),
+            2) Su año de nacimiento (<code>int</code>), y
+            3) Su estatura en metros (<code>float</code>).
+            Al finalizar, debe mostrar los 3 datos juntos en un único <code>printf</code>.
+          </p>
+        </div>
+
+        <details class="code-solution">
+          <summary>💻 Ver código solución completo</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> inicial;
+    <span class="c-kw">int</span> anioNacimiento;
+    <span class="c-kw">float</span> estatura;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese la inicial de su nombre: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">" %c"</span>, &amp;inicial);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese su anio de nacimiento: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;anioNacimiento);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese su estatura en metros: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;estatura);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Inicial: %c | Nacido en: %d | Estatura: %.2f m\n"</span>, inicial, anioNacimiento, estatura);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 32: FLUJO COMPLETO EN MEMORIA CUANDO INTERACTUAMOS -->
+      <section>
+        <h2><span class="section-num">31</span> Qué Pasa en la Computadora de Punta a Punta</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Repasemos el circuito completo que recorre un dato desde tu dedo en el teclado hasta el monitor:
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b>Reserva en RAM:</b> <code>int edad;</code> crea la cajita en una dirección de memoria (ej. <code>&amp;edad</code>).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b>Pedido en Pantalla (Output):</b> <code>printf("Ingrese edad: ");</code> envía el mensaje hacia el monitor.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b>Lectura de Teclado (Input):</b> <code>scanf("%d", &amp;edad);</code> recibe las teclas, las convierte en un entero y las guarda en la dirección <code>&amp;edad</code>.
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content" style="font-size: 0.84rem;">
+              <b>Respuesta Final (Output):</b> <code>printf("Edad: %d\n", edad);</code> lee el contenido de la cajita y lo muestra en pantalla.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: SÍNTESIS DE LA SECCIÓN 5 DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">32</span> Síntesis Visual de la Sección 5 del Apunte</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;"><code>printf()</code> — Mostrar (Output)</h4>
+            <p style="font-size: 0.83rem; margin: 0 0 6px;">
+              Muestra texto o el valor de variables por pantalla. <b>No lleva <code>&amp;</code></b>.
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"Hola mundo\n"</span>);
+<span class="c-fn">printf</span>(<span class="c-str">"Edad: %d\n"</span>, edad);</div>
+            </div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;"><code>scanf()</code> — Ingresar (Input)</h4>
+            <p style="font-size: 0.83rem; margin: 0 0 6px;">
+              Lee un dato del teclado y lo guarda en la variable. <b>Siempre lleva <code>&amp;</code></b>.
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edad);
+<span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;altura);</div>
+            </div>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Los 3 Especificadores</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.5; margin-left: 18px; margin-bottom: 0;">
+              <li><b><code>%d</code></b> → <code>int</code> (números enteros)</li>
+              <li><b><code>%f</code></b> → <code>float</code> (números con decimales)</li>
+              <li><b><code>%c</code></b> → <code>char</code> (un único carácter)</li>
+            </ul>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">El Símbolo <code>&amp;</code></h4>
+            <p style="font-size: 0.83rem; margin: 0;">
+              Indica qué variable usaremos y <b>dónde se almacena</b> esa variable en memoria para que <code>scanf</code> pueda depositar el dato ahí adentro.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: RESUMEN FINAL, CHECKLIST Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">33</span> Resumen de la Unidad 05 y Checklist</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Puntos Esenciales</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>printf():</b> Muestra texto y valores formateados en pantalla.</li>
-              <li><b>scanf():</b> Lee datos del teclado y pausa la ejecución.</li>
-              <li><b>%d, %f, %c:</b> Especificadores para entero, float y char.</li>
-              <li><b>&amp; (ampersand):</b> Operador de dirección obligatorio en variables numéricas con
-                <code>scanf</code>.</li>
-              <li><b>%.2f:</b> Formatea la salida a 2 lugares decimales.</li>
+            <h4 style="color: #818cf8;">Ideas Clave que te Llevás Hoy</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.55; margin-left: 18px;">
+              <li><b>Interacción:</b> <code>printf()</code> saca datos a la pantalla (output) y <code>scanf()</code> entra datos desde el teclado (input).</li>
+              <li><b>Especificadores:</b> <code>%d</code> para <code>int</code>, <code>%f</code> (o <code>%.2f</code> en salida) para <code>float</code>, y <code>%c</code> para <code>char</code>.</li>
+              <li><b>El operador <code>&amp;</code>:</b> Va siempre delante de la variable en <code>scanf("%d", &amp;edad);</code> y nunca en <code>printf</code>.</li>
+              <li><b>Lectura segura de <code>char</code>:</b> Usar un espacio en <code>scanf(" %c", &amp;letra);</code> evita leer el Enter anterior.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé explicar por qué <code>scanf</code> necesita el
-              <code>&amp;</code> y <code>printf</code> no?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo cuál especificador corresponde a cada
-              tipo?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé cómo limitar la cantidad de decimales en
-              <code>printf</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo escribir un programa que pida dos números y
-              muestre la suma?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé para qué sirve <code>\n</code> adentro de un <code>printf</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo qué especificador corresponde a <code>int</code>, <code>float</code> y <code>char</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar con mis palabras por qué <code>scanf</code> necesita el <code>&amp;</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo poner siempre un <code>printf</code> pidiendo el dato antes de cada <code>scanf</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué escribimos <code>" %c"</code> con un espacio adelante?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
+        <div style="text-align: center; margin-top: 16px;">
           <a href="04-tipos-datos.html" class="badge badge-indigo"
             style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
             ← Anterior: Tipos de Datos
           </a>
           <a href="../index.html" class="badge badge-cyan"
             style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            1er Cuatrimestre
+            ← Índice 1er Bimestre
           </a>
           <a href="06-operadores-aritmeticos.html" class="badge badge-emerald"
             style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
@@ -416,8 +1403,9 @@
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -427,7 +1415,18 @@
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>

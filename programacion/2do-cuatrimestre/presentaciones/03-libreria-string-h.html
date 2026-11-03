@@ -1,74 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 2C - 03: Biblioteca string.h y Operaciones con Cadenas | Clases Particulares</title>
+  <title>Programación 2C - 03: Librería string.h y Operaciones con Cadenas | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
-  
-  <!-- Reveal.js Styles -->
+
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom Design System -->
-  <link rel="stylesheet" href="../../assets/css/presentation.css?v=3">
-  <!-- Estilos de código optimizados para alta legibilidad sin desbordes -->
-  <style>
-    .reveal .code-body,
-    .reveal pre.code-body,
-    .reveal .code-window pre {
-      font-size: 1.05rem !important;
-      line-height: 1.38 !important;
-      width: 100% !important;
-      margin: 0 !important;
-      box-shadow: none !important;
-      padding: 10px 18px !important;
-      box-sizing: border-box !important;
-    }
-    .grid-2 .code-body,
-    .grid-1-2 .code-body,
-    .grid-2-1 .code-body,
-    .grid-2 pre.code-body,
-    .grid-1-2 pre.code-body,
-    .grid-2-1 pre.code-body,
-    .grid-2 .code-window pre,
-    .grid-1-2 .code-window pre,
-    .grid-2-1 .code-window pre {
-      font-size: 1.00rem !important;
-      padding: 10px 14px !important;
-      line-height: 1.38 !important;
-    }
-    .grid-3 .code-body,
-    .grid-3 pre.code-body,
-    .grid-3 .code-window pre {
-      font-size: 0.80rem !important;
-      padding: 8px 10px !important;
-      line-height: 1.34 !important;
-    }
-    .terminal-body {
-      font-size: 1.05rem !important;
-      padding: 12px 16px !important;
-      line-height: 1.40 !important;
-    }
-    .reveal code:not(.code-body *) {
-      font-size: 0.88em !important;
-      border: none !important;
-      padding: 1px 5px !important;
-      box-decoration-break: clone !important;
-      -webkit-box-decoration-break: clone !important;
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/css/presentation.css">
 </head>
+
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
-      <a href="../index.html">← Volver al 2do Cuatrimestre</a>
+      <a href="../index.html">← Índice 2do Cuatrimestre</a>
       <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">2do Cuatrimestre • Unidad 03</span>
@@ -79,353 +38,1386 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-emerald">2do Cuatrimestre • Biblioteca Estándar • Unidad 03</span>
-          <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Biblioteca <code>&lt;string.h&gt;</code> y Operaciones con Cadenas</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            El arsenal estándar de C para manipular texto: copiar, comparar, concatenar y buscar subcadenas con seguridad y eficiencia.
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-emerald">2do Cuatrimestre • Unidad 03</span>
+          <h1 style="font-size: 2.5rem; margin-bottom: 12px;">Librería <code>&lt;string.h&gt;</code> y Operaciones con Cadenas</h1>
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 24px;">
+            Las 9 herramientas oficiales de C para medir, copiar, comparar, concatenar y buscar dentro de Strings
           </p>
 
           <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">strlen & strcpy</span>
-            <span class="badge badge-amber">strcmp vs ==</span>
-            <span class="badge badge-emerald">strcat & strchr</span>
-            <span class="badge badge-purple">strstr & versiones seguras 'n'</span>
+            <span class="badge badge-cyan">strlen &amp; strcpy</span>
+            <span class="badge badge-indigo">strcmp == 0</span>
+            <span class="badge badge-amber">strcat</span>
+            <span class="badge badge-purple">strchr &amp; strstr</span>
+            <span class="badge badge-rose">strncpy / strncmp / strncat</span>
           </div>
 
-          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-emerald" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar por las 36 diapositivas de esta unidad.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS Y TABLA MAESTRA -->
+      <!-- SLIDE 2: HOJA DE RUTA Y CONEXIÓN -->
       <section>
-        <h2><span class="section-num">01</span> La Biblioteca <code>&lt;string.h&gt;</code></h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem;">C proporciona funciones optimizadas en <code>#include &lt;string.h&gt;</code> para evitar reinventar la rueda en tareas comunes.</p>
+        <h2><span class="section-num">01</span> Hoja de Ruta y Conexión con la Unidad 02</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Lo que aprendimos en la Unidad 02</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Un String en C es un arreglo <code>char[]</code> terminado en <b><code>'\0'</code></b>.</li>
+              <li>No se pueden copiar ni comparar arreglos directamente con <code>=</code> ni con <code>==</code>.</li>
+              <li>Programamos a mano un ciclo <code>while</code> para contar la longitud de un String.</li>
+            </ul>
+          </div>
 
-        <table class="trace-table" style="font-size: 0.8rem;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Lo que vamos a dominar hoy (Sección 5 del Apunte)</h4>
+            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
+              <li>Cómo incluir y aprovechar la librería estándar <b><code>#include &lt;string.h&gt;</code></b>.</li>
+              <li>Las funciones fundamentales: <code>strlen</code>, <code>strcpy</code>, <code>strcmp</code> y <code>strcat</code>.</li>
+              <li>Búsqueda de caracteres y subcadenas: <code>strchr</code> y <code>strstr</code> (y su diferencia con "empieza con").</li>
+              <li>Las versiones con cantidad de caracteres: <code>strncpy</code>, <code>strncmp</code> y <code>strncat</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: 5. LIBRERÍA <STRING.H> -->
+      <section>
+        <h2><span class="section-num">02</span> 5. ¿Qué es la Librería <code>&lt;string.h&gt;</code>?</h2>
+        <div class="box box-cyan" style="margin-bottom: 12px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición del Apunte (págs. 5–6)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            C ya tiene una librería que nos proporciona funciones listas para trabajar con Strings y realizar las operaciones más comunes sobre cadenas sin tener que programar cada ciclo desde cero.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-header">
+            <span class="code-title">encabezado.c</span>
+            <span class="code-badge">Apunte pág. 6</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+<span class="c-pre">#include &lt;string.h&gt;</span></div>
+        </div>
+
+        <div class="box box-amber">
+          <p style="margin: 0; font-size: 0.86rem;">
+            📌 <b>Regla obligatoria:</b> Siempre que uses cualquiera de las funciones que veremos hoy, tenés que escribir <code>#include &lt;string.h&gt;</code> en la parte superior de tu archivo <code>.c</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: TABLA MAESTRA DE LAS 9 FUNCIONES DEL APUNTE -->
+      <section>
+        <h2><span class="section-num">03</span> Las 9 Funciones de <code>&lt;string.h&gt;</code> del Apunte</h2>
+        <table class="trace-table">
           <thead>
             <tr>
               <th>Función</th>
-              <th>Propósito</th>
-              <th>Sintaxis Canónica</th>
-              <th>Precaución Clave</th>
+              <th>¿Qué hace? (Apunte pág. 6)</th>
+              <th>Familia</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>strlen()</code></td>
-              <td>Obtiene longitud</td>
-              <td><code>int n = strlen(s);</code></td>
-              <td>No cuenta el <code>'\0'</code></td>
+              <td><b><code>strlen()</code></b></td>
+              <td>Obtiene la longitud</td>
+              <td>Medición</td>
             </tr>
             <tr>
-              <td><code>strcpy()</code></td>
-              <td>Copia una cadena en otra</td>
-              <td><code>strcpy(dest, orig);</code></td>
-              <td><code>dest</code> debe tener espacio suficiente</td>
+              <td><b><code>strcpy()</code></b></td>
+              <td>Copia un String</td>
+              <td>Copia completa</td>
             </tr>
             <tr>
-              <td><code>strcmp()</code></td>
-              <td>Compara dos cadenas</td>
-              <td><code>if (strcmp(a, b) == 0)</code></td>
-              <td>Devuelve 0 si son idénticas</td>
+              <td><b><code>strncpy()</code></b></td>
+              <td>Copia una cantidad determinada de caracteres</td>
+              <td>Copia con límite <code>n</code></td>
             </tr>
             <tr>
-              <td><code>strcat()</code></td>
-              <td>Concatena (une al final)</td>
-              <td><code>strcat(dest, orig);</code></td>
-              <td><code>dest</code> debe soportar la suma de ambas</td>
+              <td><b><code>strcmp()</code></b></td>
+              <td>Compara dos Strings</td>
+              <td>Comparación completa</td>
             </tr>
             <tr>
-              <td><code>strchr()</code></td>
+              <td><b><code>strncmp()</code></b></td>
+              <td>Compara una cantidad determinada de caracteres</td>
+              <td>Comparación con límite <code>n</code></td>
+            </tr>
+            <tr>
+              <td><b><code>strcat()</code></b></td>
+              <td>Une dos Strings</td>
+              <td>Unión completa</td>
+            </tr>
+            <tr>
+              <td><b><code>strncat()</code></b></td>
+              <td>Une una cantidad determinada de caracteres</td>
+              <td>Unión con límite <code>n</code></td>
+            </tr>
+            <tr>
+              <td><b><code>strchr()</code></b></td>
               <td>Busca un carácter</td>
-              <td><code>char *p = strchr(s, 'c');</code></td>
-              <td>Retorna puntero o <code>NULL</code> si no existe</td>
+              <td>Búsqueda de <code>char</code></td>
             </tr>
             <tr>
-              <td><code>strstr()</code></td>
-              <td>Busca una subcadena</td>
-              <td><code>char *p = strstr(s, "sub");</code></td>
-              <td>Retorna puntero al inicio del substring</td>
-            </tr>
-            <tr>
-              <td><code>strncpy/cmp/cat</code></td>
-              <td>Versiones limitadas a N bytes</td>
-              <td><code>strncpy(dest, orig, N);</code></td>
-              <td>Puede requerir <code>dest[N] = '\0'</code> manual</td>
+              <td><b><code>strstr()</code></b></td>
+              <td>Busca un substring</td>
+              <td>Búsqueda de texto</td>
             </tr>
           </tbody>
         </table>
       </section>
 
-      <!-- SLIDE 3: STRLEN Y STRCPY -->
+      <!-- SLIDE 5: 1. strlen() — OBTENER LA LONGITUD -->
       <section>
-        <h2><span class="section-num">02</span> <code>strlen()</code> y <code>strcpy()</code></h2>
+        <h2><span class="section-num">04</span> 1. <code>strlen()</code> — Obtener la Longitud</h2>
+        <div class="box box-cyan" style="margin-bottom: 10px;">
+          <p style="font-size: 0.9rem; margin: 0;">
+            <b><code>strlen</code></b> viene de <i><b>str</b>ing <b>len</b>gth</i> (longitud del String). Cuenta cuántos caracteres tiene la cadena hasta encontrar el <code>'\0'</code>.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-header">
+            <span class="code-title">ejemplo_strlen.c</span>
+            <span class="code-badge">Apunte pág. 6</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include &lt;string.h&gt;</span>
+
+<span class="c-kw">char</span> cadena[] = <span class="c-str">"Hola"</span>;
+<span class="c-kw">int</span> longitud = <span class="c-fn">strlen</span>(cadena); <span class="c-cmt">// ➔ longitud: 4</span></div>
+        </div>
+
+        <div class="array-container" style="margin: 10px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 0 (1°)</span>
+            <div class="array-cell highlight">'H'</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 1 (2°)</span>
+            <div class="array-cell highlight">'o'</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 2 (3°)</span>
+            <div class="array-cell highlight">'l'</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 3 (4°)</span>
+            <div class="array-cell highlight">'a'</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Pos 4 (Freno)</span>
+            <div class="array-cell" style="border-color: #f87171; color: #f87171;">'\0'</div>
+          </div>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; margin: 0;">
+          <b>¿Qué cuenta?</b> Cuenta los caracteres hasta encontrar <code>'\0'</code>. Por eso la longitud es <b><code>4</code></b> (el <code>'\0'</code> <b>no se cuenta</b>).
+        </p>
+      </section>
+
+      <!-- SLIDE 6: 2. strcpy() — COPIAR UN STRING -->
+      <section>
+        <h2><span class="section-num">05</span> 2. <code>strcpy()</code> — Copiar un String</h2>
+        <div class="box box-indigo" style="margin-bottom: 10px;">
+          <p style="font-size: 0.9rem; margin: 0;">
+            <b><code>strcpy</code></b> significa <i><b>str</b>ing <b>c</b>o<b>py</b></i>. Sirve para copiar una cadena dentro de otra (incluyendo su <code>'\0'</code> final).
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-header">
+            <span class="code-title">ejemplo_strcpy.c</span>
+            <span class="code-badge">Apunte pág. 7</span>
+          </div>
+          <div class="code-body"><span class="c-kw">char</span> origen[] = <span class="c-str">"Hola"</span>;
+<span class="c-kw">char</span> destino[<span class="c-num">20</span>];
+
+<span class="c-fn">strcpy</span>(destino, origen);</div>
+        </div>
+
         <div class="grid-2">
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">1. strlen() — Longitud del texto</h4>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              Viene de <i>string length</i>. Cuenta caracteres hasta encontrar <code>'\0'</code>:
-            </p>
-            <div class="code-window" style="margin: 8px 0;">
-              <div class="code-body"><span class="c-kw">char</span> cad[] = <span class="c-str">"Hola"</span>;
-<span class="c-kw">int</span> len = <span class="c-fn">strlen</span>(cad); <span class="c-cmt">// len = 4</span></div>
-            </div>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">
-              Ojo: <code>cad</code> ocupa 5 bytes en RAM, pero <code>strlen</code> devuelve 4 porque el <code>'\0'</code> no se cuenta como carácter del texto.
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Cómo quedan las variables ahora?</h4>
+            <p style="font-size: 0.86rem; font-family: var(--font-mono); margin: 0;">
+              origen &nbsp;➔ "Hola"<br>
+              destino ➔ "Hola"
             </p>
           </div>
 
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">2. strcpy() — Copiar cadenas</h4>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">
-              En C no podemos hacer <code>destino = origen;</code>. Se usa <code>strcpy</code>:
-            </p>
-            <div class="code-window" style="margin: 8px 0;">
-              <div class="code-body"><span class="c-kw">char</span> origen[] = <span class="c-str">"Hola"</span>;
-<span class="c-kw">char</span> destino[<span class="c-num">20</span>]; <span class="c-cmt">// Capacidad holgada</span>
-<span class="c-fn">strcpy</span>(destino, origen);</div>
-            </div>
-            <p style="font-size: 0.82rem; color: var(--accent-amber);">
-              ⚠️ <b>Regla:</b> El destino va PRIMERO: <code>strcpy(destino, origen)</code>. Copia todo incluyendo el <code>'\0'</code>.
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">⚠️ Regla de oro del orden</h4>
+            <p style="font-size: 0.85rem; margin: 0;">
+              La sintaxis es <b><code>strcpy(destino, origen);</code></b>.<br>
+              <b>El destino va primero</b>, igual que cuando escribís una asignación <code>destino = origen</code>.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: STRCMP VS == -->
+      <!-- SLIDE 7: EJEMPLO NIVEL 1 CON STRLEN Y STRCPY -->
       <section>
-        <h2><span class="section-num">03</span> La Gran Trampa: <code>strcmp()</code> vs <code>==</code></h2>
-        <div class="box box-rose" style="margin-bottom: 14px;">
-          <h4 style="color: #f87171; margin-bottom: 4px;">¿Por qué NUNCA debés hacer <code>if (cad1 == cad2)</code>?</h4>
-          <p style="font-size: 0.9rem; margin: 0; color: #fecaca;">
-            En C, los nombres de los arreglos representan sus <b>direcciones de memoria</b>. Si hacés <code>cad1 == cad2</code>, el programa no compara si las palabras dicen lo mismo; <b>está preguntando si ambas variables ocupan la misma dirección de memoria física</b>, lo cual siempre será falso aunque ambas contengan <code>"Hola"</code>.
+        <h2><span class="section-num">06</span> Ejemplo Nivel 1: <code>strlen()</code> y <code>strcpy()</code> en Acción</h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel1_len_cpy.c</span>
+              <span class="code-badge">Nivel 1</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+<span class="c-pre">#include &lt;string.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> origen[] = <span class="c-str">"Hola"</span>;
+    <span class="c-kw">char</span> destino[<span class="c-num">20</span>];
+
+    <span class="c-kw">int</span> longitud = <span class="c-fn">strlen</span>(origen);
+    <span class="c-fn">strcpy</span>(destino, origen);
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Origen: %s (largo %d)\n"</span>, origen, longitud);
+    <span class="c-fn">printf</span>(<span class="c-str">"Copia en destino: %s\n"</span>, destino);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel1_len_cpy</span>
+Origen: Hola (largo 4)
+Copia en destino: Hola</div>
+            </div>
+            <div class="box box-cyan" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                También podés copiar un texto literal directamente: <code>strcpy(destino, "Nuevo texto");</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: 3. strcmp() — ¿POR QUÉ NO USAR == CON STRINGS? -->
+      <section>
+        <h2><span class="section-num">07</span> 3. <code>strcmp()</code> — ¿Por Qué Falla <code>cadena1 == cadena2</code>?</h2>
+        <div class="box box-rose" style="margin-bottom: 12px;">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Advertencia Muy Importante del Apunte (pág. 7)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Si queremos saber si dos Strings son iguales, <b>NO hacemos <code>if(cadena1 == cadena2)</code></b>. Eso no compara el contenido de las cadenas, sino las direcciones de memoria donde están guardados los dos arreglos.
+          </p>
+        </div>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Comparar con == (Siempre da falso)</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">char</span> c1[] = <span class="c-str">"Hola"</span>;
+<span class="c-kw">char</span> c2[] = <span class="c-str">"Hola"</span>;
+<span class="c-kw">if</span>(c1 == c2) { <span class="c-cmt">// ¡MAL!</span>
+    <span class="c-fn">printf</span>(<span class="c-str">"Son iguales"</span>);
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Como <code>c1</code> y <code>c2</code> son dos arreglos distintos en la memoria RAM, <code>c1 == c2</code> da falso aunque tengan las mismas letras.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Comparar con strcmp() == 0</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">char</span> c1[] = <span class="c-str">"Hola"</span>;
+<span class="c-kw">char</span> c2[] = <span class="c-str">"Hola"</span>;
+<span class="c-kw">if</span>(<span class="c-fn">strcmp</span>(c1, c2) == <span class="c-num">0</span>) {
+    <span class="c-fn">printf</span>(<span class="c-str">"Son iguales"</span>);
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              <code>strcmp</code> revisa letra por letra ambas cadenas y devuelve <b><code>0</code></b> cuando no encuentra ninguna diferencia.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: ¿QUÉ DEVUELVE EXACTAMENTE strcmp()? -->
+      <section>
+        <h2><span class="section-num">08</span> ¿Qué Valores Devuelve <code>strcmp(cadena1, cadena2)</code>?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          <code>strcmp</code> significa <i><b>str</b>ing <b>c</b>o<b>mp</b>are</i>. Resta los códigos ASCII en la primera letra donde difieren y devuelve:
+        </p>
+
+        <table class="trace-table" style="margin: 12px 0;">
+          <thead>
+            <tr>
+              <th>Valor devuelto</th>
+              <th>Significado (Apunte pág. 7)</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b><code>0</code></b></td>
+              <td><b>Los Strings son exactamente iguales</b> (0 diferencias)</td>
+              <td><code>strcmp("Hola", "Hola") ➔ 0</code></td>
+            </tr>
+            <tr>
+              <td><b><code>&lt; 0</code> (negativo)</b></td>
+              <td>El primero es <b>menor</b> alfabéticamente que el segundo</td>
+              <td><code>strcmp("Ana", "Juan") ➔ &lt; 0</code></td>
+            </tr>
+            <tr>
+              <td><b><code>&gt; 0</code> (positivo)</b></td>
+              <td>El primero es <b>mayor</b> alfabéticamente que el segundo</td>
+              <td><code>strcmp("Zorro", "Ana") ➔ &gt; 0</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-emerald">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 <b>Cómo recordarlo sin confundirte:</b> Pensá a <code>strcmp</code> como un "contador de diferencia": si devuelve <b><code>0</code></b>, hay <b>cero diferencias</b> (son iguales). Por eso siempre preguntamos <code>if(strcmp(a, b) == 0)</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: 4. strcat() — UNIR STRINGS -->
+      <section>
+        <h2><span class="section-num">09</span> 4. <code>strcat()</code> — Unir (Concatenar) Strings</h2>
+        <div class="box box-cyan" style="margin-bottom: 10px;">
+          <p style="font-size: 0.9rem; margin: 0;">
+            <b><code>strcat</code></b> significa <i><b>str</b>ing <b>cat</b>enate</i> (concatenar). Sirve para <b>agregar una cadena al final de otra</b>.
           </p>
         </div>
 
         <div class="grid-2">
           <div class="code-window">
             <div class="code-header">
-              <span class="code-title">comparar_strings.c</span>
-              <span class="code-badge">strcmp</span>
+              <span class="code-title">sin_espacio.c</span>
+              <span class="code-badge">Apunte pág. 8</span>
             </div>
-            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
-<span class="c-pre">#include</span> <span class="c-str">&lt;string.h&gt;</span>
+            <div class="code-body"><span class="c-kw">char</span> nombre[<span class="c-num">30</span>] = <span class="c-str">"Juan"</span>;
+<span class="c-kw">char</span> apellido[] = <span class="c-str">"Perez"</span>;
 
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-{
-    <span class="c-kw">char</span> c1[] = <span class="c-str">"Hola"</span>;
-    <span class="c-kw">char</span> c2[] = <span class="c-str">"Hola"</span>;
-    
-    <span class="c-kw">if</span> (<span class="c-fn">strcmp</span>(c1, c2) == <span class="c-num">0</span>) {
-        <span class="c-fn">printf</span>(<span class="c-str">"Son iguales en contenido.\n"</span>);
+<span class="c-fn">strcat</span>(nombre, apellido);
+<span class="c-cmt">// Resultado en nombre:</span>
+<span class="c-cmt">// "JuanPerez"</span></div>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">con_espacio.c</span>
+              <span class="code-badge">Apunte pág. 8</span>
+            </div>
+            <div class="code-body"><span class="c-kw">char</span> nombre[<span class="c-num">30</span>] = <span class="c-str">"Juan "</span>;
+<span class="c-kw">char</span> apellido[] = <span class="c-str">"Perez"</span>;
+
+<span class="c-fn">strcat</span>(nombre, apellido);
+<span class="c-cmt">// Resultado en nombre:</span>
+<span class="c-cmt">// "Juan Perez"</span></div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            📌 <b>Detalle importante:</b> <code>strcat</code> no inventa espacios. Pega el segundo String exactamente donde estaba el <code>'\0'</code> del primero. Además, el primer arreglo (<code>nombre[30]</code>) debe tener capacidad suficiente para alojar ambas palabras.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: CÓMO FUNCIONA STRCAT EN MEMORIA -->
+      <section>
+        <h2><span class="section-num">10</span> Modelo Mental en RAM: ¿Cómo Pega <code>strcat()</code>?</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          Veamos qué pasa en las casillas de <code>char nombre[30] = "Juan ";</code> cuando hacemos <code>strcat(nombre, "Perez");</code>:
+        </p>
+
+        <p style="font-size: 0.82rem; color: #38bdf8; margin: 8px 0 4px;"><b>Antes de <code>strcat</code>:</b></p>
+        <div class="array-container" style="margin: 4px 0 10px;">
+          <div class="array-cell-wrapper"><span class="array-index">0</span><div class="array-cell">'J'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">1</span><div class="array-cell">'u'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">2</span><div class="array-cell">'a'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">3</span><div class="array-cell">'n'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">4</span><div class="array-cell">' '</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">5</span><div class="array-cell highlight">'\0'</div></div>
+        </div>
+
+        <p style="font-size: 0.82rem; color: #34d399; margin: 8px 0 4px;"><b>Después de <code>strcat(nombre, "Perez")</code> (pisa el <code>'\0'</code> de la pos 5 y pone uno nuevo al final):</b></p>
+        <div class="array-container" style="margin: 4px 0;">
+          <div class="array-cell-wrapper"><span class="array-index">0</span><div class="array-cell">'J'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">1</span><div class="array-cell">'u'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">2</span><div class="array-cell">'a'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">3</span><div class="array-cell">'n'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">4</span><div class="array-cell">' '</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">5</span><div class="array-cell highlight">'P'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">6</span><div class="array-cell highlight">'e'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">7</span><div class="array-cell highlight">'r'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">8</span><div class="array-cell highlight">'e'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">9</span><div class="array-cell highlight">'z'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">10</span><div class="array-cell highlight">'\0'</div></div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: EJEMPLO NIVEL 2 CON TABLA DE SEGUIMIENTO -->
+      <section>
+        <h2><span class="section-num">11</span> Ejemplo Nivel 2: <code>strcmp()</code> y <code>strcat()</code> con Traza</h2>
+        <div class="grid-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">nivel2_cmp_cat.c</span>
+              <span class="code-badge">Nivel 2</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+<span class="c-pre">#include &lt;string.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> nombre[<span class="c-num">30</span>] = <span class="c-str">"Juan "</span>;
+    <span class="c-kw">char</span> apellido[] = <span class="c-str">"Perez"</span>;
+
+    <span class="c-fn">strcat</span>(nombre, apellido);
+    <span class="c-fn">printf</span>(<span class="c-str">"Completo: %s\n"</span>, nombre);
+
+    <span class="c-kw">if</span>(<span class="c-fn">strcmp</span>(nombre, <span class="c-str">"Juan Perez"</span>) == <span class="c-num">0</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Coincide exactamente!\n"</span>);
     }
     <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
           </div>
 
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Valores de Retorno de <code>strcmp</code></h4>
-            <div class="step-list">
-              <div class="step-item"><span class="step-num">0</span><div><b>Son idénticas</b>: Todos los caracteres y el <code>'\0'</code> coinciden exactamente.</div></div>
-              <div class="step-item"><span class="step-num">&lt;0</span><div><b>c1 es menor</b> alfabéticamente (según orden ASCII) que c2.</div></div>
-              <div class="step-item"><span class="step-num">&gt;0</span><div><b>c1 es mayor</b> alfabéticamente que c2.</div></div>
+          <div>
+            <table class="trace-table">
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th><code>nombre</code></th>
+                  <th><code>strlen(nombre)</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Inicial</td>
+                  <td><code>"Juan "</code></td>
+                  <td><code>5</code></td>
+                </tr>
+                <tr>
+                  <td>Tras <code>strcat</code></td>
+                  <td><code>"Juan Perez"</code></td>
+                  <td><code>10</code></td>
+                </tr>
+                <tr>
+                  <td><code>strcmp == 0</code></td>
+                  <td>Verdadero (<code>0</code>)</td>
+                  <td><code>10</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="terminal-window" style="margin-top: 10px;">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./nivel2_cmp_cat</span>
+Completo: Juan Perez
+Coincide exactamente!</div>
             </div>
-            <p style="font-size: 0.8rem; color: var(--accent-cyan); margin-top: 8px;">
-              💡 <code>strcmp("Hola", "Hola")</code> devuelve <code>0</code>. ¡Por eso evaluamos <code>== 0</code>!
-            </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: STRCAT Y UNIÓN -->
+      <!-- SLIDE 13: 5. strchr() — BUSCAR UN CARÁCTER -->
       <section>
-        <h2><span class="section-num">04</span> <code>strcat()</code> — Concatenar Cadenas</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Unir una cadena al final de otra existente.</p>
+        <h2><span class="section-num">12</span> 5. <code>strchr()</code> — Buscar un Carácter en un String</h2>
+        <div class="box box-indigo" style="margin-bottom: 10px;">
+          <p style="font-size: 0.9rem; margin: 0;">
+            <b><code>strchr</code></b> sirve para <b>buscar un carácter dentro de un String</b>. La función devuelve un puntero a la <b>primera aparición encontrada</b> (o <code>NULL</code> si ese carácter no está).
+          </p>
+        </div>
 
-        <div class="code-window">
+        <div class="code-window" style="margin-bottom: 12px;">
           <div class="code-header">
-            <div class="code-dots"><span class="code-dot dot-red"></span><span class="code-dot dot-yellow"></span><span class="code-dot dot-green"></span></div>
-            <span class="code-title">concatenar.c</span>
-            <span class="code-badge">strcat</span>
+            <span class="code-title">ejemplo_strchr.c</span>
+            <span class="code-badge">Apunte pág. 8</span>
           </div>
-          <div class="code-body"><span class="c-kw">char</span> nombre[<span class="c-num">30</span>] = <span class="c-str">"Juan "</span>;  <span class="c-cmt">// Debe tener espacio libre suficiente</span>
-<span class="c-kw">char</span> apellido[] = <span class="c-str">"Perez"</span>;
+          <div class="code-body"><span class="c-kw">char</span> cadena[] = <span class="c-str">"banana"</span>;
+<span class="c-kw">char</span> *resultado = <span class="c-fn">strchr</span>(cadena, <span class="c-str">'a'</span>);</div>
+        </div>
 
-<span class="c-fn">strcat</span>(nombre, apellido);
+        <div class="array-container" style="margin: 10px 0;">
+          <div class="array-cell-wrapper"><span class="array-index">Pos 0</span><div class="array-cell">'b'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">↑ resultado</span><div class="array-cell highlight">'a'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">Pos 2</span><div class="array-cell">'n'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">Pos 3</span><div class="array-cell">'a'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">Pos 4</span><div class="array-cell">'n'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">Pos 5</span><div class="array-cell">'a'</div></div>
+          <div class="array-cell-wrapper"><span class="array-index">Pos 6</span><div class="array-cell">'\0'</div></div>
+        </div>
 
-<span class="c-fn">printf</span>(<span class="c-str">"%s\n"</span>, nombre); <span class="c-cmt">// Imprime: Juan Perez</span></div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; margin: 0;">
+          Busca <code>'a'</code> dentro de <code>"banana"</code>. Al encontrar la primera <code>'a'</code> (posición 1), <code>resultado</code> apunta a esa posición.
+        </p>
+      </section>
+
+      <!-- SLIDE 14: CÓMO USAR strchr() CON UN IF -->
+      <section>
+        <h2><span class="section-num">13</span> ¿Cómo Usamos <code>strchr()</code> en la Práctica?</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Aunque veremos punteros en detalle más adelante, usar <code>strchr</code> para saber si una letra existe o no es súper fácil: comparamos contra <b><code>NULL</code></b> (que significa "no encontrado"):
+        </p>
+
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">buscar_letra.c</span>
+              <span class="code-badge">Apunte pág. 8</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+<span class="c-pre">#include &lt;string.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> cadena[] = <span class="c-str">"banana"</span>;
+    <span class="c-kw">char</span> *resultado = <span class="c-fn">strchr</span>(cadena, <span class="c-str">'a'</span>);
+
+    <span class="c-kw">if</span>(resultado != NULL) {
+        <span class="c-fn">printf</span>(<span class="c-str">"La letra 'a' esta en la palabra!\n"</span>);
+        <span class="c-fn">printf</span>(<span class="c-str">"Resto desde 'a': %s\n"</span>, resultado);
+    } <span class="c-kw">else</span> {
+        <span class="c-fn">printf</span>(<span class="c-str">"No se encontro.\n"</span>);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./buscar_letra</span>
+La letra 'a' esta en la palabra!
+Resto desde 'a': anana</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                Como <code>resultado</code> apunta a la primera <code>'a'</code> de <code>"banana"</code>, imprimir <code>%s</code> desde ahí muestra <code>"anana"</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: 6. strstr() — BUSCAR UN SUBSTRING -->
+      <section>
+        <h2><span class="section-num">14</span> 6. <code>strstr()</code> — Buscar un Substring (Subcadena)</h2>
+        <div class="box box-cyan" style="margin-bottom: 10px;">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Explicación del Apunte (págs. 8–9)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            <b><code>strstr</code></b> sirve para <b>buscar un String dentro de otro String</b>. Si lo encuentra, devuelve un puntero a donde comienza ese substring (y si no lo encuentra, devuelve <code>NULL</code>).
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-header">
+            <span class="code-title">ejemplo_strstr.c</span>
+            <span class="code-badge">Apunte págs. 8–9</span>
+          </div>
+          <div class="code-body"><span class="c-kw">char</span> cadena[] = <span class="c-str">"programacion"</span>;
+<span class="c-kw">char</span> *encontrado = <span class="c-fn">strstr</span>(cadena, <span class="c-str">"gram"</span>);</div>
+        </div>
+
+        <div style="text-align: center; font-family: var(--font-mono); font-size: 1.25rem; background: rgba(15,23,42,0.75); padding: 12px; border-radius: 10px; border: 1px solid rgba(56, 189, 248, 0.3);">
+          p &nbsp; r &nbsp; o &nbsp; <span style="color: #34d399; font-weight: 700; text-decoration: underline;">g &nbsp; r &nbsp; a &nbsp; m</span> &nbsp; a &nbsp; c &nbsp; i &nbsp; o &nbsp; n<br>
+          <span style="font-size: 0.85rem; color: #fbbf24;">↑ acá empieza "gram"</span>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            💡 Como destaca el apunte: esto simplifica muchísimo cualquier ejercicio que pida comprobar si una cadena <b>contiene</b> una subcadena.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: 7. strstr() VS COMPROBAR SI EMPIEZA CON UNA SUBCADENA -->
+      <section>
+        <h2><span class="section-num">15</span> 7. <code>strstr()</code> vs Comprobar si "Empieza con"</h2>
+        <div class="box box-amber" style="margin-bottom: 12px;">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Distinción Clave del Apunte (pág. 9)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            No es lo mismo preguntar <b>"¿Contiene la subcadena?"</b> que preguntar <b>"¿La cadena comienza con esta subcadena?"</b>.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Caso 1: <code>"programacion"</code> y <code>"pro"</code></h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              • ¿Contiene <code>"pro"</code>? ➔ <b>Sí</b> (<code>strstr</code> lo encuentra).<br>
+              • ¿<b>Comienza</b> con <code>"pro"</code>? ➔ <b>Sí</b> (está al principio, desde la posición 0).
+            </p>
+          </div>
+
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">Caso 2: <code>"programacion"</code> y <code>"gram"</code></h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              • ¿Contiene <code>"gram"</code>? ➔ <b>Sí</b> (<code>pro<b>GRAM</b>acion</code>).<br>
+              • ¿<b>Comienza</b> con <code>"gram"</code>? ➔ <b>No</b> (empieza con <code>"pro"</code>, aunque <code>strstr()</code> encuentre <code>"gram"</code> en el medio).
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            📌 <b>Conclusión del Apunte:</b> Para saber si una palabra <b>comienza con</b> un prefijo, debemos revisar específicamente las primeras posiciones (o usar <code>strncmp</code> como veremos en un instante).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: LA FAMILIA CON "n": strncpy, strncmp, strncat -->
+      <section>
+        <h2><span class="section-num">16</span> La Familia con <code>n</code>: Operar con una Cantidad de Caracteres</h2>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+          Habrás notado en la tabla del apunte que <code>strcpy</code>, <code>strcmp</code> y <code>strcat</code> tienen hermanas con una letra <b><code>n</code></b> en el medio:
+        </p>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;"><code>strncpy(d, o, n)</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Copia solamente los primeros <b><code>n</code> caracteres</b> de <code>origen</code> en <code>destino</code>.
+            </p>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;"><code>strncmp(a, b, n)</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Compara solamente los primeros <b><code>n</code> caracteres</b> de ambas cadenas.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;"><code>strncat(d, o, n)</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Agrega al final de <code>destino</code> solamente los primeros <b><code>n</code> caracteres</b> de <code>origen</code>.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 14px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            💡 La letra <b><code>n</code></b> viene de <i>number of characters</i> (cantidad de caracteres). Veamos los ejemplos exactos del apunte para cada una.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: 8. strncpy() — COPIAR UNA CANTIDAD DE CARACTERES -->
+      <section>
+        <h2><span class="section-num">17</span> 8. <code>strncpy()</code> — Copiar una Cantidad de Caracteres</h2>
+        <div class="box box-cyan" style="margin-bottom: 10px;">
+          <p style="font-size: 0.88rem; margin: 0;">
+            Es una versión de <code>strcpy()</code> que permite indicar cuántos caracteres copiar: <b><code>strncpy(destino, origen, cantidad);</code></b>
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-header">
+            <span class="code-title">ejemplo_strncpy.c</span>
+            <span class="code-badge">Apunte pág. 9</span>
+          </div>
+          <div class="code-body"><span class="c-kw">char</span> origen[] = <span class="c-str">"Programacion"</span>;
+<span class="c-kw">char</span> destino[<span class="c-num">20</span>];
+
+<span class="c-fn">strncpy</span>(destino, origen, <span class="c-num">4</span>);
+destino[<span class="c-num">4</span>] = <span class="c-str">'\0'</span>; <span class="c-cmt">// Cerramos el String manualmente</span>
+<span class="c-cmt">// Copia: "Prog"</span></div>
         </div>
 
         <div class="box box-rose">
-          <h4 style="color: #f87171; margin-bottom: 4px;">Peligro Crítico: Desbordamiento de Búfer (Buffer Overflow)</h4>
-          <p style="font-size: 0.88rem; margin: 0; color: #cbd5e1;">
-            <code>strcat(nombre, apellido)</code> busca el <code>'\0'</code> de <code>nombre</code> y a partir de ahí empieza a escribir las letras de <code>apellido</code>. Si <code>nombre</code> no fue declarado con una capacidad de casillas suficiente para albergar a ambas cadenas combinadas, pisará variables adyacentes en la memoria RAM, destruyendo el programa.
+          <h4 style="color: #f87171; margin-bottom: 4px;">⚠️ Advertencia Importante del Apunte (pág. 9)</h4>
+          <p style="font-size: 0.85rem; margin: 0;">
+            <code>strncpy()</code> <b>no siempre agrega automáticamente <code>'\0'</code></b> si se copian exactamente los primeros <code>n</code> caracteres de una cadena más larga. Por eso, conviene hacer siempre: <b><code>destino[4] = '\0';</code></b>.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 6: STRCHR Y STRSTR -->
+      <!-- SLIDE 19: POR QUÉ HACE FALTA destino[4] = '\0' EN strncpy -->
       <section>
-        <h2><span class="section-num">05</span> Búsqueda: <code>strchr()</code> y <code>strstr()</code></h2>
-        <div class="grid-2">
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">strchr() — Buscar un Carácter</h4>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">Busca un <code>char</code> y devuelve un puntero a su primera aparición:</p>
-            <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body"><span class="c-kw">char</span> cadena[] = <span class="c-str">"banana"</span>;
-<span class="c-kw">char</span> *pos = <span class="c-fn">strchr</span>(cadena, <span class="c-char">'a'</span>);
+        <h2><span class="section-num">18</span> Visualizando en RAM qué Hace <code>strncpy(destino, origen, 4)</code></h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          Cuando copiamos solo <code>4</code> letras de <code>"Programacion"</code>, el <code>'\0'</code> de <code>"Programacion"</code> está recién en la posición 12, ¡así que no entra en los primeros 4 caracteres!
+        </p>
 
-<span class="c-kw">if</span> (pos != NULL) {
-    <span class="c-fn">printf</span>(<span class="c-str">"Encontrado: %s\n"</span>, pos);
-    <span class="c-cmt">// Imprime: anana</span>
-}</div>
-            </div>
-            <p style="font-size: 0.8rem; color: var(--text-muted);">
-              Si el carácter no existe en el texto, devuelve <code>NULL</code>.
-            </p>
+        <div class="array-container" style="margin: 14px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">destino[0]</span>
+            <div class="array-cell highlight">'P'</div>
           </div>
-
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">strstr() — Buscar una Subcadena</h4>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">Busca un string dentro de otro:</p>
-            <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body"><span class="c-kw">char</span> texto[] = <span class="c-str">"programacion"</span>;
-<span class="c-kw">char</span> *sub = <span class="c-fn">strstr</span>(texto, <span class="c-str">"gram"</span>);
-
-<span class="c-kw">if</span> (sub != NULL) {
-    <span class="c-fn">printf</span>(<span class="c-str">"Subcadena hallada: %s\n"</span>, sub);
-    <span class="c-cmt">// Imprime: gramacion</span>
-}</div>
-            </div>
-            <p style="font-size: 0.8rem; color: var(--text-muted);">
-              Retorna el puntero donde arranca la subcadena. Si no está contenida, devuelve <code>NULL</code>.
-            </p>
+          <div class="array-cell-wrapper">
+            <span class="array-index">destino[1]</span>
+            <div class="array-cell highlight">'r'</div>
           </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">destino[2]</span>
+            <div class="array-cell highlight">'o'</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">destino[3]</span>
+            <div class="array-cell highlight">'g'</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">destino[4] = '\0'</span>
+            <div class="array-cell" style="border-color: #34d399; color: #34d399;">'\0'</div>
+          </div>
+        </div>
+
+        <div class="box box-emerald">
+          <p style="margin: 0; font-size: 0.86rem;">
+            ✅ Al agregar <code>destino[4] = '\0';</code> colocamos el terminador justo después de las 4 letras copiadas (posiciones 0, 1, 2 y 3), dejando formado el String <code>"Prog"</code>.
+          </p>
         </div>
       </section>
 
-      <!-- SLIDE 7: STRSTR VS COMIENZA CON -->
+      <!-- SLIDE 20: 9. strncmp() — COMPARAR UNA CANTIDAD DE CARACTERES -->
       <section>
-        <h2><span class="section-num">06</span> <code>strstr()</code> vs "¿Comienza con...?"</h2>
-        <div class="box box-indigo" style="margin-bottom: 16px;">
-          <h4 style="color: #818cf8;">Diferencia Lógica Fundamental</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            No es lo mismo <b>contener</b> una subcadena en cualquier posición que <b>comenzar</b> con ella:
+        <h2><span class="section-num">19</span> 9. <code>strncmp()</code> — Comparar una Cantidad de Caracteres</h2>
+        <div class="box box-indigo" style="margin-bottom: 10px;">
+          <p style="font-size: 0.9rem; margin: 0;">
+            Es parecido a <code>strcmp()</code>, pero podemos decirle cuántos caracteres comparar desde el inicio: <b><code>strncmp(cadena1, cadena2, cantidad);</code></b>
           </p>
         </div>
 
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-header">
+            <span class="code-title">ejemplo_strncmp.c</span>
+            <span class="code-badge">Apunte pág. 10</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> res = <span class="c-fn">strncmp</span>(<span class="c-str">"Hola"</span>, <span class="c-str">"Hola mundo"</span>, <span class="c-num">4</span>); <span class="c-cmt">// ➔ devuelve 0</span></div>
+        </div>
+
         <div class="grid-2">
-          <div class="box box-amber">
-            <h4 style="color: #fbbf24;">Caso: "programacion" y "gram"</h4>
-            <div style="font-family: var(--font-mono); font-size: 0.9rem; margin: 8px 0; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 6px;">
-              pro<span style="color: var(--accent-emerald); font-weight: bold;">GRAM</span>acion
-            </div>
-            <ul style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin-left: 14px;">
-              <li><code>strstr(cad, "gram")</code> ➔ <b>SÍ la encuentra</b>.</li>
-              <li>¿Empieza con "gram"? ➔ <b>NO</b> (empieza con "pro").</li>
-            </ul>
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿Qué compara exactamente?</h4>
+            <p style="font-size: 0.85rem; margin: 0;">
+              Compara solamente los primeros <b>4 caracteres</b>:<br>
+              • Cadena 1 (primeros 4): <code>"Hola"</code><br>
+              • Cadena 2 (primeros 4): <code>"Hola"</code><br>
+              Como son iguales, devuelve <b><code>0</code></b>.
+            </p>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Caso: "programacion" y "pro"</h4>
-            <div style="font-family: var(--font-mono); font-size: 0.9rem; margin: 8px 0; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 6px;">
-              <span style="color: var(--accent-emerald); font-weight: bold;">PRO</span>gramacion
-            </div>
-            <ul style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin-left: 14px;">
-              <li><code>strstr(cad, "pro")</code> ➔ <b>SÍ la encuentra</b>.</li>
-              <li>¿Empieza con "pro"? ➔ <b>SÍ</b> (los primeros caracteres coinciden).</li>
-            </ul>
+            <h4 style="color: #34d399;">¡Ideal para "Comienza con"!</h4>
+            <p style="font-size: 0.85rem; margin: 0;">
+              ¿Te acordás del problema de saber si <code>"programacion"</code> empieza con <code>"pro"</code>? Con <code>strncmp(palabra, "pro", 3) == 0</code> lo resolvés en una línea.
+            </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 8: VERSIONES SEGURAS STRN... -->
+      <!-- SLIDE 21: 10. strncat() — CONCATENAR UNA CANTIDAD DETERMINADA -->
       <section>
-        <h2><span class="section-num">07</span> Operaciones Seguras con Límite 'n': <code>strncpy</code>, <code>strncmp</code> y <code>strncat</code></h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem;">Permiten limitar la operación a un número máximo de caracteres para evitar desbordes.</p>
+        <h2><span class="section-num">20</span> 10. <code>strncat()</code> — Concatenar una Cantidad Determinada</h2>
+        <div class="box box-emerald" style="margin-bottom: 10px;">
+          <p style="font-size: 0.9rem; margin: 0;">
+            Es parecido a <code>strcat()</code>, pero permite especificar cuántos caracteres del segundo String queremos agregar: <b><code>strncat(destino, origen, cantidad);</code></b>
+          </p>
+        </div>
 
-        <div class="grid-3">
-          <div class="box box-cyan">
-            <h4 style="color: #38bdf8;">strncpy(dest, orig, n)</h4>
-            <p style="font-size: 0.82rem; color: #cbd5e1;">Copia solo los primeros <code>n</code> caracteres:</p>
-            <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body"><span class="c-kw">char</span> orig[] = <span class="c-str">"Programacion"</span>;
-<span class="c-kw">char</span> dest[<span class="c-num">20</span>];
-<span class="c-fn">strncpy</span>(dest, orig, <span class="c-num">4</span>);
-dest[<span class="c-num">4</span>] = <span class="c-str">'\0'</span>; <span class="c-cmt">// Obligatorio</span></div>
+        <div class="code-window" style="margin-bottom: 12px;">
+          <div class="code-header">
+            <span class="code-title">ejemplo_strncat.c</span>
+            <span class="code-badge">Apunte pág. 10</span>
+          </div>
+          <div class="code-body"><span class="c-kw">char</span> cadena[<span class="c-num">30</span>] = <span class="c-str">"Hola "</span>;
+<span class="c-kw">char</span> otra[] = <span class="c-str">"mundo123"</span>;
+
+<span class="c-fn">strncat</span>(cadena, otra, <span class="c-num">5</span>);
+<span class="c-cmt">// Resultado en cadena: "Hola mundo"</span></div>
+        </div>
+
+        <div class="box box-indigo">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🔍 <b>¿Por qué da <code>"Hola mundo"</code>?</b> Porque de <code>"mundo123"</code> toma solamente los primeros <b><code>5</code> caracteres</b> (<code>"mundo"</code>), los pega al final de <code>"Hola "</code> y agrega automáticamente el <code>'\0'</code> final.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: DEMO COMPLETA DE LA FAMILIA CON N -->
+      <section>
+        <h2><span class="section-num">21</span> Programa Completo con <code>strncpy</code>, <code>strncmp</code> y <code>strncat</code></h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">familia_n.c</span>
+              <span class="code-badge">Apunte págs. 9–10</span>
             </div>
-            <p style="font-size: 0.78rem; color: var(--accent-amber);">
-              ⚠️ Si no hay un <code>'\0'</code> dentro de los <code>n</code> bytes, <code>strncpy</code> NO lo agrega. Debemos agregarlo manualmente.
-            </p>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+<span class="c-pre">#include &lt;string.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> origen[] = <span class="c-str">"Programacion"</span>;
+    <span class="c-kw">char</span> destino[<span class="c-num">20</span>];
+    <span class="c-fn">strncpy</span>(destino, origen, <span class="c-num">4</span>);
+    destino[<span class="c-num">4</span>] = <span class="c-str">'\0'</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"strncpy: %s\n"</span>, destino);
+
+    <span class="c-kw">if</span>(<span class="c-fn">strncmp</span>(<span class="c-str">"Hola"</span>, <span class="c-str">"Hola mundo"</span>, <span class="c-num">4</span>) == <span class="c-num">0</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"strncmp: Primeros 4 iguales\n"</span>);
+    }
+
+    <span class="c-kw">char</span> cadena[<span class="c-num">30</span>] = <span class="c-str">"Hola "</span>;
+    <span class="c-kw">char</span> otra[] = <span class="c-str">"mundo123"</span>;
+    <span class="c-fn">strncat</span>(cadena, otra, <span class="c-num">5</span>);
+    <span class="c-fn">printf</span>(<span class="c-str">"strncat: %s\n"</span>, cadena);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
           </div>
 
-          <div class="box box-indigo">
-            <h4 style="color: #818cf8;">strncmp(c1, c2, n)</h4>
-            <p style="font-size: 0.82rem; color: #cbd5e1;">Compara únicamente los primeros <code>n</code> caracteres:</p>
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./familia_n</span>
+strncpy: Prog
+strncmp: Primeros 4 iguales
+strncat: Hola mundo</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: EJEMPLO NIVEL 3: VALIDADOR DE CLAVE Y LONGITUD MÍNIMA -->
+      <section>
+        <h2><span class="section-num">22</span> Ejemplo Nivel 3: Validar Contraseña con <code>strlen</code> y <code>strcmp</code></h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Combinemos funciones con retorno y <code>&lt;string.h&gt;</code>: una función que verifique si la clave ingresada tiene al menos 4 caracteres y coincide con la clave secreta:
+        </p>
+
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">validar_clave.c</span>
+              <span class="code-badge">Nivel 3</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+<span class="c-pre">#include &lt;string.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">verificarAcceso</span>(<span class="c-kw">char</span> intento[]) {
+    <span class="c-kw">if</span>(<span class="c-fn">strlen</span>(intento) &lt; <span class="c-num">4</span>) {
+        <span class="c-kw">return</span> <span class="c-num">0</span>; <span class="c-cmt">// Muy corta</span>
+    }
+    <span class="c-kw">if</span>(<span class="c-fn">strcmp</span>(intento, <span class="c-str">"lab2026"</span>) == <span class="c-num">0</span>) {
+        <span class="c-kw">return</span> <span class="c-num">1</span>; <span class="c-cmt">// Correcta</span>
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> clave[] = <span class="c-str">"lab2026"</span>;
+    <span class="c-kw">if</span>(<span class="c-fn">verificarAcceso</span>(clave) == <span class="c-num">1</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Acceso concedido!\n"</span>);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./validar_clave</span>
+Acceso concedido!</div>
+            </div>
+            <div class="box box-emerald" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                Primero validamos el largo con <code>strlen(intento)</code> y luego la igualdad exacta con <code>strcmp(...) == 0</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: EJEMPLO NIVEL 4: RAZONAMIENTO LÓGICO PARA ARCHIVOS Y EXTENSIONES -->
+      <section>
+        <h2><span class="section-num">23</span> Ejemplo Nivel 4: Analizador de Nombres de Comando</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Supongamos que queremos analizar una cadena como <code>"programacion_en_c"</code> para saber:
+        </p>
+
+        <div class="step-list" style="margin-top: 10px;">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div><b>¿Empieza con el prefijo <code>"pro"</code>?</b> Usamos <code>strncmp(texto, "pro", strlen("pro")) == 0</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div><b>¿Contiene la subcadena <code>"gram"</code> en algún lugar?</b> Usamos <code>strstr(texto, "gram") != NULL</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div><b>¿Contiene el carácter guion bajo <code>'_'</code>?</b> Usamos <code>strchr(texto, '_') != NULL</code>.</div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div><b>Armar una etiqueta de salida:</b> Copiamos con <code>strcpy</code> y unimos con <code>strcat</code>.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: IMPLEMENTACIÓN COMPLETA NIVEL 4 -->
+      <section>
+        <h2><span class="section-num">24</span> Implementación Completa Nivel 4</h2>
+        <div class="grid-2-1" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">analizador_texto.c</span>
+              <span class="code-badge">Nivel 4</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+<span class="c-pre">#include &lt;string.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> curso[] = <span class="c-str">"programacion"</span>;
+
+    <span class="c-kw">if</span>(<span class="c-fn">strncmp</span>(curso, <span class="c-str">"pro"</span>, <span class="c-num">3</span>) == <span class="c-num">0</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"1) Empieza con 'pro': SI\n"</span>);
+    }
+    <span class="c-kw">if</span>(<span class="c-fn">strncmp</span>(curso, <span class="c-str">"gram"</span>, <span class="c-num">4</span>) == <span class="c-num">0</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"2) Empieza con 'gram': SI\n"</span>);
+    } <span class="c-kw">else</span> {
+        <span class="c-fn">printf</span>(<span class="c-str">"2) Empieza con 'gram': NO\n"</span>);
+    }
+    <span class="c-kw">if</span>(<span class="c-fn">strstr</span>(curso, <span class="c-str">"gram"</span>) != NULL) {
+        <span class="c-fn">printf</span>(<span class="c-str">"3) Contiene 'gram': SI\n"</span>);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <span>Terminal</span>
+                <span>Salida</span>
+              </div>
+              <div class="terminal-body"><span class="terminal-prompt">$ ./analizador_texto</span>
+1) Empieza con 'pro': SI
+2) Empieza con 'gram': NO
+3) Contiene 'gram': SI</div>
+            </div>
+            <div class="box box-cyan" style="margin-top: 10px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                ¡Acá ves en código real la diferencia exacta explicada en la página 9 del apunte entre contener <code>"gram"</code> y empezar con <code>"gram"</code>!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: TABLA DE SEGUIMIENTO DE OPERACIONES SUCESIVAS -->
+      <section>
+        <h2><span class="section-num">25</span> Seguimiento Paso a Paso de una Cadena en Memoria</h2>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">
+          Seguí cómo evoluciona el arreglo <code>char buffer[30];</code> línea por línea:
+        </p>
+
+        <table class="trace-table" style="margin-top: 10px;">
+          <thead>
+            <tr>
+              <th>Instrucción ejecutada</th>
+              <th>Contenido de <code>buffer</code></th>
+              <th><code>strlen(buffer)</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>strcpy(buffer, "Juan");</code></td>
+              <td><code>"Juan"</code></td>
+              <td><code>4</code></td>
+            </tr>
+            <tr>
+              <td><code>strcat(buffer, " ");</code></td>
+              <td><code>"Juan "</code></td>
+              <td><code>5</code></td>
+            </tr>
+            <tr>
+              <td><code>strncat(buffer, "Perez123", 5);</code></td>
+              <td><code>"Juan Perez"</code></td>
+              <td><code>10</code></td>
+            </tr>
+            <tr>
+              <td><code>strncpy(buffer, "Hola", 4); buffer[4] = '\0';</code></td>
+              <td><code>"Hola"</code></td>
+              <td><code>4</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            💡 <b>Diferencia clave:</b> <code>strcpy</code> <b>reemplaza</b> todo el texto de <code>buffer</code> desde la posición 0; en cambio, <code>strcat</code> <b>agrega</b> al final respetando lo que ya había.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: ERRORES FRECUENTES (PARTE 1): IF(STRCMP(A, B)) -->
+      <section>
+        <h2><span class="section-num">26</span> Errores Frecuentes (Parte 1): Olvidar el <code>== 0</code> en <code>strcmp</code></h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Este es el error número 1 en parciales de programación en C:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Olvidar == 0 (Lógica invertida)</div>
             <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body"><span class="c-kw">if</span> (<span class="c-fn">strncmp</span>(<span class="c-str">"Hola"</span>, <span class="c-str">"Hola mundo"</span>, <span class="c-num">4</span>) == <span class="c-num">0</span>) {
-    <span class="c-cmt">// Devuelve 0: ¡Coinciden!</span>
+              <div class="code-body"><span class="c-kw">if</span>(<span class="c-fn">strcmp</span>(c1, c2)) {
+    <span class="c-fn">printf</span>(<span class="c-str">"Son iguales"</span>); <span class="c-cmt">// ¡MAL!</span>
 }</div>
             </div>
-            <p style="font-size: 0.78rem; color: #94a3b8;">
-              Ideal para verificar prefijos y protocolos (ej. verificar si una URL empieza con <code>"http"</code>).
+            <p style="font-size: 0.8rem; margin: 0;">
+              En C, el número <code>0</code> significa <b>Falso</b>. Como <code>strcmp</code> devuelve <code>0</code> cuando son iguales, escribir <code>if(strcmp(c1, c2))</code> entra al <code>if</code> ¡cuando son <b>distintas</b>!
             </p>
           </div>
 
-          <div class="box box-emerald">
-            <h4 style="color: #34d399;">strncat(dest, orig, n)</h4>
-            <p style="font-size: 0.82rem; color: #cbd5e1;">Agrega como máximo <code>n</code> caracteres del origen:</p>
+          <div class="correct-card">
+            <div class="correct-title">✅ Escribir siempre == 0</div>
             <div class="code-window" style="margin: 6px 0;">
-              <div class="code-body"><span class="c-kw">char</span> cad[<span class="c-num">30</span>] = <span class="c-str">"Hola "</span>;
-<span class="c-fn">strncat</span>(cad, <span class="c-str">"mundo123"</span>, <span class="c-num">5</span>);
-<span class="c-cmt">// cad tiene: "Hola mundo"</span></div>
+              <div class="code-body"><span class="c-kw">if</span>(<span class="c-fn">strcmp</span>(c1, c2) == <span class="c-num">0</span>) {
+    <span class="c-fn">printf</span>(<span class="c-str">"Son iguales"</span>); <span class="c-cmt">// ¡BIEN!</span>
+}</div>
             </div>
-            <p style="font-size: 0.78rem; color: #94a3b8;">
-              A diferencia de <code>strncpy</code>, <code>strncat</code> siempre añade el <code>'\0'</code> al final.
+            <p style="font-size: 0.8rem; margin: 0;">
+              Y si querés preguntar si dos Strings son <b>distintos</b>, escribí explícitamente: <code>if(strcmp(c1, c2) != 0)</code>.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 9: AUTOEVALUACIÓN Y CIERRE -->
+      <!-- SLIDE 28: ERRORES FRECUENTES (PARTE 2): DESTINO SIN ESPACIO SUFICIENTE -->
       <section>
-        <h2><span class="section-num">08</span> Resumen y Autoevaluación</h2>
+        <h2><span class="section-num">27</span> Errores Frecuentes (Parte 2): Desbordar el Arreglo Destino</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Tanto en <code>strcpy</code> como en <code>strcat</code>, el primer arreglo (<code>destino</code>) debe tener casilleros libres suficientes:
+        </p>
+
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Destino demasiado chico</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">char</span> nombre[] = <span class="c-str">"Juan "</span>; <span class="c-cmt">// Tamaño exacto: 6</span>
+<span class="c-kw">char</span> apellido[] = <span class="c-str">"Perez"</span>;
+<span class="c-fn">strcat</span>(nombre, apellido); <span class="c-cmt">// ¡Desborda memoria!</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              <code>nombre[] = "Juan "</code> reservó solo 6 casilleros. Al querer pegarle <code>"Perez"</code> (5 letras más), escribe fuera del arreglo.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Reservar capacidad amplia</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">char</span> nombre[<span class="c-num">30</span>] = <span class="c-str">"Juan "</span>; <span class="c-cmt">// 30 casilleros</span>
+<span class="c-kw">char</span> apellido[] = <span class="c-str">"Perez"</span>;
+<span class="c-fn">strcat</span>(nombre, apellido); <span class="c-cmt">// Entra perfecto</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Como en el ejemplo del apunte (pág. 8), declaramos <code>char nombre[30]</code> para que sobre lugar al concatenar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: ERRORES FRECUENTES (PARTE 3): INVERTIR DESTINO Y ORIGEN -->
+      <section>
+        <h2><span class="section-num">28</span> Errores Frecuentes (Parte 3): Invertir <code>destino</code> y <code>origen</code></h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Poner el origen primero</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">char</span> origen[] = <span class="c-str">"Hola"</span>;
+<span class="c-kw">char</span> destino[<span class="c-num">20</span>];
+<span class="c-fn">strcpy</span>(origen, destino); <span class="c-cmt">// ¡Al revés!</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Esto copia la basura que había en <code>destino</code> adentro de <code>origen</code>, destruyendo la palabra <code>"Hola"</code>.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ El destino SIEMPRE va primero</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-kw">char</span> origen[] = <span class="c-str">"Hola"</span>;
+<span class="c-kw">char</span> destino[<span class="c-num">20</span>];
+<span class="c-fn">strcpy</span>(destino, origen); <span class="c-cmt">// destino &lt;- origen</span></div>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0;">
+              Tanto en <code>strcpy</code>, <code>strncpy</code>, <code>strcat</code> como en <code>strncat</code>, el primer parámetro es <b>quien recibe el cambio</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: ERRORES FRECUENTES (PARTE 4): strchr CON COMILLAS DOBLES -->
+      <section>
+        <h2><span class="section-num">29</span> Errores Frecuentes (Parte 4): <code>strchr</code> vs <code>strstr</code></h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Confundir carácter y subcadena</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// Mal: "a" tiene comillas dobles en strchr</span>
+<span class="c-fn">strchr</span>(cadena, <span class="c-str">"a"</span>);
+
+<span class="c-cmt">// Mal: 'a' tiene comillas simples en strstr</span>
+<span class="c-fn">strstr</span>(cadena, <span class="c-str">'a'</span>);</div>
+            </div>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Cada función con su tipo</div>
+            <div class="code-window" style="margin: 6px 0;">
+              <div class="code-body"><span class="c-cmt">// strchr busca 1 carácter (comilla simple)</span>
+<span class="c-fn">strchr</span>(cadena, <span class="c-str">'a'</span>);
+
+<span class="c-cmt">// strstr busca un String (comilla doble)</span>
+<span class="c-fn">strstr</span>(cadena, <span class="c-str">"gram"</span>);</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            📌 Mirá el nombre de la función: <code>str<b>chr</b></code> termina en <i>chr</i> (carácter ➔ <code>'a'</code>); <code>str<b>str</b></code> termina en <i>str</i> (string ➔ <code>"gram"</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: GUÍA RÁPIDA: ¿QUÉ FUNCIÓN ELIJO EN EL EXAMEN? -->
+      <section>
+        <h2><span class="section-num">30</span> Guía Rápida: ¿Qué Función Elijo Según el Enunciado?</h2>
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Si el ejercicio te pide...</th>
+              <th>Función ideal</th>
+              <th>Cómo se escribe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Saber cuántas letras tiene una palabra</td>
+              <td><code>strlen</code></td>
+              <td><code>int n = strlen(palabra);</code></td>
+            </tr>
+            <tr>
+              <td>Guardar una copia de un String en otro</td>
+              <td><code>strcpy</code></td>
+              <td><code>strcpy(copia, original);</code></td>
+            </tr>
+            <tr>
+              <td>Saber si dos palabras son iguales</td>
+              <td><code>strcmp</code></td>
+              <td><code>if(strcmp(a, b) == 0)</code></td>
+            </tr>
+            <tr>
+              <td>Unir nombre y apellido</td>
+              <td><code>strcat</code></td>
+              <td><code>strcat(completo, apellido);</code></td>
+            </tr>
+            <tr>
+              <td>Saber si una palabra contiene la letra <code>'z'</code></td>
+              <td><code>strchr</code></td>
+              <td><code>if(strchr(palabra, 'z') != NULL)</code></td>
+            </tr>
+            <tr>
+              <td>Saber si una frase contiene la palabra <code>"sol"</code></td>
+              <td><code>strstr</code></td>
+              <td><code>if(strstr(frase, "sol") != NULL)</code></td>
+            </tr>
+            <tr>
+              <td>Saber si empieza con los 3 caracteres <code>"pre"</code></td>
+              <td><code>strncmp</code></td>
+              <td><code>if(strncmp(palabra, "pre", 3) == 0)</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 32: BUENAS PRÁCTICAS CON <STRING.H> -->
+      <section>
+        <h2><span class="section-num">31</span> Buenas Prácticas Profesionales con <code>&lt;string.h&gt;</code></h2>
+        <div class="grid-2">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Seguridad en copias y uniones</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li>Verificá siempre que el arreglo destino tenga tamaño suficiente para todas las letras más el <code>'\0'</code>.</li>
+              <li>Cuando uses <code>strncpy(destino, origen, n)</code>, escribí inmediatamente debajo <code>destino[n] = '\0';</code>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Claridad en comparaciones y búsquedas</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.6; margin-left: 18px;">
+              <li>Escribí siempre <code>strcmp(a, b) == 0</code>, <code>&lt; 0</code> o <code>&gt; 0</code> para que la condición se lea sin ambigüedad.</li>
+              <li>En <code>strchr</code> y <code>strstr</code>, compará siempre el resultado con <code>!= NULL</code> antes de usarlo.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: EJERCICIO DE APLICACIÓN 1 -->
+      <section>
+        <h2><span class="section-num">32</span> Ejercicio de Aplicación 1: Comparar Longitudes e Igualdad</h2>
+
+        <div class="box box-indigo">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">Enunciado del Ejercicio 1</h4>
+          <p style="font-size: 0.84rem; margin: 0 0 8px;">
+            Dadas dos palabras, escribí un programa que informe con <code>strcmp</code> si son exactamente iguales. Si no lo son, que muestre cuál de las dos tiene mayor cantidad de caracteres usando <code>strlen</code>.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+<span class="c-pre">#include &lt;string.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> p1[] = <span class="c-str">"Hola"</span>;
+    <span class="c-kw">char</span> p2[] = <span class="c-str">"Programacion"</span>;
+
+    <span class="c-kw">if</span>(<span class="c-fn">strcmp</span>(p1, p2) == <span class="c-num">0</span>) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Las palabras son iguales.\n"</span>);
+    } <span class="c-kw">else</span> <span class="c-kw">if</span>(<span class="c-fn">strlen</span>(p1) &gt; <span class="c-fn">strlen</span>(p2)) {
+        <span class="c-fn">printf</span>(<span class="c-str">"%s es mas larga (%d letras).\n"</span>, p1, (<span class="c-kw">int</span>)<span class="c-fn">strlen</span>(p1));
+    } <span class="c-kw">else</span> {
+        <span class="c-fn">printf</span>(<span class="c-str">"%s es mas larga (%d letras).\n"</span>, p2, (<span class="c-kw">int</span>)<span class="c-fn">strlen</span>(p2));
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: EJERCICIO DE APLICACIÓN 2 -->
+      <section>
+        <h2><span class="section-num">33</span> Ejercicio de Aplicación 2: Armar Nombre Completo</h2>
+
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Enunciado del Ejercicio 2</h4>
+          <p style="font-size: 0.84rem; margin: 0 0 8px;">
+            Dados <code>char nombre[] = "Juan";</code> y <code>char apellido[] = "Perez";</code>, creá un tercer arreglo <code>char completo[40];</code> y usá <code>strcpy</code> y <code>strcat</code> para que guarde <code>"Perez, Juan"</code> y lo imprima por pantalla.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución paso a paso</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+<span class="c-pre">#include &lt;string.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> nombre[] = <span class="c-str">"Juan"</span>;
+    <span class="c-kw">char</span> apellido[] = <span class="c-str">"Perez"</span>;
+    <span class="c-kw">char</span> completo[<span class="c-num">40</span>];
+
+    <span class="c-fn">strcpy</span>(completo, apellido); <span class="c-cmt">// "Perez"</span>
+    <span class="c-fn">strcat</span>(completo, <span class="c-str">", "</span>);     <span class="c-cmt">// "Perez, "</span>
+    <span class="c-fn">strcat</span>(completo, nombre);   <span class="c-cmt">// "Perez, Juan"</span>
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Alumno: %s\n"</span>, completo);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 35: EJERCICIO INTEGRADOR 3 -->
+      <section>
+        <h2><span class="section-num">34</span> Ejercicio Integrador Tipo Examen (3)</h2>
+
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Ejercicio 3: Extraer un código de 3 letras y verificar correo</h4>
+          <p style="font-size: 0.84rem; margin: 0 0 8px;">
+            Dada la palabra <code>char carrera[] = "Ingenieria";</code> y el correo <code>char email[] = "alumno@escuela.edu.ar";</code>:
+            1) Copiá las primeras 3 letras de <code>carrera</code> en <code>char codigo[10]</code> usando <code>strncpy</code> (sin olvidar el <code>'\0'</code>).
+            2) Comprobá con <code>strchr</code> si el correo tiene el carácter <code>'@'</code> y con <code>strstr</code> si contiene <code>".edu"</code>.
+          </p>
+          <details class="code-solution">
+            <summary>💻 Ver solución completa</summary>
+            <div class="solution-content">
+              <div class="code-window">
+                <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+<span class="c-pre">#include &lt;string.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">char</span> carrera[] = <span class="c-str">"Ingenieria"</span>;
+    <span class="c-kw">char</span> email[] = <span class="c-str">"alumno@escuela.edu.ar"</span>;
+    <span class="c-kw">char</span> codigo[<span class="c-num">10</span>];
+
+    <span class="c-fn">strncpy</span>(codigo, carrera, <span class="c-num">3</span>);
+    codigo[<span class="c-num">3</span>] = <span class="c-str">'\0'</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Codigo: %s\n"</span>, codigo); <span class="c-cmt">// Ing</span>
+
+    <span class="c-kw">if</span>(<span class="c-fn">strchr</span>(email, <span class="c-str">'@'</span>) != NULL &amp;&amp; <span class="c-fn">strstr</span>(email, <span class="c-str">".edu"</span>) != NULL) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Correo educativo valido!\n"</span>);
+    }
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- SLIDE 36: RESUMEN FINAL Y CHECKLIST -->
+      <section>
+        <h2><span class="section-num">35</span> Resumen de la Unidad 03 y Checklist</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Puntos Clave del Módulo</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 16px;">
-              <li>Incluir siempre <code>#include &lt;string.h&gt;</code>.</li>
-              <li><code>strlen</code> cuenta caracteres útiles sin el <code>'\0'</code>.</li>
-              <li>Nunca uses <code>==</code> para comparar texto; usá <code>strcmp(a, b) == 0</code>.</li>
-              <li>En <code>strcpy</code> y <code>strcat</code>, el destino va primero y debe tener espacio holgado.</li>
-              <li><code>strchr</code> busca un carácter; <code>strstr</code> busca un texto completo.</li>
-              <li>Ambas devuelven un puntero a la posición o <code>NULL</code> si fallan.</li>
+            <h4 style="color: #818cf8;">Resumen de <code>&lt;string.h&gt;</code></h4>
+            <ul style="font-size: 0.8rem; line-height: 1.5; margin-left: 18px;">
+              <li><b><code>strlen(s)</code>:</b> Longitud sin contar <code>'\0'</code> (<code>"Hola" ➔ 4</code>).</li>
+              <li><b><code>strcpy(dest, orig)</code> / <code>strncpy</code>:</b> Copia Strings (destino va primero; en <code>strncpy</code> cerrar con <code>'\0'</code>).</li>
+              <li><b><code>strcmp(a, b)</code> / <code>strncmp</code>:</b> Devuelve <code>0</code> si son iguales, <code>&lt; 0</code> o <code>&gt; 0</code>.</li>
+              <li><b><code>strcat(dest, orig)</code> / <code>strncat</code>:</b> Agrega al final del primer String.</li>
+              <li><b><code>strchr(s, 'a')</code> y <code>strstr(s, "gram")</code>:</b> Buscan un carácter o un substring.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué valor devuelve <code>strcmp("auto", "auto")</code>? (0).</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué <code>destino[20] = origen;</code> da error de compilación?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Qué peligro conlleva concatenar en un arreglo de tamaño insuficiente?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Sé qué precaución tomar con el <code>'\0'</code> al usar <code>strncpy</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué <code>if(c1 == c2)</code> falla y por qué debo usar <code>strcmp(c1, c2) == 0</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo que en <code>strcpy(destino, origen)</code> el destino va primero?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo la diferencia entre <code>"Juan" + "Perez"</code> y <code>"Juan " + "Perez"</code> en <code>strcat</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Distingo entre contener una subcadena (<code>strstr</code>) y empezar con ella (<code>strncmp</code>)?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo agregar <code>destino[n] = '\0';</code> después de usar <code>strncpy</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 24px;">
-          <a href="02-introduccion-strings.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
-            ← Anterior: Introducción a Strings
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="02-introduccion-strings.html" class="badge badge-indigo"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px;">
+            ← Unidad 02: Introducción a Strings
           </a>
-          <a href="../index.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
-            Índice 2do Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            ← Índice 2do Cuatrimestre
           </a>
-          <a href="04-algoritmos-procesamiento-strings.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 10px;">
-            Siguiente: Algoritmos con Strings →
+          <a href="04-algoritmos-procesamiento-strings.html" class="badge badge-emerald"
+            style="font-size: 0.9rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Siguiente Unidad: Algoritmos con Strings →
           </a>
         </div>
       </section>
@@ -433,8 +1425,9 @@ dest[<span class="c-num">4</span>] = <span class="c-str">'\0'</span>; <span clas
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -444,8 +1437,20 @@ dest[<span class="c-num">4</span>] = <span class="c-str">'\0'</span>; <span clas
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>
+
 </html>

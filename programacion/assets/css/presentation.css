@@ -110,6 +110,26 @@ body, .reveal {
   font-size: 0.95rem;
   line-height: 1.55;
   box-sizing: border-box;
+  max-height: 750px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.reveal .slides section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.reveal .slides section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.reveal .slides section::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.25);
+  border-radius: 4px;
+}
+
+.reveal .slides section::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
 }
 
 /* Código en línea (inline code) */

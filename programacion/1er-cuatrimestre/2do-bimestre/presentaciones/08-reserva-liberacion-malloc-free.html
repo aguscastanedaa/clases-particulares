@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación 1C 2B - 08: malloc, free y sizeof | Clases Particulares</title>
+  <title>Programación 1C 2B - 08: Reserva y Liberación con malloc() y free() | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
   
   <!-- Reveal.js Styles -->
@@ -23,7 +23,8 @@
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
       <a href="../index.html">← Volver al 2do Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 2do Bimestre • Unidad 08</span>
   </div>
@@ -33,264 +34,1278 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-emerald">2do Cuatrimestre • Gestión de Memoria • Unidad 8</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">malloc(), free() y sizeof()</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            El ciclo de vida en el Heap: pedir memoria con precisión, verificar contra NULL y prevenir fugas de memoria
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-emerald">1er Cuatrimestre • 2do Bimestre • Unidad 08</span>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Reserva y Liberación: <code>malloc()</code> y <code>free()</code></h1>
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 22px;">
+            Cómo calcular el espacio exacto con <code>sizeof()</code>, pedir memoria a medida en el Heap con <code>malloc()</code> y devolverla responsablemente con <code>free()</code>
           </p>
 
-          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">sizeof() en bytes</span>
-            <span class="badge badge-emerald">malloc() &amp; Heap</span>
-            <span class="badge badge-rose">Validación ptr == NULL</span>
-            <span class="badge badge-amber">free() &amp; Memory Leaks</span>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">#include &lt;stdlib.h&gt;</span>
+            <span class="badge badge-indigo">sizeof(tipo)</span>
+            <span class="badge badge-emerald">malloc(cantidad * sizeof)</span>
+            <span class="badge badge-amber">free(vector)</span>
           </div>
 
-          <div class="box box-emerald" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva.
+          <div class="box box-emerald" style="max-width: 780px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.92rem; color: #cbd5e1;">
+              💡 <b>Objetivo central:</b> Hoy pasamos de la teoría a la práctica real creando nuestros primeros <b>vectores dinámicos</b> cuyo tamaño elige el usuario mientras el programa se ejecuta.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: OBJETIVOS DE APRENDIZAJE -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Objetivos de Aprendizaje de la Unidad</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Gestionar la memoria como un profesional</h4>
-            <p style="font-size: 0.88rem;">
-              En lenguajes de alto nivel como Python o JavaScript hay un "recolector de basura" (<i>Garbage Collector</i>) que limpia la memoria automáticamente en segundo plano.
-            </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              En <b>C tenés control absoluto sobre la máquina</b>: vos pedís los bytes exactos al sistema operativo y vos sos el responsable de devolverlos cuando ya no se usan. Es un gran poder y una gran responsabilidad.
-            </p>
+            <h4 style="color: #818cf8;">Lo que vas a dominar hoy</h4>
+            <ul style="font-size: 0.86rem; line-height: 1.62; margin-left: 18px;">
+              <li>Incluir la biblioteca obligatoria <b><code>#include &lt;stdlib.h&gt;</code></b>.</li>
+              <li>Calcular el tamaño en bytes de cualquier tipo usando <b><code>sizeof()</code></b>.</li>
+              <li>Reservar bloques de memoria en el Heap con <b><code>malloc()</code></b>.</li>
+              <li>Pedir al usuario <code>cantidad</code> por teclado y crear un vector exacto para esa cantidad.</li>
+              <li>Comprobar siempre si la reserva falló verificando <b><code>if (vector == NULL)</code></b>.</li>
+              <li>Liberar la memoria al finalizar usando <b><code>free(vector)</code></b> y evitar los 4 errores clásicos.</li>
+            </ul>
           </div>
 
           <div class="box box-emerald">
-            <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Utilizar el operador <b><code>sizeof()</code></b> para calcular bytes portables.</li>
-              <li>Reservar memoria dinámica con <b><code>malloc()</code></b>.</li>
-              <li>Aplicar la regla obligatoria de validación contra <b><code>NULL</code></b>.</li>
-              <li>Liberar la memoria devuelta con <b><code>free()</code></b>.</li>
-              <li>Evitar punteros colgantes (<i>dangling pointers</i>).</li>
-              <li>Comprender qué es una <b>Fuga de Memoria (<i>Memory Leak</i>)</b> y cómo evitarla.</li>
-            </ul>
+            <h4 style="color: #34d399;">Conexión con la Unidad 07</h4>
+            <p style="font-size: 0.86rem; color: #cbd5e1;">
+              En la unidad anterior aprendimos que un puntero (<code>int *vector;</code>) es solo un "papelito" que guarda una dirección de memoria, y que la memoria dinámica vive en el <b>Heap</b>.
+            </p>
+            <p style="font-size: 0.86rem; color: #cbd5e1; margin-top: 8px;">
+              Hoy vamos a aprender las dos funciones que trabajan siempre en equipo: <b><code>malloc()</code> para reservar el espacio</b> y <b><code>free()</code> para devolverlo</b>.
+            </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: EL OPERADOR SIZEOF -->
+      <!-- SLIDE 3: LA BIBLIOTECA OBLIGATORIA <STDLIB.H> -->
       <section>
-        <h2><span class="section-num">02</span> El Operador <code>sizeof()</code></h2>
+        <h2><span class="section-num">02</span> La Biblioteca Obligatoria: <code>#include &lt;stdlib.h&gt;</code></h2>
         <div class="box box-cyan">
-          <h4 style="color: #38bdf8; margin-bottom: 4px;">¿Por qué no escribir "4" a mano?</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            El tamaño de los tipos de datos puede variar entre un procesador de 32 bits, 64 bits o un microcontrolador embebido. El operador <b><code>sizeof()</code></b> calcula en tiempo de compilación el <b>tamaño exacto en bytes</b> en la computadora actual.
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Requisito número 1 antes de usar memoria dinámica</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Tal como indica el apunte en las páginas 29 y 30, para poder utilizar las funciones <code>malloc()</code> y <code>free()</code> es <b>obligatorio incluir la biblioteca <code>&lt;stdlib.h&gt;</code></b> al comienzo de nuestro archivo:
           </p>
         </div>
 
-        <div class="code-window" style="margin-top: 14px;">
-          <div class="code-header"><span class="code-title">tamanios.c</span></div>
-          <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"Tamaño de int:    %zu bytes\n"</span>, <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));    <span class="c-cmt">// Típicamente 4</span>
-<span class="c-fn">printf</span>(<span class="c-str">"Tamaño de float:  %zu bytes\n"</span>, <span class="c-kw">sizeof</span>(<span class="c-kw">float</span>));  <span class="c-cmt">// Típicamente 4</span>
-<span class="c-fn">printf</span>(<span class="c-str">"Tamaño de double: %zu bytes\n"</span>, <span class="c-kw">sizeof</span>(<span class="c-kw">double</span>)); <span class="c-cmt">// Típicamente 8</span>
-<span class="c-fn">printf</span>(<span class="c-str">"Tamaño de char:   %zu bytes\n"</span>, <span class="c-kw">sizeof</span>(<span class="c-kw">char</span>));   <span class="c-cmt">// Siempre 1</span></div>
+        <div class="code-window" style="margin-top: 12px;">
+          <div class="code-header">
+            <span class="code-title">encabezados.c</span>
+            <span class="code-badge">Bibliotecas Estándar</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>   <span class="c-cmt">// Para printf() y scanf()</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>  <span class="c-cmt">// OBLIGATORIA para malloc(), free(), calloc() y realloc()</span></div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">¿Qué significa <code>stdlib.h</code>?</h4>
+            <p style="font-size: 0.84rem; margin: 0; color: #cbd5e1;">
+              Viene del inglés <b><i>Standard Library</i></b> (Biblioteca Estándar de C). Contiene las herramientas de control de memoria y utilidades generales del sistema.
+            </p>
+          </div>
+          <div class="box box-rose">
+            <h4 style="color: #f87171;">¿Qué pasa si me olvido de incluirla?</h4>
+            <p style="font-size: 0.84rem; margin: 0; color: #cbd5e1;">
+              El compilador mostrará una advertencia o error diciendo que no conoce a <code>malloc</code> ni a <code>free</code> (<i>implicit declaration of function</i>).
+            </p>
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: LA FUNCIÓN MALLOC -->
+      <!-- SLIDE 4: ANTES DE PEDIR MEMORIA: ¿CUÁNTOS BYTES OCUPA CADA DATO? -->
       <section>
-        <h2><span class="section-num">03</span> La Función <code>malloc()</code> (Memory Allocation)</h2>
+        <h2><span class="section-num">03</span> Antes de Pedir Memoria: ¿Cuánto Ocupa cada Dato?</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Cuando llamamos a <code>malloc()</code> para pedir espacio en el Heap, <code>malloc()</code> no entiende de "enteros" o "notas": <b>solo entiende de cantidad total de bytes</b>.
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px; align-items: center;">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">¿Tengo que saber de memoria cuántos bytes mide cada tipo?</h4>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              <b>¡No!</b> Como aclara el apunte en la página 29: <i>"No hace falta saber exactamente cuántos bytes ocupa un entero en cada computadora"</i>.
+            </p>
+            <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 8px;">
+              En una PC moderna un <code>int</code> suele ocupar <b>4 bytes</b>, pero en otros dispositivos puede variar. Por eso C nos da una herramienta automática que lo mide por nosotros: <b><code>sizeof()</code></b>.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">¿Qué hace <code>sizeof()</code>?</h4>
+            <p style="font-size: 0.85rem; color: #cbd5e1;">
+              <code>sizeof(tipo)</code> le pregunta a la computadora cuántos bytes ocupa exactamente ese tipo de dato:
+            </p>
+            <div class="code-window" style="margin-top: 8px;">
+              <div class="code-body"><span class="c-kw">sizeof</span>(<span class="c-kw">int</span>)   <span class="c-cmt">// Devuelve 4 (bytes)</span>
+<span class="c-kw">sizeof</span>(<span class="c-kw">float</span>) <span class="c-cmt">// Devuelve 4 (bytes)</span>
+<span class="c-kw">sizeof</span>(<span class="c-kw">char</span>)  <span class="c-cmt">// Devuelve 1 (byte)</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: EL OPERADOR SIZEOF EN DETALLE -->
+      <section>
+        <h2><span class="section-num">04</span> El Operador <code>sizeof()</code> con Todos los Tipos</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          <code>sizeof()</code> funciona tanto con los tipos básicos de C (<code>int</code>, <code>float</code>, <code>char</code>, <code>double</code>) como con las estructuras <code>struct</code> que creamos en la Unidad 06:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Expresión en C</th>
+              <th>Significado</th>
+              <th>Valor típico en bytes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>sizeof(char)</code></td>
+              <td>Bytes que ocupa 1 carácter</td>
+              <td><b>1 byte</b></td>
+            </tr>
+            <tr>
+              <td><code>sizeof(int)</code></td>
+              <td>Bytes que ocupa 1 número entero</td>
+              <td><b>4 bytes</b></td>
+            </tr>
+            <tr>
+              <td><code>sizeof(float)</code></td>
+              <td>Bytes que ocupa 1 número con coma</td>
+              <td><b>4 bytes</b></td>
+            </tr>
+            <tr>
+              <td><code>sizeof(double)</code></td>
+              <td>Bytes que ocupa 1 decimal de doble precisión</td>
+              <td><b>8 bytes</b></td>
+            </tr>
+            <tr>
+              <td><code>sizeof(struct Alumno)</code></td>
+              <td>Bytes totales que suma toda la estructura</td>
+              <td>Depende de sus campos (ej. <b>40 bytes</b>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 6: CÓMO CALCULAR EL ESPACIO PARA VARIOS ELEMENTOS -->
+      <section>
+        <h2><span class="section-num">05</span> ¿Cómo Calculamos los Bytes para un Vector?</h2>
         <div class="box box-emerald">
-          <h4 style="color: #34d399; margin-bottom: 4px;">Pedir Memoria al Heap</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            Pertenece a la biblioteca <b><code>&lt;stdlib.h&gt;</code></b>. Le solicita al sistema operativo un bloque contiguo de memoria en el Heap de la cantidad de bytes que le pidas.
+          <h4 style="color: #34d399; margin-bottom: 4px;">Una simple multiplicación: Cantidad × Tamaño de 1 elemento</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Si <b>1 entero</b> ocupa <code>sizeof(int)</code> bytes (4 bytes), entonces para guardar <b>5 enteros</b> necesitamos multiplicar: <b><code>5 * sizeof(int)</code></b> (que da 20 bytes en total).
           </p>
         </div>
 
-        <div class="code-window" style="margin-top: 14px;">
-          <div class="code-body" style="font-size: 1.02rem; text-align: center;">
-            <span class="c-kw">int</span> *ptr = (<span class="c-kw">int</span> *)<span class="c-fn">malloc</span>(<span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+        <div class="array-container" style="margin: 16px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">Entero 1</span>
+            <div class="array-cell highlight" style="font-size: 0.85rem;">4 bytes</div>
           </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Entero 2</span>
+            <div class="array-cell highlight" style="font-size: 0.85rem;">4 bytes</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Entero 3</span>
+            <div class="array-cell highlight" style="font-size: 0.85rem;">4 bytes</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Entero 4</span>
+            <div class="array-cell highlight" style="font-size: 0.85rem;">4 bytes</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">Entero 5</span>
+            <div class="array-cell highlight" style="font-size: 0.85rem;">4 bytes</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Para una cantidad fija (ej. 5):</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-num">5</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>) <span class="c-cmt">// 5 * 4 = 20 bytes</span></div>
+            </div>
+          </div>
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Para una variable <code>cantidad</code>:</h4>
+            <div class="code-window">
+              <div class="code-body">cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: PRESENTACIÓN DE LA FUNCIÓN MALLOC() (APUNTE PÁG 29) -->
+      <section>
+        <h2><span class="section-num">06</span> La Función <code>malloc()</code> — ¿Qué Hace?</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">9.1 MALLOC() — Memory Allocation (Asignación de Memoria)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+             Su nombre viene del inglés <b><i>Memory Allocation</i></b>. Es la función que se encarga de <b>reservar un bloque de memoria contigua en el Heap</b> mientras el programa se está ejecutando.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">1. ¿Qué recibe entre paréntesis?</h4>
+            <p style="font-size: 0.83rem; margin: 0; color: #cbd5e1;">
+              La cantidad total de bytes que queremos reservar: por ejemplo, <code>5 * sizeof(int)</code>.
+            </p>
+          </div>
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">2. ¿Qué hace en la memoria RAM?</h4>
+            <p style="font-size: 0.83rem; margin: 0; color: #cbd5e1;">
+              Va al <b>Heap</b>, busca un bloque libre de ese tamaño exacto y lo marca como reservado para nuestro programa.
+            </p>
+          </div>
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">3. ¿Qué nos devuelve?</h4>
+            <p style="font-size: 0.83rem; margin: 0; color: #cbd5e1;">
+              Nos devuelve la <b>dirección de memoria</b> donde empieza ese bloque para que la guardemos en nuestro puntero.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: EJEMPLO BÁSICO DEL APUNTE (PÁG 29) -->
+      <section>
+        <h2><span class="section-num">07</span> Ejemplo Básico del Apunte: Reservar 5 Enteros</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Veamos el primer ejemplo oficial de la página 29 del apunte para reservar memoria dinámica para <b>5 números enteros</b>:
+        </p>
+
+        <div class="code-window" style="margin-top: 10px;">
+          <div class="code-header">
+            <span class="code-title">ejemplo_basico_malloc.c</span>
+            <span class="code-badge">Apunte pág. 29</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> *vector;
+vector = <span class="c-fn">malloc</span>(<span class="c-num">5</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));</div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 12px;">
+          <h4 style="color: #818cf8; margin-bottom: 4px;">💡 Nota útil: ¿Y si ves <code>(int *)malloc(...)</code> en algún libro o compilador?</h4>
+          <p style="font-size: 0.84rem; margin: 0; color: #cbd5e1;">
+            En C estándar podés escribir directamente <code>vector = malloc(5 * sizeof(int));</code> como en el apunte. Algunos programadores o compiladores agregan adelante el tipo entre paréntesis: <code>vector = (int *)malloc(5 * sizeof(int));</code>. Ambas formas hacen exactamente lo mismo: guardar la dirección en <code>vector</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: DESGLOSE COMPLETO DE LA LÍNEA DE MALLOC -->
+      <section>
+        <h2><span class="section-num">08</span> Desglose Paso a Paso de <code>vector = malloc(5 * sizeof(int));</code></h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Entendamos qué ocurre exactamente en esa línea leyéndola de adentro hacia afuera:
+        </p>
+
+        <div class="code-window" style="margin: 10px 0;">
+          <div class="code-body" style="text-align: center; font-size: 1.1rem;">vector = <span class="c-fn">malloc</span>(<span class="c-num">5</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));</div>
         </div>
 
         <div class="step-list" style="margin-top: 12px;">
           <div class="step-item">
             <span class="step-num">1</span>
-            <div class="step-content">
-              <b><code>sizeof(int)</code></b> ➔ Calcula cuántos bytes se necesitan (4 bytes).
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b><code>sizeof(int)</code></b> ➔ Averigua cuántos bytes ocupa un entero en la computadora (4 bytes).
             </div>
           </div>
           <div class="step-item">
             <span class="step-num">2</span>
-            <div class="step-content">
-              <b><code>malloc(...)</code></b> ➔ Busca un bloque libre de 4 bytes en el Heap y devuelve un puntero genérico (<code>void *</code>) a su primer byte.
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b><code>5 * sizeof(int)</code></b> ➔ Multiplica 5 por 4 bytes = <b>20 bytes totales</b> necesarios para guardar 5 enteros.
             </div>
           </div>
           <div class="step-item">
             <span class="step-num">3</span>
-            <div class="step-content">
-              <b><code>(int *)</code></b> ➔ Convierte (castea) el puntero genérico a un puntero a entero para asignarlo a <code>int *ptr</code>.
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b><code>malloc(20)</code></b> ➔ Reserva un bloque continuo de 20 bytes en el <b>Heap</b> y devuelve su dirección de inicio (ej. <code>0x5000</code>).
+            </div>
+          </div>
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content" style="font-size: 0.86rem;">
+              <b><code>vector = ...</code></b> ➔ Guarda esa dirección <code>0x5000</code> adentro de nuestro puntero <code>vector</code>. ¡Ahora tenemos un vector de 5 posiciones listo para usar!
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: VALIDACIÓN OBLIGATORIA CONTRA NULL -->
+      <!-- SLIDE 10: VISUALIZACIÓN EN RAM TRAS EJECUTAR MALLOC -->
       <section>
-        <h2><span class="section-num">04</span> La Regla de Oro: Chequear contra <code>NULL</code></h2>
-        <div class="box box-rose">
-          <h4 style="color: #f87171; margin-bottom: 4px;">La RAM de la computadora no es infinita</h4>
-          <p style="font-size: 0.9rem; margin: 0;">
-            Si el sistema operativo se queda sin memoria o no puede concederte el bloque solicitado, <code>malloc()</code> <b>devuelve <code>NULL</code></b>.
-          </p>
-        </div>
-
-        <div class="comparison-box" style="margin-top: 12px;">
-          <div class="wrong-card">
-            <div class="wrong-title">❌ Código Suicida (Sin validar)</div>
-            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #f87171;">
-              int *ptr = malloc(sizeof(int));<br>
-              *ptr = 42; // Si falló malloc, ptr es NULL ➔ CRASH!
+        <h2><span class="section-num">09</span> ¿Cómo Queda la Memoria RAM después del <code>malloc()</code>?</h2>
+        <div class="memory-architecture">
+          <div class="memory-zone stack">
+            <h4 style="color: var(--accent-cyan); text-align: center;">En el Stack (Pila)</h4>
+            <div class="memory-diagram">
+              <div class="memory-box" style="border-color: var(--accent-amber);">
+                <div class="memory-address">Dirección: 0x1000</div>
+                <div class="memory-label">int *vector</div>
+                <div class="memory-value" style="color: var(--accent-amber); border-color: rgba(251,191,36,0.4);">0x5000</div>
+              </div>
             </div>
+            <p style="font-size: 0.78rem; color: #94a3b8; text-align: center; margin: 4px 0 0;">
+              El puntero guarda dónde empieza el bloque
+            </p>
           </div>
 
-          <div class="correct-card">
-            <div class="correct-title">✅ Código Blindado y Seguro</div>
-            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #a7f3d0;">
-              int *ptr = (int *)malloc(sizeof(int));<br>
-              if (ptr == NULL) {<br>
-              &nbsp;&nbsp;printf("Error: Sin memoria\n");<br>
-              &nbsp;&nbsp;return 1; // Terminamos seguro<br>
-              }<br>
-              *ptr = 42; // 100% seguro
+          <div class="pointer-arrow">
+            <span>apunta a</span>
+            <span style="font-size: 1.8rem;">➔</span>
+            <span>0x5000</span>
+          </div>
+
+          <div class="memory-zone heap">
+            <h4 style="color: var(--accent-emerald); text-align: center;">En el Heap (5 enteros = 20 bytes)</h4>
+            <div class="array-container" style="margin: 10px 0;">
+              <div class="array-cell-wrapper">
+                <span class="array-index">vector[0]</span>
+                <div class="array-cell" style="min-width: 48px; height: 44px; font-size: 0.9rem;">?</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">vector[1]</span>
+                <div class="array-cell" style="min-width: 48px; height: 44px; font-size: 0.9rem;">?</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">vector[2]</span>
+                <div class="array-cell" style="min-width: 48px; height: 44px; font-size: 0.9rem;">?</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">vector[3]</span>
+                <div class="array-cell" style="min-width: 48px; height: 44px; font-size: 0.9rem;">?</div>
+              </div>
+              <div class="array-cell-wrapper">
+                <span class="array-index">vector[4]</span>
+                <div class="array-cell" style="min-width: 48px; height: 44px; font-size: 0.9rem;">?</div>
+              </div>
             </div>
+            <p style="font-size: 0.78rem; color: #94a3b8; text-align: center; margin: 4px 0 0;">
+              Empieza en <code>0x5000</code> y tiene 5 casillas listas
+            </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 6: LIBERACIÓN CON FREE -->
+      <!-- SLIDE 11: RESERVAR MEMORIA SEGÚN LO QUE PIDA EL USUARIO (APUNTE PÁG 30) -->
       <section>
-        <h2><span class="section-num">05</span> Liberación con <code>free()</code></h2>
-        <div class="box box-amber">
-          <h4 style="color: #fbbf24; margin-bottom: 4px;">Devolver lo que no es tuyo</h4>
-          <p style="font-size: 0.92rem; margin: 0;">
-            A diferencia de las variables del Stack (que mueren solas), la memoria del Heap <b>queda ocupada para siempre</b> hasta que tu programa finalice o la liberes explícitamente con <b><code>free(ptr);</code></b>.
-          </p>
-        </div>
-
-        <div class="code-window" style="margin-top: 14px;">
-          <div class="code-header"><span class="code-title">liberacion_correcta.c</span></div>
-          <div class="code-body"><span class="c-cmt">// 1. Liberamos la memoria en el Heap:</span>
-<span class="c-fn">free</span>(ptr);
-
-<span class="c-cmt">// 2. Buena práctica profesional inmediata:</span>
-ptr = <span class="c-kw">NULL</span>;</div>
-        </div>
-
-        <p style="font-size: 0.84rem; color: var(--accent-cyan); margin-top: 8px;">
-          💡 <b>¿Por qué poner ptr = NULL?:</b> Porque después de <code>free</code>, la variable <code>ptr</code> sigue teniendo anotada la dirección vieja en el Heap (puntero colgante / <i>dangling pointer</i>). Poniendo <code>ptr = NULL;</code> neutralizamos el puntero para no usarlo por error.
-        </p>
-      </section>
-
-      <!-- SLIDE 7: QUÉ ES UN MEMORY LEAK -->
-      <section>
-        <h2><span class="section-num">06</span> ¿Qué es una Fuga de Memoria (Memory Leak)?</h2>
-        <div class="box box-purple">
-          <h4 style="color: #c084fc; margin-bottom: 4px;">La Pesadilla de los Servidores</h4>
+        <h2><span class="section-num">10</span> Reservar Memoria según lo que Pida el Usuario</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">El verdadero poder de <code>malloc()</code> (Apunte pág. 30)</h4>
           <p style="font-size: 0.88rem; margin: 0;">
-            Una <b>fuga de memoria (<i>memory leak</i>)</b> ocurre cuando reservás memoria con <code>malloc()</code> y luego perdés el puntero que la apuntaba <b>sin haber llamado a <code>free()</code></b>.
+            En lugar de poner un <code>5</code> fijo, primero le pedimos al usuario con <code>scanf</code> cuántos elementos necesita y guardamos ese número en la variable <code>cantidad</code>:
           </p>
         </div>
 
         <div class="code-window" style="margin-top: 12px;">
-          <div class="code-header"><span class="code-title">fuga_ejemplo.c</span></div>
-          <div class="code-body"><span class="c-kw">void</span> <span class="c-fn">funcionConFuga</span>(<span class="c-type">void</span>)
-{
-    <span class="c-kw">int</span> *p = (<span class="c-kw">int</span> *)<span class="c-fn">malloc</span>(<span class="c-num">1000000</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>)); <span class="c-cmt">// 4 MB pedidos</span>
-    <span class="c-cmt">// Hacemos cosas...</span>
+          <div class="code-header">
+            <span class="code-title">reserva_a_medida.c</span>
+            <span class="code-badge">Apunte pág. 30</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> cantidad;
+<span class="c-fn">printf</span>(<span class="c-str">"Cantidad: "</span>);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;cantidad);
 
-    <span class="c-cmt">// ¡FALTA free(p)! Al salir de la función, 'p' se destruye en el Stack,</span>
-    <span class="c-cmt">// pero los 4 MB en el Heap quedan flotando e inaccesibles para siempre.</span>
+<span class="c-kw">int</span> *vector;
+<span class="c-hl">vector = <span class="c-fn">malloc</span>(cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));</span></div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            ✨ <b>Resultado:</b> Ahora el programa reserva memoria para <b>la cantidad exacta que pidió el usuario</b>. Si el usuario escribe <code>8</code>, se reservan 8 lugares; si escribe <code>250</code>, se reservan 250 lugares.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: SIMULACIÓN PASO A PASO CON ENTRADA DEL USUARIO -->
+      <section>
+        <h2><span class="section-num">11</span> Simulación en Vivo: El Usuario Ingresa <code>8</code></h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Sigamos qué pasa en la computadora cuando ejecutamos el código anterior y el usuario escribe <b><code>8</code></b> en el teclado:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Paso</th>
+              <th>Instrucción Ejecutada</th>
+              <th>¿Qué ocurre en la Memoria RAM?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1</b></td>
+              <td><code>int cantidad;</code></td>
+              <td>Se crea la variable <code>cantidad</code> en el Stack.</td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td><code>scanf("%d", &amp;cantidad);</code></td>
+              <td>El usuario tipea <code>8</code>. Ahora <code>cantidad</code> vale <b><code>8</code></b>.</td>
+            </tr>
+            <tr>
+              <td><b>3</b></td>
+              <td><code>int *vector;</code></td>
+              <td>Se crea el puntero <code>vector</code> en el Stack esperando una dirección.</td>
+            </tr>
+            <tr>
+              <td><b>4</b></td>
+              <td><code>malloc(cantidad * sizeof(int))</code></td>
+              <td>Calcula <code>8 * 4 = 32 bytes</code> y reserva <b>8 casilleros enteros</b> en el Heap (índices <code>0</code> al <code>7</code>).</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 13: COMPROBACIÓN DE ERRORES: ¿QUÉ PASA SI MALLOC DEVUELVE NULL? -->
+      <section>
+        <h2><span class="section-num">12</span> ¿Qué Pasa si No Hay Memoria Libre? (<code>vector == NULL</code>)</h2>
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Comprobación de seguridad recomendada</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            En casi todos los ejercicios de clase habrá memoria de sobra. Pero si algún día un programa pide una cantidad gigantesca y la RAM no alcanza, <b><code>malloc()</code> falla y devuelve <code>NULL</code></b>.
+          </p>
+        </div>
+
+        <div class="code-window" style="margin-top: 12px;">
+          <div class="code-header">
+            <span class="code-title">validacion_null.c</span>
+            <span class="code-badge">Buena Práctica</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> *vector = <span class="c-fn">malloc</span>(cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+<span class="c-kw">if</span> (vector == <span class="c-kw">NULL</span>) {
+    <span class="c-fn">printf</span>(<span class="c-str">"Error: No se pudo reservar memoria.\n"</span>);
+    <span class="c-kw">return</span> <span class="c-num">1</span>; <span class="c-cmt">// Terminamos el programa de forma segura</span>
 }</div>
         </div>
 
-        <p style="font-size: 0.82rem; color: var(--accent-rose);">
-          ⚠️ Si esta función se ejecuta 1.000 veces (ej. cada vez que un usuario hace clic), el programa consumirá 4 GB de RAM hasta que el sistema operativo lo cierre forzosamente.
-        </p>
+        <div class="box box-indigo" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            🛡️ <b>¿Por qué sirve este <code>if</code>?</b> Porque si <code>vector</code> quedó en <code>NULL</code> y tratamos de guardar algo en <code>vector[0]</code>, el programa se cierra abruptamente. Con el <code>if</code> mostramos un aviso claro.
+          </p>
+        </div>
       </section>
 
-      <!-- SLIDE 8: PROGRAMA COMPLETO DE CICLO DE VIDA -->
+      <!-- SLIDE 14: QUÉ CONTIENEN LAS CASILLAS RECIÉN RESERVADAS CON MALLOC -->
       <section>
-        <h2><span class="section-num">07</span> Programa Completo: El Ciclo de Vida Perfecto</h2>
+        <h2><span class="section-num">13</span> ¿Qué Hay Adentro del Vector Recién Creado con <code>malloc()</code>?</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">¡Cuidado! <code>malloc()</code> reserva el espacio pero NO lo limpia</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Igual que pasaba con las variables comunes sin inicializar, las casillas recién reservadas con <code>malloc()</code> contienen <b>valores basura desconocidos</b> hasta que les carguemos datos nosotros:
+          </p>
+        </div>
+
+        <div class="array-container" style="margin: 16px 0;">
+          <div class="array-cell-wrapper">
+            <span class="array-index">vector[0]</span>
+            <div class="array-cell out-of-bounds" style="font-size: 0.85rem;">-84215</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">vector[1]</span>
+            <div class="array-cell out-of-bounds" style="font-size: 0.85rem;">32767</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">vector[2]</span>
+            <div class="array-cell out-of-bounds" style="font-size: 0.85rem;">0</div>
+          </div>
+          <div class="array-cell-wrapper">
+            <span class="array-index">vector[3]</span>
+            <div class="array-cell out-of-bounds" style="font-size: 0.85rem;">194821</div>
+          </div>
+        </div>
+
+        <div class="box box-cyan">
+          <p style="margin: 0; font-size: 0.85rem;">
+            💡 <b>Dato importante:</b> Nunca imprimas ni sumes las casillas de un vector creado con <code>malloc()</code> antes de haberles asignado un valor (o cargado con <code>scanf</code>). En la Unidad 09 veremos que existe <code>calloc()</code> cuando necesitamos que arranquen todas en <code>0</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: CÓMO USAMOS LA MEMORIA RESERVADA CON MALLOC -->
+      <section>
+        <h2><span class="section-num">14</span> ¿Cómo Usamos el Vector Después de Hacer <code>malloc()</code>?</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Una vez que ejecutaste <code>vector = malloc(cantidad * sizeof(int));</code>, podés usar <code>vector</code> con corchetes <b>exactamente igual que cualquier vector de los que usamos todo el bimestre</b>:
+        </p>
+
+        <div class="code-window" style="margin-top: 10px;">
+          <div class="code-header">
+            <span class="code-title">uso_con_corchetes.c</span>
+            <span class="code-badge">Acceso con índices</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> *vector = <span class="c-fn">malloc</span>(<span class="c-num">3</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+<span class="c-cmt">// Guardamos valores en cada posicion usando corchetes:</span>
+vector[<span class="c-num">0</span>] = <span class="c-num">10</span>;
+vector[<span class="c-num">1</span>] = <span class="c-num">20</span>;
+vector[<span class="c-num">2</span>] = <span class="c-num">30</span>;
+
+<span class="c-cmt">// Los mostramos por pantalla:</span>
+<span class="c-fn">printf</span>(<span class="c-str">"Posicion 0: %d\n"</span>, vector[<span class="c-num">0</span>]);
+<span class="c-fn">printf</span>(<span class="c-str">"Posicion 1: %d\n"</span>, vector[<span class="c-num">1</span>]);
+<span class="c-fn">printf</span>(<span class="c-str">"Posicion 2: %d\n"</span>, vector[<span class="c-num">2</span>]);</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: CARGAR Y MOSTRAR CON UN CICLO FOR -->
+      <section>
+        <h2><span class="section-num">15</span> Recorrer el Vector Dinámico con el Ciclo <code>for</code></h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Como la cantidad de elementos está guardada en la variable <code>cantidad</code>, nuestros ciclos <code>for</code> siempre van desde <b><code>i = 0</code></b> hasta <b><code>i &lt; cantidad</code></b>:
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">1. Cargar con scanf</span>
+            </div>
+            <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+    <span class="c-fn">printf</span>(<span class="c-str">"Ingrese un numero: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;vector[i]);
+}</div>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">2. Mostrar con printf</span>
+            </div>
+            <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+    <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, vector[i]);
+}</div>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            👀 <b>Fijate en el <code>scanf</code>:</b> Se escribe <code>&amp;vector[i]</code> igual que en los vectores estáticos, porque queremos la dirección del casillero número <code>i</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: EL PROBLEMA DE NO LIBERAR: POR QUÉ EXISTE FREE() (APUNTE PÁG 30) -->
+      <section>
+        <h2><span class="section-num">16</span> 9.2 <code>free()</code> — ¿Por Qué Tenemos que Liberar la Memoria?</h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">El problema que resuelve <code>free()</code> (Apunte pág. 30)</h4>
+          <p style="font-size: 0.9rem; margin: 0;">
+            Cuando usamos <code>malloc()</code>, el programa reserva memoria en el Heap, pero <b>esa memoria NO se libera automáticamente</b>. Si nosotros no la liberamos, esa memoria queda ocupada aunque ya no la estemos usando.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">En Memoria Estática (Stack)</h4>
+            <p style="font-size: 0.84rem; margin: 0; color: #cbd5e1;">
+              C limpia todo solo cuando termina la función. No teníamos que hacer nada especial.
+            </p>
+          </div>
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">En Memoria Dinámica (Heap)</h4>
+            <p style="font-size: 0.84rem; margin: 0; color: #cbd5e1;">
+              Como nosotros pedimos la memoria manualmente con <code>malloc()</code>, <b>nosotros debemos devolverla manualmente con <code>free()</code></b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: LA ANALOGÍA COTIDIANA DEL APUNTE: ALQUILAR UNA CANCHA DE FÚTBOL (PÁG 30) -->
+      <section>
+        <h2><span class="section-num">17</span> Analogía del Apunte: Alquilar una Cancha de Fútbol</h2>
+        <p style="font-size: 0.9rem; color: #cbd5e1;">
+          En la página 30 del apunte tenemos una analogía genial para entender cómo trabajan juntos <code>malloc()</code> y <code>free()</code>. Imaginá que <b>alquilás una cancha de fútbol</b> para jugar con tus amigos:
+        </p>
+
+        <div class="grid-3" style="margin-top: 14px;">
+          <div class="box box-emerald">
+            <span class="badge badge-emerald">Paso 1: malloc()</span>
+            <h4 style="color: #34d399;">Reservar la cancha</h4>
+            <p style="font-size: 0.83rem; margin: 0; color: #cbd5e1;">
+              Llamás al complejo y reservás la cancha para tu grupo. A partir de ese momento la cancha queda bloqueada para ustedes.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <span class="badge badge-cyan">Paso 2: Uso del vector</span>
+            <h4 style="color: #38bdf8;">Jugar el partido</h4>
+            <p style="font-size: 0.83rem; margin: 0; color: #cbd5e1;">
+              Usás la cancha durante un rato para jugar (en el programa: cargás datos con <code>scanf</code>, calculás promedios y mostrás resultados).
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <span class="badge badge-amber">Paso 3: free()</span>
+            <h4 style="color: #fbbf24;">Devolver la cancha</h4>
+            <p style="font-size: 0.83rem; margin: 0; color: #cbd5e1;">
+              Cuando terminás de jugar, avisás en recepción y <b>devolvés la cancha</b> para que quede libre y otros puedan usarla.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-rose" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            ⚽ <b>¿Qué pasa si terminaste de jugar y NO devolvés la cancha?</b> La cancha sigue ocupada innecesariamente, nadie más puede entrar a jugar y te siguen cobrando el alquiler. ¡Con la memoria RAM pasa exactamente lo mismo!
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: QUÉ ES UN MEMORY LEAK (FUGA DE MEMORIA) -->
+      <section>
+        <h2><span class="section-num">18</span> ¿Qué Ocurre si Nunca Llamamos a <code>free()</code>?</h2>
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Fuga de Memoria (Memory Leak)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Cuando un programa pide memoria con <code>malloc()</code> y se olvida de liberarla con <code>free()</code>, se produce lo que en programación se conoce como una <b>fuga de memoria</b> (o <i>Memory Leak</i>).
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">En un programa cortito de práctica</h4>
+            <p style="font-size: 0.84rem; margin: 0; color: #cbd5e1;">
+              Puede que no notes que la PC ande lenta porque el programa dura pocos segundos, pero igual es un <b>error de programación</b> que se descuenta en los exámenes.
+            </p>
+          </div>
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">En un juego, navegador o servidor</h4>
+            <p style="font-size: 0.84rem; margin: 0; color: #cbd5e1;">
+              Si cada minuto el programa reserva memoria nueva y nunca hace <code>free()</code>, la memoria RAM se va llenando hasta que toda la computadora se congela.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: LA FUNCIÓN FREE() — SINTAXIS Y EJEMPLO MÍNIMO DEL APUNTE (PÁGS 30-31) -->
+      <section>
+        <h2><span class="section-num">19</span> Cómo se Escribe <code>free()</code> (Apunte págs. 30 y 31)</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          La función <code>free()</code> sirve para <b>liberar la memoria que fue reservada con <code>malloc()</code></b>. Su sintaxis es súper sencilla: solo recibe entre paréntesis el nombre del puntero:
+        </p>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">Sintaxis General</span>
+            </div>
+            <div class="code-body"><span class="c-fn">free</span>(variable);
+
+<span class="c-cmt">// Por ejemplo:</span>
+<span class="c-fn">free</span>(vector);</div>
+          </div>
+
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">Ejemplo Mínimo (Apunte pág. 31)</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> *vector;
+vector = <span class="c-fn">malloc</span>(<span class="c-num">5</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+<span class="c-fn">free</span>(vector);</div>
+          </div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 12px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            📌 <b>Fijate qué simple:</b> A <code>free(vector);</code> no hay que pasarle el tamaño ni <code>sizeof</code>. El sistema operativo ya recuerda cuántos bytes medía el bloque que empieza en esa dirección y los libera todos juntos.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: LA REGLA DE ORO DEL APUNTE (PÁG 31) -->
+      <section>
+        <h2><span class="section-num">20</span> La Regla Simple del Apunte (Pág. 31)</h2>
+        <div class="box box-emerald" style="padding: 18px 22px;">
+          <h3 style="color: #34d399; margin-bottom: 8px;">✨ "Siempre pensalos juntos"</h3>
+          <p style="font-size: 0.95rem; color: #e2e8f0; margin: 0;">
+            <b>Si usaste <code>malloc()</code> ➔ deberías usar <code>free()</code></b>, normalmente al final del programa cuando ya no necesites esos datos.<br>
+            <b>Cada <code>malloc()</code> debe tener un único <code>free()</code>.</b>
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 14px;">
+          <div class="correct-card">
+            <div class="correct-title" style="font-size: 1rem;">🟢 <code>malloc()</code> ➔ Reserva memoria</div>
+            <p style="font-size: 0.85rem; margin: 0; color: #cbd5e1;">
+              Se escribe al principio (después de saber cuántos elementos queremos) para pedir el bloque en el Heap.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title" style="font-size: 1rem;">🟠 <code>free()</code> ➔ Libera memoria</div>
+            <p style="font-size: 0.85rem; margin: 0; color: #cbd5e1;">
+              Se escribe al final (justo antes de <code>return 0;</code>) cuando ya terminamos de mostrar y procesar el vector.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: EJEMPLO PRÁCTICO COMPLETO DEL APUNTE (PÁG 31) -->
+      <section>
+        <h2><span class="section-num">21</span> Ejemplo Práctico Completo del Apunte (Pág. 31)</h2>
+        <p style="font-size: 0.85rem; color: #cbd5e1;">
+          Este es el programa modelo de la página 31 del apunte que integra todo el ciclo completo: pedir la cantidad, reservar con <code>malloc()</code>, cargar con <code>for</code>, mostrar los números y liberar con <code>free()</code>:
+        </p>
+
         <div class="code-window">
           <div class="code-header">
-            <span class="code-title">ciclo_dinamico.c</span>
-            <span class="code-badge">Estándar Seguro</span>
+            <span class="code-title">ejemplo_completo_apunte.c</span>
+            <span class="code-badge">Apunte pág. 31</span>
           </div>
           <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
 <span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
 
-<span class="c-kw">int</span> <span class="c-fn">main</span>(<span class="c-type">void</span>)
-{
-    <span class="c-cmt">// 1. Reserva en el Heap</span>
-    <span class="c-kw">int</span> *edad = (<span class="c-kw">int</span> *)<span class="c-fn">malloc</span>(<span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> cantidad;
+    <span class="c-fn">printf</span>(<span class="c-str">"Cuantos numeros queres guardar?: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;cantidad);
 
-    <span class="c-cmt">// 2. Validación obligatoria</span>
-    <span class="c-kw">if</span> (edad == <span class="c-kw">NULL</span>)
-    {
-        <span class="c-fn">printf</span>(<span class="c-str">"Error: No se pudo asignar memoria.\n"</span>);
-        <span class="c-kw">return</span> <span class="c-num">1</span>;
+    <span class="c-kw">int</span> *vector;
+    vector = <span class="c-fn">malloc</span>(cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Ingrese un numero: "</span>);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;vector[i]);
     }
 
-    <span class="c-cmt">// 3. Uso mediante desreferenciación (*)</span>
-    *edad = <span class="c-num">17</span>;
-    <span class="c-fn">printf</span>(<span class="c-str">"La edad guardada en el Heap es: %d\n"</span>, *edad);
+    <span class="c-fn">printf</span>(<span class="c-str">"Numeros ingresados:\n"</span>);
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, vector[i]);
+    }
 
-    <span class="c-cmt">// 4. Liberación limpia</span>
-    <span class="c-fn">free</span>(edad);
-    edad = <span class="c-kw">NULL</span>;
-
+    <span class="c-fn">free</span>(vector);
     <span class="c-kw">return</span> <span class="c-num">0</span>;
 }</div>
         </div>
       </section>
 
-      <!-- SLIDE 9: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <!-- SLIDE 23: EXPLICACIÓN LÍNEA POR LÍNEA (PARTE 1) -->
       <section>
-        <h2><span class="section-num">08</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">22</span> Análisis del Ejemplo Completo — Parte 1: Reserva</h2>
+        <div class="grid-1-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-body"><span class="c-kw">int</span> cantidad;
+<span class="c-fn">printf</span>(<span class="c-str">"Cuantos numeros?: "</span>);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;cantidad);
+
+<span class="c-kw">int</span> *vector;
+vector = <span class="c-fn">malloc</span>(
+    cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>)
+);</div>
+          </div>
+
+          <div class="step-list">
+            <div class="step-item">
+              <span class="step-num">1</span>
+              <div class="step-content" style="font-size: 0.85rem;">
+                <b>Primero preguntamos <code>cantidad</code>:</b> Jamás podemos hacer el <code>malloc()</code> antes del <code>scanf("%d", &amp;cantidad);</code> porque todavía no sabríamos cuántos lugares pedir.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">2</span>
+              <div class="step-content" style="font-size: 0.85rem;">
+                <b>Creamos el puntero <code>int *vector;</code>:</b> Preparamos la variable que recibirá la dirección del bloque.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">3</span>
+              <div class="step-content" style="font-size: 0.85rem;">
+                <b>Llamamos a <code>malloc()</code>:</b> Multiplicamos <code>cantidad * sizeof(int)</code> para reservar en el Heap el tamaño exacto.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: EXPLICACIÓN LÍNEA POR LÍNEA (PARTE 2) -->
+      <section>
+        <h2><span class="section-num">23</span> Análisis del Ejemplo Completo — Parte 2: Uso y Liberación</h2>
+        <div class="grid-1-2" style="align-items: center;">
+          <div class="code-window">
+            <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;vector[i]);
+}
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+    <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, vector[i]);
+}
+
+<span class="c-hl"><span class="c-fn">free</span>(vector);</span>
+<span class="c-kw">return</span> <span class="c-num">0</span>;</div>
+          </div>
+
+          <div class="step-list">
+            <div class="step-item">
+              <span class="step-num">4</span>
+              <div class="step-content" style="font-size: 0.85rem;">
+                <b>Primer ciclo <code>for</code> (Carga):</b> Va desde <code>0</code> hasta <code>cantidad - 1</code> guardando cada número en <code>vector[i]</code>.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">5</span>
+              <div class="step-content" style="font-size: 0.85rem;">
+                <b>Segundo ciclo <code>for</code> (Muestra):</b> Recorre todas las posiciones mostrando los datos guardados.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-num">6</span>
+              <div class="step-content" style="font-size: 0.85rem;">
+                <b>Cierre limpio con <code>free(vector);</code>:</b> Como ya mostramos los datos y el programa va a terminar, devolvemos la memoria al Heap.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: TABLA DE SEGUIMIENTO DEL CICLO DE VIDA EN RAM -->
+      <section>
+        <h2><span class="section-num">24</span> Seguimiento del Ciclo de Vida en la Memoria RAM</h2>
+        <p style="font-size: 0.86rem; color: #cbd5e1;">
+          Supongamos que el usuario ingresa <code>cantidad = 3</code> y luego carga los números <code>15</code>, <code>40</code> y <code>25</code>:
+        </p>
+
+        <table class="trace-table">
+          <thead>
+            <tr>
+              <th>Momento del Programa</th>
+              <th>Stack (<code>cantidad</code> y <code>vector</code>)</th>
+              <th>Heap (Bloque en <code>0x5000</code>)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1. Tras <code>scanf</code> de cantidad</b></td>
+              <td><code>cantidad = 3</code> | <code>vector = ?</code></td>
+              <td><i>Sin reservar todavía</i></td>
+            </tr>
+            <tr>
+              <td><b>2. Tras <code>malloc(3 * sizeof(int))</code></b></td>
+              <td><code>cantidad = 3</code> | <code>vector = 0x5000</code></td>
+              <td><code>[ ? , ? , ? ]</code> (3 lugares con basura)</td>
+            </tr>
+            <tr>
+              <td><b>3. Tras el <code>for</code> de carga</b></td>
+              <td><code>cantidad = 3</code> | <code>vector = 0x5000</code></td>
+              <td><b><code>[ 15 , 40 , 25 ]</code></b> (Datos cargados)</td>
+            </tr>
+            <tr>
+              <td><b>4. Tras ejecutar <code>free(vector);</code></b></td>
+              <td><code>cantidad = 3</code> | <code>vector</code> (liberado)</td>
+              <td><i>Bloque devuelto al sistema operativo</i></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- SLIDE 26: ERROR FRECUENTE 1 (DEL APUNTE): OLVIDARSE DE FREE -->
+      <section>
+        <h2><span class="section-num">25</span> Error Frecuente 1 (del Apunte): Olvidarse de <code>free()</code></h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Sin <code>free()</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> *vector;
+vector = <span class="c-fn">malloc</span>(<span class="c-num">5</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+vector[<span class="c-num">0</span>] = <span class="c-num">10</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, vector[<span class="c-num">0</span>]);
+
+<span class="c-cmt">// ¡Termina sin liberar!</span>
+<span class="c-kw">return</span> <span class="c-num">0</span>;</div>
+            </div>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Con <code>free()</code> al final</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> *vector;
+vector = <span class="c-fn">malloc</span>(<span class="c-num">5</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+vector[<span class="c-num">0</span>] = <span class="c-num">10</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, vector[<span class="c-num">0</span>]);
+
+<span class="c-fn">free</span>(vector); <span class="c-cmt">// ¡Devolvemos la cancha!</span>
+<span class="c-kw">return</span> <span class="c-num">0</span>;</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-amber" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.85rem;">
+            💡 <b>Consejo práctico:</b> Apenas escribas la línea de <code>malloc(vector)</code> en tu código, andá al final de <code>main</code> (arriba de <code>return 0;</code>) y escribí <code>free(vector);</code> para no olvidarte nunca.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: ERROR FRECUENTE 2 (DEL APUNTE): LIBERAR DOS VECES (DOUBLE FREE) -->
+      <section>
+        <h2><span class="section-num">26</span> Error Frecuente 2 (del Apunte): Liberar Dos Veces</h2>
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Cada <code>malloc()</code> debe tener un ÚNICO <code>free()</code> (Apunte pág. 31)</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            Tal como advierte explícitamente el apunte en la página 31, <b>nunca debés liberar la misma memoria dos veces</b> (error conocido como <i>Double Free</i>):
+          </p>
+        </div>
+
+        <div class="comparison-box" style="margin-top: 12px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error Grave: Doble <code>free()</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> *vector = <span class="c-fn">malloc</span>(<span class="c-num">5</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+<span class="c-fn">free</span>(vector); <span class="c-cmt">// 1ra vez: libera bien</span>
+<span class="c-fn">free</span>(vector); <span class="c-cmt">// 2da vez: ¡ERROR! Ya estaba libre</span></div>
+            </div>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: Un solo <code>free()</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> *vector = <span class="c-fn">malloc</span>(<span class="c-num">5</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+<span class="c-fn">free</span>(vector); <span class="c-cmt">// Se libera una unica vez</span>
+vector = <span class="c-kw">NULL</span>; <span class="c-cmt">// Opcional: dejamos en NULL</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: ERROR FRECUENTE 3: PONER FREE ADENTRO DEL CICLO FOR -->
+      <section>
+        <h2><span class="section-num">27</span> Error Frecuente 3: Poner <code>free()</code> Adentro del <code>for</code></h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Un descuido muy común al cerrar las llaves <code>{ }</code> del ciclo <code>for</code> es meter sin querer el <code>free(vector);</code> <b>adentro del bucle</b>:
+        </p>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Mal: <code>free()</code> adentro del <code>for</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+    <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, vector[i]);
+    <span class="c-fn">free</span>(vector); <span class="c-cmt">// ¡Destruye el vector en i=0!</span>
+}</div>
+            </div>
+            <p style="font-size: 0.78rem; color: #fca5a5; margin: 6px 0 0;">
+              En la primera vuelta (<code>i = 0</code>) libera todo el vector, y cuando quiere pasar a <code>i = 1</code> el vector ya no existe.
+            </p>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Bien: <code>free()</code> afuera y después del <code>for</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+    <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, vector[i]);
+}
+<span class="c-cmt">// Recien cuando termino todo el for:</span>
+<span class="c-fn">free</span>(vector);</div>
+            </div>
+            <p style="font-size: 0.78rem; color: #a7f3d0; margin: 6px 0 0;">
+              Primero muestra todos los elementos de principio a fin y recién al salir del ciclo libera la memoria.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: ERROR FRECUENTE 4: USAR EL VECTOR DESPUÉS DE FREE -->
+      <section>
+        <h2><span class="section-num">28</span> Error Frecuente 4: Usar el Vector Después de <code>free()</code></h2>
+        <div class="box box-rose">
+          <h4 style="color: #f87171; margin-bottom: 4px;">Si ya devolviste la cancha, ¡no podés seguir jugando adentro!</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Una vez que ejecutaste <code>free(vector);</code>, ese bloque del Heap ya no te pertenece. Intentar leer o escribir <code>vector[0]</code> después de haber hecho <code>free()</code> es un error grave:
+          </p>
+        </div>
+
+        <div class="comparison-box" style="margin-top: 10px;">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Incorrecto: Usar después de liberar</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">free</span>(vector);
+
+<span class="c-cmt">// ¡PROHIBIDO! La memoria ya fue devuelta:</span>
+vector[<span class="c-num">0</span>] = <span class="c-num">99</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, vector[<span class="c-num">0</span>]);</div>
+            </div>
+          </div>
+
+          <div class="correct-card">
+            <div class="correct-title">✅ Correcto: <code>free()</code> es la última acción</div>
+            <div class="code-window">
+              <div class="code-body">vector[<span class="c-num">0</span>] = <span class="c-num">99</span>;
+<span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, vector[<span class="c-num">0</span>]);
+
+<span class="c-cmt">// Liberamos cuando ya no lo tocamos mas:</span>
+<span class="c-fn">free</span>(vector);
+vector = <span class="c-kw">NULL</span>;</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: EJEMPLO PROGRESIVO NIVEL 1 -->
+      <section>
+        <h2><span class="section-num">29</span> Ejemplo Nivel 1: Vector Dinámico de 3 Notas (<code>float</code>)</h2>
+        <p style="font-size: 0.86rem; color: #cbd5e1;">
+          <code>malloc()</code> sirve para cualquier tipo de dato. Mirá cómo reservamos espacio para 3 números con coma (<code>float</code>):
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">nivel1_notas_float.c</span>
+            <span class="code-badge">Nivel 1 • Tipo float</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">float</span> *notas;
+    notas = <span class="c-fn">malloc</span>(<span class="c-num">3</span> * <span class="c-kw">sizeof</span>(<span class="c-kw">float</span>));
+
+    notas[<span class="c-num">0</span>] = <span class="c-num">8.5</span>;
+    notas[<span class="c-num">1</span>] = <span class="c-num">9.0</span>;
+    notas[<span class="c-num">2</span>] = <span class="c-num">7.5</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Notas: %.1f - %.1f - %.1f\n"</span>, notas[<span class="c-num">0</span>], notas[<span class="c-num">1</span>], notas[<span class="c-num">2</span>]);
+
+    <span class="c-fn">free</span>(notas);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: EJEMPLO PROGRESIVO NIVEL 2 -->
+      <section>
+        <h2><span class="section-num">30</span> Ejemplo Nivel 2: Suma y Promedio con Memoria Dinámica</h2>
+        <p style="font-size: 0.85rem; color: #cbd5e1;">
+          Combinemos la reserva dinámica según la cantidad que pide el usuario con un acumulador para calcular el promedio:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">nivel2_promedio_dinamico.c</span>
+            <span class="code-badge">Nivel 2 • Acumulador</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> cantidad, suma = <span class="c-num">0</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Cuantas edades va a cargar?: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;cantidad);
+
+    <span class="c-kw">int</span> *edades = <span class="c-fn">malloc</span>(cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Edad %d: "</span>, i + <span class="c-num">1</span>);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;edades[i]);
+        suma = suma + edades[i];
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Promedio de edades: %.2f\n"</span>, (<span class="c-kw">float</span>)suma / cantidad);
+
+    <span class="c-fn">free</span>(edades);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: EJEMPLO PROGRESIVO NIVEL 3 -->
+      <section>
+        <h2><span class="section-num">31</span> Ejemplo Nivel 3: Buscar el Mayor en un Vector Dinámico</h2>
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">nivel3_maximo_dinamico.c</span>
+            <span class="code-badge">Nivel 3 • Búsqueda de Máximo</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> cantidad;
+    <span class="c-fn">printf</span>(<span class="c-str">"Cantidad de competidores: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;cantidad);
+
+    <span class="c-kw">int</span> *puntajes = <span class="c-fn">malloc</span>(cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Puntaje %d: "</span>, i + <span class="c-num">1</span>);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;puntajes[i]);
+    }
+
+    <span class="c-kw">int</span> mayor = puntajes[<span class="c-num">0</span>];
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">1</span>; i &lt; cantidad; i++) {
+        <span class="c-kw">if</span>(puntajes[i] &gt; mayor) {
+            mayor = puntajes[i];
+        }
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"El puntaje mas alto fue: %d\n"</span>, mayor);
+    <span class="c-fn">free</span>(puntajes);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 33: EJEMPLO PROGRESIVO NIVEL 4 -->
+      <section>
+        <h2><span class="section-num">32</span> Ejemplo Nivel 4: Vector Dinámico de <code>struct</code></h2>
+        <p style="font-size: 0.85rem; color: #cbd5e1;">
+          ¡También podemos crear un vector dinámico de estructuras! Solo usamos <code>sizeof(struct Producto)</code> al llamar a <code>malloc()</code>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">nivel4_struct_dinamico.c</span>
+            <span class="code-badge">Nivel 4 • Struct + Heap</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">struct</span> <span class="c-type">Producto</span> {
+    <span class="c-kw">int</span> codigo;
+    <span class="c-kw">float</span> precio;
+};
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> cantidad;
+    <span class="c-fn">printf</span>(<span class="c-str">"Cuantos productos desea registrar?: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;cantidad);
+
+    <span class="c-kw">struct</span> <span class="c-type">Producto</span> *lista = <span class="c-fn">malloc</span>(cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">struct</span> <span class="c-type">Producto</span>));
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Codigo y precio del producto %d: "</span>, i + <span class="c-num">1</span>);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%d %f"</span>, &amp;lista[i].codigo, &amp;lista[i].precio);
+    }
+
+    <span class="c-fn">free</span>(lista);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 34: EJERCICIO PRÁCTICO 1 -->
+      <section>
+        <h2><span class="section-num">33</span> Ejercicio Práctico 1: Encontrá los 2 Errores</h2>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Observá con lupa el siguiente código. Tiene <b>2 errores importantes</b> relacionados con lo que vimos hoy en el apunte. ¿Cuáles son?
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">ejercicio_1_errores.c</span>
+            <span class="code-badge">Detectar Errores</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> cantidad;
+    <span class="c-kw">int</span> *vector = <span class="c-fn">malloc</span>(cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">int</span>));
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Cantidad: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;cantidad);
+
+    vector[<span class="c-num">0</span>] = <span class="c-num">50</span>;
+    <span class="c-fn">free</span>(vector);
+    <span class="c-fn">free</span>(vector);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+
+        <details class="code-solution">
+          <summary>🔍 Ver los 2 errores y su corrección</summary>
+          <div class="solution-content">
+            <ol style="margin-left: 18px; line-height: 1.6;">
+              <li><b>Error 1 (Orden invertido):</b> Llamó a <code>malloc(cantidad * sizeof(int))</code> <b>antes</b> de pedirle <code>cantidad</code> al usuario con <code>scanf</code>. En ese momento <code>cantidad</code> tenía basura. El <code>malloc</code> siempre debe ir <b>después</b> del <code>scanf</code>.</li>
+              <li><b>Error 2 (Doble <code>free</code>):</b> Al final escribió <code>free(vector);</code> dos veces seguidas. Cada <code>malloc()</code> debe tener un único <code>free()</code>.</li>
+            </ol>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 35: EJERCICIO PRÁCTICO 2 -->
+      <section>
+        <h2><span class="section-num">34</span> Ejercicio Práctico 2: Completar el Programa</h2>
+        <p style="font-size: 0.86rem; color: #cbd5e1;">
+          <b>Consigna:</b> Escribí un programa en C que le pregunte al usuario cuántos precios quiere cargar, reserve un vector dinámico de tipo <code>float</code> con <code>malloc()</code>, cargue los precios, muestre el total sumado y libere la memoria con <code>free()</code>.
+        </p>
+
+        <details class="code-solution">
+          <summary>🔍 Ver código resuelto completo</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-pre">#include</span> <span class="c-str">&lt;stdio.h&gt;</span>
+<span class="c-pre">#include</span> <span class="c-str">&lt;stdlib.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">int</span> cantidad;
+    <span class="c-kw">float</span> total = <span class="c-num">0</span>;
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Cuantos precios quiere cargar?: "</span>);
+    <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;cantidad);
+
+    <span class="c-kw">float</span> *precios = <span class="c-fn">malloc</span>(cantidad * <span class="c-kw">sizeof</span>(<span class="c-kw">float</span>));
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; cantidad; i++) {
+        <span class="c-fn">printf</span>(<span class="c-str">"Precio %d: "</span>, i + <span class="c-num">1</span>);
+        <span class="c-fn">scanf</span>(<span class="c-str">"%f"</span>, &amp;precios[i]);
+        total = total + precios[i];
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Total a pagar: $%.2f\n"</span>, total);
+
+    <span class="c-fn">free</span>(precios);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 36: RESUMEN FINAL Y NAVEGACIÓN -->
+      <section>
+        <h2><span class="section-num">35</span> Resumen de la Unidad 08 y Checklist</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Reglas de Oro</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><code>sizeof(tipo)</code>: Calcula bytes exactos portables.</li>
-              <li><code>malloc(bytes)</code>: Pide memoria contigua en el Heap.</li>
-              <li><b>Siempre verificar:</b> <code>if (ptr == NULL)</code> antes de usar.</li>
-              <li><code>free(ptr)</code>: Devuelve la memoria al sistema.</li>
-              <li><b>Neutralizar:</b> <code>ptr = NULL;</code> tras el free.</li>
-              <li><b>Memory Leak:</b> Olvidar el free y perder el puntero.</li>
+            <h4 style="color: #818cf8;">Fórmulas y Reglas del Apunte</h4>
+            <ul style="font-size: 0.84rem; line-height: 1.58; margin-left: 18px;">
+              <li><b>Biblioteca:</b> Siempre incluir <code>#include &lt;stdlib.h&gt;</code>.</li>
+              <li><b><code>sizeof(int)</code>:</b> Devuelve cuántos bytes ocupa un entero.</li>
+              <li><b>Reserva:</b> <code>vector = malloc(cantidad * sizeof(int));</code></li>
+              <li><b>Analogía de la cancha:</b> <code>malloc()</code> reserva la cancha; <code>free()</code> la devuelve cuando terminamos de jugar.</li>
+              <li><b>Regla de oro:</b> Cada <code>malloc()</code> debe tener un único <code>free(vector);</code> al final del programa.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Qué biblioteca debo incluir para poder usar <code>malloc</code> y <code>free</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Qué valor devuelve <code>malloc</code> cuando no hay memoria libre?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué es peligroso usar <code>*ptr</code> sin chequear si es <code>NULL</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Qué ocurre si mi programa pide memoria y nunca la libera?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué multiplicamos <code>cantidad * sizeof(int)</code> adentro de <code>malloc</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué primero hay que leer <code>cantidad</code> con <code>scanf</code> antes de llamar a <code>malloc</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar qué pasa si reservo memoria con <code>malloc</code> y me olvido de poner <code>free</code>?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo por qué nunca debo llamar a <code>free(vector)</code> dos veces ni adentro del <code>for</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
+        <div style="text-align: center; margin-top: 16px;">
           <a href="07-introduccion-memoria-dinamica.html" class="badge badge-indigo" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
             ← Anterior: Introducción a Memoria Dinámica
           </a>
           <a href="../index.html" class="badge badge-cyan" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            Índice 2do Cuatrimestre
+            Índice 2do Bimestre
           </a>
           <a href="09-calloc-realloc.html" class="badge badge-emerald" style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
             Siguiente: calloc() y realloc() →

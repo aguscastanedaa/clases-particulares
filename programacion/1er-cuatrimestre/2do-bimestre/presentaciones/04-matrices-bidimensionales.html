@@ -1,34 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Programación 1C 2B - 04: Matrices Bidimensionales | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
 
-  <!-- Reveal.js Styles -->
+  <!-- Reveal.js & KaTeX Styles -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Custom Design System -->
   <link rel="stylesheet" href="../../../assets/css/presentation.css">
 </head>
-
 <body>
   <!-- Top Global Bar -->
   <div class="top-bar">
     <div style="display: flex; align-items: center; gap: 14px;">
       <a href="../index.html">← Volver al 2do Bimestre</a>
-      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a><a
-        href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">1er Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
     </div>
     <span class="plan-tag">1er Cuatrimestre • 2do Bimestre • Unidad 04</span>
   </div>
@@ -38,320 +35,1471 @@
 
       <!-- SLIDE 1: PORTADA -->
       <section>
-        <div style="text-align: center; max-width: 960px; margin: 30px auto 0;">
-          <span class="badge badge-indigo">1er Cuatrimestre • 2do Bimestre • Unidad 4</span>
-          <h1 style="font-size: 2.7rem; margin-bottom: 12px;">Matrices Bidimensionales</h1>
-          <p style="color: #94a3b8; font-size: 1.25rem; font-weight: 500; margin-bottom: 24px;">
-            Pensando en dos dimensiones: tablas de filas y columnas, memoria contigua por filas y bucles anidados
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <span class="badge badge-indigo">1er Cuatrimestre • 2do Bimestre • Unidad 04</span>
+          <h1 style="font-size: 2.65rem; margin-bottom: 12px;">Matrices Bidimensionales</h1>
+          <p style="color: #94a3b8; font-size: 1.18rem; font-weight: 500; margin-bottom: 22px;">
+            De la fila recta a la tabla completa: filas y columnas, coordenadas <code>[fila][columna]</code>, carga, impresión en cuadrícula y búsquedas con doble ciclo <code>for</code>
           </p>
 
-          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;">
-            <span class="badge badge-cyan">Filas y Columnas [i][j]</span>
-            <span class="badge badge-emerald">Row-Major Order en RAM</span>
-            <span class="badge badge-amber">Bucles Anidados (i, j)</span>
-            <span class="badge badge-purple">Sumas por Fila y Columna</span>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center;">
+            <span class="badge badge-cyan">Filas y Columnas</span>
+            <span class="badge badge-emerald">Coordenadas [fila][columna]</span>
+            <span class="badge badge-amber">Doble Ciclo for Anidado</span>
+            <span class="badge badge-purple">Búsquedas y Acumuladores 2D</span>
           </div>
 
-          <div class="box box-indigo" style="max-width: 740px; margin: 0 auto; text-align: center;">
-            <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">
-              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←)
-              para avanzar diapositiva por diapositiva.
+          <div class="box box-indigo" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.92rem; color: #cbd5e1;">
+              💡 <b>Guía de navegación:</b> Usá la <b>barra espaciadora</b> o las <b>flechas del teclado</b> (→ / ←) para avanzar diapositiva por diapositiva. Esta clase explica desde cero toda la sección 6 del Apunte Teórico.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: OBJETIVOS -->
+      <!-- SLIDE 2: OBJETIVOS DE APRENDIZAJE -->
       <section>
-        <h2><span class="section-num">01</span> Objetivos de Aprendizaje</h2>
+        <h2><span class="section-num">01</span> Objetivos y el Salto a Dos Dimensiones</h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">De la línea al plano</h4>
-            <p style="font-size: 0.88rem;">
-              Un vector es una estructura unidimensional (1D): como una línea recta de datos.
+            <h4 style="color: #818cf8;">De la línea recta (1D) al plano (2D)</h4>
+            <p style="font-size: 0.86rem;">
+              En las primeras tres unidades trabajamos con <b>vectores</b>: una sola fila de casilleros uno al lado del otro donde nos alcanzaba con un único número de posición (índice) para encontrar cualquier dato.
             </p>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
-              Una <b>matriz</b> es bidimensional (2D): tiene <b>filas y columnas</b>. Es el equivalente directo a una
-              planilla de Excel, un tablero de ajedrez o tatetí, o la cuadrícula de píxeles de una imagen digital.
+            <p style="font-size: 0.86rem; color: var(--text-muted); margin-top: 8px;">
+              Hoy damos un paso clave: ¿qué hacemos cuando nuestros datos tienen forma de <b>tabla o cuadrícula</b> con varios renglones y columnas? Para eso existen las <b>matrices</b>.
             </p>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Lo que vas a dominar hoy</h4>
-            <ul style="font-size: 0.86rem; line-height: 1.6; margin-left: 18px;">
-              <li>Comprender qué es una matriz y cómo declararla: <code>[FILAS][COLUMNAS]</code>.</li>
-              <li>Aprender a orientarte con los dos índices: <code>[fila][columna]</code>.</li>
-              <li>Entender cómo se organiza en la RAM <b><i>Row-Major Order</i></b>.</li>
-              <li>Dominar el recorrido completo con <b>dos bucles <code>for</code> anidados</b>.</li>
-              <li>Imprimir matrices con formato tabular prolijo.</li>
-              <li>Calcular totales globales, sumas por filas y sumas por columnas.</li>
+            <ul style="font-size: 0.85rem; line-height: 1.58; margin-left: 18px;">
+              <li>Comprender qué es una <b>matriz</b> y diferenciar <b>filas</b> (horizontales) de <b>columnas</b> (verticales).</li>
+              <li>Declarar e inicializar matrices calculando su cantidad total de posiciones.</li>
+              <li>Leer y modificar cualquier casillero usando sus dos coordenadas <code>[fila][columna]</code>.</li>
+              <li>Recorrer, mostrar en forma de tabla y cargar matrices con <b>dos ciclos <code>for</code> anidados</b>.</li>
+              <li>Buscar el mayor/menor, sumar elementos y calcular totales por fila o por columna.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: DECLARACIÓN Y ANATOMÍA -->
+      <!-- SLIDE 3: ¿QUÉ ES UNA MATRIZ Y POR QUÉ LA NECESITAMOS? -->
       <section>
-        <h2><span class="section-num">02</span> Declaración y Doble Coordenada</h2>
+        <h2><span class="section-num">02</span> ¿Qué es una Matriz?</h2>
         <div class="box box-cyan">
-          <h4 style="color: #38bdf8; margin-bottom: 4px;">Sintaxis en C:</h4>
-          <p style="font-size: 1.05rem; font-family: var(--font-mono); margin: 6px 0; color: #ffffff;">
-            tipo nombre[<span style="color: var(--accent-amber);">FILAS</span>][<span
-              style="color: var(--accent-cyan);">COLUMNAS</span>];
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Definición del Apunte Teórico (Sección 6)</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Una <b>matriz</b> es una estructura que permite almacenar <b>muchos datos del mismo tipo</b> organizados en <b>filas y columnas</b>. Podés imaginarla exactamente como una <b>tabla de Excel</b> o un cuadro de doble entrada.
           </p>
         </div>
 
-        <div class="grid-2" style="margin-top: 14px;">
-          <div class="code-window">
-            <div class="code-header"><span class="code-title">matriz_ejemplo.c</span></div>
-            <div class="code-body"><span class="c-cmt">// Una matriz de 2 filas y 3 columnas:</span>
-              <span class="c-kw">int</span> tabla[<span class="c-num">2</span>][<span class="c-num">3</span>] = {
-              {<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>}, <span
-                class="c-cmt">// Fila 0</span>
-              {<span class="c-num">40</span>, <span class="c-num">50</span>, <span class="c-num">60</span>} <span
-                class="c-cmt">// Fila 1</span>
-              };
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">↔️ Las Filas (Horizontales)</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Son los <b>renglones horizontales</b> de la tabla (van de izquierda a derecha). Se numeran de arriba hacia abajo empezando siempre desde la <b>Fila 0</b>.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">↕️ Las Columnas (Verticales)</h4>
+            <p style="font-size: 0.84rem; margin: 0;">
+              Son las <b>tiras verticales</b> de la tabla (van de arriba hacia abajo). Se numeran de izquierda a derecha empezando siempre desde la <b>Columna 0</b>.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-purple" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            📌 <b>Condición importante:</b> Igual que en los vectores, <b>todos los casilleros de una misma matriz deben ser del mismo tipo de dato</b> (todos <code>int</code>, o todos <code>float</code>, o todos <code>char</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: LA ANALOGÍA DEL EDIFICIO DE CASILLEROS -->
+      <section>
+        <h2><span class="section-num">03</span> La Analogía de los Casilleros del Apunte</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Para entender la diferencia con lo que ya sabíamos, el apunte nos propone comparar un estante simple contra un mueble completo de casilleros:
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-cyan" style="text-align: center;">
+            <h4 style="color: #38bdf8;">Un Vector = Una sola fila de casilleros</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              Están todos en un solo piso. Con <b>1 solo número</b> (el número de casillero) ya sabés a cuál ir:
+            </p>
+            <div class="array-container" style="margin: 18px 0;">
+              <div class="array-cell-wrapper"><span class="array-index">[0]</span><div class="array-cell">10</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[1]</span><div class="array-cell">20</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[2]</span><div class="array-cell">30</div></div>
+              <div class="array-cell-wrapper"><span class="array-index">[3]</span><div class="array-cell">40</div></div>
             </div>
+            <p style="font-size: 0.82rem; margin: 0;">
+              <i>"Guardalo en el casillero 2"</i> ➔ <code>vector[2]</code>
+            </p>
+          </div>
+
+          <div class="box box-emerald" style="text-align: center;">
+            <h4 style="color: #34d399;">Una Matriz = Un edificio / mueble de casilleros</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              Tiene varios pisos (<b>filas</b>) y varias puertas por piso (<b>columnas</b>). Necesitás <b>2 datos</b> para ubicar un casillero:
+            </p>
+            <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr); margin: 6px auto;">
+              <div class="matrix-cell">10<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell">20<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell">30<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell">40<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell">50<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell">60<span class="coord">[1][2]</span></div>
+            </div>
+            <p style="font-size: 0.82rem; margin: 0;">
+              <i>"Andá a la <b>Fila 1</b>, <b>Columna 2</b>"</i> ➔ <code>matriz[1][2]</code>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: ¿CUÁNDO USAMOS UNA MATRIZ EN LA VIDA REAL? -->
+      <section>
+        <h2><span class="section-num">04</span> ¿Cuándo Usamos una Matriz? (Ejemplos Reales)</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Siempre que tengamos información cruzada entre dos categorías (por ejemplo, <i>Alumnos × Materias</i> o <i>Filas × Butacas</i>), una matriz es la estructura ideal:
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">📚 1. Boletín de Notas de un Curso</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Si tenemos <b>4 alumnos</b> y cada uno rinde <b>3 trimestres</b>, en lugar de crear 4 vectores sueltos creamos una sola matriz <code>notas[4][3]</code>: cada <b>fila</b> es un alumno y cada <b>columna</b> es un trimestre.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">🎮 2. Tableros de Juegos</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Un tablero de <b>Ta-Te-Tí</b> es una matriz de <code>3x3</code>; un tablero de <b>Ajedrez o Damas</b> es una matriz de <code>8x8</code>; el mapa de la <b>Batalla Naval</b> es una cuadrícula de <code>10x10</code>.
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">🎬 3. Reservas de Cine o Teatro</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Las butacas de una sala están organizadas por <b>fila</b> y <b>número de asiento</b>. Podemos guardar un <code>0</code> si el asiento está libre y un <code>1</code> si ya está ocupado.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">🗓️ 4. Horarios y Planillas de Ventas</h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              El horario de la escuela (5 días de la semana × 6 módulos por día) o las ventas de 3 sucursales a lo largo de los 12 meses del año.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: DIFERENCIA VISUAL Y CONCEPTUAL ENTRE VECTOR Y MATRIZ -->
+      <section>
+        <h2><span class="section-num">05</span> Comparación Directa: Vector vs. Matriz</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Repasemos lado a lado el cuadro comparativo de la página 17 del apunte:
+        </p>
+
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <span class="badge badge-cyan">1 Dimensión (1D)</span>
+            <h4 style="color: #38bdf8;">Vector</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> numeros[<span class="c-num">5</span>];</div>
+            </div>
+            <p style="font-size: 0.82rem; margin: 8px 0 4px;">Representación en una sola línea:</p>
+            <div class="code-window">
+              <div class="code-body">[<span class="c-num">10</span>] [<span class="c-num">20</span>] [<span class="c-num">30</span>] [<span class="c-num">40</span>] [<span class="c-num">50</span>]</div>
+            </div>
+            <ul style="font-size: 0.82rem; margin-left: 16px; margin-top: 8px; line-height: 1.55;">
+              <li>Usa <b>un solo par de corchetes</b>.</li>
+              <li>Se accede con <b>1 índice</b>: <code>numeros[i]</code>.</li>
+              <li>Se recorre con <b>1 ciclo <code>for</code></b>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-indigo">
+            <span class="badge badge-indigo">2 Dimensiones (2D)</span>
+            <h4 style="color: #818cf8;">Matriz</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">3</span>];</div>
+            </div>
+            <p style="font-size: 0.82rem; margin: 8px 0 4px;">Representación en tabla (filas y columnas):</p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-num">10</span>  <span class="c-num">20</span>  <span class="c-num">30</span>
+<span class="c-num">40</span>  <span class="c-num">50</span>  <span class="c-num">60</span>
+<span class="c-num">70</span>  <span class="c-num">80</span>  <span class="c-num">90</span></div>
+            </div>
+            <ul style="font-size: 0.82rem; margin-left: 16px; margin-top: 8px; line-height: 1.55;">
+              <li>Usa <b>dos pares de corchetes</b>.</li>
+              <li>Se accede con <b>2 índices</b>: <code>matriz[fila][columna]</code>.</li>
+              <li>Se recorre con <b>2 ciclos <code>for</code> anidados</b>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: DECLARACIÓN DE UNA MATRIZ EN C -->
+      <section>
+        <h2><span class="section-num">06</span> ¿Cómo se Declara una Matriz en C?</h2>
+        <div class="box box-cyan" style="text-align: center; padding: 16px;">
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0 0 6px;">Sintaxis general obligatoria:</p>
+          <p style="font-size: 1.35rem; font-family: var(--font-mono); font-weight: 700; margin: 0; color: #ffffff;">
+            <span style="color: var(--syn-keyword);">tipo</span> nombre[<span style="color: var(--accent-amber);">FILAS</span>][<span style="color: var(--accent-cyan);">COLUMNAS</span>];
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">1. <code>tipo</code> y <code>nombre</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              Indica qué clase de datos guardará toda la tabla (<code>int</code>, <code>float</code>, <code>char</code>) y el nombre identificador que elegimos (ej. <code>matriz</code>, <code>notas</code>, <code>tablero</code>).
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">2. Primer Corchete: <code>[FILAS]</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              El <b>primer número</b> entre corchetes indica <b>SIEMPRE la cantidad de filas</b> (renglones horizontales) que tendrá la matriz.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">3. Segundo Corchete: <code>[COLUMNAS]</code></h4>
+            <p style="font-size: 0.82rem; margin: 0;">
+              El <b>segundo número</b> entre corchetes indica <b>SIEMPRE la cantidad de columnas</b> (verticales) que tendrá cada fila.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-emerald" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            🧠 <b>Regla para no olvidarte nunca el orden:</b> Recordá la sigla <b>"F-C"</b> (como <i>Fútbol Club</i>): primero va la <b>F</b> de <b>Fila</b> y segundo va la <b>C</b> de <b>Columna</b>: <code>matriz[Fila][Columna]</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: CÁLCULO DE POSICIONES TOTALES -->
+      <section>
+        <h2><span class="section-num">07</span> ¿Cuántos Elementos Entran en una Matriz?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Para saber cuántas casillas totales tiene una matriz, simplemente <b>multiplicamos la cantidad de filas por la cantidad de columnas</b> ($\text{Total} = \text{Filas} \times \text{Columnas}$). Veamos los dos ejemplos del apunte:
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Ejemplo 1: Matriz Cuadrada <code>3x3</code></h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">3</span>];</div>
+            </div>
+            <ul style="font-size: 0.83rem; margin-left: 16px; margin-top: 8px; line-height: 1.55;">
+              <li>Cantidad de <b>filas</b>: <code>3</code></li>
+              <li>Cantidad de <b>columnas</b>: <code>3</code></li>
+              <li>Capacidad total: $3 \times 3 = \mathbf{9}$ <b>números enteros</b>.</li>
+            </ul>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 4px 0 0;">
+              Se llama <i>matriz cuadrada</i> porque tiene la misma cantidad de filas que de columnas.
+            </p>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Ejemplo 2: Matriz Rectangular <code>3x4</code></h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">4</span>];</div>
+            </div>
+            <ul style="font-size: 0.83rem; margin-left: 16px; margin-top: 8px; line-height: 1.55;">
+              <li>Cantidad de <b>filas</b>: <code>3</code></li>
+              <li>Cantidad de <b>columnas</b>: <code>4</code></li>
+              <li>Capacidad total: $3 \times 4 = \mathbf{12}$ <b>posiciones en total</b>.</li>
+            </ul>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 4px 0 0;">
+              Se llama <i>matriz rectangular</i> porque el número de filas es distinto al de columnas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: ÍNDICES Y COORDENADAS EN BASE CERO -->
+      <section>
+        <h2><span class="section-num">08</span> Índices en Base Cero: De <code>0</code> a <code>N - 1</code></h2>
+        <div class="box box-amber">
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">¡La misma regla fundamental de los vectores!</h4>
+          <p style="font-size: 0.88rem; margin: 0;">
+            En lenguaje C, <b>tanto las filas como las columnas empiezan a contarse desde <code>0</code></b> (nunca desde 1).
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">En <code>int matriz[2][3];</code></h4>
+            <ul style="font-size: 0.84rem; margin-left: 16px; line-height: 1.6;">
+              <li>Tiene <b>2 filas</b> ➔ las filas válidas son la <b><code>0</code></b> y la <b><code>1</code></b>.<br>
+                <span style="color: #f87171;">(¡La fila 2 NO existe!)</span></li>
+              <li>Tiene <b>3 columnas</b> ➔ las columnas válidas son la <b><code>0</code></b>, la <b><code>1</code></b> y la <b><code>2</code></b>.<br>
+                <span style="color: #f87171;">(¡La columna 3 NO existe!)</span></li>
+            </ul>
           </div>
 
           <div class="box box-purple">
-            <h4 style="color: #c084fc;">Acceso por Coordenadas</h4>
-            <p style="font-size: 0.85rem;">
-              • <code>tabla[0][0]</code> es el valor <b>10</b>.<br>
-              • <code>tabla[0][2]</code> es el valor <b>30</b>.<br>
-              • <code>tabla[1][1]</code> es el valor <b>50</b>.<br>
-              • <code>tabla[1][2]</code> es el valor <b>60</b> (última celda).
+            <h4 style="color: #c084fc;">Regla General para cualquier Matriz</h4>
+            <p style="font-size: 0.84rem;">
+              Si declaramos <code>tipo m[F][C];</code>:
             </p>
-            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 6px;">
-              ¡Ambos índices empiezan siempre en 0!
-            </p>
+            <ul style="font-size: 0.84rem; margin-left: 16px; line-height: 1.6;">
+              <li>Primera casilla (arriba a la izquierda): <b><code>m[0][0]</code></b></li>
+              <li>Filas válidas: desde <b><code>0</code></b> hasta <b><code>F - 1</code></b></li>
+              <li>Columnas válidas: desde <b><code>0</code></b> hasta <b><code>C - 1</code></b></li>
+              <li>Última casilla (abajo a la derecha): <b><code>m[F - 1][C - 1]</code></b></li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: VISUALIZACIÓN EN CUADRÍCULA -->
+      <!-- SLIDE 10: MAPA VISUAL COMPLETO DE COORDENADAS -->
       <section>
-        <h2><span class="section-num">03</span> Mapa Visual de una Matriz 3x3</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Las coordenadas exactas `[fila][columna]` en una
-          cuadrícula:</p>
-
-        <div style="text-align: center;">
-          <div class="matrix-grid" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="matrix-cell">
-              10
-              <span class="coord">[0][0]</span>
-            </div>
-            <div class="matrix-cell">
-              15
-              <span class="coord">[0][1]</span>
-            </div>
-            <div class="matrix-cell">
-              20
-              <span class="coord">[0][2]</span>
-            </div>
-
-            <div class="matrix-cell">
-              25
-              <span class="coord">[1][0]</span>
-            </div>
-            <div class="matrix-cell">
-              30
-              <span class="coord">[1][1]</span>
-            </div>
-            <div class="matrix-cell">
-              35
-              <span class="coord">[1][2]</span>
-            </div>
-
-            <div class="matrix-cell">
-              40
-              <span class="coord">[2][0]</span>
-            </div>
-            <div class="matrix-cell">
-              45
-              <span class="coord">[2][1]</span>
-            </div>
-            <div class="matrix-cell">
-              50
-              <span class="coord">[2][2]</span>
-            </div>
-          </div>
-        </div>
-
-        <p style="font-size: 0.85rem; color: var(--accent-cyan); text-align: center; margin-top: 8px;">
-          El primer corchete indica qué tan abajo estás (fila). El segundo corchete indica qué tan a la derecha estás
-          (columna).
+        <h2><span class="section-num">09</span> Mapa Visual de Coordenadas <code>[fila][columna]</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Observá cómo se identifica cada casilla adentro de una matriz de 3 filas por 4 columnas (<code>int m[3][4];</code>):
         </p>
+
+        <div style="text-align: center; margin: 8px 0;">
+          <div class="matrix-grid" style="grid-template-columns: repeat(4, 96px); gap: 8px; padding: 16px;">
+            <div class="matrix-cell" style="width: 96px; height: 54px; border-color: var(--accent-cyan);">Fila 0, Col 0<span class="coord" style="color: var(--accent-cyan); font-size: 0.75rem;">m[0][0]</span></div>
+            <div class="matrix-cell" style="width: 96px; height: 54px;">Fila 0, Col 1<span class="coord" style="color: var(--accent-cyan); font-size: 0.75rem;">m[0][1]</span></div>
+            <div class="matrix-cell" style="width: 96px; height: 54px;">Fila 0, Col 2<span class="coord" style="color: var(--accent-cyan); font-size: 0.75rem;">m[0][2]</span></div>
+            <div class="matrix-cell" style="width: 96px; height: 54px;">Fila 0, Col 3<span class="coord" style="color: var(--accent-cyan); font-size: 0.75rem;">m[0][3]</span></div>
+
+            <div class="matrix-cell" style="width: 96px; height: 54px;">Fila 1, Col 0<span class="coord" style="color: var(--accent-amber); font-size: 0.75rem;">m[1][0]</span></div>
+            <div class="matrix-cell" style="width: 96px; height: 54px;">Fila 1, Col 1<span class="coord" style="color: var(--accent-amber); font-size: 0.75rem;">m[1][1]</span></div>
+            <div class="matrix-cell" style="width: 96px; height: 54px;">Fila 1, Col 2<span class="coord" style="color: var(--accent-amber); font-size: 0.75rem;">m[1][2]</span></div>
+            <div class="matrix-cell" style="width: 96px; height: 54px;">Fila 1, Col 3<span class="coord" style="color: var(--accent-amber); font-size: 0.75rem;">m[1][3]</span></div>
+
+            <div class="matrix-cell" style="width: 96px; height: 54px;">Fila 2, Col 0<span class="coord" style="color: var(--accent-emerald); font-size: 0.75rem;">m[2][0]</span></div>
+            <div class="matrix-cell" style="width: 96px; height: 54px;">Fila 2, Col 1<span class="coord" style="color: var(--accent-emerald); font-size: 0.75rem;">m[2][1]</span></div>
+            <div class="matrix-cell" style="width: 96px; height: 54px;">Fila 2, Col 2<span class="coord" style="color: var(--accent-emerald); font-size: 0.75rem;">m[2][2]</span></div>
+            <div class="matrix-cell" style="width: 96px; height: 54px; border-color: var(--accent-emerald);">Fila 2, Col 3<span class="coord" style="color: var(--accent-emerald); font-size: 0.75rem;">m[2][3]</span></div>
+          </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 6px;">
+          <p style="margin: 0; font-size: 0.84rem; text-align: center;">
+            🔍 Mirá cualquier fila horizontal: el <b>primer número (fila) se mantiene igual</b> y el segundo va subiendo (<code>0, 1, 2, 3</code>). Mirá cualquier columna vertical: el <b>segundo número (columna) se mantiene fijo</b>.
+          </p>
+        </div>
       </section>
 
-      <!-- SLIDE 5: ROW-MAJOR ORDER EN RAM -->
+      <!-- SLIDE 11: INICIALIZACIÓN DIRECTA DE UNA MATRIZ -->
       <section>
-        <h2><span class="section-num">04</span> La Matriz en la Memoria RAM Física</h2>
+        <h2><span class="section-num">10</span> Inicializar una Matriz al Crearla</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Tal como muestra la página 17 del apunte, podemos crear una matriz ya cargada con valores iniciales usando <b>llaves internas para cada fila</b> separadas por una coma:
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">inicializar_matriz.c</span>
+              <span class="code-badge">2 Filas × 3 Columnas</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> matriz[<span class="c-num">2</span>][<span class="c-num">3</span>] =
+{
+    {<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>},   <span class="c-cmt">// Valores de la Fila 0</span>
+    {<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>}    <span class="c-cmt">// Valores de la Fila 1</span>
+};</div>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿Cómo se lee esta estructura de llaves?</h4>
+            <ul style="font-size: 0.83rem; margin-left: 16px; line-height: 1.58;">
+              <li>La llave grande exterior <code>{ ... };</code> envuelve a toda la matriz y termina con punto y coma.</li>
+              <li>La primera llave interna <code>{1, 2, 3}</code> llena las 3 columnas de la <b>Fila 0</b>.</li>
+              <li>Después va una <b>coma <code>,</code></b> para separar una fila de la siguiente.</li>
+              <li>La segunda llave interna <code>{4, 5, 6}</code> llena las 3 columnas de la <b>Fila 1</b>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: REPRESENTACIÓN VISUAL DE MATRIZ[2][3] Y ATAJO {0} -->
+      <section>
+        <h2><span class="section-num">11</span> Vista en Tabla de <code>matriz[2][3]</code> y Limpieza con <code>{0}</code></h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Tabla generada en memoria (pág. 18 del Apunte)</h4>
+            <p style="font-size: 0.82rem;">
+              El código de la diapositiva anterior construye exactamente esta tabla de 2 filas y 3 columnas:
+            </p>
+            <table class="trace-table" style="text-align: center; margin-top: 10px;">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Fila \ Col</th>
+                  <th style="text-align: center;">Columna 0</th>
+                  <th style="text-align: center;">Columna 1</th>
+                  <th style="text-align: center;">Columna 2</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Fila 0</b></td>
+                  <td><code>1</code> <span style="color: var(--text-dim); font-size: 0.72rem;">[0][0]</span></td>
+                  <td><code>2</code> <span style="color: var(--text-dim); font-size: 0.72rem;">[0][1]</span></td>
+                  <td><code>3</code> <span style="color: var(--text-dim); font-size: 0.72rem;">[0][2]</span></td>
+                </tr>
+                <tr>
+                  <td><b>Fila 1</b></td>
+                  <td><code>4</code> <span style="color: var(--text-dim); font-size: 0.72rem;">[1][0]</span></td>
+                  <td><code>5</code> <span style="color: var(--text-dim); font-size: 0.72rem;">[1][1]</span></td>
+                  <td><code>6</code> <span style="color: var(--text-dim); font-size: 0.72rem;">[1][2]</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">💡 Tip: ¿Cómo poner toda una matriz en cero?</h4>
+            <p style="font-size: 0.82rem;">
+              Si declarás una matriz sin asignarle nada (<code>int sala[3][4];</code>), sus casillas arrancan con <b>basura de memoria</b>. Si querés que todas las casillas arranquen limpias en <code>0</code>:
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-cmt">// Rellena las 12 casillas automáticamente con 0:</span>
+<span class="c-kw">int</span> sala[<span class="c-num">3</span>][<span class="c-num">4</span>] = {<span class="c-num">0</span>};</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fde68a; margin: 6px 0 0;">
+              Muy útil para inicializar tableros vacíos o salas de cine donde al principio todos los asientos están libres (<code>0</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: ACCEDER A ELEMENTOS DE UNA MATRIZ -->
+      <section>
+        <h2><span class="section-num">12</span> Acceder a los Elementos de una Matriz</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Para leer o mostrar un valor puntual de la matriz escribimos su nombre seguido de la fila y la columna: <b><code>matriz[fila][columna]</code></b>. Veamos los tres ejemplos exactos de la página 18 del apunte sobre nuestra <code>matriz[2][3]</code>:
+        </p>
+
+        <div class="grid-3" style="margin-top: 10px;">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Ejemplo 1: <code>matriz[0][0]</code></h4>
+            <p style="font-size: 0.82rem;">
+              Busca el elemento que está en la <b>Fila 0</b> y <b>Columna 0</b> (esquina superior izquierda).
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, matriz[<span class="c-num">0</span>][<span class="c-num">0</span>]);</div>
+            </div>
+            <p style="font-size: 0.86rem; color: var(--accent-emerald); font-weight: 700; margin: 6px 0 0;">
+              ➔ Resultado: 1
+            </p>
+          </div>
+
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">Ejemplo 2: <code>matriz[0][2]</code></h4>
+            <p style="font-size: 0.82rem;">
+              Busca el elemento que está en la <b>Fila 0</b> y <b>Columna 2</b> (final de la primera fila).
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, matriz[<span class="c-num">0</span>][<span class="c-num">2</span>]);</div>
+            </div>
+            <p style="font-size: 0.86rem; color: var(--accent-emerald); font-weight: 700; margin: 6px 0 0;">
+              ➔ Resultado: 3
+            </p>
+          </div>
+
+          <div class="box box-purple">
+            <h4 style="color: #c084fc;">Ejemplo 3: <code>matriz[1][1]</code></h4>
+            <p style="font-size: 0.82rem;">
+              Busca el elemento que está en la <b>Fila 1</b> y <b>Columna 1</b> (al medio de la segunda fila).
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"%d"</span>, matriz[<span class="c-num">1</span>][<span class="c-num">1</span>]);</div>
+            </div>
+            <p style="font-size: 0.86rem; color: var(--accent-emerald); font-weight: 700; margin: 6px 0 0;">
+              ➔ Resultado: 5
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: MODIFICAR ELEMENTOS DE UNA MATRIZ -->
+      <section>
+        <h2><span class="section-num">13</span> Modificar un Elemento de la Matriz</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          También podemos cambiar el valor guardado en cualquier casilla asignándole un número nuevo con el signo <code>=</code>, tal como muestra el apunte:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">modificar_celda.c</span>
+            <span class="code-badge">Escritura en [1][1]</span>
+          </div>
+          <div class="code-body">matriz[<span class="c-num">1</span>][<span class="c-num">1</span>] = <span class="c-num">100</span>;   <span class="c-cmt">// Reemplaza el valor de la Fila 1, Columna 1 por un 100</span></div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 12px;">
+          <div class="box box-indigo" style="text-align: center;">
+            <h4 style="color: #818cf8;">Antes de ejecutar la línea</h4>
+            <div class="matrix-grid" style="grid-template-columns: repeat(3, 68px); margin: 8px auto;">
+              <div class="matrix-cell" style="width: 68px;">1<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell" style="width: 68px;">2<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell" style="width: 68px;">3<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell" style="width: 68px;">4<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-sec" style="width: 68px;">5<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell" style="width: 68px;">6<span class="coord">[1][2]</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">En <code>[1][1]</code> estaba el valor <code>5</code>.</p>
+          </div>
+
+          <div class="box box-emerald" style="text-align: center;">
+            <h4 style="color: #34d399;">Después de <code>matriz[1][1] = 100;</code></h4>
+            <div class="matrix-grid" style="grid-template-columns: repeat(3, 68px); margin: 8px auto;">
+              <div class="matrix-cell" style="width: 68px;">1<span class="coord">[0][0]</span></div>
+              <div class="matrix-cell" style="width: 68px;">2<span class="coord">[0][1]</span></div>
+              <div class="matrix-cell" style="width: 68px;">3<span class="coord">[0][2]</span></div>
+              <div class="matrix-cell" style="width: 68px;">4<span class="coord">[1][0]</span></div>
+              <div class="matrix-cell diag-main" style="width: 68px;">100<span class="coord">[1][1]</span></div>
+              <div class="matrix-cell" style="width: 68px;">6<span class="coord">[1][2]</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 0;">Solo cambió <code>[1][1]</code>; las otras 5 casillas quedan intactas.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: CÓMO SE GUARDA EN LA MEMORIA RAM (ROW-MAJOR ORDER) -->
+      <section>
+        <h2><span class="section-num">14</span> ¿Cómo Guarda C la Matriz en la Memoria RAM?</h2>
         <div class="box box-amber">
-          <h4 style="color: #fbbf24; margin-bottom: 4px;">La Realidad del Hardware: La RAM no tiene 2D</h4>
-          <p style="font-size: 0.88rem; margin: 0;">
-            Físicamente, la memoria RAM es una sola tira recta de celdas unidimensionales. ¿Cómo guarda C una tabla de
-            dos dimensiones? Mediante el método <b>Row-Major Order</b> (orden por filas):
+          <h4 style="color: #fbbf24; margin-bottom: 4px;">Un secreto del hardware: la memoria RAM es una tira recta</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Aunque nosotros dibujamos la matriz como un cuadrado de filas y columnas, los chips de memoria RAM son una sola fila larga de casilleros. C guarda las matrices <b>fila por fila, una detrás de la otra</b> (técnica llamada <i>Row-Major Order</i>):
           </p>
         </div>
 
-        <div class="step-list" style="margin-top: 14px;">
-          <div class="step-item">
-            <span class="step-num">1</span>
-            <div class="step-content">
-              Se guarda en RAM primero toda la <b>Fila 0</b>: <code>tabla[0][0]</code>, <code>tabla[0][1]</code>,
-              <code>tabla[0][2]</code>.
-            </div>
-          </div>
-          <div class="step-item">
-            <span class="step-num">2</span>
-            <div class="step-content">
-              Inmediatamente después, pegadita, se guarda toda la <b>Fila 1</b>: <code>tabla[1][0]</code>,
-              <code>tabla[1][1]</code>, <code>tabla[1][2]</code>.
-            </div>
-          </div>
-        </div>
-
-        <p style="font-size: 0.84rem; color: var(--accent-emerald); margin-top: 10px;">
-          ✓ Por esta razón, el compilador necesita saber obligatoriamente cuántas columnas hay, para calcular cuánto
-          debe saltar en la RAM para pasar a la siguiente fila.
-        </p>
-      </section>
-
-      <!-- SLIDE 6: RECORRIDO CON BUCLES ANIDADOS -->
-      <section>
-        <h2><span class="section-num">05</span> El Recorrido Canónico con Bucles Anidados</h2>
-        <div class="code-window">
-          <div class="code-header">
-            <span class="code-title">imprimir_matriz.c</span>
-            <span class="code-badge">Doble for</span>
-          </div>
-          <div class="code-body"><span class="c-pre">#define</span> FILAS <span class="c-num">3</span>
-            <span class="c-pre">#define</span> COLS <span class="c-num">3</span>
-
-            <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; FILAS;
-            i++) <span class="c-cmt">// Bucle exterior: maneja las filas</span>
-            {
-            <span class="c-kw">for</span> (<span class="c-kw">int</span> j = <span class="c-num">0</span>; j &lt; COLS;
-            j++) <span class="c-cmt">// Bucle interior: maneja las columnas</span>
-            {
-            <span class="c-fn">printf</span>(<span class="c-str">"%4d"</span>, matriz[i][j]); <span class="c-cmt">//
-              Imprime cada celda con ancho de 4</span>
-            }
-            <span class="c-fn">printf</span>(<span class="c-str">"\n"</span>); <span class="c-cmt">// ¡Salto de línea al
-              terminar cada fila!</span>
-            }
+        <div style="text-align: center; margin: 14px 0;">
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">
+            Así se ubican las 6 casillas de <code>matriz[2][3]</code> contiguas en la memoria RAM:
+          </p>
+          <div class="array-container">
+            <div class="array-cell-wrapper"><span class="array-index" style="color: var(--accent-cyan);">Fila 0 • [0][0]</span><div class="array-cell" style="border-color: var(--accent-cyan);">1</div></div>
+            <div class="array-cell-wrapper"><span class="array-index" style="color: var(--accent-cyan);">Fila 0 • [0][1]</span><div class="array-cell" style="border-color: var(--accent-cyan);">2</div></div>
+            <div class="array-cell-wrapper"><span class="array-index" style="color: var(--accent-cyan);">Fila 0 • [0][2]</span><div class="array-cell" style="border-color: var(--accent-cyan);">3</div></div>
+            <div class="array-cell-wrapper"><span class="array-index" style="color: var(--accent-emerald);">Fila 1 • [1][0]</span><div class="array-cell" style="border-color: var(--accent-emerald);">4</div></div>
+            <div class="array-cell-wrapper"><span class="array-index" style="color: var(--accent-emerald);">Fila 1 • [1][1]</span><div class="array-cell" style="border-color: var(--accent-emerald);">5</div></div>
+            <div class="array-cell-wrapper"><span class="array-index" style="color: var(--accent-emerald);">Fila 1 • [1][2]</span><div class="array-cell" style="border-color: var(--accent-emerald);">6</div></div>
           </div>
         </div>
 
         <div class="box box-cyan">
           <p style="margin: 0; font-size: 0.85rem;">
-            💡 <b>Cómo piensa la CPU:</b> Con <code>i = 0</code>, el bucle <code>j</code> da todas sus vueltas (0, 1, 2)
-            e imprime la fila 0 completa. Termina el bucle de <code>j</code>, se imprime el salto de línea
-            <code>\n</code>, y <code>i</code> pasa a valer 1 para hacer lo mismo con la siguiente fila.
+            💡 <b>¿Por qué nos importa esto?</b> Porque el orden natural y más veloz para recorrer una matriz en C es exactamente ese: <b>terminar primero toda la Fila 0 de izquierda a derecha, y recién después bajar a la Fila 1</b>.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 7: SUMA TOTAL Y PROMEDIO -->
+      <!-- SLIDE 16: RECORRER UNA MATRIZ: ¿POR QUÉ DOS CICLOS FOR? -->
       <section>
-        <h2><span class="section-num">06</span> Suma Total de los Elementos</h2>
+        <h2><span class="section-num">15</span> Recorrer una Matriz: ¿Por Qué Dos Ciclos <code>for</code>?</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">
+          Como explica la página 18 del apunte: <i>"Para recorrer un vector alcanzaba con un solo <code>for</code>, pero una matriz tiene <b>filas y columnas</b>, por lo tanto necesitamos <b>dos ciclos <code>for</code> anidados</b>."</i>
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-amber">
+            <h4 style="color: #fbbf24;">1. El Primer <code>for</code> (Externo) ➔ Recorre las FILAS</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">2</span>; fila++)</div>
+            </div>
+            <p style="font-size: 0.83rem; margin-top: 8px; margin-bottom: 0;">
+              Elige en qué renglón horizontal estamos parados ahora. Primero se para en la <code>fila = 0</code>, espera a que se recorran todas sus columnas, y luego baja a la <code>fila = 1</code>.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">2. El Segundo <code>for</code> (Interno) ➔ Recorre las COLUMNAS</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> columna = <span class="c-num">0</span>; columna &lt; <span class="c-num">3</span>; columna++)</div>
+            </div>
+            <p style="font-size: 0.83rem; margin-top: 8px; margin-bottom: 0;">
+              Está adentro del primer <code>for</code>. Para la fila actual, camina de izquierda a derecha por todas sus columnas: <code>columna = 0</code>, luego <code>columna = 1</code> y luego <code>columna = 2</code>.
+            </p>
+          </div>
+        </div>
+
+        <div class="box box-indigo" style="margin-top: 10px;">
+          <p style="margin: 0; font-size: 0.86rem;">
+            📖 <b>Analogía de lectura:</b> Es exactamente igual a cómo leés un libro: tus ojos eligen el <b>renglón 0</b> y leen palabra por palabra de izquierda a derecha (columnas); cuando terminás el renglón, bajás al <b>renglón 1</b> y volvés a empezar desde la izquierda.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: CÓDIGO DEL APUNTE PARA MOSTRAR UNA MATRIZ -->
+      <section>
+        <h2><span class="section-num">16</span> Código del Apunte para Mostrar una Matriz</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Veamos el programa completo de las páginas 18 y 19 del apunte para mostrar nuestra matriz de 2 filas y 3 columnas en pantalla:
+        </p>
+
+        <div class="grid-2-1">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">mostrar_matriz_apunte.c</span>
+              <span class="code-badge">Recorrido 2D</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> matriz[<span class="c-num">2</span>][<span class="c-num">3</span>] =
+    {
+        {<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>},
+        {<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>}
+    };
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">2</span>; fila++)
+    {
+        <span class="c-kw">for</span>(<span class="c-kw">int</span> columna = <span class="c-num">0</span>; columna &lt; <span class="c-num">3</span>; columna++)
+        {
+            <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, matriz[fila][columna]);
+        }
+        <span class="c-fn">printf</span>(<span class="c-str">"\n"</span>);
+    }
+
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header"><span>Consola</span><span>stdout</span></div>
+              <div class="terminal-body">1 2 3 
+4 5 6 </div>
+            </div>
+
+            <div class="box box-emerald" style="margin-top: 10px;">
+              <h4 style="color: #34d399;">¿Qué logra este código?</h4>
+              <p style="font-size: 0.8rem; margin: 0;">
+                Imprime los 3 números de la Fila 0 separados por espacio, hace un salto de línea (<code>\n</code>) y abajo imprime los 3 números de la Fila 1.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 18: ¿POR QUÉ ES INDISPENSABLE EL printf("\n") AFUERA DEL SEGUNDO FOR? -->
+      <section>
+        <h2><span class="section-num">17</span> El Rol Clave del <code>printf("\n");</code> Entre las Llaves</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Muchos alumnos preguntan qué pasa si nos olvidamos del <code>printf("\n");</code> o si lo ponemos en el lugar equivocado. Compará los 3 casos:
+        </p>
+
+        <div class="grid-3">
+          <div class="correct-card">
+            <div class="correct-title">✅ 1. Afuera del 2do <code>for</code> (Correcto)</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> f = <span class="c-num">0</span>; f &lt; <span class="c-num">2</span>; f++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> c = <span class="c-num">0</span>; c &lt; <span class="c-num">3</span>; c++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, m[f][c]);
+    }
+    <span class="c-fn">printf</span>(<span class="c-str">"\n"</span>);
+}</div>
+            </div>
+            <div class="terminal-window">
+              <div class="terminal-body" style="font-size: 0.88rem;">1 2 3 
+4 5 6 </div>
+            </div>
+            <p style="font-size: 0.76rem; color: #a7f3d0; margin: 0;">Salta de renglón solo al terminar cada fila completa.</p>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">❌ 2. Si nos olvidamos el <code>\n</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> f = <span class="c-num">0</span>; f &lt; <span class="c-num">2</span>; f++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> c = <span class="c-num">0</span>; c &lt; <span class="c-num">3</span>; c++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, m[f][c]);
+    }
+    <span class="c-cmt">// Falta printf("\n");</span>
+}</div>
+            </div>
+            <div class="terminal-window">
+              <div class="terminal-body" style="font-size: 0.88rem;">1 2 3 4 5 6 </div>
+            </div>
+            <p style="font-size: 0.76rem; color: #fecaca; margin: 0;">Sale todo en una sola tira como si fuera un vector.</p>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">❌ 3. Si ponemos <code>\n</code> adentro</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> f = <span class="c-num">0</span>; f &lt; <span class="c-num">2</span>; f++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> c = <span class="c-num">0</span>; c &lt; <span class="c-num">3</span>; c++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d\n"</span>, m[f][c]);
+    }
+}</div>
+            </div>
+            <div class="terminal-window">
+              <div class="terminal-body" style="font-size: 0.82rem;">1
+2
+3...</div>
+            </div>
+            <p style="font-size: 0.76rem; color: #fecaca; margin: 0;">Salta de renglón en cada número (sale una columna vertical).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19: SIMULACIÓN PASO A PASO DEL DOBLE FOR - PRIMERA VUELTA (FILA = 0) -->
+      <section>
+        <h2><span class="section-num">18</span> Seguimiento Paso a Paso: Vuelta 1 (<code>fila = 0</code>)</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Hagamos el seguimiento detallado de la página 19 del apunte para ver cómo trabaja la computadora cuando entra al doble <code>for</code>:
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <b>Entra al primer <code>for</code> con <code>fila = 0</code>:</b> Como <code>0 &lt; 2</code> es verdadero, se mete al bloque y arranca el segundo <code>for</code> desde <code>columna = 0</code>.
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <b><code>fila = 0</code>, <code>columna = 0</code>:</b> Ejecuta <code>printf("%d ", matriz[0][0]);</code> ➔ imprime en pantalla el <b><code>1 </code></b>.
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <b><code>fila = 0</code>, <code>columna = 1</code>:</b> <code>fila</code> sigue quieta en 0, pero <code>columna</code> sube a 1. Ejecuta <code>printf("%d ", matriz[0][1]);</code> ➔ imprime al lado el <b><code>2 </code></b>.
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <b><code>fila = 0</code>, <code>columna = 2</code>:</b> Ejecuta <code>printf("%d ", matriz[0][2]);</code> ➔ imprime al lado el <b><code>3 </code></b>.
+            </div>
+          </div>
+
+          <div class="step-item">
+            <span class="step-num">5</span>
+            <div class="step-content">
+              <b>Termina el segundo <code>for</code>:</b> <code>columna</code> llega a 3 (<code>3 &lt; 3</code> es falso). Sale del ciclo interno y ejecuta <b><code>printf("\n");</code></b> bajando el cursor al renglón siguiente.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 20: SIMULACIÓN PASO A PASO - SEGUNDA VUELTA (FILA = 1) Y TABLA DE TRAZA -->
+      <section>
+        <h2><span class="section-num">19</span> Seguimiento: Vuelta 2 (<code>fila = 1</code>) y Traza Completa</h2>
+        <div class="grid-2">
+          <div>
+            <p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 0;">
+              Después del salto de línea, el primer <code>for</code> hace <code>fila++</code> y pasa a valer <b><code>fila = 1</code></b>:
+            </p>
+            <ul style="font-size: 0.82rem; margin-left: 16px; line-height: 1.6;">
+              <li>El ciclo interno de <code>columna</code> <b>vuelve a empezar desde <code>0</code></b>.</li>
+              <li>Con <code>columna = 0</code>: muestra <code>matriz[1][0]</code> ➔ <b><code>4 </code></b></li>
+              <li>Con <code>columna = 1</code>: muestra <code>matriz[1][1]</code> ➔ <b><code>5 </code></b></li>
+              <li>Con <code>columna = 2</code>: muestra <code>matriz[1][2]</code> ➔ <b><code>6 </code></b></li>
+              <li>Termina el segundo <code>for</code> y hace el segundo <code>printf("\n");</code>.</li>
+              <li>Luego <code>fila</code> sube a <code>2</code>, y como <code>2 &lt; 2</code> es falso, termina todo.</li>
+            </ul>
+          </div>
+
+          <div>
+            <table class="trace-table" style="margin: 0; font-size: 0.8rem;">
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th><code>fila</code></th>
+                  <th><code>columna</code></th>
+                  <th>Casilla leída</th>
+                  <th>Imprime</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><code>0</code></td>
+                  <td><code>0</code></td>
+                  <td><code>matriz[0][0]</code></td>
+                  <td><b><code>1 </code></b></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><code>0</code></td>
+                  <td><code>1</code></td>
+                  <td><code>matriz[0][1]</code></td>
+                  <td><b><code>2 </code></b></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><code>0</code></td>
+                  <td><code>2</code></td>
+                  <td><code>matriz[0][2]</code></td>
+                  <td><b><code>3 </code></b> + <code>\n</code></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><code>1</code></td>
+                  <td><code>0</code></td>
+                  <td><code>matriz[1][0]</code></td>
+                  <td><b><code>4 </code></b></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><code>1</code></td>
+                  <td><code>1</code></td>
+                  <td><code>matriz[1][1]</code></td>
+                  <td><b><code>5 </code></b></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><code>1</code></td>
+                  <td><code>2</code></td>
+                  <td><code>matriz[1][2]</code></td>
+                  <td><b><code>6 </code></b> + <code>\n</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: CARGAR UNA MATRIZ POR TECLADO CON SCANF -->
+      <section>
+        <h2><span class="section-num">20</span> Cargar una Matriz por Teclado con <code>scanf</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          En la página 19 del apunte vemos cómo pedirle al usuario que ingrese por teclado todos los números de una matriz usando el mismo doble ciclo <code>for</code>:
+        </p>
+
         <div class="code-window">
           <div class="code-header">
-            <span class="code-title">suma_matriz.c</span>
-            <span class="code-badge">Acumulador 2D</span>
+            <span class="code-title">cargar_matriz_apunte.c</span>
+            <span class="code-badge">Lectura con scanf</span>
           </div>
-          <div class="code-body"><span class="c-kw">int</span> sumaTotal = <span class="c-num">0</span>;
+          <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
 
-            <span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; FILAS;
-            i++)
-            {
-            <span class="c-kw">for</span> (<span class="c-kw">int</span> j = <span class="c-num">0</span>; j &lt; COLS;
-            j++)
-            {
-            sumaTotal += matriz[i][j];
-            }
-            }
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> matriz[<span class="c-num">2</span>][<span class="c-num">3</span>];
 
-            <span class="c-kw">float</span> promedio = (<span class="c-kw">float</span>)sumaTotal / (FILAS * COLS);
-            <span class="c-fn">printf</span>(<span class="c-str">"Total: %d | Promedio general: %.2f\n"</span>,
-            sumaTotal, promedio);
-          </div>
-        </div>
-      </section>
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">2</span>; fila++)
+    {
+        <span class="c-kw">for</span>(<span class="c-kw">int</span> columna = <span class="c-num">0</span>; columna &lt; <span class="c-num">3</span>; columna++)
+        {
+            <span class="c-fn">printf</span>(<span class="c-str">"Ingrese un numero: "</span>);
+            <span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;matriz[fila][columna]);
+        }
+    }
 
-      <!-- SLIDE 8: SUMA POR FILAS -->
-      <section>
-        <h2><span class="section-num">07</span> Procesamiento por Filas (Ej: Puntaje por Alumno)</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Si cada fila representa un alumno y cada columna una
-          materia:</p>
-
-        <div class="code-window">
-          <div class="code-header"><span class="code-title">suma_por_filas.c</span></div>
-          <div class="code-body"><span class="c-kw">for</span> (<span class="c-kw">int</span> i = <span
-              class="c-num">0</span>; i &lt; FILAS; i++)
-            {
-            <span class="c-kw">int</span> sumaFila = <span class="c-num">0</span>; <span class="c-cmt">// ¡Se resetea a
-              cero para cada nuevo alumno!</span>
-
-            <span class="c-kw">for</span> (<span class="c-kw">int</span> j = <span class="c-num">0</span>; j &lt; COLS;
-            j++)
-            {
-            sumaFila += notas[i][j];
-            }
-
-            <span class="c-fn">printf</span>(<span class="c-str">"Total del alumno [%d]: %d\n"</span>, i, sumaFila);
-            }
-          </div>
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
         </div>
 
-        <div class="box box-amber">
+        <div class="box box-amber" style="margin-top: 10px;">
           <p style="margin: 0; font-size: 0.85rem;">
-            ⚠️ <b>Detalle vital:</b> La variable <code>sumaFila = 0;</code> debe ubicarse <b>adentro del bucle
-              <code>i</code></b>, para que al pasar al alumno siguiente su acumulador vuelva a arrancar desde cero.
+            ⚠️ <b>¡No te olvides el símbolo ampersand (<code>&amp;</code>)!</b> En <code>scanf("%d", &amp;matriz[fila][columna]);</code> el <code>&amp;</code> adelante del nombre de la matriz es obligatorio para indicarle a C en qué casillero de la memoria guardar el número.
           </p>
         </div>
       </section>
 
-      <!-- SLIDE 9: AUTOEVALUACIÓN Y NAVEGACIÓN -->
+      <!-- SLIDE 22: SEGUIMIENTO DEL ORDEN DE CARGA Y MENSAJE CON COORDENADAS -->
       <section>
-        <h2><span class="section-num">08</span> Resumen de la Unidad y Checklist</h2>
+        <h2><span class="section-num">21</span> ¿En Qué Orden se Cargan los Datos con <code>scanf</code>?</h2>
+        <div class="grid-2">
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Orden de llenado (Fila por Fila)</h4>
+            <p style="font-size: 0.82rem;">
+              Como el primer <code>for</code> es de <code>fila</code> y el segundo de <code>columna</code>, los 6 números que escribe el usuario se guardan en este orden exacto:
+            </p>
+            <ol style="font-size: 0.8rem; margin-left: 18px; line-height: 1.55;">
+              <li>1er número ingresado ➔ va a <b><code>matriz[0][0]</code></b></li>
+              <li>2do número ingresado ➔ va a <b><code>matriz[0][1]</code></b></li>
+              <li>3er número ingresado ➔ va a <b><code>matriz[0][2]</code></b> <i>(fin Fila 0)</i></li>
+              <li>4to número ingresado ➔ va a <b><code>matriz[1][0]</code></b></li>
+              <li>5to número ingresado ➔ va a <b><code>matriz[1][1]</code></b></li>
+              <li>6to número ingresado ➔ va a <b><code>matriz[1][2]</code></b> <i>(fin Fila 1)</i></li>
+            </ol>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">✨ Mejora Pro: Avisarle al usuario qué casilla carga</h4>
+            <p style="font-size: 0.82rem;">
+              Podemos mostrar los valores de <code>fila</code> y <code>columna</code> adentro del <code>printf</code> para que el usuario sepa qué coordenada está completando:
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-fn">printf</span>(<span class="c-str">"Ingrese valor para [%d][%d]: "</span>, fila, columna);
+<span class="c-fn">scanf</span>(<span class="c-str">"%d"</span>, &amp;matriz[fila][columna]);</div>
+            </div>
+            <div class="terminal-window">
+              <div class="terminal-body" style="font-size: 0.82rem;">Ingrese valor para [0][0]: <span class="terminal-user-input">10</span>
+Ingrese valor para [0][1]: <span class="terminal-user-input">25</span>
+Ingrese valor para [0][2]: <span class="terminal-user-input">8</span>...</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: EJEMPLO DEL APUNTE (PÁG. 20): BUSCAR EL MAYOR EN UNA MATRIZ -->
+      <section>
+        <h2><span class="section-num">22</span> Buscar el Mayor Elemento en una Matriz (Apunte pág. 20)</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          La idea es idéntica a cuando buscábamos el mayor en un vector: <b>tomamos el primer elemento <code>matriz[0][0]</code> como referencia inicial</b> y luego recorremos toda la matriz comparando cada casilla contra <code>mayor</code>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">buscar_mayor_matriz.c</span>
+            <span class="code-badge">Algoritmo del Apunte (Pág. 20)</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> mayor = matriz[<span class="c-num">0</span>][<span class="c-num">0</span>];   <span class="c-cmt">// Asumimos al principio que el primero es el mayor</span>
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">2</span>; fila++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> columna = <span class="c-num">0</span>; columna &lt; <span class="c-num">3</span>; columna++)
+    {
+        <span class="c-kw">if</span>(matriz[fila][columna] &gt; mayor)
+        {
+            mayor = matriz[fila][columna];   <span class="c-cmt">// Actualizamos el récord</span>
+        }
+    }
+}
+
+<span class="c-fn">printf</span>(<span class="c-str">"El numero mayor de la matriz es: %d\n"</span>, mayor);</div>
+        </div>
+
+        <div class="box box-cyan" style="margin-top: 8px;">
+          <p style="margin: 0; font-size: 0.84rem;">
+            💡 <b>¿Y si quisiéramos buscar el MENOR de toda la matriz?</b> Igual que en vectores: llamamos a la variable <code>menor = matriz[0][0];</code> y cambiamos el signo <code>&gt;</code> por <code>&lt;</code> en el <code>if</code>: <code>if(matriz[fila][columna] &lt; menor)</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: SIMULACIÓN DE BÚSQUEDA DEL MAYOR + GUARDAR COORDENADAS -->
+      <section>
+        <h2><span class="section-num">23</span> Traza del Mayor y Cómo Guardar su Posición <code>[fila][col]</code></h2>
         <div class="grid-2">
           <div class="box box-indigo">
-            <h4 style="color: #818cf8;">Puntos Clave</h4>
-            <ul style="font-size: 0.85rem; line-height: 1.6; margin-left: 18px;">
-              <li><b>Matriz:</b> Arreglo 2D con filas y columnas (<code>[i][j]</code>).</li>
-              <li><b>Dimensiones:</b> <code>[0 a FILAS-1]</code> y <code>[0 a COLS-1]</code>.</li>
-              <li><b>Row-Major:</b> Filas contiguas una tras otra en RAM.</li>
-              <li><b>Recorrido:</b> Doble bucle anidado (<code>i</code> para filas, <code>j</code> para cols).</li>
-              <li><b>Impresión:</b> Usar <code>\n</code> al terminar cada fila exterior.</li>
+            <h4 style="color: #818cf8;">Seguimiento sobre <code>{{14, 92, 30}, {55, 99, 12}}</code></h4>
+            <ul style="font-size: 0.8rem; margin-left: 16px; line-height: 1.55;">
+              <li><b>Inicio:</b> <code>mayor = matriz[0][0]</code> ➔ arranca en <b><code>14</code></b>.</li>
+              <li><code>[0][0] = 14</code>: ¿<code>14 &gt; 14</code>? No. Sigue <code>14</code>.</li>
+              <li><code>[0][1] = 92</code>: ¿<code>92 &gt; 14</code>? <b>SÍ</b> ➔ <code>mayor</code> pasa a ser <b><code>92</code></b>.</li>
+              <li><code>[0][2] = 30</code>: ¿<code>30 &gt; 92</code>? No. Sigue <code>92</code>.</li>
+              <li><code>[1][0] = 55</code>: ¿<code>55 &gt; 92</code>? No. Sigue <code>92</code>.</li>
+              <li><code>[1][1] = 99</code>: ¿<code>99 &gt; 92</code>? <b>SÍ</b> ➔ <code>mayor</code> pasa a ser <b><code>99</code></b>.</li>
+              <li><code>[1][2] = 12</code>: ¿<code>12 &gt; 99</code>? No. Resultado final: <b><code>99</code></b>.</li>
+            </ul>
+          </div>
+
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">¿En qué fila y columna estaba el mayor?</h4>
+            <p style="font-size: 0.8rem;">
+              Si además nos piden informar en qué casillero apareció el máximo, guardamos <code>fila</code> y <code>columna</code> adentro del mismo <code>if</code>:
+            </p>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> mayor = matriz[<span class="c-num">0</span>][<span class="c-num">0</span>];
+<span class="c-kw">int</span> filaMax = <span class="c-num">0</span>, colMax = <span class="c-num">0</span>;
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">2</span>; fila++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> col = <span class="c-num">0</span>; col &lt; <span class="c-num">3</span>; col++)
+    {
+        <span class="c-kw">if</span>(matriz[fila][col] &gt; mayor)
+        {
+            mayor = matriz[fila][col];
+            filaMax = fila;
+            colMax = col;
+        }
+    }
+}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: EJEMPLO PROGRESIVO NIVEL 2: SUMAR TODOS LOS ELEMENTOS Y PROMEDIO -->
+      <section>
+        <h2><span class="section-num">24</span> Ejemplo Nivel 2: Suma Total y Promedio de una Matriz</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Para sumar todos los números de una matriz usamos una variable acumuladora <code>int suma = 0;</code> inicializada en cero antes del doble <code>for</code>:
+        </p>
+
+        <div class="grid-2-1">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">suma_y_promedio_matriz.c</span>
+              <span class="code-badge">Acumulador Global</span>
+            </div>
+            <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> matriz[<span class="c-num">2</span>][<span class="c-num">3</span>] =
+    {
+        {<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>},
+        {<span class="c-num">40</span>, <span class="c-num">50</span>, <span class="c-num">60</span>}
+    };
+    <span class="c-kw">int</span> suma = <span class="c-num">0</span>;
+    <span class="c-kw">float</span> promedio;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">2</span>; fila++)
+    {
+        <span class="c-kw">for</span>(<span class="c-kw">int</span> columna = <span class="c-num">0</span>; columna &lt; <span class="c-num">3</span>; columna++)
+        {
+            suma = suma + matriz[fila][columna];
+        }
+    }
+
+    promedio = (<span class="c-kw">float</span>)suma / <span class="c-num">6</span>;   <span class="c-cmt">// 2 filas * 3 columnas = 6 elementos</span>
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Suma total: %d\n"</span>, suma);
+    <span class="c-fn">printf</span>(<span class="c-str">"Promedio: %.2f\n"</span>, promedio);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header"><span>Consola</span><span>stdout</span></div>
+              <div class="terminal-body">Suma total: 210
+Promedio: 35.00</div>
+            </div>
+            <div class="box box-amber" style="margin-top: 8px;">
+              <h4 style="color: #fbbf24;">División del promedio</h4>
+              <p style="font-size: 0.8rem; margin: 0;">
+                Recordá dividir por el <b>total de casillas</b> de la matriz ($\text{Filas} \times \text{Columnas} = 2 \times 3 = 6$), ¡no por la cantidad de filas sola!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: EJEMPLO PROGRESIVO NIVEL 2B: CONTAR ELEMENTOS CON CONDICIÓN -->
+      <section>
+        <h2><span class="section-num">25</span> Ejemplo Nivel 2B: Contar Elementos con Condición</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          ¿Cómo contamos cuántos números mayores a 10 (o cuántos números pares) hay dentro de una matriz de <code>3x3</code>? Agregamos un contador y un <code>if</code> adentro del segundo <code>for</code>:
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">contar_en_matriz.c</span>
+            <span class="code-badge">Contador + if</span>
+          </div>
+          <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">3</span>] =
+    {
+        {<span class="c-num">4</span>,  <span class="c-num">15</span>, <span class="c-num">8</span>},
+        {<span class="c-num">22</span>, <span class="c-num">7</span>,  <span class="c-num">19</span>},
+        {<span class="c-num">3</span>,  <span class="c-num">12</span>, <span class="c-num">5</span>}
+    };
+    <span class="c-kw">int</span> contMayoresA10 = <span class="c-num">0</span>;
+    <span class="c-kw">int</span> contPares = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">3</span>; fila++)
+    {
+        <span class="c-kw">for</span>(<span class="c-kw">int</span> columna = <span class="c-num">0</span>; columna &lt; <span class="c-num">3</span>; columna++)
+        {
+            <span class="c-kw">if</span>(matriz[fila][columna] &gt; <span class="c-num">10</span>)
+            {
+                contMayoresA10++;
+            }
+            <span class="c-kw">if</span>(matriz[fila][columna] % <span class="c-num">2</span> == <span class="c-num">0</span>)
+            {
+                contPares++;
+            }
+        }
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Mayores a 10: %d | Numeros pares: %d\n"</span>, contMayoresA10, contPares);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 27: EJEMPLO PROGRESIVO NIVEL 3: SUMAR POR FILAS -->
+      <section>
+        <h2><span class="section-num">26</span> Ejemplo Nivel 3: Sumar por Cada Fila Individual</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">
+          Imaginá que cada <b>fila es un alumno</b> (3 alumnos) y cada <b>columna es una nota</b> (4 notas por alumno). Queremos mostrar el promedio de cada alumno por separado:
+        </p>
+
+        <div class="grid-2-1">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="code-title">promedio_por_fila.c</span>
+              <span class="code-badge">Nivel 3 • Subtotal por Fila</span>
+            </div>
+            <div class="code-body"><span class="c-kw">int</span> notas[<span class="c-num">3</span>][<span class="c-num">4</span>] =
+{
+    {<span class="c-num">8</span>, <span class="c-num">7</span>, <span class="c-num">9</span>, <span class="c-num">8</span>},   <span class="c-cmt">// Alumno 0</span>
+    {<span class="c-num">6</span>, <span class="c-num">5</span>, <span class="c-num">6</span>, <span class="c-num">7</span>},   <span class="c-cmt">// Alumno 1</span>
+    {<span class="c-num">10</span>, <span class="c-num">9</span>, <span class="c-num">10</span>, <span class="c-num">9</span>}  <span class="c-cmt">// Alumno 2</span>
+};
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">3</span>; fila++)
+{
+<span class="c-hl">    <span class="c-kw">int</span> sumaFila = <span class="c-num">0</span>; <span class="c-cmt">// ¡Se reinicia en 0 para cada alumno!</span></span>
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> columna = <span class="c-num">0</span>; columna &lt; <span class="c-num">4</span>; columna++)
+    {
+        sumaFila = sumaFila + notas[fila][columna];
+    }
+
+    <span class="c-kw">float</span> prom = (<span class="c-kw">float</span>)sumaFila / <span class="c-num">4</span>;
+    <span class="c-fn">printf</span>(<span class="c-str">"Alumno %d -&gt; Suma: %d | Promedio: %.2f\n"</span>, fila, sumaFila, prom);
+}</div>
+          </div>
+
+          <div>
+            <div class="terminal-window">
+              <div class="terminal-header"><span>Consola</span><span>stdout</span></div>
+              <div class="terminal-body" style="font-size: 0.85rem;">Alumno 0 -&gt; Suma: 32 | Promedio: 8.00
+Alumno 1 -&gt; Suma: 24 | Promedio: 6.00
+Alumno 2 -&gt; Suma: 38 | Promedio: 9.50</div>
+            </div>
+            <div class="box box-amber" style="margin-top: 8px;">
+              <p style="margin: 0; font-size: 0.78rem;">
+                🔑 <b>Ubicación de <code>sumaFila = 0;</code>:</b> Va <b>adentro del primer <code>for</code></b> y antes del segundo, para que al pasar al siguiente alumno la cuenta vuelva a empezar desde <code>0</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 28: EJEMPLO PROGRESIVO NIVEL 4: SUMAR POR COLUMNAS -->
+      <section>
+        <h2><span class="section-num">27</span> Ejemplo Nivel 4: Sumar por Cada Columna</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">
+          ¿Y si queremos saber cuánto se vendió en cada <b>día (columna)</b> sumando las 2 sucursales (filas)? Ponemos el <code>for</code> de <code>columna</code> afuera y el <code>for</code> de <code>fila</code> adentro, ¡pero al leer la matriz respetamos siempre <code>ventas[fila][columna]</code>!
+        </p>
+
+        <div class="code-window">
+          <div class="code-header">
+            <span class="code-title">suma_por_columna.c</span>
+            <span class="code-badge">Nivel 4 • Subtotal por Columna</span>
+          </div>
+          <div class="code-body"><span class="c-kw">int</span> ventas[<span class="c-num">2</span>][<span class="c-num">3</span>] =
+{
+    {<span class="c-num">100</span>, <span class="c-num">200</span>, <span class="c-num">150</span>},   <span class="c-cmt">// Sucursal 0 (Lunes, Martes, Miércoles)</span>
+    {<span class="c-num">300</span>, <span class="c-num">100</span>, <span class="c-num">250</span>}    <span class="c-cmt">// Sucursal 1 (Lunes, Martes, Miércoles)</span>
+};
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> columna = <span class="c-num">0</span>; columna &lt; <span class="c-num">3</span>; columna++)
+{
+    <span class="c-kw">int</span> sumaCol = <span class="c-num">0</span>;   <span class="c-cmt">// Se reinicia en 0 para cada nueva columna</span>
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">2</span>; fila++)
+    {
+        sumaCol = sumaCol + ventas[fila][columna];
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Total Columna %d: %d\n"</span>, columna, sumaCol);
+}
+<span class="c-cmt">// Imprime: Columna 0: 400 | Columna 1: 300 | Columna 2: 400</span></div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: NOMBRES DE ÍNDICES: FILA Y COLUMNA VS i Y j -->
+      <section>
+        <h2><span class="section-num">28</span> Nombres de Variables: <code>fila / columna</code> vs. <code>i / j</code></h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Tanto en el apunte como en los exámenes vas a ver escritos los índices de dos maneras equivalentes. Ambas hacen exactamente lo mismo:
+        </p>
+
+        <div class="grid-2" style="margin-top: 10px;">
+          <div class="box box-emerald">
+            <h4 style="color: #34d399;">Estilo Descriptivo (Usado en el Apunte)</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">2</span>; fila++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> columna = <span class="c-num">0</span>; columna &lt; <span class="c-num">3</span>; columna++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, matriz[fila][columna]);
+    }
+    <span class="c-fn">printf</span>(<span class="c-str">"\n"</span>);
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #a7f3d0; margin: 6px 0 0;">
+              ✓ Super claro para empezar porque el propio nombre te recuerda qué corchete es cuál.
+            </p>
+          </div>
+
+          <div class="box box-cyan">
+            <h4 style="color: #38bdf8;">Estilo Abreviado Clásico (<code>i</code> y <code>j</code>)</h4>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">for</span>(<span class="c-kw">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">2</span>; i++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> j = <span class="c-num">0</span>; j &lt; <span class="c-num">3</span>; j++)
+    {
+        <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, matriz[i][j]);
+    }
+    <span class="c-fn">printf</span>(<span class="c-str">"\n"</span>);
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #7dd3fc; margin: 6px 0 0;">
+              ✓ Por convención universal, en matrices <b><code>i</code> representa la fila</b> y <b><code>j</code> representa la columna</b>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 30: ERRORES FRECUENTES CON MATRICES (1/2) -->
+      <section>
+        <h2><span class="section-num">29</span> Errores Frecuentes con Matrices (Parte 1)</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 1: Invertir los límites de Filas y Columnas</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> matriz[<span class="c-num">2</span>][<span class="c-num">3</span>]; <span class="c-cmt">// 2 filas, 3 columnas</span>
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">3</span>; fila++)       <span class="c-cmt">// ¡MAL! Puso 3</span>
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> col = <span class="c-num">0</span>; col &lt; <span class="c-num">2</span>; col++)     <span class="c-cmt">// ¡MAL! Puso 2</span>
+        matriz[fila][col] = <span class="c-num">0</span>;
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px; margin-bottom: 0;">
+              <b>Qué pasa:</b> En una matriz rectangular <code>[2][3]</code>, si hacés <code>fila &lt; 3</code> intentás entrar a la <code>matriz[2][...]</code> que <b>no existe</b> (desborde de memoria). El tope de <code>fila</code> debe coincidir siempre con el primer corchete (<code>2</code>) y el de <code>columna</code> con el segundo (<code>3</code>).
+            </p>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 2: Escribir coma <code>[f, c]</code> en vez de <code>[f][c]</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-cmt">// Sintaxis inválida en lenguaje C:</span>
+matriz[<span class="c-num">1</span>, <span class="c-num">2</span>] = <span class="c-num">50</span>;      <span class="c-cmt">// ¡ERROR!</span>
+
+<span class="c-cmt">// Sintaxis correcta en lenguaje C:</span>
+matriz[<span class="c-num">1</span>][<span class="c-num">2</span>] = <span class="c-num">50</span>;     <span class="c-cmt">// ¡BIEN!</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px; margin-bottom: 0;">
+              <b>Qué pasa:</b> En C cada dimensión lleva <b>su propio par de corchetes separado</b>. Nunca separes fila y columna con una coma adentro del mismo corchete.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 31: ERRORES FRECUENTES CON MATRICES (2/2) -->
+      <section>
+        <h2><span class="section-num">30</span> Errores Frecuentes con Matrices (Parte 2)</h2>
+        <div class="comparison-box">
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 3: Inicializar <code>mayor = 0</code> en vez de <code>matriz[0][0]</code></div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> mayor = <span class="c-num">0</span>; <span class="c-cmt">// Peligroso si hay negativos</span></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px; margin-bottom: 0;">
+              <b>Qué pasa:</b> Si la matriz tiene todas temperaturas bajo cero (ej. <code>-5, -12, -3</code>), ningún elemento será mayor que <code>0</code> y tu programa dirá erróneamente que el mayor es <code>0</code>. Si además buscás el <code>menor</code> y ponés <code>menor = 0</code>, ¡casi siempre dará 0! <b>Siempre inicializá con <code>matriz[0][0]</code>.</b>
+            </p>
+          </div>
+
+          <div class="wrong-card">
+            <div class="wrong-title">❌ Error 4: Olvidar reiniciar el acumulador por fila</div>
+            <div class="code-window">
+              <div class="code-body"><span class="c-kw">int</span> sumaFila = <span class="c-num">0</span>; <span class="c-cmt">// Afuera de ambos for</span>
+<span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">3</span>; fila++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> col = <span class="c-num">0</span>; col &lt; <span class="c-num">4</span>; col++)
+        sumaFila += notas[fila][col];
+}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #fecaca; margin-top: 6px; margin-bottom: 0;">
+              <b>Qué pasa:</b> Si no volvés a poner <code>sumaFila = 0;</code> al empezar cada nueva fila, las notas del Alumno 1 se suman encima de las del Alumno 0.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 32: EJERCICIO PRÁCTICO 1 -->
+      <section>
+        <h2><span class="section-num">31</span> Ejercicio Práctico 1: Buscar el Menor en una Matriz</h2>
+        <div class="box box-cyan">
+          <h4 style="color: #38bdf8; margin-bottom: 4px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Dada una matriz de <code>3x3</code> ya inicializada con números enteros, escribí un programa en C que la muestre en formato tabla y luego busque e informe cuál es el <b>número menor</b> de toda la matriz y en qué <b>fila y columna</b> se encuentra.
+          </p>
+        </div>
+
+        <details class="code-solution">
+          <summary>👁️ Ver solución completa en C</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> matriz[<span class="c-num">3</span>][<span class="c-num">3</span>] =
+    {
+        {<span class="c-num">25</span>, <span class="c-num">18</span>, <span class="c-num">40</span>},
+        {<span class="c-num">12</span>, <span class="c-num">7</span>,  <span class="c-num">33</span>},
+        {<span class="c-num">9</span>,  <span class="c-num">50</span>, <span class="c-num">14</span>}
+    };
+
+    <span class="c-kw">int</span> menor = matriz[<span class="c-num">0</span>][<span class="c-num">0</span>];
+    <span class="c-kw">int</span> filaMenor = <span class="c-num">0</span>, colMenor = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">3</span>; fila++)
+    {
+        <span class="c-kw">for</span>(<span class="c-kw">int</span> columna = <span class="c-num">0</span>; columna &lt; <span class="c-num">3</span>; columna++)
+        {
+            <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, matriz[fila][columna]);
+
+            <span class="c-kw">if</span>(matriz[fila][columna] &lt; menor)
+            {
+                menor = matriz[fila][columna];
+                filaMenor = fila;
+                colMenor = columna;
+            }
+        }
+        <span class="c-fn">printf</span>(<span class="c-str">"\n"</span>);
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"\nEl menor es %d (Fila %d, Columna %d)\n"</span>, menor, filaMenor, colMenor);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 33: EJERCICIO PRÁCTICO 2: SALA DE CINE -->
+      <section>
+        <h2><span class="section-num">32</span> Ejercicio Práctico 2: Control de Butacas de Cine</h2>
+        <div class="box box-emerald">
+          <h4 style="color: #34d399; margin-bottom: 4px;">Enunciado</h4>
+          <p style="font-size: 0.86rem; margin: 0;">
+            Una sala de cine pequeña tiene <b>2 filas de 4 asientos cada una</b> (<code>int cine[2][4]</code>). Un <code>0</code> indica asiento libre y un <code>1</code> indica asiento ocupado. Escribí un programa que muestre el mapa de la sala y cuente cuántos asientos están libres y cuántos están ocupados.
+          </p>
+        </div>
+
+        <details class="code-solution">
+          <summary>👁️ Ver solución completa en C</summary>
+          <div class="solution-content">
+            <div class="code-window">
+              <div class="code-body"><span class="c-pre">#include &lt;stdio.h&gt;</span>
+
+<span class="c-kw">int</span> <span class="c-fn">main</span>()
+{
+    <span class="c-kw">int</span> cine[<span class="c-num">2</span>][<span class="c-num">4</span>] =
+    {
+        {<span class="c-num">1</span>, <span class="c-num">0</span>, <span class="c-num">1</span>, <span class="c-num">1</span>},
+        {<span class="c-num">0</span>, <span class="c-num">0</span>, <span class="c-num">1</span>, <span class="c-num">0</span>}
+    };
+    <span class="c-kw">int</span> libres = <span class="c-num">0</span>, ocupados = <span class="c-num">0</span>;
+
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">2</span>; fila++)
+    {
+        <span class="c-kw">for</span>(<span class="c-kw">int</span> columna = <span class="c-num">0</span>; columna &lt; <span class="c-num">4</span>; columna++)
+        {
+            <span class="c-fn">printf</span>(<span class="c-str">"%d "</span>, cine[fila][columna]);
+            <span class="c-kw">if</span>(cine[fila][columna] == <span class="c-num">0</span>)
+                libres++;
+            <span class="c-kw">else</span>
+                ocupados++;
+        }
+        <span class="c-fn">printf</span>(<span class="c-str">"\n"</span>);
+    }
+
+    <span class="c-fn">printf</span>(<span class="c-str">"Asientos libres: %d | Ocupados: %d\n"</span>, libres, ocupados);
+    <span class="c-kw">return</span> <span class="c-num">0</span>;
+}</div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 34: EJERCICIO PRÁCTICO 3: LECTURA DE CÓDIGO TIPO EXAMEN -->
+      <section>
+        <h2><span class="section-num">33</span> Ejercicio Práctico 3: Desafío Tipo Examen</h2>
+        <p style="color: var(--text-muted); font-size: 0.86rem;">
+          Sin ejecutar el programa en la computadora, determiná: <b>1) ¿Cuántos elementos tiene la matriz? 2) ¿Cuál es el valor de <code>m[1][2]</code> antes del doble <code>for</code>? 3) ¿Qué muestra exactamente el <code>printf</code> final?</b>
+        </p>
+
+        <div class="code-window">
+          <div class="code-body"><span class="c-kw">int</span> m[<span class="c-num">2</span>][<span class="c-num">3</span>] =
+{
+    {<span class="c-num">5</span>, <span class="c-num">10</span>, <span class="c-num">15</span>},
+    {<span class="c-num">20</span>, <span class="c-num">25</span>, <span class="c-num">30</span>}
+};
+<span class="c-kw">int</span> acum = <span class="c-num">0</span>;
+
+m[<span class="c-num">0</span>][<span class="c-num">1</span>] = <span class="c-num">50</span>;
+
+<span class="c-kw">for</span>(<span class="c-kw">int</span> fila = <span class="c-num">0</span>; fila &lt; <span class="c-num">2</span>; fila++)
+{
+    <span class="c-kw">for</span>(<span class="c-kw">int</span> col = <span class="c-num">0</span>; col &lt; <span class="c-num">3</span>; col++)
+    {
+        <span class="c-kw">if</span>(m[fila][col] &gt;= <span class="c-num">25</span>)
+        {
+            acum = acum + m[fila][col];
+        }
+    }
+}
+<span class="c-fn">printf</span>(<span class="c-str">"Resultado: %d"</span>, acum);</div>
+        </div>
+
+        <details class="code-solution">
+          <summary>👁️ Ver respuestas detalladas</summary>
+          <div class="solution-content">
+            <ul style="font-size: 0.83rem; margin-left: 16px; line-height: 1.55;">
+              <li><b>1) Total de elementos:</b> $2 \text{ filas} \times 3 \text{ columnas} = \mathbf{6}$ <b>elementos</b>.</li>
+              <li><b>2) Valor de <code>m[1][2]</code>:</b> Fila 1 (segunda fila), Columna 2 (tercera columna) ➔ vale <b><code>30</code></b>.</li>
+              <li><b>3) Salida final:</b> La línea <code>m[0][1] = 50;</code> cambia el <code>10</code> por un <code>50</code>, quedando la matriz <code>{{5, 50, 15}, {20, 25, 30}}</code>. El <code>if</code> suma solo los mayores o iguales a 25: suma <code>50 + 25 + 30 = 105</code>. Imprime: <b><code>Resultado: 105</code></b>.</li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <!-- SLIDE 35: RESUMEN FINAL Y CHECKLIST DE LA UNIDAD 04 -->
+      <section>
+        <h2><span class="section-num">34</span> Resumen Final y Checklist de la Unidad 04</h2>
+        <div class="grid-2">
+          <div class="box box-indigo">
+            <h4 style="color: #818cf8;">Síntesis de Matrices</h4>
+            <ul style="font-size: 0.83rem; line-height: 1.58; margin-left: 18px;">
+              <li><b>Declaración:</b> <code>tipo nombre[filas][columnas];</code> (capacidad total = $\text{filas} \times \text{columnas}$).</li>
+              <li><b>Coordenadas:</b> Siempre en base cero (filas de <code>0</code> a <code>F-1</code>, columnas de <code>0</code> a <code>C-1</code>).</li>
+              <li><b>Doble ciclo <code>for</code>:</b> El primero recorre las <code>filas</code> y el segundo recorre las <code>columnas</code>.</li>
+              <li><b>Formato tabla:</b> Imprimir cada elemento con espacio adentro del 2do <code>for</code> y hacer <code>printf("\n");</code> al cerrar el 2do <code>for</code>.</li>
             </ul>
           </div>
 
           <div class="box box-emerald">
             <h4 style="color: #34d399;">Checklist de Autoevaluación</h4>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Cuántos elementos totales tiene una matriz
-              declarada como <code>[3][4]</code>?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Cuál es la coordenada del primer y del último
-              elemento de la matriz?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Por qué se necesita un bucle adentro de otro para
-              recorrer una matriz?</div>
-            <div class="checklist-item"><span class="icon">✓</span> ¿Dónde se debe resetear el acumulador al calcular
-              subtotales por fila?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Distingo sin dudar qué corchete es la fila y cuál es la columna?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé inicializar una matriz con llaves por cada fila?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Puedo escribir el doble <code>for</code> para cargar o mostrar cualquier matriz?</div>
+            <div class="checklist-item"><span class="icon">✓</span> ¿Sé buscar el mayor elemento inicializando <code>mayor = matriz[0][0]</code>?</div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 18px;">
-          <a href="03-ordenamiento-vectores.html" class="badge badge-indigo"
-            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px;">
-            ← Anterior: Ordenamiento
+        <div style="text-align: center; margin-top: 16px;">
+          <a href="03-ordenamiento-vectores.html" class="badge badge-indigo" style="font-size: 0.88rem; text-decoration: none; padding: 8px 20px;">
+            ← Anterior: Ordenamiento de Vectores
           </a>
-          <a href="../index.html" class="badge badge-cyan"
-            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
-            Índice 2do Cuatrimestre
+          <a href="../index.html" class="badge badge-cyan" style="font-size: 0.88rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
+            Índice 2do Bimestre
           </a>
-          <a href="05-diagonales-matriz.html" class="badge badge-emerald"
-            style="font-size: 0.9rem; text-decoration: none; padding: 8px 22px; margin-left: 8px;">
+          <a href="05-diagonales-matriz.html" class="badge badge-emerald" style="font-size: 0.88rem; text-decoration: none; padding: 8px 20px; margin-left: 8px;">
             Siguiente: Diagonales de una Matriz →
           </a>
         </div>
@@ -360,8 +1508,9 @@
     </div>
   </div>
 
-  <!-- Reveal.js Scripts -->
+  <!-- Reveal.js & KaTeX Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -371,9 +1520,19 @@
       center: false,
       width: 1200,
       height: 750,
-      margin: 0.05
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
     });
   </script>
 </body>
-
 </html>
