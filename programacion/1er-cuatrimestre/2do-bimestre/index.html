@@ -342,24 +342,23 @@
         dinámicos.
       </p>
       <div class="stats-bar">
-        <span class="stat-badge">📚 Unidades: <b>10 Clases Magistrales (~350 Diapositivas)</b></span>
-        <span class="stat-badge">🎯 Enfoque: <b>Desde Cero • Traza Paso a Paso • Ejemplos N1–N4</b></span>
-        <span class="stat-badge">⚡ Estándar: <b>C99 / C11</b></span>
+        <span class="stat-badge">📚 Unidades: <b>10</b></span>
+        <span class="stat-badge">🎯 Enfoque: <b>Desde Cero • Traza Paso a Paso</b></span>
+        <a href="Apunte teorico - Lab. Algoritmos y Estructura de Datos p2.pdf" target="_blank" class="stat-badge"
+          style="text-decoration: none; border-color: rgba(56, 189, 248, 0.35); color: #38bdf8;">📄
+          <b>Abrir Apunte Teórico (PDF)</b></a>
       </div>
     </header>
 
     <div class="switch-banner">
-      <p>📄 <b>Material Oficial de Cátedra:</b> Consultá el Apunte Teórico original del 2do Bimestre o repasá el 1er
-        Bimestre.</p>
+      <p><b>¿Necesitas repasar el 1er bimestre?</b> Repasá el material del 1er Bimestre.</p>
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <a href="Apunte teorico - Lab. Algoritmos y Estructura de Datos p2.pdf" target="_blank">📘 Abrir Apunte Teórico
-          (PDF)</a>
+
         <a href="../1er-bimestre/index.html">Ir al 1er Bimestre →</a>
       </div>
     </div>
 
-    <input type="text" id="filter" class="search-box"
-    placeholder="Buscar por tema o concepto (ej. vectores, indices, recorrido, menor, par, break, ordenar, aux,
+    <input type="text" id="filter" class="search-box" placeholder="Buscar por tema o concepto (ej. vectores, indices, recorrido, menor, par, break, ordenar, aux,
     matrices, diagonales, struct, malloc, free, calloc, realloc)...">
 
     <!-- BLOQUE 1: VECTORES Y ALGORITMOS -->
@@ -367,8 +366,7 @@
     <div class="lesson-list">
 
       <!-- UNIDAD 1 -->
-      <a href="presentaciones/01-vectores-estaticos.html" class="lesson-card"
-        data-search="vectores estaticos arreglos arrays que es un vector indices 0 a n-1 casillas ram contigua corchetes
+      <a href="presentaciones/01-vectores-estaticos.html" class="lesson-card" data-search="vectores estaticos arreglos arrays que es un vector indices 0 a n-1 casillas ram contigua corchetes
         inicializacion directa ventajas desventajas desbordamiento">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 01 • Clase Completa</span>
@@ -389,8 +387,7 @@
       </a>
 
       <!-- UNIDAD 2 -->
-      <a href="presentaciones/02-recorridos-busquedas-vectores.html" class="lesson-card"
-        data-search="recorridos for busqueda lineal acumulador contador suma promedio maximo minimo menor par break
+      <a href="presentaciones/02-recorridos-busquedas-vectores.html" class="lesson-card" data-search="recorridos for busqueda lineal acumulador contador suma promedio maximo minimo menor par break
         bandera flag scanf &edades[i] modelo examen">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 02 • Clase Completa</span>
@@ -411,8 +408,7 @@
       </a>
 
       <!-- UNIDAD 3 -->
-      <a href="presentaciones/03-ordenamiento-vectores.html" class="lesson-card"
-        data-search="ordenamiento vectores ordenar menor a mayor descendente intercambio swap variable auxiliar aux for
+      <a href="presentaciones/03-ordenamiento-vectores.html" class="lesson-card" data-search="ordenamiento vectores ordenar menor a mayor descendente intercambio swap variable auxiliar aux for
         anidado j = i + 1 metodo burbuja">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 03 • Clase Completa</span>
@@ -437,8 +433,7 @@
     <div class="lesson-list">
 
       <!-- UNIDAD 4 -->
-      <a href="presentaciones/04-matrices-bidimensionales.html" class="lesson-card"
-        data-search="matrices bidimensionales filas columnas matriz[fila][columna] bucles anidados tabla excel edificio
+      <a href="presentaciones/04-matrices-bidimensionales.html" class="lesson-card" data-search="matrices bidimensionales filas columnas matriz[fila][columna] bucles anidados tabla excel edificio
         casilleros scanf mayor">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 04 • Clase Completa</span>
@@ -446,7 +441,8 @@
           <p>De 1D a 2D (fila de casilleros vs edificio de casilleros), declaración
             <code>tipo nombre[filas][columnas]</code>, inicialización con llaves anidadas, acceso y modificación por
             doble coordenada, simulación paso a paso del doble <code>for</code> (fila y columna), carga con
-            <code>scanf</code> y búsqueda del mayor en una matriz.</p>
+            <code>scanf</code> y búsqueda del mayor en una matriz.
+          </p>
           <div class="tag-list">
             <span class="tag-item">matriz[fila][columna]</span>
             <span class="tag-item">Doble for (fila, col)</span>
@@ -458,8 +454,7 @@
       </a>
 
       <!-- UNIDAD 5 -->
-      <a href="presentaciones/05-diagonales-matriz.html" class="lesson-card"
-        data-search="diagonales matriz cuadrada diagonal principal fila == columna matriz[i][i] diagonal secundaria fila
+      <a href="presentaciones/05-diagonales-matriz.html" class="lesson-card" data-search="diagonales matriz cuadrada diagonal principal fila == columna matriz[i][i] diagonal secundaria fila
         + columna == N - 1 matriz[i][N-1-i] suma">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 05 • Clase Completa</span>
@@ -467,7 +462,8 @@
           <p>Matrices cuadradas (N × N), deducción visual y matemática de la Diagonal Principal
             (<code>fila == columna</code>, acceso directo con <code>matriz[i][i]</code>) y de la Diagonal Secundaria
             (<code>fila + columna = N - 1</code>, acceso con <code>matriz[i][N - 1 - i]</code>), recorrido con un único
-            <code>for</code>, sumatorias y zonas triangulares.</p>
+            <code>for</code>, sumatorias y zonas triangulares.
+          </p>
           <div class="tag-list">
             <span class="tag-item">Matriz Cuadrada N×N</span>
             <span class="tag-item">Principal: matriz[i][i]</span>
@@ -479,8 +475,7 @@
       </a>
 
       <!-- UNIDAD 6 -->
-      <a href="presentaciones/06-estructuras-struct.html" class="lesson-card"
-        data-search="estructuras struct molde campos atributos operador punto . struct Alumno alumno1 vector de
+      <a href="presentaciones/06-estructuras-struct.html" class="lesson-card" data-search="estructuras struct molde campos atributos operador punto . struct Alumno alumno1 vector de
         estructuras alumnos[30] Producto">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 06 • Clase Completa</span>
@@ -488,7 +483,8 @@
           <p>Por qué agrupar datos relacionados de distinto tipo (ficha de Alumno o Producto), definición del molde
             <code>struct Alumno</code>, creación de variables, acceso con el operador punto (<code>alumno1.edad</code>),
             vectores de estructuras (<code>struct Alumno alumnos[30]</code>), carga con <code>for</code> y búsquedas por
-            campo.</p>
+            campo.
+          </p>
           <div class="tag-list">
             <span class="tag-item">struct Alumno</span>
             <span class="tag-item">Operador Punto (.)</span>
@@ -505,8 +501,7 @@
     <div class="lesson-list">
 
       <!-- UNIDAD 7 -->
-      <a href="presentaciones/07-introduccion-memoria-dinamica.html" class="lesson-card"
-        data-search="introduccion memoria dinamica estatica vs dinamica analogia fiesta sillas stack vs heap direcciones
+      <a href="presentaciones/07-introduccion-memoria-dinamica.html" class="lesson-card" data-search="introduccion memoria dinamica estatica vs dinamica analogia fiesta sillas stack vs heap direcciones
         de memoria punteros int *numeros NULL">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 07 • Clase Completa</span>
@@ -514,7 +509,8 @@
           <p>Qué es la memoria RAM y qué problema resuelve la memoria dinámica, analogía de las sillas en una fiesta,
             memoria estática vs dinámica, zonas Stack y Heap, concepto de dirección de memoria (<code>&amp;</code>), qué
             es un puntero (<code>int *vector</code>), puntero seguro <code>NULL</code> y panorama de las 4 funciones de
-            <code>&lt;stdlib.h&gt;</code>.</p>
+            <code>&lt;stdlib.h&gt;</code>.
+          </p>
           <div class="tag-list">
             <span class="tag-item">Estática vs Dinámica</span>
             <span class="tag-item">Zona Heap</span>
@@ -526,8 +522,7 @@
       </a>
 
       <!-- UNIDAD 8 -->
-      <a href="presentaciones/08-reserva-liberacion-malloc-free.html" class="lesson-card"
-        data-search="malloc free sizeof stdlib.h reserva liberacion heap validacion NULL analogia cancha futbol memory
+      <a href="presentaciones/08-reserva-liberacion-malloc-free.html" class="lesson-card" data-search="malloc free sizeof stdlib.h reserva liberacion heap validacion NULL analogia cancha futbol memory
         leak doble free">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 08 • Clase Completa</span>
@@ -547,8 +542,7 @@
       </a>
 
       <!-- UNIDAD 9 -->
-      <a href="presentaciones/09-calloc-realloc.html" class="lesson-card"
-        data-search="calloc realloc basura malloc inicializacion en 0 cambiar tamano agrandar achicar conservar datos
+      <a href="presentaciones/09-calloc-realloc.html" class="lesson-card" data-search="calloc realloc basura malloc inicializacion en 0 cambiar tamano agrandar achicar conservar datos
         puntero auxiliar">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 09 • Clase Completa</span>
@@ -556,7 +550,8 @@
           <p>Valores basura en <code>malloc()</code> vs inicialización limpia en cero con
             <code>calloc(cantidad, sizeof(int))</code>, cómo agrandar o achicar un bloque existente con
             <code>realloc()</code> sin perder los datos cargados, qué ocurre en el Heap al reubicar y uso seguro con
-            puntero auxiliar.</p>
+            puntero auxiliar.
+          </p>
           <div class="tag-list">
             <span class="tag-item">calloc(N, sizeof)</span>
             <span class="tag-item">Todo en 0</span>
@@ -568,8 +563,7 @@
       </a>
 
       <!-- UNIDAD 10 -->
-      <a href="presentaciones/10-vectores-dinamicos.html" class="lesson-card"
-        data-search="vectores dinamicos cantidad elegida por usuario notas[i] acceso igual a estatico recorrido carga
+      <a href="presentaciones/10-vectores-dinamicos.html" class="lesson-card" data-search="vectores dinamicos cantidad elegida por usuario notas[i] acceso igual a estatico recorrido carga
         busqueda ordenamiento struct dinamico integracion">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 10 • Clase Completa</span>

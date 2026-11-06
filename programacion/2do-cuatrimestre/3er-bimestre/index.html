@@ -342,20 +342,25 @@
       <div class="header-badge">Segundo Cuatrimestre • Texto, Punteros y Estructuras Avanzadas</div>
       <h1>Programación en C: 2do Cuatrimestre</h1>
       <p>
-        Plan curricular avanzado basado en el Apunte Teórico oficial (Parte 3): funciones con retorno, arreglos como parámetros, cadenas de caracteres (strings), biblioteca <code>string.h</code>, algoritmos de texto, punteros, direcciones físicas de memoria, paso por referencia simulado, equivalencia con arreglos, estructuras complejas, operador <code>-&gt;</code>, colecciones de registros y casos integradores.
+        Plan curricular avanzado basado en el Apunte Teórico oficial (Parte 3): funciones con retorno, arreglos como
+        parámetros, cadenas de caracteres (strings), biblioteca <code>string.h</code>, algoritmos de texto, punteros,
+        direcciones físicas de memoria, paso por referencia simulado, equivalencia con arreglos, estructuras complejas,
+        operador <code>-&gt;</code>, colecciones de registros y casos integradores.
       </p>
       <div class="stats-bar">
         <span class="stat-badge">📚 Unidades: <b>13 Clases Completas</b></span>
-        <span class="stat-badge">🎯 Temas: <b>40 Apartados del Apunte Cubiertos</b></span>
-        <span class="stat-badge">⚡ Nivel: <b>Intermedio a Avanzado</b></span>
-        <a href="Apunte%20teorico%20-%20Lab.%20Algoritmos%20y%20Estructura%20de%20Datos%20p3.pdf" target="_blank" class="stat-badge" style="text-decoration: none; border-color: rgba(52, 211, 153, 0.35); color: #34d399;">📄 <b>Abrir Apunte Teórico Parte 3 (PDF)</b></a>
+        <span class="stat-badge">🎯 Temas: <b>Apunte Teórico Cubierto</b></span>
+        <a href="Apunte%20teorico%20-%20Lab.%20Algoritmos%20y%20Estructura%20de%20Datos%20p3.pdf" target="_blank"
+          class="stat-badge" style="text-decoration: none; border-color: rgba(52, 211, 153, 0.35); color: #34d399;">📄
+          <b>Abrir Apunte Teórico Parte 3 (PDF)</b></a>
       </div>
     </header>
 
     <div class="switch-cuatrimestre-banner">
       <div class="switch-text">
         <h4>¿Buscás el 4to Bimestre?</h4>
-        <p>Explorá el nuevo bloque completo de Introducción a la Programación en Python (sintaxis, control de flujo, modularidad, listas y archivos).</p>
+        <p>Explorá el nuevo bloque completo de Introducción a la Programación en Python (sintaxis, control de flujo,
+          modularidad, listas y archivos).</p>
       </div>
       <a href="../4to-bimestre/index.html" class="switch-btn">Ir al 4to Bimestre (Python) →</a>
     </div>
@@ -373,7 +378,8 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 01</span>
           <h3>Funciones con Retorno y Arreglos como Parámetros</h3>
-          <p>Diferencia entre funciones void y con valor devuelto, uso de return, pasaje de vectores como parámetros, por qué C exige enviar el tamaño y cálculo de acumuladores y promedios.</p>
+          <p>Diferencia entre funciones void y con valor devuelto, uso de return, pasaje de vectores como parámetros,
+            por qué C exige enviar el tamaño y cálculo de acumuladores y promedios.</p>
           <div class="tag-list">
             <span class="tag-item">return</span>
             <span class="tag-item">tipo vector[]</span>
@@ -395,7 +401,8 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 02</span>
           <h3>Introducción a los Strings en C</h3>
-          <p>Relación entre strings y char[], diferencia entre 'A' y "Agustin", el rol vital del terminador nulo '\0', por qué se reserva N + 1 bytes en RAM, especificador %s y conteo manual.</p>
+          <p>Relación entre strings y char[], diferencia entre 'A' y "Agustin", el rol vital del terminador nulo '\0',
+            por qué se reserva N + 1 bytes en RAM, especificador %s y conteo manual.</p>
           <div class="tag-list">
             <span class="tag-item">char[]</span>
             <span class="tag-item">Terminador '\0'</span>
@@ -412,7 +419,8 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 03</span>
           <h3>Biblioteca &lt;string.h&gt; y Operaciones con Cadenas</h3>
-          <p>Funciones estándar: strlen, strcpy, strcmp (por qué == falla), strcat, strchr, strstr, y las variantes seguras con límite de caracteres (strncpy, strncmp, strncat).</p>
+          <p>Funciones estándar: strlen, strcpy, strcmp (por qué == falla), strcat, strchr, strstr, y las variantes
+            seguras con límite de caracteres (strncpy, strncmp, strncat).</p>
           <div class="tag-list">
             <span class="tag-item">#include &lt;string.h&gt;</span>
             <span class="tag-item">strlen / strcpy</span>
@@ -429,7 +437,9 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 04</span>
           <h3>Procesamiento y Algoritmos con Strings</h3>
-          <p>Lógica paso a paso: comparación manual carácter a carácter, conteo de ocurrencias, detección de prefijos, mutación de letras, alternancia de mayúsculas/minúsculas con ASCII (+32), inversión de texto y verificación de palíndromos.</p>
+          <p>Lógica paso a paso: comparación manual carácter a carácter, conteo de ocurrencias, detección de prefijos,
+            mutación de letras, alternancia de mayúsculas/minúsculas con ASCII (+32), inversión de texto y verificación
+            de palíndromos.</p>
           <div class="tag-list">
             <span class="tag-item">sonIguales</span>
             <span class="tag-item">contarCaracter</span>
@@ -451,7 +461,8 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 05</span>
           <h3>Introducción a los Punteros y Direcciones de Memoria</h3>
-          <p>Qué es físicamente una dirección de RAM, impresión con %p, operador de dirección &amp;, declaración de punteros, operador de desreferenciación *, analogía de la casa y prevención de punteros salvajes.</p>
+          <p>Qué es físicamente una dirección de RAM, impresión con %p, operador de dirección &amp;, declaración de
+            punteros, operador de desreferenciación *, analogía de la casa y prevención de punteros salvajes.</p>
           <div class="tag-list">
             <span class="tag-item">&amp;variable</span>
             <span class="tag-item">*puntero</span>
@@ -468,7 +479,9 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 06</span>
           <h3>Paso por Referencia, Punteros y Funciones</h3>
-          <p>Limitaciones del paso por valor, mutación de variables originales mediante punteros, funciones que devuelven múltiples resultados: cálculo simultáneo de cociente y resto, y algoritmo minMax sobre vectores.</p>
+          <p>Limitaciones del paso por valor, mutación de variables originales mediante punteros, funciones que
+            devuelven múltiples resultados: cálculo simultáneo de cociente y resto, y algoritmo minMax sobre vectores.
+          </p>
           <div class="tag-list">
             <span class="tag-item">cambiar(&amp;x)</span>
             <span class="tag-item">*ptr = valor</span>
@@ -485,7 +498,8 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 07</span>
           <h3>Relación entre Punteros y Arreglos</h3>
-          <p>El nombre de un vector como dirección de inicio, aritmética de punteros (p + 1 avanza sizeof bytes), acceso con *(p + i), equivalencia con v[i] y diferencias reales entre arreglos y punteros móviles.</p>
+          <p>El nombre de un vector como dirección de inicio, aritmética de punteros (p + 1 avanza sizeof bytes), acceso
+            con *(p + i), equivalencia con v[i] y diferencias reales entre arreglos y punteros móviles.</p>
           <div class="tag-list">
             <span class="tag-item">v == &amp;v[0]</span>
             <span class="tag-item">p + 1</span>
@@ -507,7 +521,8 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 08</span>
           <h3>Estructuras (struct) y Fundamentos de Modelado</h3>
-          <p>Agrupación de datos heterogéneos bajo un molde, declaración de campos, operador punto (.), envío de estructuras a funciones por valor y copia inmutable en el Stack.</p>
+          <p>Agrupación de datos heterogéneos bajo un molde, declaración de campos, operador punto (.), envío de
+            estructuras a funciones por valor y copia inmutable en el Stack.</p>
           <div class="tag-list">
             <span class="tag-item">struct Persona</span>
             <span class="tag-item">Operador Punto (.)</span>
@@ -524,7 +539,8 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 09</span>
           <h3>Punteros a Estructuras y el Operador Flecha (-&gt;)</h3>
-          <p>Paso eficiente de registros por dirección, necesidad de la flecha (-&gt;), equivalencia con (*emp).campo, precedencia del punto sobre el asterisco y función de aumento salarial porcentual.</p>
+          <p>Paso eficiente de registros por dirección, necesidad de la flecha (-&gt;), equivalencia con (*emp).campo,
+            precedencia del punto sobre el asterisco y función de aumento salarial porcentual.</p>
           <div class="tag-list">
             <span class="tag-item">struct Empleado *emp</span>
             <span class="tag-item">Operador -&gt;</span>
@@ -541,7 +557,8 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 10</span>
           <h3>Arreglos de Estructuras</h3>
-          <p>Vectores donde cada elemento es una estructura completa, sintaxis clase[i].campo, recorridos con for, búsqueda del mejor promedio y actualización de datos en flota de vehículos.</p>
+          <p>Vectores donde cada elemento es una estructura completa, sintaxis clase[i].campo, recorridos con for,
+            búsqueda del mejor promedio y actualización de datos en flota de vehículos.</p>
           <div class="tag-list">
             <span class="tag-item">struct Alumno curso[30]</span>
             <span class="tag-item">curso[i].campo</span>
@@ -558,7 +575,8 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 11</span>
           <h3>Estructuras con Arreglos Internos y Anidadas</h3>
-          <p>Composición avanzada: estructuras con vectores internos (notas[3]), acumulación y promedio, y estructuras anidadas como struct Fecha dentro de struct Persona (persona.nacimiento.dia).</p>
+          <p>Composición avanzada: estructuras con vectores internos (notas[3]), acumulación y promedio, y estructuras
+            anidadas como struct Fecha dentro de struct Persona (persona.nacimiento.dia).</p>
           <div class="tag-list">
             <span class="tag-item">notas[3] interno</span>
             <span class="tag-item">struct Fecha</span>
@@ -575,7 +593,8 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 12</span>
           <h3>Integración: Transferencia Bancaria</h3>
-          <p>El caso integrador definitivo: modelado de CuentaBancaria, transferencia atómica con dos punteros (*origen y *destino), protocolo defensivo de validaciones y garantía de integridad transaccional.</p>
+          <p>El caso integrador definitivo: modelado de CuentaBancaria, transferencia atómica con dos punteros (*origen
+            y *destino), protocolo defensivo de validaciones y garantía de integridad transaccional.</p>
           <div class="tag-list">
             <span class="tag-item">struct CuentaBancaria</span>
             <span class="tag-item">Punteros Dobles</span>
@@ -592,7 +611,8 @@
         <div class="lesson-info">
           <span class="lesson-num">Unidad 13</span>
           <h3>Resumen de Símbolos y Repaso Integrador</h3>
-          <p>Tabla maestra con los 9 símbolos clave de C (&amp;, *, int*, [], ., -&gt;, '\0', return), método para descifrar expresiones complejas, trampas comunes de examen y autoevaluación interactiva.</p>
+          <p>Tabla maestra con los 9 símbolos clave de C (&amp;, *, int*, [], ., -&gt;, '\0', return), método para
+            descifrar expresiones complejas, trampas comunes de examen y autoevaluación interactiva.</p>
           <div class="tag-list">
             <span class="tag-item">Tabla Maestra de Símbolos</span>
             <span class="tag-item">Expresiones Complejas</span>
