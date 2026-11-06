@@ -997,4 +997,15 @@ details.code-solution .solution-content {
   color: #f1f5f9;
 }
 
-
+/* Legibilidad del código para principiantes: sin ligaduras tipográficas
+   (evita que >=, <=, !=, == y -> se dibujen como símbolos distintos a los que se tipean) */
+.code-body,
+.terminal-body,
+.reveal pre,
+.reveal code,
+.memory-label,
+.memory-value,
+.trace-table td code {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}

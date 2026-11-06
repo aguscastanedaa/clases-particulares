@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 07: Bucles while: Repetición Controlada por una Condición | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 07</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 07</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Bucles while: Repetición Controlada por una Condición</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Repetir instrucciones mientras una condición sea verdadera: iteraciones, contadores, acumuladores, bucles infinitos, break y continue</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">Bucles e iteraciones</span><span class="badge badge-indigo">while</span><span class="badge badge-emerald">Contadores y acumuladores</span><span class="badge badge-amber">Bucles infinitos</span><span class="badge badge-purple">break y continue</span><span class="badge badge-rose">Validación de datos</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 40 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: Que el Programa Repita Tareas</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya sabemos</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Condiciones que dan <code>True</code>/<code>False</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>if</code>, <code>elif</code>, <code>else</code> para <b>elegir</b> qué ejecutar.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Contadores y acumuladores: <code>i += 1</code>, <code>total += x</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>En C: <code>while (cond) { ... }</code>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Qué es un <b>bucle</b> y una <b>iteración</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>La estructura <b><code>while</code></b> y sus tres partes.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Cómo <b>seguir paso a paso</b> un bucle con una tabla.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los <b>bucles infinitos</b> y cómo evitarlos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>break</code></b> y <b><code>continue</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Programas con <b>validación de datos</b> y <b>menús</b>.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que puedas escribir un <code>while</code> sin que se cuelgue, y que puedas decir <b>exactamente</b> cuántas veces se repite y qué muestra en cada vuelta.</p></div></section>
+<section><h2><span class="section-num">02</span> El Problema: Repetir a Mano</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Queremos mostrar los números del 1 al 5. Con lo que sabemos hasta ahora:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">a_mano.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-num">1</span>)
+<span class="c-fn">print</span>(<span class="c-num">2</span>)
+<span class="c-fn">print</span>(<span class="c-num">3</span>)
+<span class="c-fn">print</span>(<span class="c-num">4</span>)
+<span class="c-fn">print</span>(<span class="c-num">5</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1
+2
+3
+4
+5</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Problemas</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>¿Y si fueran <b>1000</b> números?</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>¿Y si la cantidad la elige el <b>usuario</b>?</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Hay que <b>copiar y pegar</b> código: cualquier cambio obliga a modificar muchas líneas.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">La solución</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Escribir las instrucciones <b>una sola vez</b> y decirle a Python <b>cuántas veces</b> (o <b>hasta cuándo</b>) repetirlas. Eso es un <b>bucle</b>.</p></div></div></section>
+<section><h2><span class="section-num">03</span> ¿Qué Es un Bucle?</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un <b>bucle</b> (también llamado <b>ciclo</b> o <i>loop</i>) es una estructura que <b>repite un bloque de instrucciones</b> mientras se cumpla una condición. Cada repetición se llama <b>iteración</b>.</p></div><div class="grid-3" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">🏃 Analogía</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Dar vueltas a una pista <b>mientras no completes</b> 5 vueltas. En cada vuelta preguntás: "¿ya completé las 5?".</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">🔁 Iteración</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Una <b>pasada</b> por el bloque. Si el bucle repite 5 veces, tiene <b>5 iteraciones</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">❓ Condición</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">La <b>pregunta</b> que se evalúa <b>antes de cada iteración</b> para decidir si sigue o termina.</p></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Dos tipos en Python</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>while</code></b> (hoy): se repite <b>mientras</b> una condición sea verdadera. Ideal cuando <b>no sabemos cuántas veces</b>.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>for</code></b> (próxima unidad): recorre una secuencia o repite una <b>cantidad conocida</b> de veces.</li></ul></div></section>
+<section><h2><span class="section-num">04</span> Sintaxis del while</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-amber);">while </span><span style="color:var(--accent-cyan);">condicion</span><span style="color:var(--accent-rose);">:</span></div><div class="code-window"><div class="code-header"><span class="code-title">sintaxis_while.py</span><span class="code-badge">Plantilla</span></div><div class="code-body"><span class="c-kw">while</span> condicion:
+    instruccion_1
+    instruccion_2
+    ...
+instruccion_fuera_del_bucle</div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><b><code>while</code></b> → palabra reservada: "mientras".</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><b><code>condicion</code></b> → expresión que da <code>True</code> o <code>False</code>, igual que en un <code>if</code>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;"><b><code>:</code></b> → dos puntos obligatorios.</div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.84rem;"><b>Bloque indentado</b> → las líneas con sangría <b>forman el cuerpo</b> del bucle y se repiten.</div></div><div class="step-item"><span class="step-num">5</span><div class="step-content" style="font-size:0.84rem;">La primera línea <b>sin sangría</b> ya no es parte del bucle: se ejecuta <b>una sola vez al terminar</b>.</div></div></div></section>
+<section><h2><span class="section-num">05</span> Ejemplo del Apunte: Contar del 1 al 5</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">contar.py</span><span class="code-badge">Python</span></div><div class="code-body">i = <span class="c-num">1</span>
+
+<span class="c-kw">while</span> i &lt;= <span class="c-num">5</span>:
+    <span class="c-fn">print</span>(i)
+    i += <span class="c-num">1</span></div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1
+2
+3
+4
+5</div></div></div></div><div class="grid-2" style="margin-top:8px;"><svg viewBox="0 0 520 250" style="width:100%; max-width:470px; margin:6px auto; display:block;" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#94a3b8"/></marker></defs><rect x="205" y="4" width="110" height="28" rx="14" fill="rgba(56,189,248,0.15)" stroke="#38bdf8"/><text x="260" y="23" font-size="13" text-anchor="middle" fill="#e2e8f0" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">Inicio</text><line x1="260" y1="32" x2="260" y2="52" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar2)"/><polygon points="260,54 390,94 260,134 130,94" fill="rgba(251,191,36,0.14)" stroke="#fbbf24" stroke-width="1.6"/><text x="260" y="99" font-size="13" text-anchor="middle" fill="#fbbf24" font-weight="700" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">i &lt;= 5</text><line x1="260" y1="134" x2="260" y2="162" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar2)"/><text x="276" y="152" font-size="13" text-anchor="start" fill="#34d399" font-weight="700" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">Sí</text><rect x="175" y="164" width="170" height="44" rx="8" fill="rgba(52,211,153,0.13)" stroke="#34d399"/><text x="260" y="183" font-size="12" text-anchor="middle" fill="#e2e8f0" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">print(i)</text><text x="260" y="199" font-size="12" text-anchor="middle" fill="#e2e8f0" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">i += 1</text><line x1="175" y1="186" x2="70" y2="186" stroke="#94a3b8" stroke-width="1.6"/><line x1="70" y1="186" x2="70" y2="94" stroke="#94a3b8" stroke-width="1.6"/><line x1="70" y1="94" x2="128" y2="94" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar2)"/><text x="60" y="130" font-size="11" text-anchor="end" fill="#94a3b8" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">repite</text><line x1="390" y1="94" x2="450" y2="94" stroke="#94a3b8" stroke-width="1.6"/><line x1="450" y1="94" x2="450" y2="206" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar2)"/><text x="418" y="87" font-size="13" text-anchor="middle" fill="#f87171" font-weight="700" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">No</text><rect x="392" y="208" width="116" height="28" rx="14" fill="rgba(129,140,248,0.15)" stroke="#818cf8"/><text x="450" y="227" font-size="13" text-anchor="middle" fill="#e2e8f0" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">Continúa</text></svg><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué hace cada línea</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>i = 1</code>: <b>inicialización</b> de la variable de control.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>while i &lt;= 5:</code>: <b>condición</b>, se evalúa antes de cada vuelta.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>print(i)</code>: muestra el valor actual.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>i += 1</code>: <b>actualización</b>; sin ella el bucle sería infinito.</li></ul></div></div></section>
+<section><h2><span class="section-num">06</span> Simulación Paso a Paso (Tabla de Seguimiento)</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Seguimos el bucle del ejemplo <b>iteración por iteración</b>:</p><table class="trace-table"><thead><tr><th>Iteración</th><th><code>i</code> al evaluar</th><th>¿<code>i &lt;= 5</code>?</th><th>Qué hace el cuerpo</th><th><code>i</code> al final</th></tr></thead><tbody><tr><td>1</td><td>1</td><td><code>True</code></td><td><code>print(1)</code> y <code>i += 1</code></td><td>2</td></tr><tr><td>2</td><td>2</td><td><code>True</code></td><td><code>print(2)</code> y <code>i += 1</code></td><td>3</td></tr><tr><td>3</td><td>3</td><td><code>True</code></td><td><code>print(3)</code> y <code>i += 1</code></td><td>4</td></tr><tr><td>4</td><td>4</td><td><code>True</code></td><td><code>print(4)</code> y <code>i += 1</code></td><td>5</td></tr><tr><td>5</td><td>5</td><td><code>True</code></td><td><code>print(5)</code> y <code>i += 1</code></td><td>6</td></tr><tr><td>—</td><td>6</td><td><code>False</code></td><td><b>El bucle termina</b></td><td>6</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Dos cosas para fijarse</h4><ul style="font-size:0.88rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>La condición se evalúa <b>una vez más</b> de las que se ejecuta el cuerpo (6 evaluaciones, 5 iteraciones).</li></ul><ul style="font-size:0.88rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Al salir, <code>i</code> <b>vale 6</b>, no 5: es el valor que <b>rompió</b> la condición.</li></ul></div></section>
+<section><h2><span class="section-num">07</span> Las Tres Partes de un while Correcto</h2><div class="grid-3" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">1. Inicialización</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Darle un <b>valor inicial</b> a la variable de control <b>antes</b> del bucle: <code>i = 1</code>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">2. Condición</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">La <b>pregunta</b> que decide si se repite: <code>while i &lt;= 5:</code>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">3. Actualización</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Cambiar la variable de control <b>dentro del cuerpo</b> para acercarse al final: <code>i += 1</code>.</p></div></div><div class="code-window"><div class="code-header"><span class="code-title">tres_partes.py</span><span class="code-badge">Plantilla mental</span></div><div class="code-body">i = <span class="c-num">1</span>              <span class="c-cmt"># 1. Inicialización</span>
+<span class="c-kw">while</span> i &lt;= <span class="c-num">5</span>:      <span class="c-cmt"># 2. Condición</span>
+    <span class="c-fn">print</span>(i)
+    i += <span class="c-num">1</span>         <span class="c-cmt"># 3. Actualización</span></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Si falta alguna de las tres</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Sin <b>inicialización</b> → <code>NameError</code> (la variable no existe).</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Sin <b>actualización</b> → <b>bucle infinito</b> (la condición nunca cambia).</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Condición mal armada → se repite <b>de más</b> o <b>de menos</b>.</li></ul></div></section>
+<section><h2><span class="section-num">08</span> Cuando la Condición Es Falsa desde el Principio</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">cero_iteraciones.py</span><span class="code-badge">Python</span></div><div class="code-body">i = <span class="c-num">10</span>
+
+<span class="c-kw">while</span> i &lt;= <span class="c-num">5</span>:
+    <span class="c-fn">print</span>(i)
+    i += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"Terminó. i vale"</span>, i)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Terminó. i vale 10</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Se evalúa ANTES</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">El <code>while</code> <b>primero pregunta</b>, después ejecuta. Si la condición es falsa desde el inicio, el cuerpo se ejecuta <b>0 veces</b>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Igual que el <code>while</code> de C. (El <code>do-while</code> de C, que ejecuta <b>al menos una vez</b>, <b>no existe</b> en Python: lo veremos más adelante.)</p></div></div></section>
+<section><h2><span class="section-num">09</span> Cuenta Regresiva: Decrementar</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">regresiva.py</span><span class="code-badge">Python</span></div><div class="code-body">contador = <span class="c-num">5</span>
+
+<span class="c-kw">while</span> contador &gt; <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(contador)
+    contador -= <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"¡Despegue!"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">5
+4
+3
+2
+1
+¡Despegue!</div></div></div></div><table class="trace-table"><thead><tr><th>Vuelta</th><th><code>contador</code> al evaluar</th><th>¿<code>&gt; 0</code>?</th><th>Muestra</th></tr></thead><tbody><tr><td>1</td><td>5</td><td><code>True</code></td><td><code>5</code></td></tr><tr><td>2</td><td>4</td><td><code>True</code></td><td><code>4</code></td></tr><tr><td>3</td><td>3</td><td><code>True</code></td><td><code>3</code></td></tr><tr><td>4</td><td>2</td><td><code>True</code></td><td><code>2</code></td></tr><tr><td>5</td><td>1</td><td><code>True</code></td><td><code>1</code></td></tr><tr><td>—</td><td>0</td><td><code>False</code></td><td>Sale del bucle</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Observá</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Acá la variable <b>disminuye</b> (<code>-= 1</code>) y la condición usa <code>&gt;</code>. La actualización siempre debe <b>acercar</b> la variable a hacer <b>falsa</b> la condición.</p></div></section>
+<section><h2><span class="section-num">10</span> Cambiar el Paso: de a 2, de a 5, de a 10</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">pasos.py</span><span class="code-badge">Python</span></div><div class="code-body">n = <span class="c-num">0</span>
+<span class="c-kw">while</span> n &lt;= <span class="c-num">20</span>:
+    <span class="c-fn">print</span>(n, end=<span class="c-str">" "</span>)
+    n += <span class="c-num">5</span>
+<span class="c-fn">print</span>()
+
+p = <span class="c-num">2</span>
+<span class="c-kw">while</span> p &lt;= <span class="c-num">10</span>:
+    <span class="c-fn">print</span>(p, end=<span class="c-str">" "</span>)
+    p += <span class="c-num">2</span></div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">0 5 10 15 20 
+2 4 6 8 10 </div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">La actualización define el paso</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>n += 5</code> salta de 5 en 5. Para <b>pares</b> se parte de 2 y se suma de a 2. Para <b>múltiplos de 3</b>: <code>3, 6, 9...</code> con <code>+= 3</code>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">El <code>end=" "</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Evita el salto de línea y deja todo en <b>una línea</b> separado por espacios. El <code>print()</code> final <b>baja el cursor</b>.</p></div></div></section>
+<section><h2><span class="section-num">11</span> Acumulador: Sumar del 1 al 10</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">suma_hasta_10.py</span><span class="code-badge">Python</span></div><div class="code-body">i = <span class="c-num">1</span>
+suma = <span class="c-num">0</span>
+
+<span class="c-kw">while</span> i &lt;= <span class="c-num">10</span>:
+    suma += i
+    i += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"La suma es"</span>, suma)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">La suma es 55</div></div></div></div><table class="trace-table"><thead><tr><th>Iteración</th><th><code>i</code> (antes)</th><th><code>suma</code> (antes)</th><th><code>suma += i</code></th><th><code>i</code> (después)</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>0</td><td>1</td><td>2</td></tr><tr><td>2</td><td>2</td><td>1</td><td>3</td><td>3</td></tr><tr><td>3</td><td>3</td><td>3</td><td>6</td><td>4</td></tr><tr><td>4</td><td>4</td><td>6</td><td>10</td><td>5</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>10</td><td>10</td><td>45</td><td>55</td><td>11</td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Recordá</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Un <b>acumulador</b> (<code>suma</code>) siempre se <b>inicializa antes</b> del bucle (en 0 para sumas, en 1 para productos) y se <b>actualiza adentro</b>. Si lo inicializaras <b>dentro</b>, se reiniciaría en cada vuelta.</p></div></section>
+<section><h2><span class="section-num">12</span> Contador: ¿Cuántos Cumplen una Condición?</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">contar_pares.py</span><span class="code-badge">Python</span></div><div class="code-body">numero = <span class="c-num">1</span>
+pares = <span class="c-num">0</span>
+
+<span class="c-kw">while</span> numero &lt;= <span class="c-num">20</span>:
+    <span class="c-kw">if</span> numero % <span class="c-num">2</span> == <span class="c-num">0</span>:
+        pares += <span class="c-num">1</span>
+    numero += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"Cantidad de pares entre 1 y 20:"</span>, pares)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Cantidad de pares entre 1 y 20: 10</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Un <code>if</code> dentro del <code>while</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">En cada vuelta se <b>pregunta</b> si el número es par. Solo <b>cuando lo es</b> se incrementa el contador.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Dos variables que cambian</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>numero</code> <b>siempre</b> avanza (control del bucle); <code>pares</code> solo <b>a veces</b> (contador). Sus actualizaciones están en <b>sangrías distintas</b>.</p></div></div></section>
+<section><h2><span class="section-num">13</span> Ejemplo: Tabla de Multiplicar de un Número</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">tabla.py</span><span class="code-badge">Python</span></div><div class="code-body">n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número: "</span>))
+i = <span class="c-num">1</span>
+
+<span class="c-kw">while</span> i &lt;= <span class="c-num">10</span>:
+    <span class="c-fn">print</span>(<span class="c-str">f"{n} x {i} = {n * i}"</span>)
+    i += <span class="c-num">1</span></div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Número: <span class="terminal-user-input">7</span>
+7 x 1 = 7
+7 x 2 = 14
+7 x 3 = 21
+7 x 4 = 28
+7 x 5 = 35
+7 x 6 = 42
+7 x 7 = 49
+7 x 8 = 56
+7 x 9 = 63
+7 x 10 = 70</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Una misma variable de control (<code>i</code>) se usa <b>como contador del bucle y como factor</b> en la cuenta. Si el usuario escribe 7, la tabla muestra <code>7 x 1 = 7</code> hasta <code>7 x 10 = 70</code>.</p></div></section>
+<section><h2><span class="section-num">14</span> Ejemplo: Factorial de un Número</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">El factorial de <code>n</code> (escrito <code>n!</code>) es <code>1 × 2 × 3 × ... × n</code>. Por ejemplo <code>5! = 120</code>. Es un <b>acumulador de productos</b>: parte en <b>1</b> (no en 0).</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">factorial.py</span><span class="code-badge">Python</span></div><div class="code-body">n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número: "</span>))
+factorial = <span class="c-num">1</span>
+i = <span class="c-num">1</span>
+
+<span class="c-kw">while</span> i &lt;= n:
+    factorial *= i
+    i += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">f"{n}! = {factorial}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Número: <span class="terminal-user-input">5</span>
+5! = 120</div></div></div></div><table class="trace-table"><thead><tr><th><code>i</code></th><th><code>factorial</code> antes</th><th><code>factorial *= i</code></th></tr></thead><tbody><tr><td>1</td><td>1</td><td>1</td></tr><tr><td>2</td><td>1</td><td>2</td></tr><tr><td>3</td><td>2</td><td>6</td></tr><tr><td>4</td><td>6</td><td>24</td></tr><tr><td>5</td><td>24</td><td>120</td></tr></tbody></table></section>
+<section><h2><span class="section-num">15</span> Bucles Infinitos: El Error Más Temido</h2><div class="box box-rose"><h4 style="color:var(--accent-rose);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un <b>bucle infinito</b> es un bucle cuya condición <b>nunca se vuelve falsa</b>. El programa <b>se queda repitiendo para siempre</b> (y la pantalla se llena de mensajes o el programa "se cuelga").</p></div><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Se olvida la actualización</div><div class="code-window"><div class="code-header"><span class="code-title">infinito.py</span><span class="code-badge">Nunca termina</span></div><div class="code-body">i = <span class="c-num">1</span>
+<span class="c-kw">while</span> i &lt;= <span class="c-num">5</span>:
+    <span class="c-fn">print</span>(i)
+    <span class="c-cmt"># ¡falta i += 1!</span></div></div><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>i</code> <b>siempre vale 1</b>, así que <code>1 &lt;= 5</code> es <b>siempre</b> <code>True</code>.</p></div><div class="terminal-window"><div class="terminal-header"><span>Salida (infinita)</span><span>● ● ●</span></div><div class="terminal-body">1
+1
+1
+1
+1
+1
+1
+...  (no termina nunca)</div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">¿Cómo lo detengo?</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Presioná <b><code>Ctrl + C</code></b> en la terminal: Python interrumpe el programa y muestra <code>KeyboardInterrupt</code>. En un editor, usá el botón de <b>Stop/Detener</b>.</p></div></section>
+<section><h2><span class="section-num">16</span> Causas Típicas de un Bucle Infinito</h2><table class="trace-table"><thead><tr><th>Causa</th><th>Ejemplo</th><th>Corrección</th></tr></thead><tbody><tr><td>Olvidar la actualización</td><td><code>while i &lt;= 5:</code> sin <code>i += 1</code></td><td>Agregar <code>i += 1</code> <b>dentro</b> del bucle</td></tr><tr><td>Actualizar en la <b>dirección equivocada</b></td><td><code>while i &lt;= 5:</code> con <code>i -= 1</code></td><td>Usar <code>i += 1</code></td></tr><tr><td>Actualización <b>fuera</b> del bucle (mala sangría)</td><td><code>i += 1</code> sin sangría, después del <code>while</code></td><td>Indentar con el resto del cuerpo</td></tr><tr><td>Condición que <b>siempre</b> es verdadera</td><td><code>while 1 &lt; 2:</code></td><td>Revisar la condición</td></tr><tr><td>Cambiar <b>otra</b> variable</td><td>La condición usa <code>i</code> pero se modifica <code>j</code></td><td>Actualizar la variable de la condición</td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Chequeo rápido</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Antes de ejecutar un <code>while</code>, preguntate: <b>"¿qué línea del cuerpo hace que la condición se vuelva falsa algún día?"</b> Si no encontrás ninguna, hay un bucle infinito.</p></div></section>
+<section><h2><span class="section-num">17</span> Bucle Infinito Intencional: while True</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">A veces queremos un bucle que <b>no tenga una condición natural</b> de fin (un menú, un juego, un servidor). Se escribe <code>while True:</code> y se sale <b>con <code>break</code></b> cuando corresponde.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">while_true.py</span><span class="code-badge">Python</span></div><div class="code-body">contador = <span class="c-num">0</span>
+
+<span class="c-kw">while</span> <span class="c-kw">True</span>:
+    contador += <span class="c-num">1</span>
+    <span class="c-fn">print</span>(<span class="c-str">"Vuelta"</span>, contador)
+    <span class="c-kw">if</span> contador == <span class="c-num">3</span>:
+        <span class="c-kw">break</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"Fin"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Vuelta 1
+Vuelta 2
+Vuelta 3
+Fin</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Importante</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>while True</code> <b>sin</b> un <code>break</code> alcanzable es un <b>bucle infinito de verdad</b>. Siempre verificá que alguna condición dentro del bucle lleve al <code>break</code>.</p></div></section>
+<section><h2><span class="section-num">18</span> break: Salir del Bucle Inmediatamente</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>break</code> <b>termina el bucle al instante</b> y el programa continúa con la <b>primera instrucción después del bucle</b>. Las iteraciones restantes <b>no se ejecutan</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">break.py</span><span class="code-badge">Python</span></div><div class="code-body">i = <span class="c-num">1</span>
+<span class="c-kw">while</span> i &lt;= <span class="c-num">10</span>:
+    <span class="c-kw">if</span> i == <span class="c-num">5</span>:
+        <span class="c-kw">break</span>
+    <span class="c-fn">print</span>(i)
+    i += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"Salió del bucle con i ="</span>, i)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1
+2
+3
+4
+Salió del bucle con i = 5</div></div></div></div><table class="trace-table"><thead><tr><th><code>i</code></th><th>¿<code>i == 5</code>?</th><th>Acción</th></tr></thead><tbody><tr><td>1</td><td><code>False</code></td><td>Muestra 1</td></tr><tr><td>2</td><td><code>False</code></td><td>Muestra 2</td></tr><tr><td>3</td><td><code>False</code></td><td>Muestra 3</td></tr><tr><td>4</td><td><code>False</code></td><td>Muestra 4</td></tr><tr><td>5</td><td><code>True</code></td><td><b><code>break</code></b>: sale (no muestra 5)</td></tr></tbody></table></section>
+<section><h2><span class="section-num">19</span> continue: Saltear una Iteración</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>continue</code> <b>saltea el resto del cuerpo</b> en la iteración actual y <b>vuelve a evaluar la condición</b> para pasar a la siguiente vuelta. El bucle <b>no termina</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">continue.py</span><span class="code-badge">Python</span></div><div class="code-body">i = <span class="c-num">0</span>
+<span class="c-kw">while</span> i &lt; <span class="c-num">5</span>:
+    i += <span class="c-num">1</span>
+    <span class="c-kw">if</span> i == <span class="c-num">3</span>:
+        <span class="c-kw">continue</span>
+    <span class="c-fn">print</span>(i)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1
+2
+4
+5</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Cuidado: la actualización va ANTES del continue</h4><div class="code-window"><div class="code-header"><span class="code-title">continue_infinito.py</span><span class="code-badge">Se cuelga en i = 3</span></div><div class="code-body">i = <span class="c-num">0</span>
+<span class="c-kw">while</span> i &lt; <span class="c-num">5</span>:
+    <span class="c-kw">if</span> i == <span class="c-num">3</span>:
+        <span class="c-kw">continue</span>   <span class="c-cmt"># ¡salta el i += 1!</span>
+    <span class="c-fn">print</span>(i)
+    i += <span class="c-num">1</span></div></div><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si <code>continue</code> se ejecuta <b>antes</b> de <code>i += 1</code>, <code>i</code> se queda valiendo 3 <b>para siempre</b>. Por eso en el ejemplo anterior el <code>i += 1</code> está <b>primero</b>.</p></div></section>
+<section><h2><span class="section-num">20</span> break vs. continue</h2><table class="trace-table"><thead><tr><th></th><th><code>break</code></th><th><code>continue</code></th></tr></thead><tbody><tr><td>Qué hace</td><td><b>Sale</b> del bucle por completo</td><td><b>Saltea</b> solo la iteración actual</td></tr><tr><td>Después de ejecutarse</td><td>Sigue con la instrucción <b>después</b> del bucle</td><td>Vuelve a <b>evaluar la condición</b></td></tr><tr><td>¿El bucle termina?</td><td><b>Sí</b></td><td><b>No</b> (si la condición sigue siendo verdadera)</td></tr><tr><td>Uso típico</td><td>Ya encontré lo que buscaba / el usuario quiere salir</td><td>Este dato no me sirve, paso al siguiente</td></tr></tbody></table><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">break_y_continue.py</span><span class="code-badge">Python</span></div><div class="code-body">i = <span class="c-num">0</span>
+<span class="c-kw">while</span> i &lt; <span class="c-num">6</span>:
+    i += <span class="c-num">1</span>
+    <span class="c-kw">if</span> i == <span class="c-num">2</span>:
+        <span class="c-kw">continue</span>
+    <span class="c-kw">if</span> i == <span class="c-num">5</span>:
+        <span class="c-kw">break</span>
+    <span class="c-fn">print</span>(i)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1
+3
+4</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Resultado</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Se muestran <code>1</code>, <code>3</code> y <code>4</code>: el <code>2</code> se saltea (<code>continue</code>) y al llegar a <code>5</code> el bucle termina (<code>break</code>).</p></div></section>
+<section><h2><span class="section-num">21</span> Validar Datos: Repetir Hasta que Sea Correcto</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">validar_edad.py</span><span class="code-badge">Python</span></div><div class="code-body">edad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Ingrese su edad (0-120): "</span>))
+
+<span class="c-kw">while</span> edad &lt; <span class="c-num">0</span> <span class="c-kw">or</span> edad &gt; <span class="c-num">120</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Edad inválida. Intente de nuevo."</span>)
+    edad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Ingrese su edad (0-120): "</span>))
+
+<span class="c-fn">print</span>(<span class="c-str">"Edad registrada:"</span>, edad)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ingrese su edad (0-120): <span class="terminal-user-input">-5</span>
+Edad inválida. Intente de nuevo.
+Ingrese su edad (0-120): <span class="terminal-user-input">200</span>
+Edad inválida. Intente de nuevo.
+Ingrese su edad (0-120): <span class="terminal-user-input">17</span>
+Edad registrada: 17</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.86rem;">Se pide el dato <b>una vez</b> antes del bucle.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.86rem;">El <code>while</code> <b>repite mientras el dato sea inválido</b>: avisa y vuelve a pedirlo.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.86rem;">Cuando el usuario escribe un valor correcto, la condición es <code>False</code> y el bucle termina.</div></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">En C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Esto se solía escribir con <code>do { ... } while (...)</code>. En Python se escribe así: <b>pedir antes, repetir el pedido dentro del <code>while</code></b>.</p></div></section>
+<section><h2><span class="section-num">22</span> El do-while de C No Existe en Python: while True + break</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">El patrón "ejecutar <b>al menos una vez</b> y repetir si es inválido" se escribe en Python con <code>while True</code> y <code>break</code>:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">validar_con_break.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">while</span> <span class="c-kw">True</span>:
+    nota = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Nota (1-10): "</span>))
+    <span class="c-kw">if</span> <span class="c-num">1</span> &lt;= nota &lt;= <span class="c-num">10</span>:
+        <span class="c-kw">break</span>
+    <span class="c-fn">print</span>(<span class="c-str">"Valor fuera de rango"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"Nota guardada:"</span>, nota)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Nota (1-10): <span class="terminal-user-input">15</span>
+Valor fuera de rango
+Nota (1-10): <span class="terminal-user-input">0</span>
+Valor fuera de rango
+Nota (1-10): <span class="terminal-user-input">8</span>
+Nota guardada: 8</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="code-window"><div class="code-header"><span class="code-title">C</span><span class="code-badge">do-while</span></div><div class="code-body">/* C */
+do {
+    scanf(<span class="c-str">"%d"</span>, &amp;nota);
+} <span class="c-kw">while</span> (nota &lt; <span class="c-num">1</span> || nota &gt; <span class="c-num">10</span>);</div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Ventaja</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Se escribe <b>un solo</b> <code>input</code> en vez de dos. El <code>break</code> sale <b>cuando el dato ya es válido</b>.</p></div></div></section>
+<section><h2><span class="section-num">23</span> Centinela: Leer Datos Hasta un Valor Especial</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un <b>centinela</b> es un valor especial (por ejemplo <code>0</code>) que <b>avisa que se terminó la carga de datos</b>. No se cuenta como un dato más.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">centinela.py</span><span class="code-badge">Python</span></div><div class="code-body">suma = <span class="c-num">0</span>
+cantidad = <span class="c-num">0</span>
+numero = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número (0 para terminar): "</span>))
+
+<span class="c-kw">while</span> numero != <span class="c-num">0</span>:
+    suma += numero
+    cantidad += <span class="c-num">1</span>
+    numero = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número (0 para terminar): "</span>))
+
+<span class="c-fn">print</span>(<span class="c-str">f"Ingresaste {cantidad} números. Suma: {suma}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Número (0 para terminar): <span class="terminal-user-input">10</span>
+Número (0 para terminar): <span class="terminal-user-input">25</span>
+Número (0 para terminar): <span class="terminal-user-input">5</span>
+Número (0 para terminar): <span class="terminal-user-input">0</span>
+Ingresaste 3 números. Suma: 40</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Patrón</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b>Leer antes del bucle → procesar → leer de nuevo al final del cuerpo.</b> El valor centinela corta el ciclo <b>sin ser procesado</b>.</p></div></section>
+<section><h2><span class="section-num">24</span> Ejemplo: Adivinar el Número</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">adivinar.py</span><span class="code-badge">Python</span></div><div class="code-body">secreto = <span class="c-num">42</span>
+intento = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Adiviná el número: "</span>))
+
+<span class="c-kw">while</span> intento != secreto:
+    <span class="c-kw">if</span> intento &lt; secreto:
+        <span class="c-fn">print</span>(<span class="c-str">"Es más grande"</span>)
+    <span class="c-kw">else</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"Es más chico"</span>)
+    intento = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Adiviná el número: "</span>))
+
+<span class="c-fn">print</span>(<span class="c-str">"¡Correcto!"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Adiviná el número: <span class="terminal-user-input">10</span>
+Es más grande
+Adiviná el número: <span class="terminal-user-input">80</span>
+Es más chico
+Adiviná el número: <span class="terminal-user-input">42</span>
+¡Correcto!</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Por qué <code>while</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">No sabemos <b>cuántos intentos</b> necesitará el usuario: puede acertar a la primera o a la décima. Cuando la cantidad de repeticiones <b>no se conoce de antemano</b>, el <code>while</code> es la herramienta natural.</p></div></section>
+<section><h2><span class="section-num">25</span> Ejemplo: Menú Interactivo</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">menu.py</span><span class="code-badge">Python</span></div><div class="code-body">opcion = <span class="c-str">""</span>
+
+<span class="c-kw">while</span> opcion != <span class="c-str">"3"</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"1) Saludar  2) Despedirse  3) Salir"</span>)
+    opcion = <span class="c-fn">input</span>(<span class="c-str">"Elija una opción: "</span>)
+    <span class="c-kw">if</span> opcion == <span class="c-str">"1"</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"¡Hola!"</span>)
+    <span class="c-kw">elif</span> opcion == <span class="c-str">"2"</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"¡Chau!"</span>)
+    <span class="c-kw">elif</span> opcion != <span class="c-str">"3"</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"Opción inválida"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"Programa finalizado"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1) Saludar  2) Despedirse  3) Salir
+Elija una opción: <span class="terminal-user-input">1</span>
+¡Hola!
+1) Saludar  2) Despedirse  3) Salir
+Elija una opción: <span class="terminal-user-input">7</span>
+Opción inválida
+1) Saludar  2) Despedirse  3) Salir
+Elija una opción: <span class="terminal-user-input">2</span>
+¡Chau!
+1) Saludar  2) Despedirse  3) Salir
+Elija una opción: <span class="terminal-user-input">3</span>
+Programa finalizado</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Observá</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>opcion</code> se inicializa con un valor que <b>no es "3"</b> para que el bucle <b>arranque</b>. Las opciones se comparan como <b>texto</b> (por eso <code>"3"</code> con comillas): no hizo falta convertir a <code>int</code>.</p></div></section>
+<section><h2><span class="section-num">26</span> Bucles Anidados: Un while Dentro de Otro</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">El cuerpo de un <code>while</code> puede contener <b>otro <code>while</code></b>. Por cada vuelta del bucle <b>externo</b>, el <b>interno</b> completa <b>todas</b> sus vueltas.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">triangulo_anidado.py</span><span class="code-badge">Python</span></div><div class="code-body">fila = <span class="c-num">1</span>
+<span class="c-kw">while</span> fila &lt;= <span class="c-num">4</span>:
+    columna = <span class="c-num">1</span>
+    <span class="c-kw">while</span> columna &lt;= fila:
+        <span class="c-fn">print</span>(<span class="c-str">"*"</span>, end=<span class="c-str">""</span>)
+        columna += <span class="c-num">1</span>
+    <span class="c-fn">print</span>()
+    fila += <span class="c-num">1</span></div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">*
+**
+***
+****</div></div></div></div><table class="trace-table"><thead><tr><th><code>fila</code></th><th>Vueltas del bucle interno</th><th>Resultado en pantalla</th></tr></thead><tbody><tr><td>1</td><td>1</td><td><code>*</code></td></tr><tr><td>2</td><td>2</td><td><code>**</code></td></tr><tr><td>3</td><td>3</td><td><code>***</code></td></tr><tr><td>4</td><td>4</td><td><code>****</code></td></tr></tbody></table><div class="box box-rose"><h4 style="color:var(--accent-rose);">Fijate en <code>columna = 1</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Se <b>reinicia dentro</b> del bucle externo: así el interno <b>empieza de cero en cada fila</b>. Si estuviera afuera, el interno solo funcionaría la primera vez.</p></div></section>
+<section><h2><span class="section-num">27</span> Ejemplo: Suma de los Dígitos de un Número</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Usamos <code>% 10</code> para obtener el <b>último dígito</b> y <code>// 10</code> para <b>eliminarlo</b> (unidad 04):</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">suma_digitos.py</span><span class="code-badge">Python</span></div><div class="code-body">numero = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número: "</span>))
+suma = <span class="c-num">0</span>
+
+<span class="c-kw">while</span> numero &gt; <span class="c-num">0</span>:
+    digito = numero % <span class="c-num">10</span>
+    suma += digito
+    numero //= <span class="c-num">10</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"Suma de dígitos:"</span>, suma)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Número: <span class="terminal-user-input">4739</span>
+Suma de dígitos: 23</div></div></div></div><table class="trace-table"><thead><tr><th>Vuelta</th><th><code>numero</code></th><th><code>digito</code></th><th><code>suma</code></th><th><code>numero //= 10</code></th></tr></thead><tbody><tr><td>1</td><td>4739</td><td>9</td><td>9</td><td>473</td></tr><tr><td>2</td><td>473</td><td>3</td><td>12</td><td>47</td></tr><tr><td>3</td><td>47</td><td>7</td><td>19</td><td>4</td></tr><tr><td>4</td><td>4</td><td>4</td><td>23</td><td>0</td></tr><tr><td>—</td><td>0</td><td><code>0 &gt; 0</code> es <code>False</code></td><td></td><td>Termina</td></tr></tbody></table></section>
+<section><h2><span class="section-num">28</span> Ejemplo: Sucesión de Fibonacci</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Cada término es la <b>suma de los dos anteriores</b>: <code>0, 1, 1, 2, 3, 5, 8...</code>. Necesitamos <b>dos variables</b> que "avancen" juntas.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">fibonacci.py</span><span class="code-badge">Python</span></div><div class="code-body">n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"¿Cuántos términos? "</span>))
+anterior = <span class="c-num">0</span>
+actual = <span class="c-num">1</span>
+contador = <span class="c-num">0</span>
+
+<span class="c-kw">while</span> contador &lt; n:
+    <span class="c-fn">print</span>(anterior, end=<span class="c-str">" "</span>)
+    anterior, actual = actual, anterior + actual
+    contador += <span class="c-num">1</span>
+<span class="c-fn">print</span>()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">¿Cuántos términos? <span class="terminal-user-input">8</span>
+0 1 1 2 3 5 8 13 </div></div></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">La línea clave</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>anterior, actual = actual, anterior + actual</code> actualiza <b>las dos a la vez</b> (asignación múltiple, unidad 02): usa los <b>valores viejos</b> de ambas para calcular los nuevos.</p></div></section>
+<section><h2><span class="section-num">29</span> Error Frecuente #1: Off-by-One (Una Vuelta de Más o de Menos)</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Empezar en 0 con <code>&lt;=</code> (queríamos 3 saludos)</div><div class="code-window"><div class="code-header"><span class="code-title">cuatro_veces.py</span><span class="code-badge">Cuenta mal</span></div><div class="code-body">i = <span class="c-num">0</span>
+<span class="c-kw">while</span> i &lt;= <span class="c-num">3</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Hola"</span>)
+    i += <span class="c-num">1</span></div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola
+Hola
+Hola
+Hola</div></div></div><div class="correct-card"><div class="correct-title">✅ Condición correcta</div><div class="code-window"><div class="code-header"><span class="code-title">tres_veces.py</span><span class="code-badge">3 veces</span></div><div class="code-body">i = <span class="c-num">0</span>
+<span class="c-kw">while</span> i &lt; <span class="c-num">3</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Hola"</span>)
+    i += <span class="c-num">1</span></div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola
+Hola
+Hola</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.86rem;">Para repetir <b>N veces</b>: empezá en <b>0</b> y usá <code>&lt; N</code>; o empezá en <b>1</b> y usá <code>&lt;= N</code>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.86rem;">Las dos formas son correctas; el error aparece al <b>mezclarlas</b> (empezar en 0 con <code>&lt;= N</code> da N+1 vueltas).</div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">En el primer ejemplo</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Con <code>i = 0</code> y <code>i &lt;= 3</code> el contador toma los valores 0, 1, 2 y 3: ¡<b>4</b> vueltas! Verificá siempre <b>contando a mano</b> las vueltas.</p></div></section>
+<section><h2><span class="section-num">30</span> Error Frecuente #2: Inicialización y Variables de Control</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Variable sin inicializar</div><div class="code-window"><div class="code-header"><span class="code-title">sin_inicializar.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">while</span> contador &lt; <span class="c-num">3</span>:
+    <span class="c-fn">print</span>(contador)
+    contador += <span class="c-num">1</span></div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1, in &lt;module&gt;
+    while contador &lt; 3:
+          ^^^^^^^^
+NameError: name 'contador' is not defined</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Acumulador dentro del bucle</div><div class="code-window"><div class="code-header"><span class="code-title">reinicia.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">i = <span class="c-num">1</span>
+<span class="c-kw">while</span> i &lt;= <span class="c-num">3</span>:
+    suma = <span class="c-num">0</span>
+    suma += i
+    i += <span class="c-num">1</span>
+<span class="c-fn">print</span>(suma)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">3</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Solución 1</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Inicializar la variable <b>antes</b> del <code>while</code>: <code>contador = 0</code>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Solución 2</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Mover <code>suma = 0</code> <b>antes</b> del bucle. Adentro se reinicia en <b>cada vuelta</b>, y al final solo queda el último valor (3 en vez de 6).</p></div></div></section>
+<section><h2><span class="section-num">31</span> Error Frecuente #3: Problemas de Indentación en el Cuerpo</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Actualización fuera del bucle</div><div class="code-window"><div class="code-header"><span class="code-title">sangria_infinita.py</span><span class="code-badge">Bucle infinito</span></div><div class="code-body">i = <span class="c-num">1</span>
+<span class="c-kw">while</span> i &lt;= <span class="c-num">3</span>:
+    <span class="c-fn">print</span>(i)
+i += <span class="c-num">1</span></div></div><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>i += 1</code> <b>no tiene sangría</b>: no es parte del cuerpo. Dentro del bucle <code>i</code> nunca cambia.</p></div><div class="correct-card"><div class="correct-title">✅ Indentado correctamente</div><div class="code-window"><div class="code-header"><span class="code-title">sangria_ok.py</span><span class="code-badge">OK</span></div><div class="code-body">i = <span class="c-num">1</span>
+<span class="c-kw">while</span> i &lt;= <span class="c-num">3</span>:
+    <span class="c-fn">print</span>(i)
+    i += <span class="c-num">1</span></div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1
+2
+3</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Otros descuidos</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Olvidar los <b>dos puntos</b> del <code>while</code>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Escribir <code>while i = 5:</code> (<b>asignación</b> en vez de comparación).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usar <code>==</code> en la condición de un contador (<code>while i == 5</code>): el bucle <b>no entra nunca</b> si <code>i</code> no vale 5 al principio.</li></ul></div></section>
+<section><h2><span class="section-num">32</span> Comparación Final: while en C y en Python</h2><table class="trace-table"><thead><tr><th>Aspecto</th><th>C</th><th>Python</th></tr></thead><tbody><tr><td>Sintaxis</td><td><code>while (cond) { ... }</code></td><td><code>while cond:</code> + bloque indentado</td></tr><tr><td><code>do-while</code></td><td>Existe</td><td>No existe → <code>while True</code> + <code>break</code></td></tr><tr><td>Incremento</td><td><code>i++</code></td><td><code>i += 1</code></td></tr><tr><td><code>break</code> y <code>continue</code></td><td>Existen</td><td>Existen y funcionan igual</td></tr><tr><td>Variable de control</td><td>Se declara (<code>int i = 1;</code>)</td><td>Se crea al asignar (<code>i = 1</code>)</td></tr><tr><td>Cortar un bucle infinito</td><td>Ctrl + C</td><td>Ctrl + C (<code>KeyboardInterrupt</code>)</td></tr><tr><td>Bucle <code>while</code> con <code>else</code></td><td>No existe</td><td>Existe (no lo vemos en este curso)</td></tr></tbody></table></section>
+<section><h2><span class="section-num">33</span> Buenas Prácticas con while</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Pensá siempre en las <b>tres partes</b>: inicializar, condición, actualizar.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b>nombres claros</b>: <code>intentos</code>, <code>suma</code>, <code>contador</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Probá a mano</b> las primeras y las últimas vueltas con una tabla.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <code>while True</code> + <code>break</code> solo cuando <b>no hay una condición natural</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Agregá un <b>límite</b> (por ejemplo, máximo de intentos) si hay riesgo de bucle infinito.</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Condiciones <b>imposibles de cumplir</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Modificar la variable de control en <b>muchos lugares</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Bucles anidados profundos si se puede evitar.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usar <code>continue</code> sin asegurar antes la <b>actualización</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Dejar un <code>print</code> de depuración olvidado dentro del bucle.</li></ul></div></div></section>
+<section><h2><span class="section-num">34</span> Ejercicio 1: ¿Qué Imprime y Cuántas Veces Se Repite?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Seguilo con una tabla</span></div><div class="code-body">a = <span class="c-num">20</span>
+cantidad = <span class="c-num">0</span>
+
+<span class="c-kw">while</span> a &gt; <span class="c-num">3</span>:
+    a -= <span class="c-num">4</span>
+    cantidad += <span class="c-num">1</span>
+    <span class="c-fn">print</span>(a)
+
+<span class="c-fn">print</span>(<span class="c-str">"Vueltas:"</span>, cantidad)</div></div><details class="code-solution"><summary>👁️ Ver tabla y respuesta</summary><div class="solution-content"><table class="trace-table"><thead><tr><th>Vuelta</th><th><code>a</code> antes</th><th><code>a -= 4</code></th><th><code>cantidad</code></th></tr></thead><tbody><tr><td>1</td><td>20</td><td>16</td><td>1</td></tr><tr><td>2</td><td>16</td><td>12</td><td>2</td></tr><tr><td>3</td><td>12</td><td>8</td><td>3</td></tr><tr><td>4</td><td>8</td><td>4</td><td>4</td></tr><tr><td>5</td><td>4</td><td>0</td><td>5</td></tr><tr><td>—</td><td>0</td><td><code>0 &gt; 3</code> → <code>False</code></td><td>Sale</td></tr></tbody></table><p style="font-size:0.9rem; line-height:1.55; margin:4px 0;"><b>Salida:</b> <code>16</code>, <code>12</code>, <code>8</code>, <code>4</code>, <code>0</code> y luego <code>Vueltas: 5</code>.</p></div></details></section>
+<section><h2><span class="section-num">35</span> Ejercicio 2: Promedio con Centinela</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Escribí un programa que pida <b>notas</b> hasta que el usuario ingrese <b>-1</b>. Al final mostrá <b>cuántas</b> notas ingresó, el <b>promedio</b> y la <b>nota más alta</b>. Si no ingresó ninguna, mostrá <code>No se ingresaron notas</code>.</p></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body">suma = <span class="c-num">0</span>
+cantidad = <span class="c-num">0</span>
+mayor = <span class="c-num">0</span>
+
+nota = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Nota (-1 para terminar): "</span>))
+<span class="c-kw">while</span> nota != -<span class="c-num">1</span>:
+    suma += nota
+    cantidad += <span class="c-num">1</span>
+    <span class="c-kw">if</span> nota &gt; mayor:
+        mayor = nota
+    nota = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Nota (-1 para terminar): "</span>))
+
+<span class="c-kw">if</span> cantidad == <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"No se ingresaron notas"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">f"Cantidad: {cantidad} | Promedio: {suma / cantidad:.2f} | Máxima: {mayor}"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Nota (-1 para terminar): <span class="terminal-user-input">7</span>
+Nota (-1 para terminar): <span class="terminal-user-input">9.5</span>
+Nota (-1 para terminar): <span class="terminal-user-input">6</span>
+Nota (-1 para terminar): <span class="terminal-user-input">-1</span>
+Cantidad: 3 | Promedio: 7.50 | Máxima: 9.5</div></div></div></details></section>
+<section><h2><span class="section-num">36</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body">contador = <span class="c-num">1</span>
+<span class="c-kw">while</span> contador &lt;= <span class="c-num">5</span>
+<span class="c-fn">print</span>(contador)
+    contador + <span class="c-num">1</span>
+total = <span class="c-num">0</span>
+<span class="c-kw">while</span> total = <span class="c-num">10</span>:
+    total += <span class="c-num">2</span></div></div><details class="code-solution"><summary>👁️ Ver errores y solución</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Falta el <b><code>:</code></b> al final del primer <code>while</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>print(contador)</code> <b>sin sangría</b>: no pertenece al bucle.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>contador + 1</code> <b>no modifica</b> nada (calcula y descarta): debe ser <code>contador += 1</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>while total = 10:</code> usa <code>=</code> en vez de comparación; además la condición correcta sería <code>total &lt; 10</code>.</li></ul><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3_ok.py</span><span class="code-badge">Solución</span></div><div class="code-body">contador = <span class="c-num">1</span>
+<span class="c-kw">while</span> contador &lt;= <span class="c-num">5</span>:
+    <span class="c-fn">print</span>(contador)
+    contador += <span class="c-num">1</span>
+
+total = <span class="c-num">0</span>
+<span class="c-kw">while</span> total &lt; <span class="c-num">10</span>:
+    total += <span class="c-num">2</span></div></div></div></details></section>
+<section><h2><span class="section-num">37</span> Ejercicio 4 (Reto): Número Primo y Contraseña</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">A) ¿Es primo?</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Pedí un número <code>n</code> mayor que 1. Un número es <b>primo</b> si <b>no es divisible</b> por ningún número entre 2 y <code>n - 1</code>. Usá un <code>while</code> y <code>break</code>.</p></div><div class="box box-purple"><h4 style="color:var(--accent-purple);">B) Contraseña con 3 intentos</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Pedí la contraseña hasta <b>3 veces</b>. Si acierta, mostrá <code>Acceso permitido</code> y cortá el bucle. Si agota los intentos, mostrá <code>Cuenta bloqueada</code>.</p></div><details class="code-solution"><summary>👁️ Ver soluciones</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio4.py</span><span class="code-badge">Python</span></div><div class="code-body">n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número: "</span>))
+divisor = <span class="c-num">2</span>
+primo = <span class="c-kw">True</span>
+
+<span class="c-kw">while</span> divisor &lt; n:
+    <span class="c-kw">if</span> n % divisor == <span class="c-num">0</span>:
+        primo = <span class="c-kw">False</span>
+        <span class="c-kw">break</span>
+    divisor += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(n, <span class="c-str">"es primo:"</span>, primo)
+
+intentos = <span class="c-num">0</span>
+acceso = <span class="c-kw">False</span>
+<span class="c-kw">while</span> intentos &lt; <span class="c-num">3</span> <span class="c-kw">and</span> <span class="c-kw">not</span> acceso:
+    clave = <span class="c-fn">input</span>(<span class="c-str">"Contraseña: "</span>)
+    <span class="c-kw">if</span> clave == <span class="c-str">"python"</span>:
+        acceso = <span class="c-kw">True</span>
+    <span class="c-kw">else</span>:
+        intentos += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"Acceso permitido"</span> <span class="c-kw">if</span> acceso <span class="c-kw">else</span> <span class="c-str">"Cuenta bloqueada"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Número: <span class="terminal-user-input">29</span>
+29 es primo: True
+Contraseña: <span class="terminal-user-input">abc</span>
+Contraseña: <span class="terminal-user-input">python</span>
+Acceso permitido</div></div></div></details></section>
+<section><h2><span class="section-num">38</span> Resumen de la Unidad 07</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>while condicion:</code> <b>repite</b> el bloque mientras la condición sea <code>True</code>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Tres partes: <b>inicializar</b>, <b>condición</b>, <b>actualizar</b>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>La condición se evalúa <b>antes</b> de cada iteración (puede haber <b>0</b>).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Bucle infinito</b> = la condición nunca se vuelve falsa (<code>Ctrl + C</code> para cortar).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>break</code> <b>sale</b>; <code>continue</code> <b>saltea</b> la iteración.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>while True</code> + <code>break</code> reemplaza al <code>do-while</code> de C.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Puedo completar una tabla de seguimiento de un <code>while</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Identifico la inicialización, la condición y la actualización?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué un bucle puede ser infinito?</div><div class="checklist-item"><span class="icon">✓</span> ¿Distingo <code>break</code> de <code>continue</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé validar datos con un bucle?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 07 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Bucles while: Repetición Controlada por una Condición</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="06-estructuras-condicionales.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Estructuras Condicionales</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="08-bucles-for-range-control-ciclos.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Bucles for y range() →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

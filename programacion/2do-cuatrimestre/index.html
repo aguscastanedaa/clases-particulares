@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2do Cuatrimestre | Programación en C | Clases Particulares</title>
+  <title>2do Cuatrimestre | Programación | Clases Particulares</title>
   <link rel="icon" type="image/jpeg" href="../../logo.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +21,7 @@
       --accent: #34d399;
       --accent-glow: rgba(52, 211, 153, 0.2);
       --accent-cyan: #38bdf8;
+      --accent-cyan-glow: rgba(56, 189, 248, 0.2);
       --accent-purple: #c084fc;
       --accent-amber: #fbbf24;
       --badge-bg: rgba(52, 211, 153, 0.12);
@@ -48,7 +49,7 @@
 
     .container {
       width: 100%;
-      max-width: 920px;
+      max-width: 960px;
     }
 
     .breadcrumb-nav {
@@ -105,7 +106,7 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       margin-bottom: 10px;
-      background: linear-gradient(135deg, #ffffff 40%, var(--accent) 100%);
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent) 75%, var(--accent-cyan) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -114,6 +115,194 @@
       color: var(--text-muted);
       font-size: 1.05rem;
       line-height: 1.55;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      font-size: 0.82rem;
+    }
+
+    .stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      color: var(--text-muted);
+    }
+
+    .stat-badge b {
+      color: var(--accent);
+    }
+
+    .stat-badge b.cyan {
+      color: var(--accent-cyan);
+    }
+
+    /* BIMESTRES HERO GRID */
+    .bimestres-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 28px 0 34px;
+    }
+
+    .bimestre-hero {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 26px 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bimestre-hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .bimestre-hero.b3::before {
+      background: linear-gradient(90deg, var(--accent), #818cf8);
+    }
+
+    .bimestre-hero.b4::before {
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent));
+    }
+
+    .bimestre-hero:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.6);
+    }
+
+    .bimestre-hero.b3:hover {
+      border-color: rgba(52, 211, 153, 0.4);
+      box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.6), 0 0 24px var(--accent-glow);
+    }
+
+    .bimestre-hero.b4:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.6), 0 0 24px var(--accent-cyan-glow);
+    }
+
+    .bimestre-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      align-self: flex-start;
+    }
+
+    .b3 .bimestre-badge {
+      background: rgba(52, 211, 153, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+    }
+
+    .b4 .bimestre-badge {
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .bimestre-hero h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .bimestre-hero p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .bimestre-features {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 22px;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+    }
+
+    .bimestre-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .b3 .bimestre-feature-item span.bullet { color: var(--accent); }
+    .b4 .bimestre-feature-item span.bullet { color: var(--accent-cyan); }
+
+    .bimestre-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bimestre-count {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .bimestre-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .b3 .bimestre-btn {
+      color: var(--accent);
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+    }
+
+    .b3:hover .bimestre-btn {
+      background: var(--accent);
+      color: #042516;
+    }
+
+    .b4 .bimestre-btn {
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .b4:hover .bimestre-btn {
+      background: var(--accent-cyan);
+      color: #04131f;
     }
 
     .switch-cuatrimestre-banner {
@@ -162,29 +351,6 @@
       box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
     }
 
-    .stats-bar {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-      font-size: 0.82rem;
-    }
-
-    .stat-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--card-border);
-      padding: 4px 12px;
-      border-radius: 9999px;
-      color: var(--text-muted);
-    }
-
-    .stat-badge b {
-      color: var(--accent);
-    }
-
     .search-box {
       width: 100%;
       background: var(--card-bg);
@@ -212,6 +378,14 @@
       display: flex;
       align-items: center;
       gap: 10px;
+    }
+
+    .section-title.b3-title {
+      color: var(--accent);
+    }
+
+    .section-title.b4-title {
+      color: var(--accent-cyan);
     }
 
     .section-title::after {
@@ -244,9 +418,18 @@
 
     .lesson-card:hover {
       transform: translateX(4px);
+    }
+
+    .b3-card:hover {
       border-color: rgba(52, 211, 153, 0.45);
       background: rgba(16, 44, 38, 0.7);
       box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.6), 0 0 18px var(--accent-glow);
+    }
+
+    .b4-card:hover {
+      border-color: rgba(56, 189, 248, 0.45);
+      background: rgba(22, 33, 58, 0.88);
+      box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.6), 0 0 18px var(--accent-cyan-glow);
     }
 
     .lesson-info {
@@ -260,22 +443,32 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--accent);
-      background: var(--badge-bg);
       padding: 3px 8px;
       border-radius: 6px;
       margin-bottom: 6px;
     }
 
+    .b3-card .lesson-num {
+      color: var(--accent);
+      background: var(--badge-bg);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+    }
+
+    .b4-card .lesson-num {
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
     .lesson-info h3 {
-      font-size: 1.12rem;
+      font-size: 1.05rem;
       font-weight: 600;
       margin-bottom: 4px;
       color: #ffffff;
     }
 
     .lesson-info p {
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       line-height: 1.45;
     }
@@ -303,13 +496,19 @@
       gap: 6px;
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--accent);
       white-space: nowrap;
       transition: gap 0.2s ease;
     }
 
+    .b3-card .lesson-action { color: var(--accent); }
+    .b4-card .lesson-action { color: var(--accent-cyan); }
+
     .lesson-card:hover .lesson-action {
       gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .bimestres-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
@@ -318,7 +517,6 @@
         align-items: flex-start;
         gap: 14px;
       }
-
       .lesson-action {
         align-self: flex-end;
       }
@@ -331,42 +529,85 @@
     <div class="breadcrumb-nav">
       <a href="../../index.html">Portal Académico</a>
       <span class="breadcrumb-sep">/</span>
-      <a href="../index.html">Programación en C</a>
+      <a href="../index.html">Programación</a>
       <span class="breadcrumb-sep">/</span>
       <span class="breadcrumb-current">2do Cuatrimestre</span>
     </div>
 
     <header>
-      <div class="header-badge">Segundo Cuatrimestre • Texto, Punteros y Estructuras Avanzadas</div>
-      <h1>Programación en C: 2do Cuatrimestre</h1>
-      <p>
-        Plan curricular avanzado basado en el Apunte Teórico oficial (Parte 3): funciones con retorno, arreglos como parámetros, cadenas de caracteres (strings), biblioteca <code>string.h</code>, algoritmos de texto, punteros, direcciones físicas de memoria, paso por referencia simulado, equivalencia con arreglos, estructuras complejas, operador <code>-&gt;</code>, colecciones de registros y casos integradores.
-      </p>
+      <div class="header-badge">Semestre Superior • 2 Bimestres • 31 Unidades Didácticas</div>
+      <h1>2do Cuatrimestre: C Avanzado y Programación en Python</h1>
+      <p>Estructurado académicamente en dos bimestres complementarios: el <b>3er Bimestre</b> enfocado en tópicos superiores de C (funciones con retorno, procesamiento de strings, aritmética de punteros, paso por referencia y registros struct) y el <b>4to Bimestre</b> dedicado a la introducción completa a la programación en Python (sintaxis limpia, tipado dinámico, condicionales, ciclos, modularidad, listas, matrices y persistencia en archivos).</p>
+
       <div class="stats-bar">
-        <span class="stat-badge">📚 Unidades: <b>13 Clases Completas</b></span>
-        <span class="stat-badge">🎯 Temas: <b>40 Apartados del Apunte Cubiertos</b></span>
-        <span class="stat-badge">⚡ Nivel: <b>Intermedio a Avanzado</b></span>
-        <a href="Apunte%20teorico%20-%20Lab.%20Algoritmos%20y%20Estructura%20de%20Datos%20p3.pdf" target="_blank" class="stat-badge" style="text-decoration: none; border-color: rgba(52, 211, 153, 0.35); color: #34d399;">📄 <b>Abrir Apunte Teórico Parte 3 (PDF)</b></a>
+        <span class="stat-badge">🏛️ Organización: <b>2 Bimestres</b></span>
+        <span class="stat-badge">📚 Total: <b>31 Presentaciones</b></span>
+        <span class="stat-badge">🎯 3er Bimestre: <b>13 Unidades (C)</b></span>
+        <span class="stat-badge"><b class="cyan">4to Bimestre:</b> <b>18 Unidades (Python)</b></span>
       </div>
     </header>
 
+    <!-- ACCESO DIRECTO A AMBOS BIMESTRES -->
+    <div class="bimestres-grid">
+      <!-- 3ER BIMESTRE -->
+      <a href="3er-bimestre/index.html" class="bimestre-hero b3">
+        <div>
+          <span class="bimestre-badge">3er Bimestre • C Avanzado</span>
+          <h2>3er Bimestre</h2>
+          <p>Funciones con retorno y paso de arreglos como parámetros, cadenas de caracteres en RAM, biblioteca <code>&lt;string.h&gt;</code>, aritmética y paso por referencia con punteros, estructuras compuestas <code>struct</code>, operador flecha (<code>-&gt;</code>) y proyecto integrador bancario.</p>
+
+          <div class="bimestre-features">
+            <div class="bimestre-feature-item"><span class="bullet">▸</span> Funciones con retorno y vectores como parámetros</div>
+            <div class="bimestre-feature-item"><span class="bullet">▸</span> Strings, terminador \0 y biblioteca string.h</div>
+            <div class="bimestre-feature-item"><span class="bullet">▸</span> Punteros, operadores &amp; y *, paso por referencia</div>
+            <div class="bimestre-feature-item"><span class="bullet">▸</span> Estructuras struct, operador -&gt; y caso bancario</div>
+          </div>
+        </div>
+
+        <div class="bimestre-footer">
+          <span class="bimestre-count">13 Unidades Didácticas</span>
+          <span class="bimestre-btn">Abrir 3er Bimestre →</span>
+        </div>
+      </a>
+
+      <!-- 4TO BIMESTRE -->
+      <a href="4to-bimestre/index.html" class="bimestre-hero b4">
+        <div>
+          <span class="bimestre-badge">4to Bimestre • Python 3</span>
+          <h2>4to Bimestre</h2>
+          <p>Python enseñado desde cero: sintaxis limpia e indentación, tipos y variables, I/O con <code>input()</code> y f-strings, operadores, condicionales, bucles <code>while/for</code>, funciones (parámetros, <code>return</code>, alcance), strings y sus métodos, listas y matrices, archivos con <code>with</code>, <code>try/except</code>, módulos y buenas prácticas.</p>
+
+          <div class="bimestre-features">
+            <div class="bimestre-feature-item"><span class="bullet">▸</span> Sintaxis, indentación, print() e input()</div>
+            <div class="bimestre-feature-item"><span class="bullet">▸</span> Tipos dinámicos, operadores y condicionales if/elif</div>
+            <div class="bimestre-feature-item"><span class="bullet">▸</span> Bucles while/for, range(), funciones y strings</div>
+            <div class="bimestre-feature-item"><span class="bullet">▸</span> Listas, matrices, archivos, errores y buenas prácticas</div>
+          </div>
+        </div>
+
+        <div class="bimestre-footer">
+          <span class="bimestre-count">18 Unidades Didácticas</span>
+          <span class="bimestre-btn">Abrir 4to Bimestre →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- SWITCH BANNER -->
     <div class="switch-cuatrimestre-banner">
       <div class="switch-text">
-        <h4>¿Necesitás consultar los temas del 1er Cuatrimestre?</h4>
-        <p>El 1er Cuatrimestre contiene 23 presentaciones divididas en sus dos bimestres: desde fundamentos iniciales (variables, if, for) hasta vectores, matrices y memoria dinámica (malloc, free).</p>
+        <h4>¿Buscás los Fundamentos Iniciales?</h4>
+        <p>Explorá el 1er Cuatrimestre (1er y 2do Bimestre): Algoritmia, variables, control de flujo, vectores, matrices y memoria dinámica en el Heap.</p>
       </div>
       <a href="../1er-cuatrimestre/index.html" class="switch-btn">Ir al 1er Cuatrimestre →</a>
     </div>
 
     <input type="text" id="filter" class="search-box"
-      placeholder="Buscar por tema o concepto (ej. return, string, strlen, strcmp, punteros, &, *, flecha ->, transferencia)...">
+      placeholder="Buscar tema o unidad en el 2do Cuatrimestre (ej: punteros, struct, python, while, listas, archivos)...">
 
-    <!-- BLOQUE 1: FUNCIONES CON RETORNO Y ARREGLOS -->
-    <div class="section-title">Bloque I: Funciones con Retorno y Arreglos como Parámetros</div>
+    <!-- 3ER BIMESTRE LIST -->
+    <div class="section-title b3-title">3er Bimestre: Punteros, Strings y Estructuras en C (13 Unidades)</div>
     <div class="lesson-list">
-
-      <!-- UNIDAD 1 -->
-      <a href="presentaciones/01-funciones-retorno-arreglos-parametros.html" class="lesson-card"
+      <a href="3er-bimestre/presentaciones/01-funciones-retorno-arreglos-parametros.html" class="lesson-card b4-card"
         data-search="funciones con retorno return printf parametros argumentos doble sumar calcularDescuento arreglos como parametros mostrarVector sumarVector tamano longitud">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 01</span>
@@ -380,15 +621,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-    </div>
-
-    <!-- BLOQUE 2: STRINGS Y BIBLIOTECA STRING.H -->
-    <div class="section-title">Bloque II: Manejo de Texto y Algoritmos con Strings</div>
-    <div class="lesson-list">
-
-      <!-- UNIDAD 2 -->
-      <a href="presentaciones/02-introduccion-strings.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/02-introduccion-strings.html" class="lesson-card b4-card"
         data-search="introduccion strings char[] arreglo caracteres terminador nulo \0 memoria ram comillas simples vs dobles %s recorrido longitud manual">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 02</span>
@@ -402,10 +635,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-
-      <!-- UNIDAD 3 -->
-      <a href="presentaciones/03-libreria-string-h.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/03-libreria-string-h.html" class="lesson-card b4-card"
         data-search="libreria string.h strlen strcpy strncpy strcmp strncmp strcat strncat strchr strstr buscar subcadena empieza con buffer overflow">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 03</span>
@@ -419,10 +649,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-
-      <!-- UNIDAD 4 -->
-      <a href="presentaciones/04-algoritmos-procesamiento-strings.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/04-algoritmos-procesamiento-strings.html" class="lesson-card b4-card"
         data-search="algoritmos procesamiento strings comparar manual sonIguales contarCaracter buscar subcadenas comienzaCon modificar reemplazar mayusculas minusculas ascii 32 invertirString palindromos radar">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 04</span>
@@ -436,15 +663,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-    </div>
-
-    <!-- BLOQUE 3: PUNTEROS Y MEMORIA -->
-    <div class="section-title">Bloque III: Punteros, Direcciones de Memoria y Referencia</div>
-    <div class="lesson-list">
-
-      <!-- UNIDAD 5 -->
-      <a href="presentaciones/05-introduccion-punteros-direcciones-memoria.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/05-introduccion-punteros-direcciones-memoria.html" class="lesson-card b4-card"
         data-search="punteros direcciones memoria ram operador & ampersand operador * asterisco desreferenciacion int *ptr %p analogia casa papel direccion">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 05</span>
@@ -458,10 +677,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-
-      <!-- UNIDAD 6 -->
-      <a href="presentaciones/06-paso-por-referencia-punteros-funciones.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/06-paso-por-referencia-punteros-funciones.html" class="lesson-card b4-card"
         data-search="paso por referencia punteros funciones modificar variable original cambiar(&x) incrementar division cociente resto devolver varios valores minMax">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 06</span>
@@ -475,10 +691,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-
-      <!-- UNIDAD 7 -->
-      <a href="presentaciones/07-punteros-y-arreglos.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/07-punteros-y-arreglos.html" class="lesson-card b4-card"
         data-search="relacion punteros arreglos direccion primer elemento numeros == &numeros[0] int *p = numeros aritmetica punteros p + 1 *(p + i) equivalencia corchetes limites constantes">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 07</span>
@@ -492,15 +705,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-    </div>
-
-    <!-- BLOQUE 4: ESTRUCTURAS AVANZADAS E INTEGRACIÓN -->
-    <div class="section-title">Bloque IV: Estructuras Avanzadas, Punteros e Integración</div>
-    <div class="lesson-list">
-
-      <!-- UNIDAD 8 -->
-      <a href="presentaciones/08-estructuras-struct-fundamentos.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/08-estructuras-struct-fundamentos.html" class="lesson-card b4-card"
         data-search="estructuras struct fundamentos registros campos heterogeneos operador punto . struct Persona struct Punto Alumno copia valor imprimirPunto calcularPromedio">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 08</span>
@@ -514,10 +719,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-
-      <!-- UNIDAD 9 -->
-      <a href="presentaciones/09-punteros-a-estructuras-operador-flecha.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/09-punteros-a-estructuras-operador-flecha.html" class="lesson-card b4-card"
         data-search="punteros a estructuras operador flecha -> (*emp).salario aumentarSalario porcentaje mutacion directa precedencia operadores">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 09</span>
@@ -531,10 +733,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-
-      <!-- UNIDAD 10 -->
-      <a href="presentaciones/10-arreglos-de-estructuras.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/10-arreglos-de-estructuras.html" class="lesson-card b4-card"
         data-search="arreglos de estructuras vectores de structs struct Alumno clase[30] clase[i].campo mejorPromedio modificar vehiculos flota kilometraje">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 10</span>
@@ -548,10 +747,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-
-      <!-- UNIDAD 11 -->
-      <a href="presentaciones/11-estructuras-arreglos-internos-anidadas.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/11-estructuras-arreglos-internos-anidadas.html" class="lesson-card b4-card"
         data-search="estructuras con arreglos internos estructuras anidadas estudiante notas[3] struct Fecha nacimiento persona.nacimiento.dia jerarquia arbol">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 11</span>
@@ -565,10 +761,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-
-      <!-- UNIDAD 12 -->
-      <a href="presentaciones/12-integracion-transferencia-bancaria.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/12-integracion-transferencia-bancaria.html" class="lesson-card b4-card"
         data-search="integracion transferencia bancaria struct CuentaBancaria saldo estado activa inactiva transferir punteros origen destino validaciones atomica return 1 0">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 12</span>
@@ -582,10 +775,7 @@
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
-      </a>
-
-      <!-- UNIDAD 13 -->
-      <a href="presentaciones/13-resumen-simbolos-repaso-integrador.html" class="lesson-card"
+      </a><a href="3er-bimestre/presentaciones/13-resumen-simbolos-repaso-integrador.html" class="lesson-card b4-card"
         data-search="resumen simbolos repaso integrador guia operadores & * int* [] . -> \0 return lectura expresiones complejas autoevaluacion">
         <div class="lesson-info">
           <span class="lesson-num">Unidad 13</span>
@@ -596,6 +786,317 @@
             <span class="tag-item">Expresiones Complejas</span>
             <span class="tag-item">Preguntas de Examen</span>
             <span class="tag-item">Autoevaluación</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+    </div>
+
+    <!-- 4TO BIMESTRE LIST -->
+    <div class="section-title b4-title">4to Bimestre: Introducción a la Programación en Python (18 Unidades)</div>
+    <div class="lesson-list">
+      <a href="4to-bimestre/presentaciones/01-introduccion-python.html" class="lesson-card b4-card"
+        data-search="introduccion python compilado interpretado c vs python printf print sep end comentarios indentacion errores sintaxis traceback pep 8">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 01 • 36 diapositivas</span>
+          <h3>Introducción a Python y Fundamentos del Lenguaje</h3>
+          <p>¿Qué es Python y para qué se usa? Alto nivel, compilado (C) vs interpretado (Python), cómo instalar y ejecutar, tu primer <code>print()</code> con <code>sep</code> y <code>end</code>, comentarios (<code>#</code>), los tres tipos de errores y la regla de oro: la <b>indentación</b>.</p>
+          <div class="tag-list">
+            <span class="tag-item">Alto Nivel</span>
+            <span class="tag-item">Interpretado</span>
+            <span class="tag-item">print()</span>
+            <span class="tag-item">Comentarios #</span>
+            <span class="tag-item">Errores</span>
+            <span class="tag-item">Indentación</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/02-variables-y-tipos-de-datos.html" class="lesson-card b4-card"
+        data-search="variables tipos de datos int float str bool type conversion int() float() str() bool() tipado dinamico asignacion nombres reservadas">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 02 • 39 diapositivas</span>
+          <h3>Variables y Tipos de Datos</h3>
+          <p>Qué es una variable y para qué sirve, el signo <code>=</code> como asignación, nombres válidos y PEP 8, los cuatro tipos (<code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>), <code>type()</code>, tipado dinámico, conversión de tipos y errores típicos.</p>
+          <div class="tag-list">
+            <span class="tag-item">Asignación =</span>
+            <span class="tag-item">Nombres</span>
+            <span class="tag-item">int float str bool</span>
+            <span class="tag-item">type()</span>
+            <span class="tag-item">Casting</span>
+            <span class="tag-item">Traza de variables</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/03-entrada-salida-de-datos.html" class="lesson-card b4-card"
+        data-search="entrada salida input print f-string formato int(input()) float(input()) scanf printf string conversion">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 03 • 31 diapositivas</span>
+          <h3>Entrada y Salida de Datos</h3>
+          <p>Mostrar con <code>print()</code> y <b>f-strings</b> (formato <code>:.2f</code>), pedir con <code>input()</code>, por qué <code>input()</code> <b>siempre devuelve <code>str</code></b>, <code>int(input())</code> y <code>float(input())</code>, programas interactivos y comparación con <code>printf</code>/<code>scanf</code>.</p>
+          <div class="tag-list">
+            <span class="tag-item">print()</span>
+            <span class="tag-item">f-strings</span>
+            <span class="tag-item">input()</span>
+            <span class="tag-item">int(input())</span>
+            <span class="tag-item">ValueError</span>
+            <span class="tag-item">C vs Python</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/04-operadores-aritmeticos.html" class="lesson-card b4-card"
+        data-search="operadores aritmeticos suma resta division entera modulo potencia precedencia += incremento contador acumulador math round divmod">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 04 • 36 diapositivas</span>
+          <h3>Operadores Aritméticos</h3>
+          <p>Los siete operadores (<code>+ - * / // % **</code>), diferencia entre <code>/</code> y <code>//</code>, el módulo y sus usos, potencia, precedencia, operadores abreviados (<code>+=</code>), contadores y acumuladores, <code>round</code>, <code>divmod</code> y <code>math</code>.</p>
+          <div class="tag-list">
+            <span class="tag-item">/ vs //</span>
+            <span class="tag-item">Módulo %</span>
+            <span class="tag-item">Potencia **</span>
+            <span class="tag-item">Precedencia</span>
+            <span class="tag-item">+= -=</span>
+            <span class="tag-item">Sin ++ ni --</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/05-operadores-comparacion-y-logicos.html" class="lesson-card b4-card"
+        data-search="comparacion logicos and or not booleanos tablas de verdad igual distinto mayor menor cortocircuito in precedencia">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 05 • 36 diapositivas</span>
+          <h3>Operadores de Comparación y Lógicos</h3>
+          <p>Comparaciones que devuelven <code>True</code>/<code>False</code>, <code>=</code> vs <code>==</code>, comparaciones encadenadas, <code>and</code>/<code>or</code>/<code>not</code> con tablas de verdad, precedencia, cortocircuito, el error <code>x == 2 or 7</code> y el operador <code>in</code>.</p>
+          <div class="tag-list">
+            <span class="tag-item">== != &gt; &lt; &gt;= &lt;=</span>
+            <span class="tag-item">and or not</span>
+            <span class="tag-item">Tablas de verdad</span>
+            <span class="tag-item">Cortocircuito</span>
+            <span class="tag-item">in / not in</span>
+            <span class="tag-item">Booleanos</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/06-estructuras-condicionales.html" class="lesson-card b4-card"
+        data-search="condicionales if else elif anidados decisiones diagrama de flujo indentacion dos puntos">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 06 • 40 diapositivas</span>
+          <h3>Estructuras Condicionales</h3>
+          <p><code>if</code>, <code>if-else</code>, <code>if-elif-else</code> y anidados, con <b>diagramas de flujo</b>, seguimiento de caminos, orden de los <code>elif</code>, validaciones, expresión condicional y errores frecuentes (dos puntos, indentación, límites).</p>
+          <div class="tag-list">
+            <span class="tag-item">if</span>
+            <span class="tag-item">else</span>
+            <span class="tag-item">elif</span>
+            <span class="tag-item">Anidados</span>
+            <span class="tag-item">Diagramas de flujo</span>
+            <span class="tag-item">Casos borde</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/07-bucles-while-control-repeticion.html" class="lesson-card b4-card"
+        data-search="while bucles repeticion iteracion bucle infinito break continue centinela validacion menu do-while">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 07 • 40 diapositivas</span>
+          <h3>Bucles while: Repetición Controlada</h3>
+          <p><code>while</code> con sus tres partes (inicialización, condición, actualización), tablas de seguimiento, contadores y acumuladores, <b>bucles infinitos</b>, <code>break</code> y <code>continue</code>, validación de datos, centinelas, menús y bucles anidados.</p>
+          <div class="tag-list">
+            <span class="tag-item">while</span>
+            <span class="tag-item">Iteraciones</span>
+            <span class="tag-item">Bucle infinito</span>
+            <span class="tag-item">break / continue</span>
+            <span class="tag-item">Validación</span>
+            <span class="tag-item">Menús</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/08-bucles-for-range-control-ciclos.html" class="lesson-card b4-card"
+        data-search="for range bucle iteracion limite excluyente paso negativo anidados patrones break continue">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 08 • 43 diapositivas</span>
+          <h3>Bucles for y la Función range()</h3>
+          <p><code>for ... in ...</code>, <code>range(fin)</code>, <code>range(inicio, fin, paso)</code> y por qué el <b>límite final no se incluye</b>, paso negativo, recorrer textos, <code>break</code>/<code>continue</code>, bucles anidados, patrones y comparación <code>for</code> vs <code>while</code>.</p>
+          <div class="tag-list">
+            <span class="tag-item">for in</span>
+            <span class="tag-item">range()</span>
+            <span class="tag-item">Límite excluyente</span>
+            <span class="tag-item">Paso negativo</span>
+            <span class="tag-item">for anidados</span>
+            <span class="tag-item">for vs while</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/09-funciones-definicion-parametros-return.html" class="lesson-card b4-card"
+        data-search="funciones def parametros argumentos return print vs return none docstring funciones booleanas modularidad">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 09 • 42 diapositivas</span>
+          <h3>Funciones: Definición, Parámetros y return</h3>
+          <p>Qué es una función, <code>def</code>, definir vs llamar, flujo de ejecución, <b>parámetros vs argumentos</b>, <code>return</code>, <b><code>print</code> vs <code>return</code></b>, <code>None</code>, funciones booleanas, funciones que llaman a funciones y docstrings.</p>
+          <div class="tag-list">
+            <span class="tag-item">def</span>
+            <span class="tag-item">Parámetros / argumentos</span>
+            <span class="tag-item">return</span>
+            <span class="tag-item">print vs return</span>
+            <span class="tag-item">None</span>
+            <span class="tag-item">Docstring</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/10-funciones-alcance-valores-por-defecto.html" class="lesson-card b4-card"
+        data-search="funciones alcance scope variable local global valores por defecto argumentos con nombre retorno multiple tupla pass">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 10 • 32 diapositivas</span>
+          <h3>Funciones: Alcance y Valores por Defecto</h3>
+          <p>Argumentos con nombre, parámetros opcionales, devolver varios valores (tuplas), <b>variables locales y globales</b>, <code>global</code>, <code>pass</code>, validación con funciones y programas organizados en pedir / calcular / mostrar.</p>
+          <div class="tag-list">
+            <span class="tag-item">Valores por defecto</span>
+            <span class="tag-item">Keyword args</span>
+            <span class="tag-item">return a, b</span>
+            <span class="tag-item">Local vs global</span>
+            <span class="tag-item">Scope</span>
+            <span class="tag-item">Refactorizar</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/11-strings-fundamentos-indices-slicing.html" class="lesson-card b4-card"
+        data-search="strings cadenas texto indices negativos len slicing rebanado inmutable concatenar repetir in ord chr palindromo">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 11 • 38 diapositivas</span>
+          <h3>Strings: Fundamentos, Índices y Slicing</h3>
+          <p>Qué es un <code>str</code>, comillas y escapes, <b>índices positivos y negativos</b>, <code>len()</code>, recorrer con <code>for</code> y <code>enumerate</code>, <code>+</code>, <code>*</code>, <code>in</code>, <b>slicing</b> <code>[inicio:fin:paso]</code>, inmutabilidad, <code>ord</code>/<code>chr</code>.</p>
+          <div class="tag-list">
+            <span class="tag-item">Índices</span>
+            <span class="tag-item">len()</span>
+            <span class="tag-item">Slicing</span>
+            <span class="tag-item">Inmutabilidad</span>
+            <span class="tag-item">+ y *</span>
+            <span class="tag-item">ord / chr</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/12-strings-metodos-y-procesamiento.html" class="lesson-card b4-card"
+        data-search="strings metodos upper lower title strip replace count find index startswith endswith isdigit isalpha split join cesar validar">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 12 • 39 diapositivas</span>
+          <h3>Strings: Métodos y Procesamiento de Texto</h3>
+          <p><code>upper</code>, <code>lower</code>, <code>title</code>, <code>strip</code>, <code>replace</code>, <code>count</code>, <code>find</code>/<code>index</code>, <code>startswith</code>, <code>isdigit</code>…, <code>split</code> y <code>join</code>, encadenar métodos, f-strings avanzadas y ejemplos completos (contraseñas, César).</p>
+          <div class="tag-list">
+            <span class="tag-item">upper lower</span>
+            <span class="tag-item">strip replace</span>
+            <span class="tag-item">find count</span>
+            <span class="tag-item">split join</span>
+            <span class="tag-item">isdigit</span>
+            <span class="tag-item">César</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/13-listas-fundamentos-y-operaciones.html" class="lesson-card b4-card"
+        data-search="listas list vectores append insert extend remove pop del sort sorted reverse copy referencia mutable tupla">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 13 • 40 diapositivas</span>
+          <h3>Listas: Fundamentos y Operaciones</h3>
+          <p>Qué es una lista, crear, indexar y <b>slicing</b>, mutabilidad, <code>append</code>, <code>insert</code>, <code>extend</code>, <code>remove</code>, <code>pop</code>, <code>del</code>, <code>in</code>, <code>index</code>, <code>count</code>, <code>sort</code>/<code>sorted</code>, <b>copias y referencias</b>, listas en funciones y tuplas.</p>
+          <div class="tag-list">
+            <span class="tag-item">Listas</span>
+            <span class="tag-item">Índices</span>
+            <span class="tag-item">append insert</span>
+            <span class="tag-item">remove pop</span>
+            <span class="tag-item">sort sorted</span>
+            <span class="tag-item">Copias</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/14-listas-recorridos-y-algoritmos.html" class="lesson-card b4-card"
+        data-search="listas algoritmos recorrido acumulador contador maximo minimo busqueda filtrar comprension zip burbuja ordenamiento busqueda binaria">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 14 • 37 diapositivas</span>
+          <h3>Listas: Recorridos y Algoritmos Clásicos</h3>
+          <p>Patrón de recorrido, acumulador, contador, promedio, <b>máximo/mínimo</b>, búsqueda lineal, filtrar y transformar, <b>listas por comprensión</b>, <code>zip</code>, duplicados, <b>burbuja</b>, <b>búsqueda binaria</b> y errores frecuentes.</p>
+          <div class="tag-list">
+            <span class="tag-item">Recorridos</span>
+            <span class="tag-item">Máximo / mínimo</span>
+            <span class="tag-item">Búsqueda</span>
+            <span class="tag-item">Comprensión</span>
+            <span class="tag-item">Burbuja</span>
+            <span class="tag-item">Búsqueda binaria</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/15-listas-anidadas-y-matrices.html" class="lesson-card b4-card"
+        data-search="matrices listas anidadas lista de listas filas columnas diagonal transpuesta for anidados deepcopy tablero">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 15 • 39 diapositivas</span>
+          <h3>Listas Anidadas y Matrices</h3>
+          <p>Listas de listas, <code>matriz[fila][columna]</code>, recorridos con <code>for</code> anidados, sumas por fila y columna, <b>diagonales</b>, transpuesta, suma de matrices, errores clásicos (<code>[[0]*n]*m</code>, copia superficial) y registros.</p>
+          <div class="tag-list">
+            <span class="tag-item">Matrices</span>
+            <span class="tag-item">[i][j]</span>
+            <span class="tag-item">for anidados</span>
+            <span class="tag-item">Diagonales</span>
+            <span class="tag-item">Transpuesta</span>
+            <span class="tag-item">deepcopy</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/16-manejo-de-archivos-lectura-escritura.html" class="lesson-card b4-card"
+        data-search="archivos open modos r w a x write read readline readlines with close persistencia rutas encoding utf-8 txt">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 16 • 40 diapositivas</span>
+          <h3>Manejo de Archivos: Lectura y Escritura</h3>
+          <p>Persistencia, ciclo abrir-usar-cerrar, <code>open()</code> y modos <code>r w a x</code>, <code>write</code>, <code>close</code>, <code>read</code>, <code>readline</code>, <code>readlines</code>, recorrer con <code>for</code>, <b><code>with open()</code></b>, rutas y <code>encoding="utf-8"</code>.</p>
+          <div class="tag-list">
+            <span class="tag-item">open()</span>
+            <span class="tag-item">r w a x</span>
+            <span class="tag-item">write / read</span>
+            <span class="tag-item">readline</span>
+            <span class="tag-item">with open</span>
+            <span class="tag-item">Rutas y utf-8</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/17-archivos-procesamiento-y-errores.html" class="lesson-card b4-card"
+        data-search="archivos try except finally excepciones errores filenotfounderror raise csv registros actualizar eliminar persistencia">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 17 • 37 diapositivas</span>
+          <h3>Archivos: Procesamiento de Datos y Manejo de Errores</h3>
+          <p><code>try / except / else / finally</code>, validar entradas, <code>FileNotFoundError</code>, <code>raise</code>, formato CSV con <code>split</code>, cargar y guardar registros, buscar, filtrar, <b>actualizar y eliminar</b> datos, datos "sucios" y un gestor con persistencia.</p>
+          <div class="tag-list">
+            <span class="tag-item">try / except</span>
+            <span class="tag-item">FileNotFoundError</span>
+            <span class="tag-item">CSV</span>
+            <span class="tag-item">Registros</span>
+            <span class="tag-item">Actualizar / eliminar</span>
+            <span class="tag-item">Persistencia</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+      <a href="4to-bimestre/presentaciones/18-organizacion-buenas-practicas-repaso.html" class="lesson-card b4-card"
+        data-search="organizacion buenas practicas pep 8 main import modulos math random datetime resolver problemas depurar assert repaso integrador">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 18 • 35 diapositivas</span>
+          <h3>Organización, Buenas Prácticas y Repaso Final</h3>
+          <p>Nombres y <b>PEP 8</b>, funciones con una responsabilidad, <code>main()</code> y <code>if __name__ == "__main__"</code>, <b>módulos</b> (<code>math</code>, <code>random</code>, <code>datetime</code> y propios), <b>7 etapas</b> para resolver problemas, depurar, <code>assert</code> y repaso integrador.</p>
+          <div class="tag-list">
+            <span class="tag-item">PEP 8</span>
+            <span class="tag-item">main()</span>
+            <span class="tag-item">import</span>
+            <span class="tag-item">7 etapas</span>
+            <span class="tag-item">assert</span>
+            <span class="tag-item">Repaso integrador</span>
           </div>
         </div>
         <div class="lesson-action">Abrir clase →</div>
@@ -612,19 +1113,17 @@
       const q = e.target.value.toLowerCase().trim();
 
       cards.forEach(card => {
-        const text = (card.textContent + ' ' + (card.getAttribute('data-search') || '')).toLowerCase();
-        if (!q || text.includes(q)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
+        const text = card.textContent.toLowerCase();
+        const searchTags = card.getAttribute('data-search') ? card.getAttribute('data-search').toLowerCase() : '';
+        const match = text.includes(q) || searchTags.includes(q);
+        card.style.display = match ? 'flex' : 'none';
       });
 
       sections.forEach(sec => {
-        let sibling = sec.nextElementSibling;
-        if (sibling && sibling.classList.contains('lesson-list')) {
-          const visibleCards = sibling.querySelectorAll('.lesson-card:not([style*="display: none"])');
-          sec.style.display = visibleCards.length > 0 ? 'flex' : 'none';
+        const list = sec.nextElementSibling;
+        if (list && list.classList.contains('lesson-list')) {
+          const visible = Array.from(list.querySelectorAll('.lesson-card')).some(c => c.style.display !== 'none');
+          sec.style.display = visible ? 'flex' : 'none';
         }
       });
     });

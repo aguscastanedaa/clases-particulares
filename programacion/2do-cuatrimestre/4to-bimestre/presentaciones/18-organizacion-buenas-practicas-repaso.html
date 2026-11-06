@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 18: Organización, Buenas Prácticas y Repaso Final | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 18</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 18</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Organización, Buenas Prácticas y Repaso Final</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Escribir programas claros y mantenibles: nombres, PEP 8, funciones con una responsabilidad, main(), módulos e import, resolución de problemas en 7 etapas y repaso integrador del bimestre</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">Nombres y PEP 8</span><span class="badge badge-indigo">Funciones y main()</span><span class="badge badge-emerald">Módulos e import</span><span class="badge badge-amber">Resolver problemas</span><span class="badge badge-purple">Depurar y probar</span><span class="badge badge-rose">Repaso integrador</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 35 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: De "Funciona" a "Está Bien Hecho"</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya sabemos</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Todo el <b>lenguaje básico</b>: variables, tipos, operadores, <code>if</code>, bucles.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Funciones</b>, <b>strings</b>, <b>listas</b>, <b>matrices</b> y <b>archivos</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Manejo de errores con <b><code>try / except</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>En C: ya organizamos programas con <code>main</code>, funciones y <code>#include</code>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Nombres</b> y <b>estilo</b> (PEP 8).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Dividir</b> un programa en <b>funciones pequeñas</b> y la función <b><code>main()</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Módulos</b> y <b><code>import</code></b> (<code>math</code>, <code>random</code>, <code>datetime</code>, los tuyos).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Un <b>método</b> para resolver problemas en <b>7 etapas</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Depurar</b> y <b>probar</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Repaso integrador</b> de todo el bimestre.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que tus programas no solo <b>funcionen</b>, sino que sean <b>fáciles de leer, modificar y probar</b>, y que tengas un <b>método</b> para atacar cualquier ejercicio nuevo.</p></div></section>
+<section><h2><span class="section-num">02</span> No Alcanza con Que Funcione</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">A medida que los programas crecen, <b>el código se lee muchas más veces de las que se escribe</b> (por vos en el futuro, por tus compañeros, por tu docente). Un programa correcto pero <b>ilegible</b> es <b>difícil de corregir y de ampliar</b>.</p></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Programa que "solo funciona"</h4><div class="code-window"><div class="code-header"><span class="code-title">funciona_pero.py</span><span class="code-badge">Difícil de entender</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">f</span>(a,b):
+  x=a*b/<span class="c-num">100</span>
+  <span class="c-kw">return</span> a-x
+z=f(<span class="c-num">1000</span>,<span class="c-num">20</span>)
+<span class="c-fn">print</span>(z)</div></div><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">¿Qué es <code>f</code>? ¿Qué son <code>a</code>, <code>b</code>, <code>x</code>, <code>z</code>?</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Programa bien escrito</h4><div class="code-window"><div class="code-header"><span class="code-title">bien_escrito.py</span><span class="code-badge">Se lee solo</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">calcular_precio_final</span>(precio, descuento):
+    monto_descuento = precio * descuento / <span class="c-num">100</span>
+    <span class="c-kw">return</span> precio - monto_descuento
+
+precio_final = calcular_precio_final(<span class="c-num">1000</span>, <span class="c-num">20</span>)
+<span class="c-fn">print</span>(precio_final)</div></div><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;">Hace <b>exactamente lo mismo</b>, pero <b>se entiende</b>.</p></div></div></section>
+<section><h2><span class="section-num">03</span> Usar Nombres Descriptivos</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Del apunte</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Es importante elegir nombres que <b>expliquen qué información almacena</b> una variable o <b>qué tarea realiza</b> una función.</p></div><table class="trace-table"><thead><tr><th>Nombre poco claro</th><th>Nombre descriptivo</th><th>Por qué mejora</th></tr></thead><tbody><tr><td><code>x = 18</code></td><td><code>edad_alumno = 18</code></td><td>Dice <b>qué</b> guarda</td></tr><tr><td><code>def funcion1():</code></td><td><code>def calcular_promedio():</code></td><td>Dice <b>qué hace</b> (verbo)</td></tr><tr><td><code>l = [8, 6, 9]</code></td><td><code>notas = [8, 6, 9]</code></td><td>El <b>plural</b> indica una colección</td></tr><tr><td><code>t = 0</code></td><td><code>total_ventas = 0</code></td><td>No hace falta un comentario</td></tr><tr><td><code>flag = True</code></td><td><code>es_mayor_de_edad = True</code></td><td>Un booleano se lee como <b>pregunta</b></td></tr></tbody></table><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Reglas</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Variables y funciones: <b><code>snake_case</code></b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Constantes: <b><code>MAYUSCULAS</code></b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Funciones: <b>verbos</b> (<code>calcular</code>, <code>mostrar</code>, <code>es_...</code>).</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Evitá abreviaturas raras y nombres de una letra (salvo <code>i</code>, <code>j</code>).</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Nombres que <b>mienten</b> (<code>edad = "Juan"</code>).</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Tapar</b> nombres de Python (<code>list</code>, <code>len</code>, <code>sum</code>).</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Nombres de <b>dos significados</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Acentos y <code>ñ</code> en identificadores.</li></ul></div></div></section>
+<section><h2><span class="section-num">04</span> Estilo de Código: Las Convenciones de PEP 8</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">PEP 8</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Es la <b>guía oficial de estilo</b> de Python. Seguirla hace que <b>todo el código Python se vea parecido</b> y sea más fácil de leer.</p></div><table class="trace-table"><thead><tr><th>Tema</th><th>Recomendación</th><th>Ejemplo</th></tr></thead><tbody><tr><td>Sangría</td><td><b>4 espacios</b> por nivel (nunca mezclar con tabulaciones)</td><td><code>    return x</code></td></tr><tr><td>Espacios en operadores</td><td>Uno <b>a cada lado</b> de <code>=</code>, <code>+</code>, <code>==</code>...</td><td><code>total = a + b</code></td></tr><tr><td>Después de la coma</td><td>Un espacio</td><td><code>f(a, b, c)</code></td></tr><tr><td>Argumentos con nombre</td><td><b>Sin</b> espacios alrededor del <code>=</code></td><td><code>f(x=1)</code></td></tr><tr><td>Largo de línea</td><td>Hasta <b>79 caracteres</b></td><td>Cortar líneas largas</td></tr><tr><td>Líneas en blanco</td><td><b>2</b> entre funciones; 1 para separar ideas</td><td></td></tr><tr><td>Importaciones</td><td>Al <b>principio</b> del archivo</td><td><code>import math</code></td></tr><tr><td>Comentarios</td><td>Con <code># </code> (almohadilla + espacio)</td><td><code># calcula el IVA</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">05</span> Comentarios Útiles vs. Comentarios Inútiles</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Comentarios que repiten el código</div><div class="code-window"><div class="code-header"><span class="code-title">inutiles.py</span><span class="code-badge">Ruido</span></div><div class="code-body">edad = <span class="c-num">18</span>      <span class="c-cmt"># asigno 18 a edad</span>
+edad += <span class="c-num">1</span>      <span class="c-cmt"># le sumo 1 a edad</span>
+<span class="c-fn">print</span>(edad)    <span class="c-cmt"># muestro edad</span></div></div><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;">Si el código <b>ya lo dice</b>, el comentario <b>sobra</b> (y se desactualiza).</p></div><div class="correct-card"><div class="correct-title">✅ Comentarios que explican el porqué</div><div class="code-window"><div class="code-header"><span class="code-title">utiles.py</span><span class="code-badge">Aportan</span></div><div class="code-body"><span class="c-cmt"># El IVA para alimentos es del 10,5 %</span>
+IVA_ALIMENTOS = <span class="c-num">10.5</span>
+
+<span class="c-cmt"># Se descarta la primera línea: es el encabezado</span>
+<span class="c-kw">for</span> linea <span class="c-kw">in</span> lineas[<span class="c-num">1</span>:]:
+    ...</div></div><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;">Explican <b>por qué</b> o una <b>decisión no obvia</b>.</p></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Docstrings</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Las funciones importantes llevan un <b>docstring</b> (texto entre <code>"""</code>) que explica <b>qué hace, qué recibe y qué devuelve</b> (unidad 09). Es <b>documentación que viaja con la función</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Regla</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b>Buenos nombres primero</b>; comentarios solo <b>donde los nombres no alcanzan</b>.</p></div></section>
+<section><h2><span class="section-num">06</span> Separar el Programa en Funciones</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Del apunte</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Cuando un programa tiene <b>muchas instrucciones</b>, conviene <b>dividirlo en funciones más pequeñas</b>. De esta manera <b>cada función tiene una responsabilidad específica</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">pedir_mostrar.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">pedir_datos</span>():
+    nombre = <span class="c-fn">input</span>(<span class="c-str">"Ingrese su nombre: "</span>)
+    edad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Ingrese su edad: "</span>))
+    <span class="c-kw">return</span> nombre, edad
+
+<span class="c-kw">def</span> <span class="c-fn">mostrar_datos</span>(nombre, edad):
+    <span class="c-fn">print</span>(<span class="c-str">"Nombre:"</span>, nombre)
+    <span class="c-fn">print</span>(<span class="c-str">"Edad:"</span>, edad)
+
+nombre, edad = pedir_datos()
+mostrar_datos(nombre, edad)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ingrese su nombre: <span class="terminal-user-input">Lucía</span>
+Ingrese su edad: <span class="terminal-user-input">17</span>
+Nombre: Lucía
+Edad: 17</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);"><code>pedir_datos()</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><b>Solo</b> pide datos y los <b>devuelve</b> (una tupla, unidad 10).</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);"><code>mostrar_datos(...)</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><b>Solo</b> muestra. Si cambia el formato de salida, <b>no se toca</b> la entrada.</p></div></div></section>
+<section><h2><span class="section-num">07</span> Una Función, Una Responsabilidad</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Una función que hace de todo</div><div class="code-window"><div class="code-header"><span class="code-title">todo_junto.py</span><span class="code-badge">3 tareas mezcladas</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">procesar</span>():
+    n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"N: "</span>))      <span class="c-cmt"># entrada</span>
+    suma = <span class="c-num">0</span>
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, n + <span class="c-num">1</span>):  <span class="c-cmt"># cálculo</span>
+        suma += i
+    <span class="c-fn">print</span>(<span class="c-str">"Suma:"</span>, suma)       <span class="c-cmt"># salida</span></div></div></div><div class="correct-card"><div class="correct-title">✅ Funciones separadas</div><div class="code-window"><div class="code-header"><span class="code-title">separado.py</span><span class="code-badge">1 tarea cada una</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">pedir_n</span>():
+    <span class="c-kw">return</span> <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"N: "</span>))
+
+<span class="c-kw">def</span> <span class="c-fn">sumar_hasta</span>(n):
+    <span class="c-kw">return</span> <span class="c-fn">sum</span>(<span class="c-fn">range</span>(<span class="c-num">1</span>, n + <span class="c-num">1</span>))
+
+<span class="c-kw">def</span> <span class="c-fn">mostrar</span>(suma):
+    <span class="c-fn">print</span>(<span class="c-str">"Suma:"</span>, suma)</div></div></div></div><table class="trace-table"><thead><tr><th>Ventaja de separar</th><th>Ejemplo</th></tr></thead><tbody><tr><td>Se <b>reutilizan</b></td><td><code>sumar_hasta(10)</code> sirve en otros programas</td></tr><tr><td>Se <b>prueban</b> por separado</td><td>Se prueba <code>sumar_hasta(4)</code> sin teclear nada</td></tr><tr><td>Se <b>entienden</b> mejor</td><td>Cada función cabe en una pantalla</td></tr><tr><td>Los cambios <b>afectan menos</b></td><td>Cambiar la salida no toca el cálculo</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Señal de alerta</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si para describir lo que hace una función usás <b>"y"</b> ("pide los datos <b>y</b> calcula <b>y</b> muestra"), probablemente <b>son varias funciones</b>.</p></div></section>
+<section><h2><span class="section-num">08</span> La Función Principal: main()</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Del apunte</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Podemos organizar el programa utilizando una <b>función principal llamada <code>main()</code></b>, que <b>centraliza el inicio y la organización general</b> del programa.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">main_basico.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">saludar</span>():
+    <span class="c-fn">print</span>(<span class="c-str">"Hola mundo"</span>)
+
+<span class="c-kw">def</span> <span class="c-fn">main</span>():
+    saludar()
+
+main()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola mundo</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;">Se <b>definen</b> las funciones auxiliares (<code>saludar</code>, <code>pedir_datos</code>, etc.).</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;">Se define <code>main()</code>, que <b>cuenta la historia del programa</b>: qué se llama y en qué orden.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;">Al final, <b>una sola llamada</b>: <code>main()</code>.</div></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En C, <code>main</code> era <b>obligatoria</b> y el sistema la ejecutaba solo. En Python <b>no hace falta</b>, pero <b>es una convención muy extendida</b>: ordena el programa igual que en C.</p></div></section>
+<section><h2><span class="section-num">09</span> main() en un Programa Completo</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">programa_organizado.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">pedir_notas</span>(cantidad):
+    notas = []
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(cantidad):
+        notas.append(<span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">f"Nota {i + 1}: "</span>)))
+    <span class="c-kw">return</span> notas
+
+<span class="c-kw">def</span> <span class="c-fn">calcular_promedio</span>(notas):
+    <span class="c-kw">return</span> <span class="c-fn">sum</span>(notas) / <span class="c-fn">len</span>(notas)
+
+<span class="c-kw">def</span> <span class="c-fn">mostrar_resultado</span>(promedio):
+    estado = <span class="c-str">"aprobó"</span> <span class="c-kw">if</span> promedio &gt;= <span class="c-num">6</span> <span class="c-kw">else</span> <span class="c-str">"desaprobó"</span>
+    <span class="c-fn">print</span>(<span class="c-str">f"Promedio: {promedio:.2f} ({estado})"</span>)
+
+<span class="c-kw">def</span> <span class="c-fn">main</span>():
+    notas = pedir_notas(<span class="c-num">3</span>)
+    promedio = calcular_promedio(notas)
+    mostrar_resultado(promedio)
+
+main()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Nota 1: <span class="terminal-user-input">7</span>
+Nota 2: <span class="terminal-user-input">5.5</span>
+Nota 3: <span class="terminal-user-input">8</span>
+Promedio: 6.83 (aprobó)</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Leyendo <code>main()</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Se entiende el programa <b>sin mirar los detalles</b>: *pedir notas → calcular promedio → mostrar resultado*. Cada paso es <b>una función</b> que podés <b>probar y mejorar</b> por separado.</p></div></section>
+<section><h2><span class="section-num">10</span> if <i>_name_</i> == "<i>_main_</i>": Ejecutar o Importar</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">programa.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">main</span>():
+    <span class="c-fn">print</span>(<span class="c-str">"Ejecutando el programa"</span>)
+
+<span class="c-kw">if</span> __name__ == <span class="c-str">"__main__"</span>:
+    main()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ejecutando el programa</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.82rem;">Cada archivo <code>.py</code> tiene una variable especial <b><code>__name__</code></b>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.82rem;">Si <b>ejecutás el archivo directamente</b> (<code>python programa.py</code>), <code>__name__</code> vale <b><code>"__main__"</code></b> y se llama a <code>main()</code>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.82rem;">Si otro archivo lo <b>importa</b> (<code>import programa</code>), <code>__name__</code> vale <b><code>"programa"</code></b> y <b>no</b> se ejecuta <code>main()</code>.</div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Para qué sirve</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Permite que <b>un mismo archivo</b> sirva como <b>programa</b> (se ejecuta solo) y como <b>módulo</b> (otro programa usa sus funciones <b>sin que se ejecute todo</b>). Es la <b>forma estándar</b> de cerrar un programa Python.</p></div></section>
+<section><h2><span class="section-num">11</span> Módulos e import</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Del apunte</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Python permite <b>dividir nuestro código en distintos archivos</b>. <b>Cada archivo de Python puede funcionar como un módulo</b>. También podemos usar <b>módulos que ya vienen preparados</b> con el lenguaje, y los incorporamos con <b><code>import</code></b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">import_math.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">import</span> <span class="c-type">math</span>
+
+resultado = math.sqrt(<span class="c-num">25</span>)
+<span class="c-fn">print</span>(resultado)
+<span class="c-fn">print</span>(math.pi)
+<span class="c-fn">print</span>(math.floor(<span class="c-num">4.7</span>), math.ceil(<span class="c-num">4.2</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">5.0
+3.141592653589793
+4 5</div></div></div></div><table class="trace-table"><thead><tr><th>Forma</th><th>Cómo se usa</th><th>Cuándo</th></tr></thead><tbody><tr><td><code>import math</code></td><td><code>math.sqrt(25)</code> (con el prefijo)</td><td>La más <b>clara</b>: se ve <b>de dónde viene</b> cada función</td></tr><tr><td><code>from math import sqrt</code></td><td><code>sqrt(25)</code> (sin prefijo)</td><td>Cuando usás <b>pocas</b> funciones</td></tr><tr><td><code>import math as m</code></td><td><code>m.sqrt(25)</code></td><td>Alias <b>más corto</b> (muy usado con módulos largos)</td></tr></tbody></table><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>#include &lt;math.h&gt;</code> ↔ <code>import math</code>. Pero en Python <b>las funciones se usan con el nombre del módulo</b>: <code>math.sqrt</code>, no <code>sqrt</code> suelto.</p></div></section>
+<section><h2><span class="section-num">12</span> Módulos Conocidos de la Biblioteca Estándar</h2><table class="trace-table"><thead><tr><th>Módulo</th><th>Para qué sirve</th><th>Ejemplos</th></tr></thead><tbody><tr><td><code>math</code></td><td>Operaciones <b>matemáticas</b></td><td><code>sqrt</code>, <code>pi</code>, <code>floor</code>, <code>ceil</code>, <code>sin</code>, <code>factorial</code></td></tr><tr><td><code>random</code></td><td>Valores <b>aleatorios</b></td><td><code>randint</code>, <code>choice</code>, <code>shuffle</code></td></tr><tr><td><code>datetime</code></td><td><b>Fechas y horarios</b></td><td><code>date</code>, <code>datetime</code>, <code>timedelta</code></td></tr><tr><td><code>os</code></td><td>Interactuar con el <b>sistema</b> (archivos, carpetas)</td><td><code>os.path.exists</code>, <code>os.remove</code></td></tr><tr><td><code>copy</code></td><td><b>Copiar</b> objetos</td><td><code>copy.deepcopy</code> (unidad 15)</td></tr><tr><td><code>time</code></td><td>Medir y <b>esperar</b> tiempo</td><td><code>time.sleep</code>, <code>time.time</code></td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">La biblioteca estándar</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Python trae <b>cientos de módulos</b> listos para usar: <b>"baterías incluidas"</b>. Antes de escribir algo complejo, <b>buscá si ya existe</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Ver las funciones de un módulo</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Dentro de la consola interactiva: <code>dir(math)</code> lista su contenido y <code>help(math.sqrt)</code> explica una función.</p></div></section>
+<section><h2><span class="section-num">13</span> El Módulo random</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">modulo_random.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">import</span> <span class="c-type">random</span>
+
+random.seed(<span class="c-num">7</span>)
+
+<span class="c-fn">print</span>(random.randint(<span class="c-num">1</span>, <span class="c-num">6</span>))
+<span class="c-fn">print</span>(random.choice([<span class="c-str">"piedra"</span>, <span class="c-str">"papel"</span>, <span class="c-str">"tijera"</span>]))
+
+lista = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>, <span class="c-num">4</span>, <span class="c-num">5</span>]
+random.shuffle(lista)
+<span class="c-fn">print</span>(lista)
+<span class="c-fn">print</span>(random.random() &lt; <span class="c-num">1</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">3
+piedra
+[2, 3, 5, 1, 4]
+True</div></div></div></div><table class="trace-table"><thead><tr><th>Función</th><th>Qué hace</th></tr></thead><tbody><tr><td><code>random.randint(a, b)</code></td><td>Entero aleatorio entre <code>a</code> y <code>b</code> (<b>ambos incluidos</b>)</td></tr><tr><td><code>random.choice(lista)</code></td><td>Un elemento <b>al azar</b> de la lista</td></tr><tr><td><code>random.shuffle(lista)</code></td><td><b>Mezcla</b> la lista (la modifica)</td></tr><tr><td><code>random.random()</code></td><td>Decimal entre 0 (incluido) y 1 (excluido)</td></tr><tr><td><code>random.seed(n)</code></td><td>Fija <b>la semilla</b>: la secuencia se vuelve <b>repetible</b></td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Sobre <code>seed</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Sin <code>seed</code>, <b>cada ejecución da resultados distintos</b>. La usamos acá para que el ejemplo sea repetible, pero <b>los valores exactos pueden variar según la versión de Python</b>; en tus programas no la necesitás.</p></div></section>
+<section><h2><span class="section-num">14</span> El Módulo datetime</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">modulo_datetime.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">import</span> <span class="c-type">datetime</span>
+
+nacimiento = datetime.date(<span class="c-num">2008</span>, <span class="c-num">3</span>, <span class="c-num">5</span>)
+hoy = datetime.date(<span class="c-num">2024</span>, <span class="c-num">11</span>, <span class="c-num">20</span>)
+
+<span class="c-fn">print</span>(nacimiento)
+<span class="c-fn">print</span>(hoy.strftime(<span class="c-str">"%d/%m/%Y"</span>))
+<span class="c-fn">print</span>(<span class="c-str">"Días vividos:"</span>, (hoy - nacimiento).days)
+<span class="c-fn">print</span>(<span class="c-str">"A/M/D:"</span>, hoy.year, hoy.month, hoy.day)
+<span class="c-fn">print</span>(<span class="c-str">"Mañana:"</span>, hoy + datetime.timedelta(days=<span class="c-num">1</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">2008-03-05
+20/11/2024
+Días vividos: 6104
+A/M/D: 2024 11 20
+Mañana: 2024-11-21</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Qué muestra</h4><ul style="font-size:0.8rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>date(año, mes, día)</code> <b>crea</b> una fecha.</li></ul><ul style="font-size:0.8rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Restar</b> fechas da un intervalo (<code>.days</code>).</li></ul><ul style="font-size:0.8rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>strftime("%d/%m/%Y")</code> <b>da formato</b> al texto.</li></ul><ul style="font-size:0.8rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>timedelta</code> permite <b>sumar días</b>.</li></ul></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">La fecha de hoy</h4><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;"><code>datetime.date.today()</code> devuelve <b>la fecha actual</b> de tu computadora. No la usamos en el ejemplo porque <b>cambia cada día</b>.</p></div></div></section>
+<section><h2><span class="section-num">15</span> Crear Tu Propio Módulo</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Cualquier archivo <code>.py</code> <b>es un módulo</b>. Si guardás tus funciones en <code>utilidades.py</code>, <b>otro archivo</b> de la <b>misma carpeta</b> puede usarlas con <code>import utilidades</code>.</p></div><div class="grid-2" style="margin-top:8px;"><div class="code-window"><div class="code-header"><span class="code-title">utilidades.py</span><span class="code-badge">Archivo 1: el módulo</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">es_par</span>(n):
+    <span class="c-kw">return</span> n % <span class="c-num">2</span> == <span class="c-num">0</span>
+
+<span class="c-kw">def</span> <span class="c-fn">promedio</span>(lista):
+    <span class="c-kw">return</span> <span class="c-fn">sum</span>(lista) / <span class="c-fn">len</span>(lista)
+
+<span class="c-kw">if</span> __name__ == <span class="c-str">"__main__"</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Probando utilidades"</span>)</div></div><div class="code-window"><div class="code-header"><span class="code-title">programa.py</span><span class="code-badge">Archivo 2: lo usa</span></div><div class="code-body"><span class="c-kw">import</span> <span class="c-type">utilidades</span>
+
+<span class="c-fn">print</span>(utilidades.es_par(<span class="c-num">10</span>))
+notas = [<span class="c-num">8</span>, <span class="c-num">6</span>, <span class="c-num">10</span>]
+<span class="c-fn">print</span>(utilidades.promedio(notas))</div></div></div><div class="terminal-window"><div class="terminal-header"><span>Salida al ejecutar programa.py</span><span>● ● ●</span></div><div class="terminal-body">True
+8.0</div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Observá</h4><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;"><b>No</b> aparece <code>Probando utilidades</code>: gracias a <code>if __name__ == "__main__":</code>, <b>al importar no se ejecuta</b> el código de prueba. Los dos archivos deben estar <b>en la misma carpeta</b>.</p></div></section>
+<section><h2><span class="section-num">16</span> Resolver un Problema Paso a Paso: Las 7 Etapas</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Del apunte</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Cuando nos enfrentamos a un ejercicio, <b>no debemos comenzar escribiendo código</b> sin antes <b>entender qué nos están pidiendo</b>.</p></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><b>Comprender el problema:</b> ¿qué tenemos que resolver?</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><b>Identificar los datos de entrada:</b> ¿qué información necesitamos?</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;"><b>Identificar el resultado:</b> ¿qué debemos obtener?</div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.84rem;"><b>Pensar el procedimiento:</b> ¿qué operaciones o decisiones necesitamos?</div></div><div class="step-item"><span class="step-num">5</span><div class="step-content" style="font-size:0.84rem;"><b>Dividir el problema:</b> ¿podemos resolverlo mediante funciones?</div></div><div class="step-item"><span class="step-num">6</span><div class="step-content" style="font-size:0.84rem;"><b>Escribir el código:</b> traducir la solución al lenguaje Python.</div></div><div class="step-item"><span class="step-num">7</span><div class="step-content" style="font-size:0.84rem;"><b>Probar el programa:</b> verificar que funcione con <b>distintos valores</b>.</div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Lo más importante</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b>La programación no consiste solamente en conocer las instrucciones de un lenguaje.</b> Lo central es aprender a <b>pensar cómo resolver un problema</b> y <b>después</b> traducir esa solución a código.</p></div></section>
+<section><h2><span class="section-num">17</span> Las 7 Etapas en un Ejemplo (1/2): Planificar</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Enunciado</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">"Un local de ropa aplica <b>15 % de descuento</b> a las compras de <b>más de 5000 pesos</b>. Pedir el <b>total</b> de la compra y mostrar <b>cuánto se paga</b>."</p></div><table class="trace-table"><thead><tr><th>Etapa</th><th>Aplicada al problema</th></tr></thead><tbody><tr><td>1. Comprender</td><td>Hay que <b>calcular el precio final</b>; el descuento es <b>condicional</b>.</td></tr><tr><td>2. Datos de entrada</td><td>El <b>total de la compra</b> (número decimal).</td></tr><tr><td>3. Resultado</td><td>El <b>monto a pagar</b> (y, si corresponde, el descuento).</td></tr><tr><td>4. Procedimiento</td><td>Si <code>total &gt; 5000</code> → <code>pagar = total - total * 0,15</code>; si no, <code>pagar = total</code>.</td></tr><tr><td>5. Dividir</td><td>Una función <code>calcular_total_a_pagar(total)</code> que <b>devuelve</b> el valor; <code>main()</code> pide, llama y muestra.</td></tr></tbody></table></section>
+<section><h2><span class="section-num">18</span> Las 7 Etapas en un Ejemplo (2/2): Codificar y Probar</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">descuento_compra.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">calcular_total_a_pagar</span>(total):
+    <span class="c-kw">if</span> total &gt; <span class="c-num">5000</span>:
+        <span class="c-kw">return</span> total - total * <span class="c-num">15</span> / <span class="c-num">100</span>
+    <span class="c-kw">return</span> total
+
+<span class="c-kw">def</span> <span class="c-fn">main</span>():
+    total = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Total de la compra: "</span>))
+    pagar = calcular_total_a_pagar(total)
+    <span class="c-fn">print</span>(<span class="c-str">f"Total a pagar: {pagar:.2f}"</span>)
+
+main()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Total de la compra: <span class="terminal-user-input">8000</span>
+Total a pagar: 6800.00</div></div></div></div><table class="trace-table"><thead><tr><th>Etapa 7: pruebas</th><th>Entrada</th><th>Esperado</th><th>Resultado</th></tr></thead><tbody><tr><td>Sin descuento</td><td>3000</td><td>3000.00</td><td>✅</td></tr><tr><td><b>Borde</b> exacto</td><td>5000</td><td>5000.00 (no es "más de")</td><td>✅</td></tr><tr><td>Con descuento</td><td>8000</td><td>6800.00</td><td>✅</td></tr><tr><td>Un centavo más</td><td>5000.01</td><td>Descuento aplicado</td><td>✅</td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Probar bien</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">No alcanza con <b>un</b> caso: probá <b>valores típicos</b>, <b>los bordes</b> (5000) y <b>casos especiales</b> (0, negativos). Los errores viven <b>en los bordes</b>.</p></div></section>
+<section><h2><span class="section-num">19</span> Depurar: Cómo Encontrar y Corregir Errores</h2><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.82rem;"><b>Leé el error de abajo hacia arriba</b>: la última línea dice <b>qué</b> falló; las anteriores, <b>dónde</b>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.82rem;"><b>Reproducí el error</b> con el dato mínimo que lo provoca y <b>simplificá</b>: probá la función <b>sola</b>, con datos <b>fijos</b>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.82rem;"><b>Mostrá valores</b> con <code>print()</code> en puntos clave para ver <b>qué hay realmente</b> en las variables.</div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.82rem;"><b>Hacé una tabla de seguimiento</b> a mano y compará con lo que hace el programa.</div></div><div class="step-item"><span class="step-num">5</span><div class="step-content" style="font-size:0.82rem;"><b>Cambiá una sola cosa a la vez</b> y volvé a probar.</div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">depurar_con_print.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">promedio</span>(notas):
+    suma = <span class="c-num">0</span>
+    <span class="c-kw">for</span> n <span class="c-kw">in</span> notas:
+        suma += n
+        <span class="c-fn">print</span>(<span class="c-str">"DEBUG n ="</span>, n, <span class="c-str">"suma ="</span>, suma)
+    <span class="c-kw">return</span> suma / <span class="c-fn">len</span>(notas)
+
+<span class="c-fn">print</span>(promedio([<span class="c-num">8</span>, <span class="c-num">6</span>, <span class="c-num">10</span>]))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">DEBUG n = 8 suma = 8
+DEBUG n = 6 suma = 14
+DEBUG n = 10 suma = 24
+8.0</div></div></div></div></section>
+<section><h2><span class="section-num">20</span> Pruebas Simples con assert</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>assert condicion</code> <b>comprueba</b> que algo sea verdadero. Si lo es, <b>no pasa nada</b>; si no, el programa se detiene con <b><code>AssertionError</code></b>. Sirve para <b>probar funciones automáticamente</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">pruebas_ok.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">es_par</span>(n):
+    <span class="c-kw">return</span> n % <span class="c-num">2</span> == <span class="c-num">0</span>
+
+<span class="c-kw">assert</span> es_par(<span class="c-num">4</span>) == <span class="c-kw">True</span>
+<span class="c-kw">assert</span> es_par(<span class="c-num">7</span>) == <span class="c-kw">False</span>
+<span class="c-fn">print</span>(<span class="c-str">"Pruebas OK"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Pruebas OK</div></div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">prueba_falla.py</span><span class="code-badge">Detecta un error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">promedio</span>(a, b):
+    <span class="c-kw">return</span> a + b / <span class="c-num">2</span>
+
+<span class="c-kw">assert</span> promedio(<span class="c-num">4</span>, <span class="c-num">8</span>) == <span class="c-num">6</span>, <span class="c-str">"promedio mal"</span>
+<span class="c-fn">print</span>(<span class="c-str">"No llega acá"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 4, in &lt;module&gt;
+    assert promedio(4, 8) == 6, "promedio mal"
+           ^^^^^^^^^^^^^^^^^^^
+AssertionError: promedio mal</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué detectó</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Falta el <b>paréntesis</b>: <code>a + b / 2</code> da <code>8.0</code>, no <code>6.0</code>. La prueba lo atrapó <b>antes</b> de llegar al usuario.</p></div></section>
+<section><h2><span class="section-num">21</span> Resumen de Símbolos y Operadores (del Apunte)</h2><table class="trace-table"><thead><tr><th>Elemento</th><th>¿Para qué sirve?</th></tr></thead><tbody><tr><td><code>=</code></td><td>Asignar un valor</td></tr><tr><td><code>==</code>  <code>!=</code></td><td>Comparar si dos valores son <b>iguales</b> / <b>distintos</b></td></tr><tr><td><code>+  -  *  /</code></td><td>Sumar, restar, multiplicar, dividir</td></tr><tr><td><code>//</code>  <code>%</code>  <code>**</code></td><td>División <b>entera</b>, <b>resto</b> y <b>potencia</b></td></tr><tr><td><code>+=</code></td><td>Incrementar o sumar a una variable (<code>-=</code>, <code>*=</code>... también)</td></tr><tr><td><code>and</code>  <code>or</code>  <code>not</code></td><td>Unir condiciones (todas / alguna) o <b>invertir</b> un valor lógico</td></tr><tr><td><code>if</code>  <code>elif</code>  <code>else</code></td><td>Evaluar una condición, otra y la alternativa</td></tr><tr><td><code>while</code></td><td>Repetir <b>mientras</b> una condición sea verdadera</td></tr><tr><td><code>for</code>  <code>range()</code></td><td>Recorrer una secuencia / generar números</td></tr><tr><td><code>break</code>  <code>continue</code></td><td><b>Salir</b> de un bucle / <b>saltear</b> una iteración</td></tr></tbody></table><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Más símbolos</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>[ ]</code> listas e índices • <code>( )</code> llamadas y tuplas • <code>:</code> abre un bloque • <code>#</code> comentario • <code>"..."</code> texto • <code>f"..."</code> f-string.</p></div></section>
+<section><h2><span class="section-num">22</span> Resumen de Funciones y Palabras Clave (del Apunte)</h2><table class="trace-table"><thead><tr><th>Elemento</th><th>¿Para qué sirve?</th><th>Elemento</th><th>¿Para qué sirve?</th></tr></thead><tbody><tr><td><code>def</code></td><td>Crear una función</td><td><code>append()</code></td><td>Agregar al final de una lista</td></tr><tr><td><code>return</code></td><td>Devolver un resultado</td><td><code>insert()</code></td><td>Agregar en una posición</td></tr><tr><td><code>print()</code></td><td>Mostrar información</td><td><code>remove()</code></td><td>Eliminar por <b>valor</b></td></tr><tr><td><code>input()</code></td><td>Solicitar información</td><td><code>pop()</code></td><td>Eliminar por <b>posición</b></td></tr><tr><td><code>type()</code></td><td>Consultar el tipo</td><td><code>sort()</code></td><td>Ordenar una lista</td></tr><tr><td><code>int()</code> <code>float()</code> <code>str()</code> <code>bool()</code></td><td>Convertir de tipo</td><td><code>open()</code></td><td>Abrir un archivo</td></tr><tr><td><code>len()</code></td><td>Cantidad de elementos</td><td><code>import</code></td><td>Incorporar un módulo</td></tr><tr><td><code>range()</code></td><td>Generar números</td><td><code>try / except</code></td><td>Controlar errores</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Para repasar</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Probá <b>cada</b> elemento de las tablas en la <b>consola interactiva</b> con <b>un ejemplo propio</b>: la mejor forma de fijarlos.</p></div></section>
+<section><h2><span class="section-num">23</span> Mapa del Curso: Lo Que Aprendiste en C y Cómo Se Dice en Python</h2><table class="trace-table"><thead><tr><th>Tema</th><th>C (bimestres 1 a 3)</th><th>Python (bimestre 4)</th></tr></thead><tbody><tr><td>Salida / entrada</td><td><code>printf</code> / <code>scanf</code></td><td><code>print</code> / <code>input</code> (+ f-strings)</td></tr><tr><td>Variables</td><td><code>int edad = 16;</code></td><td><code>edad = 16</code></td></tr><tr><td>Condicionales</td><td><code>if (...) { } else { }</code></td><td><code>if ...:</code> / <code>elif</code> / <code>else:</code></td></tr><tr><td>Bucles</td><td><code>while</code>, <code>for(;;)</code>, <code>do-while</code></td><td><code>while</code>, <code>for ... in range()</code></td></tr><tr><td>Funciones</td><td><code>int f(int a) { }</code></td><td><code>def f(a):</code></td></tr><tr><td>Texto</td><td><code>char s[]</code>, <code>string.h</code></td><td><code>str</code>, métodos</td></tr><tr><td>Vectores / matrices</td><td><code>int v[5]</code>, <code>int m[3][3]</code></td><td>listas y listas de listas</td></tr><tr><td>Memoria dinámica</td><td><code>malloc</code>, <code>free</code></td><td>Automática</td></tr><tr><td>Registros</td><td><code>struct</code></td><td>Listas / (diccionarios y clases)</td></tr><tr><td>Archivos</td><td><code>FILE *</code>, <code>fopen</code></td><td><code>with open(...)</code></td></tr><tr><td>Errores</td><td>Códigos de retorno</td><td>Excepciones (<code>try/except</code>)</td></tr></tbody></table></section>
+<section><h2><span class="section-num">24</span> Los 10 Errores Más Comunes de Principiantes</h2><table class="trace-table"><thead><tr><th>Mensaje / síntoma</th><th>Causa habitual</th></tr></thead><tbody><tr><td><code>SyntaxError</code></td><td>Falta <code>:</code>, paréntesis o comillas sin cerrar; <code>=</code> en vez de <code>==</code></td></tr><tr><td><code>IndentationError</code></td><td>Sangría incorrecta o mezclada</td></tr><tr><td><code>NameError</code></td><td>Variable <b>no definida</b> o mal escrita (¡mayúsculas!)</td></tr><tr><td><code>TypeError</code></td><td>Mezclar tipos (<code>"5" + 3</code>), llamar mal a una función</td></tr><tr><td><code>ValueError</code></td><td>Convertir un texto que <b>no</b> es número</td></tr><tr><td><code>IndexError</code></td><td>Índice <b>fuera de rango</b> (<code>len</code> en vez de <code>len - 1</code>)</td></tr><tr><td><code>ZeroDivisionError</code></td><td>Dividir por cero</td></tr><tr><td><code>FileNotFoundError</code></td><td>El archivo <b>no existe</b> o está en otra carpeta</td></tr><tr><td>Bucle infinito</td><td>No se actualiza la variable de control (<code>Ctrl + C</code>)</td></tr><tr><td>Resultado <code>None</code> inesperado</td><td>Falta el <code>return</code> o se asignó el resultado de <code>sort()</code>/<code>append()</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">25</span> Repaso Integrador: Biblioteca Personal (1/3) — Datos en Archivo</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Proyecto</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Un programa con <b>menú</b>, <b>funciones</b>, <b>lista de listas</b> de libros <code>[título, autor, año]</code>, <b>validación</b> con <code>try/except</code>, <b>persistencia</b> en archivo y <b>búsqueda</b>.</p></div><div class="code-window"><div class="code-header"><span class="code-title">biblioteca.py</span><span class="code-badge">Parte 1: cargar y guardar</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">cargar</span>(nombre):
+    libros = []
+    <span class="c-kw">try</span>:
+        <span class="c-kw">with</span> <span class="c-fn">open</span>(nombre, <span class="c-str">"r"</span>, encoding=<span class="c-str">"utf-8"</span>) <span class="c-kw">as</span> f:
+            <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+                titulo, autor, anio = linea.strip().split(<span class="c-str">";"</span>)
+                libros.append([titulo, autor, <span class="c-fn">int</span>(anio)])
+    <span class="c-kw">except</span> FileNotFoundError:
+        <span class="c-kw">pass</span>
+    <span class="c-kw">return</span> libros
+
+<span class="c-kw">def</span> <span class="c-fn">guardar</span>(nombre, libros):
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(nombre, <span class="c-str">"w"</span>, encoding=<span class="c-str">"utf-8"</span>) <span class="c-kw">as</span> f:
+        <span class="c-kw">for</span> titulo, autor, anio <span class="c-kw">in</span> libros:
+            f.write(<span class="c-str">f"{titulo};{autor};{anio}\n"</span>)</div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué se reutiliza</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>cargar</code> / <code>guardar</code> (unidad 17): <code>try/except</code>, <code>split</code>, conversión, <code>with</code> y la <b>lista de listas</b> (unidad 15).</p></div></section>
+<section><h2><span class="section-num">26</span> Repaso Integrador: Biblioteca Personal (2/3) — Validación y Búsqueda</h2><div class="code-window"><div class="code-header"><span class="code-title">biblioteca.py</span><span class="code-badge">Parte 2: funciones auxiliares</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">pedir_anio</span>():
+    <span class="c-kw">while</span> <span class="c-kw">True</span>:
+        <span class="c-kw">try</span>:
+            <span class="c-kw">return</span> <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Año: "</span>))
+        <span class="c-kw">except</span> ValueError:
+            <span class="c-fn">print</span>(<span class="c-str">"Ingresá un número entero"</span>)
+
+<span class="c-kw">def</span> <span class="c-fn">buscar</span>(libros, texto):
+    <span class="c-kw">return</span> [l <span class="c-kw">for</span> l <span class="c-kw">in</span> libros <span class="c-kw">if</span> texto.lower() <span class="c-kw">in</span> l[<span class="c-num">0</span>].lower()]</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);"><code>pedir_anio()</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Repite <b>hasta que el dato sea válido</b> (unidad 17). <b>Devuelve</b> el entero.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);"><code>buscar(...)</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Una <b>comprensión</b> que filtra los libros cuyo <b>título contiene</b> el texto (sin distinguir mayúsculas, con <code>lower</code> e <code>in</code>).</p></div></div></section>
+<section><h2><span class="section-num">27</span> Repaso Integrador: Biblioteca Personal (3/3) — El Menú</h2><div class="code-window"><div class="code-header"><span class="code-title">biblioteca.py</span><span class="code-badge">Parte 3: menú y main()</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">main</span>():
+    libros = cargar(<span class="c-str">"libros.txt"</span>)
+    opcion = <span class="c-str">""</span>
+    <span class="c-kw">while</span> opcion != <span class="c-str">"4"</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"1) Agregar  2) Buscar  3) Listar  4) Salir"</span>)
+        opcion = <span class="c-fn">input</span>(<span class="c-str">"Opción: "</span>)
+        <span class="c-kw">if</span> opcion == <span class="c-str">"1"</span>:
+            libros.append([<span class="c-fn">input</span>(<span class="c-str">"Título: "</span>), <span class="c-fn">input</span>(<span class="c-str">"Autor: "</span>), pedir_anio()])
+            guardar(<span class="c-str">"libros.txt"</span>, libros)
+        <span class="c-kw">elif</span> opcion == <span class="c-str">"2"</span>:
+            <span class="c-kw">for</span> l <span class="c-kw">in</span> buscar(libros, <span class="c-fn">input</span>(<span class="c-str">"Buscar: "</span>)):
+                <span class="c-fn">print</span>(<span class="c-str">f"- {l[0]} ({l[1]}, {l[2]})"</span>)
+        <span class="c-kw">elif</span> opcion == <span class="c-str">"3"</span>:
+            <span class="c-kw">for</span> l <span class="c-kw">in</span> <span class="c-fn">sorted</span>(libros, key=<span class="c-kw">lambda</span> x: x[<span class="c-num">2</span>]):
+                <span class="c-fn">print</span>(<span class="c-str">f"{l[2]}: {l[0]}"</span>)
+
+<span class="c-kw">if</span> __name__ == <span class="c-str">"__main__"</span>:
+    main()</div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Para analizar en clase</h4><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;"><code>lambda x: x[2]</code> es una <b>función sin nombre</b> que devuelve el año: <code>sorted(..., key=...)</code> <b>ordena por ese criterio</b>. ¿Qué pasa si <code>libros.txt</code> <b>no existe</b>? ¿Cómo agregarías <b>Eliminar</b>?</p></div></section>
+<section><h2><span class="section-num">28</span> Ejercicio 1: Reorganizar un Programa</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Funciona, pero está mal organizado</span></div><div class="code-body">n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número: "</span>))
+c = <span class="c-num">0</span>
+i = <span class="c-num">1</span>
+<span class="c-kw">while</span> i &lt;= n:
+    <span class="c-kw">if</span> n % i == <span class="c-num">0</span>:
+        c += <span class="c-num">1</span>
+    i += <span class="c-num">1</span>
+<span class="c-kw">if</span> c == <span class="c-num">2</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"primo"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"no primo"</span>)</div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Reescribilo con <b>nombres descriptivos</b>, separando en funciones (<b><code>contar_divisores(n)</code></b>, <b><code>es_primo(n)</code></b>) y con <b><code>main()</code></b> y <code>if __name__ == "__main__":</code>. Agregá <b>pruebas con <code>assert</code></b>.</p></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1_ok.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">contar_divisores</span>(n):
+    cantidad = <span class="c-num">0</span>
+    <span class="c-kw">for</span> divisor <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, n + <span class="c-num">1</span>):
+        <span class="c-kw">if</span> n % divisor == <span class="c-num">0</span>:
+            cantidad += <span class="c-num">1</span>
+    <span class="c-kw">return</span> cantidad
+
+<span class="c-kw">def</span> <span class="c-fn">es_primo</span>(n):
+    <span class="c-kw">return</span> contar_divisores(n) == <span class="c-num">2</span>
+
+<span class="c-kw">def</span> <span class="c-fn">main</span>():
+    numero = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número: "</span>))
+    <span class="c-fn">print</span>(<span class="c-str">"primo"</span> <span class="c-kw">if</span> es_primo(numero) <span class="c-kw">else</span> <span class="c-str">"no primo"</span>)
+
+<span class="c-kw">if</span> __name__ == <span class="c-str">"__main__"</span>:
+    <span class="c-kw">assert</span> es_primo(<span class="c-num">7</span>) <span class="c-kw">and</span> <span class="c-kw">not</span> es_primo(<span class="c-num">9</span>) <span class="c-kw">and</span> <span class="c-kw">not</span> es_primo(<span class="c-num">1</span>)
+    main()</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Número: <span class="terminal-user-input">13</span>
+primo</div></div></div></details></section>
+<section><h2><span class="section-num">29</span> Ejercicio 2: Aplicá las 7 Etapas</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Problema</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">"Una <b>pizzería</b> cobra <b>2500</b> la pizza común y <b>3200</b> la especial. Hay un <b>descuento del 10 %</b> si se piden <b>3 pizzas o más</b>. Pedir la <b>cantidad de cada tipo</b> y mostrar el <b>total a pagar</b>."</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Tu tarea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Escribí por etapas: <b>entradas</b>, <b>salida</b>, <b>procedimiento</b>, <b>funciones</b> (por ejemplo <code>calcular_subtotal</code>, <code>aplicar_descuento</code>) y <b>casos de prueba</b> (incluí <b>exactamente 3 pizzas</b> y <b>0 pizzas</b>). Después, programalo.</p></div><details class="code-solution"><summary>👁️ Ver una solución</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">calcular_subtotal</span>(comunes, especiales):
+    <span class="c-kw">return</span> comunes * <span class="c-num">2500</span> + especiales * <span class="c-num">3200</span>
+
+<span class="c-kw">def</span> <span class="c-fn">aplicar_descuento</span>(subtotal, cantidad_total):
+    <span class="c-kw">if</span> cantidad_total &gt;= <span class="c-num">3</span>:
+        <span class="c-kw">return</span> subtotal * <span class="c-num">0.90</span>
+    <span class="c-kw">return</span> subtotal
+
+<span class="c-kw">def</span> <span class="c-fn">main</span>():
+    comunes = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Pizzas comunes: "</span>))
+    especiales = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Pizzas especiales: "</span>))
+    subtotal = calcular_subtotal(comunes, especiales)
+    total = aplicar_descuento(subtotal, comunes + especiales)
+    <span class="c-fn">print</span>(<span class="c-str">f"Total a pagar: {total:.2f}"</span>)
+
+main()</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Pizzas comunes: <span class="terminal-user-input">2</span>
+Pizzas especiales: <span class="terminal-user-input">1</span>
+Total a pagar: 7380.00</div></div></div></details></section>
+<section><h2><span class="section-num">30</span> Ejercicio 3: Mini Proyecto de Módulo Propio</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Creá un módulo <b><code>estadistica.py</code></b> con las funciones <b><code>promedio(lista)</code></b>, <b><code>maximo(lista)</code></b>, <b><code>minimo(lista)</code></b> y <b><code>mediana(lista)</code></b> (la mediana es el valor <b>del medio</b> de la lista <b>ordenada</b>; si hay cantidad par, el promedio de los <b>dos centrales</b>). Incluí <code>if __name__ == "__main__":</code> con pruebas <code>assert</code>. Luego creá <b>otro archivo</b> que <b>lea números desde un archivo</b> y use tu módulo.</p></div><details class="code-solution"><summary>👁️ Ver el módulo</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">estadistica.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">promedio</span>(lista):
+    <span class="c-kw">return</span> <span class="c-fn">sum</span>(lista) / <span class="c-fn">len</span>(lista)
+
+<span class="c-kw">def</span> <span class="c-fn">maximo</span>(lista):
+    mayor = lista[<span class="c-num">0</span>]
+    <span class="c-kw">for</span> x <span class="c-kw">in</span> lista:
+        <span class="c-kw">if</span> x &gt; mayor:
+            mayor = x
+    <span class="c-kw">return</span> mayor
+
+<span class="c-kw">def</span> <span class="c-fn">minimo</span>(lista):
+    menor = lista[<span class="c-num">0</span>]
+    <span class="c-kw">for</span> x <span class="c-kw">in</span> lista:
+        <span class="c-kw">if</span> x &lt; menor:
+            menor = x
+    <span class="c-kw">return</span> menor
+
+<span class="c-kw">def</span> <span class="c-fn">mediana</span>(lista):
+    orden = <span class="c-fn">sorted</span>(lista)
+    n = <span class="c-fn">len</span>(orden)
+    medio = n // <span class="c-num">2</span>
+    <span class="c-kw">if</span> n % <span class="c-num">2</span> == <span class="c-num">1</span>:
+        <span class="c-kw">return</span> orden[medio]
+    <span class="c-kw">return</span> (orden[medio - <span class="c-num">1</span>] + orden[medio]) / <span class="c-num">2</span>
+
+<span class="c-kw">if</span> __name__ == <span class="c-str">"__main__"</span>:
+    <span class="c-kw">assert</span> promedio([<span class="c-num">2</span>, <span class="c-num">4</span>, <span class="c-num">6</span>]) == <span class="c-num">4</span>
+    <span class="c-kw">assert</span> mediana([<span class="c-num">3</span>, <span class="c-num">1</span>, <span class="c-num">2</span>]) == <span class="c-num">2</span>
+    <span class="c-kw">assert</span> mediana([<span class="c-num">4</span>, <span class="c-num">1</span>, <span class="c-num">3</span>, <span class="c-num">2</span>]) == <span class="c-num">2.5</span>
+    <span class="c-fn">print</span>(<span class="c-str">"Pruebas OK"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Pruebas OK</div></div></div></details></section>
+<section><h2><span class="section-num">31</span> Ejercicio 4 (Reto Final): Juego de Adivinanza con Estadísticas</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Hacé un <b>juego de adivinar un número del 1 al 100</b> (elegido con <code>random.randint</code>). El programa debe: <b>validar</b> cada intento con <code>try/except</code>, dar pistas <b>"más alto" / "más bajo"</b>, contar los <b>intentos</b>, y al terminar <b>guardar</b> en <code>puntajes.txt</code> el <b>nombre</b> y la <b>cantidad de intentos</b>. Al iniciar, mostrar el <b>mejor puntaje</b> (el menor número de intentos) leyendo el archivo.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Pistas de organización</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Funciones: <code>pedir_numero()</code> (validación), <code>jugar()</code> (devuelve intentos), <code>guardar_puntaje(nombre, intentos)</code>, <code>mejor_puntaje()</code> (devuelve <code>None</code> si el archivo no existe) y <code>main()</code>. Probá cada función <b>por separado</b>.</p></div></section>
+<section><h2><span class="section-num">32</span> ¿Y Ahora Qué? Próximos Pasos</h2><div class="grid-3" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">🧱 Estructuras de datos</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><b>Diccionarios</b> (<code>{"clave": valor}</code>), <b>conjuntos</b> (<code>set</code>) y <b>tuplas</b>: guardar datos con <b>nombre</b> en lugar de posición.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">🏗️ Programación orientada a objetos</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><b>Clases y objetos</b>: agrupar <b>datos y funciones</b> en un mismo tipo (el equivalente más potente de los <code>struct</code> de C).</p></div><div class="box box-purple"><h4 style="color:var(--accent-purple);">📦 Bibliotecas externas</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>pip install</code>: <b><code>requests</code></b> (internet), <b><code>pandas</code></b> (datos), <b><code>matplotlib</code></b> (gráficos), <b><code>pygame</code></b> (juegos)...</p></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cómo seguir aprendiendo</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Practicá todos los días</b>, aunque sea 20 minutos.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Resolvé <b>problemas</b> en sitios de práctica (por ejemplo, ejercicios de lógica y algoritmos).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Hacé <b>proyectos propios</b>: un juego, una agenda, un bot, un programa para tu vida diaria.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Leé código</b> de otros y <b>la documentación oficial</b> (docs.python.org).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>No tengas miedo a los errores</b>: son tu mejor guía.</li></ul></div></section>
+<section><h2><span class="section-num">33</span> Resumen Final del Bimestre</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave de la unidad</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Nombres</b> descriptivos y estilo <b>PEP 8</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Funciones pequeñas</b> con <b>una responsabilidad</b> y una función <b><code>main()</code></b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Módulos</b>: <code>import math</code>, <code>random</code>, <code>datetime</code> y los <b>propios</b>; <code>if __name__ == "__main__":</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>7 etapas</b> para resolver problemas: entender → entradas → salida → procedimiento → dividir → codificar → <b>probar</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Depurar</b>: leer el error, mostrar valores, simplificar. <b>Probar</b>: bordes y <code>assert</code>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación final</h4><div class="checklist-item"><span class="icon">✓</span> ¿Puedo explicar con mis palabras qué es una variable, un bucle y una función?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé elegir entre <code>if</code>, <code>while</code> y <code>for</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Manejo strings, listas, matrices y archivos?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé leer un mensaje de error y encontrar su causa?</div><div class="checklist-item"><span class="icon">✓</span> ¿Puedo organizar un programa en funciones y <code>main()</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Tengo un método para atacar un ejercicio nuevo?</div></div></div><div class="box box-amber"><p style="font-size:0.9rem; line-height:1.55; margin:4px 0;">🎓 <b>¡Completaste el apartado de Python!</b> Programar es un oficio que se aprende <b>escribiendo código</b>: seguí practicando con los ejercicios de cada unidad.</p></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 18 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Organización, Buenas Prácticas y Repaso Final</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="17-archivos-procesamiento-y-errores.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Archivos: Procesamiento y Manejo de Errores</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="../index.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">🎓 Fin del bimestre</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

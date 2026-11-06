@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 12: Strings: Métodos y Procesamiento de Texto | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 12</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 12</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Strings: Métodos y Procesamiento de Texto</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Las herramientas que trae cada string: upper, lower, strip, replace, find, count, split, join, isdigit... y cómo combinarlas para resolver problemas reales con texto</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">Métodos de str</span><span class="badge badge-indigo">Limpiar y convertir</span><span class="badge badge-emerald">Buscar y contar</span><span class="badge badge-amber">split y join</span><span class="badge badge-purple">Validar texto</span><span class="badge badge-rose">Ejemplos completos</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 39 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: Herramientas Listas para Usar</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya sabemos</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Un <code>str</code> es una secuencia de caracteres con <b>índices</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>len()</code>, <code>+</code>, <code>*</code>, <code>in</code> y el <b>slicing</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los strings son <b>inmutables</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>En C usábamos <code>string.h</code>: <code>strlen</code>, <code>strcpy</code>, <code>strcat</code>, <code>strcmp</code>, <code>toupper</code>...</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Qué es un <b>método</b> y cómo se llama.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Convertir <b>mayúsculas/minúsculas</b>, <b>limpiar</b> espacios, <b>reemplazar</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Buscar</b> y <b>contar</b> fragmentos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Validar</b> el contenido (<code>isdigit</code>, <code>isalpha</code>...).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Dividir</b> (<code>split</code>) y <b>unir</b> (<code>join</code>) textos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Resolver problemas completos de procesamiento de texto.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que sepas <b>qué método usar</b> para cada tarea con texto, y que recuerdes que <b>todos devuelven un string nuevo</b> sin modificar el original.</p></div></section>
+<section><h2><span class="section-num">02</span> ¿Qué Es un Método?</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un <b>método</b> es una <b>función que "pertenece" a un tipo de dato</b> y trabaja <b>sobre un valor concreto</b> de ese tipo. Se llama con un <b>punto</b> después del valor: <code>valor.metodo(argumentos)</code>.</p></div><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-cyan);">texto</span><span style="color:var(--accent-amber);">.</span><span style="color:var(--accent-indigo);">metodo</span>(<span style="color:var(--accent-emerald);">argumentos</span>)</div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">primer_metodo.py</span><span class="code-badge">Python</span></div><div class="code-body">nombre = <span class="c-str">"agustin"</span>
+
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(nombre))
+<span class="c-fn">print</span>(nombre.upper())
+<span class="c-fn">print</span>(<span class="c-str">"hola mundo"</span>.title())</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">7
+AGUSTIN
+Hola Mundo</div></div></div></div><table class="trace-table"><thead><tr><th></th><th>Función</th><th>Método</th></tr></thead><tbody><tr><td>Se escribe</td><td><code>len(nombre)</code></td><td><code>nombre.upper()</code></td></tr><tr><td>El dato va...</td><td>Entre los paréntesis</td><td>Antes del punto</td></tr><tr><td>Ejemplos</td><td><code>len</code>, <code>print</code>, <code>int</code></td><td><code>upper</code>, <code>strip</code>, <code>split</code></td></tr></tbody></table><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En C: <code>toupper(c)</code> o <code>strlen(s)</code> (funciones <b>sueltas</b> de <code>ctype.h</code>/<code>string.h</code>). En Python las herramientas <b>vienen con el propio string</b>: no hace falta <code>#include</code> ni <code>import</code>.</p></div></section>
+<section><h2><span class="section-num">03</span> Los Métodos NO Modifican el String Original</h2><div class="box box-rose"><h4 style="color:var(--accent-rose);">Recordá la inmutabilidad</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Como los strings <b>no se pueden modificar</b>, <b>todos los métodos devuelven un string NUEVO</b> y dejan el original <b>intacto</b>. Si querés conservar el resultado, <b>hay que guardarlo</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">no_modifican.py</span><span class="code-badge">Python</span></div><div class="code-body">texto = <span class="c-str">"hola"</span>
+
+texto.upper()
+<span class="c-fn">print</span>(texto)
+
+mayusculas = texto.upper()
+<span class="c-fn">print</span>(mayusculas)
+<span class="c-fn">print</span>(texto)
+
+texto = texto.upper()
+<span class="c-fn">print</span>(texto)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">hola
+HOLA
+hola
+HOLA</div></div></div></div><table class="trace-table"><thead><tr><th>Línea</th><th>Qué pasa</th><th><code>texto</code></th></tr></thead><tbody><tr><td><code>texto.upper()</code></td><td>Se calcula <code>"HOLA"</code> pero <b>no se guarda</b></td><td><code>"hola"</code></td></tr><tr><td><code>mayusculas = texto.upper()</code></td><td>Se guarda el resultado <b>en otra variable</b></td><td><code>"hola"</code></td></tr><tr><td><code>texto = texto.upper()</code></td><td><b>Reasigna</b> la misma variable</td><td><code>"HOLA"</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">04</span> Mayúsculas y Minúsculas: upper(), lower()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">upper_lower.py</span><span class="code-badge">Python</span></div><div class="code-body">nombre = <span class="c-str">"Agustin Perez"</span>
+
+<span class="c-fn">print</span>(nombre.upper())
+<span class="c-fn">print</span>(nombre.lower())
+
+respuesta = <span class="c-str">"SI"</span>
+<span class="c-kw">if</span> respuesta.lower() == <span class="c-str">"si"</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Aceptó"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">AGUSTIN PEREZ
+agustin perez
+Aceptó</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);"><code>upper()</code> / <code>lower()</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Devuelven el texto <b>todo en mayúsculas</b> o <b>todo en minúsculas</b>. Los caracteres que no son letras <b>no cambian</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Uso muy frecuente</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Para <b>comparar sin importar la capitalización</b>: convertí a <b>minúsculas</b> ambos lados antes de comparar. Así <code>"SI"</code>, <code>"Si"</code> y <code>"si"</code> son aceptados.</p></div></div></section>
+<section><h2><span class="section-num">05</span> title(), capitalize(), swapcase()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">title_capitalize.py</span><span class="code-badge">Python</span></div><div class="code-body">frase = <span class="c-str">"hoLA mUndo de PYTHON"</span>
+
+<span class="c-fn">print</span>(frase.title())
+<span class="c-fn">print</span>(frase.capitalize())
+<span class="c-fn">print</span>(frase.swapcase())
+<span class="c-fn">print</span>(<span class="c-str">"hola"</span>.capitalize() == <span class="c-str">"Hola"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola Mundo De Python
+Hola mundo de python
+HOla MuNDO DE python
+True</div></div></div></div><table class="trace-table"><thead><tr><th>Método</th><th>Qué hace</th><th>Resultado con <code>"hoLA mUndo de PYTHON"</code></th></tr></thead><tbody><tr><td><code>title()</code></td><td>Primera letra de <b>cada palabra</b> en mayúscula, el resto en minúscula</td><td><code>Hola Mundo De Python</code></td></tr><tr><td><code>capitalize()</code></td><td>Solo la <b>primera letra del texto</b> en mayúscula; el resto en minúscula</td><td><code>Hola mundo de python</code></td></tr><tr><td><code>swapcase()</code></td><td><b>Invierte</b> mayúsculas y minúsculas</td><td><code>HOla MuNDO DE python</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">06</span> Limpiar Espacios: strip(), lstrip(), rstrip()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">strip.py</span><span class="code-badge">Python</span></div><div class="code-body">dato = <span class="c-str">"   Ana Perez   "</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"["</span> + dato + <span class="c-str">"]"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"["</span> + dato.strip() + <span class="c-str">"]"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"["</span> + dato.lstrip() + <span class="c-str">"]"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"["</span> + dato.rstrip() + <span class="c-str">"]"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"xxholaxx"</span>.strip(<span class="c-str">"x"</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[   Ana Perez   ]
+[Ana Perez]
+[Ana Perez   ]
+[   Ana Perez]
+hola</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Qué eliminan</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>strip()</code></b>: espacios (y saltos de línea, tabulaciones) del <b>principio y del final</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>lstrip()</code></b>: solo a la <b>izquierda</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>rstrip()</code></b>: solo a la <b>derecha</b>.</li></ul></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Importante</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">No tocan los espacios <b>del medio</b>. Con un argumento (<code>strip("x")</code>) eliminan <b>esos caracteres</b> en los extremos. Es clave para <b>limpiar datos</b> escritos por el usuario o leídos de archivos.</p></div></div></section>
+<section><h2><span class="section-num">07</span> Reemplazar Texto: replace()</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);">texto.<span style="color:var(--accent-indigo);">replace</span>(<span style="color:var(--accent-rose);">viejo</span>, <span style="color:var(--accent-emerald);">nuevo</span>)</div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">replace.py</span><span class="code-badge">Python</span></div><div class="code-body">frase = <span class="c-str">"Me gusta el mate. El mate es rico."</span>
+
+<span class="c-fn">print</span>(frase.replace(<span class="c-str">"mate"</span>, <span class="c-str">"te"</span>))
+<span class="c-fn">print</span>(frase.replace(<span class="c-str">"mate"</span>, <span class="c-str">"te"</span>, <span class="c-num">1</span>))
+<span class="c-fn">print</span>(frase.replace(<span class="c-str">" "</span>, <span class="c-str">""</span>))
+<span class="c-fn">print</span>(frase.replace(<span class="c-str">"xyz"</span>, <span class="c-str">"abc"</span>) == frase)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Me gusta el te. El te es rico.
+Me gusta el te. El mate es rico.
+Megustaelmate.Elmateesrico.
+True</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cómo funciona</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>replace(viejo, nuevo)</code> reemplaza <b>todas</b> las apariciones de <code>viejo</code> por <code>nuevo</code>. Un <b>tercer argumento</b> limita <b>cuántas</b> (<code>1</code> = solo la primera).</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Casos útiles</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Eliminar</b> algo: reemplazar por <code>""</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Si <code>viejo</code> <b>no aparece</b>, devuelve el texto <b>igual</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Distingue <b>mayúsculas</b>.</li></ul></div></div></section>
+<section><h2><span class="section-num">08</span> Contar Apariciones: count()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">count.py</span><span class="code-badge">Python</span></div><div class="code-body">texto = <span class="c-str">"banana"</span>
+
+<span class="c-fn">print</span>(texto.count(<span class="c-str">"a"</span>))
+<span class="c-fn">print</span>(texto.count(<span class="c-str">"an"</span>))
+<span class="c-fn">print</span>(texto.count(<span class="c-str">"x"</span>))
+<span class="c-fn">print</span>(<span class="c-str">"aaaa"</span>.count(<span class="c-str">"aa"</span>))
+<span class="c-fn">print</span>(<span class="c-str">"Mississippi"</span>.lower().count(<span class="c-str">"s"</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">3
+2
+0
+2
+4</div></div></div></div><table class="trace-table"><thead><tr><th>Expresión</th><th>Resultado</th><th>Por qué</th></tr></thead><tbody><tr><td><code>"banana".count("a")</code></td><td>3</td><td>Hay tres <code>a</code></td></tr><tr><td><code>"banana".count("an")</code></td><td>2</td><td><code>an</code> aparece dos veces</td></tr><tr><td><code>"aaaa".count("aa")</code></td><td>2</td><td>Cuenta <b>sin solapar</b>: <code>aa</code> + <code>aa</code></td></tr><tr><td><code>"Mississippi".lower().count("s")</code></td><td>4</td><td>Se pasó a minúsculas <b>antes</b> de contar</td></tr></tbody></table><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Reemplaza el bucle con contador que escribíamos a mano (unidad 11 y bimestres anteriores).</p></div></section>
+<section><h2><span class="section-num">09</span> Buscar Posiciones: find() e index()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">find.py</span><span class="code-badge">Python</span></div><div class="code-body">texto = <span class="c-str">"programacion"</span>
+
+<span class="c-fn">print</span>(texto.find(<span class="c-str">"gram"</span>))
+<span class="c-fn">print</span>(texto.find(<span class="c-str">"a"</span>))
+<span class="c-fn">print</span>(texto.find(<span class="c-str">"a"</span>, <span class="c-num">6</span>))
+<span class="c-fn">print</span>(texto.rfind(<span class="c-str">"a"</span>))
+<span class="c-fn">print</span>(texto.find(<span class="c-str">"xyz"</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">3
+5
+7
+7
+-1</div></div></div></div><table class="trace-table"><thead><tr><th>Método</th><th>Devuelve</th></tr></thead><tbody><tr><td><code>find(fragmento)</code></td><td>El <b>índice</b> de la <b>primera</b> aparición, o <b><code>-1</code></b> si no está</td></tr><tr><td><code>find(fragmento, desde)</code></td><td>Igual, empezando a buscar <b>desde</b> esa posición</td></tr><tr><td><code>rfind(fragmento)</code></td><td>El índice de la <b>última</b> aparición</td></tr><tr><td><code>index(fragmento)</code></td><td>Igual que <code>find</code>, pero si no está lanza <b><code>ValueError</code></b></td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cuidado con <code>-1</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>-1</code> <b>no es un índice "válido"</b>: significa "no encontrado". Para solo preguntar si <b>está o no</b>, usá <code>in</code> (<code>"gram" in texto</code>) en vez de <code>find(...) != -1</code>.</p></div></section>
+<section><h2><span class="section-num">10</span> Comienzo y Final de un Texto: startswith() y endswith()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">startswith.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-str">"informe_final.pdf"</span>
+
+<span class="c-fn">print</span>(archivo.startswith(<span class="c-str">"informe"</span>))
+<span class="c-fn">print</span>(archivo.endswith(<span class="c-str">".pdf"</span>))
+<span class="c-fn">print</span>(archivo.endswith(<span class="c-str">".docx"</span>))
+<span class="c-fn">print</span>(archivo.endswith((<span class="c-str">".pdf"</span>, <span class="c-str">".docx"</span>)))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">True
+True
+False
+True</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Qué hacen</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Devuelven <code>True</code> si el texto <b>empieza</b> o <b>termina</b> con el fragmento indicado. Distinguen <b>mayúsculas</b>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Con varias opciones</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si pasás una <b>tupla</b> <code>(".pdf", ".docx")</code>, devuelven <code>True</code> si coincide con <b>alguna</b> de las opciones. Muy útil para <b>tipos de archivo</b>.</p></div></div></section>
+<section><h2><span class="section-num">11</span> Clasificar el Contenido: isdigit(), isalpha() y Compañía</h2><table class="trace-table"><thead><tr><th>Método</th><th><code>True</code> si el texto...</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>isdigit()</code></td><td>tiene <b>solo dígitos</b> (y al menos uno)</td><td><code>"2024".isdigit()</code> → <code>True</code></td></tr><tr><td><code>isalpha()</code></td><td>tiene <b>solo letras</b></td><td><code>"Hola".isalpha()</code> → <code>True</code></td></tr><tr><td><code>isalnum()</code></td><td>tiene <b>solo letras y/o números</b></td><td><code>"abc123".isalnum()</code> → <code>True</code></td></tr><tr><td><code>isspace()</code></td><td>tiene <b>solo espacios</b> (o tabulaciones...)</td><td><code>"   ".isspace()</code> → <code>True</code></td></tr><tr><td><code>isupper()</code></td><td>tiene letras y <b>todas en mayúscula</b></td><td><code>"HOLA".isupper()</code> → <code>True</code></td></tr><tr><td><code>islower()</code></td><td>tiene letras y <b>todas en minúscula</b></td><td><code>"hola".islower()</code> → <code>True</code></td></tr></tbody></table><div class="code-window"><div class="code-header"><span class="code-title">clasificar.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-str">"2024"</span>.isdigit(), <span class="c-str">"20.5"</span>.isdigit(), <span class="c-str">"-7"</span>.isdigit())
+<span class="c-fn">print</span>(<span class="c-str">"Hola"</span>.isalpha(), <span class="c-str">"Hola mundo"</span>.isalpha())
+<span class="c-fn">print</span>(<span class="c-str">"abc123"</span>.isalnum(), <span class="c-str">"abc 123"</span>.isalnum())
+<span class="c-fn">print</span>(<span class="c-str">""</span>.isdigit(), <span class="c-str">"HOLA"</span>.isupper(), <span class="c-str">"Hola"</span>.isupper())</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">True False False
+True False
+True False
+False True False</div></div></section>
+<section><h2><span class="section-num">12</span> Validar Entradas con isdigit()</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Recordá que <code>int(input())</code> falla con <code>ValueError</code> si el usuario no escribe un número. <code>isdigit()</code> permite <b>comprobar antes</b> de convertir:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">validar_isdigit.py</span><span class="code-badge">Python</span></div><div class="code-body">dato = <span class="c-fn">input</span>(<span class="c-str">"Ingrese su edad: "</span>)
+
+<span class="c-kw">while</span> <span class="c-kw">not</span> dato.isdigit():
+    <span class="c-fn">print</span>(<span class="c-str">"Eso no es un número entero positivo."</span>)
+    dato = <span class="c-fn">input</span>(<span class="c-str">"Ingrese su edad: "</span>)
+
+edad = <span class="c-fn">int</span>(dato)
+<span class="c-fn">print</span>(<span class="c-str">"Edad registrada:"</span>, edad)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ingrese su edad: <span class="terminal-user-input">veinte</span>
+Eso no es un número entero positivo.
+Ingrese su edad: <span class="terminal-user-input">17.5</span>
+Eso no es un número entero positivo.
+Ingrese su edad: <span class="terminal-user-input">17</span>
+Edad registrada: 17</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Limitaciones</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>isdigit()</code> es <code>False</code> para <b>negativos</b> (<code>"-5"</code>) y <b>decimales</b> (<code>"3.5"</code>): solo acepta <b>dígitos</b>. Para esos casos se usa <code>try/except</code> (unidad 17).</p></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ventaja</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El programa <b>no se rompe</b>: vuelve a pedir el dato hasta que sea válido.</p></div></section>
+<section><h2><span class="section-num">13</span> Dividir un Texto: split()</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>texto.split(separador)</code> <b>divide el texto</b> en pedazos cada vez que encuentra el <code>separador</code> y devuelve <b>una lista</b> con los pedazos. Sin argumento, separa por <b>espacios en blanco</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">split.py</span><span class="code-badge">Python</span></div><div class="code-body">frase = <span class="c-str">"Aprender Python es divertido"</span>
+<span class="c-fn">print</span>(frase.split())
+
+fecha = <span class="c-str">"25/12/2024"</span>
+<span class="c-fn">print</span>(fecha.split(<span class="c-str">"/"</span>))
+
+datos = <span class="c-str">"Ana,17,Rosario"</span>
+nombre, edad, ciudad = datos.split(<span class="c-str">","</span>)
+<span class="c-fn">print</span>(nombre, edad, ciudad)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">['Aprender', 'Python', 'es', 'divertido']
+['25', '12', '2024']
+Ana 17 Rosario</div></div></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Qué es esa lista</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Una <b>lista</b> es una colección de varios valores entre <code>[ ]</code> (la estudiamos a fondo en la unidad 13). Se puede <b>recorrer con <code>for</code></b> y <b>desempaquetar</b> en variables como vimos con las tuplas.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Detalle</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Los pedazos son <b>siempre textos</b>: <code>edad</code> es <code>"17"</code>, no el número 17. Si hace falta, convertilo con <code>int(edad)</code>.</p></div></section>
+<section><h2><span class="section-num">14</span> Unir Textos: join()</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>separador.join(lista)</code> <b>une</b> todos los textos de una lista <b>poniendo el <code>separador</code> entre ellos</b>. Es la operación <b>inversa</b> de <code>split</code>. El separador <b>va antes del punto</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">join.py</span><span class="code-badge">Python</span></div><div class="code-body">palabras = [<span class="c-str">"Python"</span>, <span class="c-str">"es"</span>, <span class="c-str">"genial"</span>]
+
+<span class="c-fn">print</span>(<span class="c-str">" "</span>.join(palabras))
+<span class="c-fn">print</span>(<span class="c-str">"-"</span>.join(palabras))
+<span class="c-fn">print</span>(<span class="c-str">""</span>.join(palabras))
+<span class="c-fn">print</span>(<span class="c-str">", "</span>.join([<span class="c-str">"rojo"</span>, <span class="c-str">"verde"</span>, <span class="c-str">"azul"</span>]))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Python es genial
+Python-es-genial
+Pythonesgenial
+rojo, verde, azul</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Solo con strings</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Todos los elementos de la lista <b>deben ser <code>str</code></b>. <code>"-".join([1, 2, 3])</code> da <code>TypeError</code>: primero hay que convertirlos con <code>str()</code>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Ventaja sobre <code>+</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Armar un texto con <code>join</code> es <b>más corto y más rápido</b> que concatenar con <code>+</code> dentro de un bucle.</p></div></section>
+<section><h2><span class="section-num">15</span> split + join: Procesar Palabras</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">palabras.py</span><span class="code-badge">Python</span></div><div class="code-body">frase = <span class="c-str">"  la   programacion   es   divertida  "</span>
+
+palabras = frase.split()
+<span class="c-fn">print</span>(palabras)
+<span class="c-fn">print</span>(<span class="c-str">"Cantidad de palabras:"</span>, <span class="c-fn">len</span>(palabras))
+
+<span class="c-fn">print</span>(<span class="c-str">" "</span>.join(palabras))
+<span class="c-fn">print</span>(<span class="c-str">" "</span>.join(palabras[::-<span class="c-num">1</span>]))
+<span class="c-fn">print</span>(<span class="c-str">" "</span>.join(p.capitalize() <span class="c-kw">for</span> p <span class="c-kw">in</span> palabras))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">['la', 'programacion', 'es', 'divertida']
+Cantidad de palabras: 4
+la programacion es divertida
+divertida es programacion la
+La Programacion Es Divertida</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.82rem;"><code>frase.split()</code> <b>ignora los espacios de más</b> y devuelve las <b>4 palabras</b>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.82rem;"><code>" ".join(palabras)</code> las une con <b>un solo espacio</b>: se <b>normalizan</b> los espacios.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.82rem;"><code>palabras[::-1]</code> invierte <b>el orden</b> de la lista (el slicing funciona <b>igual que en strings</b>).</div></div></div></section>
+<section><h2><span class="section-num">16</span> Encadenar Métodos</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Como cada método <b>devuelve un string</b>, se puede <b>llamar otro método sobre el resultado</b>. Se lee <b>de izquierda a derecha</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">encadenar.py</span><span class="code-badge">Python</span></div><div class="code-body">dato = <span class="c-str">"   JUAN pErEz   "</span>
+
+limpio = dato.strip().lower().title()
+<span class="c-fn">print</span>(limpio)
+
+<span class="c-fn">print</span>(<span class="c-str">"  A-B-C  "</span>.strip().replace(<span class="c-str">"-"</span>, <span class="c-str">" "</span>).upper())</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Juan Perez
+A B C</div></div></div></div><table class="trace-table"><thead><tr><th>Paso</th><th>Expresión</th><th>Resultado</th></tr></thead><tbody><tr><td>1</td><td><code>dato.strip()</code></td><td><code>"JUAN pErEz"</code></td></tr><tr><td>2</td><td><code>.lower()</code></td><td><code>"juan perez"</code></td></tr><tr><td>3</td><td><code>.title()</code></td><td><code>"Juan Perez"</code></td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Buena práctica</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Encadenar <b>2 o 3</b> métodos queda claro. Con muchos más conviene <b>separar en variables</b> para que se entienda cada paso.</p></div></section>
+<section><h2><span class="section-num">17</span> Tabla Resumen de Métodos de str</h2><table class="trace-table"><thead><tr><th>Tarea</th><th>Método</th><th>Ejemplo → resultado</th></tr></thead><tbody><tr><td>Mayúsculas / minúsculas</td><td><code>upper()</code>, <code>lower()</code></td><td><code>"ab".upper()</code> → <code>"AB"</code></td></tr><tr><td>Capitalizar</td><td><code>title()</code>, <code>capitalize()</code></td><td><code>"ana perez".title()</code> → <code>"Ana Perez"</code></td></tr><tr><td>Quitar espacios</td><td><code>strip()</code>, <code>lstrip()</code>, <code>rstrip()</code></td><td><code>" a ".strip()</code> → <code>"a"</code></td></tr><tr><td>Reemplazar</td><td><code>replace(v, n)</code></td><td><code>"a-b".replace("-", "+")</code> → <code>"a+b"</code></td></tr><tr><td>Contar</td><td><code>count(x)</code></td><td><code>"hola".count("o")</code> → <code>1</code></td></tr><tr><td>Buscar posición</td><td><code>find(x)</code>, <code>index(x)</code></td><td><code>"hola".find("l")</code> → <code>2</code></td></tr><tr><td>Empieza / termina</td><td><code>startswith</code>, <code>endswith</code></td><td><code>"a.py".endswith(".py")</code> → <code>True</code></td></tr><tr><td>Clasificar</td><td><code>isdigit</code>, <code>isalpha</code>...</td><td><code>"12".isdigit()</code> → <code>True</code></td></tr><tr><td>Dividir / unir</td><td><code>split</code>, <code>join</code></td><td><code>"a b".split()</code> → <code>["a", "b"]</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">18</span> Dar Formato: f-strings Avanzadas</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">formato_avanzado.py</span><span class="code-badge">Python</span></div><div class="code-body">nombre = <span class="c-str">"Ana"</span>
+precio = <span class="c-num">1234567.891</span>
+descuento = <span class="c-num">0.125</span>
+
+<span class="c-fn">print</span>(<span class="c-str">f"[{nombre:&gt;10}]"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"[{nombre:&lt;10}]"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"[{nombre:^10}]"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"[{nombre:*^10}]"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"{precio:,.2f}"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"{descuento:.1%}"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"{42:05d}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[       Ana]
+[Ana       ]
+[   Ana    ]
+[***Ana****]
+1,234,567.89
+12.5%
+00042</div></div></div></div><table class="trace-table"><thead><tr><th>Formato</th><th>Significado</th></tr></thead><tbody><tr><td><code>:&gt;10</code></td><td>Alinear a la <b>derecha</b> en 10 espacios</td></tr><tr><td><code>:&lt;10</code></td><td>Alinear a la <b>izquierda</b></td></tr><tr><td><code>:^10</code></td><td><b>Centrar</b></td></tr><tr><td><code>:*^10</code></td><td>Centrar <b>rellenando</b> con <code>*</code></td></tr><tr><td><code>:,.2f</code></td><td>Separador de miles y 2 decimales</td></tr><tr><td><code>:.1%</code></td><td>Como <b>porcentaje</b> con 1 decimal</td></tr><tr><td><code>:05d</code></td><td>Entero con <b>ceros</b> a la izquierda (5 dígitos)</td></tr></tbody></table></section>
+<section><h2><span class="section-num">19</span> Otras Formas de Dar Formato (Para Reconocerlas)</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Es posible que encuentres código más antiguo que usa otras formas. <b>Hacen lo mismo</b> que una f-string:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">formatos.py</span><span class="code-badge">Python</span></div><div class="code-body">nombre = <span class="c-str">"Ana"</span>
+edad = <span class="c-num">17</span>
+
+<span class="c-fn">print</span>(<span class="c-str">f"{nombre} tiene {edad} años"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"{} tiene {} años"</span>.<span class="c-fn">format</span>(nombre, edad))
+<span class="c-fn">print</span>(<span class="c-str">"%s tiene %d años"</span> % (nombre, edad))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ana tiene 17 años
+Ana tiene 17 años
+Ana tiene 17 años</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);"><code>%</code> (estilo C)</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Usa marcadores como <code>printf</code>: <code>%s</code>, <code>%d</code>, <code>%.2f</code>. Es la <b>más antigua</b>; por eso te resulta familiar.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cuál usar</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><b>f-strings</b>: son <b>más legibles y cortas</b>. Las otras conviene <b>reconocerlas</b> al leer código ajeno.</p></div></div></section>
+<section><h2><span class="section-num">20</span> Ejemplo: Contar las Palabras de una Frase</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">contar_palabras.py</span><span class="code-badge">Python</span></div><div class="code-body">frase = <span class="c-fn">input</span>(<span class="c-str">"Escribí una frase: "</span>)
+
+palabras = frase.split()
+<span class="c-fn">print</span>(<span class="c-str">"Cantidad de palabras:"</span>, <span class="c-fn">len</span>(palabras))
+<span class="c-fn">print</span>(<span class="c-str">"Palabra más larga:"</span>, <span class="c-fn">max</span>(palabras, key=<span class="c-fn">len</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Escribí una frase: <span class="terminal-user-input">El perro corre por el parque</span>
+Cantidad de palabras: 6
+Palabra más larga: parque</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>split()</code> (sin argumentos) ya <b>ignora los espacios repetidos</b>, así que <code>len(frase.split())</code> cuenta bien las palabras. <code>max(palabras, key=len)</code> devuelve la <b>palabra de mayor longitud</b>: es una forma avanzada de <code>max</code> que usa <code>len</code> como criterio.</p></div></section>
+<section><h2><span class="section-num">21</span> Ejemplo: Normalizar Nombres Escritos por el Usuario</h2><div class="code-window"><div class="code-header"><span class="code-title">normalizar.py</span><span class="code-badge">Python</span></div><div class="code-body">nombre = <span class="c-fn">input</span>(<span class="c-str">"Nombre: "</span>)
+apellido = <span class="c-fn">input</span>(<span class="c-str">"Apellido: "</span>)
+
+completo = nombre.strip().title() + <span class="c-str">" "</span> + apellido.strip().title()
+<span class="c-fn">print</span>(<span class="c-str">f"Bienvenido/a, {completo}"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Nombre: <span class="terminal-user-input">  marIA </span>
+Apellido: <span class="terminal-user-input">gonZALEZ</span>
+Bienvenido/a, Maria Gonzalez</div></div><table class="trace-table"><thead><tr><th>Entrada</th><th>Después de <code>strip()</code></th><th>Después de <code>title()</code></th></tr></thead><tbody><tr><td><code>"  marIA "</code></td><td><code>"marIA"</code></td><td><code>"Maria"</code></td></tr><tr><td><code>"gonZALEZ"</code></td><td><code>"gonZALEZ"</code></td><td><code>"Gonzalez"</code></td></tr></tbody></table><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Por qué</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Los usuarios escriben <b>de cualquier forma</b>. Limpiar y normalizar los datos <b>apenas se reciben</b> evita errores y resultados inconsistentes.</p></div></section>
+<section><h2><span class="section-num">22</span> Ejemplo: Validar una Contraseña</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Reglas</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Una contraseña es válida si tiene <b>al menos 8 caracteres</b>, <b>al menos un dígito</b> y <b>al menos una mayúscula</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">validar_clave.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">es_valida</span>(clave):
+    digito = <span class="c-kw">False</span>
+    mayus = <span class="c-kw">False</span>
+    <span class="c-kw">for</span> c <span class="c-kw">in</span> clave:
+        <span class="c-kw">if</span> c.isdigit():
+            digito = <span class="c-kw">True</span>
+        <span class="c-kw">if</span> c.isupper():
+            mayus = <span class="c-kw">True</span>
+    <span class="c-kw">return</span> <span class="c-fn">len</span>(clave) &gt;= <span class="c-num">8</span> <span class="c-kw">and</span> digito <span class="c-kw">and</span> mayus
+
+<span class="c-kw">for</span> c <span class="c-kw">in</span> [<span class="c-str">"python"</span>, <span class="c-str">"Python2024"</span>, <span class="c-str">"PYTHONES"</span>]:
+    <span class="c-fn">print</span>(<span class="c-str">f"{c:12} -&gt; {es_valida(c)}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">python       -&gt; False
+Python2024   -&gt; True
+PYTHONES     -&gt; False</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Patrón</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Se recorren los caracteres <b>una sola vez</b> con <b>banderas</b> (<code>digito</code>...) que pasan a <code>True</code> cuando se encuentra lo buscado. Al final se <b>combinan</b> con <code>and</code>.</p></div></section>
+<section><h2><span class="section-num">23</span> Ejemplo: Contar Vocales sin Distinguir Mayúsculas</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">vocales.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">contar_vocales</span>(texto):
+    cantidad = <span class="c-num">0</span>
+    <span class="c-kw">for</span> letra <span class="c-kw">in</span> texto.lower():
+        <span class="c-kw">if</span> letra <span class="c-kw">in</span> <span class="c-str">"aeiou"</span>:
+            cantidad += <span class="c-num">1</span>
+    <span class="c-kw">return</span> cantidad
+
+<span class="c-fn">print</span>(contar_vocales(<span class="c-str">"Programacion"</span>))
+<span class="c-fn">print</span>(contar_vocales(<span class="c-str">"PYTHON ES GENIAL"</span>))
+<span class="c-fn">print</span>(contar_vocales(<span class="c-str">"rhythm"</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">5
+5
+0</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">La clave</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>texto.lower()</code> <b>se evalúa una sola vez</b> y el <code>for</code> recorre <b>el resultado</b>. Así no hace falta preguntar por <code>"A"</code> <b>y</b> <code>"a"</code>. Las vocales con tilde (á, é...) <b>no</b> están en <code>"aeiou"</code>: habría que agregarlas.</p></div></section>
+<section><h2><span class="section-num">24</span> Ejemplo: Cifrado César</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Se <b>desplaza cada letra</b> <code>n</code> posiciones en el alfabeto (con <code>n = 3</code>, <code>a</code> → <code>d</code>). Usamos <code>ord()</code> y <code>chr()</code> (unidad 11) y <code>%</code> para <b>"dar la vuelta"</b> al final del alfabeto.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">cesar.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">cesar</span>(texto, desplazamiento):
+    resultado = <span class="c-str">""</span>
+    <span class="c-kw">for</span> letra <span class="c-kw">in</span> texto.lower():
+        <span class="c-kw">if</span> letra.isalpha():
+            posicion = <span class="c-fn">ord</span>(letra) - <span class="c-fn">ord</span>(<span class="c-str">"a"</span>)
+            nueva = (posicion + desplazamiento) % <span class="c-num">26</span>
+            resultado += <span class="c-fn">chr</span>(<span class="c-fn">ord</span>(<span class="c-str">"a"</span>) + nueva)
+        <span class="c-kw">else</span>:
+            resultado += letra
+    <span class="c-kw">return</span> resultado
+
+secreto = cesar(<span class="c-str">"hola mundo"</span>, <span class="c-num">3</span>)
+<span class="c-fn">print</span>(secreto)
+<span class="c-fn">print</span>(cesar(secreto, -<span class="c-num">3</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">krod pxqgr
+hola mundo</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Observá</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>(posicion + n) % 26</code> hace que <code>x</code> + 3 vuelva a <code>a</code>. Se <b>conservan</b> espacios y signos con el <code>else</code>. Para <b>descifrar</b>, se usa el <b>desplazamiento opuesto</b>.</p></div></section>
+<section><h2><span class="section-num">25</span> Ejemplo: ¿Es un Palíndromo? (Frases Completas)</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Ahora ignorando mayúsculas, espacios y signos (versión mejorada del ejercicio de la unidad 11):</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">palindromo_frase.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">es_palindromo</span>(frase):
+    limpio = <span class="c-str">""</span>
+    <span class="c-kw">for</span> c <span class="c-kw">in</span> frase.lower():
+        <span class="c-kw">if</span> c.isalnum():
+            limpio += c
+    <span class="c-kw">return</span> limpio == limpio[::-<span class="c-num">1</span>]
+
+<span class="c-fn">print</span>(es_palindromo(<span class="c-str">"Anita lava la tina"</span>))
+<span class="c-fn">print</span>(es_palindromo(<span class="c-str">"A man, a plan, a canal: Panama"</span>))
+<span class="c-fn">print</span>(es_palindromo(<span class="c-str">"Hola mundo"</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">True
+True
+False</div></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Qué combinamos</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>lower()</code> para <b>ignorar mayúsculas</b>, <code>isalnum()</code> para <b>descartar espacios y signos</b>, <b>acumulador de texto</b>, <b>slicing</b> <code>[::-1]</code> y una <b>función booleana</b>.</p></div></section>
+<section><h2><span class="section-num">26</span> Ejemplo: Procesar Datos con Formato "nombre,edad,nota"</h2><div class="code-window"><div class="code-header"><span class="code-title">procesar_registros.py</span><span class="code-badge">Python</span></div><div class="code-body">registros = [<span class="c-str">"Ana,17,8.5"</span>, <span class="c-str">"Luis,18,6"</span>, <span class="c-str">"Marta,16,9.75"</span>]
+
+<span class="c-kw">for</span> registro <span class="c-kw">in</span> registros:
+    nombre, edad, nota = registro.split(<span class="c-str">","</span>)
+    edad = <span class="c-fn">int</span>(edad)
+    nota = <span class="c-fn">float</span>(nota)
+    estado = <span class="c-str">"aprobado"</span> <span class="c-kw">if</span> nota &gt;= <span class="c-num">6</span> <span class="c-kw">else</span> <span class="c-str">"desaprobado"</span>
+    <span class="c-fn">print</span>(<span class="c-str">f"{nombre:&lt;8}{edad:&gt;3} años  nota {nota:&gt;5.2f}  {estado}"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ana      17 años  nota  8.50  aprobado
+Luis     18 años  nota  6.00  aprobado
+Marta    16 años  nota  9.75  aprobado</div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Por qué importa</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Este es <b>el patrón</b> para leer archivos de datos (unidad 16 y 17): cada <b>línea</b> es un texto con campos separados por comas; <code>split(",")</code> los separa y se <b>convierten</b> a <code>int</code>/<code>float</code> los que son números.</p></div></section>
+<section><h2><span class="section-num">27</span> Mini Proyecto: Análisis de un Texto</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">analisis_texto.py</span><span class="code-badge">Python</span></div><div class="code-body">texto = <span class="c-fn">input</span>(<span class="c-str">"Texto: "</span>)
+
+letras = <span class="c-num">0</span>
+vocales = <span class="c-num">0</span>
+<span class="c-kw">for</span> c <span class="c-kw">in</span> texto.lower():
+    <span class="c-kw">if</span> c.isalpha():
+        letras += <span class="c-num">1</span>
+        <span class="c-kw">if</span> c <span class="c-kw">in</span> <span class="c-str">"aeiou"</span>:
+            vocales += <span class="c-num">1</span>
+
+palabras = texto.split()
+<span class="c-fn">print</span>(<span class="c-str">f"Caracteres: {len(texto)}"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"Letras: {letras} (vocales: {vocales})"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"Palabras: {len(palabras)}"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"Mayúsculas: {texto.upper()}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Texto: <span class="terminal-user-input">Python es genial y divertido</span>
+Caracteres: 28
+Letras: 24 (vocales: 9)
+Palabras: 5
+Mayúsculas: PYTHON ES GENIAL Y DIVERTIDO</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Qué integra</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>input</code>, <code>lower</code>, <code>isalpha</code>, <code>for</code>, <code>if</code> anidado, <code>split</code>, <code>len</code>, <code>upper</code> y f-strings: todo lo que vimos en las dos unidades de strings.</p></div></section>
+<section><h2><span class="section-num">28</span> Error Frecuente #1: Olvidar Guardar el Resultado</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ El método no modifica la variable</div><div class="code-window"><div class="code-header"><span class="code-title">sin_guardar.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">nombre = <span class="c-str">"ana"</span>
+nombre.title()
+<span class="c-fn">print</span>(nombre)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">ana</div></div></div><div class="correct-card"><div class="correct-title">✅ Reasignar o guardar</div><div class="code-window"><div class="code-header"><span class="code-title">guardado.py</span><span class="code-badge">OK</span></div><div class="code-body">nombre = <span class="c-str">"ana"</span>
+nombre = nombre.title()
+<span class="c-fn">print</span>(nombre)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ana</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Por qué</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>nombre.title()</code> <b>calcula</b> <code>"Ana"</code> pero el resultado <b>se descarta</b> (nadie lo guardó). Es el error <b>más común</b> con métodos de strings. No da ningún aviso: simplemente <b>no pasa nada</b>.</p></div></section>
+<section><h2><span class="section-num">29</span> Error Frecuente #2: Paréntesis y Métodos Inexistentes</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Sin paréntesis</div><div class="code-window"><div class="code-header"><span class="code-title">sin_parentesis.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">texto = <span class="c-str">"hola"</span>
+<span class="c-fn">print</span>(texto.upper)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">&lt;built-in method upper of str object at 0x0000016458065050&gt;</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Método que no existe</div><div class="code-window"><div class="code-header"><span class="code-title">no_existe.py</span><span class="code-badge">Con error</span></div><div class="code-body">texto = <span class="c-str">"hola"</span>
+texto.agregar(<span class="c-str">"!"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2, in &lt;module&gt;
+    texto.agregar("!")
+    ^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'agregar'</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Sin <code>( )</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Mostró <b>el método</b> en sí (algo como <code>&lt;built-in method upper...&gt;</code>), <b>no lo ejecutó</b>. Los paréntesis son los que <b>llaman</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);"><code>AttributeError</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Significa "este tipo <b>no tiene</b> ese método". Revisá la <b>ortografía</b> y la <b>tabla de métodos</b>: <code>agregar</code> no existe en <code>str</code>.</p></div></div></section>
+<section><h2><span class="section-num">30</span> Error Frecuente #3: find, index, isdigit y join</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ <code>index</code> sin encontrar</div><div class="code-window"><div class="code-header"><span class="code-title">index_error.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-str">"hola"</span>.index(<span class="c-str">"z"</span>))</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1, in &lt;module&gt;
+    print("hola".index("z"))
+          ~~~~~~~~~~~~^^^^^
+ValueError: substring not found</div></div></div><div class="wrong-card"><div class="wrong-title">❌ <code>join</code> con números</div><div class="code-window"><div class="code-header"><span class="code-title">join_error.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-str">"-"</span>.join([<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>]))</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1, in &lt;module&gt;
+    print("-".join([1, 2, 3]))
+          ~~~~~~~~^^^^^^^^^^^
+TypeError: sequence item 0: expected str instance, int found</div></div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">isdigit_limites.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-str">"-5"</span>.isdigit(), <span class="c-str">"3.5"</span>.isdigit(), <span class="c-str">" 7"</span>.isdigit())
+<span class="c-fn">print</span>(<span class="c-str">"hola"</span>.find(<span class="c-str">"z"</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">False False False
+-1</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Soluciones</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>find</code> devuelve <code>-1</code> en lugar de lanzar error (o usá <code>in</code>).</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>join</code> necesita <b>textos</b>: <code>"-".join(str(n) for n in lista)</code> o <code>map(str, lista)</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>isdigit</code> rechaza <b>signos, puntos y espacios</b>.</li></ul></div></section>
+<section><h2><span class="section-num">31</span> Comparación Final: Procesar Texto en C y en Python</h2><table class="trace-table"><thead><tr><th>Tarea</th><th>C</th><th>Python</th></tr></thead><tbody><tr><td>Pasar a mayúsculas</td><td>Bucle con <code>toupper(c)</code></td><td><code>texto.upper()</code></td></tr><tr><td>Quitar espacios extremos</td><td>Hay que programarlo</td><td><code>texto.strip()</code></td></tr><tr><td>Reemplazar</td><td>Hay que programarlo</td><td><code>texto.replace(v, n)</code></td></tr><tr><td>Contar apariciones</td><td>Bucle con contador</td><td><code>texto.count(x)</code></td></tr><tr><td>Buscar una parte</td><td><code>strstr(s, t)</code></td><td><code>t in s</code>, <code>s.find(t)</code></td></tr><tr><td>Empieza con...</td><td><code>strncmp(s, t, n) == 0</code></td><td><code>s.startswith(t)</code></td></tr><tr><td>Dividir por separador</td><td><code>strtok</code></td><td><code>s.split(sep)</code></td></tr><tr><td>¿Es dígito?</td><td><code>isdigit(c)</code></td><td><code>c.isdigit()</code></td></tr><tr><td>Modifica el original</td><td>Sí (sobre el arreglo)</td><td><b>No</b> (devuelve uno nuevo)</td></tr></tbody></table></section>
+<section><h2><span class="section-num">32</span> Buenas Prácticas al Procesar Texto</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Guardá siempre</b> el resultado de un método.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Limpiá</b> (<code>strip</code>) y <b>normalizá</b> (<code>lower</code>) los datos del usuario al recibirlos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <code>in</code> para <b>preguntar si está</b>; <code>find</code> solo si necesitás la <b>posición</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Preferí <code>split</code>/<code>join</code> a bucles que concatenan.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <code>isdigit()</code> para <b>validar antes</b> de convertir.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Encadená</b> pocos métodos y <b>comentá</b> pasos no obvios.</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Pensar que <code>texto.upper()</code> <b>cambia</b> <code>texto</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Escribir tus propias versiones de lo que <b>ya existe</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Comparar textos <b>sin pensar en mayúsculas/espacios</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Confiar en que <code>isdigit()</code> acepta negativos o decimales.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Olvidar que <code>split</code> devuelve <b>textos</b> (no números).</li></ul></div></div></section>
+<section><h2><span class="section-num">33</span> Ejercicio 1: ¿Qué Muestra Cada Línea?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Predecí cada línea</span></div><div class="code-body">s = <span class="c-str">"  Hola Mundo  "</span>
+
+<span class="c-fn">print</span>(s.strip().upper())
+<span class="c-fn">print</span>(s.strip().replace(<span class="c-str">"o"</span>, <span class="c-str">"0"</span>))
+<span class="c-fn">print</span>(s.strip().count(<span class="c-str">"o"</span>))
+<span class="c-fn">print</span>(s.strip().split())
+<span class="c-fn">print</span>(s.find(<span class="c-str">"M"</span>))
+<span class="c-fn">print</span>(s.strip().startswith(<span class="c-str">"Hola"</span>))
+<span class="c-fn">print</span>(<span class="c-str">"-"</span>.join(s.split()))</div></div><details class="code-solution"><summary>👁️ Ver respuestas</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Python</span></div><div class="code-body">s = <span class="c-str">"  Hola Mundo  "</span>
+<span class="c-fn">print</span>(s.strip().upper())
+<span class="c-fn">print</span>(s.strip().replace(<span class="c-str">"o"</span>, <span class="c-str">"0"</span>))
+<span class="c-fn">print</span>(s.strip().count(<span class="c-str">"o"</span>))
+<span class="c-fn">print</span>(s.strip().split())
+<span class="c-fn">print</span>(s.find(<span class="c-str">"M"</span>))
+<span class="c-fn">print</span>(s.strip().startswith(<span class="c-str">"Hola"</span>))
+<span class="c-fn">print</span>(<span class="c-str">"-"</span>.join(s.split()))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">HOLA MUNDO
+H0la Mund0
+2
+['Hola', 'Mundo']
+7
+True
+Hola-Mundo</div></div></div></div><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>s.find("M")</code> <b>no</b> usa <code>strip</code>: cuenta los <b>2 espacios iniciales</b> y <code>"Hola "</code> → índice <b>7</b>.</li></ul></div></details></section>
+<section><h2><span class="section-num">34</span> Ejercicio 2: Escribí el Código</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Escribí funciones y probalas:</p><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>limpiar(texto)</code>: sin espacios extremos y con <b>solo la primera letra</b> en mayúscula.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>contar_palabra(texto, palabra)</code>: cuántas veces aparece una palabra, <b>sin distinguir mayúsculas</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>es_email(texto)</code>: <code>True</code> si contiene <b>una sola <code>@</code></b> y termina en <b><code>.com</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>iniciales(nombre_completo)</code>: <code>"juan carlos perez"</code> → <code>"J.C.P."</code>.</li></ul></div><details class="code-solution"><summary>👁️ Ver soluciones</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">limpiar</span>(texto):
+    <span class="c-kw">return</span> texto.strip().capitalize()
+
+<span class="c-kw">def</span> <span class="c-fn">contar_palabra</span>(texto, palabra):
+    <span class="c-kw">return</span> texto.lower().split().count(palabra.lower())
+
+<span class="c-kw">def</span> <span class="c-fn">es_email</span>(texto):
+    <span class="c-kw">return</span> texto.count(<span class="c-str">"@"</span>) == <span class="c-num">1</span> <span class="c-kw">and</span> texto.endswith(<span class="c-str">".com"</span>)
+
+<span class="c-kw">def</span> <span class="c-fn">iniciales</span>(nombre_completo):
+    resultado = <span class="c-str">""</span>
+    <span class="c-kw">for</span> parte <span class="c-kw">in</span> nombre_completo.split():
+        resultado += parte[<span class="c-num">0</span>].upper() + <span class="c-str">"."</span>
+    <span class="c-kw">return</span> resultado
+
+<span class="c-fn">print</span>(limpiar(<span class="c-str">"  hOLA  "</span>))
+<span class="c-fn">print</span>(contar_palabra(<span class="c-str">"Si si SI no"</span>, <span class="c-str">"si"</span>))
+<span class="c-fn">print</span>(es_email(<span class="c-str">"ana@mail.com"</span>), es_email(<span class="c-str">"ana@@mail.com"</span>))
+<span class="c-fn">print</span>(iniciales(<span class="c-str">"juan carlos perez"</span>))</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola
+3
+True False
+J.C.P.</div></div></div></details></section>
+<section><h2><span class="section-num">35</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body">nombre = <span class="c-str">"  ana perez  "</span>
+nombre.strip()
+nombre.title
+<span class="c-fn">print</span>(nombre)
+
+edad = <span class="c-str">"25"</span>
+<span class="c-kw">if</span> edad.isdigit:
+    <span class="c-fn">print</span>(edad + <span class="c-num">1</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"a,b,c"</span>.split(<span class="c-str">","</span>))[<span class="c-num">0</span>]
+<span class="c-fn">print</span>(<span class="c-str">"-"</span>.join([<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>]))
+<span class="c-fn">print</span>(<span class="c-str">"hola"</span>.push(<span class="c-str">"!"</span>))</div></div><details class="code-solution"><summary>👁️ Ver errores y solución</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>nombre.strip()</code> y <code>nombre.title</code> <b>no se guardan</b> (y falta el paréntesis de <code>title</code>).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>edad.isdigit</code> sin <code>()</code>: la condición <b>siempre</b> es verdadera (es un método, no una llamada).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>edad + 1</code>: <code>"25" + 1</code> → <code>TypeError</code>; convertir con <code>int(edad) + 1</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>print(...)[0]</code>: el <code>[0]</code> se aplica al resultado de <code>print</code> (<code>None</code>). Debe ir <b>dentro</b>: <code>print("a,b,c".split(",")[0])</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>join</code> con números → convertir a <code>str</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>push</code> <b>no existe</b> en <code>str</code> (<code>AttributeError</code>); para agregar texto se <b>concatena</b>: <code>"hola" + "!"</code>.</li></ul></div></details></section>
+<section><h2><span class="section-num">36</span> Ejercicio 4 (Reto): Conversor y Verificador</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Pedí al usuario una <b>fecha</b> con formato <code>dd/mm/aaaa</code>. Verificá que tenga <b>tres partes</b>, que todas sean <b>numéricas</b>, que el <b>día</b> esté entre 1 y 31 y el <b>mes</b> entre 1 y 12. Si es válida, mostrala como <code>aaaa-mm-dd</code>; si no, mostrá <code>Fecha inválida</code>.</p></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio4.py</span><span class="code-badge">Python</span></div><div class="code-body">fecha = <span class="c-fn">input</span>(<span class="c-str">"Fecha (dd/mm/aaaa): "</span>).strip()
+partes = fecha.split(<span class="c-str">"/"</span>)
+
+valida = <span class="c-kw">False</span>
+<span class="c-kw">if</span> <span class="c-fn">len</span>(partes) == <span class="c-num">3</span>:
+    dia, mes, anio = partes
+    <span class="c-kw">if</span> dia.isdigit() <span class="c-kw">and</span> mes.isdigit() <span class="c-kw">and</span> anio.isdigit():
+        <span class="c-kw">if</span> <span class="c-num">1</span> &lt;= <span class="c-fn">int</span>(dia) &lt;= <span class="c-num">31</span> <span class="c-kw">and</span> <span class="c-num">1</span> &lt;= <span class="c-fn">int</span>(mes) &lt;= <span class="c-num">12</span>:
+            valida = <span class="c-kw">True</span>
+
+<span class="c-kw">if</span> valida:
+    <span class="c-fn">print</span>(<span class="c-str">f"{anio}-{mes.zfill(2)}-{dia.zfill(2)}"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Fecha inválida"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Fecha (dd/mm/aaaa): <span class="terminal-user-input">5/3/2024</span>
+2024-03-05</div></div><p style="font-size:0.9rem; line-height:1.55; margin:4px 0;"><code>zfill(2)</code> es otro método: <b>rellena con ceros a la izquierda</b> hasta completar 2 caracteres.</p></div></details></section>
+<section><h2><span class="section-num">37</span> Resumen de la Unidad 12</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Un <b>método</b> se llama <code>texto.metodo()</code> y <b>devuelve un string nuevo</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Conversión:</b> <code>upper</code>, <code>lower</code>, <code>title</code>, <code>capitalize</code>. <b>Limpieza:</b> <code>strip</code>, <code>replace</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Búsqueda:</b> <code>count</code>, <code>find</code>, <code>index</code>, <code>startswith</code>, <code>endswith</code>, <code>in</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Clasificación:</b> <code>isdigit</code>, <code>isalpha</code>, <code>isalnum</code>...</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>split</code></b> divide en lista; <b><code>join</code></b> une una lista.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Hay que <b>guardar</b> el resultado: el original no cambia.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué <code>s.upper()</code> solo no cambia <code>s</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé elegir entre <code>find</code>, <code>index</code> e <code>in</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Puedo validar un número antes de convertirlo?</div><div class="checklist-item"><span class="icon">✓</span> ¿Uso <code>split</code> y <code>join</code> con soltura?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé encadenar métodos sin perderme?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 12 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Strings: Métodos y Procesamiento de Texto</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="11-strings-fundamentos-indices-slicing.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Strings: Fundamentos, Índices y Slicing</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="13-listas-fundamentos-y-operaciones.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Listas: Fundamentos y Operaciones →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

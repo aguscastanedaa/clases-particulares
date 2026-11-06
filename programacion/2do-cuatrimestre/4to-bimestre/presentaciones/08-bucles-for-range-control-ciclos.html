@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 08: Bucles for y la Función range() | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 08</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 08</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Bucles for y la Función range()</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Repetir una cantidad conocida de veces y recorrer secuencias: for, range(inicio, fin, paso), break, continue, bucles anidados y comparación con while</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">for ... in</span><span class="badge badge-indigo">range()</span><span class="badge badge-emerald">Límite excluyente</span><span class="badge badge-amber">Recorrer textos</span><span class="badge badge-purple">for anidados</span><span class="badge badge-rose">for vs while</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 43 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: El Otro Bucle de Python</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya sabemos</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>while</code>: repite <b>mientras</b> una condición sea verdadera.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Tres partes: inicializar, condición, actualizar.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>break</code>, <code>continue</code> y los bucles infinitos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>En C: <code>for (int i = 0; i &lt; 5; i++)</code>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>La estructura <b><code>for ... in ...</code></b>: recorrer una secuencia.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>La función <b><code>range()</code></b> y sus tres formas.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Por qué el <b>límite final no se incluye</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Recorrer <b>textos</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>break</code> y <code>continue</code> en un <code>for</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Bucles anidados</b> y cuándo elegir <code>for</code> o <code>while</code>.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que puedas explicar con precisión <b>cuántas veces</b> se repite un <code>for</code> y <b>qué valor toma la variable</b> en cada vuelta, sin dudar con el límite de <code>range()</code>.</p></div></section>
+<section><h2><span class="section-num">02</span> ¿Cuándo Usar for y Cuándo while?</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);"><code>while</code>: no sé cuántas veces</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Repetir hasta que el usuario acierte.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Pedir un dato hasta que sea válido.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Leer números hasta que escriba 0.</li></ul><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">La repetición depende de una <b>condición</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);"><code>for</code>: sé cuántas veces (o qué recorrer)</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Repetir <b>10</b> veces.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mostrar los números del 1 al 100.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Recorrer <b>cada letra</b> de una palabra.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Procesar <b>cada elemento</b> de una lista.</li></ul></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Regla práctica</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Si podés decir <b>"para cada ..."</b> o <b>"N veces"</b> → <code>for</code>. Si tenés que decir <b>"hasta que ..."</b> o <b>"mientras ..."</b> → <code>while</code>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">En C el <code>for</code> tenía <b>tres partes</b> en una línea (<code>inicio; condición; paso</code>). En Python el <code>for</code> es <b>más simple</b>: recibe una secuencia y <b>toma sus valores uno por uno</b>.</p></div></section>
+<section><h2><span class="section-num">03</span> Sintaxis del for</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-amber);">for </span><span style="color:var(--accent-cyan);">variable</span><span style="color:var(--accent-amber);"> in </span><span style="color:var(--accent-emerald);">secuencia</span><span style="color:var(--accent-rose);">:</span></div><div class="code-window"><div class="code-header"><span class="code-title">sintaxis_for.py</span><span class="code-badge">Plantilla</span></div><div class="code-body"><span class="c-kw">for</span> variable <span class="c-kw">in</span> secuencia:
+    instruccion_1
+    instruccion_2
+instruccion_fuera_del_bucle</div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><b><code>for</code></b> → palabra reservada: "para".</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><b><code>variable</code></b> → un nombre que Python <b>va asignando automáticamente</b> a cada elemento de la secuencia (una por vuelta).</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;"><b><code>in</code></b> → palabra reservada: "dentro de".</div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.84rem;"><b><code>secuencia</code></b> → algo que se puede <b>recorrer</b> elemento por elemento (un <code>range()</code>, un texto, una lista...).</div></div><div class="step-item"><span class="step-num">5</span><div class="step-content" style="font-size:0.84rem;"><b><code>:</code></b> y el <b>bloque indentado</b> → lo que se repite, <b>una vez por cada elemento</b>.</div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Se lee así</h4><p style="font-size:0.9rem; line-height:1.55; margin:4px 0;">"<b>Para cada</b> <code>variable</code> <b>dentro de</b> <code>secuencia</code>, hacer lo siguiente..."</p></div></section>
+<section><h2><span class="section-num">04</span> Primer Contacto: Recorrer una Lista y un Texto</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Antes de ver <code>range()</code>, miremos qué hace el <code>for</code> con secuencias que ya conocemos: una <b>lista</b> (la veremos a fondo en la unidad 13) y un <b>texto</b>:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">for_basico.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> color <span class="c-kw">in</span> [<span class="c-str">"rojo"</span>, <span class="c-str">"verde"</span>, <span class="c-str">"azul"</span>]:
+    <span class="c-fn">print</span>(<span class="c-str">"Color:"</span>, color)
+
+<span class="c-fn">print</span>(<span class="c-str">"---"</span>)
+
+<span class="c-kw">for</span> letra <span class="c-kw">in</span> <span class="c-str">"Hola"</span>:
+    <span class="c-fn">print</span>(letra)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Color: rojo
+Color: verde
+Color: azul
+---
+H
+o
+l
+a</div></div></div></div><table class="trace-table"><thead><tr><th>Vuelta</th><th><code>color</code></th><th>Qué se muestra</th></tr></thead><tbody><tr><td>1</td><td><code>"rojo"</code></td><td><code>Color: rojo</code></td></tr><tr><td>2</td><td><code>"verde"</code></td><td><code>Color: verde</code></td></tr><tr><td>3</td><td><code>"azul"</code></td><td><code>Color: azul</code></td></tr><tr><td>—</td><td>No quedan elementos</td><td>El bucle termina</td></tr></tbody></table><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Idea central</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">El <code>for</code> <b>no necesita inicializar ni actualizar</b> una variable: Python <b>toma el siguiente elemento</b> solo y <b>termina cuando no quedan más</b>. Eso evita casi todos los bucles infinitos.</p></div></section>
+<section><h2><span class="section-num">05</span> La Variable de Iteración</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Qué es</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Es la variable que escribís entre <code>for</code> e <code>in</code> (<code>color</code>, <code>letra</code>, <code>i</code>...). <b>Se crea sola</b> y <b>cambia en cada vuelta</b>, tomando el valor del elemento actual.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cómo elegir el nombre</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Nombre <b>descriptivo</b> si recorrés cosas: <code>letra</code>, <code>nota</code>, <code>alumno</code>.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>i</code>, <code>j</code>, <code>k</code></b> son tradicionales cuando solo contás números.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>_</code></b> cuando <b>no vas a usar</b> el valor.</li></ul></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">variable_iteracion.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> numero <span class="c-kw">in</span> [<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>]:
+    doble = numero * <span class="c-num">2</span>
+    <span class="c-fn">print</span>(numero, <span class="c-str">"-&gt;"</span>, doble)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">10 -&gt; 20
+20 -&gt; 40
+30 -&gt; 60</div></div></div></div><div class="memory-diagram" style="margin:6px 0;"><div class="memory-box"><div class="memory-address">vuelta 1</div><div class="memory-label">numero <span class="memory-type">int</span></div><div class="memory-value">10</div></div><div class="memory-box"><div class="memory-address">vuelta 2</div><div class="memory-label">numero <span class="memory-type">int</span></div><div class="memory-value">20</div></div><div class="memory-box"><div class="memory-address">vuelta 3</div><div class="memory-label">numero <span class="memory-type">int</span></div><div class="memory-value">30</div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dato</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si la secuencia tiene <b>3 elementos</b>, el cuerpo se ejecuta <b>exactamente 3 veces</b>: es imposible que sea infinito.</p></div></section>
+<section><h2><span class="section-num">06</span> La Función range(): Generar Secuencias de Números</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>range()</code> <b>genera una secuencia de números enteros</b> pensada para usar con <code>for</code>. Permite repetir <b>una cantidad determinada de veces</b> sin escribir los números a mano.</p></div><table class="trace-table"><thead><tr><th>Forma</th><th>Genera</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>range(fin)</code></td><td>De <b>0</b> hasta <code>fin - 1</code></td><td><code>range(5)</code> → <code>0, 1, 2, 3, 4</code></td></tr><tr><td><code>range(inicio, fin)</code></td><td>De <code>inicio</code> hasta <code>fin - 1</code></td><td><code>range(1, 6)</code> → <code>1, 2, 3, 4, 5</code></td></tr><tr><td><code>range(inicio, fin, paso)</code></td><td>De <code>inicio</code> hasta antes de <code>fin</code>, de a <code>paso</code></td><td><code>range(2, 11, 2)</code> → <code>2, 4, 6, 8, 10</code></td></tr></tbody></table><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">formas_range.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-fn">list</span>(<span class="c-fn">range</span>(<span class="c-num">5</span>)))
+<span class="c-fn">print</span>(<span class="c-fn">list</span>(<span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">6</span>)))
+<span class="c-fn">print</span>(<span class="c-fn">list</span>(<span class="c-fn">range</span>(<span class="c-num">2</span>, <span class="c-num">11</span>, <span class="c-num">2</span>)))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[0, 1, 2, 3, 4]
+[1, 2, 3, 4, 5]
+[2, 4, 6, 8, 10]</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Sobre <code>list(...)</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>range</code> no muestra sus números por sí solo; <code>list(range(...))</code> los convierte en una <b>lista</b> para que podamos verlos. Lo usamos acá solo para <b>mirar</b> qué genera.</p></div></section>
+<section><h2><span class="section-num">07</span> Tu Primer for con range: Explicado Línea por Línea</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">primer_for.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">5</span>):
+    <span class="c-fn">print</span>(i)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">0
+1
+2
+3
+4</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><b><code>for i in range(5):</code></b> → "para cada valor <code>i</code> de la secuencia que genera <code>range(5)</code>". Esa secuencia es <code>0, 1, 2, 3, 4</code>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><b><code>i</code></b> → variable de iteración: en cada vuelta vale <b>el siguiente número</b> de la secuencia.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;"><b><code>range(5)</code></b> → genera <b>5 números</b>, empezando en <b>0</b> y <b>terminando en 4</b>: el 5 <b>nunca se incluye</b>.</div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.84rem;"><b><code>print(i)</code></b> → el cuerpo: muestra el valor actual de <code>i</code>.</div></div><div class="step-item"><span class="step-num">5</span><div class="step-content" style="font-size:0.84rem;"><b>Total:</b> el cuerpo se ejecuta <b>5 veces</b> (una por cada número). Después, el programa sigue con la línea siguiente.</div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">La pregunta clásica</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">¿Por qué muestra del 0 al 4 y no del 1 al 5? Porque <code>range(5)</code> arranca en <b>0</b> y llega <b>hasta antes</b> del 5. La cantidad de vueltas es <b>5</b>, pero los valores son <code>0..4</code>.</p></div></section>
+<section><h2><span class="section-num">08</span> Seguimiento de for i in range(5)</h2><table class="trace-table"><thead><tr><th>Iteración</th><th>Valor de <code>i</code></th><th>Qué hace <code>print(i)</code></th><th>Pantalla hasta ahora</th></tr></thead><tbody><tr><td>1</td><td>0</td><td>Muestra <code>0</code></td><td><code>0</code></td></tr><tr><td>2</td><td>1</td><td>Muestra <code>1</code></td><td><code>0 1</code></td></tr><tr><td>3</td><td>2</td><td>Muestra <code>2</code></td><td><code>0 1 2</code></td></tr><tr><td>4</td><td>3</td><td>Muestra <code>3</code></td><td><code>0 1 2 3</code></td></tr><tr><td>5</td><td>4</td><td>Muestra <code>4</code></td><td><code>0 1 2 3 4</code></td></tr><tr><td>—</td><td>(sin más valores)</td><td>Termina</td><td>Sigue el programa</td></tr></tbody></table><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">vuelta 1</div><div class="array-cell highlight">0</div></div><div class="array-cell-wrapper"><div class="array-index">vuelta 2</div><div class="array-cell highlight">1</div></div><div class="array-cell-wrapper"><div class="array-index">vuelta 3</div><div class="array-cell highlight">2</div></div><div class="array-cell-wrapper"><div class="array-index">vuelta 4</div><div class="array-cell highlight">3</div></div><div class="array-cell-wrapper"><div class="array-index">vuelta 5</div><div class="array-cell highlight">4</div></div><div class="array-cell-wrapper"><div class="array-index">¡fuera!</div><div class="array-cell out-of-bounds">5</div></div></div><p style="text-align:center; font-size:0.78rem; color: var(--text-muted); margin:0 0 6px;"><code>range(5)</code> produce los valores celestes. El <b>5</b> (con borde punteado) <b>queda afuera</b>.</p><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Sin mantenimiento manual</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Comparalo con el <code>while</code>: acá <b>no hubo</b> <code>i = 0</code>, ni <code>i &lt; 5</code>, ni <code>i += 1</code>. <b>El <code>for</code> los hace por vos.</b></p></div></section>
+<section><h2><span class="section-num">09</span> range(inicio, fin): Empezar en Otro Número</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">range_1_6.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">6</span>):
+    <span class="c-fn">print</span>(i)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1
+2
+3
+4
+5</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Los dos argumentos</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>inicio</code> (1)</b>: primer valor de la secuencia (<b>incluido</b>).</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>fin</code> (6)</b>: valor donde <b>se detiene</b> (<b>excluido</b>).</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cantidad de vueltas</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Siempre es <b><code>fin - inicio</code></b>: <code>6 - 1 = 5</code> vueltas. Con <code>range(5)</code> el inicio es 0, así que son <code>5 - 0 = 5</code>.</p></div></div><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">vuelta 1</div><div class="array-cell highlight">1</div></div><div class="array-cell-wrapper"><div class="array-index">vuelta 2</div><div class="array-cell highlight">2</div></div><div class="array-cell-wrapper"><div class="array-index">vuelta 3</div><div class="array-cell highlight">3</div></div><div class="array-cell-wrapper"><div class="array-index">vuelta 4</div><div class="array-cell highlight">4</div></div><div class="array-cell-wrapper"><div class="array-index">vuelta 5</div><div class="array-cell highlight">5</div></div><div class="array-cell-wrapper"><div class="array-index">¡fuera!</div><div class="array-cell out-of-bounds">6</div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Para "del 1 al N"</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Usá <b><code>range(1, N + 1)</code></b>: el <code>+ 1</code> compensa el límite excluyente. Para mostrar del 1 al 10 → <code>range(1, 11)</code>.</p></div></section>
+<section><h2><span class="section-num">10</span> range(inicio, fin, paso): Saltar de a Varios</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">range_paso.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">2</span>, <span class="c-num">11</span>, <span class="c-num">2</span>):
+    <span class="c-fn">print</span>(i, end=<span class="c-str">" "</span>)
+<span class="c-fn">print</span>()
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">0</span>, <span class="c-num">50</span>, <span class="c-num">10</span>):
+    <span class="c-fn">print</span>(i, end=<span class="c-str">" "</span>)
+<span class="c-fn">print</span>()
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">10</span>, <span class="c-num">3</span>):
+    <span class="c-fn">print</span>(i, end=<span class="c-str">" "</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">2 4 6 8 10 
+0 10 20 30 40 
+1 4 7 </div></div></div></div><table class="trace-table"><thead><tr><th>Argumento</th><th>Significado</th></tr></thead><tbody><tr><td><code>inicio</code></td><td>Primer valor (incluido)</td></tr><tr><td><code>fin</code></td><td>Límite que <b>no</b> se alcanza ni se incluye</td></tr><tr><td><code>paso</code></td><td>Cuánto <b>se suma</b> en cada vuelta (por defecto, 1)</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Fijate</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>range(1, 10, 3)</code> da <code>1, 4, 7</code> y <b>no incluye el 10</b> (ni el 9): el siguiente después de 7 sería 10, que <b>no es menor que 10</b>. La secuencia <b>continúa mientras no se pase del límite</b>.</p></div></section>
+<section><h2><span class="section-num">11</span> El Límite Final NUNCA Se Incluye</h2><div class="box box-rose"><h4 style="color:var(--accent-rose);">La regla</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><b>El valor <code>fin</code> de <code>range(inicio, fin)</code> jamás forma parte de la secuencia.</b> Es el primer número <b>que no se genera</b>.</p></div><table class="trace-table"><thead><tr><th>Querés mostrar...</th><th>Escribís</th><th>Genera</th></tr></thead><tbody><tr><td>Del 0 al 4</td><td><code>range(5)</code></td><td><code>0 1 2 3 4</code></td></tr><tr><td>Del 1 al 5</td><td><code>range(1, 6)</code></td><td><code>1 2 3 4 5</code></td></tr><tr><td>Del 1 al 10</td><td><code>range(1, 11)</code></td><td><code>1 ... 10</code></td></tr><tr><td>Pares del 2 al 10</td><td><code>range(2, 11, 2)</code></td><td><code>2 4 6 8 10</code></td></tr><tr><td>De 10 a 1 (bajando)</td><td><code>range(10, 0, -1)</code></td><td><code>10 9 ... 1</code></td></tr></tbody></table><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">¿Por qué es así?</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>La <b>cantidad de números</b> es exactamente <code>fin - inicio</code>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Se pueden <b>encadenar</b> rangos sin repetir: <code>range(0, 5)</code> y <code>range(5, 10)</code>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Es igual que los <b>índices</b> de una lista (unidad 13).</li></ul></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Truco para recordarlo</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Pensá en <code>range(1, 6)</code> como <b>"empezá en 1 y frená cuando llegues al 6"</b>: el 6 es la <b>señal de stop</b>, no un valor más.</p></div></div></section>
+<section><h2><span class="section-num">12</span> Paso Negativo: Contar Hacia Atrás</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">range_negativo.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">5</span>, <span class="c-num">0</span>, -<span class="c-num">1</span>):
+    <span class="c-fn">print</span>(i)
+<span class="c-fn">print</span>(<span class="c-str">"¡Despegue!"</span>)
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">10</span>, -<span class="c-num">1</span>, -<span class="c-num">5</span>):
+    <span class="c-fn">print</span>(n, end=<span class="c-str">" "</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">5
+4
+3
+2
+1
+¡Despegue!
+10 5 0 </div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.86rem;">Con un <b>paso negativo</b>, <code>range</code> <b>resta</b> en cada vuelta.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.86rem;">El <code>inicio</code> debe ser <b>mayor</b> que el <code>fin</code>: <code>range(5, 0, -1)</code> va de 5 hacia 1 (<b>el 0 no se incluye</b>).</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.86rem;">Para llegar <b>hasta el 0 inclusive</b> hay que poner <code>-1</code> como fin: <code>range(5, -1, -1)</code>.</div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Error clásico</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>range(1, 5, -1)</code> <b>no genera nada</b>: no se puede ir de 1 a 5 restando.</p></div></section>
+<section><h2><span class="section-num">13</span> Cuando range No Genera Nada</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">range_vacio.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-fn">list</span>(<span class="c-fn">range</span>(<span class="c-num">0</span>)))
+<span class="c-fn">print</span>(<span class="c-fn">list</span>(<span class="c-fn">range</span>(<span class="c-num">5</span>, <span class="c-num">1</span>)))
+<span class="c-fn">print</span>(<span class="c-fn">list</span>(<span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">5</span>, -<span class="c-num">1</span>)))
+<span class="c-fn">print</span>(<span class="c-fn">list</span>(<span class="c-fn">range</span>(<span class="c-num">3</span>, <span class="c-num">3</span>)))
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">0</span>):
+    <span class="c-fn">print</span>(<span class="c-str">"nunca se ejecuta"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Fin"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[]
+[]
+[]
+[]
+Fin</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Rango vacío</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Si <code>inicio</code> ya está <b>pasado</b> (o es igual) al <code>fin</code> en la dirección del paso, la secuencia es <b>vacía</b> y el <code>for</code> se ejecuta <b>0 veces</b> (sin error).</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con <code>while</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Es como un <code>while</code> cuya condición es <b>falsa desde el principio</b>: el cuerpo no se ejecuta ni una vez.</p></div></div></section>
+<section><h2><span class="section-num">14</span> range No Es una Lista (y Tampoco Genera Todo de Golpe)</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">que_es_range.py</span><span class="code-badge">Python</span></div><div class="code-body">r = <span class="c-fn">range</span>(<span class="c-num">5</span>)
+<span class="c-fn">print</span>(r)
+<span class="c-fn">print</span>(<span class="c-fn">type</span>(r))
+<span class="c-fn">print</span>(<span class="c-fn">list</span>(r))
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(r))
+<span class="c-fn">print</span>(<span class="c-num">3</span> <span class="c-kw">in</span> r)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">range(0, 5)
+&lt;class 'range'&gt;
+[0, 1, 2, 3, 4]
+5
+True</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué es en realidad</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Un <b>objeto <code>range</code></b>: una "receta" que <b>calcula cada número cuando se lo pide</b>. Por eso <code>range(1000000)</code> <b>no ocupa memoria</b> en forma de un millón de valores.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Para verlo</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si querés ver los números, convertilo con <code>list(...)</code>. Dentro de un <code>for</code> <b>no hace falta</b>: el <code>for</code> los pide de a uno.</p></div></div></section>
+<section><h2><span class="section-num">15</span> Repetir N Veces Sin Usar el Valor: la Variable _</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">repetir_n_veces.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> _ <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>):
+    <span class="c-fn">print</span>(<span class="c-str">"¡Hola!"</span>)
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>):
+    <span class="c-fn">print</span>(<span class="c-str">"Vuelta número"</span>, i + <span class="c-num">1</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">¡Hola!
+¡Hola!
+¡Hola!
+Vuelta número 1
+Vuelta número 2
+Vuelta número 3</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Cuando solo importa "cuántas veces"</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si <b>no usás</b> el valor de la variable dentro del cuerpo, por convención se la llama <b><code>_</code></b> (guion bajo). Le avisa al lector: "este valor no se usa".</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cuando SÍ lo usás</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si querés numerar las vueltas, usá <code>i</code>. Como <code>i</code> empieza en 0, para mostrar <b>"vuelta 1"</b> se escribe <b><code>i + 1</code></b>.</p></div></div></section>
+<section><h2><span class="section-num">16</span> Acumulador con for: Sumar del 1 al 10</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">suma_for.py</span><span class="code-badge">Python</span></div><div class="code-body">suma = <span class="c-num">0</span>
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">11</span>):
+    suma += i
+
+<span class="c-fn">print</span>(<span class="c-str">"La suma es"</span>, suma)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">La suma es 55</div></div></div></div><table class="trace-table"><thead><tr><th><code>i</code></th><th><code>suma</code> antes</th><th><code>suma += i</code></th></tr></thead><tbody><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>2</td><td>1</td><td>3</td></tr><tr><td>3</td><td>3</td><td>6</td></tr><tr><td>4</td><td>6</td><td>10</td></tr><tr><td>...</td><td>...</td><td>...</td></tr><tr><td>10</td><td>45</td><td>55</td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Igual que con <code>while</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">El acumulador <b>se inicializa antes</b> del bucle y <b>se actualiza adentro</b>. Lo que cambia: <b>no hay</b> <code>i = 1</code> ni <code>i += 1</code>: el <code>for</code> se ocupa de la variable.</p></div></section>
+<section><h2><span class="section-num">17</span> Comparación: el Mismo Problema con while y con for</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Con <code>while</code> (5 líneas)</h4><div class="code-window"><div class="code-header"><span class="code-title">suma_while.py</span><span class="code-badge">Python</span></div><div class="code-body">i = <span class="c-num">1</span>
+suma = <span class="c-num">0</span>
+<span class="c-kw">while</span> i &lt;= <span class="c-num">10</span>:
+    suma += i
+    i += <span class="c-num">1</span>
+<span class="c-fn">print</span>(suma)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">55</div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con <code>for</code> (3 líneas)</h4><div class="code-window"><div class="code-header"><span class="code-title">suma_for.py</span><span class="code-badge">Python</span></div><div class="code-body">suma = <span class="c-num">0</span>
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">11</span>):
+    suma += i
+<span class="c-fn">print</span>(suma)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">55</div></div></div></div><table class="trace-table"><thead><tr><th></th><th><code>while</code></th><th><code>for</code></th></tr></thead><tbody><tr><td>Inicialización</td><td>A mano (<code>i = 1</code>)</td><td>Automática</td></tr><tr><td>Condición</td><td>A mano (<code>i &lt;= 10</code>)</td><td>Implícita en <code>range</code></td></tr><tr><td>Actualización</td><td>A mano (<code>i += 1</code>)</td><td>Automática</td></tr><tr><td>Riesgo de bucle infinito</td><td><b>Alto</b></td><td>Casi nulo</td></tr><tr><td>Ideal para</td><td>Cantidad <b>desconocida</b></td><td>Cantidad <b>conocida</b></td></tr></tbody></table></section>
+<section><h2><span class="section-num">18</span> Contadores y Filtros con for</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">multiplos.py</span><span class="code-badge">Python</span></div><div class="code-body">multiplos = <span class="c-num">0</span>
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">101</span>):
+    <span class="c-kw">if</span> n % <span class="c-num">7</span> == <span class="c-num">0</span>:
+        multiplos += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"Múltiplos de 7 hasta 100:"</span>, multiplos)
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">7</span>, <span class="c-num">50</span>, <span class="c-num">7</span>):
+    <span class="c-fn">print</span>(n, end=<span class="c-str">" "</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Múltiplos de 7 hasta 100: 14
+7 14 21 28 35 42 49 </div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Dos formas</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Filtrar con <code>if</code></b> dentro del bucle (probar todos los números).</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Generar solo los que sirven</b> con el paso: <code>range(7, 50, 7)</code>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cuál conviene</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si hay un <b>patrón regular</b> (múltiplos, pares), el <b>paso</b> de <code>range</code> es más corto y más rápido. Si la condición es <b>compleja</b>, usá <code>if</code>.</p></div></div></section>
+<section><h2><span class="section-num">19</span> Ejemplo: Tabla de Multiplicar con for</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">tabla_for.py</span><span class="code-badge">Python</span></div><div class="code-body">n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"¿Qué tabla querés ver? "</span>))
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">11</span>):
+    <span class="c-fn">print</span>(<span class="c-str">f"{n} x {i:2d} = {n * i:3d}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">¿Qué tabla querés ver? <span class="terminal-user-input">9</span>
+9 x  1 =   9
+9 x  2 =  18
+9 x  3 =  27
+9 x  4 =  36
+9 x  5 =  45
+9 x  6 =  54
+9 x  7 =  63
+9 x  8 =  72
+9 x  9 =  81
+9 x 10 =  90</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Compará con la unidad anterior</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Mismo problema que resolvimos con <code>while</code>. Acá el <code>for</code> <b>elimina las líneas de mantenimiento</b> de <code>i</code>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Detalle del formato</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>{i:2d}</code> y <code>{n * i:3d}</code> reservan <b>2</b> y <b>3</b> posiciones: así los números <b>quedan alineados</b> en columnas.</p></div></section>
+<section><h2><span class="section-num">20</span> Ejemplo: Factorial con for</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">factorial_for.py</span><span class="code-badge">Python</span></div><div class="code-body">n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número: "</span>))
+factorial = <span class="c-num">1</span>
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, n + <span class="c-num">1</span>):
+    factorial *= i
+
+<span class="c-fn">print</span>(<span class="c-str">f"{n}! = {factorial}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Número: <span class="terminal-user-input">6</span>
+6! = 720</div></div></div></div><table class="trace-table"><thead><tr><th><code>i</code></th><th><code>factorial</code> antes</th><th><code>factorial *= i</code></th></tr></thead><tbody><tr><td>1</td><td>1</td><td>1</td></tr><tr><td>2</td><td>1</td><td>2</td></tr><tr><td>3</td><td>2</td><td>6</td></tr><tr><td>4</td><td>6</td><td>24</td></tr><tr><td>5</td><td>24</td><td>120</td></tr><tr><td>6</td><td>120</td><td>720</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Atención al límite</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Para multiplicar <b>hasta <code>n</code> inclusive</b> hace falta <code>range(1, n + 1)</code>. Con <code>range(1, n)</code> se obtendría <code>(n - 1)!</code>.</p></div></section>
+<section><h2><span class="section-num">21</span> Recorrer un Texto Letra por Letra</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">recorrer_texto.py</span><span class="code-badge">Python</span></div><div class="code-body">palabra = <span class="c-str">"Python"</span>
+
+<span class="c-kw">for</span> letra <span class="c-kw">in</span> palabra:
+    <span class="c-fn">print</span>(letra)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">P
+y
+t
+h
+o
+n</div></div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">contar_vocales.py</span><span class="code-badge">Python</span></div><div class="code-body">frase = <span class="c-str">"programacion en python"</span>
+vocales = <span class="c-num">0</span>
+
+<span class="c-kw">for</span> letra <span class="c-kw">in</span> frase:
+    <span class="c-kw">if</span> letra <span class="c-kw">in</span> <span class="c-str">"aeiou"</span>:
+        vocales += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"Vocales:"</span>, vocales)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Vocales: 7</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Un texto es una secuencia de caracteres</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Por eso se puede recorrer con <code>for</code>: en cada vuelta <code>letra</code> vale <b>un carácter</b>. <code>letra in "aeiou"</code> pregunta si ese carácter está <b>dentro</b> del texto de vocales.</p></div></section>
+<section><h2><span class="section-num">22</span> break en un for: Cortar la Repetición</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Recordatorio</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>break</code> <b>termina el bucle al instante</b> y el programa sigue después de él. Funciona <b>igual</b> que en <code>while</code>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">break_for.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">10</span>):
+    <span class="c-kw">if</span> i == <span class="c-num">5</span>:
+        <span class="c-kw">break</span>
+    <span class="c-fn">print</span>(i)
+
+<span class="c-fn">print</span>(<span class="c-str">"Salió del bucle"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1
+2
+3
+4
+Salió del bucle</div></div></div></div><table class="trace-table"><thead><tr><th><code>i</code></th><th>¿<code>i == 5</code>?</th><th>Acción</th></tr></thead><tbody><tr><td>1</td><td><code>False</code></td><td>Muestra 1</td></tr><tr><td>2</td><td><code>False</code></td><td>Muestra 2</td></tr><tr><td>3</td><td><code>False</code></td><td>Muestra 3</td></tr><tr><td>4</td><td><code>False</code></td><td>Muestra 4</td></tr><tr><td>5</td><td><code>True</code></td><td><b><code>break</code></b>: el bucle termina (el 5 no se muestra)</td></tr></tbody></table><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Uso típico: buscar</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">"Recorrer hasta <b>encontrar</b> algo y <b>dejar de buscar</b>". Seguir recorriendo sería trabajo de más.</p></div></section>
+<section><h2><span class="section-num">23</span> continue en un for: Saltear una Vuelta</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">continue_for.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">6</span>):
+    <span class="c-kw">if</span> i == <span class="c-num">3</span>:
+        <span class="c-kw">continue</span>
+    <span class="c-fn">print</span>(i)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1
+2
+4
+5</div></div></div></div><table class="trace-table"><thead><tr><th><code>i</code></th><th>¿<code>i == 3</code>?</th><th>Qué ocurre</th></tr></thead><tbody><tr><td>1</td><td><code>False</code></td><td>Muestra 1</td></tr><tr><td>2</td><td><code>False</code></td><td>Muestra 2</td></tr><tr><td>3</td><td><code>True</code></td><td><b><code>continue</code></b>: salta el <code>print</code> y pasa a la siguiente vuelta</td></tr><tr><td>4</td><td><code>False</code></td><td>Muestra 4</td></tr><tr><td>5</td><td><code>False</code></td><td>Muestra 5</td></tr></tbody></table><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Ventaja frente a <code>while</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En un <code>for</code>, <code>continue</code> <b>no es riesgoso</b>: la variable <b>avanza sola</b> a la próxima vuelta (en <code>while</code> podías quedar en un bucle infinito).</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Salida</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Se muestran <code>1 2 4 5</code>: <b>faltó el 3</b>, pero el bucle <b>no terminó</b>.</p></div></div></section>
+<section><h2><span class="section-num">24</span> Buscar con break: El Primer Múltiplo de 7 Mayor a 50</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">buscar.py</span><span class="code-badge">Python</span></div><div class="code-body">primero = <span class="c-kw">None</span>
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">51</span>, <span class="c-num">100</span>):
+    <span class="c-kw">if</span> n % <span class="c-num">7</span> == <span class="c-num">0</span>:
+        primero = n
+        <span class="c-kw">break</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"El primero es:"</span>, primero)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">El primero es: 56</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.86rem;">Se <b>recorre desde 51</b> (el primer número mayor a 50).</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.86rem;">En cuanto aparece uno <b>divisible por 7</b> (el 56), se <b>guarda</b> y se hace <code>break</code>: no hace falta seguir.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.86rem;"><code>primero = None</code> indica <b>"todavía no encontré nada"</b>: si el bucle termina sin <code>break</code>, seguiría valiendo <code>None</code>.</div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué es <code>None</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Es el valor especial de Python que significa <b>"ningún valor"</b>. Cuenta como <code>False</code> en una condición.</p></div></section>
+<section><h2><span class="section-num">25</span> Bucles for Anidados</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un <code>for</code> <b>dentro de otro <code>for</code></b>. Por <b>cada vuelta</b> del bucle <b>externo</b>, el <b>interno</b> completa <b>todas</b> sus vueltas. Se usan para <b>tablas, filas y columnas</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">anidado_tabla.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> fila <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">4</span>):
+    <span class="c-kw">for</span> columna <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">4</span>):
+        <span class="c-fn">print</span>(fila * columna, end=<span class="c-str">"\t"</span>)
+    <span class="c-fn">print</span>()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1	2	3	
+2	4	6	
+3	6	9	</div></div></div></div><table class="trace-table"><thead><tr><th><code>fila</code></th><th><code>columna</code></th><th><code>fila * columna</code></th></tr></thead><tbody><tr><td>1</td><td>1, 2, 3</td><td>1, 2, 3</td></tr><tr><td>2</td><td>1, 2, 3</td><td>2, 4, 6</td></tr><tr><td>3</td><td>1, 2, 3</td><td>3, 6, 9</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cantidad total de vueltas</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>3 × 3 = 9</code> ejecuciones del <code>print</code> interno. El <code>print()</code> <b>sin argumentos</b> (a la altura del bucle interno) baja a la <b>línea siguiente</b> al terminar cada fila.</p></div></section>
+<section><h2><span class="section-num">26</span> Patrones con for Anidados: Rectángulos y Escaleras</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">patrones.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> fila <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>):
+    <span class="c-kw">for</span> col <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">5</span>):
+        <span class="c-fn">print</span>(<span class="c-str">"*"</span>, end=<span class="c-str">""</span>)
+    <span class="c-fn">print</span>()
+
+<span class="c-fn">print</span>()
+
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">5</span>):
+    <span class="c-kw">for</span> col <span class="c-kw">in</span> <span class="c-fn">range</span>(fila):
+        <span class="c-fn">print</span>(<span class="c-str">"*"</span>, end=<span class="c-str">""</span>)
+    <span class="c-fn">print</span>()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">*****
+*****
+*****
+
+*
+**
+***
+****</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Rectángulo</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">El bucle interno <b>siempre</b> hace 5 vueltas → filas de 5 <code>*</code>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Escalera</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El bucle interno hace <b><code>fila</code></b> vueltas: la fila 1 tiene 1, la 2 tiene 2, etc. <b>El rango interno depende del externo.</b></p></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Compará con <code>while</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Mismo patrón que en la unidad anterior, <b>sin</b> reiniciar <code>columna = 1</code> a mano en cada fila: el <code>for</code> <b>recomienza solo</b>.</p></div></section>
+<section><h2><span class="section-num">27</span> Detalles: Qué Pasa con la Variable del for</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">variable_for.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>):
+    <span class="c-fn">print</span>(<span class="c-str">"antes:"</span>, i)
+    i = <span class="c-num">100</span>
+    <span class="c-fn">print</span>(<span class="c-str">"después:"</span>, i)
+
+<span class="c-fn">print</span>(<span class="c-str">"al terminar el bucle:"</span>, i)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">antes: 0
+después: 100
+antes: 1
+después: 100
+antes: 2
+después: 100
+al terminar el bucle: 100</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Reasignar <code>i</code> no altera el recorrido</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Aunque dentro del cuerpo hagamos <code>i = 100</code>, en la <b>siguiente vuelta</b> Python <b>vuelve a asignar</b> el próximo valor de <code>range</code> (1, luego 2). <b>No se "saltea" nada.</b></p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Después del bucle</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">La variable <b>sigue existiendo</b> y conserva el <b>último valor asignado</b>. Es una <b>mala práctica</b> modificar la variable de iteración: confunde al lector.</p></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Diferencia con C</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">En C, cambiar <code>i</code> dentro del <code>for</code> <b>sí afectaba</b> las vueltas. En Python, <b>no</b>. Si necesitás ese control, usá <code>while</code>.</p></div></section>
+<section><h2><span class="section-num">28</span> Ejemplo: Promedio de N Notas</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">promedio_for.py</span><span class="code-badge">Python</span></div><div class="code-body">cantidad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"¿Cuántas notas? "</span>))
+suma = <span class="c-num">0</span>
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, cantidad + <span class="c-num">1</span>):
+    nota = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">f"Nota {i}: "</span>))
+    suma += nota
+
+<span class="c-fn">print</span>(<span class="c-str">f"Promedio: {suma / cantidad:.2f}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">¿Cuántas notas? <span class="terminal-user-input">3</span>
+Nota 1: <span class="terminal-user-input">8</span>
+Nota 2: <span class="terminal-user-input">6.5</span>
+Nota 3: <span class="terminal-user-input">9</span>
+Promedio: 7.83</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Por qué <code>for</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">La <b>cantidad de repeticiones se conoce</b> (la dio el usuario antes), por eso conviene <code>for</code>. Se usa <code>i</code> para <b>numerar</b> el mensaje ("Nota 1", "Nota 2"...).</p></div></section>
+<section><h2><span class="section-num">29</span> Ejemplo: El Mayor y el Menor de N Números</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">mayor_menor.py</span><span class="code-badge">Python</span></div><div class="code-body">cantidad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"¿Cuántos números? "</span>))
+mayor = <span class="c-kw">None</span>
+menor = <span class="c-kw">None</span>
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(cantidad):
+    n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">f"Número {i + 1}: "</span>))
+    <span class="c-kw">if</span> mayor <span class="c-kw">is</span> <span class="c-kw">None</span> <span class="c-kw">or</span> n &gt; mayor:
+        mayor = n
+    <span class="c-kw">if</span> menor <span class="c-kw">is</span> <span class="c-kw">None</span> <span class="c-kw">or</span> n &lt; menor:
+        menor = n
+
+<span class="c-fn">print</span>(<span class="c-str">"Mayor:"</span>, mayor, <span class="c-str">"| Menor:"</span>, menor)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">¿Cuántos números? <span class="terminal-user-input">4</span>
+Número 1: <span class="terminal-user-input">12</span>
+Número 2: <span class="terminal-user-input">-3</span>
+Número 3: <span class="terminal-user-input">27</span>
+Número 4: <span class="terminal-user-input">8</span>
+Mayor: 27 | Menor: -3</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">La técnica</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Se parte de <code>None</code> ("todavía no hay candidato"). El primer número <b>se vuelve</b> mayor y menor; los siguientes se <b>comparan</b> contra los candidatos. <code>is None</code> es la forma correcta de preguntar si una variable vale <code>None</code>.</p></div></section>
+<section><h2><span class="section-num">30</span> Ejemplo: Divisores de un Número y Números Primos</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">divisores.py</span><span class="code-badge">Python</span></div><div class="code-body">n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número: "</span>))
+divisores = []
+
+<span class="c-kw">for</span> d <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, n + <span class="c-num">1</span>):
+    <span class="c-kw">if</span> n % d == <span class="c-num">0</span>:
+        divisores.append(d)
+
+<span class="c-fn">print</span>(<span class="c-str">"Divisores de"</span>, n, <span class="c-str">":"</span>, divisores)
+
+<span class="c-kw">if</span> <span class="c-fn">len</span>(divisores) == <span class="c-num">2</span>:
+    <span class="c-fn">print</span>(n, <span class="c-str">"es primo"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Número: <span class="terminal-user-input">28</span>
+Divisores de 28 : [1, 2, 4, 7, 14, 28]</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dos novedades que se anticipan</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>divisores = []</code> crea una <b>lista vacía</b>; <code>.append(d)</code> <b>agrega</b> un elemento al final (unidad 13).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Un <b>primo</b> tiene <b>exactamente dos</b> divisores: 1 y él mismo.</li></ul></div></section>
+<section><h2><span class="section-num">31</span> Error Frecuente #1: for Sin range sobre un Número</h2><div class="code-window"><div class="code-header"><span class="code-title">for_numero.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-num">5</span>:
+    <span class="c-fn">print</span>(i)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1, in &lt;module&gt;
+    for i in 5:
+             ^
+TypeError: 'int' object is not iterable</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Un número entero <b>no es una secuencia</b>: no se puede recorrer. Python lo avisa con <code>TypeError</code> ("object is not iterable").</p></div><div class="correct-card"><div class="correct-title">✅ Corrección</div><div class="code-window"><div class="code-header"><span class="code-title">ok.py</span><span class="code-badge">OK</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">5</span>):
+    <span class="c-fn">print</span>(i)</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cómo lo pienso</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Después de <code>in</code> tiene que ir <b>algo con varios elementos</b> (<code>range(...)</code>, un texto, una lista). Un número solo es <b>un</b> elemento.</p></div></section>
+<section><h2><span class="section-num">32</span> Error Frecuente #2: El Límite de range (Off-by-One)</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Se esperaban 5 números del 1 al 5</div><div class="code-window"><div class="code-header"><span class="code-title">uno_menos.py</span><span class="code-badge">Falta el 5</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">5</span>):
+    <span class="c-fn">print</span>(i, end=<span class="c-str">" "</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1 2 3 4 </div></div></div><div class="correct-card"><div class="correct-title">✅ Límite corregido</div><div class="code-window"><div class="code-header"><span class="code-title">correcto.py</span><span class="code-badge">OK</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">6</span>):
+    <span class="c-fn">print</span>(i, end=<span class="c-str">" "</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1 2 3 4 5 </div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Fuera del rango por defecto</div><div class="code-window"><div class="code-header"><span class="code-title">correcto_2.py</span><span class="code-badge">Otra forma válida</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">5</span>):
+    <span class="c-fn">print</span>(i + <span class="c-num">1</span>, end=<span class="c-str">" "</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1 2 3 4 5 </div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Error común</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Escribir <code>range(10)</code> y esperar <code>1..10</code>. <b><code>range(10)</code> da <code>0..9</code></b>. Para <code>1..10</code>: <b><code>range(1, 11)</code></b>.</p></div></div></section>
+<section><h2><span class="section-num">33</span> Error Frecuente #3: Argumentos de range Incorrectos</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Número decimal</div><div class="code-window"><div class="code-header"><span class="code-title">range_float.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">2.5</span>):
+    <span class="c-fn">print</span>(i)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1, in &lt;module&gt;
+    for i in range(2.5):
+             ~~~~~^^^^^
+TypeError: 'float' object cannot be interpreted as an integer</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Paso cero</div><div class="code-window"><div class="code-header"><span class="code-title">paso_cero.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">5</span>, <span class="c-num">0</span>):
+    <span class="c-fn">print</span>(i)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1, in &lt;module&gt;
+    for i in range(1, 5, 0):
+             ~~~~~^^^^^^^^^
+ValueError: range() arg 3 must not be zero</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Reglas de <code>range</code></h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los argumentos deben ser <b>enteros</b> (<code>int</code>).</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>El <b>paso no puede ser 0</b>.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Con un decimal, convertí: <code>range(int(2.5))</code>.</li></ul></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Para pasos decimales</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>range</code> <b>no</b> admite pasos decimales (<code>range(0, 1, 0.1)</code>). Para eso se usa un <code>while</code> o se calcula <code>i * 0.1</code> dentro del bucle.</p></div></div></section>
+<section><h2><span class="section-num">34</span> Error Frecuente #4: Olvidos de Sintaxis</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Sin los dos puntos</div><div class="code-window"><div class="code-header"><span class="code-title">sin_dospuntos.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>)
+    <span class="c-fn">print</span>(i)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1
+    for i in range(3)
+                     ^
+SyntaxError: expected ':'</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Sintaxis de C</div><div class="code-window"><div class="code-header"><span class="code-title">estilo_c.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">for</span> (i = <span class="c-num">0</span>; i &lt; <span class="c-num">3</span>; i++):
+    <span class="c-fn">print</span>(i)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1
+    for (i = 0; i &lt; 3; i++):
+         ^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Recordatorio</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Igual que en <code>if</code> y <code>while</code>: <b>dos puntos</b> al final de la línea y <b>cuerpo indentado</b> (sin sangría da <code>IndentationError</code>). El <code>for</code> de C <code>(i = 0; i &lt; n; i++)</code> <b>no existe</b> en Python.</p></div></section>
+<section><h2><span class="section-num">35</span> Traducción del for de C al for de Python</h2><table class="trace-table"><thead><tr><th>En C</th><th>En Python</th></tr></thead><tbody><tr><td><code>for (int i = 0; i &lt; 5; i++)</code></td><td><code>for i in range(5):</code></td></tr><tr><td><code>for (int i = 1; i &lt;= 10; i++)</code></td><td><code>for i in range(1, 11):</code></td></tr><tr><td><code>for (int i = 0; i &lt; 20; i += 2)</code></td><td><code>for i in range(0, 20, 2):</code></td></tr><tr><td><code>for (int i = 10; i &gt; 0; i--)</code></td><td><code>for i in range(10, 0, -1):</code></td></tr><tr><td><code>for (int i = 0; i &lt; n; i++)</code> sobre un arreglo</td><td><code>for elemento in lista:</code> (se recorre <b>directo</b>)</td></tr></tbody></table><div class="grid-2" style="margin-top:8px;"><div class="code-window"><div class="code-header"><span class="code-title">C</span><span class="code-badge">C</span></div><div class="code-body">/* C */
+<span class="c-kw">for</span> (<span class="c-fn">int</span> i = <span class="c-num">0</span>; i &lt; <span class="c-num">5</span>; i++) {
+    printf(<span class="c-str">"%d\n"</span>, i);
+}</div></div><div class="code-window"><div class="code-header"><span class="code-title">Python</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-cmt"># Python</span>
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">5</span>):
+    <span class="c-fn">print</span>(i)</div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Clave para traducir</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">En C: <code>inicio</code>, <code>condición</code> y <code>paso</code> se separan con <code>;</code>. En Python: <code>range(inicio, fin, paso)</code> con <b>comas</b>, y el <code>fin</code> <b>no se incluye</b>: la condición <code>&lt;</code> se vuelve el <b>límite exacto</b>, y <code>&lt;=</code> exige <b>sumar 1</b>.</p></div></section>
+<section><h2><span class="section-num">36</span> Buenas Prácticas con for</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Elegí <b><code>for</code></b> cuando la cantidad de vueltas o los elementos son <b>conocidos</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b>nombres descriptivos</b> al recorrer elementos (<code>for nota in notas</code>).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b><code>_</code></b> si no necesitás el valor.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Contá a mano</b> las vueltas de <code>range(a, b)</code>: son <code>b - a</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Probá los <b>casos borde</b>: rango vacío, un solo elemento.</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Modificar</b> la variable de iteración dentro del cuerpo.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usar <code>for</code> cuando necesitás repetir <b>hasta que ocurra algo</b> (usá <code>while</code>).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Anidar más de <b>2 o 3</b> bucles.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Olvidar que <code>range(n)</code> empieza en <b>0</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Calcular dentro del bucle algo que <b>no cambia</b> (sacalo afuera).</li></ul></div></div></section>
+<section><h2><span class="section-num">37</span> Ejercicio 1: ¿Qué Muestra Cada for?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Predecí cada línea</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">4</span>):
+    <span class="c-fn">print</span>(i, end=<span class="c-str">" "</span>)
+<span class="c-fn">print</span>()
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">2</span>, <span class="c-num">9</span>, <span class="c-num">3</span>):
+    <span class="c-fn">print</span>(i, end=<span class="c-str">" "</span>)
+<span class="c-fn">print</span>()
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">10</span>, <span class="c-num">4</span>, -<span class="c-num">2</span>):
+    <span class="c-fn">print</span>(i, end=<span class="c-str">" "</span>)
+<span class="c-fn">print</span>()
+
+total = <span class="c-num">0</span>
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">5</span>):
+    total += i * i
+<span class="c-fn">print</span>(total)</div></div><details class="code-solution"><summary>👁️ Ver respuestas</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">4</span>):
+    <span class="c-fn">print</span>(i, end=<span class="c-str">" "</span>)
+<span class="c-fn">print</span>()
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">2</span>, <span class="c-num">9</span>, <span class="c-num">3</span>):
+    <span class="c-fn">print</span>(i, end=<span class="c-str">" "</span>)
+<span class="c-fn">print</span>()
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">10</span>, <span class="c-num">4</span>, -<span class="c-num">2</span>):
+    <span class="c-fn">print</span>(i, end=<span class="c-str">" "</span>)
+<span class="c-fn">print</span>()
+total = <span class="c-num">0</span>
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">5</span>):
+    total += i * i
+<span class="c-fn">print</span>(total)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">0 1 2 3 
+2 5 8 
+10 8 6 
+30</div></div></div></div><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>range(2, 9, 3)</code> → 2, 5, 8 (el siguiente, 11, ya pasa el límite).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>range(10, 4, -2)</code> → 10, 8, 6 (el 4 no se incluye).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Última línea: <code>1 + 4 + 9 + 16 = 30</code>.</li></ul></div></details></section>
+<section><h2><span class="section-num">38</span> Ejercicio 2: Seguimiento de un for Anidado</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Escribí todas las líneas de salida</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">4</span>):
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(i):
+        <span class="c-fn">print</span>(i, j)</div></div><details class="code-solution"><summary>👁️ Ver respuesta</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">4</span>):
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(i):
+        <span class="c-fn">print</span>(i, j)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1 0
+2 0
+2 1
+3 0
+3 1
+3 2</div></div></div></div><table class="trace-table"><thead><tr><th><code>i</code></th><th><code>range(i)</code></th><th>Vueltas internas</th></tr></thead><tbody><tr><td>1</td><td><code>0</code></td><td>1</td></tr><tr><td>2</td><td><code>0, 1</code></td><td>2</td></tr><tr><td>3</td><td><code>0, 1, 2</code></td><td>3</td></tr></tbody></table><p style="font-size:0.9rem; line-height:1.55; margin:4px 0;">En total son <code>1 + 2 + 3 = 6</code> líneas.</p></div></details></section>
+<section><h2><span class="section-num">39</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-num">10</span>:
+    <span class="c-fn">print</span>(i)
+
+<span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">6</span>)
+    <span class="c-fn">print</span>(j)
+
+<span class="c-kw">for</span> k <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">5</span>, <span class="c-num">1</span>):
+    <span class="c-fn">print</span>(k)
+
+<span class="c-kw">for</span> m <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">0</span>, <span class="c-num">1</span>, <span class="c-num">0.1</span>):
+<span class="c-fn">print</span>(m)</div></div><details class="code-solution"><summary>👁️ Ver errores y soluciones</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>for i in 10</code>: un número no es recorrible → <code>range(10)</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Falta el <code>:</code> en el segundo <code>for</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>range(5, 1)</code> <b>no genera nada</b>: para ir hacia abajo, <code>range(5, 1, -1)</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>range(0, 1, 0.1)</code>: <code>range</code> solo admite enteros; y falta la <b>sangría</b> de <code>print(m)</code>. Solución: <code>for m in range(10): print(m / 10)</code>.</li></ul></div></details></section>
+<section><h2><span class="section-num">40</span> Ejercicio 4: Programas Completos</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">A) Suma de pares</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Calculá y mostrá la <b>suma de todos los números pares</b> entre 1 y 100 (inclusive), usando <code>range</code> con paso.</p></div><div class="box box-purple"><h4 style="color:var(--accent-purple);">B) Tabla completa</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Mostrá en pantalla la <b>tabla de multiplicar del 1 al 5</b>, cada tabla con su encabezado (<code>Tabla del 3</code>) y los 10 resultados, usando <b>dos <code>for</code></b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">C) Pirámide</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Pedí un número <code>n</code> y dibujá una pirámide de <code>n</code> filas con asteriscos (<code>*</code>), centrada con espacios.</p></div><details class="code-solution"><summary>👁️ Ver soluciones</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio4.py</span><span class="code-badge">Soluciones</span></div><div class="code-body"><span class="c-cmt"># A) suma de pares</span>
+suma = <span class="c-num">0</span>
+<span class="c-kw">for</span> n <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">2</span>, <span class="c-num">101</span>, <span class="c-num">2</span>):
+    suma += n
+<span class="c-fn">print</span>(<span class="c-str">"Suma de pares:"</span>, suma)      <span class="c-cmt"># 2550</span>
+
+<span class="c-cmt"># B) tablas del 1 al 5</span>
+<span class="c-kw">for</span> tabla <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">6</span>):
+    <span class="c-fn">print</span>(<span class="c-str">"Tabla del"</span>, tabla)
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">11</span>):
+        <span class="c-fn">print</span>(<span class="c-str">f"{tabla} x {i} = {tabla * i}"</span>)
+
+<span class="c-cmt"># C) pirámide de n filas</span>
+n = <span class="c-num">4</span>
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, n + <span class="c-num">1</span>):
+    <span class="c-fn">print</span>(<span class="c-str">" "</span> * (n - fila) + <span class="c-str">"*"</span> * (<span class="c-num">2</span> * fila - <span class="c-num">1</span>))</div></div><p style="font-size:0.9rem; line-height:1.55; margin:4px 0;">Salida de la pirámide con <code>n = 4</code>:</p><div class="terminal-window"><div class="terminal-header"><span>Pirámide</span><span>● ● ●</span></div><div class="terminal-body">   *
+  ***
+ *****
+*******</div></div><p style="font-size:0.9rem; line-height:1.55; margin:4px 0;"><code>" " * k</code> y <code>"*" * k</code> <b>repiten</b> un texto <code>k</code> veces (lo veremos en la unidad de strings).</p></div></details></section>
+<section><h2><span class="section-num">41</span> Resumen de la Unidad 08</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>for variable in secuencia:</code> ejecuta el bloque <b>una vez por elemento</b>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>range(fin)</code>, <code>range(inicio, fin)</code>, <code>range(inicio, fin, paso)</code>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>El valor <code>fin</code> nunca se incluye.</b> Cantidad de vueltas = <code>fin - inicio</code> (con paso 1).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Paso negativo → cuenta <b>hacia atrás</b> (<code>inicio &gt; fin</code>).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>break</code> y <code>continue</code> funcionan igual que en <code>while</code>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>for</code> → cantidad <b>conocida</b>; <code>while</code> → <b>hasta que</b> pase algo.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Puedo decir qué valores genera <code>range(3, 12, 4)</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé escribir "del 1 al N" con <code>range</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé contar hacia atrás hasta el 0 inclusive?</div><div class="checklist-item"><span class="icon">✓</span> ¿Puedo seguir un <code>for</code> anidado con una tabla?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé elegir entre <code>for</code> y <code>while</code>?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 08 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Bucles for y la Función range()</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="07-bucles-while-control-repeticion.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Bucles while</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="09-funciones-definicion-parametros-return.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Funciones: Definición, Parámetros y Return →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

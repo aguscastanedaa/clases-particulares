@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 06: Estructuras Condicionales | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 06</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 06</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Estructuras Condicionales</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Que el programa tome decisiones: if, if-else, if-elif-else y condicionales anidados, con diagramas de flujo, seguimiento y errores frecuentes</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">if</span><span class="badge badge-indigo">if - else</span><span class="badge badge-emerald">elif</span><span class="badge badge-amber">Anidados</span><span class="badge badge-purple">Diagramas de flujo</span><span class="badge badge-rose">Errores frecuentes</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 40 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: Programas Que Deciden</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya sabemos</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Comparaciones (<code>==</code>, <code>&gt;=</code>...) que dan <code>True</code> o <code>False</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Operadores lógicos <code>and</code>, <code>or</code>, <code>not</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>La <b>indentación</b> marca los bloques.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>En C: <code>if (...) { } else if (...) { } else { }</code>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Cómo ejecutar código <b>solo si</b> se cumple una condición: <code>if</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Cómo elegir entre <b>dos</b> caminos: <code>if-else</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Cómo elegir entre <b>varios</b> caminos: <code>elif</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Cómo <b>anidar</b> decisiones.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Cómo seguir el <b>flujo</b> de un programa y detectar errores.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que puedas leer un <code>if-elif-else</code> y decir <b>qué camino se ejecuta</b> para cualquier valor, y escribir el tuyo sin errores de sintaxis.</p></div></section>
+<section><h2><span class="section-num">02</span> El Problema: Un Programa Que Siempre Hace Lo Mismo</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Hasta ahora nuestros programas ejecutaban <b>todas</b> las instrucciones, <b>en orden</b>, siempre. Esto se llama flujo <b>secuencial</b>. Pero en la vida real <b>decidimos</b>:</p><div class="grid-3" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">☔ "Si llueve..."</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">...llevo paraguas; <b>si no</b>, no.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">🎟️ "Si sos mayor de 18..."</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">...podés entrar; <b>si no</b>, no.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">📝 "Si la nota es..."</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Mayor o igual a 9, excelente; <b>si no</b>, si es mayor o igual a 6, aprobado; <b>si no</b>, desaprobado.</p></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Una <b>estructura condicional</b> permite que el programa <b>elija qué instrucciones ejecutar</b> según el resultado de una condición (<code>True</code> o <code>False</code>). El flujo deja de ser una línea recta y pasa a tener <b>caminos</b>.</p></div></section>
+<section><h2><span class="section-num">03</span> Los Tipos de Estructuras Condicionales</h2><table class="trace-table"><thead><tr><th>Estructura</th><th>Cuándo se usa</th><th>Caminos</th></tr></thead><tbody><tr><td><code>if</code></td><td>Hacer algo <b>solo si</b> se cumple una condición</td><td>1 (o nada)</td></tr><tr><td><code>if - else</code></td><td>Elegir entre <b>dos</b> alternativas excluyentes</td><td>2</td></tr><tr><td><code>if - elif - else</code></td><td>Elegir entre <b>tres o más</b> alternativas</td><td>3 o más</td></tr><tr><td>Anidado</td><td>Una decisión <b>dentro</b> de otra</td><td>Varios niveles</td></tr></tbody></table><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">En C: <code>if (...) {}</code>, <code>else if (...) {}</code>, <code>else {}</code>. En Python se abrevia <code>else if</code> como <b><code>elif</code></b>, se <b>eliminan</b> los paréntesis obligatorios y las llaves, y se agregan <b>dos puntos <code>:</code></b> más la indentación.</p></div><div class="grid-2" style="margin-top:8px;"><div class="code-window"><div class="code-header"><span class="code-title">C</span><span class="code-badge">C</span></div><div class="code-body"><span class="c-kw">if</span> (nota &gt;= <span class="c-num">6</span>) {
+    printf(<span class="c-str">"Aprobado"</span>);
+} <span class="c-kw">else</span> {
+    printf(<span class="c-str">"Desaprobado"</span>);
+}</div></div><div class="code-window"><div class="code-header"><span class="code-title">Python</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">if</span> nota &gt;= <span class="c-num">6</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Aprobado"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Desaprobado"</span>)</div></div></div></section>
+<section><h2><span class="section-num">04</span> Anatomía del if: Sintaxis</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-amber);">if </span><span style="color:var(--accent-cyan);">condicion</span><span style="color:var(--accent-rose);">:</span></div><div class="code-window"><div class="code-header"><span class="code-title">sintaxis_if.py</span><span class="code-badge">Plantilla</span></div><div class="code-body"><span class="c-kw">if</span> condicion:
+    instruccion_1
+    instruccion_2
+instruccion_fuera_del_if</div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><b><code>if</code></b> → palabra reservada: "si". Inicia la estructura.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><b><code>condicion</code></b> → una expresión que da <code>True</code> o <code>False</code> (por ejemplo <code>edad &gt;= 18</code>). <b>No se escriben paréntesis</b> (aunque se pueden usar).</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;"><b><code>:</code></b> → los <b>dos puntos</b> anuncian que viene un bloque. <b>Son obligatorios.</b></div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.84rem;"><b>Bloque indentado</b> → las líneas con <b>4 espacios</b> son lo que se ejecuta <b>solo si</b> la condición es <code>True</code>.</div></div><div class="step-item"><span class="step-num">5</span><div class="step-content" style="font-size:0.84rem;">La primera línea <b>sin sangría</b> termina el bloque: se ejecuta <b>siempre</b>.</div></div></div></section>
+<section><h2><span class="section-num">05</span> El if en Acción</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">if_simple.py</span><span class="code-badge">Python</span></div><div class="code-body">edad = <span class="c-num">20</span>
+
+<span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Es mayor de edad"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"Fin del programa"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Es mayor de edad
+Fin del programa</div></div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">if_simple (edad = 15)</span><span class="code-badge">Python</span></div><div class="code-body">edad = <span class="c-num">15</span>
+
+<span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Es mayor de edad"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"Fin del programa"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Fin del programa</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con <code>edad = 20</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>20 &gt;= 18</code> es <code>True</code> → se ejecuta el bloque → aparecen <b>los dos mensajes</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Con <code>edad = 15</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>15 &gt;= 18</code> es <code>False</code> → el bloque se <b>saltea</b> → aparece <b>solo</b> <code>Fin del programa</code>.</p></div></div></section>
+<section><h2><span class="section-num">06</span> Diagrama de Flujo del if</h2><div class="grid-2" style="margin-top:8px;"><svg viewBox="0 0 520 250" style="width:100%; max-width:470px; margin:6px auto; display:block;" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#94a3b8"/></marker></defs><rect x="205" y="4" width="110" height="28" rx="14" fill="rgba(56,189,248,0.15)" stroke="#38bdf8"/><text x="260" y="23" font-size="13" text-anchor="middle" fill="#e2e8f0" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">Inicio</text><line x1="260" y1="32" x2="260" y2="52" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar)"/><polygon points="260,54 385,97 260,140 135,97" fill="rgba(251,191,36,0.14)" stroke="#fbbf24" stroke-width="1.6"/><text x="260" y="102" font-size="13" text-anchor="middle" fill="#fbbf24" font-weight="700" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">edad &gt;= 18</text><line x1="385" y1="97" x2="450" y2="97" stroke="#94a3b8" stroke-width="1.6"/><line x1="450" y1="97" x2="450" y2="148" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar)"/><text x="418" y="90" font-size="13" text-anchor="middle" fill="#34d399" font-weight="700" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">Sí</text><rect x="375" y="150" width="150" height="40" rx="8" fill="rgba(52,211,153,0.13)" stroke="#34d399"/><text x="450" y="175" font-size="12" text-anchor="middle" fill="#e2e8f0" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">print("Mayor")</text><text x="102" y="90" font-size="13" text-anchor="middle" fill="#f87171" font-weight="700" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">No</text><line x1="135" y1="97" x2="40" y2="97" stroke="#94a3b8" stroke-width="1.6"/><line x1="40" y1="97" x2="40" y2="226" stroke="#94a3b8" stroke-width="1.6"/><line x1="40" y1="226" x2="200" y2="226" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar)"/><line x1="450" y1="190" x2="450" y2="226" stroke="#94a3b8" stroke-width="1.6"/><line x1="450" y1="226" x2="320" y2="226" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar)"/><rect x="202" y="212" width="116" height="28" rx="14" fill="rgba(129,140,248,0.15)" stroke="#818cf8"/><text x="260" y="231" font-size="13" text-anchor="middle" fill="#e2e8f0" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">Continúa</text></svg><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cómo leerlo</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>El <b>rombo</b> es la pregunta (condición).</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Si la respuesta es <b>Sí</b> (<code>True</code>), se ejecuta la caja del bloque.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Si es <b>No</b> (<code>False</code>), el programa <b>se salta</b> el bloque.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>En ambos casos el programa <b>continúa</b> con la instrucción que sigue.</li></ul></div></div><div class="code-window"><div class="code-header"><span class="code-title">flujo_if.py</span><span class="code-badge">Código del diagrama</span></div><div class="code-body"><span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Mayor"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Continúa"</span>)</div></div></section>
+<section><h2><span class="section-num">07</span> Qué Pertenece al Bloque y Qué No: la Indentación</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">bloque.py</span><span class="code-badge">Python</span></div><div class="code-body">numero = <span class="c-num">7</span>
+
+<span class="c-kw">if</span> numero &gt; <span class="c-num">5</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Mayor que 5"</span>)
+    <span class="c-fn">print</span>(<span class="c-str">"También del if"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Se ejecuta siempre"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Mayor que 5
+También del if
+Se ejecuta siempre</div></div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">bloque (numero = 3)</span><span class="code-badge">Python</span></div><div class="code-body">numero = <span class="c-num">3</span>
+
+<span class="c-kw">if</span> numero &gt; <span class="c-num">5</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Mayor que 5"</span>)
+    <span class="c-fn">print</span>(<span class="c-str">"También del if"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Se ejecuta siempre"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Se ejecuta siempre</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Regla</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Todo lo que tiene <b>la misma sangría</b> debajo del <code>if:</code> forma parte del bloque. Con <code>numero = 3</code>, <b>las dos</b> líneas indentadas se saltearon y solo salió la última. En C este rol lo cumplían las <b>llaves</b>; acá <b>es la sangría</b>.</p></div></section>
+<section><h2><span class="section-num">08</span> if - else: Dos Caminos</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-amber);">if </span><span style="color:var(--accent-cyan);">condicion</span><span style="color:var(--accent-rose);">:</span></div><div class="code-window"><div class="code-header"><span class="code-title">sintaxis_if_else.py</span><span class="code-badge">Plantilla</span></div><div class="code-body"><span class="c-kw">if</span> condicion:
+    <span class="c-cmt"># se ejecuta si es True</span>
+<span class="c-kw">else</span>:
+    <span class="c-cmt"># se ejecuta si es False</span></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);"><code>else</code> = "en caso contrario"</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">No lleva condición: se ejecuta cuando la del <code>if</code> es <code>False</code>. También <b>termina en <code>:</code></b> y su bloque va <b>indentado</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Exactamente un camino</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Con <code>if-else</code> <b>siempre</b> se ejecuta <b>uno solo</b> de los dos bloques: nunca los dos, nunca ninguno.</p></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">if_else.py</span><span class="code-badge">Python</span></div><div class="code-body">edad = <span class="c-num">16</span>
+
+<span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Es mayor"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Es menor"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Es menor</div></div></div></div></section>
+<section><h2><span class="section-num">09</span> Diagrama de Flujo del if - else</h2><div class="grid-2" style="margin-top:8px;"><svg viewBox="0 0 520 250" style="width:100%; max-width:470px; margin:6px auto; display:block;" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#94a3b8"/></marker></defs><rect x="205" y="4" width="110" height="28" rx="14" fill="rgba(56,189,248,0.15)" stroke="#38bdf8"/><text x="260" y="23" font-size="13" text-anchor="middle" fill="#e2e8f0" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">Inicio</text><line x1="260" y1="32" x2="260" y2="52" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar)"/><polygon points="260,54 385,97 260,140 135,97" fill="rgba(251,191,36,0.14)" stroke="#fbbf24" stroke-width="1.6"/><text x="260" y="102" font-size="13" text-anchor="middle" fill="#fbbf24" font-weight="700" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">edad &gt;= 18</text><line x1="385" y1="97" x2="450" y2="97" stroke="#94a3b8" stroke-width="1.6"/><line x1="450" y1="97" x2="450" y2="148" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar)"/><text x="418" y="90" font-size="13" text-anchor="middle" fill="#34d399" font-weight="700" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">Sí</text><rect x="375" y="150" width="150" height="40" rx="8" fill="rgba(52,211,153,0.13)" stroke="#34d399"/><text x="450" y="175" font-size="12" text-anchor="middle" fill="#e2e8f0" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">print("Es mayor")</text><line x1="135" y1="97" x2="70" y2="97" stroke="#94a3b8" stroke-width="1.6"/><line x1="70" y1="97" x2="70" y2="148" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar)"/><text x="102" y="90" font-size="13" text-anchor="middle" fill="#f87171" font-weight="700" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">No</text><rect x="-5" y="150" width="150" height="40" rx="8" fill="rgba(248,113,113,0.12)" stroke="#f87171"/><text x="70" y="175" font-size="12" text-anchor="middle" fill="#e2e8f0" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">print("Es menor")</text><line x1="70" y1="190" x2="70" y2="226" stroke="#94a3b8" stroke-width="1.6"/><line x1="70" y1="226" x2="200" y2="226" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar)"/><line x1="450" y1="190" x2="450" y2="226" stroke="#94a3b8" stroke-width="1.6"/><line x1="450" y1="226" x2="320" y2="226" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#ar)"/><rect x="202" y="212" width="116" height="28" rx="14" fill="rgba(129,140,248,0.15)" stroke="#818cf8"/><text x="260" y="231" font-size="13" text-anchor="middle" fill="#e2e8f0" font-weight="500" font-family="JetBrains Mono, monospace" style="font-variant-ligatures:none; font-feature-settings:&quot;liga&quot; 0, &quot;calt&quot; 0;">Continúa</text></svg><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dos caminos que se unen</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Según la condición, el programa recorre <b>la rama Sí</b> o <b>la rama No</b>.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Nunca recorre las dos.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Después, ambas ramas <b>se juntan</b> y el programa sigue.</li></ul></div></div><table class="trace-table"><thead><tr><th><code>edad</code></th><th><code>edad &gt;= 18</code></th><th>Camino</th><th>Salida</th></tr></thead><tbody><tr><td><code>25</code></td><td><code>True</code></td><td>if</td><td><code>Es mayor</code></td></tr><tr><td><code>18</code></td><td><code>True</code></td><td>if</td><td><code>Es mayor</code></td></tr><tr><td><code>17</code></td><td><code>False</code></td><td>else</td><td><code>Es menor</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">10</span> Programa Interactivo con if - else</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">entrada_edad.py</span><span class="code-badge">Python</span></div><div class="code-body">edad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Ingrese su edad: "</span>))
+
+<span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Podés ingresar"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"No podés ingresar"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ingrese su edad: <span class="terminal-user-input">20</span>
+Podés ingresar</div></div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">entrada_edad (otra ejecución)</span><span class="code-badge">Python</span></div><div class="code-body">edad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Ingrese su edad: "</span>))
+
+<span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Podés ingresar"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"No podés ingresar"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ingrese su edad: <span class="terminal-user-input">14</span>
+No podés ingresar</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Notá</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">El <b>mismo programa</b> produce <b>resultados distintos</b> según lo que escribe el usuario: eso es lo que lo vuelve interactivo. Fijate que usamos <code>int(...)</code> para poder comparar con un número.</p></div></section>
+<section><h2><span class="section-num">11</span> Condiciones con Variables Booleanas y "Valores Verdaderos"</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">La condición puede ser <b>cualquier valor</b>: Python lo trata como <code>True</code> o <code>False</code> (igual que <code>bool()</code> de la unidad 02):</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">valores_verdaderos.py</span><span class="code-badge">Python</span></div><div class="code-body">tiene_entrada = <span class="c-kw">True</span>
+<span class="c-kw">if</span> tiene_entrada:
+    <span class="c-fn">print</span>(<span class="c-str">"Pasa"</span>)
+
+nombre = <span class="c-str">""</span>
+<span class="c-kw">if</span> nombre:
+    <span class="c-fn">print</span>(<span class="c-str">"Hay nombre"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Falta el nombre"</span>)
+
+<span class="c-kw">if</span> <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"no se imprime"</span>)
+<span class="c-kw">if</span> <span class="c-num">5</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"5 cuenta como verdadero"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Pasa
+Falta el nombre
+5 cuenta como verdadero</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cuenta como <code>False</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>False</code>, <code>0</code>, <code>0.0</code>, <code>""</code> (texto vacío) y <code>None</code>. <b>Todo lo demás cuenta como <code>True</code></b>. Es muy útil para preguntar "¿está vacío?", pero al principio preferí <b>comparaciones explícitas</b>: son más claras.</p></div></section>
+<section><h2><span class="section-num">12</span> if - elif - else: Más de Dos Caminos</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-amber);">if </span><span style="color:var(--accent-cyan);">condicion_1</span><span style="color:var(--accent-amber);">:   ... elif </span><span style="color:var(--accent-cyan);">condicion_2</span><span style="color:var(--accent-amber);">:   ... else:</span></div><div class="code-window"><div class="code-header"><span class="code-title">sintaxis_elif.py</span><span class="code-badge">Plantilla</span></div><div class="code-body"><span class="c-kw">if</span> condicion_1:
+    <span class="c-cmt"># camino 1</span>
+<span class="c-kw">elif</span> condicion_2:
+    <span class="c-cmt"># camino 2</span>
+<span class="c-kw">elif</span> condicion_3:
+    <span class="c-cmt"># camino 3</span>
+<span class="c-kw">else</span>:
+    <span class="c-cmt"># ninguna se cumplió</span></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);"><code>elif</code> = "si no, y si..."</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Es la abreviatura de <b>else if</b> de C. Significa: "si no se cumplió lo anterior, probá esta otra condición".</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Se pueden usar <b>todos los <code>elif</code> que haga falta</b></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El <code>else</code> final es <b>opcional</b> y atrapa todo lo que no cumplió ninguna condición.</p></div></div></section>
+<section><h2><span class="section-num">13</span> Ejemplo del Apunte: Clasificar una Nota</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">clasificar_nota.py</span><span class="code-badge">Python</span></div><div class="code-body">nota = <span class="c-num">8</span>
+
+<span class="c-kw">if</span> nota &gt;= <span class="c-num">9</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Excelente"</span>)
+<span class="c-kw">elif</span> nota &gt;= <span class="c-num">6</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Aprobado"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Desaprobado"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Aprobado</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.86rem;">Python pregunta <b>primero</b> <code>nota &gt;= 9</code> → <code>8 &gt;= 9</code> → <code>False</code>. <b>Saltea</b> ese bloque.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.86rem;">Pregunta <code>nota &gt;= 6</code> → <code>8 &gt;= 6</code> → <code>True</code>. <b>Ejecuta</b> ese bloque: muestra <code>Aprobado</code>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.86rem;">Como ya encontró una condición verdadera, <b>no evalúa nada más</b> (ni siquiera el <code>else</code>). Sigue con lo que viene después de toda la estructura.</div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Regla de oro</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;"><b>Python evalúa de arriba hacia abajo y ejecuta solo el PRIMER bloque cuya condición sea <code>True</code>.</b> Los demás se ignoran, aunque también fueran verdaderos.</p></div></section>
+<section><h2><span class="section-num">14</span> Seguimiento: Qué Camino Toma Cada Nota</h2><table class="trace-table"><thead><tr><th><code>nota</code></th><th><code>nota &gt;= 9</code></th><th><code>nota &gt;= 6</code></th><th>Bloque que se ejecuta</th><th>Salida</th></tr></thead><tbody><tr><td><code>10</code></td><td><code>True</code></td><td>(no se evalúa)</td><td><code>if</code></td><td><code>Excelente</code></td></tr><tr><td><code>9</code></td><td><code>True</code></td><td>(no se evalúa)</td><td><code>if</code></td><td><code>Excelente</code></td></tr><tr><td><code>8</code></td><td><code>False</code></td><td><code>True</code></td><td><code>elif</code></td><td><code>Aprobado</code></td></tr><tr><td><code>6</code></td><td><code>False</code></td><td><code>True</code></td><td><code>elif</code></td><td><code>Aprobado</code></td></tr><tr><td><code>5</code></td><td><code>False</code></td><td><code>False</code></td><td><code>else</code></td><td><code>Desaprobado</code></td></tr></tbody></table><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">probar_todos.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> nota <span class="c-kw">in</span> [<span class="c-num">10</span>, <span class="c-num">9</span>, <span class="c-num">8</span>, <span class="c-num">6</span>, <span class="c-num">5</span>]:
+    <span class="c-kw">if</span> nota &gt;= <span class="c-num">9</span>:
+        <span class="c-fn">print</span>(nota, <span class="c-str">"Excelente"</span>)
+    <span class="c-kw">elif</span> nota &gt;= <span class="c-num">6</span>:
+        <span class="c-fn">print</span>(nota, <span class="c-str">"Aprobado"</span>)
+    <span class="c-kw">else</span>:
+        <span class="c-fn">print</span>(nota, <span class="c-str">"Desaprobado"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">10 Excelente
+9 Excelente
+8 Aprobado
+6 Aprobado
+5 Desaprobado</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Para curiosos</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Ese <code>for</code> repite el bloque para cada valor de la lista: lo estudiamos en la unidad 08. Acá solo sirve para <b>probar los cinco casos juntos</b>.</p></div></section>
+<section><h2><span class="section-num">15</span> El Orden de los elif Importa</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Orden incorrecto</div><div class="code-window"><div class="code-header"><span class="code-title">orden_mal.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">nota = <span class="c-num">10</span>
+
+<span class="c-kw">if</span> nota &gt;= <span class="c-num">6</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Aprobado"</span>)
+<span class="c-kw">elif</span> nota &gt;= <span class="c-num">9</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Excelente"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Desaprobado"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Aprobado</div></div></div><div class="correct-card"><div class="correct-title">✅ Orden correcto</div><div class="code-window"><div class="code-header"><span class="code-title">orden_bien.py</span><span class="code-badge">OK</span></div><div class="code-body">nota = <span class="c-num">10</span>
+
+<span class="c-kw">if</span> nota &gt;= <span class="c-num">9</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Excelente"</span>)
+<span class="c-kw">elif</span> nota &gt;= <span class="c-num">6</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Aprobado"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Desaprobado"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Excelente</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Con <code>nota = 10</code>, <code>nota &gt;= 6</code> ya es <code>True</code>: se ejecuta ese bloque y el <code>elif nota &gt;= 9</code> <b>jamás se evalúa</b>. <b>Ordená las condiciones de la más específica a la más general.</b></p></div></section>
+<section><h2><span class="section-num">16</span> Varios if Seguidos vs. if - elif</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">dos_if.py</span><span class="code-badge">Python</span></div><div class="code-body">nota = <span class="c-num">10</span>
+
+<span class="c-kw">if</span> nota &gt;= <span class="c-num">9</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Excelente"</span>)
+<span class="c-kw">if</span> nota &gt;= <span class="c-num">6</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Aprobado"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Excelente
+Aprobado</div></div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">if_elif.py</span><span class="code-badge">Python</span></div><div class="code-body">nota = <span class="c-num">10</span>
+
+<span class="c-kw">if</span> nota &gt;= <span class="c-num">9</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Excelente"</span>)
+<span class="c-kw">elif</span> nota &gt;= <span class="c-num">6</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Aprobado"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Excelente</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Dos <code>if</code> independientes</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Cada <code>if</code> es <b>una decisión nueva</b>: con <code>nota = 10</code> <b>se ejecutan los dos</b>. Usalos para requisitos <b>independientes</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);"><code>if</code> + <code>elif</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Forman <b>una sola decisión</b>: se ejecuta <b>como máximo un</b> bloque. Usalos para opciones <b>excluyentes</b>.</p></div></div></section>
+<section><h2><span class="section-num">17</span> Ejemplo: Calificación según la Nota Ingresada</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">calificacion.py</span><span class="code-badge">Python</span></div><div class="code-body">nota = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Ingrese la nota: "</span>))
+
+<span class="c-kw">if</span> nota &lt; <span class="c-num">0</span> <span class="c-kw">or</span> nota &gt; <span class="c-num">10</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Nota inválida"</span>)
+<span class="c-kw">elif</span> nota &gt;= <span class="c-num">9</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Sobresaliente"</span>)
+<span class="c-kw">elif</span> nota &gt;= <span class="c-num">7</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Muy bueno"</span>)
+<span class="c-kw">elif</span> nota &gt;= <span class="c-num">6</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Aprobado"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Desaprobado"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ingrese la nota: <span class="terminal-user-input">7.5</span>
+Muy bueno</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;">Primero se <b>descartan los valores imposibles</b> (menores que 0 o mayores que 10).</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;">Luego, de <b>mayor a menor</b>, cada <code>elif</code> solo se evalúa si falló el anterior.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;">Por eso en <code>nota &gt;= 7</code> <b>no hace falta</b> escribir <code>nota &lt; 9</code>: si llegó ahí, ya se sabe que no es <code>&gt;= 9</code>.</div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Validar primero</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Poner <b>primero</b> el caso inválido es una <b>buena práctica</b>: evita procesar datos que no tienen sentido.</p></div></section>
+<section><h2><span class="section-num">18</span> Ejemplo: Signo de un Número</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">signo.py</span><span class="code-badge">Python</span></div><div class="code-body">n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Ingrese un número: "</span>))
+
+<span class="c-kw">if</span> n &gt; <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Positivo"</span>)
+<span class="c-kw">elif</span> n &lt; <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Negativo"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Es cero"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ingrese un número: <span class="terminal-user-input">-4</span>
+Negativo</div></div></div></div><table class="trace-table"><thead><tr><th><code>n</code></th><th><code>n &gt; 0</code></th><th><code>n &lt; 0</code></th><th>Resultado</th></tr></thead><tbody><tr><td><code>5</code></td><td><code>True</code></td><td>—</td><td><code>Positivo</code></td></tr><tr><td><code>-4</code></td><td><code>False</code></td><td><code>True</code></td><td><code>Negativo</code></td></tr><tr><td><code>0</code></td><td><code>False</code></td><td><code>False</code></td><td><code>Es cero</code> (<code>else</code>)</td></tr></tbody></table><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Idea</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">El <code>else</code> no necesita condición: si no es positivo ni negativo, <b>solo puede ser cero</b>. Usar <code>else</code> evita escribir <code>elif n == 0</code>.</p></div></section>
+<section><h2><span class="section-num">19</span> Ejemplo: El Mayor de Tres Números</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">mayor_de_tres.py</span><span class="code-badge">Python</span></div><div class="code-body">a = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"a: "</span>))
+b = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"b: "</span>))
+c = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"c: "</span>))
+
+<span class="c-kw">if</span> a &gt;= b <span class="c-kw">and</span> a &gt;= c:
+    mayor = a
+<span class="c-kw">elif</span> b &gt;= a <span class="c-kw">and</span> b &gt;= c:
+    mayor = b
+<span class="c-kw">else</span>:
+    mayor = c
+
+<span class="c-fn">print</span>(<span class="c-str">"El mayor es"</span>, mayor)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">a: <span class="terminal-user-input">7</span>
+b: <span class="terminal-user-input">12</span>
+c: <span class="terminal-user-input">9</span>
+El mayor es 12</div></div></div></div><table class="trace-table"><thead><tr><th>Condición</th><th>Con 7, 12, 9</th><th>Resultado</th></tr></thead><tbody><tr><td><code>a &gt;= b and a &gt;= c</code></td><td><code>7 &gt;= 12</code> → <code>False</code></td><td>No</td></tr><tr><td><code>b &gt;= a and b &gt;= c</code></td><td><code>12 &gt;= 7 and 12 &gt;= 9</code> → <code>True</code></td><td><code>mayor = b</code> → 12</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Atajo de Python</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">La función <code>max(a, b, c)</code> devuelve directamente el mayor. Pero <b>practicar la lógica con <code>if</code></b> es el objetivo de esta unidad.</p></div></section>
+<section><h2><span class="section-num">20</span> Ejemplo: Par o Impar y Divisibilidad</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">par_impar.py</span><span class="code-badge">Python</span></div><div class="code-body">n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Ingrese un número: "</span>))
+
+<span class="c-kw">if</span> n % <span class="c-num">2</span> == <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(n, <span class="c-str">"es par"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(n, <span class="c-str">"es impar"</span>)
+
+<span class="c-kw">if</span> n % <span class="c-num">5</span> == <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(n, <span class="c-str">"también es múltiplo de 5"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ingrese un número: <span class="terminal-user-input">35</span>
+35 es impar
+35 también es múltiplo de 5</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Dos decisiones independientes</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">El primer <code>if-else</code> clasifica en par/impar. El segundo <code>if</code> es <b>aparte</b>: se evalúa siempre y solo agrega un mensaje.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Para 35</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>35 % 2</code> → <code>1</code> ≠ 0 → <b>impar</b>. <code>35 % 5</code> → <code>0</code> → <b>múltiplo de 5</b>.</p></div></div></section>
+<section><h2><span class="section-num">21</span> Condicionales Anidados</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un condicional <b>anidado</b> es un <code>if</code> <b>dentro del bloque</b> de otro <code>if</code>. La decisión interna solo se evalúa <b>si se cumplió la externa</b>. Cada nivel agrega <b>4 espacios más</b> de sangría.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">anidado.py</span><span class="code-badge">Python</span></div><div class="code-body">edad = <span class="c-num">20</span>
+tiene_entrada = <span class="c-kw">True</span>
+
+<span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+    <span class="c-kw">if</span> tiene_entrada:
+        <span class="c-fn">print</span>(<span class="c-str">"Puede ingresar"</span>)
+    <span class="c-kw">else</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"Necesita comprar entrada"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Es menor de edad"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Puede ingresar</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;">El <code>if edad &gt;= 18</code> <b>externo</b> decide si es mayor.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;">Solo <b>si lo es</b>, entra al bloque y evalúa el <code>if tiene_entrada</code> <b>interno</b>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;">El <code>else</code> del nivel interno y el del nivel externo se distinguen por <b>la sangría</b>: pertenecen al <code>if</code> que tiene su mismo nivel.</div></div></div></section>
+<section><h2><span class="section-num">22</span> Caminos de Ejecución de un Anidado</h2><table class="trace-table"><thead><tr><th><code>edad</code></th><th><code>tiene_entrada</code></th><th>¿Entra al <code>if</code> externo?</th><th>¿Qué imprime?</th></tr></thead><tbody><tr><td><code>20</code></td><td><code>True</code></td><td>Sí</td><td><code>Puede ingresar</code></td></tr><tr><td><code>20</code></td><td><code>False</code></td><td>Sí</td><td><code>Necesita comprar entrada</code></td></tr><tr><td><code>15</code></td><td><code>True</code></td><td>No</td><td><code>Es menor de edad</code> (el interno <b>no se evalúa</b>)</td></tr><tr><td><code>15</code></td><td><code>False</code></td><td>No</td><td><code>Es menor de edad</code></td></tr></tbody></table><div class="grid-3" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Camino 1</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Mayor <b>con</b> entrada.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Camino 2</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Mayor <b>sin</b> entrada.</p></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Camino 3</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Menor de edad (con o sin entrada).</p></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Fijate</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Hay <b>tres</b> mensajes posibles con <b>cuatro</b> combinaciones de datos. Al diseñar condicionales conviene <b>listar todos los casos</b> como en esta tabla.</p></div></section>
+<section><h2><span class="section-num">23</span> Anidar o Usar and: ¿Cuándo Conviene Cada Uno?</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Con <code>and</code> (una sola decisión)</h4><div class="code-window"><div class="code-header"><span class="code-title">con_and.py</span><span class="code-badge">2 caminos</span></div><div class="code-body"><span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span> <span class="c-kw">and</span> tiene_entrada:
+    <span class="c-fn">print</span>(<span class="c-str">"Puede ingresar"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"No puede ingresar"</span>)</div></div><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Más <b>corto</b> si solo importa el resultado final.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Anidado (decisiones separadas)</h4><div class="code-window"><div class="code-header"><span class="code-title">anidado.py</span><span class="code-badge">3 caminos</span></div><div class="code-body"><span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+    <span class="c-kw">if</span> tiene_entrada:
+        <span class="c-fn">print</span>(<span class="c-str">"Puede ingresar"</span>)
+    <span class="c-kw">else</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"Falta la entrada"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Es menor"</span>)</div></div><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Conviene cuando <b>cada situación</b> necesita <b>un mensaje distinto</b>.</p></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Evitá el "efecto escalera"</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Más de <b>dos o tres niveles</b> de anidamiento vuelven el código ilegible. Si te pasa, probá combinar condiciones con <code>and</code>/<code>or</code> o usar <code>elif</code>.</p></div></section>
+<section><h2><span class="section-num">24</span> Ejemplo: Cajero Automático</h2><div class="code-window"><div class="code-header"><span class="code-title">cajero.py</span><span class="code-badge">Python</span></div><div class="code-body">saldo = <span class="c-num">5000</span>
+clave_correcta = <span class="c-num">1234</span>
+
+clave = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Clave: "</span>))
+<span class="c-kw">if</span> clave == clave_correcta:
+    monto = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Monto a retirar: "</span>))
+    <span class="c-kw">if</span> monto &lt;= <span class="c-num">0</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"Monto inválido"</span>)
+    <span class="c-kw">elif</span> monto &gt; saldo:
+        <span class="c-fn">print</span>(<span class="c-str">"Saldo insuficiente"</span>)
+    <span class="c-kw">else</span>:
+        saldo = saldo - monto
+        <span class="c-fn">print</span>(<span class="c-str">f"Retiro exitoso. Saldo: {saldo}"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Clave incorrecta"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Clave: <span class="terminal-user-input">1234</span>
+Monto a retirar: <span class="terminal-user-input">1500</span>
+Retiro exitoso. Saldo: 3500</div></div><div class="box box-indigo"><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Solo <b>si la clave es correcta</b> se pide el monto; adentro, un <code>if-elif-else</code> distingue tres casos.</p></div></section>
+<section><h2><span class="section-num">25</span> Ejemplo: Calculadora con elif</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">calculadora.py</span><span class="code-badge">Python</span></div><div class="code-body">a = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Primer número: "</span>))
+operador = <span class="c-fn">input</span>(<span class="c-str">"Operación (+, -, *, /): "</span>)
+b = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Segundo número: "</span>))
+
+<span class="c-kw">if</span> operador == <span class="c-str">"+"</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Resultado:"</span>, a + b)
+<span class="c-kw">elif</span> operador == <span class="c-str">"-"</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Resultado:"</span>, a - b)
+<span class="c-kw">elif</span> operador == <span class="c-str">"*"</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Resultado:"</span>, a * b)
+<span class="c-kw">elif</span> operador == <span class="c-str">"/"</span>:
+    <span class="c-kw">if</span> b != <span class="c-num">0</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"Resultado:"</span>, a / b)
+    <span class="c-kw">else</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"No se puede dividir por cero"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Operación no válida"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Primer número: <span class="terminal-user-input">10</span>
+Operación (+, -, *, /): <span class="terminal-user-input">/</span>
+Segundo número: <span class="terminal-user-input">4</span>
+Resultado: 2.5</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Observá</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El operador se pide como <b>texto</b> y se compara con <code>==</code> contra textos entre comillas. La división tiene un <code>if</code> <b>anidado</b> para evitar <code>ZeroDivisionError</code>.</p></div></section>
+<section><h2><span class="section-num">26</span> Expresión Condicional en una Línea (Curiosidad)</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Python permite elegir <b>un valor</b> según una condición en una sola línea:</p><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-emerald);">valor_si_true</span><span style="color:var(--accent-amber);"> if </span><span style="color:var(--accent-cyan);">condicion</span><span style="color:var(--accent-amber);"> else </span><span style="color:var(--accent-rose);">valor_si_false</span></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">expresion_condicional.py</span><span class="code-badge">Python</span></div><div class="code-body">edad = <span class="c-num">20</span>
+estado = <span class="c-str">"mayor"</span> <span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span> <span class="c-kw">else</span> <span class="c-str">"menor"</span>
+<span class="c-fn">print</span>(estado)
+
+n = <span class="c-num">7</span>
+<span class="c-fn">print</span>(<span class="c-str">"par"</span> <span class="c-kw">if</span> n % <span class="c-num">2</span> == <span class="c-num">0</span> <span class="c-kw">else</span> <span class="c-str">"impar"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">mayor
+impar</div></div></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Equivale al <b>operador ternario</b> de C: <code>estado = (edad &gt;= 18) ? "mayor" : "menor";</code>. Es práctica para <b>asignar un valor</b>, pero para <b>ejecutar instrucciones</b> usá el <code>if</code> normal.</p></div></section>
+<section><h2><span class="section-num">27</span> Seguimiento Completo con if - elif - else</h2><div class="code-window"><div class="code-header"><span class="code-title">traza_condicional.py</span><span class="code-badge">Predecí la salida</span></div><div class="code-body">puntos = <span class="c-num">0</span>
+nivel = <span class="c-num">4</span>
+
+<span class="c-kw">if</span> nivel &gt;= <span class="c-num">5</span>:
+    puntos += <span class="c-num">100</span>
+<span class="c-kw">elif</span> nivel &gt;= <span class="c-num">3</span>:
+    puntos += <span class="c-num">50</span>
+    <span class="c-kw">if</span> nivel == <span class="c-num">4</span>:
+        puntos += <span class="c-num">10</span>
+<span class="c-kw">else</span>:
+    puntos += <span class="c-num">5</span>
+
+<span class="c-fn">print</span>(puntos)</div></div><table class="trace-table"><thead><tr><th>Paso</th><th>Evaluación</th><th>Resultado</th><th><code>puntos</code></th></tr></thead><tbody><tr><td>1</td><td><code>puntos = 0</code>, <code>nivel = 4</code></td><td>—</td><td>0</td></tr><tr><td>2</td><td><code>nivel &gt;= 5</code> → <code>4 &gt;= 5</code></td><td><code>False</code></td><td>0</td></tr><tr><td>3</td><td><code>nivel &gt;= 3</code> → <code>4 &gt;= 3</code></td><td><code>True</code> → entra al <code>elif</code></td><td>0</td></tr><tr><td>4</td><td><code>puntos += 50</code></td><td>—</td><td>50</td></tr><tr><td>5</td><td>Anidado: <code>nivel == 4</code></td><td><code>True</code></td><td>50</td></tr><tr><td>6</td><td><code>puntos += 10</code></td><td>—</td><td>60</td></tr><tr><td>7</td><td>Se saltea el <code>else</code>; <code>print(puntos)</code></td><td>Muestra <code>60</code></td><td>60</td></tr></tbody></table></section>
+<section><h2><span class="section-num">28</span> Error Frecuente #1: Olvidar los Dos Puntos</h2><div class="code-window"><div class="code-header"><span class="code-title">falta_dos_puntos.py</span><span class="code-badge">Con error</span></div><div class="code-body">edad = <span class="c-num">20</span>
+<span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>
+    <span class="c-fn">print</span>(<span class="c-str">"Mayor"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2
+    if edad &gt;= 18
+                 ^
+SyntaxError: expected ':'</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Falta el <b><code>:</code></b> al final de la línea del <code>if</code>. Python avisa con <code>SyntaxError</code>. Lo mismo ocurre con <code>else</code>, <code>elif</code>, <code>while</code>, <code>for</code> y <code>def</code>.</p></div><div class="correct-card"><div class="correct-title">✅ Corrección</div><div class="code-window"><div class="code-header"><span class="code-title">ok.py</span><span class="code-badge">OK</span></div><div class="code-body"><span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Mayor"</span>)</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Truco</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Cada vez que escribas una línea que <b>abre un bloque</b>, pensá: "¿puse los dos puntos?".</p></div></section>
+<section><h2><span class="section-num">29</span> Error Frecuente #2: Problemas de Indentación</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Sin sangría en el bloque</div><div class="code-window"><div class="code-header"><span class="code-title">sin_sangria.py</span><span class="code-badge">Con error</span></div><div class="code-body">edad = <span class="c-num">20</span>
+<span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+<span class="c-fn">print</span>(<span class="c-str">"Mayor"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 3
+    print("Mayor")
+    ^^^^^
+IndentationError: expected an indented block after 'if' statement on line 2</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Sangrías desparejas</div><div class="code-window"><div class="code-header"><span class="code-title">sangria_dispar.py</span><span class="code-badge">Con error</span></div><div class="code-body">edad = <span class="c-num">20</span>
+<span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Mayor"</span>)
+  <span class="c-fn">print</span>(<span class="c-str">"Puede votar"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 4
+    print("Puede votar")
+                        ^
+IndentationError: unindent does not match any outer indentation level</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Solución</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Todas las líneas del bloque con <b>la misma cantidad de espacios</b> (4 es lo estándar).</p></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Error lógico (sin mensaje)</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Si olvidás indentar una línea <b>que sí debía</b> estar dentro del <code>if</code>, Python <b>no se queja</b>: la línea se ejecuta <b>siempre</b>. Revisá la sangría con cuidado.</p></div></div></section>
+<section><h2><span class="section-num">30</span> Error Frecuente #3: Sintaxis de C Mezclada</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ <code>else if</code> y paréntesis/llaves</div><div class="code-window"><div class="code-header"><span class="code-title">estilo_c.py</span><span class="code-badge">Con error</span></div><div class="code-body">x = <span class="c-num">5</span>
+<span class="c-kw">if</span> (x &gt; <span class="c-num">3</span>) {
+    <span class="c-fn">print</span>(<span class="c-str">"mayor"</span>)
+}</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2
+    if (x &gt; 3) {
+               ^
+SyntaxError: invalid syntax</div></div></div><div class="wrong-card"><div class="wrong-title">❌ <code>else if</code> en vez de <code>elif</code></div><div class="code-window"><div class="code-header"><span class="code-title">else_if.py</span><span class="code-badge">Con error</span></div><div class="code-body">x = <span class="c-num">5</span>
+<span class="c-kw">if</span> x &gt; <span class="c-num">9</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"a"</span>)
+<span class="c-kw">else</span> <span class="c-kw">if</span> x &gt; <span class="c-num">3</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"b"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 4
+    else if x &gt; 3:
+         ^^
+SyntaxError: expected ':'</div></div></div></div><table class="trace-table"><thead><tr><th>Si escribís (C)</th><th>En Python se escribe</th></tr></thead><tbody><tr><td><code>if (x &gt; 3) { ... }</code></td><td><code>if x &gt; 3:</code> + bloque indentado</td></tr><tr><td><code>else if (...)</code></td><td><code>elif ...:</code></td></tr><tr><td><code>else { ... }</code></td><td><code>else:</code> + bloque indentado</td></tr></tbody></table><div class="box box-rose"><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Otros errores: <code>else</code> <b>con condición</b> (no la lleva) y <code>elif</code>/<code>else</code> <b>sin</b> un <code>if</code> antes.</p></div></section>
+<section><h2><span class="section-num">31</span> Error Frecuente #4: Errores Lógicos en los Límites</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Son los más difíciles: el programa <b>funciona</b>, pero se equivoca justo en el <b>valor del borde</b>.</p><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ <code>&gt;</code> en lugar de <code>&gt;=</code></div><div class="code-window"><div class="code-header"><span class="code-title">limite.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">edad = <span class="c-num">18</span>
+<span class="c-kw">if</span> edad &gt; <span class="c-num">18</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Mayor de edad"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Menor de edad"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Menor de edad</div></div></div><div class="correct-card"><div class="correct-title">✅ Con <code>&gt;=</code></div><div class="code-window"><div class="code-header"><span class="code-title">limite_ok.py</span><span class="code-badge">OK</span></div><div class="code-body">edad = <span class="c-num">18</span>
+<span class="c-kw">if</span> edad &gt;= <span class="c-num">18</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Mayor de edad"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Menor de edad"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Mayor de edad</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cómo detectarlo</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Siempre <b>probá los valores del borde</b>: para <code>&gt;= 18</code>, probá <b>17, 18 y 19</b>. Y probá <b>cada camino</b> del programa al menos una vez.</p></div></section>
+<section><h2><span class="section-num">32</span> Comparación Final: Condicionales en C y en Python</h2><table class="trace-table"><thead><tr><th>Aspecto</th><th>C</th><th>Python</th></tr></thead><tbody><tr><td>Palabras</td><td><code>if</code>, <code>else if</code>, <code>else</code></td><td><code>if</code>, <code>elif</code>, <code>else</code></td></tr><tr><td>Condición</td><td>Entre paréntesis (obligatorio)</td><td>Sin paréntesis</td></tr><tr><td>Inicio del bloque</td><td>Llave <code>{</code></td><td>Dos puntos <code>:</code></td></tr><tr><td>Delimitación del bloque</td><td>Llaves <code>{ }</code></td><td><b>Indentación</b></td></tr><tr><td>Fin de instrucción</td><td><code>;</code></td><td>Salto de línea</td></tr><tr><td><code>if (x = 5)</code></td><td>Compila (error lógico)</td><td><code>SyntaxError</code></td></tr><tr><td>Ternario</td><td><code>c ? a : b</code></td><td><code>a if c else b</code></td></tr><tr><td><code>switch</code></td><td>Existe</td><td>Se usa <code>if-elif</code> (o <code>match</code> en 3.10+)</td></tr></tbody></table></section>
+<section><h2><span class="section-num">33</span> Buenas Prácticas con Condicionales</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>4 espacios</b> por nivel de sangría.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Validá los datos <b>primero</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Ordená los <code>elif</code> de lo <b>más específico a lo más general</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b>nombres booleanos</b> claros: <code>if es_mayor:</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Probá <b>todos los caminos</b> y los <b>valores de borde</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Dejá un comentario si la condición no es obvia.</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Anidar más de 2 o 3 niveles.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Repetir el mismo bloque en varias ramas.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Escribir condiciones imposibles (<code>x &lt; 5 and x &gt; 10</code>).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Comparar con <code>== True</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usar varios <code>if</code> cuando las opciones son excluyentes.</li></ul></div></div></section>
+<section><h2><span class="section-num">34</span> Ejercicio 1: ¿Qué Imprime?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Predecí la salida</span></div><div class="code-body">x = <span class="c-num">15</span>
+
+<span class="c-kw">if</span> x % <span class="c-num">2</span> == <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"A"</span>)
+<span class="c-kw">elif</span> x % <span class="c-num">3</span> == <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"B"</span>)
+    <span class="c-kw">if</span> x &gt; <span class="c-num">10</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"C"</span>)
+<span class="c-kw">elif</span> x % <span class="c-num">5</span> == <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"D"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"E"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"F"</span>)</div></div><details class="code-solution"><summary>👁️ Ver respuesta</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>15 % 2</code> es 1 → <code>False</code>. <code>15 % 3</code> es 0 → <code>True</code>: entra al <b>primer <code>elif</code></b> y muestra <code>B</code>; el anidado <code>15 &gt; 10</code> muestra <code>C</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Como ya se ejecutó un bloque, <b>no se evalúan</b> el <code>elif x % 5</code> (aunque 15 sea múltiplo de 5) <b>ni</b> el <code>else</code>. Luego <code>F</code>.</li></ul><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Python</span></div><div class="code-body">x = <span class="c-num">15</span>
+<span class="c-kw">if</span> x % <span class="c-num">2</span> == <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"A"</span>)
+<span class="c-kw">elif</span> x % <span class="c-num">3</span> == <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"B"</span>)
+    <span class="c-kw">if</span> x &gt; <span class="c-num">10</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"C"</span>)
+<span class="c-kw">elif</span> x % <span class="c-num">5</span> == <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"D"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"E"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"F"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">B
+C
+F</div></div></div></div></div></details></section>
+<section><h2><span class="section-num">35</span> Ejercicio 2: Entradas de Cine</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Escribí un programa que pida la <b>edad</b> y muestre el precio de la entrada: <b>menores de 3 años</b> → gratis; <b>de 3 a 12</b> → 2000; <b>de 13 a 64</b> → 4000; <b>65 o más</b> → 2500. Si la edad es negativa, mostrá <code>Edad inválida</code>.</p></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body">edad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Edad: "</span>))
+
+<span class="c-kw">if</span> edad &lt; <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Edad inválida"</span>)
+<span class="c-kw">elif</span> edad &lt; <span class="c-num">3</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Entrada gratis"</span>)
+<span class="c-kw">elif</span> edad &lt;= <span class="c-num">12</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Precio: 2000"</span>)
+<span class="c-kw">elif</span> edad &lt;= <span class="c-num">64</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Precio: 4000"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Precio: 2500"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Edad: <span class="terminal-user-input">70</span>
+Precio: 2500</div></div><p style="font-size:0.9rem; line-height:1.55; margin:4px 0;">Cada <code>elif</code> solo se evalúa si falló el anterior, por eso alcanza con <b>una sola comparación</b> por rama.</p></div></details></section>
+<section><h2><span class="section-num">36</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body">nota = <span class="c-fn">input</span>(<span class="c-str">"Nota: "</span>)
+<span class="c-kw">if</span> (nota &gt;= <span class="c-num">6</span>) {
+    <span class="c-fn">print</span>(<span class="c-str">"Aprobado"</span>)
+<span class="c-kw">else</span> <span class="c-kw">if</span> nota &lt; <span class="c-num">6</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Desaprobado"</span>)
+<span class="c-kw">if</span> nota = <span class="c-num">10</span>
+    <span class="c-fn">print</span>(<span class="c-str">"Perfecto"</span>)</div></div><details class="code-solution"><summary>👁️ Ver errores y solución</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>nota</code> es texto → <code>float(input(...))</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>{ }</code> y paréntesis son de C: usar <code>:</code> e indentación.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>else if</code> → <code>elif</code>; además falta el <b><code>:</code></b> (y se podía usar solo <code>else:</code>).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>nota = 10</code> → <code>nota == 10</code>, y falta el <code>:</code>.</li></ul><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3_ok.py</span><span class="code-badge">Solución</span></div><div class="code-body">nota = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Nota: "</span>))
+<span class="c-kw">if</span> nota &gt;= <span class="c-num">6</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Aprobado"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Desaprobado"</span>)
+<span class="c-kw">if</span> nota == <span class="c-num">10</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Perfecto"</span>)</div></div></div></details></section>
+<section><h2><span class="section-num">37</span> Ejercicio 4 (Reto): Clasificar un Triángulo</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Pedí los <b>tres lados</b> de un triángulo. Primero verificá que <b>sea válido</b> (cada lado menor que la suma de los otros dos). Si lo es, indicá si es <b>equilátero</b> (3 lados iguales), <b>isósceles</b> (2 iguales) o <b>escaleno</b> (todos distintos).</p></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio4.py</span><span class="code-badge">Python</span></div><div class="code-body">a = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Lado a: "</span>))
+b = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Lado b: "</span>))
+c = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Lado c: "</span>))
+
+<span class="c-kw">if</span> a &lt; b + c <span class="c-kw">and</span> b &lt; a + c <span class="c-kw">and</span> c &lt; a + b:
+    <span class="c-kw">if</span> a == b == c:
+        <span class="c-fn">print</span>(<span class="c-str">"Equilátero"</span>)
+    <span class="c-kw">elif</span> a == b <span class="c-kw">or</span> b == c <span class="c-kw">or</span> a == c:
+        <span class="c-fn">print</span>(<span class="c-str">"Isósceles"</span>)
+    <span class="c-kw">else</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"Escaleno"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"No forma un triángulo"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Lado a: <span class="terminal-user-input">5</span>
+Lado b: <span class="terminal-user-input">5</span>
+Lado c: <span class="terminal-user-input">8</span>
+Isósceles</div></div></div></details></section>
+<section><h2><span class="section-num">38</span> Resumen de la Unidad 06</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>if condicion:</code> ejecuta su bloque <b>solo si</b> es <code>True</code>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>else:</code> es el camino cuando <b>no</b> se cumple.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>elif</code> permite <b>más de dos</b> caminos; se ejecuta <b>solo el primer</b> bloque verdadero.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Se puede <b>anidar</b> (cada nivel, 4 espacios más).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Dos puntos + indentación</b> reemplazan a <code>( )</code> y <code>{ }</code> de C.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Probá siempre los <b>bordes</b> y <b>todos los caminos</b>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Sé qué bloque se ejecuta con cada valor?</div><div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué el orden de los <code>elif</code> importa?</div><div class="checklist-item"><span class="icon">✓</span> ¿Distingo varios <code>if</code> de un <code>if-elif</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Puedo seguir un condicional anidado con una tabla?</div><div class="checklist-item"><span class="icon">✓</span> ¿Recuerdo los <code>:</code> y la indentación?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 06 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Estructuras Condicionales</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="05-operadores-comparacion-y-logicos.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Operadores de Comparación y Lógicos</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="07-bucles-while-control-repeticion.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Bucles while →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

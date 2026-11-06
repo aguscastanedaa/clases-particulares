@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 16: Manejo de Archivos: Lectura y Escritura | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 16</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 16</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Manejo de Archivos: Lectura y Escritura</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Conservar datos más allá de la ejecución: abrir y cerrar archivos de texto, modos r, w, a y x, write, read, readline, recorrer líneas y la forma segura con with open()</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">Persistencia</span><span class="badge badge-indigo">open() y modos</span><span class="badge badge-emerald">write() y close()</span><span class="badge badge-amber">read() y líneas</span><span class="badge badge-purple">with open()</span><span class="badge badge-rose">Rutas y codificación</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 40 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: De fopen a open</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya conocemos de C</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Trabajar con archivos requería un puntero <b><code>FILE *</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Se abría con <b><code>fopen("datos.txt", "w")</code></b> y se cerraba con <b><code>fclose</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Se escribía con <code>fprintf</code> y se leía con <code>fscanf</code> o <code>fgets</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los modos eran <code>"r"</code>, <code>"w"</code>, <code>"a"</code>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender en Python</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Por qué necesitamos <b>archivos</b> (persistencia).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>open()</code></b> y sus <b>modos</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Escribir</b>: <code>write()</code>; <b>leer</b>: <code>read()</code>, <code>readline()</code>, recorrer con <code>for</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>close()</code></b> y la forma <b>segura</b>: <code>with open()</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Rutas</b>, <b>codificación</b> y errores frecuentes.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que puedas <b>guardar información en un archivo</b> y <b>recuperarla</b> en otra ejecución, sin perder datos ni dejar archivos abiertos.</p></div></section>
+<section><h2><span class="section-num">02</span> El Problema: Los Datos Se Pierden al Terminar</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Hasta ahora...</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Todos los datos que usamos (variables, listas, matrices) <b>viven en la memoria RAM</b> mientras el programa se ejecuta. <b>Cuando el programa termina, desaparecen.</b></p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">sin_persistencia.py</span><span class="code-badge">Python</span></div><div class="code-body">notas = []
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>):
+    notas.append(<span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">f"Nota {i + 1}: "</span>)))
+<span class="c-fn">print</span>(<span class="c-str">"Guardadas:"</span>, notas)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Nota 1: <span class="terminal-user-input">8</span>
+Nota 2: <span class="terminal-user-input">6</span>
+Nota 3: <span class="terminal-user-input">9</span>
+Guardadas: [8, 6, 9]</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Al ejecutar de nuevo</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Hay que <b>volver a escribir todas las notas</b>: el programa <b>no recuerda</b> nada de la ejecución anterior.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">La solución: archivos</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Un <b>archivo</b> guarda información en el <b>disco</b>, donde <b>permanece</b> aunque el programa termine (¡o se apague la computadora!).</p></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Ejemplos reales</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Guardar <b>nombres de alumnos</b> y <b>notas</b>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Registrar un <b>historial</b> de compras.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Guardar la <b>configuración</b> o el <b>progreso</b> de un juego.</li></ul></div></section>
+<section><h2><span class="section-num">03</span> Memoria RAM vs. Disco</h2><table class="trace-table"><thead><tr><th></th><th>Memoria RAM (variables)</th><th>Disco (archivos)</th></tr></thead><tbody><tr><td>Cuándo existe</td><td>Solo <b>mientras corre</b> el programa</td><td><b>Permanente</b></td></tr><tr><td>Velocidad</td><td>Muy rápida</td><td>Más lenta</td></tr><tr><td>Qué guarda</td><td>Variables, listas...</td><td>Textos, datos, imágenes...</td></tr><tr><td>Si se apaga la computadora</td><td><b>Se pierde todo</b></td><td><b>Se conserva</b></td></tr><tr><td>Cómo se accede</td><td>Por el <b>nombre</b> de la variable</td><td>Por el <b>nombre del archivo</b> (y su ruta)</td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Archivos de texto</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">En esta unidad trabajamos con <b>archivos de texto plano</b> (<code>.txt</code>, <code>.csv</code>): contienen <b>caracteres legibles</b>, organizados en <b>líneas</b>. Se pueden abrir con el <b>Bloc de notas</b>. (Los archivos binarios —imágenes, audio— quedan fuera del alcance de este curso.)</p></div></section>
+<section><h2><span class="section-num">04</span> El Ciclo de Vida de un Archivo: Abrir, Usar, Cerrar</h2><div style="display:flex; align-items:stretch; justify-content:center; gap:8px; margin:10px 0; flex-wrap:wrap;"><div style="flex:1; min-width:120px; background:var(--bg-surface); border:1px solid var(--card-border); border-top:3px solid var(--accent-cyan); border-radius:10px; padding:10px 12px; text-align:center; font-size:0.84rem; line-height:1.4;"><b>1. Abrir</b><br><code>open(nombre, modo)</code></div><div style="align-self:center; color:var(--accent-amber); font-size:1.4rem; font-weight:700;">→</div><div style="flex:1; min-width:120px; background:var(--bg-surface); border:1px solid var(--card-border); border-top:3px solid var(--accent-amber); border-radius:10px; padding:10px 12px; text-align:center; font-size:0.84rem; line-height:1.4;"><b>2. Usar</b><br>Leer o escribir</div><div style="align-self:center; color:var(--accent-amber); font-size:1.4rem; font-weight:700;">→</div><div style="flex:1; min-width:120px; background:var(--bg-surface); border:1px solid var(--card-border); border-top:3px solid var(--accent-emerald); border-radius:10px; padding:10px 12px; text-align:center; font-size:0.84rem; line-height:1.4;"><b>3. Cerrar</b><br><code>close()</code> (o <code>with</code>)</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">🚪 Analogía: una puerta</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Para entrar a una habitación hay que <b>abrir</b> la puerta, hacer lo que necesitás y <b>cerrarla</b> al salir. Si la dejás abierta, <b>gastás recursos</b> y puede haber problemas.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Siempre los tres pasos</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Olvidar <b>cerrar</b> un archivo puede hacer que <b>los datos no se guarden</b> realmente en el disco. Python tiene una forma que <b>cierra solo</b>: <code>with</code> (la vemos en breve).</p></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Comparación con C</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Es <b>exactamente el mismo ciclo</b>: <code>fopen</code> → <code>fprintf</code>/<code>fgets</code> → <code>fclose</code>. Cambian los nombres y la sintaxis.</p></div></section>
+<section><h2><span class="section-num">05</span> Abrir un Archivo: open()</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-cyan);">archivo</span> = <span style="color:var(--accent-indigo);">open(</span><span style="color:var(--accent-emerald);">"datos.txt"</span>, <span style="color:var(--accent-amber);">"modo"</span><span style="color:var(--accent-indigo);">)</span></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><b><code>open(</code></b> → función que <b>abre</b> (o crea) un archivo y devuelve <b>un objeto "archivo"</b>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><b><code>"datos.txt"</code></b> → el <b>nombre</b> del archivo (con su extensión). Si no se indica carpeta, se busca en la <b>carpeta donde se ejecuta el programa</b>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;"><b><code>"modo"</code></b> → <b>para qué</b> lo abrimos: leer, escribir, agregar...</div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.84rem;"><b><code>archivo =</code></b> → guardamos el objeto devuelto en una variable. A través de ella <b>usamos</b> el archivo (<code>archivo.write(...)</code>, <code>archivo.read()</code>, <code>archivo.close()</code>).</div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">abrir.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"w"</span>)
+<span class="c-fn">print</span>(<span class="c-fn">type</span>(archivo))
+archivo.close()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">&lt;class '_io.TextIOWrapper'&gt;</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué es ese objeto</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">No es el contenido del archivo: es <b>un "puente"</b> hacia él. Mientras esté abierto, ese puente <b>permite leer o escribir</b>.</p></div></section>
+<section><h2><span class="section-num">06</span> Los Modos de Apertura</h2><table class="trace-table"><thead><tr><th>Modo</th><th>Significado</th><th>Si el archivo <b>no existe</b></th><th>Si <b>ya existe</b></th></tr></thead><tbody><tr><td><code>"r"</code></td><td><b>R</b>ead: solo <b>leer</b></td><td><b>Error</b> (<code>FileNotFoundError</code>)</td><td>Se abre para leer</td></tr><tr><td><code>"w"</code></td><td><b>W</b>rite: <b>escribir</b></td><td>Se <b>crea</b></td><td><b>Se borra todo</b> su contenido</td></tr><tr><td><code>"a"</code></td><td><b>A</b>ppend: <b>agregar</b> al final</td><td>Se <b>crea</b></td><td>Se <b>conserva</b> y se agrega al final</td></tr><tr><td><code>"x"</code></td><td>e<b>X</b>clusivo: <b>crear</b></td><td>Se <b>crea</b></td><td><b>Error</b> (<code>FileExistsError</code>)</td></tr></tbody></table><div class="grid-2" style="margin-top:8px;"><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cuidado con "w"</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b>Borra</b> el contenido anterior <b>apenas se abre</b> el archivo, aunque no escribas nada después.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Si no indicás modo</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>open("datos.txt")</code> equivale a <code>"r"</code> (<b>lectura</b>). Conviene <b>escribirlo siempre</b> para que quede claro.</p></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Son los mismos modos de <code>fopen</code>: <code>"r"</code>, <code>"w"</code>, <code>"a"</code>. Python agrega <code>"x"</code>.</p></div></section>
+<section><h2><span class="section-num">07</span> Escribir en un Archivo: write()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">escribir.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"w"</span>)
+
+archivo.write(<span class="c-str">"Hola mundo"</span>)
+
+archivo.close()
+<span class="c-fn">print</span>(<span class="c-str">"Archivo guardado"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Archivo guardado</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 datos.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Hola mundo</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><code>open("datos.txt", "w")</code> → abre (y <b>crea</b>, si no existe) el archivo en <b>modo escritura</b>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><code>archivo.write("Hola mundo")</code> → escribe ese <b>texto</b> dentro del archivo.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;"><code>archivo.close()</code> → <b>cierra</b> el archivo: los datos quedan <b>guardados</b> en el disco.</div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dónde queda</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El archivo <code>datos.txt</code> aparece <b>en la misma carpeta</b> que tu programa. Podés abrirlo con el <b>Bloc de notas</b> para verlo (la ventana amarilla de arriba muestra su contenido).</p></div></section>
+<section><h2><span class="section-num">08</span> write() No Agrega Saltos de Línea</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">sin_saltos.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"lista.txt"</span>, <span class="c-str">"w"</span>)
+
+archivo.write(<span class="c-str">"Ana"</span>)
+archivo.write(<span class="c-str">"Luis"</span>)
+archivo.write(<span class="c-str">"Marta"</span>)
+
+archivo.close()</div></div></div><div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 lista.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">AnaLuisMarta</div></div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">con_saltos.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"lista.txt"</span>, <span class="c-str">"w"</span>)
+
+archivo.write(<span class="c-str">"Ana\n"</span>)
+archivo.write(<span class="c-str">"Luis\n"</span>)
+archivo.write(<span class="c-str">"Marta\n"</span>)
+
+archivo.close()</div></div></div><div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 lista.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana
+Luis
+Marta</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">A diferencia de <code>print()</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>print</code> agrega un salto de línea <b>solo</b>; <b><code>write</code> no</b>. Sin <code>\n</code>, todo queda <b>pegado</b> en una sola línea.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cada línea termina con <code>\n</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El <code>\n</code> es el <b>carácter de salto de línea</b> (unidad 01). Es lo que <b>separa las líneas</b> de un archivo.</p></div></div></section>
+<section><h2><span class="section-num">09</span> write() Solo Acepta Texto</h2><div class="code-window"><div class="code-header"><span class="code-title">write_numero.py</span><span class="code-badge">Con error</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"numeros.txt"</span>, <span class="c-str">"w"</span>)
+edad = <span class="c-num">18</span>
+archivo.write(edad)
+archivo.close()</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 3, in &lt;module&gt;
+    archivo.write(edad)
+    ~~~~~~~~~~~~~^^^^^^
+TypeError: write() argument must be str, not int</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>write</code> solo escribe <b>strings</b>. Un <code>int</code> o un <code>float</code> hay que <b>convertirlo</b> con <code>str()</code> (o usar una <b>f-string</b>).</p></div><div class="correct-card"><div class="correct-title">✅ Corrección</div><div class="code-window"><div class="code-header"><span class="code-title">ok.py</span><span class="code-badge">OK</span></div><div class="code-body">archivo.write(<span class="c-fn">str</span>(edad) + <span class="c-str">"\n"</span>)
+archivo.write(<span class="c-str">f"Edad: {edad}\n"</span>)</div></div></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En C, <code>fprintf(archivo, "%d\n", edad)</code> <b>formateaba</b> el número. En Python se <b>arma el texto primero</b> (f-string) y recién ahí se escribe.</p></div></section>
+<section><h2><span class="section-num">10</span> ¿Por Qué Hay Que Cerrar el Archivo? close()</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué hace <code>close()</code></h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Guarda</b> de verdad los datos pendientes (Python los acumula en un <b>búfer</b> y los envía al disco en bloques).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Libera</b> el archivo para que otros programas puedan usarlo.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Libera los <b>recursos</b> del sistema.</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Si no se cierra</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Puede que los datos <b>no se guarden</b> completos.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>El archivo queda <b>bloqueado</b> (en Windows, no podés borrarlo ni abrirlo desde otro programa).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Un programa que abre <b>muchos</b> archivos sin cerrarlos puede <b>agotar</b> los recursos.</li></ul></div></div><div class="code-window"><div class="code-header"><span class="code-title">escribir_cerrado.py</span><span class="code-badge">Con error</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"prueba.txt"</span>, <span class="c-str">"w"</span>)
+archivo.write(<span class="c-str">"dato"</span>)
+archivo.close()
+archivo.write(<span class="c-str">"otro"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 4, in &lt;module&gt;
+    archivo.write("otro")
+    ~~~~~~~~~~~~~^^^^^^^^
+ValueError: I/O operation on closed file.</div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Después de <code>close()</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Ya no se puede usar el archivo: <code>ValueError: I/O operation on closed file</code>. Para volver a trabajar con él hay que <b>abrirlo de nuevo</b>.</p></div></section>
+<section><h2><span class="section-num">11</span> El Modo "w" Sobrescribe</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">sobrescribir.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"saludo.txt"</span>, <span class="c-str">"w"</span>)
+archivo.write(<span class="c-str">"Primera version\n"</span>)
+archivo.close()
+
+archivo = <span class="c-fn">open</span>(<span class="c-str">"saludo.txt"</span>, <span class="c-str">"w"</span>)
+archivo.write(<span class="c-str">"Segunda version\n"</span>)
+archivo.close()</div></div></div><div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 saludo.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Segunda version</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">La segunda apertura con <code>"w"</code> <b>borró</b> <code>Primera version</code> y dejó solo <code>Segunda version</code>. El modo <code>"w"</code> <b>siempre parte de un archivo vacío</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Entonces...</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Usá <b><code>"w"</code></b> cuando querés <b>reemplazar</b> todo el contenido (guardar el estado actual). Usá <b><code>"a"</code></b> cuando querés <b>conservar</b> lo anterior y <b>sumar</b> datos.</p></div></section>
+<section><h2><span class="section-num">12</span> Agregar Información sin Borrar: Modo "a"</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">agregar.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"diario.txt"</span>, <span class="c-str">"a"</span>)
+archivo.write(<span class="c-str">"Nuevo dato\n"</span>)
+archivo.close()</div></div></div><div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 diario.txt (antes)</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Dato 1
+Dato 2</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 diario.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Dato 1
+Dato 2
+Nuevo dato</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cómo funciona</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si el archivo <b>ya existe</b>, se <b>conserva</b> y lo nuevo <b>se escribe al final</b>. Si <b>no existe</b>, se <b>crea</b>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Para qué sirve</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><b>Registros</b> (logs), <b>historiales</b>, <b>contadores</b>: información que <b>va creciendo</b> con cada ejecución.</p></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Fijate en el <code>\n</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Cada <code>write</code> termina con <code>\n</code> para que el <b>siguiente dato empiece en una línea nueva</b>.</p></div></section>
+<section><h2><span class="section-num">13</span> Leer Todo el Contenido: read()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">leer.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"r"</span>)
+
+contenido = archivo.read()
+<span class="c-fn">print</span>(contenido)
+<span class="c-fn">print</span>(<span class="c-fn">type</span>(contenido))
+
+archivo.close()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola mundo
+Segunda linea
+
+&lt;class 'str'&gt;</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 datos.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Hola mundo
+Segunda linea</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;">Se abre en modo <b><code>"r"</code></b> (lectura).</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><code>archivo.read()</code> <b>devuelve TODO el contenido como un único string</b> (con los <code>\n</code> incluidos).</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;">Se <b>cierra</b> el archivo.</div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Atención</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>read()</code> carga <b>todo el archivo en memoria</b>. Con archivos muy grandes conviene <b>leer línea por línea</b> (próximas diapositivas).</p></div></section>
+<section><h2><span class="section-num">14</span> El Archivo como una Cinta: la Posición de Lectura</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Al abrir un archivo, Python mantiene una <b>posición actual</b> (un "cursor"). Cada lectura <b>avanza</b> esa posición. Cuando llega al final, <b>no hay más para leer</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">posicion.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"r"</span>)
+
+primera = archivo.read()
+segunda = archivo.read()
+
+<span class="c-fn">print</span>(<span class="c-fn">repr</span>(primera))
+<span class="c-fn">print</span>(<span class="c-fn">repr</span>(segunda))
+
+archivo.seek(<span class="c-num">0</span>)
+<span class="c-fn">print</span>(<span class="c-fn">repr</span>(archivo.read()))
+archivo.close()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">'Hola mundo\n'
+''
+'Hola mundo\n'</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">La segunda lectura devuelve <code>""</code></h4><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;">La primera <code>read()</code> <b>consumió todo</b>: el cursor quedó al final. La segunda <b>no encuentra nada</b> y devuelve un <b>string vacío</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Volver al principio</h4><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;"><code>archivo.seek(0)</code> <b>reposiciona</b> el cursor al inicio. (<code>repr</code> muestra el texto <b>con comillas y <code>\n</code> visibles</b>.)</p></div></div></section>
+<section><h2><span class="section-num">15</span> Leer Una Línea: readline()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">readline.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"alumnos.txt"</span>, <span class="c-str">"r"</span>)
+
+linea1 = archivo.readline()
+linea2 = archivo.readline()
+<span class="c-fn">print</span>(<span class="c-fn">repr</span>(linea1))
+<span class="c-fn">print</span>(<span class="c-fn">repr</span>(linea2))
+
+archivo.close()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">'Ana\n'
+'Luis\n'</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 alumnos.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana
+Luis
+Marta</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cómo funciona</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>readline()</code> lee <b>una línea</b> (hasta el <code>\n</code> <b>inclusive</b>) y <b>avanza</b> el cursor. La siguiente llamada lee <b>la línea que sigue</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Al terminar el archivo</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Cuando no quedan líneas, <code>readline()</code> devuelve <b><code>""</code></b> (string vacío). Con una línea en blanco del archivo devuelve <code>"\n"</code> (<b>no</b> vacío).</p></div></div></section>
+<section><h2><span class="section-num">16</span> Leer Todas las Líneas en una Lista: readlines()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">readlines.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"alumnos.txt"</span>, <span class="c-str">"r"</span>)
+
+lineas = archivo.readlines()
+<span class="c-fn">print</span>(lineas)
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(lineas))
+
+archivo.close()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">['Ana\n', 'Luis\n', 'Marta\n']
+3</div></div></div></div><table class="trace-table"><thead><tr><th>Método</th><th>Devuelve</th></tr></thead><tbody><tr><td><code>read()</code></td><td>Un <b>string</b> con <b>todo</b> el contenido</td></tr><tr><td><code>readline()</code></td><td>Un <b>string</b> con <b>la siguiente línea</b></td></tr><tr><td><code>readlines()</code></td><td>Una <b>lista de strings</b>, una por línea (con sus <code>\n</code>)</td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Para recordar</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Los tres <b>conservan los <code>\n</code></b>. Si no los querés, usá <code>.strip()</code> (próximas diapositivas).</p></div></section>
+<section><h2><span class="section-num">17</span> Recorrer un Archivo Línea por Línea con for</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">for_archivo.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"alumnos.txt"</span>, <span class="c-str">"r"</span>)
+
+<span class="c-kw">for</span> linea <span class="c-kw">in</span> archivo:
+    <span class="c-fn">print</span>(linea)
+
+archivo.close()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ana
+
+Luis
+
+Marta</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">La forma recomendada</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Un archivo abierto <b>se puede recorrer directamente con <code>for</code></b>: Python entrega <b>una línea por vuelta</b>, <b>sin cargar todo en memoria</b>. Es la forma <b>más eficiente y legible</b>.</p></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">¿Por qué sale una línea en blanco de más?</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Cada <code>linea</code> <b>ya trae su <code>\n</code></b> y <code>print</code> <b>agrega otro</b> salto: queda <b>doble espacio</b>. Se soluciona con <code>.strip()</code> (siguiente diapositiva).</p></div></div></section>
+<section><h2><span class="section-num">18</span> Limpiar el Salto de Línea: strip() y rstrip()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">strip_lineas.py</span><span class="code-badge">Python</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"alumnos.txt"</span>, <span class="c-str">"r"</span>)
+
+<span class="c-kw">for</span> linea <span class="c-kw">in</span> archivo:
+    nombre = linea.strip()
+    <span class="c-fn">print</span>(<span class="c-str">f"Alumno: {nombre}"</span>)
+
+archivo.close()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Alumno: Ana
+Alumno: Luis
+Alumno: Marta</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);"><code>linea.strip()</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Elimina <b>espacios y saltos de línea</b> del <b>principio y del final</b> de la línea (unidad 12). Es el paso <b>habitual</b> al leer.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);"><code>linea.rstrip("\n")</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Quita <b>solo el salto de línea</b> del final (conserva espacios iniciales, por si importan).</p></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Alternativa</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>print(linea, end="")</code> también evita el doble salto, <b>pero conviene limpiar el dato</b> para poder <b>usarlo</b> (comparar, convertir).</p></div></section>
+<section><h2><span class="section-num">19</span> with open(): La Forma Segura y Recomendada</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>with open(...) as archivo:</code> abre el archivo y <b>lo cierra automáticamente al terminar el bloque</b>, <b>incluso si ocurre un error</b> dentro. <b>No hace falta llamar a <code>close()</code>.</b></p></div><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-amber);">with </span><span style="color:var(--accent-indigo);">open(</span><span style="color:var(--accent-emerald);">"datos.txt"</span>, <span style="color:var(--accent-amber);">"r"</span><span style="color:var(--accent-indigo);">)</span><span style="color:var(--accent-amber);"> as </span><span style="color:var(--accent-cyan);">archivo</span><span style="color:var(--accent-rose);">:</span></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">con_with.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> archivo:
+    contenido = archivo.read()
+    <span class="c-fn">print</span>(contenido)
+
+<span class="c-fn">print</span>(<span class="c-str">"El archivo ya se cerró solo"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola mundo
+
+El archivo ya se cerró solo</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.82rem;"><b><code>with</code></b> → "con". Administra el archivo durante un <b>bloque</b>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.82rem;"><b><code>as archivo</code></b> → el <b>nombre</b> con el que usamos el archivo dentro del bloque.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.82rem;"><b>Bloque indentado</b> → solo <b>dentro</b> de él el archivo está <b>abierto</b>. Al <b>salir</b> (última línea con sangría), se <b>cierra solo</b>.</div></div></div></section>
+<section><h2><span class="section-num">20</span> with vs. close(): Por Qué Preferir with</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Con <code>close()</code></h4><div class="code-window"><div class="code-header"><span class="code-title">sin_with.py</span><span class="code-badge">Riesgo</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"r"</span>)
+contenido = archivo.read()
+numero = <span class="c-fn">int</span>(contenido)   <span class="c-cmt"># ¡puede fallar!</span>
+archivo.close()          <span class="c-cmt"># nunca se ejecuta</span></div></div><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;">Si ocurre un error <b>antes del <code>close()</code></b>, el archivo <b>queda abierto</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con <code>with</code></h4><div class="code-window"><div class="code-header"><span class="code-title">con_with.py</span><span class="code-badge">Seguro</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> archivo:
+    contenido = archivo.read()
+    numero = <span class="c-fn">int</span>(contenido)   <span class="c-cmt"># si falla...</span>
+<span class="c-cmt"># ...el archivo igual se cierra</span></div></div><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;">Python <b>cierra el archivo siempre</b>, pase lo que pase.</p></div></div><table class="trace-table"><thead><tr><th></th><th><code>open</code> + <code>close</code></th><th><code>with open</code></th></tr></thead><tbody><tr><td>Cierra automáticamente</td><td>No (lo hacés vos)</td><td><b>Sí</b></td></tr><tr><td>Seguro ante errores</td><td>No</td><td><b>Sí</b></td></tr><tr><td>Líneas de código</td><td>Más</td><td>Menos</td></tr><tr><td>Recomendado</td><td>Solo para entender el mecanismo</td><td><b>Sí, siempre</b></td></tr></tbody></table></section>
+<section><h2><span class="section-num">21</span> Escribir Varias Líneas con with</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">escribir_lista.py</span><span class="code-badge">Python</span></div><div class="code-body">nombres = [<span class="c-str">"Ana"</span>, <span class="c-str">"Luis"</span>, <span class="c-str">"Marta"</span>]
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"alumnos.txt"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> archivo:
+    <span class="c-kw">for</span> nombre <span class="c-kw">in</span> nombres:
+        archivo.write(nombre + <span class="c-str">"\n"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"Se guardaron"</span>, <span class="c-fn">len</span>(nombres), <span class="c-str">"nombres"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Se guardaron 3 nombres</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 alumnos.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana
+Luis
+Marta</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Patrón</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b><code>with open(..., "w")</code></b> + <b><code>for</code></b> + <b><code>write(... + "\n")</code></b>. Es la forma estándar de <b>guardar una lista</b>: <b>un elemento por línea</b>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Variante: <code>print(..., file=archivo)</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>print(nombre, file=archivo)</code> escribe <b>con salto de línea automático</b>. Es cómoda cuando querés el formato de <code>print</code>.</p></div></section>
+<section><h2><span class="section-num">22</span> Leer con with y Contar Líneas</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">contar_lineas.py</span><span class="code-badge">Python</span></div><div class="code-body">cantidad = <span class="c-num">0</span>
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"alumnos.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> archivo:
+    <span class="c-kw">for</span> linea <span class="c-kw">in</span> archivo:
+        cantidad += <span class="c-num">1</span>
+        <span class="c-fn">print</span>(cantidad, linea.strip())
+
+<span class="c-fn">print</span>(<span class="c-str">"Total de líneas:"</span>, cantidad)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1 Ana
+2 Luis
+3 Marta
+4 Pedro
+Total de líneas: 4</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">El <b>contador</b> clásico, aplicado a <b>las líneas de un archivo</b>. Es la base de muchos programas que <b>procesan datos</b> guardados.</p></div></section>
+<section><h2><span class="section-num">23</span> Leer Números desde un Archivo</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">leer_numeros.py</span><span class="code-badge">Python</span></div><div class="code-body">total = <span class="c-num">0</span>
+cantidad = <span class="c-num">0</span>
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"notas.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> archivo:
+    <span class="c-kw">for</span> linea <span class="c-kw">in</span> archivo:
+        nota = <span class="c-fn">float</span>(linea.strip())
+        total += nota
+        cantidad += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">f"Notas leídas: {cantidad}"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"Promedio: {total / cantidad:.2f}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Notas leídas: 4
+Promedio: 7.75</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 notas.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">8
+6.5
+9
+7.5</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Todo es texto</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Cada <code>linea</code> es <b>un string</b>. Para calcular hay que <b>convertir</b>: <code>float(linea.strip())</code>. Es el mismo problema de <code>input()</code> (unidad 03).</p></div></section>
+<section><h2><span class="section-num">24</span> Guardar una Lista y Recuperarla</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">guardar_recuperar.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">40</span>]
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"numeros.txt"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> archivo:
+    <span class="c-kw">for</span> n <span class="c-kw">in</span> numeros:
+        archivo.write(<span class="c-fn">str</span>(n) + <span class="c-str">"\n"</span>)
+
+recuperados = []
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"numeros.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> archivo:
+    <span class="c-kw">for</span> linea <span class="c-kw">in</span> archivo:
+        recuperados.append(<span class="c-fn">int</span>(linea.strip()))
+
+<span class="c-fn">print</span>(recuperados)
+<span class="c-fn">print</span>(recuperados == numeros)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[10, 20, 30, 40]
+True</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 numeros.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">10
+20
+30
+40</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ida y vuelta</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><b>Guardar:</b> convertir cada elemento con <code>str()</code> y escribirlo con <code>\n</code>. <b>Recuperar:</b> leer cada línea, <b>limpiar</b> con <code>strip()</code> y <b>convertir</b> con <code>int()</code>. Al final la lista <b>es igual</b> a la original: los datos <b>sobreviven</b> entre ejecuciones.</p></div></section>
+<section><h2><span class="section-num">25</span> Ejemplo: Un Registro de Notas Persistente</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">registro.py</span><span class="code-badge">Python</span></div><div class="code-body">nombre = <span class="c-fn">input</span>(<span class="c-str">"Alumno: "</span>)
+nota = <span class="c-fn">input</span>(<span class="c-str">"Nota: "</span>)
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"registro.txt"</span>, <span class="c-str">"a"</span>) <span class="c-kw">as</span> archivo:
+    archivo.write(<span class="c-str">f"{nombre},{nota}\n"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"Registro guardado"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Alumno: <span class="terminal-user-input">Valentina</span>
+Nota: <span class="terminal-user-input">9</span>
+Registro guardado</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 registro.txt (antes)</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana,8
+Luis,6</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 registro.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana,8
+Luis,6
+Valentina,9</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cómo funciona</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Cada ejecución <b>agrega una línea</b> <code>nombre,nota</code> al final (<code>"a"</code>). El <b>formato <code>dato1,dato2</code></b> (separado por comas) permite <b>recuperar</b> los campos después con <code>split(",")</code> (unidad 17).</p></div></section>
+<section><h2><span class="section-num">26</span> Ejemplo: Contar Palabras de un Archivo</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">contar_palabras_archivo.py</span><span class="code-badge">Python</span></div><div class="code-body">total_palabras = <span class="c-num">0</span>
+total_lineas = <span class="c-num">0</span>
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"texto.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> archivo:
+    <span class="c-kw">for</span> linea <span class="c-kw">in</span> archivo:
+        total_lineas += <span class="c-num">1</span>
+        total_palabras += <span class="c-fn">len</span>(linea.split())
+
+<span class="c-fn">print</span>(<span class="c-str">"Líneas:"</span>, total_lineas)
+<span class="c-fn">print</span>(<span class="c-str">"Palabras:"</span>, total_palabras)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Líneas: 3
+Palabras: 11</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 texto.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Python es un lenguaje
+muy facil de aprender
+y muy potente</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Combina</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>with open</code>, recorrer líneas, <code>split()</code> (unidad 12) y <b>acumuladores</b>: todo lo que ya sabés aplicado a <b>datos externos</b>.</p></div></section>
+<section><h2><span class="section-num">27</span> Rutas: Dónde Está el Archivo</h2><table class="trace-table"><thead><tr><th>Tipo de ruta</th><th>Ejemplo</th><th>Se interpreta...</th></tr></thead><tbody><tr><td><b>Relativa</b></td><td><code>"datos.txt"</code> o <code>"datos/notas.txt"</code></td><td>A partir de la <b>carpeta actual</b> (donde se ejecuta el programa)</td></tr><tr><td><b>Absoluta</b></td><td><code>"C:\\Usuarios\\Ana\\datos.txt"</code></td><td>Desde la <b>raíz</b> del disco (siempre el mismo lugar)</td></tr></tbody></table><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dos detalles de Windows</h4><ul style="font-size:0.8rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>En un texto, <b>la barra invertida <code>\</code> es especial</b> (<code>\n</code>...). Para escribirla hay que <b>duplicarla</b> <code>\\</code> o usar <b><code>/</code></b>: <code>"C:/Usuarios/Ana/datos.txt"</code> <b>también funciona</b> en Windows.</li></ul></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Para qué sirve saber esto</h4><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;">Si el programa <b>no encuentra</b> el archivo, casi siempre es porque <b>la carpeta actual no es la que pensabas</b>. Revisá <b>desde dónde ejecutás</b> el programa.</p></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">rutas.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">import</span> <span class="c-type">os</span>
+
+<span class="c-fn">print</span>(os.path.exists(<span class="c-str">"datos.txt"</span>))
+<span class="c-fn">print</span>(os.path.exists(<span class="c-str">"no_existe.txt"</span>))
+<span class="c-fn">print</span>(os.getcwd() != <span class="c-str">""</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">True
+False
+True</div></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Útil: <code>os.path.exists</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Devuelve <code>True</code> si <b>existe</b> un archivo o carpeta. Se usa <b>antes de abrir</b> para <b>evitar errores</b> (lo vemos en la unidad 17).</p></div></section>
+<section><h2><span class="section-num">28</span> Codificación de Texto: encoding="utf-8"</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">El problema</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un archivo de texto guarda <b>bytes</b>; la <b>codificación</b> define <b>cómo se traducen</b> a letras. Si escribís y leés con <b>codificaciones distintas</b>, las <b>tildes y la <code>ñ</code></b> se ven mal (<code>Ã¡</code> en lugar de <code>á</code>).</p></div><div class="code-window"><div class="code-header"><span class="code-title">utf8.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"saludo.txt"</span>, <span class="c-str">"w"</span>, encoding=<span class="c-str">"utf-8"</span>) <span class="c-kw">as</span> archivo:
+    archivo.write(<span class="c-str">"Canción: ¡Hola, niño!\n"</span>)
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"saludo.txt"</span>, <span class="c-str">"r"</span>, encoding=<span class="c-str">"utf-8"</span>) <span class="c-kw">as</span> archivo:
+    <span class="c-fn">print</span>(archivo.read())</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Canción: ¡Hola, niño!</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Recomendación</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><b>Siempre agregá <code>encoding="utf-8"</code></b> al abrir archivos con texto en español: funciona <b>igual en todos los sistemas</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Por qué importa</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En Windows, el valor por defecto <b>puede ser otro</b> (por ejemplo <code>cp1252</code>). Con <code>utf-8</code> explícito <b>evitás sorpresas</b> al compartir archivos.</p></div></div></section>
+<section><h2><span class="section-num">29</span> Error Frecuente #1: El Archivo No Existe (FileNotFoundError)</h2><div class="code-window"><div class="code-header"><span class="code-title">no_existe.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"inexistente.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> archivo:
+    <span class="c-fn">print</span>(archivo.read())</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1, in &lt;module&gt;
+    with open("inexistente.txt", "r") as archivo:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'inexistente.txt'</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El modo <code>"r"</code> <b>necesita</b> que el archivo <b>ya exista</b>. Si no está en la <b>carpeta actual</b>, Python lanza <b><code>FileNotFoundError</code></b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cómo evitarlo</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Verificar el <b>nombre</b> y la <b>ruta</b> (¡las mayúsculas y la extensión cuentan!).</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Comprobar antes con <code>os.path.exists</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Atrapar</b> el error con <code>try/except</code> (unidad 17).</li></ul></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En C, <code>fopen</code> <b>devolvía <code>NULL</code></b> y había que <b>comprobarlo</b>. Python <b>detiene el programa</b> con una excepción si no se maneja.</p></div></section>
+<section><h2><span class="section-num">30</span> Error Frecuente #2: Confusiones con el Modo</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Leer en modo "w"</div><div class="code-window"><div class="code-header"><span class="code-title">leer_en_w.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+    <span class="c-fn">print</span>(f.read())</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2, in &lt;module&gt;
+    print(f.read())
+          ~~~~~~^^
+io.UnsupportedOperation: not readable</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Escribir en modo "r"</div><div class="code-window"><div class="code-header"><span class="code-title">escribir_en_r.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+    f.write(<span class="c-str">"hola"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2, in &lt;module&gt;
+    f.write("hola")
+    ~~~~~~~^^^^^^^^
+io.UnsupportedOperation: not writable</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Y el error más grave</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Abrir con <b><code>"w"</code></b> un archivo que <b>querías conservar</b>: <b>se borra todo</b> sin avisar. Si querés <b>agregar</b>, usá <b><code>"a"</code></b>; si querés <b>solo leer</b>, usá <b><code>"r"</code></b>.</p></div></section>
+<section><h2><span class="section-num">31</span> Error Frecuente #3: Olvidos con las Líneas</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Olvidar el <code>\n</code> al escribir</div><div class="code-window"><div class="code-header"><span class="code-title">sin_salto.py</span><span class="code-badge">Error lógico</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"l.txt"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+    f.write(<span class="c-str">"Ana"</span>)
+    f.write(<span class="c-str">"Luis"</span>)</div></div><p style="font-size:0.9rem; line-height:1.55; margin:4px 0;">El archivo queda con <b>una sola línea</b>: <code>AnaLuis</code>.</p></div><div class="wrong-card"><div class="wrong-title">❌ Comparar sin limpiar el <code>\n</code></div><div class="code-window"><div class="code-header"><span class="code-title">sin_strip.py</span><span class="code-badge">Error lógico</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"n.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+    <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+        <span class="c-fn">print</span>(linea == <span class="c-str">"Ana"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">False
+False</div></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Soluciones</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>write(nombre + "\n")</code> o <code>print(nombre, file=archivo)</code>.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>linea.strip() == "Ana"</code>: <b>limpiar antes</b> de comparar o convertir.</li></ul></div></section>
+<section><h2><span class="section-num">32</span> Comparación Final: Archivos en C y en Python</h2><table class="trace-table"><thead><tr><th>Tarea</th><th>C</th><th>Python</th></tr></thead><tbody><tr><td>Abrir</td><td><code>FILE *f = fopen("a.txt", "w");</code></td><td><code>f = open("a.txt", "w")</code></td></tr><tr><td>Comprobar que abrió</td><td><code>if (f == NULL)</code></td><td>Excepción <code>FileNotFoundError</code></td></tr><tr><td>Escribir texto</td><td><code>fprintf(f, "%s\n", texto);</code></td><td><code>f.write(texto + "\n")</code></td></tr><tr><td>Leer una línea</td><td><code>fgets(buf, n, f)</code></td><td><code>f.readline()</code></td></tr><tr><td>Leer todo</td><td>Bucle con <code>fgets</code></td><td><code>f.read()</code></td></tr><tr><td>Recorrer líneas</td><td><code>while (fgets(...))</code></td><td><code>for linea in f:</code></td></tr><tr><td>Cerrar</td><td><code>fclose(f);</code></td><td><code>f.close()</code> o <b><code>with</code></b></td></tr><tr><td>Modos</td><td><code>"r"</code>, <code>"w"</code>, <code>"a"</code></td><td><code>"r"</code>, <code>"w"</code>, <code>"a"</code>, <code>"x"</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">33</span> Buenas Prácticas con Archivos</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Usá siempre <code>with open(...)</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Agregá <b><code>encoding="utf-8"</code></b> si hay tildes.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Elegí el <b>modo correcto</b> (<code>r</code>, <code>w</code>, <code>a</code>).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Limpiá</b> las líneas con <code>strip()</code> antes de usarlas.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Convertí</b> los datos al tipo correcto (<code>int</code>, <code>float</code>).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b>nombres de archivo claros</b> (<code>notas_2024.txt</code>).</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Dejar archivos <b>abiertos</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usar <b><code>"w"</code></b> sobre un archivo que querés <b>conservar</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Cargar todo</b> con <code>read()</code> si el archivo es enorme.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Olvidar el <b><code>\n</code></b> al escribir.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Suponer</b> que el archivo existe o que el usuario escribe datos válidos.</li></ul></div></div></section>
+<section><h2><span class="section-num">34</span> Ejercicio 1: ¿Qué Contiene el Archivo?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Predecí el contenido y la salida</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"a.txt"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+    f.write(<span class="c-str">"uno\n"</span>)
+    f.write(<span class="c-str">"dos"</span>)
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"a.txt"</span>, <span class="c-str">"a"</span>) <span class="c-kw">as</span> f:
+    f.write(<span class="c-str">"tres\n"</span>)
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"a.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+    lineas = f.readlines()
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(lineas))
+<span class="c-fn">print</span>(lineas)</div></div><details class="code-solution"><summary>👁️ Ver respuesta</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"a.txt"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+    f.write(<span class="c-str">"uno\n"</span>)
+    f.write(<span class="c-str">"dos"</span>)
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"a.txt"</span>, <span class="c-str">"a"</span>) <span class="c-kw">as</span> f:
+    f.write(<span class="c-str">"tres\n"</span>)
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"a.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+    lineas = f.readlines()
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(lineas))
+<span class="c-fn">print</span>(lineas)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">2
+['uno\n', 'dostres\n']</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 a.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">uno
+dostres</div></div></div></div><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>"dos"</code> <b>no llevaba <code>\n</code></b>, así que <code>"tres"</code> quedó <b>pegado</b>: <code>dostres</code>. Por eso hay <b>2 líneas</b> y no 3.</li></ul></div></details></section>
+<section><h2><span class="section-num">35</span> Ejercicio 2: Escribí los Programas</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>A)</b> Pedí 3 nombres con <code>input()</code> y <b>guardalos</b>, uno por línea, en <code>amigos.txt</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>B)</b> Leé <code>amigos.txt</code> y mostrá cada nombre <b>numerado</b> (<code>1. Ana</code>).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>C)</b> <b>Agregá</b> un nombre más <b>sin borrar</b> los anteriores.</li></ul></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"amigos.txt"</span>, <span class="c-str">"w"</span>, encoding=<span class="c-str">"utf-8"</span>) <span class="c-kw">as</span> f:
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>):
+        f.write(<span class="c-fn">input</span>(<span class="c-str">f"Nombre {i + 1}: "</span>) + <span class="c-str">"\n"</span>)
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"amigos.txt"</span>, <span class="c-str">"a"</span>, encoding=<span class="c-str">"utf-8"</span>) <span class="c-kw">as</span> f:
+    f.write(<span class="c-str">"Pedro\n"</span>)
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"amigos.txt"</span>, <span class="c-str">"r"</span>, encoding=<span class="c-str">"utf-8"</span>) <span class="c-kw">as</span> f:
+    numero = <span class="c-num">1</span>
+    <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+        <span class="c-fn">print</span>(<span class="c-str">f"{numero}. {linea.strip()}"</span>)
+        numero += <span class="c-num">1</span></div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Nombre 1: <span class="terminal-user-input">Ana</span>
+Nombre 2: <span class="terminal-user-input">Luis</span>
+Nombre 3: <span class="terminal-user-input">Marta</span>
+1. Ana
+2. Luis
+3. Marta
+4. Pedro</div></div></div></div></div></details></section>
+<section><h2><span class="section-num">36</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body">archivo = <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"r"</span>)
+archivo.write(<span class="c-str">"Hola"</span>)
+archivo.close()
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"notas.txt"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+    f.write(<span class="c-num">8</span>)
+    f.write(<span class="c-str">"9"</span>)
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"nombres.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+    <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+        <span class="c-kw">if</span> linea == <span class="c-str">"Ana"</span>:
+            <span class="c-fn">print</span>(<span class="c-str">"Encontrada"</span>)
+
+f = <span class="c-fn">open</span>(<span class="c-str">"x.txt"</span>, <span class="c-str">"w"</span>)
+f.close()
+f.write(<span class="c-str">"fin"</span>)</div></div><details class="code-solution"><summary>👁️ Ver errores y solución</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Se <b>escribe</b> en un archivo abierto en modo <code>"r"</code> → usar <code>"w"</code> o <code>"a"</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>f.write(8)</code>: <b>solo texto</b> → <code>f.write("8\n")</code> o <code>str(8)</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>f.write("9")</code> sin <code>\n</code>: las notas quedan <b>pegadas</b> (<code>89</code>).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>linea == "Ana"</code>: la línea trae <code>\n</code> → comparar con <code>linea.strip() == "Ana"</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>f.write("fin")</code> <b>después de <code>close()</code></b> → <code>ValueError</code>.</li></ul></div></details></section>
+<section><h2><span class="section-num">37</span> Ejercicio 4 (Reto): Libreta de Contactos Simple</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Armá un programa con un <b>menú</b> (<code>while</code>) con las opciones: <b>1) Agregar contacto</b> (nombre y teléfono, guardados como <code>nombre,telefono</code> en <code>contactos.txt</code>, modo <code>"a"</code>), <b>2) Ver todos</b> (leer el archivo y mostrar <code>nombre: telefono</code>), <b>3) Salir</b>. Los datos deben <b>sobrevivir</b> entre ejecuciones.</p></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio4.py</span><span class="code-badge">Python</span></div><div class="code-body">opcion = <span class="c-str">""</span>
+<span class="c-kw">while</span> opcion != <span class="c-str">"3"</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"1) Agregar  2) Ver  3) Salir"</span>)
+    opcion = <span class="c-fn">input</span>(<span class="c-str">"Opción: "</span>)
+    <span class="c-kw">if</span> opcion == <span class="c-str">"1"</span>:
+        nombre = <span class="c-fn">input</span>(<span class="c-str">"Nombre: "</span>)
+        tel = <span class="c-fn">input</span>(<span class="c-str">"Teléfono: "</span>)
+        <span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"contactos.txt"</span>, <span class="c-str">"a"</span>, encoding=<span class="c-str">"utf-8"</span>) <span class="c-kw">as</span> f:
+            f.write(<span class="c-str">f"{nombre},{tel}\n"</span>)
+    <span class="c-kw">elif</span> opcion == <span class="c-str">"2"</span>:
+        <span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"contactos.txt"</span>, <span class="c-str">"r"</span>, encoding=<span class="c-str">"utf-8"</span>) <span class="c-kw">as</span> f:
+            <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+                n, t = linea.strip().split(<span class="c-str">","</span>)
+                <span class="c-fn">print</span>(<span class="c-str">f"{n}: {t}"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1) Agregar  2) Ver  3) Salir
+Opción: <span class="terminal-user-input">1</span>
+Nombre: <span class="terminal-user-input">Ana</span>
+Teléfono: <span class="terminal-user-input">1122</span>
+1) Agregar  2) Ver  3) Salir
+Opción: <span class="terminal-user-input">1</span>
+Nombre: <span class="terminal-user-input">Luis</span>
+Teléfono: <span class="terminal-user-input">3344</span>
+1) Agregar  2) Ver  3) Salir
+Opción: <span class="terminal-user-input">2</span>
+Ana: 1122
+Luis: 3344
+1) Agregar  2) Ver  3) Salir
+Opción: <span class="terminal-user-input">3</span></div></div><p style="font-size:0.9rem; line-height:1.55; margin:4px 0;">Se creó con un archivo vacío para poder leerlo; en la unidad 17 vemos cómo <b>crearlo si no existe</b> con <code>try/except</code>.</p></div></details></section>
+<section><h2><span class="section-num">38</span> Resumen de la Unidad 16</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.8rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los <b>archivos</b> guardan datos en el <b>disco</b> (persistencia).</li></ul><ul style="font-size:0.8rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Ciclo: <b>abrir</b> (<code>open</code>) → <b>usar</b> → <b>cerrar</b> (<code>close</code> o <code>with</code>).</li></ul><ul style="font-size:0.8rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Modos: <b><code>r</code></b> lee, <b><code>w</code></b> escribe (<b>borra</b>), <b><code>a</code></b> agrega, <b><code>x</code></b> crea.</li></ul><ul style="font-size:0.8rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>write()</code> solo texto y <b>sin <code>\n</code> automático</b>; <code>read()</code>, <code>readline()</code>, <code>readlines()</code>, <code>for linea in f</code>.</li></ul><ul style="font-size:0.8rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>with open(...) as f:</code></b> cierra solo: usalo <b>siempre</b>.</li></ul><ul style="font-size:0.8rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Limpiá con <b><code>strip()</code></b>, convertí con <b><code>int</code>/<code>float</code></b> y usá <code>encoding="utf-8"</code>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Sé qué hace cada modo y cuál borra datos?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué hay que cerrar un archivo?</div><div class="checklist-item"><span class="icon">✓</span> ¿Entiendo qué ventaja tiene <code>with</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé leer un archivo línea por línea y convertir los datos?</div><div class="checklist-item"><span class="icon">✓</span> ¿Reconozco <code>FileNotFoundError</code> y sus causas?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 16 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Manejo de Archivos: Lectura y Escritura</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="15-listas-anidadas-y-matrices.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Listas Anidadas y Matrices</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="17-archivos-procesamiento-y-errores.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Archivos: Procesamiento y Manejo de Errores →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

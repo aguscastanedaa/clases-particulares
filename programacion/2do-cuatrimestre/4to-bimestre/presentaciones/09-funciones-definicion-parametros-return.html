@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 09: Funciones: Definición, Parámetros y return | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 09</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 09</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Funciones: Definición, Parámetros y return</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Dividir un programa en piezas reutilizables: crear funciones con def, enviarles datos con parámetros y argumentos, y recibir resultados con return</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">def</span><span class="badge badge-indigo">Llamar una función</span><span class="badge badge-emerald">Parámetros y argumentos</span><span class="badge badge-amber">return</span><span class="badge badge-purple">print vs return</span><span class="badge badge-rose">Funciones que llaman funciones</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 42 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: De las Funciones de C a las de Python</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya conocemos de C</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Una función es un bloque con <b>nombre</b> que hace una tarea (unidad 12 del 1er bimestre).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>En C se declara el <b>tipo de retorno</b> y el <b>tipo de cada parámetro</b>: <code>int sumar(int a, int b)</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Necesita <b>prototipos</b> y llaves <code>{ }</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Se <b>retorna</b> con <code>return</code>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Qué es una <b>función</b> y por qué usarlas.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Cómo <b>definirla</b> (<code>def</code>) y cómo <b>llamarla</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Parámetros</b> y <b>argumentos</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>return</code></b> y la diferencia con <b><code>print()</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Funciones que devuelven <b>booleanos</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Funciones que <b>llaman a otras funciones</b>.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que puedas dividir un problema en funciones pequeñas y entender <b>exactamente</b> qué pasa con los datos cuando se llama a una función y cuando esta devuelve un resultado.</p></div></section>
+<section><h2><span class="section-num">02</span> El Problema: Código Repetido</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Imaginá que un programa necesita mostrar este mismo cartel de bienvenida <b>en tres lugares</b> distintos:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">repetido.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-str">"===================="</span>)
+<span class="c-fn">print</span>(<span class="c-str">"  Bienvenido al curso"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"===================="</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Primera parte del programa..."</span>)
+<span class="c-fn">print</span>(<span class="c-str">"===================="</span>)
+<span class="c-fn">print</span>(<span class="c-str">"  Bienvenido al curso"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"===================="</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Segunda parte del programa..."</span>)
+<span class="c-fn">print</span>(<span class="c-str">"===================="</span>)
+<span class="c-fn">print</span>(<span class="c-str">"  Bienvenido al curso"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"===================="</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">====================
+  Bienvenido al curso
+====================
+Primera parte del programa...
+====================
+  Bienvenido al curso
+====================
+Segunda parte del programa...
+====================
+  Bienvenido al curso
+====================</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Problemas</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mismo código copiado <b>varias veces</b>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Si hay que cambiar el cartel, hay que <b>editar todas las copias</b> (y es fácil olvidar una).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>El programa se vuelve <b>largo y difícil de leer</b>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">La solución</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Escribir esas instrucciones <b>una sola vez</b>, ponerles un <b>nombre</b> y <b>llamarlas</b> cada vez que haga falta. Eso es una <b>función</b>.</p></div></div></section>
+<section><h2><span class="section-num">03</span> ¿Qué Es una Función?</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Una <b>función</b> es un <b>bloque de código con nombre</b> que realiza una <b>tarea específica</b>. Se <b>define una vez</b> y se puede <b>usar (llamar) todas las veces que se quiera</b>. Puede recibir datos y puede devolver un resultado.</p></div><div style="display:flex; align-items:stretch; justify-content:center; gap:8px; margin:10px 0; flex-wrap:wrap;"><div style="flex:1; min-width:120px; background:var(--bg-surface); border:1px solid var(--card-border); border-top:3px solid var(--accent-cyan); border-radius:10px; padding:10px 12px; text-align:center; font-size:0.84rem; line-height:1.4;"><b>Entrada</b><br>Los datos que recibe (parámetros)</div><div style="align-self:center; color:var(--accent-amber); font-size:1.4rem; font-weight:700;">→</div><div style="flex:1; min-width:120px; background:var(--bg-surface); border:1px solid var(--card-border); border-top:3px solid var(--accent-amber); border-radius:10px; padding:10px 12px; text-align:center; font-size:0.84rem; line-height:1.4;"><b>Proceso</b><br>Las instrucciones del cuerpo de la función</div><div style="align-self:center; color:var(--accent-amber); font-size:1.4rem; font-weight:700;">→</div><div style="flex:1; min-width:120px; background:var(--bg-surface); border:1px solid var(--card-border); border-top:3px solid var(--accent-emerald); border-radius:10px; padding:10px 12px; text-align:center; font-size:0.84rem; line-height:1.4;"><b>Salida</b><br>El resultado que devuelve (<code>return</code>)</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">🏭 Analogía: una máquina</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Una <b>licuadora</b>: ponés frutas (entrada), la máquina trabaja (proceso) y obtenés jugo (salida). No hace falta saber cómo funciona por dentro para <b>usarla</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Para qué sirven</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Reutilizar</b> código.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Organizar</b> el programa en partes.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Evitar repeticiones</b>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Probar</b> cada parte por separado.</li></ul></div></div></section>
+<section><h2><span class="section-num">04</span> Ya Venimos Usando Funciones</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Cada vez que escribiste algo seguido de paréntesis, <b>llamaste a una función</b>. Python trae muchas ya hechas ("incorporadas"):</p><table class="trace-table"><thead><tr><th>Función</th><th>Qué recibe</th><th>Qué hace / devuelve</th></tr></thead><tbody><tr><td><code>print("Hola")</code></td><td>Un texto</td><td>Lo muestra (no devuelve nada útil)</td></tr><tr><td><code>input("Nombre: ")</code></td><td>Un mensaje</td><td><b>Devuelve</b> el texto que escribió el usuario</td></tr><tr><td><code>len("Hola")</code></td><td>Un texto</td><td><b>Devuelve</b> <code>4</code></td></tr><tr><td><code>int("25")</code></td><td>Un texto</td><td><b>Devuelve</b> el entero <code>25</code></td></tr><tr><td><code>range(5)</code></td><td>Un número</td><td><b>Devuelve</b> la secuencia <code>0..4</code></td></tr><tr><td><code>abs(-7)</code></td><td>Un número</td><td><b>Devuelve</b> <code>7</code></td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dos grandes familias</h4><ul style="font-size:0.88rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Incorporadas:</b> ya vienen con Python (las de arriba).</li></ul><ul style="font-size:0.88rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Definidas por el usuario:</b> las que <b>escribimos nosotros</b> con <code>def</code> (el tema de hoy).</li></ul></div></section>
+<section><h2><span class="section-num">05</span> Definir una Función con def: Sintaxis</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-amber);">def </span><span style="color:var(--accent-cyan);">nombre_funcion</span>(<span style="color:var(--accent-emerald);">parametros</span>)<span style="color:var(--accent-rose);">:</span></div><div class="code-window"><div class="code-header"><span class="code-title">sintaxis_def.py</span><span class="code-badge">Plantilla</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">nombre_funcion</span>(parametros):
+    instruccion_1
+    instruccion_2
+    <span class="c-kw">return</span> resultado      <span class="c-cmt"># opcional</span></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><b><code>def</code></b> → palabra reservada (de <i>define</i>, "definir"). Anuncia que se crea una función.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><b><code>nombre_funcion</code></b> → el nombre que elegimos (en <code>snake_case</code>, preferentemente un <b>verbo</b>: <code>saludar</code>, <code>calcular_total</code>).</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;"><b><code>( )</code></b> → paréntesis <b>obligatorios</b>; adentro van los <b>parámetros</b> (pueden estar vacíos).</div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.84rem;"><b><code>:</code></b> → dos puntos obligatorios.</div></div><div class="step-item"><span class="step-num">5</span><div class="step-content" style="font-size:0.84rem;"><b>Cuerpo indentado</b> → las instrucciones que se ejecutan <b>cada vez que se llama</b> a la función.</div></div></div></section>
+<section><h2><span class="section-num">06</span> Definir una Función No la Ejecuta</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">solo_definir.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">saludar</span>():
+    <span class="c-fn">print</span>(<span class="c-str">"Hola mundo"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"Fin del programa"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Fin del programa</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Python <b>leyó</b> <code>def saludar()</code> y <b>recordó</b> que existe esa función, pero <b>no ejecutó su cuerpo</b>. Solo se ejecutó el último <code>print</code>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Analogía</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Definir una función es <b>escribir una receta</b> en el libro. No cocinás nada hasta que <b>decidís prepararla</b>.</p></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Idea clave</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;"><b>Definir</b> (con <code>def</code>) y <b>llamar</b> (con <code>nombre()</code>) son <b>dos pasos distintos</b>. Sin el segundo, el cuerpo <b>nunca se ejecuta</b>.</p></div></section>
+<section><h2><span class="section-num">07</span> Llamar (Invocar) una Función</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-cyan);">saludar</span>()</div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">llamar_funcion.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">saludar</span>():
+    <span class="c-fn">print</span>(<span class="c-str">"Hola mundo"</span>)
+
+saludar()
+saludar()
+saludar()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola mundo
+Hola mundo
+Hola mundo</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.86rem;"><code>def saludar():</code> <b>crea</b> la función (todavía no se ejecuta).</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.86rem;"><code>saludar()</code> <b>llama</b> a la función: Python <b>salta</b> a su cuerpo, ejecuta <code>print("Hola mundo")</code> y <b>vuelve</b> a la línea siguiente.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.86rem;">Cada llamada ejecuta el cuerpo <b>completo otra vez</b>: tres llamadas, tres saludos.</div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Los paréntesis son lo que "ejecuta"</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>saludar()</code> <b>llama</b> a la función. <code>saludar</code> (sin paréntesis) es solo <b>el nombre</b>, no hace nada.</p></div></section>
+<section><h2><span class="section-num">08</span> Solución al Problema: El Cartel en una Función</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">con_funcion.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">cartel</span>():
+    <span class="c-fn">print</span>(<span class="c-str">"===================="</span>)
+    <span class="c-fn">print</span>(<span class="c-str">"  Bienvenido al curso"</span>)
+    <span class="c-fn">print</span>(<span class="c-str">"===================="</span>)
+
+cartel()
+<span class="c-fn">print</span>(<span class="c-str">"Primera parte del programa..."</span>)
+cartel()
+<span class="c-fn">print</span>(<span class="c-str">"Segunda parte del programa..."</span>)
+cartel()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">====================
+  Bienvenido al curso
+====================
+Primera parte del programa...
+====================
+  Bienvenido al curso
+====================
+Segunda parte del programa...
+====================
+  Bienvenido al curso
+====================</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Resultado</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">La salida es <b>idéntica</b> a la versión larga, pero ahora el cartel está escrito <b>una sola vez</b>.</p></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cambiar el cartel</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Para modificarlo, se edita <b>un solo lugar</b> (el <code>def</code>) y las tres llamadas <b>se actualizan solas</b>.</p></div></div></section>
+<section><h2><span class="section-num">09</span> Cómo Fluye la Ejecución: Salto y Regreso</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">flujo_llamada.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">mostrar_mensaje</span>():
+    <span class="c-fn">print</span>(<span class="c-str">"   2) Dentro de la función"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"1) Antes de llamar"</span>)
+mostrar_mensaje()
+<span class="c-fn">print</span>(<span class="c-str">"3) Después de llamar"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1) Antes de llamar
+   2) Dentro de la función
+3) Después de llamar</div></div></div></div><table class="trace-table"><thead><tr><th>Orden</th><th>Línea que se ejecuta</th><th>Qué pasa</th></tr></thead><tbody><tr><td>1</td><td><code>def mostrar_mensaje(): ...</code></td><td>Se <b>registra</b> la función (no se ejecuta el cuerpo)</td></tr><tr><td>2</td><td><code>print("1) Antes de llamar")</code></td><td>Muestra la primera línea</td></tr><tr><td>3</td><td><code>mostrar_mensaje()</code></td><td>Python <b>salta</b> al cuerpo de la función</td></tr><tr><td>4</td><td><code>print("   2) Dentro...")</code></td><td>Se ejecuta el cuerpo</td></tr><tr><td>5</td><td>(fin del cuerpo)</td><td>Python <b>vuelve</b> a la línea siguiente a la llamada</td></tr><tr><td>6</td><td><code>print("3) Después de llamar")</code></td><td>El programa continúa</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Resumen del recorrido</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;"><b>Llamada → salto al cuerpo → ejecución → regreso</b> a donde se había llamado.</p></div></section>
+<section><h2><span class="section-num">10</span> La Función Debe Definirse Antes de Llamarla</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Llamar antes de definir</div><div class="code-window"><div class="code-header"><span class="code-title">orden_mal.py</span><span class="code-badge">Con error</span></div><div class="code-body">saludar()
+
+<span class="c-kw">def</span> <span class="c-fn">saludar</span>():
+    <span class="c-fn">print</span>(<span class="c-str">"Hola"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1, in &lt;module&gt;
+    saludar()
+    ^^^^^^^
+NameError: name 'saludar' is not defined</div></div></div><div class="correct-card"><div class="correct-title">✅ Definir primero, llamar después</div><div class="code-window"><div class="code-header"><span class="code-title">orden_bien.py</span><span class="code-badge">OK</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">saludar</span>():
+    <span class="c-fn">print</span>(<span class="c-str">"Hola"</span>)
+
+saludar()</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Por qué</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Python ejecuta <b>de arriba hacia abajo</b>. Cuando llega a <code>saludar()</code>, <b>todavía no leyó</b> el <code>def</code>, entonces <b>no conoce</b> ese nombre: <code>NameError</code>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">En C esto se resolvía con los <b>prototipos</b> al principio. En Python <b>no existen</b>: simplemente <b>definí tus funciones antes</b> del código que las usa (en la unidad 18 veremos la función <code>main()</code>).</p></div></section>
+<section><h2><span class="section-num">11</span> Funciones con Parámetros: Recibir Datos</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un <b>parámetro</b> es una <b>variable escrita entre los paréntesis del <code>def</code></b> que <b>recibe un dato</b> cuando se llama a la función. Permite que la misma función trabaje con <b>datos distintos</b> cada vez.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">parametro.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">saludar</span>(nombre):
+    <span class="c-fn">print</span>(<span class="c-str">"Hola,"</span>, nombre)
+
+saludar(<span class="c-str">"Agustin"</span>)
+saludar(<span class="c-str">"Lucía"</span>)
+saludar(<span class="c-str">"Martín"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola, Agustin
+Hola, Lucía
+Hola, Martín</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Sin parámetros</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;"><code>cartel()</code> siempre hace <b>lo mismo</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con parámetros</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;"><code>saludar("Lucía")</code> hace lo mismo <b>para distintos valores</b>: la función se <b>adapta</b> a lo que recibe.</p></div></div></section>
+<section><h2><span class="section-num">12</span> Parámetros vs. Argumentos</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Dos palabras que se confunden mucho. Se refieren a <b>lo mismo visto desde dos lados</b>:</p><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Parámetro (en la definición)</h4><div class="code-window"><div class="code-header"><span class="code-title">definicion.py</span><span class="code-badge">def</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">saludar</span>(nombre):      <span class="c-cmt"># "nombre" es el PARÁMETRO</span>
+    <span class="c-fn">print</span>(<span class="c-str">"Hola,"</span>, nombre)</div></div><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Es la <b>variable "hueco"</b> que aparece al <b>definir</b> la función. Todavía no tiene un valor concreto.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Argumento (en la llamada)</h4><div class="code-window"><div class="code-header"><span class="code-title">llamada.py</span><span class="code-badge">llamada</span></div><div class="code-body">saludar(<span class="c-str">"Agustin"</span>)        <span class="c-cmt"># "Agustin" es el ARGUMENTO</span></div></div><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Es el <b>valor real</b> que enviamos <b>al llamar</b> a la función. Ese valor <b>llena</b> el hueco del parámetro.</p></div></div><table class="trace-table"><thead><tr><th></th><th>Parámetro</th><th>Argumento</th></tr></thead><tbody><tr><td>Dónde aparece</td><td>En el <code>def</code></td><td>En la llamada</td></tr><tr><td>Qué es</td><td>Un <b>nombre</b> de variable</td><td>Un <b>valor</b> concreto</td></tr><tr><td>Ejemplo</td><td><code>nombre</code></td><td><code>"Agustin"</code></td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Regla para recordar</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">El <b>p</b>arámetro está en la <b>p</b>lantilla (la definición); el <b>a</b>rgumento es lo que <b>a</b>portás al llamar.</p></div></section>
+<section><h2><span class="section-num">13</span> Cómo Viaja el Dato: del Argumento al Parámetro</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">viaje_dato.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">saludar</span>(nombre):
+    <span class="c-fn">print</span>(<span class="c-str">"Hola,"</span>, nombre)
+
+saludar(<span class="c-str">"Agustin"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola, Agustin</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;">Se llama <code>saludar("Agustin")</code>: Python <b>evalúa el argumento</b> (<code>"Agustin"</code>).</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;">Salta a la función y <b>crea la variable <code>nombre</code></b> (el parámetro), <b>asignándole</b> ese valor: es como ejecutar <code>nombre = "Agustin"</code>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;">Se ejecuta el cuerpo: <code>print("Hola,", nombre)</code>.</div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.84rem;">Al terminar, la variable <code>nombre</code> <b>desaparece</b>. Solo existía mientras la función se ejecutaba.</div></div></div><div class="memory-diagram" style="margin:6px 0;"><div class="memory-box"><div class="memory-address">el argumento</div><div class="memory-label">(afuera) <span class="memory-type">str</span></div><div class="memory-value">"Agustin"</div></div><div class="pointer-arrow" style="align-self:center;">▶ se copia ▶</div><div class="memory-box"><div class="memory-address">el parámetro, dentro de la función</div><div class="memory-label">nombre <span class="memory-type">str</span></div><div class="memory-value">"Agustin"</div></div></div></section>
+<section><h2><span class="section-num">14</span> Varios Parámetros</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">dos_parametros.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(numero1, numero2):
+    resultado = numero1 + numero2
+    <span class="c-fn">print</span>(resultado)
+
+sumar(<span class="c-num">5</span>, <span class="c-num">3</span>)
+sumar(<span class="c-num">10</span>, <span class="c-num">20</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">8
+30</div></div></div></div><table class="trace-table"><thead><tr><th>Llamada</th><th><code>numero1</code></th><th><code>numero2</code></th><th><code>resultado</code></th><th>Muestra</th></tr></thead><tbody><tr><td><code>sumar(5, 3)</code></td><td>5</td><td>3</td><td>8</td><td><code>8</code></td></tr><tr><td><code>sumar(10, 20)</code></td><td>10</td><td>20</td><td>30</td><td><code>30</code></td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">El orden importa</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Los argumentos se asignan <b>por posición</b>: el <b>primero</b> va al <b>primer</b> parámetro, el segundo al segundo, etc. Se llaman <b>argumentos posicionales</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">orden_argumentos.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">presentar</span>(nombre, edad):
+    <span class="c-fn">print</span>(nombre, <span class="c-str">"tiene"</span>, edad, <span class="c-str">"años"</span>)
+
+presentar(<span class="c-str">"Ana"</span>, <span class="c-num">17</span>)
+presentar(<span class="c-num">17</span>, <span class="c-str">"Ana"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ana tiene 17 años
+17 tiene Ana años</div></div></div></div></section>
+<section><h2><span class="section-num">15</span> Error: Cantidad Incorrecta de Argumentos</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Faltan argumentos</div><div class="code-window"><div class="code-header"><span class="code-title">faltan.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    <span class="c-fn">print</span>(a + b)
+
+sumar(<span class="c-num">5</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 4, in &lt;module&gt;
+    sumar(5)
+    ~~~~~^^^
+TypeError: sumar() missing 1 required positional argument: 'b'</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Sobran argumentos</div><div class="code-window"><div class="code-header"><span class="code-title">sobran.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    <span class="c-fn">print</span>(a + b)
+
+sumar(<span class="c-num">5</span>, <span class="c-num">3</span>, <span class="c-num">1</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 4, in &lt;module&gt;
+    sumar(5, 3, 1)
+    ~~~~~^^^^^^^^^
+TypeError: sumar() takes 2 positional arguments but 3 were given</div></div></div></div><div class="box box-rose"><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;"><b>Regla:</b> la cantidad de argumentos <b>debe coincidir</b> con la cantidad de parámetros. Si no, Python lanza <code>TypeError</code> y <b>avisa cuántos esperaba y cuántos recibió</b>. (Los parámetros opcionales se ven en la unidad 10.)</p></div><div class="box box-cyan"><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><b>Comparación con C:</b> era un error de compilación; en Python aparece <b>al ejecutar</b> esa línea.</p></div></section>
+<section><h2><span class="section-num">16</span> Funciones Que Muestran vs. Funciones Que Devuelven</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Hasta ahora nuestras funciones <b>mostraban</b> el resultado con <code>print()</code>. Pero muchas veces necesitamos <b>recibir</b> ese resultado para <b>seguir usándolo</b> en otra parte del programa.</p><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Con <code>print()</code> dentro</h4><div class="code-window"><div class="code-header"><span class="code-title">muestra.py</span><span class="code-badge">Solo muestra</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    <span class="c-fn">print</span>(a + b)
+
+sumar(<span class="c-num">5</span>, <span class="c-num">3</span>)      <span class="c-cmt"># muestra 8</span></div></div><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El resultado <b>sale por pantalla</b> y se <b>pierde</b>: el programa no puede usarlo.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con <code>return</code></h4><div class="code-window"><div class="code-header"><span class="code-title">devuelve.py</span><span class="code-badge">Devuelve</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    <span class="c-kw">return</span> a + b
+
+r = sumar(<span class="c-num">5</span>, <span class="c-num">3</span>)  <span class="c-cmt"># r vale 8</span></div></div><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El resultado <b>vuelve al código que llamó</b> y puede <b>guardarse</b>, calcularse o mostrarse.</p></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Idea</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Una función que <b>calcula</b> algo casi siempre debería <b>devolver</b> el resultado (<code>return</code>) y dejar que <b>quien la llama</b> decida si lo muestra o no.</p></div></section>
+<section><h2><span class="section-num">17</span> return: Devolver un Resultado</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-amber);">return </span><span style="color:var(--accent-cyan);">valor_o_expresion</span></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">return_basico.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">doble</span>(numero):
+    <span class="c-kw">return</span> numero * <span class="c-num">2</span>
+
+resultado = doble(<span class="c-num">5</span>)
+<span class="c-fn">print</span>(resultado)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">10</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><code>doble(5)</code>: el parámetro <code>numero</code> recibe <code>5</code>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><code>return numero * 2</code>: Python <b>calcula</b> <code>5 * 2</code> = <code>10</code> y <b>termina</b> la función <b>devolviendo</b> ese valor.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;">La <b>llamada completa</b> <code>doble(5)</code> <b>se reemplaza por el valor devuelto</b> (<code>10</code>).</div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.84rem;"><code>resultado = 10</code>: ese valor <b>se guarda</b> en la variable <code>resultado</code>.</div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Imaginalo así</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Cuando una función devuelve algo, la llamada <b>"se convierte"</b> en ese valor: <code>resultado = doble(5)</code> es como escribir <code>resultado = 10</code>.</p></div></section>
+<section><h2><span class="section-num">18</span> Seguimiento Paso a Paso de una Llamada con return</h2><div class="code-window"><div class="code-header"><span class="code-title">seguimiento_return.py</span><span class="code-badge">Seguilo</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    <span class="c-kw">return</span> a + b
+
+resultado = sumar(<span class="c-num">5</span>, <span class="c-num">3</span>)
+<span class="c-fn">print</span>(resultado)</div></div><table class="trace-table"><thead><tr><th>Paso</th><th>Qué hace Python</th><th>Estado</th></tr></thead><tbody><tr><td>1</td><td>Registra la función <code>sumar</code> (no ejecuta el cuerpo)</td><td>—</td></tr><tr><td>2</td><td>Evalúa <code>sumar(5, 3)</code>: crea los parámetros</td><td><code>a</code> = 5, <code>b</code> = 3 (dentro de la función)</td></tr><tr><td>3</td><td>Ejecuta <code>return a + b</code> → calcula <code>5 + 3</code></td><td>Devuelve <code>8</code>; <code>a</code> y <code>b</code> <b>desaparecen</b></td></tr><tr><td>4</td><td>La llamada se reemplaza por <code>8</code> y se asigna</td><td><code>resultado</code> = 8</td></tr><tr><td>5</td><td>Ejecuta <code>print(resultado)</code></td><td>Muestra <code>8</code></td></tr></tbody></table><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">seguimiento_return.py (salida)</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    <span class="c-kw">return</span> a + b
+
+resultado = sumar(<span class="c-num">5</span>, <span class="c-num">3</span>)
+<span class="c-fn">print</span>(resultado)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">8</div></div></div></div></section>
+<section><h2><span class="section-num">19</span> Usar el Valor Devuelto de Distintas Formas</h2><div class="code-window"><div class="code-header"><span class="code-title">usos_return.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">doble</span>(n):
+    <span class="c-kw">return</span> n * <span class="c-num">2</span>
+
+x = doble(<span class="c-num">4</span>)                    <span class="c-cmt"># 1) guardarlo</span>
+<span class="c-fn">print</span>(x)
+<span class="c-fn">print</span>(doble(<span class="c-num">10</span>))                <span class="c-cmt"># 2) mostrarlo directamente</span>
+y = doble(<span class="c-num">3</span>) + doble(<span class="c-num">5</span>)         <span class="c-cmt"># 3) usarlo en una cuenta</span>
+<span class="c-fn">print</span>(y)
+<span class="c-fn">print</span>(doble(doble(<span class="c-num">3</span>)))          <span class="c-cmt"># 4) usarlo como argumento de otra llamada</span>
+<span class="c-kw">if</span> doble(<span class="c-num">6</span>) &gt; <span class="c-num">10</span>:               <span class="c-cmt"># 5) usarlo en una condición</span>
+    <span class="c-fn">print</span>(<span class="c-str">"Mayor que 10"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">8
+20
+16
+12
+Mayor que 10</div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Como la llamada <b>se convierte en un valor</b>, puede aparecer <b>en cualquier lugar donde iría un valor</b>: en una asignación, un <code>print</code>, una cuenta, una condición o dentro de otra llamada. Por eso <code>doble(doble(3))</code> da <code>12</code>: primero <code>doble(3)</code> → <code>6</code>, y luego <code>doble(6)</code> → <code>12</code>.</p></div></section>
+<section><h2><span class="section-num">20</span> print() vs. return: La Diferencia Más Importante</h2><table class="trace-table"><thead><tr><th></th><th><code>print()</code></th><th><code>return</code></th></tr></thead><tbody><tr><td>Para qué sirve</td><td><b>Mostrar</b> información por pantalla</td><td><b>Devolver</b> un valor a quien llamó</td></tr><tr><td>¿Termina la función?</td><td>No</td><td><b>Sí</b>, en ese momento</td></tr><tr><td>¿Se puede guardar el resultado?</td><td><b>No</b> (solo se ve en pantalla)</td><td><b>Sí</b> (<code>x = funcion()</code>)</td></tr><tr><td>¿Para quién?</td><td>Para el <b>usuario</b> que mira la pantalla</td><td>Para el <b>programa</b> que sigue trabajando</td></tr><tr><td>Analogía</td><td>Cantar el resultado <b>en voz alta</b></td><td>Entregar el resultado <b>por escrito</b>, para que lo uses</td></tr></tbody></table><div class="grid-2" style="margin-top:8px;"><div class="code-window"><div class="code-header"><span class="code-title">con_print.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">doble_print</span>(n):
+    <span class="c-fn">print</span>(n * <span class="c-num">2</span>)
+
+r = doble_print(<span class="c-num">4</span>)
+<span class="c-fn">print</span>(<span class="c-str">"r vale:"</span>, r)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">8
+r vale: None</div></div><div class="code-window"><div class="code-header"><span class="code-title">con_return.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">doble_return</span>(n):
+    <span class="c-kw">return</span> n * <span class="c-num">2</span>
+
+r = doble_return(<span class="c-num">4</span>)
+<span class="c-fn">print</span>(<span class="c-str">"r vale:"</span>, r)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">r vale: 8</div></div></div></section>
+<section><h2><span class="section-num">21</span> Qué Devuelve una Función Sin return: None</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">sin_return.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">saludar</span>(nombre):
+    <span class="c-fn">print</span>(<span class="c-str">"Hola,"</span>, nombre)
+
+resultado = saludar(<span class="c-str">"Ana"</span>)
+<span class="c-fn">print</span>(resultado)
+<span class="c-fn">print</span>(<span class="c-fn">type</span>(resultado))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola, Ana
+None
+&lt;class 'NoneType'&gt;</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">None</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Toda función que <b>termina sin ejecutar un <code>return</code> con valor</b> devuelve automáticamente <b><code>None</code></b>: el valor especial que significa <b>"ningún valor"</b>.</p></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Error típico</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Intentar usar ese <code>None</code> en una cuenta: <code>resultado + 1</code> → <code>TypeError</code>. Pasa cuando <b>la función mostraba</b> el valor (con <code>print</code>) <b>en lugar de devolverlo</b>.</p></div></div></section>
+<section><h2><span class="section-num">22</span> return Termina la Función Inmediatamente</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">return_termina.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">probar</span>():
+    <span class="c-fn">print</span>(<span class="c-str">"Antes del return"</span>)
+    <span class="c-kw">return</span> <span class="c-num">10</span>
+    <span class="c-fn">print</span>(<span class="c-str">"Esto NUNCA se ejecuta"</span>)
+
+valor = probar()
+<span class="c-fn">print</span>(<span class="c-str">"Recibido:"</span>, valor)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Antes del return
+Recibido: 10</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Regla</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">En cuanto Python ejecuta un <code>return</code>, <b>sale de la función</b> y <b>vuelve</b> a quien la llamó. Las líneas <b>que están después</b> (en ese camino) <b>no se ejecutan</b>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Equivale a <code>break</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Es parecido a <code>break</code> en un bucle, pero <b>sale de toda la función</b>, no solo del bucle.</p></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Varios <code>return</code> posibles</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Una función puede tener <b>varios <code>return</code></b> en distintos caminos (por ejemplo, dentro de un <code>if</code> y un <code>else</code>). <b>Se ejecuta solo uno</b>: el primero que se alcance.</p></div></section>
+<section><h2><span class="section-num">23</span> Varios return en Caminos Distintos</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">varios_return.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">clasificar</span>(nota):
+    <span class="c-kw">if</span> nota &gt;= <span class="c-num">9</span>:
+        <span class="c-kw">return</span> <span class="c-str">"Excelente"</span>
+    <span class="c-kw">elif</span> nota &gt;= <span class="c-num">6</span>:
+        <span class="c-kw">return</span> <span class="c-str">"Aprobado"</span>
+    <span class="c-kw">return</span> <span class="c-str">"Desaprobado"</span>
+
+<span class="c-fn">print</span>(clasificar(<span class="c-num">10</span>))
+<span class="c-fn">print</span>(clasificar(<span class="c-num">7</span>))
+<span class="c-fn">print</span>(clasificar(<span class="c-num">3</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Excelente
+Aprobado
+Desaprobado</div></div></div></div><table class="trace-table"><thead><tr><th>Llamada</th><th>Camino</th><th>Devuelve</th></tr></thead><tbody><tr><td><code>clasificar(10)</code></td><td><code>nota &gt;= 9</code> es <code>True</code> → primer <code>return</code></td><td><code>"Excelente"</code></td></tr><tr><td><code>clasificar(7)</code></td><td><code>False</code>; <code>nota &gt;= 6</code> es <code>True</code> → segundo <code>return</code></td><td><code>"Aprobado"</code></td></tr><tr><td><code>clasificar(3)</code></td><td>Ningún <code>if</code> se cumple → llega al último <code>return</code></td><td><code>"Desaprobado"</code></td></tr></tbody></table><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Ventaja</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Como <code>return</code> ya <b>sale de la función</b>, <b>no hace falta <code>else</code></b> para el último caso: si llegó ahí, es porque no se cumplió ninguna de las condiciones anteriores.</p></div></section>
+<section><h2><span class="section-num">24</span> Funciones Que Devuelven Booleanos</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Una función puede devolver <code>True</code> o <code>False</code>. Es muy útil para <b>darle nombre a una pregunta</b> y usarla después en un <code>if</code> o un <code>while</code>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">funcion_booleana.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">es_par</span>(numero):
+    <span class="c-kw">return</span> numero % <span class="c-num">2</span> == <span class="c-num">0</span>
+
+<span class="c-fn">print</span>(es_par(<span class="c-num">10</span>))
+<span class="c-fn">print</span>(es_par(<span class="c-num">7</span>))
+
+<span class="c-kw">if</span> es_par(<span class="c-num">10</span>):
+    <span class="c-fn">print</span>(<span class="c-str">"Es par"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">True
+False
+Es par</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Cómo funciona</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>numero % 2 == 0</code> <b>ya es</b> un <code>True</code>/<code>False</code>: la función lo <b>devuelve directamente</b>. No hace falta escribir <code>if ...: return True else: return False</code>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Se lee como una frase</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>if es_par(10):</code> → "si es par el 10". Los nombres como <code>es_...</code>, <code>tiene_...</code> o <code>puede_...</code> dejan claro que devuelve un booleano.</p></div></div></section>
+<section><h2><span class="section-num">25</span> Ejemplo del Apunte: Calcular un Descuento</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">calcular_descuento.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">calcular_descuento</span>(precio, porcentaje):
+    descuento = precio * porcentaje / <span class="c-num">100</span>
+    <span class="c-kw">return</span> precio - descuento
+
+precio_final = calcular_descuento(<span class="c-num">1000</span>, <span class="c-num">20</span>)
+<span class="c-fn">print</span>(precio_final)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">800.0</div></div></div></div><table class="trace-table"><thead><tr><th>Paso</th><th>Cálculo</th><th>Valor</th></tr></thead><tbody><tr><td>Llamada</td><td><code>calcular_descuento(1000, 20)</code></td><td><code>precio</code> = 1000, <code>porcentaje</code> = 20</td></tr><tr><td><code>descuento</code></td><td><code>1000 * 20 / 100</code></td><td><code>200.0</code></td></tr><tr><td><code>return</code></td><td><code>1000 - 200.0</code></td><td><code>800.0</code></td></tr><tr><td>Asignación</td><td><code>precio_final = ...</code></td><td><code>800.0</code></td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">¿Por qué <code>800.0</code> y no <code>800</code>?</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Porque <code>/</code> siempre da <code>float</code> (unidad 04): <code>descuento</code> es <code>200.0</code> y el resultado final también es <code>float</code>. Combina funciones, parámetros, variables, operadores aritméticos y <code>return</code>.</p></div></section>
+<section><h2><span class="section-num">26</span> Funciones Que Llaman a Otras Funciones</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">composicion.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">cuadrado</span>(x):
+    <span class="c-kw">return</span> x * x
+
+<span class="c-kw">def</span> <span class="c-fn">area_circulo</span>(radio):
+    <span class="c-kw">return</span> <span class="c-num">3.14159</span> * cuadrado(radio)
+
+<span class="c-kw">def</span> <span class="c-fn">mostrar_area</span>(radio):
+    <span class="c-fn">print</span>(<span class="c-str">f"r={radio}: {area_circulo(radio):.2f}"</span>)
+
+mostrar_area(<span class="c-num">2</span>)
+mostrar_area(<span class="c-num">5</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">r=2: 12.57
+r=5: 78.54</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.86rem;"><code>mostrar_area(2)</code> llama a <code>area_circulo(2)</code>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.86rem;"><code>area_circulo(2)</code> llama a <code>cuadrado(2)</code> y recibe <code>4</code>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.86rem;"><code>area_circulo</code> devuelve <code>3.14159 * 4</code> ≈ <code>12.57</code>; <code>mostrar_area</code> lo muestra con formato.</div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dividir y conquistar</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Un problema grande se <b>descompone</b> en funciones <b>pequeñas</b>, cada una con <b>una sola tarea</b>, que se <b>combinan</b> entre sí. Es la base de un programa <b>ordenado</b>.</p></div></section>
+<section><h2><span class="section-num">27</span> Ejemplo: Promedio y Mayor de Dos Números</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">promedio_mayor.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">promedio</span>(a, b, c):
+    <span class="c-kw">return</span> (a + b + c) / <span class="c-num">3</span>
+
+<span class="c-kw">def</span> <span class="c-fn">mayor_de_dos</span>(a, b):
+    <span class="c-kw">if</span> a &gt; b:
+        <span class="c-kw">return</span> a
+    <span class="c-kw">return</span> b
+
+<span class="c-fn">print</span>(promedio(<span class="c-num">6</span>, <span class="c-num">8</span>, <span class="c-num">10</span>))
+<span class="c-fn">print</span>(mayor_de_dos(<span class="c-num">7</span>, <span class="c-num">12</span>))
+<span class="c-fn">print</span>(mayor_de_dos(mayor_de_dos(<span class="c-num">4</span>, <span class="c-num">9</span>), <span class="c-num">6</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">8.0
+12
+9</div></div></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Observá</h4><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>El <b>paréntesis</b> de <code>promedio</code> es necesario por la precedencia (unidad 04).</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>mayor_de_dos(mayor_de_dos(4, 9), 6)</code> <b>reutiliza</b> la función para comparar <b>tres</b> valores.</li></ul><ul style="font-size:0.86rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Python ya trae <code>max()</code>, pero acá <b>practicamos lógica</b>.</li></ul></div></section>
+<section><h2><span class="section-num">28</span> Ejemplo: ¿Es Primo? (Función con Bucle y Booleano)</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">es_primo.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">es_primo</span>(n):
+    <span class="c-kw">if</span> n &lt; <span class="c-num">2</span>:
+        <span class="c-kw">return</span> <span class="c-kw">False</span>
+    <span class="c-kw">for</span> divisor <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">2</span>, n):
+        <span class="c-kw">if</span> n % divisor == <span class="c-num">0</span>:
+            <span class="c-kw">return</span> <span class="c-kw">False</span>
+    <span class="c-kw">return</span> <span class="c-kw">True</span>
+
+<span class="c-kw">for</span> numero <span class="c-kw">in</span> [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">9</span>, <span class="c-num">13</span>, <span class="c-num">20</span>, <span class="c-num">29</span>]:
+    <span class="c-fn">print</span>(numero, <span class="c-str">"-&gt;"</span>, es_primo(numero))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1 -&gt; False
+2 -&gt; True
+9 -&gt; False
+13 -&gt; True
+20 -&gt; False
+29 -&gt; True</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;">Los menores que 2 <b>no son primos</b>: se devuelve <code>False</code> enseguida.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;">Se prueban todos los divisores desde 2 hasta <code>n - 1</code>. Si <b>alguno</b> divide a <code>n</code>, se devuelve <code>False</code> <b>y la función termina</b> (el <code>return</code> actúa como un <code>break</code>).</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;">Si el bucle termina <b>sin encontrar divisores</b>, el último <code>return True</code> indica que <b>es primo</b>.</div></div></div></section>
+<section><h2><span class="section-num">29</span> Ejemplo: Factorial y Tabla como Funciones</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">factorial_tabla.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">factorial</span>(n):
+    resultado = <span class="c-num">1</span>
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, n + <span class="c-num">1</span>):
+        resultado *= i
+    <span class="c-kw">return</span> resultado
+
+<span class="c-kw">def</span> <span class="c-fn">mostrar_tabla</span>(n):
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">6</span>):
+        <span class="c-fn">print</span>(<span class="c-str">f"{n} x {i} = {n * i}"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"5! ="</span>, factorial(<span class="c-num">5</span>))
+<span class="c-fn">print</span>(<span class="c-str">"6! ="</span>, factorial(<span class="c-num">6</span>))
+mostrar_tabla(<span class="c-num">4</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">5! = 120
+6! = 720
+4 x 1 = 4
+4 x 2 = 8
+4 x 3 = 12
+4 x 4 = 16
+4 x 5 = 20</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);"><code>factorial</code> calcula y devuelve</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">No muestra nada: <b>devuelve</b> el valor. Quien la llama decide qué hacer con él (mostrarlo, sumarlo...).</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);"><code>mostrar_tabla</code> solo muestra</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Su tarea es <b>imprimir</b>, así que <b>no necesita <code>return</code></b> (devuelve <code>None</code>). Tiene sentido cuando el <b>objetivo es mostrar</b>.</p></div></div></section>
+<section><h2><span class="section-num">30</span> Documentar una Función: Docstrings y Comentarios</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Docstring</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Es un <b>texto entre triples comillas</b> escrito <b>como primera línea</b> del cuerpo de la función. Explica <b>qué hace</b>, <b>qué recibe</b> y <b>qué devuelve</b>. Python lo guarda y se puede consultar con <code>help()</code>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">docstring.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">area_rectangulo</span>(base, altura):
+    <span class="c-str">"""Calcula el área de un rectángulo.
+
+    base: largo de la base (número)
+    altura: largo de la altura (número)
+    Devuelve el área (base * altura).
+    """</span>
+    <span class="c-kw">return</span> base * altura
+
+<span class="c-fn">print</span>(area_rectangulo(<span class="c-num">4</span>, <span class="c-num">6</span>))
+<span class="c-fn">print</span>(area_rectangulo.__doc__.splitlines()[<span class="c-num">0</span>])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">24
+Calcula el área de un rectángulo.</div></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cuándo documentar</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">En las funciones <b>no triviales</b>. Elegí también <b>buenos nombres</b> (<code>area_rectangulo</code>): un buen nombre explica más que un comentario.</p></div></section>
+<section><h2><span class="section-num">31</span> Error Frecuente #1: Olvidar los Paréntesis o los Dos Puntos</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Llamar sin paréntesis</div><div class="code-window"><div class="code-header"><span class="code-title">sin_parentesis.py</span><span class="code-badge">Error lógico</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">saludar</span>():
+    <span class="c-fn">print</span>(<span class="c-str">"Hola"</span>)
+
+saludar          <span class="c-cmt"># no hace nada</span></div></div><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Escribir solo <code>saludar</code> <b>no llama</b> a la función: nombra al objeto función. Si lo mostraras con <code>print(saludar)</code> verías algo como <code>&lt;function saludar at 0x...&gt;</code>.</p></div><div class="wrong-card"><div class="wrong-title">❌ Definir sin <code>:</code></div><div class="code-window"><div class="code-header"><span class="code-title">sin_dos_puntos.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">saludar</span>()
+    <span class="c-fn">print</span>(<span class="c-str">"Hola"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1
+    def saludar()
+                 ^
+SyntaxError: expected ':'</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Otros descuidos</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Olvidar <code>def</code> (escribir <code>saludar():</code> solo).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Olvidar la <b>sangría</b> del cuerpo (<code>IndentationError</code>).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Llamar a la función con <code>saludar[]</code> o <code>saludar{}</code>: los paréntesis son <b><code>( )</code></b>.</li></ul></div></section>
+<section><h2><span class="section-num">32</span> Error Frecuente #2: Confundir print con return</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Esperar un resultado de una función que solo imprime</div><div class="code-window"><div class="code-header"><span class="code-title">print_en_vez_de_return.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    <span class="c-fn">print</span>(a + b)
+
+total = sumar(<span class="c-num">2</span>, <span class="c-num">3</span>) * <span class="c-num">10</span></div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">5
+Traceback (most recent call last):
+  File "ejemplo.py", line 4, in &lt;module&gt;
+    total = sumar(2, 3) * 10
+            ~~~~~~~~~~~~^~~~
+TypeError: unsupported operand type(s) for *: 'NoneType' and 'int'</div></div></div><div class="correct-card"><div class="correct-title">✅ Devolver el resultado</div><div class="code-window"><div class="code-header"><span class="code-title">con_return.py</span><span class="code-badge">OK</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    <span class="c-kw">return</span> a + b
+
+total = sumar(<span class="c-num">2</span>, <span class="c-num">3</span>) * <span class="c-num">10</span>
+<span class="c-fn">print</span>(total)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">50</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cómo detectarlo</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Si ves un <code>None</code> inesperado o un error como <code>unsupported operand type(s) ... NoneType</code>, <b>revisá si la función tiene <code>return</code></b>. <code>NoneType</code> es el tipo del valor <code>None</code>.</p></div></section>
+<section><h2><span class="section-num">33</span> Error Frecuente #3: return Mal Ubicado</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ <code>return</code> dentro del bucle</div><div class="code-window"><div class="code-header"><span class="code-title">return_adentro.py</span><span class="code-badge">Error lógico</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar_hasta</span>(n):
+    total = <span class="c-num">0</span>
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, n + <span class="c-num">1</span>):
+        total += i
+        <span class="c-kw">return</span> total
+
+<span class="c-fn">print</span>(sumar_hasta(<span class="c-num">4</span>))</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1</div></div></div><div class="correct-card"><div class="correct-title">✅ <code>return</code> al final, fuera del bucle</div><div class="code-window"><div class="code-header"><span class="code-title">return_afuera.py</span><span class="code-badge">OK</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar_hasta</span>(n):
+    total = <span class="c-num">0</span>
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, n + <span class="c-num">1</span>):
+        total += i
+    <span class="c-kw">return</span> total
+
+<span class="c-fn">print</span>(sumar_hasta(<span class="c-num">4</span>))</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">10</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">El <code>return</code> dentro del <code>for</code> <b>termina la función en la primera vuelta</b> y devuelve <code>1</code>. Para devolver <b>el total</b>, el <code>return</code> debe estar <b>después</b> del bucle (a la <b>sangría de la función</b>).</p></div></section>
+<section><h2><span class="section-num">34</span> Comparación Final: Funciones en C y en Python</h2><table class="trace-table"><thead><tr><th>Aspecto</th><th>C</th><th>Python</th></tr></thead><tbody><tr><td>Definición</td><td><code>int sumar(int a, int b) { ... }</code></td><td><code>def sumar(a, b): ...</code></td></tr><tr><td>Tipo de retorno</td><td>Obligatorio (<code>int</code>, <code>void</code>...)</td><td>No se declara</td></tr><tr><td>Tipos de parámetros</td><td>Obligatorios</td><td>No se declaran (tipado dinámico)</td></tr><tr><td>Prototipos</td><td>Necesarios si la función se define después</td><td>No existen: definir <b>antes de usar</b></td></tr><tr><td>Sin resultado</td><td><code>void</code></td><td>Devuelve <code>None</code> automáticamente</td></tr><tr><td>Llaves</td><td><code>{ }</code></td><td><code>:</code> + indentación</td></tr><tr><td>Devolver varios valores</td><td>Difícil (punteros o <code>struct</code>)</td><td>Posible con una <b>tupla</b> (unidad siguiente)</td></tr></tbody></table><div class="grid-2" style="margin-top:8px;"><div class="code-window"><div class="code-header"><span class="code-title">C</span><span class="code-badge">C</span></div><div class="code-body"><span class="c-fn">int</span> sumar(<span class="c-fn">int</span> a, <span class="c-fn">int</span> b) {
+    <span class="c-kw">return</span> a + b;
+}</div></div><div class="code-window"><div class="code-header"><span class="code-title">Python</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    <span class="c-kw">return</span> a + b</div></div></div></section>
+<section><h2><span class="section-num">35</span> Buenas Prácticas con Funciones</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Una función = una tarea.</b></li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Nombres con <b>verbos</b> en <code>snake_case</code>: <code>calcular_total</code>, <code>es_primo</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Que las funciones de <b>cálculo devuelvan</b> (<code>return</code>) en lugar de imprimir.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mostrá resultados <b>fuera</b> de la función (en quien la llama).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Agregá un <b>docstring</b> a las funciones importantes.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Definí todas las funciones <b>antes</b> de usarlas.</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Funciones <b>enormes</b> que hacen de todo.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Repetir el mismo bloque en vez de crear una función.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mezclar <b>cálculo</b>, <b>entrada</b> y <b>salida</b> en la misma función.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Nombres vagos: <code>funcion1</code>, <code>hacer()</code>, <code>proceso()</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Olvidar el <code>return</code> y esperar un valor.</li></ul></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">buenas_practicas.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">calcular_iva</span>(precio):
+    <span class="c-kw">return</span> precio * <span class="c-num">0.21</span>
+
+<span class="c-kw">def</span> <span class="c-fn">total_con_iva</span>(precio):
+    <span class="c-kw">return</span> precio + calcular_iva(precio)
+
+<span class="c-fn">print</span>(total_con_iva(<span class="c-num">1000</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1210.0</div></div></div></div></section>
+<section><h2><span class="section-num">36</span> Ejercicio 1: ¿Qué Muestra el Programa?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Predecí la salida</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">f</span>(a, b):
+    <span class="c-kw">return</span> a * <span class="c-num">2</span> + b
+
+<span class="c-kw">def</span> <span class="c-fn">g</span>(x):
+    <span class="c-fn">print</span>(x + <span class="c-num">1</span>)
+
+r1 = f(<span class="c-num">3</span>, <span class="c-num">4</span>)
+r2 = g(<span class="c-num">5</span>)
+<span class="c-fn">print</span>(r1)
+<span class="c-fn">print</span>(r2)
+<span class="c-fn">print</span>(f(f(<span class="c-num">1</span>, <span class="c-num">1</span>), <span class="c-num">1</span>))</div></div><details class="code-solution"><summary>👁️ Ver respuesta</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">f</span>(a, b):
+    <span class="c-kw">return</span> a * <span class="c-num">2</span> + b
+
+<span class="c-kw">def</span> <span class="c-fn">g</span>(x):
+    <span class="c-fn">print</span>(x + <span class="c-num">1</span>)
+
+r1 = f(<span class="c-num">3</span>, <span class="c-num">4</span>)
+r2 = g(<span class="c-num">5</span>)
+<span class="c-fn">print</span>(r1)
+<span class="c-fn">print</span>(r2)
+<span class="c-fn">print</span>(f(f(<span class="c-num">1</span>, <span class="c-num">1</span>), <span class="c-num">1</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">6
+10
+None
+7</div></div></div></div><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>f(3, 4)</code> = <code>3 * 2 + 4</code> = <b>10</b>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>g(5)</code> <b>imprime</b> <code>6</code> (en el momento de la llamada) y <b>devuelve <code>None</code></b>, por eso <code>r2</code> vale <code>None</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>f(f(1, 1), 1)</code>: <code>f(1, 1)</code> = 3; <code>f(3, 1)</code> = <b>7</b>.</li></ul></div></details></section>
+<section><h2><span class="section-num">37</span> Ejercicio 2: Escribí las Funciones</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Escribí estas funciones (con <code>return</code>) y probalas con <code>print</code>:</p><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>es_mayor_de_edad(edad)</code> → <code>True</code> si <code>edad &gt;= 18</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>area_triangulo(base, altura)</code> → <code>base * altura / 2</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>contar_vocales(texto)</code> → cantidad de vocales minúsculas del texto.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>maximo_de_tres(a, b, c)</code> → el mayor de los tres, <b>sin usar <code>max()</code></b>.</li></ul></div><details class="code-solution"><summary>👁️ Ver soluciones</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">es_mayor_de_edad</span>(edad):
+    <span class="c-kw">return</span> edad &gt;= <span class="c-num">18</span>
+
+<span class="c-kw">def</span> <span class="c-fn">area_triangulo</span>(base, altura):
+    <span class="c-kw">return</span> base * altura / <span class="c-num">2</span>
+
+<span class="c-kw">def</span> <span class="c-fn">contar_vocales</span>(texto):
+    cantidad = <span class="c-num">0</span>
+    <span class="c-kw">for</span> letra <span class="c-kw">in</span> texto:
+        <span class="c-kw">if</span> letra <span class="c-kw">in</span> <span class="c-str">"aeiou"</span>:
+            cantidad += <span class="c-num">1</span>
+    <span class="c-kw">return</span> cantidad
+
+<span class="c-kw">def</span> <span class="c-fn">maximo_de_tres</span>(a, b, c):
+    mayor = a
+    <span class="c-kw">if</span> b &gt; mayor:
+        mayor = b
+    <span class="c-kw">if</span> c &gt; mayor:
+        mayor = c
+    <span class="c-kw">return</span> mayor
+
+<span class="c-fn">print</span>(es_mayor_de_edad(<span class="c-num">20</span>), area_triangulo(<span class="c-num">6</span>, <span class="c-num">5</span>), contar_vocales(<span class="c-str">"murcielago"</span>), maximo_de_tres(<span class="c-num">4</span>, <span class="c-num">11</span>, <span class="c-num">7</span>))</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">True 15.0 5 11</div></div></div></details></section>
+<section><h2><span class="section-num">38</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">multiplicar</span>(a, b)
+    <span class="c-kw">return</span> a * b
+
+resultado = multiplicar(<span class="c-num">4</span>)
+<span class="c-fn">print</span>(resultado)
+
+<span class="c-kw">def</span> <span class="c-fn">saludar</span>(nombre):
+    <span class="c-fn">print</span>(<span class="c-str">"Hola"</span>, nombre)
+
+mensaje = saludar(<span class="c-str">"Ana"</span>)
+<span class="c-fn">print</span>(mensaje + <span class="c-str">"!"</span>)
+
+es_par(<span class="c-num">7</span>)
+
+<span class="c-kw">def</span> <span class="c-fn">es_par</span>(n):
+    <span class="c-kw">return</span> n % <span class="c-num">2</span> == <span class="c-num">0</span></div></div><details class="code-solution"><summary>👁️ Ver errores y solución</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>def multiplicar(a, b)</code> <b>sin <code>:</code></b>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>multiplicar(4)</code>: <b>falta un argumento</b>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>saludar</code> <b>imprime</b> y devuelve <code>None</code>: <code>None + "!"</code> da <code>TypeError</code>. Debería <b>devolver</b> el saludo: <code>return "Hola " + nombre</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>es_par(7)</code> se <b>llama antes de definirla</b>: <code>NameError</code>.</li></ul><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3_ok.py</span><span class="code-badge">Solución</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">multiplicar</span>(a, b):
+    <span class="c-kw">return</span> a * b
+
+<span class="c-kw">def</span> <span class="c-fn">saludar</span>(nombre):
+    <span class="c-kw">return</span> <span class="c-str">"Hola "</span> + nombre
+
+<span class="c-kw">def</span> <span class="c-fn">es_par</span>(n):
+    <span class="c-kw">return</span> n % <span class="c-num">2</span> == <span class="c-num">0</span>
+
+<span class="c-fn">print</span>(multiplicar(<span class="c-num">4</span>, <span class="c-num">5</span>))
+<span class="c-fn">print</span>(saludar(<span class="c-str">"Ana"</span>) + <span class="c-str">"!"</span>)
+<span class="c-fn">print</span>(es_par(<span class="c-num">7</span>))</div></div></div></details></section>
+<section><h2><span class="section-num">39</span> Ejercicio 4 (Reto): Mini Calculadora con Funciones</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Armá un programa con <b>cuatro funciones</b> (<code>sumar</code>, <code>restar</code>, <code>multiplicar</code>, <code>dividir</code>), todas con <code>return</code>. La función <code>dividir</code> debe <b>devolver <code>None</code></b> si el divisor es 0. Luego, <b>pedí dos números</b> y mostrá los <b>cuatro resultados</b> (o <code>No se puede dividir por cero</code>).</p></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio4.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    <span class="c-kw">return</span> a + b
+
+<span class="c-kw">def</span> <span class="c-fn">restar</span>(a, b):
+    <span class="c-kw">return</span> a - b
+
+<span class="c-kw">def</span> <span class="c-fn">multiplicar</span>(a, b):
+    <span class="c-kw">return</span> a * b
+
+<span class="c-kw">def</span> <span class="c-fn">dividir</span>(a, b):
+    <span class="c-kw">if</span> b == <span class="c-num">0</span>:
+        <span class="c-kw">return</span> <span class="c-kw">None</span>
+    <span class="c-kw">return</span> a / b
+
+x = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Primer número: "</span>))
+y = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Segundo número: "</span>))
+
+<span class="c-fn">print</span>(<span class="c-str">"Suma:"</span>, sumar(x, y))
+<span class="c-fn">print</span>(<span class="c-str">"Resta:"</span>, restar(x, y))
+<span class="c-fn">print</span>(<span class="c-str">"Producto:"</span>, multiplicar(x, y))
+cociente = dividir(x, y)
+<span class="c-kw">if</span> cociente <span class="c-kw">is</span> <span class="c-kw">None</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"No se puede dividir por cero"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Cociente:"</span>, cociente)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Primer número: <span class="terminal-user-input">12</span>
+Segundo número: <span class="terminal-user-input">0</span>
+Suma: 12.0
+Resta: 12.0
+Producto: 0.0
+No se puede dividir por cero</div></div></div></div></div></details></section>
+<section><h2><span class="section-num">40</span> Resumen de la Unidad 09</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Una <b>función</b> es un bloque con nombre que se <b>define</b> (<code>def</code>) una vez y se <b>llama</b> muchas.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Definir</b> no ejecuta: hay que <b>llamar</b> con <code>nombre()</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Parámetro</b> = nombre en el <code>def</code>; <b>argumento</b> = valor en la llamada.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>return</code></b> devuelve un valor y <b>termina</b> la función.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Sin <code>return</code>, la función devuelve <b><code>None</code></b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>print</code> muestra; <code>return</code> entrega</b> el resultado al programa.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Distingo parámetro de argumento?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé qué ocurre cuando una función no tiene <code>return</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Puedo seguir una llamada paso a paso?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué hay que definir antes de llamar?</div><div class="checklist-item"><span class="icon">✓</span> ¿Escribo funciones booleanas como <code>es_par</code>?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 09 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Funciones: Definición, Parámetros y return</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="08-bucles-for-range-control-ciclos.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Bucles for y range()</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="10-funciones-alcance-valores-por-defecto.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Funciones: Alcance y Valores por Defecto →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

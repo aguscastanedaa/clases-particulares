@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 10: Funciones: Alcance, Valores por Defecto y Múltiples Resultados | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 10</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 10</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Funciones: Alcance, Valores por Defecto y Múltiples Resultados</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Funciones más flexibles: argumentos con nombre, parámetros opcionales, devolver varios valores, variables locales y globales y cómo organizar un programa en funciones</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">Argumentos con nombre</span><span class="badge badge-indigo">Valores por defecto</span><span class="badge badge-emerald">Devolver varios valores</span><span class="badge badge-amber">Variables locales</span><span class="badge badge-purple">Variables globales</span><span class="badge badge-rose">Programas con funciones</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 32 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: Funciones Más Flexibles</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya sabemos</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Definir con <code>def</code>, llamar con <code>nombre()</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Parámetros (en el <code>def</code>) y argumentos (en la llamada).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>return</code> devuelve un valor y termina la función.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>print</code> muestra; <code>return</code> entrega.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Argumentos con nombre</b>: <code>f(precio=100, iva=21)</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Valores por defecto</b>: parámetros opcionales.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Devolver varios valores</b> a la vez.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Alcance</b>: variables <b>locales</b> y <b>globales</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Estructurar</b> un programa completo con funciones.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que sepas <b>dónde "vive" cada variable</b>, por qué una variable de una función no se ve desde afuera y cómo escribir funciones cómodas de usar.</p></div></section>
+<section><h2><span class="section-num">02</span> Argumentos con Nombre (Keyword Arguments)</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Hasta ahora los argumentos se asignaban <b>por posición</b>. Python también permite indicar <b>el nombre del parámetro</b> en la llamada:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">argumentos_con_nombre.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">presentar</span>(nombre, edad, ciudad):
+    <span class="c-fn">print</span>(<span class="c-str">f"{nombre}, {edad} años, de {ciudad}"</span>)
+
+presentar(<span class="c-str">"Ana"</span>, <span class="c-num">17</span>, <span class="c-str">"Rosario"</span>)
+presentar(nombre=<span class="c-str">"Ana"</span>, edad=<span class="c-num">17</span>, ciudad=<span class="c-str">"Rosario"</span>)
+presentar(ciudad=<span class="c-str">"Rosario"</span>, nombre=<span class="c-str">"Ana"</span>, edad=<span class="c-num">17</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ana, 17 años, de Rosario
+Ana, 17 años, de Rosario
+Ana, 17 años, de Rosario</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Ventajas</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>La llamada <b>se explica sola</b>: <code>edad=17</code> es más claro que un <code>17</code> suelto.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>El <b>orden deja de importar</b>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Útil con <b>muchos parámetros</b>.</li></ul></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Regla</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Se pueden <b>mezclar</b>, pero los <b>posicionales van primero</b>: <code>presentar("Ana", edad=17, ciudad="Rosario")</code>. Después de un argumento con nombre <b>no puede</b> venir uno posicional.</p></div></div></section>
+<section><h2><span class="section-num">03</span> Valores por Defecto: Parámetros Opcionales</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un parámetro puede tener un <b>valor por defecto</b> escrito con <code>=</code> en el <code>def</code>. Si al llamar <b>no se envía</b> ese argumento, la función usa el valor por defecto. Si se envía, <b>lo reemplaza</b>.</p></div><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-amber);">def </span><span style="color:var(--accent-cyan);">funcion</span>(obligatorio, <span style="color:var(--accent-emerald);">opcional</span><span style="color:var(--accent-rose);"> = </span><span style="color:var(--accent-emerald);">valor</span>):</div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">valor_por_defecto.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">saludar</span>(nombre, saludo=<span class="c-str">"Hola"</span>):
+    <span class="c-fn">print</span>(saludo + <span class="c-str">","</span>, nombre)
+
+saludar(<span class="c-str">"Ana"</span>)
+saludar(<span class="c-str">"Luis"</span>, <span class="c-str">"Buen día"</span>)
+saludar(<span class="c-str">"Marta"</span>, saludo=<span class="c-str">"Bienvenida"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola, Ana
+Buen día, Luis
+Bienvenida, Marta</div></div></div></div><table class="trace-table"><thead><tr><th>Llamada</th><th><code>nombre</code></th><th><code>saludo</code></th><th>Explicación</th></tr></thead><tbody><tr><td><code>saludar("Ana")</code></td><td><code>"Ana"</code></td><td><code>"Hola"</code> (por defecto)</td><td>No se envió <code>saludo</code></td></tr><tr><td><code>saludar("Luis", "Buen día")</code></td><td><code>"Luis"</code></td><td><code>"Buen día"</code></td><td>Se <b>reemplazó</b> el valor</td></tr><tr><td><code>saludar("Marta", saludo="Bienvenida")</code></td><td><code>"Marta"</code></td><td><code>"Bienvenida"</code></td><td>Reemplazo con nombre</td></tr></tbody></table></section>
+<section><h2><span class="section-num">04</span> Ejemplo: IVA Configurable</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">iva_defecto.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">precio_final</span>(precio, iva=<span class="c-num">21</span>):
+    <span class="c-kw">return</span> precio + precio * iva / <span class="c-num">100</span>
+
+<span class="c-fn">print</span>(precio_final(<span class="c-num">1000</span>))
+<span class="c-fn">print</span>(precio_final(<span class="c-num">1000</span>, <span class="c-num">10.5</span>))
+<span class="c-fn">print</span>(precio_final(<span class="c-num">1000</span>, iva=<span class="c-num">0</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1210.0
+1105.0
+1000.0</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">El caso común, sin escribir nada extra</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>precio_final(1000)</code> usa el <b>21 %</b> habitual. Solo se aclara el IVA cuando es <b>distinto</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Dónde los vimos antes</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>print(..., sep="-", end="")</code> y <code>range(inicio, fin, paso)</code> <b>son funciones con parámetros opcionales</b>: <code>sep</code> vale <code>" "</code> y <code>end</code> vale <code>"\n"</code> <b>por defecto</b>.</p></div></div></section>
+<section><h2><span class="section-num">05</span> Regla: Los Parámetros con Valor por Defecto Van al Final</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Opcional antes que obligatorio</div><div class="code-window"><div class="code-header"><span class="code-title">orden_mal.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">f</span>(a=<span class="c-num">1</span>, b):
+    <span class="c-kw">return</span> a + b</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 1
+    def f(a=1, b):
+               ^
+SyntaxError: parameter without a default follows parameter with a default</div></div></div><div class="correct-card"><div class="correct-title">✅ Obligatorios primero</div><div class="code-window"><div class="code-header"><span class="code-title">orden_bien.py</span><span class="code-badge">OK</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">f</span>(b, a=<span class="c-num">1</span>):
+    <span class="c-kw">return</span> a + b
+
+<span class="c-fn">print</span>(f(<span class="c-num">5</span>))
+<span class="c-fn">print</span>(f(<span class="c-num">5</span>, <span class="c-num">10</span>))</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">6
+15</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Por qué</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Si <code>a</code> tuviera valor por defecto y <code>b</code> no, al llamar <code>f(5)</code> Python no sabría <b>a cuál</b> de los dos asignarle el <code>5</code>. Por eso <b>todos los obligatorios van primero</b> y los opcionales <b>después</b>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">En C <b>no existen</b> los parámetros opcionales: habría que escribir varias funciones o pasar siempre todos los datos.</p></div></section>
+<section><h2><span class="section-num">06</span> Devolver Más de un Valor</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Una función puede devolver <b>varios valores a la vez</b> separándolos con comas en el <code>return</code>. Python los empaqueta en una <b>tupla</b> (una secuencia de valores) y <b>quien llama</b> puede recibirlos en <b>variables separadas</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">retorno_multiple.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">dividir</span>(a, b):
+    cociente = a // b
+    resto = a % b
+    <span class="c-kw">return</span> cociente, resto
+
+c, r = dividir(<span class="c-num">17</span>, <span class="c-num">5</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Cociente:"</span>, c)
+<span class="c-fn">print</span>(<span class="c-str">"Resto:"</span>, r)
+
+todo = dividir(<span class="c-num">17</span>, <span class="c-num">5</span>)
+<span class="c-fn">print</span>(todo)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Cociente: 3
+Resto: 2
+(3, 2)</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Recibirlos</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>c, r = dividir(17, 5)</code> <b>reparte</b> el primer valor en <code>c</code> y el segundo en <code>r</code> (<b>desempaquetado</b>). Importa el <b>orden</b>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En C una función devuelve <b>un solo valor</b> (para más había que usar punteros o <code>struct</code>). En Python alcanza con <b>separar con comas</b>.</p></div></div></section>
+<section><h2><span class="section-num">07</span> Ejemplo: Estadísticas de Tres Notas</h2><div class="code-window"><div class="code-header"><span class="code-title">estadisticas.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">estadisticas</span>(a, b, c):
+    suma = a + b + c
+    promedio = suma / <span class="c-num">3</span>
+    mayor = <span class="c-fn">max</span>(a, b, c)
+    menor = <span class="c-fn">min</span>(a, b, c)
+    <span class="c-kw">return</span> promedio, mayor, menor
+
+prom, alta, baja = estadisticas(<span class="c-num">7</span>, <span class="c-num">9</span>, <span class="c-num">4</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"Promedio: {prom:.2f} | Máxima: {alta} | Mínima: {baja}"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Promedio: 6.67 | Máxima: 9 | Mínima: 4</div></div><table class="trace-table"><thead><tr><th>Variable</th><th>Valor</th></tr></thead><tbody><tr><td><code>prom</code></td><td><code>6.666...</code></td></tr><tr><td><code>alta</code></td><td><code>9</code></td></tr><tr><td><code>baja</code></td><td><code>4</code></td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cuidado con la cantidad</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Si devolvés 3 valores, <b>tenés que recibir 3 variables</b>. Con otra cantidad Python lanza <code>ValueError</code> (lo vemos en los errores frecuentes).</p></div></section>
+<section><h2><span class="section-num">08</span> Alcance de las Variables (Scope)</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">El <b>alcance</b> (o ámbito, <i>scope</i>) de una variable es <b>la parte del programa donde esa variable existe y puede usarse</b>. Depende de <b>dónde se crea</b>.</p></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">🏠 Variable local</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Se crea <b>dentro</b> de una función. <b>Solo existe</b> dentro de ella y <b>desaparece</b> cuando la función termina.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">🌍 Variable global</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Se crea <b>fuera</b> de todas las funciones. Existe <b>durante todo el programa</b> y puede <b>leerse</b> desde cualquier función.</p></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Analogía</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Una <b>habitación con la puerta cerrada</b>: lo que hay adentro (variables locales) <b>no se ve desde el pasillo</b>. Pero desde la habitación <b>sí se ve</b> lo que hay en el pasillo (variables globales).</p></div></section>
+<section><h2><span class="section-num">09</span> Variables Locales: Existen Solo Dentro de la Función</h2><div class="code-window"><div class="code-header"><span class="code-title">variable_local.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">calcular</span>():
+    resultado = <span class="c-num">10</span> + <span class="c-num">5</span>
+    <span class="c-kw">return</span> resultado
+
+total = calcular()
+<span class="c-fn">print</span>(total)
+<span class="c-fn">print</span>(resultado)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">15
+Traceback (most recent call last):
+  File "ejemplo.py", line 7, in &lt;module&gt;
+    print(resultado)
+          ^^^^^^^^^
+NameError: name 'resultado' is not defined</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>resultado</code> <b>nació</b> dentro de <code>calcular()</code> y <b>murió</b> al terminar. Desde afuera Python <b>no la conoce</b>: <code>NameError</code>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cómo se obtiene su valor</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Con <code>return</code>: la función <b>devuelve</b> el valor y afuera lo guardamos en <b>otra variable</b> (<code>total</code>). Los <b>valores</b> viajan; las <b>variables</b> no.</p></div></div></section>
+<section><h2><span class="section-num">10</span> Ciclo de Vida de una Variable Local</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ciclo_vida.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">contar_hasta</span>(n):
+    suma = <span class="c-num">0</span>
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, n + <span class="c-num">1</span>):
+        suma += i
+    <span class="c-kw">return</span> suma
+
+<span class="c-fn">print</span>(contar_hasta(<span class="c-num">3</span>))
+<span class="c-fn">print</span>(contar_hasta(<span class="c-num">4</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">6
+10</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;">Al <b>llamar</b> <code>contar_hasta(3)</code>: se crean <code>n</code>, <code>suma</code> e <code>i</code> (las variables <b>locales</b>).</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;">Al ejecutar el <code>return</code>: la función <b>devuelve el valor 6</b> y <b>todas sus variables locales se destruyen</b>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;">Al <b>llamar de nuevo</b> <code>contar_hasta(4)</code>: se crean variables <b>nuevas</b>, que <b>empiezan de cero</b> (<code>suma = 0</code>). <b>No recuerdan</b> nada de la llamada anterior.</div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consecuencia</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Cada llamada es <b>independiente</b>. Por eso <code>suma = 0</code> dentro de la función <b>siempre arranca limpio</b>.</p></div></section>
+<section><h2><span class="section-num">11</span> Variables Globales: Leer Desde una Función</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">variable_global.py</span><span class="code-badge">Python</span></div><div class="code-body">IVA = <span class="c-num">21</span>
+
+<span class="c-kw">def</span> <span class="c-fn">precio_con_iva</span>(precio):
+    <span class="c-kw">return</span> precio + precio * IVA / <span class="c-num">100</span>
+
+<span class="c-fn">print</span>(precio_con_iva(<span class="c-num">1000</span>))
+<span class="c-fn">print</span>(precio_con_iva(<span class="c-num">200</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1210.0
+242.0</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Qué pasó</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>IVA</code> está <b>fuera</b> de la función, pero la función <b>puede leerla</b>. Es una <b>constante global</b>: un valor que se usa en muchos lugares y <b>no cambia</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Convención</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Las constantes se escriben en <b>MAYÚSCULAS</b>. Son un uso <b>legítimo y recomendado</b> de las variables globales: un único lugar para cambiar el valor.</p></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Lo desaconsejado</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Usar globales <b>que cambian</b> para pasar datos entre funciones. Es <b>más claro</b> enviar datos con <b>parámetros</b> y recibirlos con <b><code>return</code></b>.</p></div></section>
+<section><h2><span class="section-num">12</span> Local y Global con el Mismo Nombre: Son Variables Distintas</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">mismo_nombre.py</span><span class="code-badge">Python</span></div><div class="code-body">numero = <span class="c-num">100</span>
+
+<span class="c-kw">def</span> <span class="c-fn">modificar</span>():
+    numero = <span class="c-num">5</span>
+    <span class="c-fn">print</span>(<span class="c-str">"Dentro:"</span>, numero)
+
+modificar()
+<span class="c-fn">print</span>(<span class="c-str">"Fuera:"</span>, numero)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Dentro: 5
+Fuera: 100</div></div></div></div><div class="memory-diagram" style="margin:6px 0;"><div class="memory-box"><div class="memory-address">GLOBAL (programa)</div><div class="memory-label">numero <span class="memory-type">int</span></div><div class="memory-value">100</div></div><div class="memory-box"><div class="memory-address">LOCAL (dentro de modificar)</div><div class="memory-label">numero <span class="memory-type">int</span></div><div class="memory-value">5</div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué pasó</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En <code>numero = 5</code> Python <b>crea una variable local nueva</b> que <b>tapa</b> a la global. La global <b>no se tocó</b>: siguió valiendo 100.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Para evitar confusiones</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Evitá usar <b>el mismo nombre</b> en una función y en el programa principal: hace difícil saber <b>de cuál</b> se habla.</p></div></div></section>
+<section><h2><span class="section-num">13</span> Modificar una Global: El Error UnboundLocalError</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">unbound.py</span><span class="code-badge">Con error</span></div><div class="code-body">contador = <span class="c-num">0</span>
+
+<span class="c-kw">def</span> <span class="c-fn">sumar_uno</span>():
+    contador = contador + <span class="c-num">1</span>
+    <span class="c-kw">return</span> contador
+
+<span class="c-fn">print</span>(sumar_uno())</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 7, in &lt;module&gt;
+    print(sumar_uno())
+          ~~~~~~~~~^^
+  File "ejemplo.py", line 4, in sumar_uno
+    contador = contador + 1
+               ^^^^^^^^
+UnboundLocalError: cannot access local variable 'contador' where it is not associated with a value</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Como la función <b>asigna</b> <code>contador</code>, Python decide que es <b>local</b>. Pero en <code>contador + 1</code> se la <b>lee antes de que tenga valor</b>: error.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Solución recomendada</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Pasar el valor <b>como parámetro</b> y devolver el nuevo: <code>def sumar_uno(valor): return valor + 1</code> y luego <code>contador = sumar_uno(contador)</code>.</p></div></div></section>
+<section><h2><span class="section-num">14</span> La Palabra global (Existe, Pero Evitala)</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">con_global.py</span><span class="code-badge">Python</span></div><div class="code-body">contador = <span class="c-num">0</span>
+
+<span class="c-kw">def</span> <span class="c-fn">sumar_uno</span>():
+    <span class="c-kw">global</span> contador
+    contador = contador + <span class="c-num">1</span>
+
+sumar_uno()
+sumar_uno()
+<span class="c-fn">print</span>(contador)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">2</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué hace</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>global contador</code> le dice a Python: "dentro de esta función, <code>contador</code> es <b>la variable global</b>, no una local nueva". Así sí <b>se puede modificar</b>.</p></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Por qué desaconsejarla</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">La función <b>depende de una variable externa</b> y la <b>modifica por detrás</b>: es difícil de probar y de seguir. Preferí <b>parámetros y <code>return</code></b>.</p></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En C las variables globales se modificaban <b>sin avisos especiales</b>. Python obliga a <b>declarar</b> la intención con <code>global</code>, justamente para que sea <b>visible</b>.</p></div></section>
+<section><h2><span class="section-num">15</span> Los Parámetros También Son Variables Locales</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">parametro_local.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">duplicar</span>(numero):
+    numero = numero * <span class="c-num">2</span>
+    <span class="c-fn">print</span>(<span class="c-str">"Dentro:"</span>, numero)
+    <span class="c-kw">return</span> numero
+
+valor = <span class="c-num">10</span>
+nuevo = duplicar(valor)
+<span class="c-fn">print</span>(<span class="c-str">"Fuera:"</span>, valor, nuevo)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Dentro: 20
+Fuera: 10 20</div></div></div></div><div class="memory-diagram" style="margin:6px 0;"><div class="memory-box"><div class="memory-address">afuera: no cambia</div><div class="memory-label">valor <span class="memory-type">int</span></div><div class="memory-value">10</div></div><div class="memory-box"><div class="memory-address">dentro: copia modificada</div><div class="memory-label">numero <span class="memory-type">int</span></div><div class="memory-value">20</div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">El parámetro <code>numero</code> recibe <b>una copia del valor</b> de <code>valor</code>. Cambiar <code>numero</code> <b>no altera</b> <code>valor</code>. Para "cambiar" el original hay que <b>devolver</b> el nuevo y <b>reasignar</b>: <code>valor = duplicar(valor)</code>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Con números y textos <b>se comporta como</b> el <b>paso por valor</b> de C. (Con las <b>listas</b> que veremos en las unidades 13 y 14, la situación tiene un matiz importante.)</p></div></section>
+<section><h2><span class="section-num">16</span> ¿Dónde Busca Python un Nombre? Local, Global, Incorporado</h2><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><b>1.º — Local:</b> si la variable existe <b>dentro de la función</b>, usa esa.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><b>2.º — Global:</b> si no, la busca <b>en el programa principal</b>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;"><b>3.º — Incorporado:</b> si tampoco, busca entre las funciones que <b>trae Python</b> (<code>print</code>, <code>len</code>...).</div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.84rem;">Si no la encuentra en <b>ninguno</b>: <code>NameError</code>.</div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">busqueda_nombres.py</span><span class="code-badge">Python</span></div><div class="code-body">x = <span class="c-str">"global"</span>
+
+<span class="c-kw">def</span> <span class="c-fn">prueba</span>():
+    y = <span class="c-str">"local"</span>
+    <span class="c-fn">print</span>(y)
+    <span class="c-fn">print</span>(x)
+    <span class="c-fn">print</span>(<span class="c-fn">len</span>(<span class="c-str">"abc"</span>))
+
+prueba()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">local
+global
+3</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Por qué importa</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Explica por qué una variable local <b>tapa</b> a una global del mismo nombre, y por qué <b>no conviene llamar <code>len</code> o <code>print</code></b> a tus propias variables: <b>tapás</b> la función de Python.</p></div></section>
+<section><h2><span class="section-num">17</span> pass: Funciones Que Todavía No Escribiste</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">pass.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">calcular_promedio</span>():
+    <span class="c-kw">pass</span>
+
+<span class="c-kw">def</span> <span class="c-fn">mostrar_resultados</span>():
+    <span class="c-kw">pass</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"El programa no falla"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">El programa no falla</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué es</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>pass</code> es una instrucción que <b>no hace nada</b>. Python <b>exige</b> un cuerpo en un <code>def</code> (o <code>if</code>, <code>for</code>...); <code>pass</code> <b>ocupa el lugar</b> hasta que lo escribas.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Para qué sirve</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Para <b>esbozar</b> la estructura de un programa: primero los <b>nombres de las funciones</b> y después sus cuerpos. Un <code>def</code> <b>vacío</b> da <code>IndentationError</code>.</p></div></div></section>
+<section><h2><span class="section-num">18</span> Pedir Datos con una Función Reutilizable</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">pedir_numero.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">pedir_numero</span>(mensaje, minimo, maximo):
+    numero = <span class="c-fn">int</span>(<span class="c-fn">input</span>(mensaje))
+    <span class="c-kw">while</span> numero &lt; minimo <span class="c-kw">or</span> numero &gt; maximo:
+        <span class="c-fn">print</span>(<span class="c-str">f"Debe estar entre {minimo} y {maximo}"</span>)
+        numero = <span class="c-fn">int</span>(<span class="c-fn">input</span>(mensaje))
+    <span class="c-kw">return</span> numero
+
+edad = pedir_numero(<span class="c-str">"Edad: "</span>, <span class="c-num">0</span>, <span class="c-num">120</span>)
+nota = pedir_numero(<span class="c-str">"Nota: "</span>, <span class="c-num">1</span>, <span class="c-num">10</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"Edad {edad}, nota {nota}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Edad: <span class="terminal-user-input">150</span>
+Debe estar entre 0 y 120
+Edad: <span class="terminal-user-input">25</span>
+Nota: <span class="terminal-user-input">11</span>
+Debe estar entre 1 y 10
+Nota: <span class="terminal-user-input">8</span>
+Edad 25, nota 8</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué ganamos</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">La <b>validación</b> (<code>while</code>) se escribe <b>una vez</b> y se <b>reutiliza</b> con distintos mensajes y rangos. Las funciones combinan <b>parámetros</b>, <b>bucles</b>, <b>entrada</b> y <b><code>return</code></b>.</p></div></section>
+<section><h2><span class="section-num">19</span> Estructurar un Programa Completo con Funciones</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Un buen programa separa tres tareas: <b>pedir datos</b>, <b>calcular</b> y <b>mostrar</b>. Cada una es una función:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">programa_con_funciones.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">pedir_datos</span>():
+    nombre = <span class="c-fn">input</span>(<span class="c-str">"Nombre: "</span>)
+    nota1 = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Nota 1: "</span>))
+    nota2 = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Nota 2: "</span>))
+    <span class="c-kw">return</span> nombre, nota1, nota2
+
+<span class="c-kw">def</span> <span class="c-fn">calcular_promedio</span>(a, b):
+    <span class="c-kw">return</span> (a + b) / <span class="c-num">2</span>
+
+<span class="c-kw">def</span> <span class="c-fn">mostrar_resultado</span>(nombre, promedio):
+    estado = <span class="c-str">"aprobó"</span> <span class="c-kw">if</span> promedio &gt;= <span class="c-num">6</span> <span class="c-kw">else</span> <span class="c-str">"desaprobó"</span>
+    <span class="c-fn">print</span>(<span class="c-str">f"{nombre} {estado} con {promedio:.2f}"</span>)
+
+nombre, n1, n2 = pedir_datos()
+prom = calcular_promedio(n1, n2)
+mostrar_resultado(nombre, prom)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Nombre: <span class="terminal-user-input">Julia</span>
+Nota 1: <span class="terminal-user-input">7</span>
+Nota 2: <span class="terminal-user-input">8.5</span>
+Julia aprobó con 7.75</div></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Flujo de datos</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>pedir_datos</code> → <b>devuelve</b> tres valores → <code>calcular_promedio</code> → <b>devuelve</b> un número → <code>mostrar_resultado</code> lo <b>imprime</b>. Los datos <b>viajan por parámetros y <code>return</code></b>, sin variables globales.</p></div></section>
+<section><h2><span class="section-num">20</span> Antes y Después: Refactorizar con Funciones</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Antes: todo mezclado</h4><div class="code-window"><div class="code-header"><span class="code-title">antes.py</span><span class="code-badge">Repetido</span></div><div class="code-body">a = <span class="c-num">80</span>
+b = <span class="c-num">90</span>
+<span class="c-fn">print</span>((a + b) / <span class="c-num">2</span>)
+c = <span class="c-num">70</span>
+d = <span class="c-num">55</span>
+<span class="c-fn">print</span>((c + d) / <span class="c-num">2</span>)
+e = <span class="c-num">100</span>
+f = <span class="c-num">60</span>
+<span class="c-fn">print</span>((e + f) / <span class="c-num">2</span>)</div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Después: una función</h4><div class="code-window"><div class="code-header"><span class="code-title">despues.py</span><span class="code-badge">Reutilizable</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">promedio</span>(x, y):
+    <span class="c-kw">return</span> (x + y) / <span class="c-num">2</span>
+
+<span class="c-fn">print</span>(promedio(<span class="c-num">80</span>, <span class="c-num">90</span>))
+<span class="c-fn">print</span>(promedio(<span class="c-num">70</span>, <span class="c-num">55</span>))
+<span class="c-fn">print</span>(promedio(<span class="c-num">100</span>, <span class="c-num">60</span>))</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Refactorizar</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Es <b>reorganizar el código sin cambiar lo que hace</b> para que sea <b>más claro y reutilizable</b>. Ambas versiones muestran <code>85.0</code>, <code>62.5</code> y <code>80.0</code>; si la fórmula cambia, se modifica <b>una sola función</b>.</p></div></section>
+<section><h2><span class="section-num">21</span> Error Frecuente #1: Argumentos Mal Combinados</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Posicional después de uno con nombre</div><div class="code-window"><div class="code-header"><span class="code-title">orden_args.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">f</span>(a, b):
+    <span class="c-kw">return</span> a - b
+
+<span class="c-fn">print</span>(f(a=<span class="c-num">10</span>, <span class="c-num">3</span>))</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 4
+    print(f(a=10, 3))
+                   ^
+SyntaxError: positional argument follows keyword argument</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Mismo parámetro dos veces</div><div class="code-window"><div class="code-header"><span class="code-title">duplicado.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">f</span>(a, b):
+    <span class="c-kw">return</span> a - b
+
+<span class="c-fn">print</span>(f(<span class="c-num">10</span>, a=<span class="c-num">3</span>))</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 4, in &lt;module&gt;
+    print(f(10, a=3))
+          ~^^^^^^^^^
+TypeError: f() got multiple values for argument 'a'</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="correct-card"><div class="correct-title">✅ Correcto</div><div class="code-window"><div class="code-header"><span class="code-title">ok.py</span><span class="code-badge">OK</span></div><div class="code-body">f(<span class="c-num">10</span>, b=<span class="c-num">3</span>)        <span class="c-cmt"># posicional + nombre</span>
+f(a=<span class="c-num">10</span>, b=<span class="c-num">3</span>)      <span class="c-cmt"># todos con nombre</span></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Regla de oro</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b>Primero los posicionales, después los de nombre.</b> Y un parámetro <b>no puede recibir dos valores</b>.</p></div></div></section>
+<section><h2><span class="section-num">22</span> Error Frecuente #2: Desempaquetar con la Cantidad Equivocada</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Menos variables que valores</div><div class="code-window"><div class="code-header"><span class="code-title">desempaquetar_mal.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">datos</span>():
+    <span class="c-kw">return</span> <span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>
+
+a, b = datos()</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 4, in &lt;module&gt;
+    a, b = datos()
+    ^^^^
+ValueError: too many values to unpack (expected 2, got 3)</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Más variables que valores</div><div class="code-window"><div class="code-header"><span class="code-title">desempaquetar_mal2.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">datos</span>():
+    <span class="c-kw">return</span> <span class="c-num">1</span>, <span class="c-num">2</span>
+
+a, b, c = datos()</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 4, in &lt;module&gt;
+    a, b, c = datos()
+    ^^^^^^^
+ValueError: not enough values to unpack (expected 3, got 2)</div></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Solución</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">La cantidad de variables a la izquierda <b>debe coincidir</b> con la cantidad de valores devueltos. Si no te interesa uno, usá <code>_</code>: <code>cociente, _ = dividir(17, 5)</code>.</p></div></section>
+<section><h2><span class="section-num">23</span> Error Frecuente #3: Confundir Local con Global</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Usar una local desde afuera</div><div class="code-window"><div class="code-header"><span class="code-title">local_afuera.py</span><span class="code-badge">Con error</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    total = a + b
+
+sumar(<span class="c-num">2</span>, <span class="c-num">3</span>)
+<span class="c-fn">print</span>(total)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 5, in &lt;module&gt;
+    print(total)
+          ^^^^^
+NameError: name 'total' is not defined</div></div></div><div class="correct-card"><div class="correct-title">✅ Devolver y guardar</div><div class="code-window"><div class="code-header"><span class="code-title">devolver.py</span><span class="code-badge">OK</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">sumar</span>(a, b):
+    <span class="c-kw">return</span> a + b
+
+total = sumar(<span class="c-num">2</span>, <span class="c-num">3</span>)
+<span class="c-fn">print</span>(total)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">5</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">El error de siempre</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Pensar que, como la función "calculó <code>total</code>", esa variable <b>existe afuera</b>. <b>No existe</b>: solo sobrevive lo que se <b>devuelve</b> con <code>return</code>.</p></div></section>
+<section><h2><span class="section-num">24</span> Comparación Final: Funciones Avanzadas en C y en Python</h2><table class="trace-table"><thead><tr><th>Aspecto</th><th>C</th><th>Python</th></tr></thead><tbody><tr><td>Parámetros opcionales</td><td>No existen</td><td><code>def f(a, b=10)</code></td></tr><tr><td>Argumentos con nombre</td><td>No existen</td><td><code>f(a=1, b=2)</code></td></tr><tr><td>Devolver varios valores</td><td>Un solo valor (o punteros / <code>struct</code>)</td><td><code>return a, b</code> (tupla)</td></tr><tr><td>Variables locales</td><td>Dentro del bloque <code>{ }</code></td><td>Dentro de la función</td></tr><tr><td>Variables globales</td><td>Se leen y modifican libremente</td><td>Se leen; para <b>modificarlas</b> hace falta <code>global</code></td></tr><tr><td>Paso de parámetros simples</td><td>Por valor (copia)</td><td>Por valor (copia del valor)</td></tr><tr><td>Cuerpo vacío</td><td><code>{ }</code></td><td><code>pass</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">25</span> Buenas Prácticas: Funciones Flexibles y Bien Organizadas</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b>parámetros con valor por defecto</b> para los casos habituales.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b>argumentos con nombre</b> cuando la llamada no sea obvia.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Pasá los datos por <b>parámetros</b> y recibilos con <b><code>return</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Declará <b>constantes globales</b> en MAYÚSCULAS al principio.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Separá <b>entrada</b>, <b>cálculo</b> y <b>salida</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Devolvé una <b>tupla</b> solo cuando los valores <b>van juntos</b>.</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Modificar variables globales dentro de funciones (<code>global</code>).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usar el <b>mismo nombre</b> para variables locales y globales.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Funciones con <b>demasiados parámetros</b> (más de 4 o 5).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Devolver <b>muchos</b> valores sin orden claro.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Tapar nombres de Python (<code>len</code>, <code>max</code>, <code>sum</code>...).</li></ul></div></div></section>
+<section><h2><span class="section-num">26</span> Ejercicio 1: ¿Qué Muestra el Programa?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Predecí la salida</span></div><div class="code-body">x = <span class="c-num">10</span>
+
+<span class="c-kw">def</span> <span class="c-fn">f</span>(x):
+    x = x + <span class="c-num">1</span>
+    <span class="c-kw">return</span> x
+
+<span class="c-kw">def</span> <span class="c-fn">g</span>(a, b=<span class="c-num">2</span>):
+    <span class="c-kw">return</span> a * b
+
+<span class="c-kw">def</span> <span class="c-fn">h</span>():
+    y = <span class="c-num">5</span>
+    <span class="c-kw">return</span> y, y * <span class="c-num">2</span>
+
+<span class="c-fn">print</span>(f(x), x)
+<span class="c-fn">print</span>(g(<span class="c-num">3</span>), g(<span class="c-num">3</span>, <span class="c-num">4</span>), g(b=<span class="c-num">5</span>, a=<span class="c-num">1</span>))
+p, q = h()
+<span class="c-fn">print</span>(p + q)</div></div><details class="code-solution"><summary>👁️ Ver respuesta</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Python</span></div><div class="code-body">x = <span class="c-num">10</span>
+
+<span class="c-kw">def</span> <span class="c-fn">f</span>(x):
+    x = x + <span class="c-num">1</span>
+    <span class="c-kw">return</span> x
+
+<span class="c-kw">def</span> <span class="c-fn">g</span>(a, b=<span class="c-num">2</span>):
+    <span class="c-kw">return</span> a * b
+
+<span class="c-kw">def</span> <span class="c-fn">h</span>():
+    y = <span class="c-num">5</span>
+    <span class="c-kw">return</span> y, y * <span class="c-num">2</span>
+
+<span class="c-fn">print</span>(f(x), x)
+<span class="c-fn">print</span>(g(<span class="c-num">3</span>), g(<span class="c-num">3</span>, <span class="c-num">4</span>), g(b=<span class="c-num">5</span>, a=<span class="c-num">1</span>))
+p, q = h()
+<span class="c-fn">print</span>(p + q)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">11 10
+6 12 5
+15</div></div></div></div><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>f(x)</code> devuelve 11 pero la <code>x</code> global <b>sigue valiendo 10</b> (el parámetro es una copia local).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>g(3)</code> usa <code>b=2</code> → 6; <code>g(3, 4)</code> → 12; <code>g(b=5, a=1)</code> → 5.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>h()</code> devuelve <code>(5, 10)</code>; <code>p + q</code> = 15.</li></ul></div></details></section>
+<section><h2><span class="section-num">27</span> Ejercicio 2: Escribí las Funciones</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>calcular_precio(base, iva=21, descuento=0)</code> → precio con descuento aplicado <b>primero</b> y luego el IVA.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>min_max(a, b, c)</code> → devuelve <b>menor y mayor</b> de tres números (sin <code>min</code>/<code>max</code>).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>horas_y_minutos(minutos)</code> → devuelve la cantidad de <b>horas completas</b> y los <b>minutos restantes</b>.</li></ul></div><details class="code-solution"><summary>👁️ Ver soluciones</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">calcular_precio</span>(base, iva=<span class="c-num">21</span>, descuento=<span class="c-num">0</span>):
+    con_descuento = base - base * descuento / <span class="c-num">100</span>
+    <span class="c-kw">return</span> con_descuento + con_descuento * iva / <span class="c-num">100</span>
+
+<span class="c-kw">def</span> <span class="c-fn">min_max</span>(a, b, c):
+    menor = a
+    mayor = a
+    <span class="c-kw">for</span> n <span class="c-kw">in</span> (b, c):
+        <span class="c-kw">if</span> n &lt; menor:
+            menor = n
+        <span class="c-kw">if</span> n &gt; mayor:
+            mayor = n
+    <span class="c-kw">return</span> menor, mayor
+
+<span class="c-kw">def</span> <span class="c-fn">horas_y_minutos</span>(minutos):
+    <span class="c-kw">return</span> minutos // <span class="c-num">60</span>, minutos % <span class="c-num">60</span>
+
+<span class="c-fn">print</span>(calcular_precio(<span class="c-num">1000</span>), calcular_precio(<span class="c-num">1000</span>, descuento=<span class="c-num">10</span>))
+<span class="c-fn">print</span>(min_max(<span class="c-num">7</span>, <span class="c-num">3</span>, <span class="c-num">9</span>))
+h, m = horas_y_minutos(<span class="c-num">135</span>)
+<span class="c-fn">print</span>(h, m)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1210.0 1089.0
+(3, 9)
+2 15</div></div></div></details></section>
+<section><h2><span class="section-num">28</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">calcular</span>(a=<span class="c-num">1</span>, b):
+    <span class="c-kw">return</span> a + b
+
+<span class="c-kw">def</span> <span class="c-fn">doble</span>(n):
+    resultado = n * <span class="c-num">2</span>
+
+<span class="c-fn">print</span>(doble(<span class="c-num">4</span>) + <span class="c-num">1</span>)
+<span class="c-fn">print</span>(resultado)
+
+total = <span class="c-num">0</span>
+<span class="c-kw">def</span> <span class="c-fn">acumular</span>(valor):
+    total = total + valor
+
+acumular(<span class="c-num">5</span>)
+
+<span class="c-kw">def</span> <span class="c-fn">dos_valores</span>():
+    <span class="c-kw">return</span> <span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>
+
+x, y = dos_valores()</div></div><details class="code-solution"><summary>👁️ Ver errores y solución</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>a=1</code> <b>antes</b> de <code>b</code>: los parámetros por defecto van <b>al final</b>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>doble</code> <b>no devuelve</b> nada: falta <code>return</code>; sin él, <code>doble(4) + 1</code> es <code>None + 1</code> (<code>TypeError</code>).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>resultado</code> es <b>local</b>: no existe afuera.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>acumular</code> <b>modifica</b> una global sin <code>global</code> → <code>UnboundLocalError</code>. Mejor: <code>def acumular(total, valor): return total + valor</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>x, y = dos_valores()</code> → devuelve <b>3</b> valores, se reciben <b>2</b> (<code>ValueError</code>).</li></ul></div></details></section>
+<section><h2><span class="section-num">29</span> Ejercicio 4 (Reto): Mini Banco con Funciones</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Armá un programa con funciones <code>depositar(saldo, monto)</code>, <code>retirar(saldo, monto)</code> y <code>mostrar_saldo(saldo)</code>. <code>retirar</code> debe devolver <b>el mismo saldo</b> si el monto es mayor que el saldo (y mostrar <code>Fondos insuficientes</code>). Hacé que el programa <b>no use variables globales</b> que cambien: el saldo viaja por parámetros y <code>return</code>.</p></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio4.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">depositar</span>(saldo, monto):
+    <span class="c-kw">return</span> saldo + monto
+
+<span class="c-kw">def</span> <span class="c-fn">retirar</span>(saldo, monto):
+    <span class="c-kw">if</span> monto &gt; saldo:
+        <span class="c-fn">print</span>(<span class="c-str">"Fondos insuficientes"</span>)
+        <span class="c-kw">return</span> saldo
+    <span class="c-kw">return</span> saldo - monto
+
+<span class="c-kw">def</span> <span class="c-fn">mostrar_saldo</span>(saldo):
+    <span class="c-fn">print</span>(<span class="c-str">f"Saldo actual: {saldo}"</span>)
+
+saldo = <span class="c-num">1000</span>
+saldo = depositar(saldo, <span class="c-num">500</span>)
+mostrar_saldo(saldo)
+saldo = retirar(saldo, <span class="c-num">2000</span>)
+saldo = retirar(saldo, <span class="c-num">300</span>)
+mostrar_saldo(saldo)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Saldo actual: 1500
+Fondos insuficientes
+Saldo actual: 1200</div></div></div></div></div></details></section>
+<section><h2><span class="section-num">30</span> Resumen de la Unidad 10</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Argumentos con nombre:</b> <code>f(edad=17)</code>; los posicionales van <b>primero</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Valores por defecto:</b> <code>def f(a, b=10)</code>; los opcionales van <b>al final</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>return a, b</code> devuelve <b>varios valores</b> (tupla); se reciben con <code>x, y = f()</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Local:</b> vive dentro de la función. <b>Global:</b> vive en todo el programa.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los <b>parámetros son locales</b> (reciben una copia del valor).</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Datos por <b>parámetros</b> y <b><code>return</code></b>; evitá <code>global</code>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Sé cuándo usar un valor por defecto?</div><div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué una variable local no se ve afuera?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé recibir dos valores devueltos?</div><div class="checklist-item"><span class="icon">✓</span> ¿Explico qué es <code>UnboundLocalError</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Puedo separar un programa en pedir / calcular / mostrar?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 10 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Funciones: Alcance, Valores por Defecto y Múltiples Resultados</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="09-funciones-definicion-parametros-return.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Funciones: Definición, Parámetros y return</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="11-strings-fundamentos-indices-slicing.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Strings: Fundamentos, Índices y Slicing →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

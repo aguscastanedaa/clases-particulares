@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3er Bimestre | 2do Cuatrimestre | Programación en C | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../logo.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b12;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #34d399;
+      --accent-glow: rgba(52, 211, 153, 0.2);
+      --accent-cyan: #38bdf8;
+      --accent-purple: #c084fc;
+      --accent-amber: #fbbf24;
+      --badge-bg: rgba(52, 211, 153, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 10% 12%, rgba(52, 211, 153, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 90% 88%, rgba(56, 189, 248, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(192, 132, 252, 0.04) 0%, transparent 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 50px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 920px;
+    }
+
+    .breadcrumb-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb-nav a:hover {
+      color: var(--accent);
+    }
+
+    .breadcrumb-sep {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .breadcrumb-current {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--badge-bg);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      padding: 4px 14px;
+      border-radius: 9999px;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.55;
+    }
+
+    .switch-cuatrimestre-banner {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .switch-text h4 {
+      font-size: 0.98rem;
+      color: #f8fafc;
+      margin-bottom: 3px;
+    }
+
+    .switch-text p {
+      font-size: 0.84rem;
+      color: #94a3b8;
+    }
+
+    .switch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.18);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .switch-btn:hover {
+      background: #38bdf8;
+      color: #041019;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      font-size: 0.82rem;
+    }
+
+    .stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      color: var(--text-muted);
+    }
+
+    .stat-badge b {
+      color: var(--accent);
+    }
+
+    .search-box {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      color: var(--text-main);
+      font-size: 0.98rem;
+      margin-bottom: 26px;
+      outline: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 28px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .lesson-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .lesson-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px 22px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .lesson-card:hover {
+      transform: translateX(4px);
+      border-color: rgba(52, 211, 153, 0.45);
+      background: rgba(16, 44, 38, 0.7);
+      box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.6), 0 0 18px var(--accent-glow);
+    }
+
+    .lesson-info {
+      flex: 1;
+      margin-right: 18px;
+    }
+
+    .lesson-num {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: var(--badge-bg);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+
+    .lesson-info h3 {
+      font-size: 1.12rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #ffffff;
+    }
+
+    .lesson-info p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .tag-list {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag-item {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .lesson-action {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+      transition: gap 0.2s ease;
+    }
+
+    .lesson-card:hover .lesson-action {
+      gap: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .lesson-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .lesson-action {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="breadcrumb-nav">
+      <a href="../../../index.html">Portal Académico</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../../index.html">Programación</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../index.html">2do Cuatrimestre</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current">3er Bimestre</span>
+    </div>
+
+    <header>
+      <div class="header-badge">Segundo Cuatrimestre • Texto, Punteros y Estructuras Avanzadas</div>
+      <h1>Programación en C: 2do Cuatrimestre</h1>
+      <p>
+        Plan curricular avanzado basado en el Apunte Teórico oficial (Parte 3): funciones con retorno, arreglos como parámetros, cadenas de caracteres (strings), biblioteca <code>string.h</code>, algoritmos de texto, punteros, direcciones físicas de memoria, paso por referencia simulado, equivalencia con arreglos, estructuras complejas, operador <code>-&gt;</code>, colecciones de registros y casos integradores.
+      </p>
+      <div class="stats-bar">
+        <span class="stat-badge">📚 Unidades: <b>13 Clases Completas</b></span>
+        <span class="stat-badge">🎯 Temas: <b>40 Apartados del Apunte Cubiertos</b></span>
+        <span class="stat-badge">⚡ Nivel: <b>Intermedio a Avanzado</b></span>
+        <a href="Apunte%20teorico%20-%20Lab.%20Algoritmos%20y%20Estructura%20de%20Datos%20p3.pdf" target="_blank" class="stat-badge" style="text-decoration: none; border-color: rgba(52, 211, 153, 0.35); color: #34d399;">📄 <b>Abrir Apunte Teórico Parte 3 (PDF)</b></a>
+      </div>
+    </header>
+
+    <div class="switch-cuatrimestre-banner">
+      <div class="switch-text">
+        <h4>¿Buscás el 4to Bimestre?</h4>
+        <p>Explorá el nuevo bloque completo de Introducción a la Programación en Python (sintaxis, control de flujo, modularidad, listas y archivos).</p>
+      </div>
+      <a href="../4to-bimestre/index.html" class="switch-btn">Ir al 4to Bimestre (Python) →</a>
+    </div>
+
+    <input type="text" id="filter" class="search-box"
+      placeholder="Buscar por tema o concepto (ej. return, string, strlen, strcmp, punteros, &, *, flecha ->, transferencia)...">
+
+    <!-- BLOQUE 1: FUNCIONES CON RETORNO Y ARREGLOS -->
+    <div class="section-title">Bloque I: Funciones con Retorno y Arreglos como Parámetros</div>
+    <div class="lesson-list">
+
+      <!-- UNIDAD 1 -->
+      <a href="presentaciones/01-funciones-retorno-arreglos-parametros.html" class="lesson-card"
+        data-search="funciones con retorno return printf parametros argumentos doble sumar calcularDescuento arreglos como parametros mostrarVector sumarVector tamano longitud">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 01</span>
+          <h3>Funciones con Retorno y Arreglos como Parámetros</h3>
+          <p>Diferencia entre funciones void y con valor devuelto, uso de return, pasaje de vectores como parámetros, por qué C exige enviar el tamaño y cálculo de acumuladores y promedios.</p>
+          <div class="tag-list">
+            <span class="tag-item">return</span>
+            <span class="tag-item">tipo vector[]</span>
+            <span class="tag-item">int tamano</span>
+            <span class="tag-item">sumarVector</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+    </div>
+
+    <!-- BLOQUE 2: STRINGS Y BIBLIOTECA STRING.H -->
+    <div class="section-title">Bloque II: Manejo de Texto y Algoritmos con Strings</div>
+    <div class="lesson-list">
+
+      <!-- UNIDAD 2 -->
+      <a href="presentaciones/02-introduccion-strings.html" class="lesson-card"
+        data-search="introduccion strings char[] arreglo caracteres terminador nulo \0 memoria ram comillas simples vs dobles %s recorrido longitud manual">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 02</span>
+          <h3>Introducción a los Strings en C</h3>
+          <p>Relación entre strings y char[], diferencia entre 'A' y "Agustin", el rol vital del terminador nulo '\0', por qué se reserva N + 1 bytes en RAM, especificador %s y conteo manual.</p>
+          <div class="tag-list">
+            <span class="tag-item">char[]</span>
+            <span class="tag-item">Terminador '\0'</span>
+            <span class="tag-item">%s</span>
+            <span class="tag-item">nombre[i] != '\0'</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 3 -->
+      <a href="presentaciones/03-libreria-string-h.html" class="lesson-card"
+        data-search="libreria string.h strlen strcpy strncpy strcmp strncmp strcat strncat strchr strstr buscar subcadena empieza con buffer overflow">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 03</span>
+          <h3>Biblioteca &lt;string.h&gt; y Operaciones con Cadenas</h3>
+          <p>Funciones estándar: strlen, strcpy, strcmp (por qué == falla), strcat, strchr, strstr, y las variantes seguras con límite de caracteres (strncpy, strncmp, strncat).</p>
+          <div class="tag-list">
+            <span class="tag-item">#include &lt;string.h&gt;</span>
+            <span class="tag-item">strlen / strcpy</span>
+            <span class="tag-item">strcmp == 0</span>
+            <span class="tag-item">strstr / strchr</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 4 -->
+      <a href="presentaciones/04-algoritmos-procesamiento-strings.html" class="lesson-card"
+        data-search="algoritmos procesamiento strings comparar manual sonIguales contarCaracter buscar subcadenas comienzaCon modificar reemplazar mayusculas minusculas ascii 32 invertirString palindromos radar">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 04</span>
+          <h3>Procesamiento y Algoritmos con Strings</h3>
+          <p>Lógica paso a paso: comparación manual carácter a carácter, conteo de ocurrencias, detección de prefijos, mutación de letras, alternancia de mayúsculas/minúsculas con ASCII (+32), inversión de texto y verificación de palíndromos.</p>
+          <div class="tag-list">
+            <span class="tag-item">sonIguales</span>
+            <span class="tag-item">contarCaracter</span>
+            <span class="tag-item">ASCII ±32</span>
+            <span class="tag-item">esPalindromo</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+    </div>
+
+    <!-- BLOQUE 3: PUNTEROS Y MEMORIA -->
+    <div class="section-title">Bloque III: Punteros, Direcciones de Memoria y Referencia</div>
+    <div class="lesson-list">
+
+      <!-- UNIDAD 5 -->
+      <a href="presentaciones/05-introduccion-punteros-direcciones-memoria.html" class="lesson-card"
+        data-search="punteros direcciones memoria ram operador & ampersand operador * asterisco desreferenciacion int *ptr %p analogia casa papel direccion">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 05</span>
+          <h3>Introducción a los Punteros y Direcciones de Memoria</h3>
+          <p>Qué es físicamente una dirección de RAM, impresión con %p, operador de dirección &amp;, declaración de punteros, operador de desreferenciación *, analogía de la casa y prevención de punteros salvajes.</p>
+          <div class="tag-list">
+            <span class="tag-item">&amp;variable</span>
+            <span class="tag-item">*puntero</span>
+            <span class="tag-item">int *p</span>
+            <span class="tag-item">%p</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 6 -->
+      <a href="presentaciones/06-paso-por-referencia-punteros-funciones.html" class="lesson-card"
+        data-search="paso por referencia punteros funciones modificar variable original cambiar(&x) incrementar division cociente resto devolver varios valores minMax">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 06</span>
+          <h3>Paso por Referencia, Punteros y Funciones</h3>
+          <p>Limitaciones del paso por valor, mutación de variables originales mediante punteros, funciones que devuelven múltiples resultados: cálculo simultáneo de cociente y resto, y algoritmo minMax sobre vectores.</p>
+          <div class="tag-list">
+            <span class="tag-item">cambiar(&amp;x)</span>
+            <span class="tag-item">*ptr = valor</span>
+            <span class="tag-item">Múltiples Retornos</span>
+            <span class="tag-item">minMax</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 7 -->
+      <a href="presentaciones/07-punteros-y-arreglos.html" class="lesson-card"
+        data-search="relacion punteros arreglos direccion primer elemento numeros == &numeros[0] int *p = numeros aritmetica punteros p + 1 *(p + i) equivalencia corchetes limites constantes">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 07</span>
+          <h3>Relación entre Punteros y Arreglos</h3>
+          <p>El nombre de un vector como dirección de inicio, aritmética de punteros (p + 1 avanza sizeof bytes), acceso con *(p + i), equivalencia con v[i] y diferencias reales entre arreglos y punteros móviles.</p>
+          <div class="tag-list">
+            <span class="tag-item">v == &amp;v[0]</span>
+            <span class="tag-item">p + 1</span>
+            <span class="tag-item">*(p + i)</span>
+            <span class="tag-item">Aritmética Punteros</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+    </div>
+
+    <!-- BLOQUE 4: ESTRUCTURAS AVANZADAS E INTEGRACIÓN -->
+    <div class="section-title">Bloque IV: Estructuras Avanzadas, Punteros e Integración</div>
+    <div class="lesson-list">
+
+      <!-- UNIDAD 8 -->
+      <a href="presentaciones/08-estructuras-struct-fundamentos.html" class="lesson-card"
+        data-search="estructuras struct fundamentos registros campos heterogeneos operador punto . struct Persona struct Punto Alumno copia valor imprimirPunto calcularPromedio">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 08</span>
+          <h3>Estructuras (struct) y Fundamentos de Modelado</h3>
+          <p>Agrupación de datos heterogéneos bajo un molde, declaración de campos, operador punto (.), envío de estructuras a funciones por valor y copia inmutable en el Stack.</p>
+          <div class="tag-list">
+            <span class="tag-item">struct Persona</span>
+            <span class="tag-item">Operador Punto (.)</span>
+            <span class="tag-item">Paso por Valor</span>
+            <span class="tag-item">Copia Inmutable</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 9 -->
+      <a href="presentaciones/09-punteros-a-estructuras-operador-flecha.html" class="lesson-card"
+        data-search="punteros a estructuras operador flecha -> (*emp).salario aumentarSalario porcentaje mutacion directa precedencia operadores">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 09</span>
+          <h3>Punteros a Estructuras y el Operador Flecha (-&gt;)</h3>
+          <p>Paso eficiente de registros por dirección, necesidad de la flecha (-&gt;), equivalencia con (*emp).campo, precedencia del punto sobre el asterisco y función de aumento salarial porcentual.</p>
+          <div class="tag-list">
+            <span class="tag-item">struct Empleado *emp</span>
+            <span class="tag-item">Operador -&gt;</span>
+            <span class="tag-item">(*emp).campo</span>
+            <span class="tag-item">aumentarSalario</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 10 -->
+      <a href="presentaciones/10-arreglos-de-estructuras.html" class="lesson-card"
+        data-search="arreglos de estructuras vectores de structs struct Alumno clase[30] clase[i].campo mejorPromedio modificar vehiculos flota kilometraje">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 10</span>
+          <h3>Arreglos de Estructuras</h3>
+          <p>Vectores donde cada elemento es una estructura completa, sintaxis clase[i].campo, recorridos con for, búsqueda del mejor promedio y actualización de datos en flota de vehículos.</p>
+          <div class="tag-list">
+            <span class="tag-item">struct Alumno curso[30]</span>
+            <span class="tag-item">curso[i].campo</span>
+            <span class="tag-item">mejorPromedio</span>
+            <span class="tag-item">actualizarKilometraje</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 11 -->
+      <a href="presentaciones/11-estructuras-arreglos-internos-anidadas.html" class="lesson-card"
+        data-search="estructuras con arreglos internos estructuras anidadas estudiante notas[3] struct Fecha nacimiento persona.nacimiento.dia jerarquia arbol">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 11</span>
+          <h3>Estructuras con Arreglos Internos y Anidadas</h3>
+          <p>Composición avanzada: estructuras con vectores internos (notas[3]), acumulación y promedio, y estructuras anidadas como struct Fecha dentro de struct Persona (persona.nacimiento.dia).</p>
+          <div class="tag-list">
+            <span class="tag-item">notas[3] interno</span>
+            <span class="tag-item">struct Fecha</span>
+            <span class="tag-item">persona.nacimiento.dia</span>
+            <span class="tag-item">Jerarquía en RAM</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 12 -->
+      <a href="presentaciones/12-integracion-transferencia-bancaria.html" class="lesson-card"
+        data-search="integracion transferencia bancaria struct CuentaBancaria saldo estado activa inactiva transferir punteros origen destino validaciones atomica return 1 0">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 12</span>
+          <h3>Integración: Transferencia Bancaria</h3>
+          <p>El caso integrador definitivo: modelado de CuentaBancaria, transferencia atómica con dos punteros (*origen y *destino), protocolo defensivo de validaciones y garantía de integridad transaccional.</p>
+          <div class="tag-list">
+            <span class="tag-item">struct CuentaBancaria</span>
+            <span class="tag-item">Punteros Dobles</span>
+            <span class="tag-item">Validaciones Defensivas</span>
+            <span class="tag-item">Integridad Atómica</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+
+      <!-- UNIDAD 13 -->
+      <a href="presentaciones/13-resumen-simbolos-repaso-integrador.html" class="lesson-card"
+        data-search="resumen simbolos repaso integrador guia operadores & * int* [] . -> \0 return lectura expresiones complejas autoevaluacion">
+        <div class="lesson-info">
+          <span class="lesson-num">Unidad 13</span>
+          <h3>Resumen de Símbolos y Repaso Integrador</h3>
+          <p>Tabla maestra con los 9 símbolos clave de C (&amp;, *, int*, [], ., -&gt;, '\0', return), método para descifrar expresiones complejas, trampas comunes de examen y autoevaluación interactiva.</p>
+          <div class="tag-list">
+            <span class="tag-item">Tabla Maestra de Símbolos</span>
+            <span class="tag-item">Expresiones Complejas</span>
+            <span class="tag-item">Preguntas de Examen</span>
+            <span class="tag-item">Autoevaluación</span>
+          </div>
+        </div>
+        <div class="lesson-action">Abrir clase →</div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const filterInput = document.getElementById('filter');
+    const cards = document.querySelectorAll('.lesson-card');
+    const sections = document.querySelectorAll('.section-title');
+
+    filterInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+
+      cards.forEach(card => {
+        const text = (card.textContent + ' ' + (card.getAttribute('data-search') || '')).toLowerCase();
+        if (!q || text.includes(q)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      sections.forEach(sec => {
+        let sibling = sec.nextElementSibling;
+        if (sibling && sibling.classList.contains('lesson-list')) {
+          const visibleCards = sibling.querySelectorAll('.lesson-card:not([style*="display: none"])');
+          sec.style.display = visibleCards.length > 0 ? 'flex' : 'none';
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

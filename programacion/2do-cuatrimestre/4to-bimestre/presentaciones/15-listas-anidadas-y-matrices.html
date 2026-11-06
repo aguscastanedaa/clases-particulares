@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 15: Listas Anidadas y Matrices | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 15</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 15</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Listas Anidadas y Matrices</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Representar tablas de datos con listas de listas: filas y columnas, acceso con doble índice, recorridos con bucles anidados, diagonales, transpuesta y errores clásicos</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">Listas de listas</span><span class="badge badge-indigo">matriz[fila][columna]</span><span class="badge badge-emerald">Bucles anidados</span><span class="badge badge-amber">Diagonales</span><span class="badge badge-purple">Filas compartidas</span><span class="badge badge-rose">Copias</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 39 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: De las Matrices de C a las Listas Anidadas</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya conocemos de C (2.º bimestre)</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Una <b>matriz</b> es una tabla de <b>filas y columnas</b>: <code>int m[3][3];</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Se accede con <b>dos índices</b>: <code>m[fila][columna]</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Se recorre con <b>dos bucles <code>for</code> anidados</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Tiene <b>diagonal principal</b> y <b>secundaria</b>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Que en Python una matriz es una <b>lista de listas</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Acceder y modificar con <code>matriz[fila][columna]</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Recorrer</b>, mostrar y <b>crear</b> matrices.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Sumas por fila y por columna</b>, <b>diagonales</b>, <b>transpuesta</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los errores <b>clásicos</b>: filas compartidas y copias.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que puedas representar y procesar <b>datos en forma de tabla</b> (notas por alumno, tableros, planillas) con la misma lógica que usaste en C.</p></div></section>
+<section><h2><span class="section-num">02</span> ¿Por Qué Necesitamos Tablas?</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Muchos datos del mundo real <b>vienen en forma de tabla</b>: <b>filas</b> y <b>columnas</b>.</p><table class="trace-table"><thead><tr><th>Alumno</th><th>Nota 1</th><th>Nota 2</th><th>Nota 3</th></tr></thead><tbody><tr><td>Ana</td><td>8</td><td>7</td><td>9</td></tr><tr><td>Luis</td><td>6</td><td>5</td><td>7</td></tr><tr><td>Marta</td><td>10</td><td>9</td><td>10</td></tr></tbody></table><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Con listas simples</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Habría que crear <b>una variable por fila</b> (<code>ana</code>, <code>luis</code>, <code>marta</code>...) y <b>no se podrían recorrer</b> con un solo bucle.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con una lista de listas</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b>Una sola variable</b> guarda toda la tabla. Cada <b>fila</b> es una <b>lista</b> y la tabla es <b>la lista de filas</b>.</p></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">tabla_notas.py</span><span class="code-badge">Python</span></div><div class="code-body">notas = [
+    [<span class="c-num">8</span>, <span class="c-num">7</span>, <span class="c-num">9</span>],
+    [<span class="c-num">6</span>, <span class="c-num">5</span>, <span class="c-num">7</span>],
+    [<span class="c-num">10</span>, <span class="c-num">9</span>, <span class="c-num">10</span>],
+]
+<span class="c-fn">print</span>(notas)
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(notas))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[[8, 7, 9], [6, 5, 7], [10, 9, 10]]
+3</div></div></div></div></section>
+<section><h2><span class="section-num">03</span> Lista de Listas: Qué Es y Cómo Se Crea</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Una <b>lista anidada</b> es una lista cuyos elementos <b>son otras listas</b>. Una <b>matriz</b> es el caso en que <b>todas las filas tienen la misma cantidad de elementos</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">crear_matriz.py</span><span class="code-badge">Python</span></div><div class="code-body">matriz = [
+    [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>],
+    [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>],
+    [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]
+]
+
+<span class="c-fn">print</span>(matriz)
+<span class="c-fn">print</span>(<span class="c-fn">type</span>(matriz))
+<span class="c-fn">print</span>(<span class="c-str">"Filas:"</span>, <span class="c-fn">len</span>(matriz))
+<span class="c-fn">print</span>(<span class="c-str">"Columnas:"</span>, <span class="c-fn">len</span>(matriz[<span class="c-num">0</span>]))
+<span class="c-fn">print</span>(matriz[<span class="c-num">0</span>])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+&lt;class 'list'&gt;
+Filas: 3
+Columnas: 3
+[1, 2, 3]</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cantidad de filas y columnas</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Filas</b> → <code>len(matriz)</code> (cuántas listas hay).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Columnas</b> → <code>len(matriz[0])</code> (cuántos elementos tiene una fila).</li></ul></div></section>
+<section><h2><span class="section-num">04</span> Acceder a un Elemento: matriz[fila][columna]</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-cyan);">matriz</span>[<span style="color:var(--accent-amber);">fila</span>][<span style="color:var(--accent-emerald);">columna</span>]</div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">acceso_matriz.py</span><span class="code-badge">Python</span></div><div class="code-body">matriz = [
+    [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>],
+    [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>],
+    [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]
+]
+
+<span class="c-fn">print</span>(matriz[<span class="c-num">0</span>][<span class="c-num">0</span>])
+<span class="c-fn">print</span>(matriz[<span class="c-num">1</span>][<span class="c-num">2</span>])
+<span class="c-fn">print</span>(matriz[<span class="c-num">2</span>][<span class="c-num">1</span>], matriz[-<span class="c-num">1</span>][-<span class="c-num">1</span>])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1
+6
+8 9</div></div></div></div><div style="text-align:center;"><div class="matrix-grid" style="grid-template-columns: repeat(3, 62px);"><div class="matrix-cell "><span class="coord">[0][0]</span>1</div><div class="matrix-cell "><span class="coord">[0][1]</span>2</div><div class="matrix-cell "><span class="coord">[0][2]</span>3</div><div class="matrix-cell "><span class="coord">[1][0]</span>4</div><div class="matrix-cell "><span class="coord">[1][1]</span>5</div><div class="matrix-cell diag-main"><span class="coord">[1][2]</span>6</div><div class="matrix-cell "><span class="coord">[2][0]</span>7</div><div class="matrix-cell "><span class="coord">[2][1]</span>8</div><div class="matrix-cell "><span class="coord">[2][2]</span>9</div></div></div><div class="box box-indigo"><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>matriz[1][2]</code> → <b>fila 1</b>, <b>columna 2</b> → <code>6</code>. Valen los <b>negativos</b>: <code>matriz[-1][-1]</code> es el <b>último</b> de la <b>última fila</b>.</p></div></section>
+<section><h2><span class="section-num">05</span> Cómo Funciona el Doble Corchete: Dos Pasos</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">dos_pasos.py</span><span class="code-badge">Python</span></div><div class="code-body">matriz = [[<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>], [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>], [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]]
+
+fila = matriz[<span class="c-num">1</span>]
+<span class="c-fn">print</span>(fila)
+
+elemento = fila[<span class="c-num">2</span>]
+<span class="c-fn">print</span>(elemento)
+
+<span class="c-fn">print</span>(matriz[<span class="c-num">1</span>][<span class="c-num">2</span>])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[4, 5, 6]
+6
+6</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.86rem;"><code>matriz[1]</code> → <b>primer corchete</b>: elige la <b>fila</b> (una lista completa): <code>[4, 5, 6]</code>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.86rem;"><code>...[2]</code> → <b>segundo corchete</b>: elige el <b>elemento</b> de esa fila: <code>6</code>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.86rem;"><code>matriz[1][2]</code> es <b>lo mismo</b> que <code>fila = matriz[1]</code> y luego <code>fila[2]</code>.</div></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En C: <code>m[1][2]</code> con <b>un par de corchetes por dimensión</b>. En Python es <b>igual de parecido</b>, pero por dentro son <b>listas dentro de una lista</b>, no un bloque de memoria contiguo.</p></div></section>
+<section><h2><span class="section-num">06</span> Modificar Elementos de una Matriz</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">modificar_matriz.py</span><span class="code-badge">Python</span></div><div class="code-body">m = [[<span class="c-num">0</span>, <span class="c-num">0</span>, <span class="c-num">0</span>], [<span class="c-num">0</span>, <span class="c-num">0</span>, <span class="c-num">0</span>], [<span class="c-num">0</span>, <span class="c-num">0</span>, <span class="c-num">0</span>]]
+
+m[<span class="c-num">0</span>][<span class="c-num">0</span>] = <span class="c-num">5</span>
+m[<span class="c-num">1</span>][<span class="c-num">1</span>] = <span class="c-num">7</span>
+m[<span class="c-num">2</span>][<span class="c-num">2</span>] = m[<span class="c-num">0</span>][<span class="c-num">0</span>] + m[<span class="c-num">1</span>][<span class="c-num">1</span>]
+
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> m:
+    <span class="c-fn">print</span>(fila)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[5, 0, 0]
+[0, 7, 0]
+[0, 0, 12]</div></div></div></div><div style="text-align:center;"><div class="matrix-grid" style="grid-template-columns: repeat(3, 62px);"><div class="matrix-cell diag-main"><span class="coord">[0][0]</span>5</div><div class="matrix-cell "><span class="coord">[0][1]</span>0</div><div class="matrix-cell "><span class="coord">[0][2]</span>0</div><div class="matrix-cell "><span class="coord">[1][0]</span>0</div><div class="matrix-cell diag-main"><span class="coord">[1][1]</span>7</div><div class="matrix-cell "><span class="coord">[1][2]</span>0</div><div class="matrix-cell "><span class="coord">[2][0]</span>0</div><div class="matrix-cell "><span class="coord">[2][1]</span>0</div><div class="matrix-cell diag-main"><span class="coord">[2][2]</span>12</div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Mutables</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Como las listas son <b>mutables</b>, se puede <b>asignar a cualquier posición</b> <code>m[i][j] = valor</code>. (En una <b>tupla</b> de tuplas no se podría.)</p></div></section>
+<section><h2><span class="section-num">07</span> Recorrer las Filas</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">recorrer_filas.py</span><span class="code-badge">Python</span></div><div class="code-body">matriz = [
+    [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>],
+    [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>],
+    [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]
+]
+
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> matriz:
+    <span class="c-fn">print</span>(fila)
+
+<span class="c-fn">print</span>(<span class="c-str">"---"</span>)
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(matriz)):
+    <span class="c-fn">print</span>(<span class="c-str">"Fila"</span>, i, <span class="c-str">"-&gt;"</span>, matriz[i])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+---
+Fila 0 -&gt; [1, 2, 3]
+Fila 1 -&gt; [4, 5, 6]
+Fila 2 -&gt; [7, 8, 9]</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Recorrer <b>la matriz</b> es recorrer <b>una lista cuyos elementos son filas</b>: en cada vuelta, <code>fila</code> es <b>una lista completa</b>.</p></div></section>
+<section><h2><span class="section-num">08</span> Recorrer Todos los Elementos: for Anidados</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">recorrer_todo.py</span><span class="code-badge">Python</span></div><div class="code-body">matriz = [
+    [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>],
+    [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>]
+]
+
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> matriz:
+    <span class="c-kw">for</span> elemento <span class="c-kw">in</span> fila:
+        <span class="c-fn">print</span>(elemento, end=<span class="c-str">" "</span>)
+<span class="c-fn">print</span>()
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(matriz)):
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(matriz[i])):
+        <span class="c-fn">print</span>(<span class="c-str">f"[{i}][{j}]={matriz[i][j]}"</span>, end=<span class="c-str">"  "</span>)
+<span class="c-fn">print</span>()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1 2 3 4 5 6 
+[0][0]=1  [0][1]=2  [0][2]=3  [1][0]=4  [1][1]=5  [1][2]=6  </div></div></div></div><table class="trace-table"><thead><tr><th>Forma</th><th>Cuándo usarla</th></tr></thead><tbody><tr><td><code>for fila in m:</code> + <code>for x in fila:</code></td><td>Solo necesitás los <b>valores</b></td></tr><tr><td><code>for i in range(len(m)):</code> + <code>for j in range(len(m[i])):</code></td><td>Necesitás <b>las posiciones</b> <code>i</code> y <code>j</code> (modificar, diagonales)</td></tr></tbody></table><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Igual que en C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El bucle <b>externo</b> recorre las <b>filas</b> y el <b>interno</b> las <b>columnas</b>. Por cada fila, el interno completa <b>todas</b> sus vueltas.</p></div></section>
+<section><h2><span class="section-num">09</span> Seguimiento del Recorrido Anidado</h2><div class="code-window"><div class="code-header"><span class="code-title">seguimiento_matriz.py</span><span class="code-badge">Matriz de 2 x 2</span></div><div class="code-body">m = [[<span class="c-num">1</span>, <span class="c-num">2</span>], [<span class="c-num">3</span>, <span class="c-num">4</span>]]
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">2</span>):
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">2</span>):
+        <span class="c-fn">print</span>(m[i][j])</div></div><table class="trace-table"><thead><tr><th>Vuelta</th><th><code>i</code></th><th><code>j</code></th><th><code>m[i][j]</code></th><th>Se muestra</th></tr></thead><tbody><tr><td>1</td><td>0</td><td>0</td><td>1</td><td><code>1</code></td></tr><tr><td>2</td><td>0</td><td>1</td><td>2</td><td><code>2</code></td></tr><tr><td>3</td><td>1</td><td>0</td><td>3</td><td><code>3</code></td></tr><tr><td>4</td><td>1</td><td>1</td><td>4</td><td><code>4</code></td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Orden de recorrido</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Se recorre <b>fila por fila</b>, de izquierda a derecha. Mientras <code>i</code> vale 0, <code>j</code> toma <b>todos</b> sus valores (0 y 1); recién después <code>i</code> pasa a 1.</p></div><div style="text-align:center;"><div class="matrix-grid" style="grid-template-columns: repeat(2, 62px);"><div class="matrix-cell "><span class="coord">[0][0]</span>1</div><div class="matrix-cell "><span class="coord">[0][1]</span>2</div><div class="matrix-cell "><span class="coord">[1][0]</span>3</div><div class="matrix-cell "><span class="coord">[1][1]</span>4</div></div></div></section>
+<section><h2><span class="section-num">10</span> Mostrar una Matriz de Forma Prolija</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">mostrar_prolija.py</span><span class="code-badge">Python</span></div><div class="code-body">m = [[<span class="c-num">1</span>, <span class="c-num">20</span>, <span class="c-num">3</span>], [<span class="c-num">400</span>, <span class="c-num">5</span>, <span class="c-num">6</span>], [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">90</span>]]
+
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> m:
+    <span class="c-kw">for</span> x <span class="c-kw">in</span> fila:
+        <span class="c-fn">print</span>(<span class="c-str">f"{x:4d}"</span>, end=<span class="c-str">""</span>)
+    <span class="c-fn">print</span>()
+
+<span class="c-fn">print</span>()
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> m:
+    <span class="c-fn">print</span>(<span class="c-str">" "</span>.join(<span class="c-fn">str</span>(x) <span class="c-kw">for</span> x <span class="c-kw">in</span> fila))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">   1  20   3
+ 400   5   6
+   7   8  90
+
+1 20 3
+400 5 6
+7 8 90</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con ancho fijo</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>f"{x:4d}"</code> reserva <b>4 posiciones</b> para cada número: las <b>columnas quedan alineadas</b>. El <code>print()</code> del final <b>baja de línea</b> al terminar cada fila.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Con <code>join</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>" ".join(str(x) for x in fila)</code> <b>une</b> los elementos de la fila con espacios (hay que pasarlos a texto).</p></div></div></section>
+<section><h2><span class="section-num">11</span> Crear una Matriz con Valores Iniciales</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">crear_ceros.py</span><span class="code-badge">Python</span></div><div class="code-body">filas = <span class="c-num">3</span>
+columnas = <span class="c-num">4</span>
+
+matriz = []
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(filas):
+    fila = []
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(columnas):
+        fila.append(<span class="c-num">0</span>)
+    matriz.append(fila)
+<span class="c-fn">print</span>(matriz)
+
+mejor = [[<span class="c-num">0</span>] * columnas <span class="c-kw">for</span> _ <span class="c-kw">in</span> <span class="c-fn">range</span>(filas)]
+<span class="c-fn">print</span>(mejor == matriz)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+True</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Con bucles</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Se arma <b>cada fila</b> (lista de ceros) y se la <b>agrega</b> a la matriz. Es la forma <b>explícita</b> y más fácil de entender.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con comprensión</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>[[0] * columnas for _ in range(filas)]</code> construye <b>lo mismo en una línea</b>: <code>[0] * columnas</code> se evalúa <b>una vez por fila</b>, creando listas <b>distintas</b>.</p></div></div></section>
+<section><h2><span class="section-num">12</span> El Gran Error: [[0] * 3] * 3 (Filas Compartidas)</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Parece una forma elegante de crear una matriz de 3 × 3... pero <b>tiene una trampa</b>:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">filas_compartidas.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">m = [[<span class="c-num">0</span>] * <span class="c-num">3</span>] * <span class="c-num">3</span>
+<span class="c-fn">print</span>(m)
+
+m[<span class="c-num">0</span>][<span class="c-num">0</span>] = <span class="c-num">5</span>
+<span class="c-fn">print</span>(m)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+[[5, 0, 0], [5, 0, 0], [5, 0, 0]]</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>[[0] * 3] * 3</code> <b>no crea 3 filas distintas</b>: crea <b>una sola lista</b> <code>[0, 0, 0]</code> y pone <b>la misma lista 3 veces</b> (como en la unidad 13 con <code>b = a</code>). Al modificar una "fila", <b>se modifican las tres</b>, porque <b>son la misma</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">filas_independientes.py</span><span class="code-badge">Correcto</span></div><div class="code-body">m = [[<span class="c-num">0</span>] * <span class="c-num">3</span> <span class="c-kw">for</span> _ <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>)]
+m[<span class="c-num">0</span>][<span class="c-num">0</span>] = <span class="c-num">5</span>
+<span class="c-fn">print</span>(m)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[[5, 0, 0], [0, 0, 0], [0, 0, 0]]</div></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Solución</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Crear <b>cada fila por separado</b> con un bucle o con <b>comprensión</b>: <code>[[0] * 3 for _ in range(3)]</code> ejecuta <code>[0] * 3</code> <b>una vez por fila</b>, generando <b>3 listas independientes</b>.</p></div></section>
+<section><h2><span class="section-num">13</span> Cargar una Matriz con input()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">cargar_matriz.py</span><span class="code-badge">Python</span></div><div class="code-body">filas = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Filas: "</span>))
+columnas = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Columnas: "</span>))
+
+matriz = []
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(filas):
+    fila = []
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(columnas):
+        valor = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">f"Elemento [{i}][{j}]: "</span>))
+        fila.append(valor)
+    matriz.append(fila)
+
+<span class="c-fn">print</span>(matriz)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Filas: <span class="terminal-user-input">2</span>
+Columnas: <span class="terminal-user-input">2</span>
+Elemento [0][0]: <span class="terminal-user-input">1</span>
+Elemento [0][1]: <span class="terminal-user-input">2</span>
+Elemento [1][0]: <span class="terminal-user-input">3</span>
+Elemento [1][1]: <span class="terminal-user-input">4</span>
+[[1, 2], [3, 4]]</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Patrón</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><b>Bucle externo</b>: crea una <code>fila = []</code> vacía por cada fila. <b>Bucle interno</b>: pide y <b>agrega</b> cada valor a la fila. Al terminar la fila, <b>se agrega a la matriz</b>. La lista <b>crece sola</b>: no hace falta fijar el tamaño antes (como <code>int m[100][100]</code> en C).</p></div></section>
+<section><h2><span class="section-num">14</span> Suma de Todos los Elementos y Suma por Fila</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">sumas_filas.py</span><span class="code-badge">Python</span></div><div class="code-body">m = [
+    [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>],
+    [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>],
+    [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]
+]
+
+total = <span class="c-num">0</span>
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> m:
+    <span class="c-kw">for</span> x <span class="c-kw">in</span> fila:
+        total += x
+<span class="c-fn">print</span>(<span class="c-str">"Suma total:"</span>, total)
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(m)):
+    <span class="c-fn">print</span>(<span class="c-str">f"Suma de la fila {i}:"</span>, <span class="c-fn">sum</span>(m[i]))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Suma total: 45
+Suma de la fila 0: 6
+Suma de la fila 1: 15
+Suma de la fila 2: 24</div></div></div></div><table class="trace-table"><thead><tr><th>Fila</th><th>Elementos</th><th>Suma</th></tr></thead><tbody><tr><td>0</td><td>1, 2, 3</td><td>6</td></tr><tr><td>1</td><td>4, 5, 6</td><td>15</td></tr><tr><td>2</td><td>7, 8, 9</td><td>24</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Idea</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Cada <b>fila es una lista</b>, así que <code>sum(fila)</code> ya suma toda la fila. El acumulador <code>total</code> <b>se inicializa fuera de los dos bucles</b>.</p></div></section>
+<section><h2><span class="section-num">15</span> Suma por Columna</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">suma_columnas.py</span><span class="code-badge">Python</span></div><div class="code-body">m = [
+    [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>],
+    [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>],
+    [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]
+]
+
+<span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(m[<span class="c-num">0</span>])):
+    suma = <span class="c-num">0</span>
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(m)):
+        suma += m[i][j]
+    <span class="c-fn">print</span>(<span class="c-str">f"Columna {j}:"</span>, suma)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Columna 0: 12
+Columna 1: 15
+Columna 2: 18</div></div></div></div><table class="trace-table"><thead><tr><th><code>j</code> (columna)</th><th>Elementos que se suman</th><th>Suma</th></tr></thead><tbody><tr><td>0</td><td><code>m[0][0]</code>, <code>m[1][0]</code>, <code>m[2][0]</code> → 1, 4, 7</td><td>12</td></tr><tr><td>1</td><td>2, 5, 8</td><td>15</td></tr><tr><td>2</td><td>3, 6, 9</td><td>18</td></tr></tbody></table><div class="box box-rose"><h4 style="color:var(--accent-rose);">Fijate el orden de los bucles</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Para sumar <b>por columnas</b>, el bucle <b>externo</b> recorre las <b>columnas (<code>j</code>)</b> y el <b>interno</b> las <b>filas (<code>i</code>)</b>. Se <b>invierte</b> respecto del recorrido normal. Y <code>suma = 0</code> va <b>dentro del externo</b> (una suma nueva por columna).</p></div></section>
+<section><h2><span class="section-num">16</span> Promedio por Alumno y Mejor Nota de la Tabla</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">promedios.py</span><span class="code-badge">Python</span></div><div class="code-body">notas = [
+    [<span class="c-num">8</span>, <span class="c-num">7</span>, <span class="c-num">9</span>],
+    [<span class="c-num">6</span>, <span class="c-num">5</span>, <span class="c-num">7</span>],
+    [<span class="c-num">10</span>, <span class="c-num">9</span>, <span class="c-num">10</span>]
+]
+nombres = [<span class="c-str">"Ana"</span>, <span class="c-str">"Luis"</span>, <span class="c-str">"Marta"</span>]
+
+mayor = notas[<span class="c-num">0</span>][<span class="c-num">0</span>]
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(notas)):
+    promedio = <span class="c-fn">sum</span>(notas[i]) / <span class="c-fn">len</span>(notas[i])
+    <span class="c-fn">print</span>(<span class="c-str">f"{nombres[i]}: {promedio:.2f}"</span>)
+    <span class="c-kw">for</span> nota <span class="c-kw">in</span> notas[i]:
+        <span class="c-kw">if</span> nota &gt; mayor:
+            mayor = nota
+
+<span class="c-fn">print</span>(<span class="c-str">"Mejor nota de la tabla:"</span>, mayor)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ana: 8.00
+Luis: 6.00
+Marta: 9.67
+Mejor nota de la tabla: 10</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Una lista simple (<code>nombres</code>) y una matriz (<code>notas</code>) se <b>relacionan por la posición <code>i</code></b>: la fila <code>notas[i]</code> pertenece al alumno <code>nombres[i]</code>.</p></div></section>
+<section><h2><span class="section-num">17</span> Las Diagonales de una Matriz Cuadrada</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Matriz cuadrada</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Una matriz con <b>la misma cantidad de filas y columnas</b> (<code>n × n</code>). Solo en ellas tienen sentido las diagonales.</p></div><div class="grid-2" style="margin-top:8px;"><div style="text-align:center;"><div class="matrix-grid" style="grid-template-columns: repeat(3, 62px);"><div class="matrix-cell diag-main"><span class="coord">[0][0]</span>1</div><div class="matrix-cell "><span class="coord">[0][1]</span>2</div><div class="matrix-cell "><span class="coord">[0][2]</span>3</div><div class="matrix-cell "><span class="coord">[1][0]</span>4</div><div class="matrix-cell diag-main"><span class="coord">[1][1]</span>5</div><div class="matrix-cell "><span class="coord">[1][2]</span>6</div><div class="matrix-cell "><span class="coord">[2][0]</span>7</div><div class="matrix-cell "><span class="coord">[2][1]</span>8</div><div class="matrix-cell diag-main"><span class="coord">[2][2]</span>9</div></div></div><div style="text-align:center;"><div class="matrix-grid" style="grid-template-columns: repeat(3, 62px);"><div class="matrix-cell "><span class="coord">[0][0]</span>1</div><div class="matrix-cell "><span class="coord">[0][1]</span>2</div><div class="matrix-cell diag-sec"><span class="coord">[0][2]</span>3</div><div class="matrix-cell "><span class="coord">[1][0]</span>4</div><div class="matrix-cell diag-both"><span class="coord">[1][1]</span>5</div><div class="matrix-cell "><span class="coord">[1][2]</span>6</div><div class="matrix-cell diag-sec"><span class="coord">[2][0]</span>7</div><div class="matrix-cell "><span class="coord">[2][1]</span>8</div><div class="matrix-cell "><span class="coord">[2][2]</span>9</div></div></div></div><table class="trace-table"><thead><tr><th>Diagonal</th><th>Condición</th><th>Elementos (de la matriz)</th></tr></thead><tbody><tr><td><b>Principal</b> (azul)</td><td><code>i == j</code></td><td><code>m[0][0]</code>, <code>m[1][1]</code>, <code>m[2][2]</code> → 1, 5, 9</td></tr><tr><td><b>Secundaria</b> (amarilla)</td><td><code>i + j == n - 1</code></td><td><code>m[0][2]</code>, <code>m[1][1]</code>, <code>m[2][0]</code> → 3, 5, 7</td></tr></tbody></table></section>
+<section><h2><span class="section-num">18</span> Código de las Diagonales</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">diagonales.py</span><span class="code-badge">Python</span></div><div class="code-body">m = [
+    [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>],
+    [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>],
+    [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]
+]
+n = <span class="c-fn">len</span>(m)
+
+principal = <span class="c-num">0</span>
+secundaria = <span class="c-num">0</span>
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(n):
+    principal += m[i][i]
+    secundaria += m[i][n - <span class="c-num">1</span> - i]
+
+<span class="c-fn">print</span>(<span class="c-str">"Diagonal principal:"</span>, principal)
+<span class="c-fn">print</span>(<span class="c-str">"Diagonal secundaria:"</span>, secundaria)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Diagonal principal: 15
+Diagonal secundaria: 15</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Sin segundo bucle</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Como <code>j</code> siempre <b>depende de <code>i</code></b>, alcanza <b>un solo bucle</b>: <code>m[i][i]</code> (principal) y <code>m[i][n - 1 - i]</code> (secundaria).</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Alternativa con doble bucle</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Se puede recorrer <b>toda</b> la matriz y <b>preguntar</b> <code>if i == j:</code> o <code>if i + j == n - 1:</code>. Es <b>más lento</b> pero muestra la <b>condición</b>.</p></div></div></section>
+<section><h2><span class="section-num">19</span> Matriz Transpuesta: La Idea</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">La <b>transpuesta</b> se obtiene <b>intercambiando filas por columnas</b>: el elemento en <code>[i][j]</code> pasa a la posición <code>[j][i]</code>.</p></div><div class="grid-2" style="margin-top:8px;"><div style="text-align:center;"><div class="matrix-grid" style="grid-template-columns: repeat(3, 62px);"><div class="matrix-cell "><span class="coord">[0][0]</span>1</div><div class="matrix-cell "><span class="coord">[0][1]</span>2</div><div class="matrix-cell "><span class="coord">[0][2]</span>3</div><div class="matrix-cell "><span class="coord">[1][0]</span>4</div><div class="matrix-cell "><span class="coord">[1][1]</span>5</div><div class="matrix-cell "><span class="coord">[1][2]</span>6</div></div></div><div style="text-align:center;"><div class="matrix-grid" style="grid-template-columns: repeat(2, 62px);"><div class="matrix-cell "><span class="coord">[0][0]</span>1</div><div class="matrix-cell "><span class="coord">[0][1]</span>4</div><div class="matrix-cell "><span class="coord">[1][0]</span>2</div><div class="matrix-cell "><span class="coord">[1][1]</span>5</div><div class="matrix-cell "><span class="coord">[2][0]</span>3</div><div class="matrix-cell "><span class="coord">[2][1]</span>6</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Observá</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Una matriz de <b>2 × 3</b> tiene una transpuesta de <b>3 × 2</b>: el resultado tiene <b><code>columnas</code> filas</b> y <b><code>filas</code> columnas</b>. Las <b>filas</b> de la original son las <b>columnas</b> de la transpuesta.</p></div></section>
+<section><h2><span class="section-num">20</span> Matriz Transpuesta: El Código</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">transpuesta.py</span><span class="code-badge">Python</span></div><div class="code-body">m = [[<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>],
+     [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>]]
+
+filas = <span class="c-fn">len</span>(m)
+columnas = <span class="c-fn">len</span>(m[<span class="c-num">0</span>])
+t = [[<span class="c-num">0</span>] * filas <span class="c-kw">for</span> _ <span class="c-kw">in</span> <span class="c-fn">range</span>(columnas)]
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(filas):
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(columnas):
+        t[j][i] = m[i][j]
+
+<span class="c-fn">print</span>(t)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[[1, 4], [2, 5], [3, 6]]</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.86rem;"><code>t</code> se crea con las dimensiones <b>invertidas</b> (<code>columnas</code> filas de <code>filas</code> elementos), con <b>filas independientes</b>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.86rem;">En cada vuelta se copia <code>m[i][j]</code> a la posición <b><code>t[j][i]</code></b>.</div></div></div></section>
+<section><h2><span class="section-num">21</span> Suma de Dos Matrices</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">suma_matrices.py</span><span class="code-badge">Python</span></div><div class="code-body">a = [[<span class="c-num">1</span>, <span class="c-num">2</span>], [<span class="c-num">3</span>, <span class="c-num">4</span>]]
+b = [[<span class="c-num">10</span>, <span class="c-num">20</span>], [<span class="c-num">30</span>, <span class="c-num">40</span>]]
+
+resultado = []
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(a)):
+    fila = []
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(a[<span class="c-num">0</span>])):
+        fila.append(a[i][j] + b[i][j])
+    resultado.append(fila)
+
+<span class="c-fn">print</span>(resultado)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[[11, 22], [33, 44]]</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Regla</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Solo se pueden sumar matrices <b>de la misma dimensión</b>. Se suma <b>elemento a elemento</b>: <code>resultado[i][j] = a[i][j] + b[i][j]</code>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Atención</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>a + b</code> con listas <b>no suma números</b>: <b>concatena</b> las filas (<code>[[1, 2], [3, 4], [10, 20], [30, 40]]</code>). Hay que <b>hacerlo con bucles</b>.</p></div></section>
+<section><h2><span class="section-num">22</span> Buscar un Valor en una Matriz</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">buscar_matriz.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">buscar</span>(matriz, valor):
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(matriz)):
+        <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(matriz[i])):
+            <span class="c-kw">if</span> matriz[i][j] == valor:
+                <span class="c-kw">return</span> i, j
+    <span class="c-kw">return</span> -<span class="c-num">1</span>, -<span class="c-num">1</span>
+
+m = [[<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>], [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>], [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]]
+<span class="c-fn">print</span>(buscar(m, <span class="c-num">6</span>))
+<span class="c-fn">print</span>(buscar(m, <span class="c-num">42</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">(1, 2)
+(-1, -1)</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Idea</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Se recorren <b>todas las posiciones</b>; al encontrar el valor, <code>return i, j</code> <b>devuelve la posición</b> (dos valores, como en la unidad 10) y <b>termina la función</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">No encontrado</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Se devuelve <code>(-1, -1)</code>: <b>ninguna posición válida</b>. Convención de la búsqueda de la unidad 14 aplicada a <b>dos dimensiones</b>.</p></div></div></section>
+<section><h2><span class="section-num">23</span> Listas Anidadas No Rectangulares</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Una lista anidada <b>no tiene por qué ser una matriz</b>: cada sublista puede tener <b>distinta longitud</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">irregular.py</span><span class="code-badge">Python</span></div><div class="code-body">datos = [
+    [<span class="c-num">8</span>, <span class="c-num">7</span>, <span class="c-num">9</span>],
+    [<span class="c-num">6</span>],
+    [<span class="c-num">10</span>, <span class="c-num">9</span>, <span class="c-num">10</span>, <span class="c-num">8</span>, <span class="c-num">9</span>],
+    []
+]
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(datos)):
+    notas = datos[i]
+    <span class="c-kw">if</span> <span class="c-fn">len</span>(notas) &gt; <span class="c-num">0</span>:
+        prom = <span class="c-fn">sum</span>(notas) / <span class="c-fn">len</span>(notas)
+        <span class="c-fn">print</span>(<span class="c-str">f"Alumno {i}: promedio {prom:.1f}"</span>)
+    <span class="c-kw">else</span>:
+        <span class="c-fn">print</span>(<span class="c-str">f"Alumno {i}: sin notas"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Alumno 0: promedio 8.0
+Alumno 1: promedio 6.0
+Alumno 2: promedio 9.2
+Alumno 3: sin notas</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cuidado</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Usá <b><code>len(matriz[i])</code></b> (no <code>len(matriz[0])</code>) para saber cuántos elementos tiene <b>cada</b> fila. Y <b>controlá las filas vacías</b> antes de dividir.</p></div></section>
+<section><h2><span class="section-num">24</span> Listas de Registros: Datos Estructurados</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">registros.py</span><span class="code-badge">Python</span></div><div class="code-body">alumnos = [
+    [<span class="c-str">"Ana"</span>, <span class="c-num">17</span>, <span class="c-num">8.5</span>],
+    [<span class="c-str">"Luis"</span>, <span class="c-num">18</span>, <span class="c-num">6.0</span>],
+    [<span class="c-str">"Marta"</span>, <span class="c-num">16</span>, <span class="c-num">9.75</span>]
+]
+
+<span class="c-kw">for</span> alumno <span class="c-kw">in</span> alumnos:
+    nombre, edad, nota = alumno
+    <span class="c-fn">print</span>(<span class="c-str">f"{nombre:&lt;6} {edad} años  nota {nota}"</span>)
+
+mejor = alumnos[<span class="c-num">0</span>]
+<span class="c-kw">for</span> a <span class="c-kw">in</span> alumnos:
+    <span class="c-kw">if</span> a[<span class="c-num">2</span>] &gt; mejor[<span class="c-num">2</span>]:
+        mejor = a
+<span class="c-fn">print</span>(<span class="c-str">"Mejor:"</span>, mejor[<span class="c-num">0</span>])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ana    17 años  nota 8.5
+Luis   18 años  nota 6.0
+Marta  16 años  nota 9.75
+Mejor: Marta</div></div></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Una lista de listas de <b>tipos mezclados</b> cumple un rol parecido al <b>arreglo de <code>struct</code></b> de C (nombre, edad, nota). En Python, más adelante, se usan <b>diccionarios</b> y <b>clases</b> para esto (están fuera del alcance de este curso).</p></div></section>
+<section><h2><span class="section-num">25</span> Matrices y Funciones</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">matriz_funciones.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">crear_matriz</span>(filas, columnas, valor=<span class="c-num">0</span>):
+    <span class="c-kw">return</span> [[valor] * columnas <span class="c-kw">for</span> _ <span class="c-kw">in</span> <span class="c-fn">range</span>(filas)]
+
+<span class="c-kw">def</span> <span class="c-fn">mostrar</span>(matriz):
+    <span class="c-kw">for</span> fila <span class="c-kw">in</span> matriz:
+        <span class="c-fn">print</span>(<span class="c-str">" "</span>.join(<span class="c-str">f"{x:3}"</span> <span class="c-kw">for</span> x <span class="c-kw">in</span> fila))
+
+<span class="c-kw">def</span> <span class="c-fn">sumar_fila</span>(matriz, i):
+    <span class="c-kw">return</span> <span class="c-fn">sum</span>(matriz[i])
+
+m = crear_matriz(<span class="c-num">2</span>, <span class="c-num">3</span>, <span class="c-num">7</span>)
+m[<span class="c-num">1</span>][<span class="c-num">2</span>] = <span class="c-num">100</span>
+mostrar(m)
+<span class="c-fn">print</span>(sumar_fila(m, <span class="c-num">1</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">  7   7   7
+  7   7 100
+114</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Recordá</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Una matriz es una <b>lista</b>: <b>se pasa por referencia</b> (la misma lista). Si la función la <b>modifica</b>, el cambio <b>se ve afuera</b>. <code>crear_matriz</code> <b>devuelve</b> una matriz nueva con <b>filas independientes</b>.</p></div></section>
+<section><h2><span class="section-num">26</span> Ejemplo: Tablero de Tres en Raya</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">tres_en_raya.py</span><span class="code-badge">Python</span></div><div class="code-body">tablero = [[<span class="c-str">" "</span>] * <span class="c-num">3</span> <span class="c-kw">for</span> _ <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>)]
+
+tablero[<span class="c-num">0</span>][<span class="c-num">0</span>] = <span class="c-str">"X"</span>
+tablero[<span class="c-num">1</span>][<span class="c-num">1</span>] = <span class="c-str">"O"</span>
+tablero[<span class="c-num">2</span>][<span class="c-num">2</span>] = <span class="c-str">"X"</span>
+
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> tablero:
+    <span class="c-fn">print</span>(<span class="c-str">"|"</span> + <span class="c-str">"|"</span>.join(fila) + <span class="c-str">"|"</span>)
+
+<span class="c-kw">def</span> <span class="c-fn">gana_fila</span>(tablero, simbolo):
+    <span class="c-kw">for</span> fila <span class="c-kw">in</span> tablero:
+        <span class="c-kw">if</span> fila == [simbolo] * <span class="c-num">3</span>:
+            <span class="c-kw">return</span> <span class="c-kw">True</span>
+    <span class="c-kw">return</span> <span class="c-kw">False</span>
+
+<span class="c-fn">print</span>(gana_fila(tablero, <span class="c-str">"X"</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">|X| | |
+| |O| |
+| | |X|
+False</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Integra</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Matriz de <b>textos</b>, <b>bucles anidados</b>, <code>join</code>, comparación de <b>listas</b> (<code>fila == [simbolo] * 3</code>) y una <b>función booleana</b>.</p></div></section>
+<section><h2><span class="section-num">27</span> Ejemplo: Tabla de Multiplicar como Matriz</h2><div class="code-window"><div class="code-header"><span class="code-title">tabla_matriz.py</span><span class="code-badge">Python</span></div><div class="code-body">tabla = [[i * j <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">6</span>)] <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">6</span>)]
+
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> tabla:
+    <span class="c-kw">for</span> x <span class="c-kw">in</span> fila:
+        <span class="c-fn">print</span>(<span class="c-str">f"{x:3}"</span>, end=<span class="c-str">""</span>)
+    <span class="c-fn">print</span>()
+
+<span class="c-fn">print</span>(tabla[<span class="c-num">2</span>][<span class="c-num">3</span>])</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">  1  2  3  4  5
+  2  4  6  8 10
+  3  6  9 12 15
+  4  8 12 16 20
+  5 10 15 20 25
+12</div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué pasó</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">La comprensión <b>anidada</b> crea la matriz entera. Fijate que el <b>elemento <code>[i][j]</code> es <code>(i+1) × (j+1)</code></b>: <code>tabla[2][3]</code> = <code>3 × 4</code> = <b>12</b>.</p></div></section>
+<section><h2><span class="section-num">28</span> Copiar una Matriz: La Trampa de la Copia Superficial</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ <code>copy()</code> (superficial)</div><div class="code-window"><div class="code-header"><span class="code-title">copia_superficial.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">original = [[<span class="c-num">1</span>, <span class="c-num">2</span>], [<span class="c-num">3</span>, <span class="c-num">4</span>]]
+copia = original.copy()
+copia[<span class="c-num">0</span>][<span class="c-num">0</span>] = <span class="c-num">99</span>
+<span class="c-fn">print</span>(<span class="c-str">"original:"</span>, original)
+<span class="c-fn">print</span>(<span class="c-str">"copia:"</span>, copia)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">original: [[99, 2], [3, 4]]
+copia: [[99, 2], [3, 4]]</div></div></div><div class="correct-card"><div class="correct-title">✅ <code>deepcopy()</code> (profunda)</div><div class="code-window"><div class="code-header"><span class="code-title">copia_profunda.py</span><span class="code-badge">Correcto</span></div><div class="code-body"><span class="c-kw">import</span> <span class="c-type">copy</span>
+original = [[<span class="c-num">1</span>, <span class="c-num">2</span>], [<span class="c-num">3</span>, <span class="c-num">4</span>]]
+copia = copy.deepcopy(original)
+copia[<span class="c-num">0</span>][<span class="c-num">0</span>] = <span class="c-num">99</span>
+<span class="c-fn">print</span>(<span class="c-str">"original:"</span>, original)
+<span class="c-fn">print</span>(<span class="c-str">"copia:"</span>, copia)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">original: [[1, 2], [3, 4]]
+copia: [[99, 2], [3, 4]]</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">¿Por qué cambió el original?</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>copy()</code> crea <b>una lista nueva</b>, pero <b>las filas</b> (que son listas) siguen siendo <b>las mismas</b>: copia <b>el contenedor</b>, no <b>lo de adentro</b>. Es una <b>copia superficial</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Solución</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>copy.deepcopy(...)</code> (módulo <code>copy</code>) copia <b>también las filas</b>. Otra opción: <code>[fila.copy() for fila in original]</code>.</p></div></section>
+<section><h2><span class="section-num">29</span> Error Frecuente #1: Confundir Filas y Columnas</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Índices intercambiados</div><div class="code-window"><div class="code-header"><span class="code-title">filas_columnas.py</span><span class="code-badge">Con error</span></div><div class="code-body">m = [[<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>], [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>]]
+<span class="c-fn">print</span>(m[<span class="c-num">2</span>][<span class="c-num">0</span>])</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2, in &lt;module&gt;
+    print(m[2][0])
+          ~^^^
+IndexError: list index out of range</div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>m</code> tiene <b>2 filas</b> y <b>3 columnas</b>. <code>m[2][0]</code> pide la <b>fila 2</b>, que <b>no existe</b> (las filas son 0 y 1). El elemento de la <b>fila 0, columna 2</b> es <code>m[0][2]</code>.</p></div></div><table class="trace-table"><thead><tr><th>Pregunta</th><th>Respuesta</th><th>Cómo se calcula</th></tr></thead><tbody><tr><td>¿Cuántas filas?</td><td>2</td><td><code>len(m)</code></td></tr><tr><td>¿Cuántas columnas?</td><td>3</td><td><code>len(m[0])</code></td></tr><tr><td>Último índice de fila</td><td>1</td><td><code>len(m) - 1</code></td></tr><tr><td>Último índice de columna</td><td>2</td><td><code>len(m[0]) - 1</code></td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Regla</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Siempre <b><code>matriz[fila][columna]</code></b>: primero la fila (<b>vertical</b>), después la columna (<b>horizontal</b>). Para recordarlo: <b>"primero bajo, después avanzo"</b>.</p></div></section>
+<section><h2><span class="section-num">30</span> Error Frecuente #2: Bucles y Límites</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Usar el mismo límite para filas y columnas</div><div class="code-window"><div class="code-header"><span class="code-title">limites.py</span><span class="code-badge">Con error</span></div><div class="code-body">m = [[<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>], [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>]]
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>):
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>):
+        <span class="c-fn">print</span>(m[i][j], end=<span class="c-str">" "</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1 2 3 4 5 6 Traceback (most recent call last):
+  File "ejemplo.py", line 4, in &lt;module&gt;
+    print(m[i][j], end=" ")
+          ~^^^
+IndexError: list index out of range</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Olvidar reiniciar el acumulador</div><div class="code-window"><div class="code-header"><span class="code-title">acumulador.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">m = [[<span class="c-num">1</span>, <span class="c-num">2</span>], [<span class="c-num">3</span>, <span class="c-num">4</span>]]
+suma = <span class="c-num">0</span>
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> m:
+    <span class="c-kw">for</span> x <span class="c-kw">in</span> fila:
+        suma += x
+    <span class="c-fn">print</span>(suma, end=<span class="c-str">" "</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">3 10 </div></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Soluciones</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usar <b><code>len(m)</code></b> para las filas y <b><code>len(m[0])</code></b> para las columnas (<b>nunca números fijos</b>).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Si querés <b>la suma de cada fila</b>, poné <code>suma = 0</code> <b>dentro del bucle externo</b> (al empezar cada fila).</li></ul></div></section>
+<section><h2><span class="section-num">31</span> Comparación Final: Matrices en C y Listas Anidadas en Python</h2><table class="trace-table"><thead><tr><th>Aspecto</th><th>Matriz en C</th><th>Lista de listas en Python</th></tr></thead><tbody><tr><td>Declarar</td><td><code>int m[3][3];</code></td><td><code>m = [[0] * 3 for _ in range(3)]</code></td></tr><tr><td>Dimensiones</td><td>Fijas (constantes)</td><td>Variables: se pueden cambiar</td></tr><tr><td>Acceso</td><td><code>m[i][j]</code></td><td><code>m[i][j]</code> (+ índices negativos)</td></tr><tr><td>Tipos</td><td>Todos iguales</td><td>Pueden mezclarse</td></tr><tr><td>Filas distintas</td><td>No (todas iguales)</td><td>Posible (listas "irregulares")</td></tr><tr><td>Fuera de rango</td><td>Comportamiento indefinido</td><td><code>IndexError</code></td></tr><tr><td>Cantidad de filas / columnas</td><td>Variables aparte</td><td><code>len(m)</code> / <code>len(m[0])</code></td></tr><tr><td>Copiar</td><td>Bucle o <code>memcpy</code></td><td><code>copy.deepcopy(m)</code></td></tr><tr><td>Trampa clásica</td><td>Desbordar el arreglo</td><td><b>Filas compartidas</b> y <b>copia superficial</b></td></tr></tbody></table></section>
+<section><h2><span class="section-num">32</span> Buenas Prácticas con Matrices</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b><code>len(m)</code></b> y <b><code>len(m[0])</code></b>, no números fijos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Creá las filas <b>independientes</b> con bucle o comprensión.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Nombrá los índices <b><code>i</code></b> (filas) y <b><code>j</code></b> (columnas).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Dibujá</b> la matriz en papel para planear los bucles.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <code>deepcopy</code> para copiar una matriz.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Encapsulá en <b>funciones</b> (<code>crear</code>, <code>mostrar</code>, <code>sumar_fila</code>).</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>[[0] * c] * f</code></b> (filas compartidas).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Confundir <code>m[i][j]</code> con <code>m[j][i]</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Suponer que <b>todas las filas</b> tienen el mismo largo.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Modificar la matriz <b>que recibís</b> sin avisar.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Más de <b>dos</b> niveles de anidamiento sin necesidad.</li></ul></div></div></section>
+<section><h2><span class="section-num">33</span> Ejercicio 1: ¿Qué Muestra el Programa?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Resolvé a mano</span></div><div class="code-body">m = [[<span class="c-num">2</span>, <span class="c-num">4</span>, <span class="c-num">6</span>],
+     [<span class="c-num">1</span>, <span class="c-num">3</span>, <span class="c-num">5</span>],
+     [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]]
+
+<span class="c-fn">print</span>(m[<span class="c-num">1</span>][<span class="c-num">2</span>], m[-<span class="c-num">1</span>][<span class="c-num">0</span>], <span class="c-fn">len</span>(m), <span class="c-fn">len</span>(m[<span class="c-num">0</span>]))
+total = <span class="c-num">0</span>
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(m)):
+    total += m[i][i]
+<span class="c-fn">print</span>(total)
+<span class="c-fn">print</span>([fila[<span class="c-num">1</span>] <span class="c-kw">for</span> fila <span class="c-kw">in</span> m])</div></div><details class="code-solution"><summary>👁️ Ver respuesta</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Python</span></div><div class="code-body">m = [[<span class="c-num">2</span>, <span class="c-num">4</span>, <span class="c-num">6</span>],
+     [<span class="c-num">1</span>, <span class="c-num">3</span>, <span class="c-num">5</span>],
+     [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]]
+<span class="c-fn">print</span>(m[<span class="c-num">1</span>][<span class="c-num">2</span>], m[-<span class="c-num">1</span>][<span class="c-num">0</span>], <span class="c-fn">len</span>(m), <span class="c-fn">len</span>(m[<span class="c-num">0</span>]))
+total = <span class="c-num">0</span>
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(m)):
+    total += m[i][i]
+<span class="c-fn">print</span>(total)
+<span class="c-fn">print</span>([fila[<span class="c-num">1</span>] <span class="c-kw">for</span> fila <span class="c-kw">in</span> m])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">5 7 3 3
+14
+[4, 3, 8]</div></div></div></div><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>La diagonal principal es <code>2 + 3 + 9 = 14</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>[fila[1] for fila in m]</code> extrae <b>la columna 1</b> (el segundo elemento de cada fila).</li></ul></div></details></section>
+<section><h2><span class="section-num">34</span> Ejercicio 2: Escribí las Funciones</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Para una matriz <code>m</code> (lista de listas de números):</p><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>suma_fila(m, i)</code> y <code>suma_columna(m, j)</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>es_cuadrada(m)</code> → <code>True</code> si tiene la <b>misma cantidad de filas y columnas</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>traza(m)</code> → suma de la <b>diagonal principal</b> (solo cuadradas; devolver <code>None</code> si no lo es).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>mayor(m)</code> → el <b>mayor elemento</b> de la matriz.</li></ul></div><details class="code-solution"><summary>👁️ Ver soluciones</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">suma_fila</span>(m, i):
+    <span class="c-kw">return</span> <span class="c-fn">sum</span>(m[i])
+
+<span class="c-kw">def</span> <span class="c-fn">suma_columna</span>(m, j):
+    total = <span class="c-num">0</span>
+    <span class="c-kw">for</span> fila <span class="c-kw">in</span> m:
+        total += fila[j]
+    <span class="c-kw">return</span> total
+
+<span class="c-kw">def</span> <span class="c-fn">es_cuadrada</span>(m):
+    <span class="c-kw">return</span> <span class="c-fn">len</span>(m) == <span class="c-fn">len</span>(m[<span class="c-num">0</span>])
+
+<span class="c-kw">def</span> <span class="c-fn">traza</span>(m):
+    <span class="c-kw">if</span> <span class="c-kw">not</span> es_cuadrada(m):
+        <span class="c-kw">return</span> <span class="c-kw">None</span>
+    <span class="c-kw">return</span> <span class="c-fn">sum</span>(m[i][i] <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(m)))
+
+<span class="c-kw">def</span> <span class="c-fn">mayor</span>(m):
+    resultado = m[<span class="c-num">0</span>][<span class="c-num">0</span>]
+    <span class="c-kw">for</span> fila <span class="c-kw">in</span> m:
+        <span class="c-kw">for</span> x <span class="c-kw">in</span> fila:
+            <span class="c-kw">if</span> x &gt; resultado:
+                resultado = x
+    <span class="c-kw">return</span> resultado
+
+m = [[<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>], [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>], [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]]
+<span class="c-fn">print</span>(suma_fila(m, <span class="c-num">1</span>), suma_columna(m, <span class="c-num">2</span>), es_cuadrada(m), traza(m), mayor(m))</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">15 18 True 15 9</div></div></div></details></section>
+<section><h2><span class="section-num">35</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body">m = [[<span class="c-num">0</span>] * <span class="c-num">3</span>] * <span class="c-num">2</span>
+m[<span class="c-num">0</span>][<span class="c-num">1</span>] = <span class="c-num">7</span>
+<span class="c-fn">print</span>(m)
+
+n = [[<span class="c-num">1</span>, <span class="c-num">2</span>], [<span class="c-num">3</span>, <span class="c-num">4</span>]]
+<span class="c-fn">print</span>(n[<span class="c-num">2</span>][<span class="c-num">1</span>])
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(n[<span class="c-num">0</span>]) * <span class="c-fn">len</span>(n[<span class="c-num">1</span>]) + n[<span class="c-num">1</span>][<span class="c-num">2</span>])
+
+copia = n.copy()
+copia[<span class="c-num">0</span>][<span class="c-num">0</span>] = <span class="c-num">100</span>
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(n)):
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(n)):
+        <span class="c-fn">print</span>(n[j][i], end=<span class="c-str">" "</span>)</div></div><details class="code-solution"><summary>👁️ Ver errores y solución</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>[[0] * 3] * 2</code>: <b>filas compartidas</b>; usar <code>[[0] * 3 for _ in range(2)]</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>n[2][1]</code>: <code>n</code> tiene solo las filas 0 y 1 → <code>IndexError</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>n[1][2]</code>: la fila 1 tiene columnas 0 y 1 → <code>IndexError</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>n.copy()</code> es <b>superficial</b>: modificar <code>copia[0][0]</code> también <b>cambia <code>n</code></b> → <code>copy.deepcopy(n)</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Último bucle: usa <code>n[j][i]</code> (índices <b>invertidos</b>) y el mismo límite para filas y columnas; solo funciona por ser cuadrada. Mejor <code>n[i][j]</code> con <code>len(n[i])</code>.</li></ul></div></details></section>
+<section><h2><span class="section-num">36</span> Ejercicio 4 (Reto): Cuadrado Mágico y Triángulo de Pascal</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">A) Cuadrado mágico</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un cuadrado de <b>3 × 3</b> es <b>mágico</b> si <b>todas las filas, todas las columnas y las dos diagonales suman lo mismo</b>. Escribí <code>es_magico(m)</code> y probala con <code>[[2, 7, 6], [9, 5, 1], [4, 3, 8]]</code>.</p></div><div class="box box-purple"><h4 style="color:var(--accent-purple);">B) Triángulo de Pascal</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Generá las primeras <b>6 filas</b> del triángulo de Pascal: cada elemento es la <b>suma de los dos de arriba</b> (los extremos valen 1).</p></div><details class="code-solution"><summary>👁️ Ver soluciones</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio4.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">es_magico</span>(m):
+    n = <span class="c-fn">len</span>(m)
+    objetivo = <span class="c-fn">sum</span>(m[<span class="c-num">0</span>])
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(n):
+        <span class="c-kw">if</span> <span class="c-fn">sum</span>(m[i]) != objetivo:
+            <span class="c-kw">return</span> <span class="c-kw">False</span>
+        <span class="c-kw">if</span> <span class="c-fn">sum</span>(m[k][i] <span class="c-kw">for</span> k <span class="c-kw">in</span> <span class="c-fn">range</span>(n)) != objetivo:
+            <span class="c-kw">return</span> <span class="c-kw">False</span>
+    <span class="c-kw">if</span> <span class="c-fn">sum</span>(m[i][i] <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(n)) != objetivo:
+        <span class="c-kw">return</span> <span class="c-kw">False</span>
+    <span class="c-kw">return</span> <span class="c-fn">sum</span>(m[i][n - <span class="c-num">1</span> - i] <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(n)) == objetivo
+
+<span class="c-fn">print</span>(es_magico([[<span class="c-num">2</span>, <span class="c-num">7</span>, <span class="c-num">6</span>], [<span class="c-num">9</span>, <span class="c-num">5</span>, <span class="c-num">1</span>], [<span class="c-num">4</span>, <span class="c-num">3</span>, <span class="c-num">8</span>]]))
+<span class="c-fn">print</span>(es_magico([[<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>], [<span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>], [<span class="c-num">7</span>, <span class="c-num">8</span>, <span class="c-num">9</span>]]))
+
+pascal = []
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">6</span>):
+    fila = [<span class="c-num">1</span>] * (i + <span class="c-num">1</span>)
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, i):
+        fila[j] = pascal[i - <span class="c-num">1</span>][j - <span class="c-num">1</span>] + pascal[i - <span class="c-num">1</span>][j]
+    pascal.append(fila)
+<span class="c-kw">for</span> fila <span class="c-kw">in</span> pascal:
+    <span class="c-fn">print</span>(fila)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">True
+False
+[1]
+[1, 1]
+[1, 2, 1]
+[1, 3, 3, 1]
+[1, 4, 6, 4, 1]
+[1, 5, 10, 10, 5, 1]</div></div></div></details></section>
+<section><h2><span class="section-num">37</span> Resumen de la Unidad 15</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Una <b>matriz</b> en Python es una <b>lista de listas</b>: <code>m = [[1, 2], [3, 4]]</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>m[i][j]</code> → fila <code>i</code>, columna <code>j</code>. Filas: <code>len(m)</code>; columnas: <code>len(m[0])</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Se recorre con <b><code>for</code> anidados</b> (fila por fila).</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Diagonal principal: <code>i == j</code>; secundaria: <code>i + j == n - 1</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Nunca</b> <code>[[0] * c] * f</code>: usá <b>comprensión</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>.copy()</code> es <b>superficial</b>: usá <b><code>copy.deepcopy</code></b>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Sé acceder y modificar <code>m[i][j]</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Puedo recorrer por filas y por columnas?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé crear una matriz de filas independientes?</div><div class="checklist-item"><span class="icon">✓</span> ¿Escribo las condiciones de las diagonales?</div><div class="checklist-item"><span class="icon">✓</span> ¿Entiendo la diferencia entre copia superficial y profunda?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 15 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Listas Anidadas y Matrices</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="14-listas-recorridos-y-algoritmos.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Listas: Recorridos y Algoritmos</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="16-manejo-de-archivos-lectura-escritura.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Manejo de Archivos: Lectura y Escritura →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

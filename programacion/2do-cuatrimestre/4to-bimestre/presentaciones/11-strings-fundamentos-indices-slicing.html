@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 11: Strings: Fundamentos, Índices y Slicing | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 11</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 11</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Strings: Fundamentos, Índices y Slicing</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Trabajar con texto en Python: qué es una cadena, posiciones e índices (positivos y negativos), len(), recorrer, concatenar, repetir, rebanar con [inicio:fin:paso] e inmutabilidad</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">Qué es un string</span><span class="badge badge-indigo">Índices</span><span class="badge badge-emerald">len()</span><span class="badge badge-amber">Recorrer</span><span class="badge badge-purple">Slicing</span><span class="badge badge-rose">Inmutabilidad</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 38 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: Del char[] de C al str de Python</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya conocemos de C</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>El texto se guardaba en un <b>arreglo de <code>char</code></b>: <code>char nombre[20];</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Terminaba con el carácter nulo <b><code>\0</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Había que usar <b><code>strlen</code></b>, <b><code>strcpy</code></b>, <b><code>strcat</code></b>, <b><code>strcmp</code></b> de <code>string.h</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los índices empezaban en <b>0</b>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender en Python</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>El tipo <b><code>str</code></b>: no hay <code>\0</code>, ni tamaño fijo.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Índices</b> positivos y <b>negativos</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>len()</code> y recorrer con <code>for</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>+</code> y <code>*</code> con textos, y los operadores <code>in</code> / <code>not in</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Slicing</b>: cortar partes de un texto.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Por qué los strings son <b>inmutables</b>.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que puedas <b>acceder a cualquier parte</b> de un texto (un carácter o un fragmento) y que entiendas <b>por qué no se puede modificar</b> una letra directamente.</p></div></section>
+<section><h2><span class="section-num">02</span> ¿Qué Es un String?</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un <b>string</b> (cadena de caracteres) es una <b>secuencia ordenada de caracteres</b>: letras, números, símbolos o espacios que representan <b>texto</b>. En Python su tipo se llama <b><code>str</code></b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">que_es_string.py</span><span class="code-badge">Python</span></div><div class="code-body">nombre = <span class="c-str">"Agustin"</span>
+saludo = <span class="c-str">'Hola, ¿cómo estás?'</span>
+codigo = <span class="c-str">"A-104"</span>
+numeros = <span class="c-str">"12345"</span>
+vacio = <span class="c-str">""</span>
+
+<span class="c-fn">print</span>(nombre, <span class="c-fn">type</span>(nombre))
+<span class="c-fn">print</span>(saludo)
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(vacio))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Agustin &lt;class 'str'&gt;
+Hola, ¿cómo estás?
+0</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Es una secuencia</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Cada carácter ocupa <b>una posición</b> y el <b>orden importa</b>: <code>"roma"</code> y <code>"amor"</code> tienen las mismas letras, pero son <b>textos distintos</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">No hay <code>char nombre[20]</code>, ni tamaño máximo, ni <code>\0</code> final: Python <b>se ocupa de la memoria</b>. Un carácter suelto es <b>también un <code>str</code></b> (de longitud 1).</p></div></div></section>
+<section><h2><span class="section-num">03</span> Distintas Formas de Escribir un String</h2><table class="trace-table"><thead><tr><th>Forma</th><th>Ejemplo</th><th>Cuándo usarla</th></tr></thead><tbody><tr><td>Comillas <b>dobles</b></td><td><code>"Hola mundo"</code></td><td>La más habitual</td></tr><tr><td>Comillas <b>simples</b></td><td><code>'Hola mundo'</code></td><td>Equivalente a las dobles</td></tr><tr><td>Con comilla <b>adentro</b></td><td><code>"It's Python"</code> o <code>'Dijo "hola"'</code></td><td>Usá la otra clase de comillas para encerrarlo</td></tr><tr><td><b>Triples</b> comillas</td><td><code>"""Línea 1<br>Línea 2"""</code></td><td>Textos de <b>varias líneas</b></td></tr><tr><td><b>Vacío</b></td><td><code>""</code></td><td>Longitud 0</td></tr></tbody></table><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">formas_de_escribir.py</span><span class="code-badge">Python</span></div><div class="code-body">a = <span class="c-str">"Dijo: 'Hola'"</span>
+b = <span class="c-str">'Dijo: "Hola"'</span>
+c = <span class="c-str">"""Primera línea
+Segunda línea
+Tercera línea"""</span>
+<span class="c-fn">print</span>(a)
+<span class="c-fn">print</span>(b)
+<span class="c-fn">print</span>(c)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Dijo: 'Hola'
+Dijo: "Hola"
+Primera línea
+Segunda línea
+Tercera línea</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Regla</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Las comillas de <b>apertura y cierre</b> deben ser <b>del mismo tipo</b>. <code>"Hola'</code> es un error de sintaxis.</p></div></section>
+<section><h2><span class="section-num">04</span> Caracteres Especiales: Secuencias de Escape</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">La barra invertida <code>\</code> seguida de una letra representa un carácter <b>que no se puede escribir directamente</b>:</p><table class="trace-table"><thead><tr><th>Secuencia</th><th>Significado</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>\n</code></td><td>Salto de línea</td><td><code>print("A\nB")</code></td></tr><tr><td><code>\t</code></td><td>Tabulación</td><td><code>print("A\tB")</code></td></tr><tr><td><code>\"</code></td><td>Comilla doble dentro de comillas dobles</td><td><code>print("Dijo \"hola\"")</code></td></tr><tr><td><code>\\</code></td><td>Una barra invertida</td><td><code>print("C:\\carpeta")</code></td></tr></tbody></table><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">escapes.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-str">"Linea 1\nLinea 2"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Nombre:\tAna"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Dijo \"hola\""</span>)
+<span class="c-fn">print</span>(<span class="c-str">"C:\\Usuarios\\Ana"</span>)
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(<span class="c-str">"a\nb"</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Linea 1
+Linea 2
+Nombre:	Ana
+Dijo "hola"
+C:\Usuarios\Ana
+3</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dato</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>"a\nb"</code> tiene <b>3 caracteres</b> (<code>a</code>, el salto de línea y <code>b</code>): la secuencia de escape cuenta como <b>un solo carácter</b>, aunque se escriba con dos símbolos.</p></div></section>
+<section><h2><span class="section-num">05</span> Los Caracteres Tienen Posiciones: los Índices</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Cada carácter de un string ocupa una <b>posición</b> numerada. Esa posición se llama <b>índice</b> y <b>empieza en 0</b>:</p><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">0</div><div class="array-cell ">H</div></div><div class="array-cell-wrapper"><div class="array-index">1</div><div class="array-cell ">o</div></div><div class="array-cell-wrapper"><div class="array-index">2</div><div class="array-cell ">l</div></div><div class="array-cell-wrapper"><div class="array-index">3</div><div class="array-cell ">a</div></div></div><p style="text-align:center; font-size:0.78rem; color: var(--text-muted); margin:0 0 6px;"><code>palabra = "Hola"</code> → el primer carácter está en el índice <b>0</b>; el último, en el índice <b>3</b>.</p><table class="trace-table"><thead><tr><th>Carácter</th><th><code>H</code></th><th><code>o</code></th><th><code>l</code></th><th><code>a</code></th></tr></thead><tbody><tr><td><b>Índice</b></td><td>0</td><td>1</td><td>2</td><td>3</td></tr></tbody></table><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Igual que en los <b>arreglos de <code>char</code></b>: el primer elemento es el <code>[0]</code>. Si el texto tiene <b>n</b> caracteres, los índices válidos van de <b>0 a n − 1</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Error típico</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Contar desde 1 ("la primera letra es la 1"). En programación <b>la primera es la 0</b>.</p></div></div></section>
+<section><h2><span class="section-num">06</span> Acceder a un Carácter: texto[indice]</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-cyan);">texto</span>[<span style="color:var(--accent-amber);">indice</span>]</div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">acceso_indice.py</span><span class="code-badge">Python</span></div><div class="code-body">palabra = <span class="c-str">"Hola"</span>
+
+<span class="c-fn">print</span>(palabra[<span class="c-num">0</span>])
+<span class="c-fn">print</span>(palabra[<span class="c-num">1</span>])
+<span class="c-fn">print</span>(palabra[<span class="c-num">3</span>])
+
+primera = palabra[<span class="c-num">0</span>]
+<span class="c-fn">print</span>(<span class="c-str">"La primera letra es"</span>, primera)
+<span class="c-fn">print</span>(<span class="c-fn">type</span>(primera))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">H
+o
+a
+La primera letra es H
+&lt;class 'str'&gt;</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><code>palabra</code> → el string sobre el que se trabaja.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><code>[ ]</code> → <b>corchetes</b>: indican "dame el carácter de la posición...".</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;"><code>indice</code> → un <b>entero</b> con la posición (0 es la primera).</div></div><div class="step-item"><span class="step-num">4</span><div class="step-content" style="font-size:0.84rem;">El resultado es <b>un nuevo <code>str</code> de un solo carácter</b> (no existe un tipo <code>char</code>).</div></div></div></section>
+<section><h2><span class="section-num">07</span> Índices Negativos: Contar Desde el Final</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Python permite usar <b>números negativos</b> para contar <b>desde el final</b>: <code>-1</code> es <b>el último</b> carácter, <code>-2</code> el penúltimo, etc.</p></div><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">0</div><div class="array-cell ">H</div></div><div class="array-cell-wrapper"><div class="array-index">1</div><div class="array-cell ">o</div></div><div class="array-cell-wrapper"><div class="array-index">2</div><div class="array-cell ">l</div></div><div class="array-cell-wrapper"><div class="array-index">3</div><div class="array-cell ">a</div></div></div><p style="text-align:center; font-size:0.78rem; color: var(--text-muted); margin:0 0 6px;">Índices positivos (desde el inicio)</p><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">-4</div><div class="array-cell ">H</div></div><div class="array-cell-wrapper"><div class="array-index">-3</div><div class="array-cell ">o</div></div><div class="array-cell-wrapper"><div class="array-index">-2</div><div class="array-cell ">l</div></div><div class="array-cell-wrapper"><div class="array-index">-1</div><div class="array-cell match">a</div></div></div><p style="text-align:center; font-size:0.78rem; color: var(--text-muted); margin:0 0 6px;">Índices negativos (desde el final)</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">indices_negativos.py</span><span class="code-badge">Python</span></div><div class="code-body">palabra = <span class="c-str">"Hola"</span>
+<span class="c-fn">print</span>(palabra[-<span class="c-num">1</span>])
+<span class="c-fn">print</span>(palabra[-<span class="c-num">2</span>])
+<span class="c-fn">print</span>(palabra[-<span class="c-num">4</span>])
+<span class="c-fn">print</span>(palabra[<span class="c-fn">len</span>(palabra) - <span class="c-num">1</span>])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">a
+l
+H
+a</div></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Para qué sirven</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>texto[-1]</code> es la forma <b>más cómoda</b> de obtener el <b>último carácter</b> sin saber cuántos tiene el texto. En C había que escribir <code>texto[strlen(texto) - 1]</code>.</p></div></section>
+<section><h2><span class="section-num">08</span> Error: Índice Fuera de Rango (IndexError)</h2><div class="code-window"><div class="code-header"><span class="code-title">fuera_de_rango.py</span><span class="code-badge">Con error</span></div><div class="code-body">palabra = <span class="c-str">"Hola"</span>
+<span class="c-fn">print</span>(palabra[<span class="c-num">4</span>])</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2, in &lt;module&gt;
+    print(palabra[4])
+          ~~~~~~~^^^
+IndexError: string index out of range</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>"Hola"</code> tiene 4 caracteres: índices <b>0, 1, 2, 3</b>. El índice <b>4 no existe</b>: Python avisa con <code>IndexError: string index out of range</code>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Rangos válidos</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Con <b>n</b> caracteres:</p><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Positivos: de <b>0</b> a <b>n − 1</b>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Negativos: de <b>−1</b> a <b>−n</b>.</li></ul></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">En C, leer fuera del arreglo <b>no daba error</b>: leía memoria que no era tuya (comportamiento <b>indefinido</b>). Python <b>se detiene y avisa</b>: más seguro.</p></div></section>
+<section><h2><span class="section-num">09</span> Longitud de un String: len()</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>len(texto)</code> <b>devuelve la cantidad de caracteres</b> de un string (incluyendo <b>espacios</b> y signos de puntuación). Es el equivalente de <code>strlen</code> de C.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">len_texto.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-fn">len</span>(<span class="c-str">"Hola"</span>))
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(<span class="c-str">"Hola mundo"</span>))
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(<span class="c-str">""</span>))
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(<span class="c-str">"  "</span>))
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(<span class="c-str">"¡Sí!"</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">4
+10
+0
+2
+4</div></div></div></div><table class="trace-table"><thead><tr><th>Texto</th><th><code>len</code></th><th>Por qué</th></tr></thead><tbody><tr><td><code>"Hola"</code></td><td>4</td><td>4 letras</td></tr><tr><td><code>"Hola mundo"</code></td><td>10</td><td>9 letras + 1 espacio</td></tr><tr><td><code>""</code></td><td>0</td><td>texto vacío</td></tr><tr><td><code>"  "</code></td><td>2</td><td>dos espacios</td></tr><tr><td><code>"¡Sí!"</code></td><td>4</td><td>los signos y las tildes también cuentan</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Relación con los índices</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b>Último índice = <code>len(texto) - 1</code></b>. Por eso <code>texto[len(texto)]</code> <b>siempre</b> da <code>IndexError</code>.</p></div></section>
+<section><h2><span class="section-num">10</span> Recorrer un String con for</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">recorrer_for.py</span><span class="code-badge">Python</span></div><div class="code-body">palabra = <span class="c-str">"Hola"</span>
+
+<span class="c-kw">for</span> caracter <span class="c-kw">in</span> palabra:
+    <span class="c-fn">print</span>(caracter)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">H
+o
+l
+a</div></div></div></div><table class="trace-table"><thead><tr><th>Vuelta</th><th><code>caracter</code></th><th>Muestra</th></tr></thead><tbody><tr><td>1</td><td><code>"H"</code></td><td><code>H</code></td></tr><tr><td>2</td><td><code>"o"</code></td><td><code>o</code></td></tr><tr><td>3</td><td><code>"l"</code></td><td><code>l</code></td></tr><tr><td>4</td><td><code>"a"</code></td><td><code>a</code></td></tr></tbody></table><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">La forma más simple</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Python <b>entrega un carácter por vuelta</b>, de izquierda a derecha, y termina solo. <b>No necesitás índices.</b> Usala cuando solo te importan los <b>caracteres</b>, no sus <b>posiciones</b>.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En C: <code>for (i = 0; texto[i] != '\0'; i++)</code>. En Python <b>no hay que buscar el final</b>.</p></div></div></section>
+<section><h2><span class="section-num">11</span> Recorrer un String con Índices</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">recorrer_indices.py</span><span class="code-badge">Python</span></div><div class="code-body">palabra = <span class="c-str">"Hola"</span>
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(palabra)):
+    <span class="c-fn">print</span>(i, palabra[i])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">0 H
+1 o
+2 l
+3 a</div></div></div></div><table class="trace-table"><thead><tr><th><code>i</code></th><th><code>palabra[i]</code></th></tr></thead><tbody><tr><td>0</td><td><code>"H"</code></td></tr><tr><td>1</td><td><code>"o"</code></td></tr><tr><td>2</td><td><code>"l"</code></td></tr><tr><td>3</td><td><code>"a"</code></td></tr></tbody></table><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.86rem;"><code>len(palabra)</code> → <code>4</code>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.86rem;"><code>range(4)</code> → <code>0, 1, 2, 3</code>: <b>exactamente los índices válidos</b>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.86rem;"><code>palabra[i]</code> → el carácter de cada posición.</div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">¿Cuál usar?</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>for c in texto</code></b> → si solo necesitás los <b>caracteres</b>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>for i in range(len(texto))</code></b> → si necesitás <b>la posición</b> (comparar con el vecino, mostrar el número, etc.).</li></ul></div></section>
+<section><h2><span class="section-num">12</span> Recorrer con Posición y Carácter a la Vez: enumerate()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">enumerate.py</span><span class="code-badge">Python</span></div><div class="code-body">palabra = <span class="c-str">"Hola"</span>
+
+<span class="c-kw">for</span> i, letra <span class="c-kw">in</span> <span class="c-fn">enumerate</span>(palabra):
+    <span class="c-fn">print</span>(<span class="c-str">f"Posición {i}: {letra}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Posición 0: H
+Posición 1: o
+Posición 2: l
+Posición 3: a</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué hace</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>enumerate(texto)</code> entrega <b>pares</b> <code>(índice, carácter)</code>. <code>for i, letra in ...</code> los <b>desempaqueta</b> en dos variables en cada vuelta (como en la unidad 10).</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Ventaja</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Evita <code>range(len(...))</code> y <code>texto[i]</code>. El código queda <b>más corto y claro</b> cuando necesitás <b>ambos</b> datos.</p></div></div></section>
+<section><h2><span class="section-num">13</span> Concatenación: Unir Strings con +</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">concatenar.py</span><span class="code-badge">Python</span></div><div class="code-body">nombre = <span class="c-str">"Juan"</span>
+apellido = <span class="c-str">"Perez"</span>
+
+completo = nombre + <span class="c-str">" "</span> + apellido
+<span class="c-fn">print</span>(completo)
+<span class="c-fn">print</span>(nombre + apellido)
+<span class="c-fn">print</span>(<span class="c-str">"Hola, "</span> + nombre + <span class="c-str">"!"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Juan Perez
+JuanPerez
+Hola, Juan!</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cómo funciona</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>+</code> entre dos <code>str</code> <b>crea un nuevo string</b> con uno <b>a continuación</b> del otro. <b>No agrega espacios</b>: hay que escribirlos (<code>" "</code>).</p></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Solo entre strings</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>"Edad: " + 18</code> → <code>TypeError</code>. Convertí con <code>str(18)</code> o usá una <b>f-string</b>.</p></div></div></section>
+<section><h2><span class="section-num">14</span> Repetición: Repetir un String con *</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">repetir.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-str">"Hola "</span> * <span class="c-num">3</span>)
+<span class="c-fn">print</span>(<span class="c-str">"-"</span> * <span class="c-num">20</span>)
+<span class="c-fn">print</span>(<span class="c-str">"="</span> * <span class="c-num">10</span> + <span class="c-str">" TÍTULO "</span> + <span class="c-str">"="</span> * <span class="c-num">10</span>)
+<span class="c-fn">print</span>(<span class="c-str">"ab"</span> * <span class="c-num">0</span> == <span class="c-str">""</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola Hola Hola 
+--------------------
+========== TÍTULO ==========
+True</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cómo funciona</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>texto * n</code> <b>repite</b> el texto <code>n</code> veces (con <code>n</code> entero). Si <code>n</code> es 0 o negativo, el resultado es <b>el texto vacío</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Para qué sirve</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Dibujar <b>líneas y separadores</b>, armar <b>patrones</b> (pirámides) y <b>rellenar</b> con espacios. Reemplaza los bucles que usábamos para dibujar con <code>*</code>.</p></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">escalera.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">5</span>):
+    <span class="c-fn">print</span>(<span class="c-str">"*"</span> * i)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">*
+**
+***
+****</div></div></div></div></section>
+<section><h2><span class="section-num">15</span> Los Operadores in y not in</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>fragmento in texto</code> es <code>True</code> si el <b>fragmento aparece en algún lugar</b> del texto. <code>not in</code> pregunta lo contrario. Distingue <b>mayúsculas y minúsculas</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">operador_in.py</span><span class="code-badge">Python</span></div><div class="code-body">frase = <span class="c-str">"Aprendo Python"</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"Python"</span> <span class="c-kw">in</span> frase)
+<span class="c-fn">print</span>(<span class="c-str">"python"</span> <span class="c-kw">in</span> frase)
+<span class="c-fn">print</span>(<span class="c-str">"e"</span> <span class="c-kw">in</span> frase)
+<span class="c-fn">print</span>(<span class="c-str">"xyz"</span> <span class="c-kw">not</span> <span class="c-kw">in</span> frase)
+<span class="c-fn">print</span>(<span class="c-str">""</span> <span class="c-kw">in</span> frase)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">True
+False
+True
+True
+True</div></div></div></div><table class="trace-table"><thead><tr><th>Expresión</th><th>Resultado</th><th>Motivo</th></tr></thead><tbody><tr><td><code>"Python" in frase</code></td><td><code>True</code></td><td>Aparece exacto</td></tr><tr><td><code>"python" in frase</code></td><td><code>False</code></td><td>Con minúscula <b>no</b> coincide</td></tr><tr><td><code>"xyz" not in frase</code></td><td><code>True</code></td><td>No aparece</td></tr><tr><td><code>"" in frase</code></td><td><code>True</code></td><td>El texto vacío está <b>siempre</b></td></tr></tbody></table><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Sustituye a <code>strstr()</code>: en C devolvía un <b>puntero</b> o <code>NULL</code>; en Python da directamente <b><code>True</code>/<code>False</code></b>.</p></div></section>
+<section><h2><span class="section-num">16</span> Slicing: Cortar Fragmentos de un Texto</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">El <b>slicing</b> (rebanado) permite <b>extraer un fragmento</b> de un string con la sintaxis <code>texto[inicio:fin]</code>. Devuelve <b>un nuevo string</b>.</p></div><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-cyan);">texto</span>[<span style="color:var(--accent-emerald);">inicio</span><span style="color:var(--accent-rose);">:</span><span style="color:var(--accent-amber);">fin</span>]</div><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">0</div><div class="array-cell match">P</div></div><div class="array-cell-wrapper"><div class="array-index">1</div><div class="array-cell match">r</div></div><div class="array-cell-wrapper"><div class="array-index">2</div><div class="array-cell match">o</div></div><div class="array-cell-wrapper"><div class="array-index">3</div><div class="array-cell match">g</div></div><div class="array-cell-wrapper"><div class="array-index">4</div><div class="array-cell ">r</div></div><div class="array-cell-wrapper"><div class="array-index">5</div><div class="array-cell ">a</div></div><div class="array-cell-wrapper"><div class="array-index">6</div><div class="array-cell ">m</div></div><div class="array-cell-wrapper"><div class="array-index">7</div><div class="array-cell ">a</div></div></div><p style="text-align:center; font-size:0.78rem; color: var(--text-muted); margin:0 0 6px;"><code>texto[0:4]</code> toma los índices <b>0, 1, 2 y 3</b> y <b>frena antes del 4</b></p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">slicing_basico.py</span><span class="code-badge">Python</span></div><div class="code-body">texto = <span class="c-str">"Programa"</span>
+<span class="c-fn">print</span>(texto[<span class="c-num">0</span>:<span class="c-num">4</span>])
+<span class="c-fn">print</span>(texto[<span class="c-num">4</span>:<span class="c-num">8</span>])
+<span class="c-fn">print</span>(texto[<span class="c-num">2</span>:<span class="c-num">5</span>])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Prog
+rama
+ogr</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Igual que <code>range</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>inicio</code> está <b>incluido</b>; <b><code>fin</code> NO se incluye</b>. La cantidad de caracteres es <b><code>fin - inicio</code></b>: <code>4 - 0 = 4</code>.</p></div></section>
+<section><h2><span class="section-num">17</span> Slicing: Omitir el Inicio, el Fin y Usar Negativos</h2><table class="trace-table"><thead><tr><th>Escribís</th><th>Significa</th><th>Con <code>"Programa"</code></th></tr></thead><tbody><tr><td><code>texto[:4]</code></td><td>Desde el <b>principio</b> hasta antes del 4</td><td><code>"Prog"</code></td></tr><tr><td><code>texto[4:]</code></td><td>Desde el 4 hasta el <b>final</b></td><td><code>"rama"</code></td></tr><tr><td><code>texto[:]</code></td><td>Una <b>copia completa</b></td><td><code>"Programa"</code></td></tr><tr><td><code>texto[-4:]</code></td><td>Los <b>últimos 4</b> caracteres</td><td><code>"rama"</code></td></tr><tr><td><code>texto[:-1]</code></td><td>Todo <b>menos el último</b></td><td><code>"Program"</code></td></tr><tr><td><code>texto[1:-1]</code></td><td>Sin el primero ni el último</td><td><code>"rogram"</code></td></tr></tbody></table><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">slicing_omitir.py</span><span class="code-badge">Python</span></div><div class="code-body">texto = <span class="c-str">"Programa"</span>
+<span class="c-fn">print</span>(texto[:<span class="c-num">4</span>], texto[<span class="c-num">4</span>:], texto[:])
+<span class="c-fn">print</span>(texto[-<span class="c-num">4</span>:], texto[:-<span class="c-num">1</span>], texto[<span class="c-num">1</span>:-<span class="c-num">1</span>])
+<span class="c-fn">print</span>(texto[<span class="c-num">2</span>:<span class="c-num">100</span>])
+<span class="c-fn">print</span>(texto[<span class="c-num">5</span>:<span class="c-num">2</span>] == <span class="c-str">""</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Prog rama Programa
+rama Program rogram
+ograma
+True</div></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Diferencia con el acceso por índice</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Un <b>índice</b> fuera de rango da <code>IndexError</code>; un <b>slice</b> fuera de rango <b>no da error</b>: se <b>ajusta</b> a lo que haya (<code>texto[2:100]</code> llega hasta el final).</p></div></section>
+<section><h2><span class="section-num">18</span> Slicing con Paso: texto[inicio:fin:paso]</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-cyan);">texto</span>[<span style="color:var(--accent-emerald);">inicio</span><span style="color:var(--accent-rose);">:</span><span style="color:var(--accent-amber);">fin</span><span style="color:var(--accent-rose);">:</span><span style="color:var(--accent-purple);">paso</span>]</div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">slicing_paso.py</span><span class="code-badge">Python</span></div><div class="code-body">texto = <span class="c-str">"ABCDEFGHIJ"</span>
+<span class="c-fn">print</span>(texto[::<span class="c-num">2</span>])
+<span class="c-fn">print</span>(texto[<span class="c-num">1</span>::<span class="c-num">2</span>])
+<span class="c-fn">print</span>(texto[<span class="c-num">2</span>:<span class="c-num">8</span>:<span class="c-num">3</span>])
+<span class="c-fn">print</span>(texto[::-<span class="c-num">1</span>])
+<span class="c-fn">print</span>(texto[::-<span class="c-num">2</span>])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">ACEGI
+BDFHJ
+CF
+JIHGFEDCBA
+JHFDB</div></div></div></div><table class="trace-table"><thead><tr><th>Slice</th><th>Resultado</th><th>Explicación</th></tr></thead><tbody><tr><td><code>texto[::2]</code></td><td><code>ACEGI</code></td><td>Un carácter <b>sí, uno no</b>, desde el principio</td></tr><tr><td><code>texto[1::2]</code></td><td><code>BDFHJ</code></td><td>Igual, desde el índice 1</td></tr><tr><td><code>texto[2:8:3]</code></td><td><code>CF</code></td><td>Índices 2 y 5 (el 8 no entra)</td></tr><tr><td><code>texto[::-1]</code></td><td><code>JIHGFEDCBA</code></td><td>Paso <b>−1</b>: el texto <b>invertido</b></td></tr><tr><td><code>texto[::-2]</code></td><td><code>JHFDB</code></td><td>Invertido, de a 2</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Truco para recordar</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b><code>texto[::-1]</code> invierte cualquier texto.</b> Es la forma más corta de lograrlo.</p></div></section>
+<section><h2><span class="section-num">19</span> Resumen Visual del Slicing</h2><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">0 / -6</div><div class="array-cell ">P</div></div><div class="array-cell-wrapper"><div class="array-index">1 / -5</div><div class="array-cell ">y</div></div><div class="array-cell-wrapper"><div class="array-index">2 / -4</div><div class="array-cell ">t</div></div><div class="array-cell-wrapper"><div class="array-index">3 / -3</div><div class="array-cell ">h</div></div><div class="array-cell-wrapper"><div class="array-index">4 / -2</div><div class="array-cell ">o</div></div><div class="array-cell-wrapper"><div class="array-index">5 / -1</div><div class="array-cell ">n</div></div></div><p style="text-align:center; font-size:0.78rem; color: var(--text-muted); margin:0 0 6px;"><code>"Python"</code> con índices positivos y negativos</p><table class="trace-table"><thead><tr><th>Slice</th><th>Resultado</th></tr></thead><tbody><tr><td><code>"Python"[0:2]</code></td><td><code>"Py"</code></td></tr><tr><td><code>"Python"[2:]</code></td><td><code>"thon"</code></td></tr><tr><td><code>"Python"[-3:]</code></td><td><code>"hon"</code></td></tr><tr><td><code>"Python"[1:-1]</code></td><td><code>"ytho"</code></td></tr><tr><td><code>"Python"[::-1]</code></td><td><code>"nohtyP"</code></td></tr></tbody></table><div class="code-window"><div class="code-header"><span class="code-title">resumen_slicing.py</span><span class="code-badge">Python</span></div><div class="code-body">t = <span class="c-str">"Python"</span>
+<span class="c-fn">print</span>(t[<span class="c-num">0</span>:<span class="c-num">2</span>], t[<span class="c-num">2</span>:], t[-<span class="c-num">3</span>:], t[<span class="c-num">1</span>:-<span class="c-num">1</span>], t[::-<span class="c-num">1</span>])</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Py thon hon ytho nohtyP</div></div></section>
+<section><h2><span class="section-num">20</span> Los Strings Son Inmutables</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><b>Inmutable</b> significa <b>que no se puede modificar una vez creado</b>. No se puede cambiar un carácter de un string "en el lugar": hay que <b>crear uno nuevo</b>.</p></div><div class="code-window"><div class="code-header"><span class="code-title">inmutable.py</span><span class="code-badge">Con error</span></div><div class="code-body">palabra = <span class="c-str">"hola"</span>
+palabra[<span class="c-num">0</span>] = <span class="c-str">"H"</span></div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2, in &lt;module&gt;
+    palabra[0] = "H"
+    ~~~~~~~^^^
+TypeError: 'str' object does not support item assignment</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Intentamos <b>asignar</b> a una posición: <code>TypeError: 'str' object does not support item assignment</code> ("un <code>str</code> no admite asignación por índice").</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">En C, <code>palabra[0] = 'H';</code> <b>sí funcionaba</b> (el arreglo de <code>char</code> era modificable). En Python es <b>distinto</b>: no mezcles las reglas.</p></div></div></section>
+<section><h2><span class="section-num">21</span> Cómo "Modificar" un Texto: Crear Uno Nuevo</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">crear_nuevo.py</span><span class="code-badge">Python</span></div><div class="code-body">palabra = <span class="c-str">"hola"</span>
+
+nueva = <span class="c-str">"H"</span> + palabra[<span class="c-num">1</span>:]
+<span class="c-fn">print</span>(nueva)
+<span class="c-fn">print</span>(palabra)
+
+palabra = <span class="c-str">"H"</span> + palabra[<span class="c-num">1</span>:]
+<span class="c-fn">print</span>(palabra)
+
+otra = palabra[:-<span class="c-num">1</span>] + <span class="c-str">"!"</span>
+<span class="c-fn">print</span>(otra)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Hola
+hola
+Hola
+Hol!</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><code>"H" + palabra[1:]</code> <b>arma un string nuevo</b>: la <code>H</code> más el resto (<code>ola</code>) del original.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;">El original <b>no cambió</b> (<code>palabra</code> sigue siendo <code>"hola"</code>): así se ve que el texto <b>no se modificó</b>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;"><code>palabra = "H" + palabra[1:]</code> <b>reasigna</b> la variable: ahora apunta al string nuevo.</div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Diferencia clave</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b>Modificar</b> un texto ≠ <b>reasignar una variable</b>. El texto <code>"hola"</code> sigue igual en memoria; la variable simplemente <b>pasó a apuntar a otro</b> texto.</p></div></section>
+<section><h2><span class="section-num">22</span> Caracteres y Códigos: ord() y chr()</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Cada carácter tiene un <b>código numérico</b>. <code>ord(c)</code> devuelve el código de un carácter y <code>chr(n)</code> devuelve el carácter de un código. (En C, un <code>char</code> <b>era</b> ese número.)</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ord_chr.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-fn">ord</span>(<span class="c-str">"A"</span>), <span class="c-fn">ord</span>(<span class="c-str">"B"</span>), <span class="c-fn">ord</span>(<span class="c-str">"a"</span>), <span class="c-fn">ord</span>(<span class="c-str">"0"</span>))
+<span class="c-fn">print</span>(<span class="c-fn">chr</span>(<span class="c-num">65</span>), <span class="c-fn">chr</span>(<span class="c-num">97</span>), <span class="c-fn">chr</span>(<span class="c-num">48</span>))
+<span class="c-fn">print</span>(<span class="c-fn">chr</span>(<span class="c-fn">ord</span>(<span class="c-str">"A"</span>) + <span class="c-num">2</span>))
+<span class="c-fn">print</span>(<span class="c-str">"a"</span> &lt; <span class="c-str">"b"</span>, <span class="c-str">"Z"</span> &lt; <span class="c-str">"a"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">65 66 97 48
+A a 0
+C
+True True</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Para qué sirve</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Para <b>mover</b> una letra "n posiciones" (cifrado César), comprobar si una letra está <b>entre <code>a</code> y <code>z</code></b>, o entender <b>por qué</b> las mayúsculas se ordenan antes que las minúsculas.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Diferencia con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En Python <b>no se puede</b> hacer <code>"A" + 2</code>. Hay que pasar por <code>ord</code> y <code>chr</code>: <code>chr(ord("A") + 2)</code> → <code>"C"</code>.</p></div></div></section>
+<section><h2><span class="section-num">23</span> Ejemplo: Iniciales de un Nombre Completo</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">iniciales.py</span><span class="code-badge">Python</span></div><div class="code-body">nombre = <span class="c-str">"Maria"</span>
+apellido = <span class="c-str">"Gonzalez"</span>
+
+iniciales = nombre[<span class="c-num">0</span>] + apellido[<span class="c-num">0</span>]
+<span class="c-fn">print</span>(iniciales)
+<span class="c-fn">print</span>(<span class="c-str">f"{nombre[0]}. {apellido}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">MG
+M. Gonzalez</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>nombre[0]</code> es <b>la primera letra</b>. Combinar <b>indexación</b> y <b>concatenación</b> permite armar nuevos textos a partir de partes de otros.</p></div></section>
+<section><h2><span class="section-num">24</span> Ejemplo: Invertir una Palabra</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Con un bucle (acumulador de texto desde <code>""</code>)</h4><div class="code-window"><div class="code-header"><span class="code-title">invertir_for.py</span><span class="code-badge">Python</span></div><div class="code-body">palabra = <span class="c-str">"Python"</span>
+invertida = <span class="c-str">""</span>
+
+<span class="c-kw">for</span> letra <span class="c-kw">in</span> palabra:
+    invertida = letra + invertida
+
+<span class="c-fn">print</span>(invertida)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">nohtyP</div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con slicing</h4><div class="code-window"><div class="code-header"><span class="code-title">invertir_slice.py</span><span class="code-badge">Python</span></div><div class="code-body">palabra = <span class="c-str">"Python"</span>
+invertida = palabra[::-<span class="c-num">1</span>]
+<span class="c-fn">print</span>(invertida)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">nohtyP</div></div></div></div><table class="trace-table"><thead><tr><th>Vuelta</th><th><code>letra</code></th><th><code>invertida</code> (después)</th></tr></thead><tbody><tr><td>1</td><td><code>"P"</code></td><td><code>"P"</code></td></tr><tr><td>2</td><td><code>"y"</code></td><td><code>"yP"</code></td></tr><tr><td>3</td><td><code>"t"</code></td><td><code>"tyP"</code></td></tr><tr><td>4</td><td><code>"h"</code></td><td><code>"htyP"</code></td></tr><tr><td>5</td><td><code>"o"</code></td><td><code>"ohtyP"</code></td></tr><tr><td>6</td><td><code>"n"</code></td><td><code>"nohtyP"</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">25</span> Ejemplo: Contar Apariciones de una Letra</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">contar_letra.py</span><span class="code-badge">Python</span></div><div class="code-body">frase = <span class="c-fn">input</span>(<span class="c-str">"Escribí una frase: "</span>)
+letra = <span class="c-fn">input</span>(<span class="c-str">"¿Qué letra buscás? "</span>)
+
+contador = <span class="c-num">0</span>
+<span class="c-kw">for</span> caracter <span class="c-kw">in</span> frase:
+    <span class="c-kw">if</span> caracter == letra:
+        contador += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">f"La letra '{letra}' aparece {contador} veces"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Escribí una frase: <span class="terminal-user-input">Programacion en Python</span>
+¿Qué letra buscás? <span class="terminal-user-input">o</span>
+La letra 'o' aparece 3 veces</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Contador + comparación</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">El mismo patrón de contador de la unidad 07, aplicado a <b>cada carácter</b>. Distingue <b>mayúsculas y minúsculas</b>: la <code>P</code> mayúscula <b>no</b> cuenta como <code>p</code>.</p></div></section>
+<section><h2><span class="section-num">26</span> Ejemplo: ¿Es un Palíndromo?</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un <b>palíndromo</b> es una palabra que <b>se lee igual</b> de izquierda a derecha que de derecha a izquierda (<i>neuquen</i>, <i>reconocer</i>).</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">palindromo.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">es_palindromo</span>(palabra):
+    <span class="c-kw">return</span> palabra == palabra[::-<span class="c-num">1</span>]
+
+<span class="c-kw">for</span> p <span class="c-kw">in</span> [<span class="c-str">"neuquen"</span>, <span class="c-str">"reconocer"</span>, <span class="c-str">"python"</span>, <span class="c-str">"a"</span>, <span class="c-str">""</span>]:
+    <span class="c-fn">print</span>(<span class="c-str">f"{p!r:12} -&gt; {es_palindromo(p)}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">'neuquen'    -&gt; True
+'reconocer'  -&gt; True
+'python'     -&gt; False
+'a'          -&gt; True
+''           -&gt; True</div></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Idea</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Se <b>compara el texto con su inverso</b> (<code>[::-1]</code>). Combina <b>slicing</b>, <b>comparación</b> y una <b>función booleana</b>. <code>{p!r}</code> muestra el texto <b>con comillas</b>, útil para ver el vacío (<code>''</code>).</p></div></section>
+<section><h2><span class="section-num">27</span> Error Frecuente #1: Índices Mal Calculados</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Índice igual a len()</div><div class="code-window"><div class="code-header"><span class="code-title">indice_len.py</span><span class="code-badge">Con error</span></div><div class="code-body">texto = <span class="c-str">"Python"</span>
+<span class="c-fn">print</span>(texto[<span class="c-fn">len</span>(texto)])</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2, in &lt;module&gt;
+    print(texto[len(texto)])
+          ~~~~~^^^^^^^^^^^^
+IndexError: string index out of range</div></div></div><div class="correct-card"><div class="correct-title">✅ Último = len() - 1  (o -1)</div><div class="code-window"><div class="code-header"><span class="code-title">indice_ok.py</span><span class="code-badge">OK</span></div><div class="code-body">texto = <span class="c-str">"Python"</span>
+<span class="c-fn">print</span>(texto[<span class="c-fn">len</span>(texto) - <span class="c-num">1</span>], texto[-<span class="c-num">1</span>])</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">n n</div></div></div></div><div class="box box-amber"><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Otro descuido frecuente: pedir "la primera letra" con <code>[1]</code> (devuelve la <b>segunda</b>). La primera es <b><code>[0]</code></b>.</p></div></section>
+<section><h2><span class="section-num">28</span> Error Frecuente #2: Intentar Modificar o Mezclar Tipos</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Modificar un carácter</div><div class="code-window"><div class="code-header"><span class="code-title">modificar.py</span><span class="code-badge">Con error</span></div><div class="code-body">s = <span class="c-str">"casa"</span>
+s[<span class="c-num">0</span>] = <span class="c-str">"m"</span></div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2, in &lt;module&gt;
+    s[0] = "m"
+    ~^^^
+TypeError: 'str' object does not support item assignment</div></div></div><div class="correct-card"><div class="correct-title">✅ Crear un nuevo texto</div><div class="code-window"><div class="code-header"><span class="code-title">nuevo.py</span><span class="code-badge">OK</span></div><div class="code-body">s = <span class="c-str">"casa"</span>
+s = <span class="c-str">"m"</span> + s[<span class="c-num">1</span>:]
+<span class="c-fn">print</span>(s)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">masa</div></div></div></div></section>
+<section><h2><span class="section-num">29</span> Error Frecuente #3: Confusiones con in, comillas y Mayúsculas</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ <code>in</code> con distinta capitalización</div><div class="code-window"><div class="code-header"><span class="code-title">in_mayus.py</span><span class="code-badge">Resultado inesperado</span></div><div class="code-body"><span class="c-fn">print</span>(<span class="c-str">"hola"</span> <span class="c-kw">in</span> <span class="c-str">"Hola mundo"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">False</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Slice con el orden invertido</div><div class="code-window"><div class="code-header"><span class="code-title">slice_vacio.py</span><span class="code-badge">Resultado vacío</span></div><div class="code-body">texto = <span class="c-str">"Python"</span>
+<span class="c-fn">print</span>(<span class="c-str">"["</span> + texto[<span class="c-num">4</span>:<span class="c-num">1</span>] + <span class="c-str">"]"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[]</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Soluciones</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Pasar ambos a minúsculas antes de comparar (<code>.lower()</code>, unidad siguiente).</li></ul></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Slice sin resultado</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si <code>inicio</code> está <b>después</b> de <code>fin</code> (con paso positivo), el resultado es el <b>texto vacío</b> <code>""</code>, <b>sin error</b>.</p></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Descuidos de sintaxis</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Olvidar cerrar las comillas.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Confundir <code>[ ]</code> (índices) con <code>( )</code> (llamadas): <code>texto(0)</code> da <code>TypeError</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usar <code>texto.len()</code>: <code>len</code> es una <b>función</b>, no un método (<code>len(texto)</code>).</li></ul></div></section>
+<section><h2><span class="section-num">30</span> Comparación Final: Strings en C y en Python</h2><table class="trace-table"><thead><tr><th>Aspecto</th><th>C</th><th>Python</th></tr></thead><tbody><tr><td>Tipo</td><td><code>char nombre[20];</code></td><td><code>nombre = "Ana"</code> (<code>str</code>)</td></tr><tr><td>Terminador</td><td><code>\0</code> obligatorio</td><td>No existe</td></tr><tr><td>Tamaño</td><td>Fijo (hay que reservar)</td><td>Variable, automático</td></tr><tr><td>Longitud</td><td><code>strlen(s)</code></td><td><code>len(s)</code></td></tr><tr><td>Un carácter</td><td><code>char c = 'a';</code></td><td><code>c = "a"</code> (un <code>str</code> de largo 1)</td></tr><tr><td>Concatenar</td><td><code>strcat(a, b)</code></td><td><code>a + b</code></td></tr><tr><td>Copiar</td><td><code>strcpy(a, b)</code></td><td><code>a = b</code></td></tr><tr><td>Comparar</td><td><code>strcmp(a, b) == 0</code></td><td><code>a == b</code></td></tr><tr><td>Buscar</td><td><code>strstr(s, t)</code></td><td><code>t in s</code></td></tr><tr><td>Modificar una letra</td><td><code>s[0] = 'H';</code> sí se puede</td><td><b>No se puede</b> (inmutable)</td></tr><tr><td>Último carácter</td><td><code>s[strlen(s) - 1]</code></td><td><code>s[-1]</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">31</span> Buenas Prácticas con Strings</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b>f-strings</b> para armar mensajes.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Preferí <code>for c in texto</code> si <b>no necesitás</b> la posición.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b>índices negativos</b> (<code>[-1]</code>) para el final.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b>slicing</b> en lugar de bucles cuando sea posible (<code>[::-1]</code>).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Convertí a número</b> (<code>int</code>/<code>float</code>) antes de calcular.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Recordá que <b>todo <code>+</code> crea un string nuevo</b>.</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Intentar <b>modificar</b> un carácter con <code>texto[i] = ...</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Concatenar</b> dentro de bucles muy largos sin necesidad.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Comparar textos <b>sin pensar en mayúsculas</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Adivinar</b> índices: probá con <code>len()</code> y con ejemplos cortos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mezclar comillas del mismo tipo dentro del texto.</li></ul></div></div></section>
+<section><h2><span class="section-num">32</span> Ejercicio 1: ¿Qué Valor Tiene Cada Expresión?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Resolvé a mano</span></div><div class="code-body">s = <span class="c-str">"Programacion"</span>
+
+<span class="c-fn">print</span>(s[<span class="c-num">0</span>])
+<span class="c-fn">print</span>(s[-<span class="c-num">1</span>])
+<span class="c-fn">print</span>(s[<span class="c-num">3</span>:<span class="c-num">7</span>])
+<span class="c-fn">print</span>(s[:<span class="c-num">3</span>])
+<span class="c-fn">print</span>(s[-<span class="c-num">4</span>:])
+<span class="c-fn">print</span>(s[::<span class="c-num">3</span>])
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(s) // <span class="c-num">2</span>)
+<span class="c-fn">print</span>(<span class="c-str">"gram"</span> <span class="c-kw">in</span> s, <span class="c-str">"Gram"</span> <span class="c-kw">in</span> s)</div></div><details class="code-solution"><summary>👁️ Ver respuestas</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Python</span></div><div class="code-body">s = <span class="c-str">"Programacion"</span>
+<span class="c-fn">print</span>(s[<span class="c-num">0</span>])
+<span class="c-fn">print</span>(s[-<span class="c-num">1</span>])
+<span class="c-fn">print</span>(s[<span class="c-num">3</span>:<span class="c-num">7</span>])
+<span class="c-fn">print</span>(s[:<span class="c-num">3</span>])
+<span class="c-fn">print</span>(s[-<span class="c-num">4</span>:])
+<span class="c-fn">print</span>(s[::<span class="c-num">3</span>])
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(s) // <span class="c-num">2</span>)
+<span class="c-fn">print</span>(<span class="c-str">"gram"</span> <span class="c-kw">in</span> s, <span class="c-str">"Gram"</span> <span class="c-kw">in</span> s)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">P
+n
+gram
+Pro
+cion
+Pgmi
+6
+True False</div></div></div></div><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>len(s)</code> es 12 → <code>12 // 2</code> = 6. <code>s[::3]</code> toma los índices 0, 3, 6 y 9: <code>P</code>, <code>g</code>, <code>m</code>, <code>i</code> (verificalo con la tabla de índices).</li></ul></div></details></section>
+<section><h2><span class="section-num">33</span> Ejercicio 2: Escribí el Código</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Dada <code>frase = "Aprender Python es divertido"</code>:</p><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mostrá la <b>primera</b> y la <b>última</b> letra.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mostrá solo la palabra <code>Python</code> usando <b>slicing</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mostrá la frase <b>invertida</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Contá <b>cuántas <code>e</code></b> tiene.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mostrá <code>*</code> repetido <b>tantas veces como letras tenga la frase</b> (<code>len</code>).</li></ul></div><details class="code-solution"><summary>👁️ Ver soluciones</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body">frase = <span class="c-str">"Aprender Python es divertido"</span>
+
+<span class="c-fn">print</span>(frase[<span class="c-num">0</span>], frase[-<span class="c-num">1</span>])
+<span class="c-fn">print</span>(frase[<span class="c-num">9</span>:<span class="c-num">15</span>])
+<span class="c-fn">print</span>(frase[::-<span class="c-num">1</span>])
+
+cantidad = <span class="c-num">0</span>
+<span class="c-kw">for</span> c <span class="c-kw">in</span> frase:
+    <span class="c-kw">if</span> c == <span class="c-str">"e"</span>:
+        cantidad += <span class="c-num">1</span>
+<span class="c-fn">print</span>(<span class="c-str">"Cantidad de e:"</span>, cantidad)
+<span class="c-fn">print</span>(<span class="c-str">"*"</span> * <span class="c-fn">len</span>(frase))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">A o
+Python
+oditrevid se nohtyP rednerpA
+Cantidad de e: 4
+****************************</div></div></div></div></div></details></section>
+<section><h2><span class="section-num">34</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body">nombre = "Ana
+<span class="c-fn">print</span>(nombre[<span class="c-num">3</span>])
+nombre[<span class="c-num">0</span>] = <span class="c-str">"E"</span>
+<span class="c-fn">print</span>(<span class="c-str">"Edad: "</span> + <span class="c-num">18</span>)
+<span class="c-fn">print</span>(nombre.<span class="c-fn">len</span>())
+<span class="c-fn">print</span>(nombre[<span class="c-num">1</span>:<span class="c-num">3</span>:<span class="c-num">0</span>])
+<span class="c-fn">print</span>(<span class="c-str">"Hola"</span>[-<span class="c-num">5</span>])</div></div><details class="code-solution"><summary>👁️ Ver errores y solución</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Comilla de cierre <b>faltante</b> en <code>"Ana</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>nombre[3]</code>: <code>"Ana"</code> tiene índices 0 a 2 → <code>IndexError</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>nombre[0] = "E"</code>: los strings son <b>inmutables</b>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>"Edad: " + 18</code> mezcla tipos → <code>str(18)</code> o f-string.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>nombre.len()</code> no existe: <code>len(nombre)</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Paso <code>0</code> en un slice → <code>ValueError</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>"Hola"[-5]</code> fuera de rango (los negativos van de −1 a −4).</li></ul></div></details></section>
+<section><h2><span class="section-num">35</span> Ejercicio 4 (Reto): Procesar un Nombre</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Pedí un <b>nombre completo</b> con <b>dos palabras</b> (por ejemplo <code>Lucia Fernandez</code>). Mostrá: (a) sus <b>iniciales</b> (<code>L.F.</code>), (b) el nombre <b>sin las vocales</b> (recorriendo con <code>for</code>) y (c) el nombre <b>al revés</b>.</p></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio4.py</span><span class="code-badge">Python</span></div><div class="code-body">completo = <span class="c-fn">input</span>(<span class="c-str">"Nombre completo: "</span>)
+
+<span class="c-cmt"># Posición del espacio: ya sabemos buscar con un bucle</span>
+inicial_nombre = completo[<span class="c-num">0</span>]
+inicial_apellido = <span class="c-str">""</span>
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(completo)):
+    <span class="c-kw">if</span> completo[i] == <span class="c-str">" "</span>:
+        inicial_apellido = completo[i + <span class="c-num">1</span>]
+
+sin_vocales = <span class="c-str">""</span>
+<span class="c-kw">for</span> letra <span class="c-kw">in</span> completo:
+    <span class="c-kw">if</span> letra.lower() <span class="c-kw">not</span> <span class="c-kw">in</span> <span class="c-str">"aeiou"</span>:
+        sin_vocales += letra
+
+<span class="c-fn">print</span>(<span class="c-str">f"{inicial_nombre}.{inicial_apellido}."</span>)
+<span class="c-fn">print</span>(sin_vocales)
+<span class="c-fn">print</span>(completo[::-<span class="c-num">1</span>])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Nombre completo: <span class="terminal-user-input">Lucia Fernandez</span>
+L.F.
+Lc Frnndz
+zednanreF aicuL</div></div></div></div></div></details><div class="box box-amber"><h4 style="color:var(--accent-amber);">Nota</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>letra.lower()</code> es un <b>método</b> de los strings: lo estudiamos a fondo en la unidad siguiente.</p></div></section>
+<section><h2><span class="section-num">36</span> Resumen de la Unidad 11</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Un <code>str</code> es una <b>secuencia ordenada de caracteres</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Índices: <b>0</b> a <b>n − 1</b> (o <b>−1</b> a <b>−n</b>). Fuera de rango → <code>IndexError</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>len(texto)</code> da la cantidad de caracteres.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>+</code> <b>une</b>, <code>*</code> <b>repite</b>, <code>in</code> <b>busca</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Slicing:</b> <code>texto[inicio:fin:paso]</code>, el <code>fin</code> <b>no</b> se incluye; <code>[::-1]</code> invierte.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los strings son <b>inmutables</b>: se crean <b>nuevos</b>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Sé qué índice tiene cada letra de "Python"?</div><div class="checklist-item"><span class="icon">✓</span> ¿Entiendo <code>texto[1:-1]</code> y <code>texto[::-1]</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé por qué <code>texto[0] = "H"</code> da error?</div><div class="checklist-item"><span class="icon">✓</span> ¿Elijo bien entre <code>for c in texto</code> y <code>range(len(texto))</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé concatenar texto y números sin errores?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 11 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Strings: Fundamentos, Índices y Slicing</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="10-funciones-alcance-valores-por-defecto.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Funciones: Alcance y Valores por Defecto</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="12-strings-metodos-y-procesamiento.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Strings: Métodos y Procesamiento →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

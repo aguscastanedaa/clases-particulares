@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 17: Archivos: Procesamiento de Datos y Manejo de Errores | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 17</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 17</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Archivos: Procesamiento de Datos y Manejo de Errores</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Programas robustos: capturar errores con try/except, procesar registros guardados (formato CSV), buscar, filtrar, actualizar y eliminar datos en archivos</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">try / except</span><span class="badge badge-indigo">else y finally</span><span class="badge badge-emerald">FileNotFoundError</span><span class="badge badge-amber">Registros con split()</span><span class="badge badge-purple">Actualizar y borrar</span><span class="badge badge-rose">Programas con persistencia</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 37 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: Programas Que No Se Rompen</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya sabemos</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Abrir, leer y escribir archivos con <b><code>with open()</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Modos <code>r</code>, <code>w</code>, <code>a</code>; <code>write</code>, <code>read</code>, recorrer líneas.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>split()</code>, <code>strip()</code>, <code>int()</code> y <code>float()</code> para convertir datos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los errores <b>detienen</b> el programa: <code>ValueError</code>, <code>FileNotFoundError</code>...</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Capturar errores</b> con <b><code>try / except</code></b> (y <code>else</code>, <code>finally</code>).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Validar</b> datos del usuario sin que el programa se rompa.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Manejar <b>archivos inexistentes</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Guardar y leer <b>registros</b> (<code>nombre,nota,...</code>).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Buscar</b>, <b>filtrar</b>, <b>actualizar</b> y <b>eliminar</b> datos de un archivo.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que tus programas <b>no se caigan</b> ante un dato inválido o un archivo faltante, y que puedas <b>mantener datos persistentes</b> (agregar, consultar, modificar, borrar).</p></div></section>
+<section><h2><span class="section-num">02</span> Repaso: Los Errores Detienen el Programa</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Hasta ahora, cuando algo salía mal, Python mostraba un mensaje en rojo y <b>terminaba el programa</b>:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">programa_fragil.py</span><span class="code-badge">Se rompe</span></div><div class="code-body">edad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Edad: "</span>))
+<span class="c-fn">print</span>(<span class="c-str">"Dentro de un año tendrás"</span>, edad + <span class="c-num">1</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Fin del programa"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Edad: <span class="terminal-user-input">dieciocho</span>
+Traceback (most recent call last):
+  File "ejemplo.py", line 1, in &lt;module&gt;
+    edad = int(input("Edad: "))
+ValueError: invalid literal for int() with base 10: 'dieciocho'</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Excepción</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Un error que ocurre <b>durante la ejecución</b> se llama <b>excepción</b>. Si <b>nadie la captura</b>, el programa <b>se interrumpe</b> en esa línea (las siguientes <b>no se ejecutan</b>).</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">La solución</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Python permite <b>anticipar</b> que algo puede fallar y <b>decidir qué hacer</b> si pasa, con la estructura <b><code>try / except</code></b>.</p></div></section>
+<section><h2><span class="section-num">03</span> try / except: Sintaxis</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-amber);">try</span><span style="color:var(--accent-rose);">:</span>   # código que puede fallar</div><div class="code-window"><div class="code-header"><span class="code-title">sintaxis_try.py</span><span class="code-badge">Plantilla</span></div><div class="code-body"><span class="c-kw">try</span>:
+    instrucciones_que_pueden_fallar
+<span class="c-kw">except</span> TipoDeError:
+    que_hacer_si_falla
+resto_del_programa</div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;"><b><code>try:</code></b> → "intentá". El bloque indentado contiene el código <b>que puede fallar</b>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;"><b><code>except TipoDeError:</code></b> → "si ocurre este error". Su bloque <b>solo se ejecuta si hubo una excepción</b> de ese tipo.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;">Si <b>no hay error</b>, el <code>except</code> <b>se saltea</b>. Si lo hay, el programa <b>no se detiene</b>: ejecuta el <code>except</code> y <b>sigue</b> con lo que viene después.</div></div></div></section>
+<section><h2><span class="section-num">04</span> try / except en Acción</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">try_basico.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">try</span>:
+    edad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Edad: "</span>))
+    <span class="c-fn">print</span>(<span class="c-str">"Dentro de un año tendrás"</span>, edad + <span class="c-num">1</span>)
+<span class="c-kw">except</span> ValueError:
+    <span class="c-fn">print</span>(<span class="c-str">"Eso no es un número válido"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"Fin del programa"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Edad: <span class="terminal-user-input">dieciocho</span>
+Eso no es un número válido
+Fin del programa</div></div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">try_basico (otra ejecución)</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">try</span>:
+    edad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Edad: "</span>))
+    <span class="c-fn">print</span>(<span class="c-str">"Dentro de un año tendrás"</span>, edad + <span class="c-num">1</span>)
+<span class="c-kw">except</span> ValueError:
+    <span class="c-fn">print</span>(<span class="c-str">"Eso no es un número válido"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"Fin del programa"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Edad: <span class="terminal-user-input">17</span>
+Dentro de un año tendrás 18
+Fin del programa</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dos caminos</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Dato válido</b> → se ejecuta todo el <code>try</code> y el <code>except</code> <b>se ignora</b>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Dato inválido</b> → falla <code>int(...)</code>, <b>se salta el resto del <code>try</code></b> (no se imprime lo de <code>edad + 1</code>) y se ejecuta el <code>except</code>. En ambos casos <b>el programa llega al final</b>.</li></ul></div></section>
+<section><h2><span class="section-num">05</span> El Flujo de Ejecución con try / except</h2><table class="trace-table"><thead><tr><th>Situación</th><th>Qué ocurre</th></tr></thead><tbody><tr><td>Todo el <code>try</code> funciona</td><td>Se ejecuta <b>todo</b> el bloque <code>try</code>; el <code>except</code> <b>no</b>.</td></tr><tr><td>Falla la <b>línea 2</b> del <code>try</code></td><td>La línea 1 <b>ya se ejecutó</b>; la 2 falla; <b>las líneas 3 en adelante del <code>try</code> NO se ejecutan</b>; se ejecuta el <code>except</code>.</td></tr><tr><td>El error es de <b>otro tipo</b> que el del <code>except</code></td><td>El <code>except</code> <b>no lo atrapa</b>: el error <b>sigue</b> y detiene el programa.</td></tr></tbody></table><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">flujo_try.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">try</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"1) Antes del error"</span>)
+    numero = <span class="c-fn">int</span>(<span class="c-str">"abc"</span>)
+    <span class="c-fn">print</span>(<span class="c-str">"2) Esto no se muestra"</span>)
+<span class="c-kw">except</span> ValueError:
+    <span class="c-fn">print</span>(<span class="c-str">"3) Entró al except"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"4) El programa continúa"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1) Antes del error
+3) Entró al except
+4) El programa continúa</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Clave</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Un <code>try</code> debe contener <b>solo el código que puede fallar</b> (no todo el programa), para <b>saber exactamente</b> qué error se está atrapando.</p></div></section>
+<section><h2><span class="section-num">06</span> Capturar Tipos de Error Específicos</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">except_especifico.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">dividir</span>(a, b):
+    <span class="c-kw">try</span>:
+        <span class="c-kw">return</span> a / b
+    <span class="c-kw">except</span> ZeroDivisionError:
+        <span class="c-fn">print</span>(<span class="c-str">"No se puede dividir por cero"</span>)
+        <span class="c-kw">return</span> <span class="c-kw">None</span>
+
+<span class="c-fn">print</span>(dividir(<span class="c-num">10</span>, <span class="c-num">2</span>))
+<span class="c-fn">print</span>(dividir(<span class="c-num">5</span>, <span class="c-num">0</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">5.0
+No se puede dividir por cero
+None</div></div></div></div><table class="trace-table"><thead><tr><th>Excepción</th><th>Cuándo aparece</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>ValueError</code></td><td>Valor <b>inadecuado</b> para la operación</td><td><code>int("abc")</code></td></tr><tr><td><code>ZeroDivisionError</code></td><td>División por <b>cero</b></td><td><code>5 / 0</code></td></tr><tr><td><code>TypeError</code></td><td>Tipos <b>incompatibles</b></td><td><code>"a" + 1</code></td></tr><tr><td><code>IndexError</code></td><td>Índice <b>fuera de rango</b></td><td><code>[1][5]</code></td></tr><tr><td><code>FileNotFoundError</code></td><td>El archivo <b>no existe</b></td><td><code>open("x.txt")</code></td></tr><tr><td><code>NameError</code></td><td>Nombre <b>no definido</b></td><td><code>print(z)</code></td></tr></tbody></table><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Regla</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Capturá <b>el tipo concreto</b> que esperás. Así <b>no ocultás</b> errores inesperados.</p></div></section>
+<section><h2><span class="section-num">07</span> Varios except y el Mensaje del Error</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">varios_except.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">try</span>:
+    a = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Numerador: "</span>))
+    b = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Denominador: "</span>))
+    <span class="c-fn">print</span>(<span class="c-str">"Resultado:"</span>, a / b)
+<span class="c-kw">except</span> ValueError:
+    <span class="c-fn">print</span>(<span class="c-str">"Debés ingresar números enteros"</span>)
+<span class="c-kw">except</span> ZeroDivisionError:
+    <span class="c-fn">print</span>(<span class="c-str">"El denominador no puede ser cero"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Numerador: <span class="terminal-user-input">10</span>
+Denominador: <span class="terminal-user-input">0</span>
+El denominador no puede ser cero</div></div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">mensaje_error.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">try</span>:
+    numero = <span class="c-fn">int</span>(<span class="c-str">"abc"</span>)
+<span class="c-kw">except</span> ValueError <span class="c-kw">as</span> error:
+    <span class="c-fn">print</span>(<span class="c-str">"Se produjo un error:"</span>, error)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Se produjo un error: invalid literal for int() with base 10: 'abc'</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Varios <code>except</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Se pueden escribir <b>varios</b> (uno por tipo). Python entra en <b>el primero</b> que coincida.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);"><code>as error</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Guarda <b>el objeto de la excepción</b> en una variable. Al imprimirla se ve <b>el mensaje original</b> de Python.</p></div></div></section>
+<section><h2><span class="section-num">08</span> else y finally</h2><div class="code-window"><div class="code-header"><span class="code-title">sintaxis_completa.py</span><span class="code-badge">Estructura completa</span></div><div class="code-body"><span class="c-kw">try</span>:
+    ...codigo que puede fallar...
+<span class="c-kw">except</span> TipoDeError:
+    ...si falla...
+<span class="c-kw">else</span>:
+    ...si NO hubo error...
+<span class="c-kw">finally</span>:
+    ...se ejecuta SIEMPRE...</div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">else_finally.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">try</span>:
+    numero = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número: "</span>))
+<span class="c-kw">except</span> ValueError:
+    <span class="c-fn">print</span>(<span class="c-str">"Inválido"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Doble:"</span>, numero * <span class="c-num">2</span>)
+<span class="c-kw">finally</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Gracias por usar el programa"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Número: <span class="terminal-user-input">21</span>
+Doble: 42
+Gracias por usar el programa</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);"><code>else</code></h4><p style="font-size:0.78rem; line-height:1.55; margin:4px 0;">Se ejecuta <b>solo si el <code>try</code> terminó sin errores</b>: separa lo que <b>puede fallar</b> de lo que se hace <b>si salió bien</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);"><code>finally</code></h4><p style="font-size:0.78rem; line-height:1.55; margin:4px 0;">Se ejecuta <b>siempre</b>, haya error o no (sirve para <b>limpiar o avisar</b>). Es opcional.</p></div></div></section>
+<section><h2><span class="section-num">09</span> Pedir un Número Hasta que Sea Válido</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">pedir_entero.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">pedir_entero</span>(mensaje):
+    <span class="c-kw">while</span> <span class="c-kw">True</span>:
+        <span class="c-kw">try</span>:
+            <span class="c-kw">return</span> <span class="c-fn">int</span>(<span class="c-fn">input</span>(mensaje))
+        <span class="c-kw">except</span> ValueError:
+            <span class="c-fn">print</span>(<span class="c-str">"  Valor inválido. Probá de nuevo."</span>)
+
+edad = pedir_entero(<span class="c-str">"Edad: "</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Edad registrada:"</span>, edad)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Edad: <span class="terminal-user-input">abc</span>
+  Valor inválido. Probá de nuevo.
+Edad: <span class="terminal-user-input">3.5</span>
+  Valor inválido. Probá de nuevo.
+Edad: <span class="terminal-user-input"></span>
+  Valor inválido. Probá de nuevo.
+Edad: <span class="terminal-user-input">25</span>
+Edad registrada: 25</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cómo funciona</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>while True</code> <b>repite</b> hasta que <code>int(...)</code> funcione. Cuando funciona, <b><code>return</code></b> devuelve el número y <b>termina la función</b> (sale del bucle). Si falla, el <code>except</code> avisa y <b>el bucle vuelve a pedir</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Mejora a <code>isdigit()</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Este método <b>sí acepta negativos y cualquier entero válido</b> (<code>"-5"</code>), cosa que <code>isdigit()</code> no hacía (unidad 12). Es la <b>forma más robusta</b>.</p></div></section>
+<section><h2><span class="section-num">10</span> Archivos: Manejar FileNotFoundError</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">archivo_no_existe.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">try</span>:
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"inexistente.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> archivo:
+        contenido = archivo.read()
+        <span class="c-fn">print</span>(contenido)
+<span class="c-kw">except</span> FileNotFoundError:
+    <span class="c-fn">print</span>(<span class="c-str">"El archivo no existe"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">"El programa sigue funcionando"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">El archivo no existe
+El programa sigue funcionando</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Sin <code>try</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El programa <b>se detiene</b> con <code>FileNotFoundError</code> y el usuario ve un mensaje técnico.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con <code>try / except</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El programa <b>muestra un mensaje claro</b> y <b>continúa</b> (o pide otro nombre de archivo).</p></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En C se comprobaba <b><code>if (archivo == NULL)</code></b> después de <code>fopen</code>. En Python se <b>atrapa la excepción</b>: el código "feliz" queda <b>limpio</b> y el manejo de errores <b>aparte</b>.</p></div></section>
+<section><h2><span class="section-num">11</span> Crear el Archivo si No Existe</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">contador_ejecuciones.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">try</span>:
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"contador.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+        veces = <span class="c-fn">int</span>(f.read().strip())
+<span class="c-kw">except</span> FileNotFoundError:
+    veces = <span class="c-num">0</span>
+
+veces += <span class="c-num">1</span>
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"contador.txt"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+    f.write(<span class="c-fn">str</span>(veces))
+
+<span class="c-fn">print</span>(<span class="c-str">"Este programa se ejecutó"</span>, veces, <span class="c-str">"vez/veces"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Este programa se ejecutó 1 vez/veces</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 contador.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">1</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;">Se <b>intenta leer</b> el contador guardado.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;">Si el archivo <b>no existe</b> (primera ejecución), se <b>parte de 0</b>.</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;">Se <b>suma 1</b> y se <b>guarda</b> el nuevo valor (con <code>"w"</code>, <b>reemplazando</b> el anterior).</div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Alternativa</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">El modo <b><code>"a"</code></b> <b>crea</b> el archivo si no existe. Y <code>os.path.exists("archivo.txt")</code> permite <b>comprobar antes</b> (unidad 16).</p></div></section>
+<section><h2><span class="section-num">12</span> Otras Excepciones Frecuentes al Trabajar con Archivos</h2><table class="trace-table"><thead><tr><th>Excepción</th><th>Causa</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>FileNotFoundError</code></td><td>El archivo (o la carpeta) <b>no existe</b></td><td><code>open("x.txt", "r")</code></td></tr><tr><td><code>PermissionError</code></td><td>No tenés <b>permiso</b> para leer/escribir</td><td>Archivo protegido o en uso</td></tr><tr><td><code>IsADirectoryError</code></td><td>Intentás abrir <b>una carpeta</b> como archivo</td><td><code>open("carpeta", "r")</code></td></tr><tr><td><code>FileExistsError</code></td><td>El archivo <b>ya existe</b> (modo <code>"x"</code>)</td><td><code>open("a.txt", "x")</code></td></tr><tr><td><code>UnicodeDecodeError</code></td><td><b>Codificación</b> incorrecta</td><td>Falta <code>encoding="utf-8"</code></td></tr><tr><td><code>OSError</code></td><td><b>Error general</b> del sistema: de él derivan <code>FileNotFoundError</code>, <code>PermissionError</code>, <code>IsADirectoryError</code> y <code>FileExistsError</code></td><td>Disco lleno, ruta inválida...</td></tr></tbody></table><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">modo_x.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">try</span>:
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"x"</span>) <span class="c-kw">as</span> f:
+        f.write(<span class="c-str">"nuevo"</span>)
+<span class="c-kw">except</span> FileExistsError:
+    <span class="c-fn">print</span>(<span class="c-str">"El archivo ya existe: no se sobrescribió"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">El archivo ya existe: no se sobrescribió</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Para atrapar varios</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Con <b><code>except OSError:</code></b> capturás <b>a la vez</b> los errores de acceso a archivos de la tabla (menos <code>UnicodeDecodeError</code>, que es un <code>ValueError</code>).</p></div></section>
+<section><h2><span class="section-num">13</span> Provocar Errores a Propósito: raise</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Una función puede <b>avisar que recibió un dato inválido</b> "lanzando" una excepción con <b><code>raise</code></b>. Es la forma de <b>exigir</b> que se cumplan ciertas reglas.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">raise.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">calcular_promedio</span>(notas):
+    <span class="c-kw">if</span> <span class="c-fn">len</span>(notas) == <span class="c-num">0</span>:
+        <span class="c-kw">raise</span> ValueError(<span class="c-str">"La lista de notas está vacía"</span>)
+    <span class="c-kw">return</span> <span class="c-fn">sum</span>(notas) / <span class="c-fn">len</span>(notas)
+
+<span class="c-kw">try</span>:
+    <span class="c-fn">print</span>(calcular_promedio([<span class="c-num">8</span>, <span class="c-num">6</span>, <span class="c-num">10</span>]))
+    <span class="c-fn">print</span>(calcular_promedio([]))
+<span class="c-kw">except</span> ValueError <span class="c-kw">as</span> error:
+    <span class="c-fn">print</span>(<span class="c-str">"Error:"</span>, error)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">8.0
+Error: La lista de notas está vacía</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Quién decide qué hacer</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">La función <b>detecta</b> el problema (<code>raise</code>); <b>quien la llama</b> decide <b>cómo reaccionar</b> (<code>try/except</code>). Es <b>mejor que devolver <code>-1</code> o <code>None</code></b> cuando el valor inválido <b>no debería pasar</b> nunca.</p></div></section>
+<section><h2><span class="section-num">14</span> Datos Estructurados en Archivos: Formato CSV Sencillo</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Para guardar <b>varios datos por registro</b>, se escribe <b>un registro por línea</b>, con los campos <b>separados por un símbolo</b> (coma, punto y coma, tabulación). Este formato se llama <b>CSV</b> (<i>Comma-Separated Values</i>).</p></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 alumnos.csv</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana,17,8.5
+Luis,18,6.0
+Marta,16,9.75</div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">leer_csv.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"alumnos.csv"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+    <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+        nombre, edad, nota = linea.strip().split(<span class="c-str">","</span>)
+        <span class="c-fn">print</span>(nombre, <span class="c-fn">int</span>(edad) + <span class="c-num">1</span>, <span class="c-fn">float</span>(nota) * <span class="c-num">10</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ana 18 85.0
+Luis 19 60.0
+Marta 17 97.5</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Pasos para leer un registro</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">1. <code>strip()</code> → quitar el <code>\n</code>.  2. <code>split(",")</code> → separar los campos.  3. <b>Desempaquetar</b> y <b>convertir</b> cada campo (<code>int</code>, <code>float</code>).</p></div></section>
+<section><h2><span class="section-num">15</span> Cargar los Registros en una Lista</h2><div class="code-window"><div class="code-header"><span class="code-title">cargar.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">cargar</span>(nombre_archivo):
+    alumnos = []
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(nombre_archivo, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+        <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+            nombre, edad, nota = linea.strip().split(<span class="c-str">","</span>)
+            alumnos.append([nombre, <span class="c-fn">int</span>(edad), <span class="c-fn">float</span>(nota)])
+    <span class="c-kw">return</span> alumnos
+
+datos = cargar(<span class="c-str">"alumnos.csv"</span>)
+<span class="c-fn">print</span>(datos)
+<span class="c-fn">print</span>(datos[<span class="c-num">1</span>][<span class="c-num">0</span>], datos[<span class="c-num">1</span>][<span class="c-num">2</span>])</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[['Ana', 17, 8.5], ['Luis', 18, 6.0], ['Marta', 16, 9.75]]
+Luis 6.0</div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Resultado</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Una <b>lista de listas</b> (como en la unidad 15): cada fila es <b>un alumno</b> <code>[nombre, edad, nota]</code> con <b>cada dato en su tipo</b>. Ahora se puede <b>recorrer, filtrar y ordenar</b> como cualquier lista.</p></div></section>
+<section><h2><span class="section-num">16</span> Guardar una Lista de Registros</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">guardar.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">guardar</span>(nombre_archivo, alumnos):
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(nombre_archivo, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+        <span class="c-kw">for</span> nombre, edad, nota <span class="c-kw">in</span> alumnos:
+            f.write(<span class="c-str">f"{nombre},{edad},{nota}\n"</span>)
+
+alumnos = [[<span class="c-str">"Ana"</span>, <span class="c-num">17</span>, <span class="c-num">8.5</span>], [<span class="c-str">"Luis"</span>, <span class="c-num">18</span>, <span class="c-num">6.0</span>]]
+alumnos.append([<span class="c-str">"Marta"</span>, <span class="c-num">16</span>, <span class="c-num">9.75</span>])
+guardar(<span class="c-str">"alumnos.csv"</span>, alumnos)
+<span class="c-fn">print</span>(<span class="c-str">"Guardados:"</span>, <span class="c-fn">len</span>(alumnos))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Guardados: 3</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 alumnos.csv</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana,17,8.5
+Luis,18,6.0
+Marta,16,9.75</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ida y vuelta</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>guardar</code> y <code>cargar</code> son <b>operaciones inversas</b>. Con ellas, el programa <b>trabaja con listas</b> en memoria y <b>persiste</b> los cambios al archivo cuando hace falta.</p></div></section>
+<section><h2><span class="section-num">17</span> Ejemplo: Promedio y Mejor Alumno desde un Archivo</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">promedio_archivo.py</span><span class="code-badge">Python</span></div><div class="code-body">suma = <span class="c-num">0</span>
+cantidad = <span class="c-num">0</span>
+mejor_nombre = <span class="c-str">""</span>
+mejor_nota = -<span class="c-num">1</span>
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"alumnos.csv"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+    <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+        nombre, edad, nota = linea.strip().split(<span class="c-str">","</span>)
+        nota = <span class="c-fn">float</span>(nota)
+        suma += nota
+        cantidad += <span class="c-num">1</span>
+        <span class="c-kw">if</span> nota &gt; mejor_nota:
+            mejor_nota = nota
+            mejor_nombre = nombre
+
+<span class="c-fn">print</span>(<span class="c-str">f"Promedio: {suma / cantidad:.2f}"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"Mejor: {mejor_nombre} ({mejor_nota})"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Promedio: 8.08
+Mejor: Marta (9.75)</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Integra</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><b>Lectura de archivo</b> + <code>split</code> + conversión + <b>acumulador</b> + <b>máximo con candidato</b> (unidad 14). Como parte de <code>-1</code> y las notas son <b>positivas</b>, cualquier nota lo reemplaza.</p></div></section>
+<section><h2><span class="section-num">18</span> Ejemplo: Buscar un Registro por Nombre</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">buscar_registro.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">buscar</span>(nombre_buscado):
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"alumnos.csv"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+        <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+            nombre, edad, nota = linea.strip().split(<span class="c-str">","</span>)
+            <span class="c-kw">if</span> nombre.lower() == nombre_buscado.lower():
+                <span class="c-kw">return</span> nombre, <span class="c-fn">int</span>(edad), <span class="c-fn">float</span>(nota)
+    <span class="c-kw">return</span> <span class="c-kw">None</span>
+
+resultado = buscar(<span class="c-str">"marta"</span>)
+<span class="c-kw">if</span> resultado <span class="c-kw">is</span> <span class="c-kw">None</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"No encontrado"</span>)
+<span class="c-kw">else</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Encontrado:"</span>, resultado)
+<span class="c-fn">print</span>(buscar(<span class="c-str">"Pedro"</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Encontrado: ('Marta', 16, 9.75)
+None</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Idea</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Se <b>recorre el archivo</b> y, al encontrar el nombre (<b>sin distinguir mayúsculas</b>), <code>return</code> devuelve el registro. Si no aparece, <b><code>None</code></b>. <code>return</code> <b>corta la búsqueda</b> y el <code>with</code> <b>igual cierra el archivo</b>.</p></div></section>
+<section><h2><span class="section-num">19</span> Ejemplo: Filtrar y Guardar en Otro Archivo</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">filtrar_archivo.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"alumnos.csv"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> entrada:
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"aprobados.csv"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> salida:
+        <span class="c-kw">for</span> linea <span class="c-kw">in</span> entrada:
+            campos = linea.strip().split(<span class="c-str">","</span>)
+            <span class="c-kw">if</span> <span class="c-fn">float</span>(campos[<span class="c-num">2</span>]) &gt;= <span class="c-num">6</span>:
+                salida.write(linea)</div></div></div><div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 alumnos.csv</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana,17,8.5
+Luis,18,4.0
+Marta,16,9.75
+Pedro,17,5.5</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 aprobados.csv</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana,17,8.5
+Marta,16,9.75</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dos archivos abiertos a la vez</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Se <b>anidan dos <code>with</code></b>: <code>entrada</code> (lectura) y <code>salida</code> (escritura). <b>Los dos se cierran solos.</b> Se copia <b>la línea original</b> (<code>salida.write(linea)</code>) porque <b>ya trae su <code>\n</code></b>.</p></div></section>
+<section><h2><span class="section-num">20</span> Actualizar un Archivo: Leer → Modificar en Memoria → Reescribir</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea fundamental</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Un archivo de texto <b>no se edita "en el lugar"</b>. El patrón estándar es: <b>1) leer todo</b> a una lista, <b>2) modificar la lista</b>, <b>3) volver a escribir todo el archivo</b> con <code>"w"</code>.</p></div><div style="display:flex; align-items:stretch; justify-content:center; gap:8px; margin:10px 0; flex-wrap:wrap;"><div style="flex:1; min-width:120px; background:var(--bg-surface); border:1px solid var(--card-border); border-top:3px solid var(--accent-cyan); border-radius:10px; padding:10px 12px; text-align:center; font-size:0.84rem; line-height:1.4;"><b>1. Leer</b><br><code>cargar()</code> → lista</div><div style="align-self:center; color:var(--accent-amber); font-size:1.4rem; font-weight:700;">→</div><div style="flex:1; min-width:120px; background:var(--bg-surface); border:1px solid var(--card-border); border-top:3px solid var(--accent-amber); border-radius:10px; padding:10px 12px; text-align:center; font-size:0.84rem; line-height:1.4;"><b>2. Modificar</b><br>Cambiar la lista</div><div style="align-self:center; color:var(--accent-amber); font-size:1.4rem; font-weight:700;">→</div><div style="flex:1; min-width:120px; background:var(--bg-surface); border:1px solid var(--card-border); border-top:3px solid var(--accent-emerald); border-radius:10px; padding:10px 12px; text-align:center; font-size:0.84rem; line-height:1.4;"><b>3. Reescribir</b><br><code>guardar()</code> con <code>"w"</code></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Por qué no se modifica directamente</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Cada línea tiene <b>largo variable</b>: cambiar <code>6.0</code> por <code>7.5</code> desplazaría <b>todo lo que sigue</b>. Es <b>más simple y seguro</b> reescribir el archivo completo desde la lista.</p></div></section>
+<section><h2><span class="section-num">21</span> Actualizar un Registro: Programa Completo</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">actualizar.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">cargar</span>(nombre_archivo):
+    alumnos = []
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(nombre_archivo, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+        <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+            n, e, nota = linea.strip().split(<span class="c-str">","</span>)
+            alumnos.append([n, <span class="c-fn">int</span>(e), <span class="c-fn">float</span>(nota)])
+    <span class="c-kw">return</span> alumnos
+
+<span class="c-kw">def</span> <span class="c-fn">guardar</span>(nombre_archivo, alumnos):
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(nombre_archivo, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+        <span class="c-kw">for</span> n, e, nota <span class="c-kw">in</span> alumnos:
+            f.write(<span class="c-str">f"{n},{e},{nota}\n"</span>)
+
+alumnos = cargar(<span class="c-str">"alumnos.csv"</span>)
+<span class="c-kw">for</span> alumno <span class="c-kw">in</span> alumnos:
+    <span class="c-kw">if</span> alumno[<span class="c-num">0</span>] == <span class="c-str">"Luis"</span>:
+        alumno[<span class="c-num">2</span>] = <span class="c-num">7.5</span>
+guardar(<span class="c-str">"alumnos.csv"</span>, alumnos)</div></div></div><div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 alumnos.csv (antes)</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana,17,8.5
+Luis,18,6.0
+Marta,16,9.75</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 alumnos.csv</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana,17,8.5
+Luis,18,7.5
+Marta,16,9.75</div></div></div></div></section>
+<section><h2><span class="section-num">22</span> Eliminar un Registro</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Mismo patrón</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><b>Cargar</b> → <b>construir una lista nueva sin el registro</b> (filtrando con <code>!=</code>) → <b>guardar</b>. Con una <b>comprensión</b>: <code>nuevos = [a for a in alumnos if a[0] != "Luis"]</code>.</p></div><div class="code-window"><div class="code-header"><span class="code-title">eliminar.py</span><span class="code-badge">Con las funciones cargar() y guardar()</span></div><div class="code-body">alumnos = cargar(<span class="c-str">"alumnos.csv"</span>)
+nuevos = [a <span class="c-kw">for</span> a <span class="c-kw">in</span> alumnos <span class="c-kw">if</span> a[<span class="c-num">0</span>] != <span class="c-str">"Luis"</span>]
+guardar(<span class="c-str">"alumnos.csv"</span>, nuevos)</div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Resultado</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">El archivo queda <b>sin la línea de Luis</b>. (Se usan las funciones <code>cargar</code> y <code>guardar</code> definidas antes en el mismo programa.)</p></div></section>
+<section><h2><span class="section-num">23</span> Datos "Sucios": Líneas en Blanco y Valores Inválidos</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">datos_sucios.py</span><span class="code-badge">Python</span></div><div class="code-body">total = <span class="c-num">0</span>
+validas = <span class="c-num">0</span>
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"numeros.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+    <span class="c-kw">for</span> n, linea <span class="c-kw">in</span> <span class="c-fn">enumerate</span>(f, start=<span class="c-num">1</span>):
+        texto = linea.strip()
+        <span class="c-kw">if</span> texto == <span class="c-str">""</span>:
+            <span class="c-kw">continue</span>
+        <span class="c-kw">try</span>:
+            total += <span class="c-fn">float</span>(texto)
+            validas += <span class="c-num">1</span>
+        <span class="c-kw">except</span> ValueError:
+            <span class="c-fn">print</span>(<span class="c-str">f"Línea {n} ignorada: {texto!r}"</span>)
+
+<span class="c-fn">print</span>(<span class="c-str">f"Suma de {validas} valores: {total}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Línea 4 ignorada: 'abc'
+Suma de 3 valores: 60.5</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 numeros.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">10
+
+20.5
+abc
+30</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dos técnicas</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>continue</code></b> para <b>saltear</b> líneas vacías.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>try/except</code> dentro del bucle</b> para <b>ignorar</b> (y avisar) las líneas inválidas <b>sin cortar</b> todo el proceso. <code>enumerate(f, start=1)</code> numera las líneas desde 1.</li></ul></div></section>
+<section><h2><span class="section-num">24</span> Copiar un Archivo y Escribir Varias Líneas a la Vez</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">copiar_escribir.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"original.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> origen:
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"copia.txt"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> destino:
+        <span class="c-kw">for</span> linea <span class="c-kw">in</span> origen:
+            destino.write(linea)
+
+nombres = [<span class="c-str">"Ana"</span>, <span class="c-str">"Luis"</span>, <span class="c-str">"Marta"</span>]
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"nombres.txt"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+    f.writelines([n + <span class="c-str">"\n"</span> <span class="c-kw">for</span> n <span class="c-kw">in</span> nombres])</div></div></div><div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 copia.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">linea 1
+linea 2</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 nombres.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;">Ana
+Luis
+Marta</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);"><code>writelines(lista)</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Escribe <b>todos los textos de una lista</b> de una vez. <b>No agrega <code>\n</code></b>: cada elemento ya debe traerlo.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Copiar</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Se <b>lee línea por línea</b> del origen y se <b>escribe tal cual</b> en el destino (cada línea conserva su <code>\n</code>).</p></div></div></section>
+<section><h2><span class="section-num">25</span> Proyecto: Gestor de Notas (1/2) — Las Funciones de Persistencia</h2><div class="code-window"><div class="code-header"><span class="code-title">gestor_notas.py</span><span class="code-badge">Parte 1: cargar y guardar</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">cargar</span>():
+    alumnos = []
+    <span class="c-kw">try</span>:
+        <span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"notas.csv"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+            <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+                n, nota = linea.strip().split(<span class="c-str">","</span>)
+                alumnos.append([n, <span class="c-fn">float</span>(nota)])
+    <span class="c-kw">except</span> FileNotFoundError:
+        <span class="c-kw">pass</span>
+    <span class="c-kw">return</span> alumnos
+
+<span class="c-kw">def</span> <span class="c-fn">guardar</span>(alumnos):
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"notas.csv"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+        <span class="c-kw">for</span> n, nota <span class="c-kw">in</span> alumnos:
+            f.write(<span class="c-str">f"{n},{nota}\n"</span>)</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);"><code>cargar()</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Lee <code>notas.csv</code> y devuelve una <b>lista de listas</b> <code>[nombre, nota]</code>. Si el archivo <b>no existe</b> (primera ejecución), el <code>except FileNotFoundError</code> hace que <b>devuelva la lista vacía</b>: el programa <b>no se rompe</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);"><code>guardar(alumnos)</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><b>Reescribe todo</b> el archivo (<code>"w"</code>) con el contenido actual de la lista, una línea <code>nombre,nota</code> por alumno. Es el patrón <b>leer → cambiar en memoria → reescribir</b>.</p></div></div></section>
+<section><h2><span class="section-num">26</span> Proyecto: Gestor de Notas (2/2) — El Programa Principal</h2><div class="grid-2" style="margin-top:8px;"><div class="code-window"><div class="code-header"><span class="code-title">gestor_notas.py</span><span class="code-badge">Parte 2: menú</span></div><div class="code-body">alumnos = cargar()
+opcion = <span class="c-str">""</span>
+<span class="c-kw">while</span> opcion != <span class="c-str">"3"</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"1) Agregar  2) Ver  3) Salir"</span>)
+    opcion = <span class="c-fn">input</span>(<span class="c-str">"Opción: "</span>)
+    <span class="c-kw">if</span> opcion == <span class="c-str">"1"</span>:
+        n = <span class="c-fn">input</span>(<span class="c-str">"Nombre: "</span>)
+        alumnos.append([n, <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Nota: "</span>))])
+        guardar(alumnos)
+    <span class="c-kw">elif</span> opcion == <span class="c-str">"2"</span>:
+        <span class="c-kw">for</span> n, nota <span class="c-kw">in</span> alumnos:
+            <span class="c-fn">print</span>(<span class="c-str">f"{n}: {nota}"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Ejecución de ejemplo (el archivo no existía)</span><span>● ● ●</span></div><div class="terminal-body">1) Agregar  2) Ver  3) Salir
+Opción: <span class="terminal-user-input">2</span>
+1) Agregar  2) Ver  3) Salir
+Opción: <span class="terminal-user-input">1</span>
+Nombre: <span class="terminal-user-input">Ana</span>
+Nota: <span class="terminal-user-input">8.5</span>
+1) Agregar  2) Ver  3) Salir
+Opción: <span class="terminal-user-input">1</span>
+Nombre: <span class="terminal-user-input">Luis</span>
+Nota: <span class="terminal-user-input">6</span>
+1) Agregar  2) Ver  3) Salir
+Opción: <span class="terminal-user-input">2</span>
+Ana: 8.5
+Luis: 6.0
+1) Agregar  2) Ver  3) Salir
+Opción: <span class="terminal-user-input">3</span></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Qué integra</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><b>Funciones</b>, <b>try/except</b>, <b>menú con <code>while</code></b>, <b>lista de listas</b>, conversión y <b>persistencia</b>: cada alta <b>se guarda al instante</b> y, al volver a ejecutar, <b>los datos siguen ahí</b>.</p></div></section>
+<section><h2><span class="section-num">27</span> Error Frecuente #1: except Demasiado General</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Ocultar todos los errores</div><div class="code-window"><div class="code-header"><span class="code-title">except_vacio.py</span><span class="code-badge">Peligroso</span></div><div class="code-body"><span class="c-kw">try</span>:
+    numero = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número: "</span>))
+    <span class="c-fn">print</span>(<span class="c-num">10</span> / numero)
+<span class="c-kw">except</span>:
+    <span class="c-kw">pass</span></div></div></div><div class="correct-card"><div class="correct-title">✅ Capturar solo lo esperado</div><div class="code-window"><div class="code-header"><span class="code-title">except_especifico.py</span><span class="code-badge">Claro</span></div><div class="code-body"><span class="c-kw">try</span>:
+    numero = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"Número: "</span>))
+    <span class="c-fn">print</span>(<span class="c-num">10</span> / numero)
+<span class="c-kw">except</span> ValueError:
+    <span class="c-fn">print</span>(<span class="c-str">"Escribí un número entero"</span>)
+<span class="c-kw">except</span> ZeroDivisionError:
+    <span class="c-fn">print</span>(<span class="c-str">"No se divide por cero"</span>)</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Por qué</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>except:</code> (o <code>except Exception:</code>) con <code>pass</code> <b>traga cualquier error</b>, incluso <b>errores de programación</b> (un nombre mal escrito). El programa <b>falla en silencio</b> y es <b>muy difícil de depurar</b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Regla</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><b>Atrapá los tipos concretos</b> que esperás y <b>decidí qué hacer</b> con cada uno. Nunca dejes un <code>except</code> <b>vacío</b>.</p></div></section>
+<section><h2><span class="section-num">28</span> Error Frecuente #2: Un try Demasiado Grande y Reescribir Antes de Leer</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Todo el programa dentro del <code>try</code></div><div class="code-window"><div class="code-header"><span class="code-title">try_enorme.py</span><span class="code-badge">Poco claro</span></div><div class="code-body"><span class="c-kw">try</span>:
+    <span class="c-cmt"># 50 líneas de código...</span>
+    ...
+<span class="c-kw">except</span> ValueError:
+    <span class="c-fn">print</span>(<span class="c-str">"Error"</span>)   <span class="c-cmt"># ¿en qué línea?</span></div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Mejor</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Poné en el <code>try</code> <b>solo la línea que puede fallar</b> (<code>int(input(...))</code>, <code>open(...)</code>). Así <b>sabés qué</b> falló y <b>por qué</b>.</p></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">abrir_w_antes_de_leer.py</span><span class="code-badge">Datos perdidos</span></div><div class="code-body"><span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+    contenido = f.read()</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2, in &lt;module&gt;
+    contenido = f.read()
+io.UnsupportedOperation: not readable</div></div><div class="code-window" style="border-color: rgba(251,191,36,0.35);"><div class="code-header"><span class="code-title">📄 datos.txt</span><span class="code-badge" style="color:#fbbf24; border-color:rgba(251,191,36,0.35); background:rgba(251,191,36,0.12);">Archivo de texto</span></div><div class="code-body" style="color:#fde68a;"></div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">¡Cuidado con <code>"w"</code>!</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Abrir con <code>"w"</code> <b>borra el archivo ANTES</b> de que ocurra el error: <code>datos.txt</code> quedó <b>vacío</b> y se perdió su contenido. <b>Primero leé</b> (modo <code>"r"</code>) y <b>recién después</b> escribí.</p></div></section>
+<section><h2><span class="section-num">29</span> Comparación Final: Manejo de Errores en C y en Python</h2><table class="trace-table"><thead><tr><th>Aspecto</th><th>C</th><th>Python</th></tr></thead><tbody><tr><td>Detectar un error</td><td>Revisar el <b>valor devuelto</b> (<code>NULL</code>, <code>-1</code>) o <code>errno</code></td><td>La <b>excepción</b> interrumpe y se captura con <code>try/except</code></td></tr><tr><td>Si nadie lo revisa</td><td>El programa <b>sigue</b> y puede fallar más adelante</td><td>El programa <b>se detiene</b> con un mensaje</td></tr><tr><td>Abrir un archivo inexistente</td><td><code>fopen</code> devuelve <code>NULL</code></td><td><code>FileNotFoundError</code></td></tr><tr><td>Información del error</td><td><code>perror</code>, <code>strerror(errno)</code></td><td>El objeto excepción (<code>as error</code>)</td></tr><tr><td>Limpieza segura</td><td><code>fclose</code> manual en cada camino</td><td><code>with</code> y <code>finally</code></td></tr><tr><td>Lanzar un error propio</td><td>Devolver un código especial</td><td><code>raise TipoDeError("mensaje")</code></td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Idea</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Python <b>separa</b> el código <b>normal</b> del código de <b>manejo de errores</b>: el primero queda <b>limpio</b>, el segundo <b>vive en el <code>except</code></b>.</p></div></section>
+<section><h2><span class="section-num">30</span> Buenas Prácticas en Manejo de Errores y Archivos</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Capturá <b>excepciones específicas</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Poné en el <code>try</code> <b>solo</b> lo que puede fallar.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Validá</b> los datos del usuario (<code>try/except</code> + bucle).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b><code>with</code></b> para abrir archivos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mostrá <b>mensajes útiles</b> al usuario.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Para modificar datos: <b>leer → cambiar en memoria → reescribir</b>.</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>except:</code> vacío</b> o con <code>pass</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Imprimir el error técnico</b> sin explicar al usuario.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Abrir con <b><code>"w"</code></b> un archivo que querés <b>leer o conservar</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Asumir que <b>los datos del archivo son válidos</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mezclar <b>lógica del programa</b> y <b>manejo de archivos</b> en la misma función.</li></ul></div></div></section>
+<section><h2><span class="section-num">31</span> Ejercicio 1: ¿Qué Muestra el Programa?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Predecí la salida</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">f</span>(x):
+    <span class="c-kw">try</span>:
+        <span class="c-kw">return</span> <span class="c-num">10</span> / x
+    <span class="c-kw">except</span> ZeroDivisionError:
+        <span class="c-kw">return</span> <span class="c-str">"cero"</span>
+    <span class="c-kw">finally</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"fin"</span>, x)
+
+<span class="c-fn">print</span>(f(<span class="c-num">2</span>))
+<span class="c-fn">print</span>(f(<span class="c-num">0</span>))
+
+<span class="c-kw">try</span>:
+    <span class="c-fn">print</span>(<span class="c-fn">int</span>(<span class="c-str">"12"</span>))
+    <span class="c-fn">print</span>(<span class="c-fn">int</span>(<span class="c-str">"1.5"</span>))
+    <span class="c-fn">print</span>(<span class="c-str">"listo"</span>)
+<span class="c-kw">except</span> ValueError:
+    <span class="c-fn">print</span>(<span class="c-str">"error"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"seguimos"</span>)</div></div><details class="code-solution"><summary>👁️ Ver respuesta</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">f</span>(x):
+    <span class="c-kw">try</span>:
+        <span class="c-kw">return</span> <span class="c-num">10</span> / x
+    <span class="c-kw">except</span> ZeroDivisionError:
+        <span class="c-kw">return</span> <span class="c-str">"cero"</span>
+    <span class="c-kw">finally</span>:
+        <span class="c-fn">print</span>(<span class="c-str">"fin"</span>, x)
+
+<span class="c-fn">print</span>(f(<span class="c-num">2</span>))
+<span class="c-fn">print</span>(f(<span class="c-num">0</span>))
+
+<span class="c-kw">try</span>:
+    <span class="c-fn">print</span>(<span class="c-fn">int</span>(<span class="c-str">"12"</span>))
+    <span class="c-fn">print</span>(<span class="c-fn">int</span>(<span class="c-str">"1.5"</span>))
+    <span class="c-fn">print</span>(<span class="c-str">"listo"</span>)
+<span class="c-kw">except</span> ValueError:
+    <span class="c-fn">print</span>(<span class="c-str">"error"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"seguimos"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">fin 2
+5.0
+fin 0
+cero
+12
+error
+seguimos</div></div></div></div><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>finally</code> se ejecuta <b>siempre, antes</b> de que la función <b>devuelva</b> el valor; por eso <code>fin 2</code> aparece <b>antes</b> que <code>5.0</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>int("1.5")</code> falla: no se imprime <code>listo</code>; se entra al <code>except</code> y luego sigue el programa.</li></ul></div></details></section>
+<section><h2><span class="section-num">32</span> Ejercicio 2: Escribí el Código</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>A)</b> <code>pedir_float(mensaje)</code>: pide un número decimal <b>hasta que sea válido</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>B)</b> Un programa que lea <code>numeros.txt</code> (un número por línea) y muestre la <b>suma</b> y el <b>mayor</b>, mostrando <code>El archivo no existe</code> si falta.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>C)</b> <code>contar_lineas(nombre)</code> que devuelva la <b>cantidad de líneas</b> de un archivo, o <b><code>-1</code></b> si no existe.</li></ul></div><details class="code-solution"><summary>👁️ Ver soluciones</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">pedir_float</span>(mensaje):
+    <span class="c-kw">while</span> <span class="c-kw">True</span>:
+        <span class="c-kw">try</span>:
+            <span class="c-kw">return</span> <span class="c-fn">float</span>(<span class="c-fn">input</span>(mensaje))
+        <span class="c-kw">except</span> ValueError:
+            <span class="c-fn">print</span>(<span class="c-str">"Número inválido"</span>)
+
+<span class="c-kw">def</span> <span class="c-fn">contar_lineas</span>(nombre):
+    <span class="c-kw">try</span>:
+        <span class="c-kw">with</span> <span class="c-fn">open</span>(nombre, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+            <span class="c-kw">return</span> <span class="c-fn">len</span>(f.readlines())
+    <span class="c-kw">except</span> FileNotFoundError:
+        <span class="c-kw">return</span> -<span class="c-num">1</span>
+
+<span class="c-fn">print</span>(pedir_float(<span class="c-str">"Altura: "</span>))
+<span class="c-fn">print</span>(contar_lineas(<span class="c-str">"numeros.txt"</span>), contar_lineas(<span class="c-str">"falta.txt"</span>))
+
+<span class="c-kw">try</span>:
+    <span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"numeros.txt"</span>, <span class="c-str">"r"</span>) <span class="c-kw">as</span> f:
+        numeros = [<span class="c-fn">float</span>(l) <span class="c-kw">for</span> l <span class="c-kw">in</span> f <span class="c-kw">if</span> l.strip()]
+    <span class="c-fn">print</span>(<span class="c-str">"Suma:"</span>, <span class="c-fn">sum</span>(numeros), <span class="c-str">"Mayor:"</span>, <span class="c-fn">max</span>(numeros))
+<span class="c-kw">except</span> FileNotFoundError:
+    <span class="c-fn">print</span>(<span class="c-str">"El archivo no existe"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Altura: <span class="terminal-user-input">abc</span>
+Número inválido
+Altura: <span class="terminal-user-input">1,75</span>
+Número inválido
+Altura: <span class="terminal-user-input">1.75</span>
+1.75
+3 -1
+Suma: 15.5 Mayor: 9.0</div></div></div></details></section>
+<section><h2><span class="section-num">33</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body"><span class="c-kw">try</span>:
+    archivo = <span class="c-fn">open</span>(<span class="c-str">"datos.txt"</span>, <span class="c-str">"r"</span>)
+    <span class="c-kw">for</span> linea <span class="c-kw">in</span> archivo:
+        numero = <span class="c-fn">int</span>(linea)
+<span class="c-kw">except</span>:
+    <span class="c-kw">pass</span>
+
+<span class="c-kw">with</span> <span class="c-fn">open</span>(<span class="c-str">"notas.csv"</span>, <span class="c-str">"w"</span>) <span class="c-kw">as</span> f:
+    <span class="c-kw">for</span> linea <span class="c-kw">in</span> f:
+        <span class="c-fn">print</span>(linea)
+
+<span class="c-kw">try</span>
+    x = <span class="c-fn">int</span>(<span class="c-str">"5"</span>)
+<span class="c-kw">except</span> ValueError
+    <span class="c-fn">print</span>(<span class="c-str">"error"</span>)
+
+nombre, edad = <span class="c-str">"Ana,17,8.5"</span>.split(<span class="c-str">","</span>)</div></div><details class="code-solution"><summary>👁️ Ver errores y solución</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>except:</code> <b>vacío</b> con <code>pass</code> oculta todo y el archivo <b>no se cierra</b> (falta <code>with</code>). Capturar <code>FileNotFoundError</code> y <code>ValueError</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Abrir <code>notas.csv</code> con <code>"w"</code> y <b>leerlo</b>: el modo es incorrecto (y además <b>lo borra</b>). Debe ser <code>"r"</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Faltan los <b>dos puntos</b> en <code>try</code> y en <code>except ValueError</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>split</code> devuelve <b>3</b> campos y se asignan a <b>2</b> variables → <code>ValueError: too many values to unpack</code>.</li></ul></div></details></section>
+<section><h2><span class="section-num">34</span> Ejercicio 4 (Reto): Agenda con Archivo y Control de Errores</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Armá una agenda que guarde <code>nombre,telefono</code> en <code>agenda.csv</code>. Debe <b>cargar</b> los datos al iniciar (si el archivo no existe, <b>empezar vacío</b>), permitir <b>agregar</b>, <b>buscar por nombre</b>, <b>eliminar</b> y <b>listar</b>, <b>guardando</b> después de cada cambio. Validá que el teléfono tenga <b>solo dígitos</b> y mostrá mensajes claros ante <b>cualquier dato inválido</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Sugerencia de funciones</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>cargar()</code>, <code>guardar(contactos)</code>, <code>agregar(contactos)</code>, <code>buscar(contactos, nombre)</code>, <code>eliminar(contactos, nombre)</code>, <code>listar(contactos)</code> y un <b>menú</b> con <code>while</code>. Reutilizá las ideas del <b>proyecto "Gestor de Notas"</b>.</p></div></section>
+<section><h2><span class="section-num">35</span> Resumen de la Unidad 17</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>try / except</code></b> atrapa excepciones para que el programa <b>no se rompa</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>else</code></b> (sin error) y <b><code>finally</code></b> (siempre).</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Capturá <b>tipos concretos</b>: <code>ValueError</code>, <code>ZeroDivisionError</code>, <code>FileNotFoundError</code>, <code>OSError</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>raise</code></b> lanza un error propio.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>CSV:</b> un registro por línea, campos separados por comas → <code>split(",")</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Modificar datos: <b>cargar → cambiar → reescribir</b>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Sé qué se ejecuta y qué no cuando ocurre un error en un <code>try</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Puedo validar un dato con un bucle y <code>try/except</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé manejar un archivo inexistente?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé leer y guardar registros <code>nombre,nota</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué se reescribe el archivo para actualizar?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 17 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Archivos: Procesamiento de Datos y Manejo de Errores</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="16-manejo-de-archivos-lectura-escritura.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Manejo de Archivos: Lectura y Escritura</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="18-organizacion-buenas-practicas-repaso.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Organización, Buenas Prácticas y Repaso Final →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

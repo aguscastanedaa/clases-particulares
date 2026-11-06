@@ -48,9 +48,9 @@ El módulo de Física incluye 4 presentaciones teóricas progresivas y una prese
 
 ---
 
-## 💻 Módulo de Programación en C
+## 💻 Módulo de Programación: C y Python
 
-El módulo de Programación en C contiene un plan curricular completo de **36 presentaciones interactivas e independientes**, organizadas en dos cuatrimestres académicos bajo el estándar **C99/C11** y animadas con **Reveal.js 5.1.0**.
+El módulo de Programación contiene un plan curricular completo de **54 presentaciones interactivas e independientes**, organizadas en dos cuatrimestres y cuatro bimestres: **C (bimestres 1 a 3, estándar C99/C11)** y **Python 3 (bimestre 4)**, animadas con **Reveal.js 5.1.0**.
 
 ### 📘 1er Cuatrimestre: Fundamentos, Estructuras de Datos y Memoria Dinámica (23 Unidades en 2 Bimestres)
 🔗 **Portal del Cuatrimestre:** [programacion/1er-cuatrimestre/index.html](programacion/1er-cuatrimestre/index.html)
@@ -221,24 +221,24 @@ El módulo de Programación en C contiene un plan curricular completo de **36 pr
 
 ---
 
-### 📗 2do Cuatrimestre: Funciones Avanzadas, Strings, Punteros y Estructuras (13 Unidades)
+### 📗 2do Cuatrimestre: C Avanzado (3er Bimestre, 13 Unidades) y Python (4to Bimestre, 18 Unidades)
 🔗 **Portal del Cuatrimestre:** [programacion/2do-cuatrimestre/index.html](programacion/2do-cuatrimestre/index.html)
-📄 **Apunte Teórico Oficial:** [Apunte teorico - Lab. Algoritmos y Estructura de Datos p3.pdf](programacion/2do-cuatrimestre/Apunte%20teorico%20-%20Lab.%20Algoritmos%20y%20Estructura%20de%20Datos%20p3.pdf)
+📄 **Apunte Teórico Oficial:** [Apunte teorico - Lab. Algoritmos y Estructura de Datos p3.pdf](programacion/2do-cuatrimestre/3er-bimestre/Apunte%20teorico%20-%20Lab.%20Algoritmos%20y%20Estructura%20de%20Datos%20p3.pdf)
 
-1. **[Unidad 01: Funciones con Retorno y Arreglos como Parámetros](programacion/2do-cuatrimestre/presentaciones/01-funciones-retorno-arreglos-parametros.html)**
+1. **[Unidad 01: Funciones con Retorno y Arreglos como Parámetros](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/01-funciones-retorno-arreglos-parametros.html)**
    - Funciones `void` vs funciones con retorno (`int`, `float`, `double`).
    - Uso de `return`, flujo de control y descarte de valores no asignados.
    - Parámetros vs argumentos: paso de arreglos por dirección base con tamaño explícito `(int arr[], int n)`.
    - Ejemplos prácticos: `doble`, `sumar`, `calcularDescuento`, cálculo de sumas y promedios en vectores.
 
-2. **[Unidad 02: Introducción a los Strings en C](programacion/2do-cuatrimestre/presentaciones/02-introduccion-strings.html)**
+2. **[Unidad 02: Introducción a los Strings en C](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/02-introduccion-strings.html)**
    - Qué es una cadena: arreglo unidimensional de caracteres terminado por el centinela nulo `'\0'`.
    - Carácter simple `'A'` (1 byte) vs cadena `"A"` (2 bytes con `'\0'`).
    - Representación en memoria RAM y tamaño necesario ($N+1$).
    - Impresión con `%s`, lectura y recorridos manuales con bucles `while` y `for`.
    - Cálculo algorítmico de la longitud sin librerías externas.
 
-3. **[Unidad 03: Biblioteca `<string.h>` y Operaciones Estándar](programacion/2do-cuatrimestre/presentaciones/03-libreria-string-h.html)**
+3. **[Unidad 03: Biblioteca `<string.h>` y Operaciones Estándar](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/03-libreria-string-h.html)**
    - Inclusión de cabecera `#include <string.h>`.
    - Medición: `strlen()`.
    - Copia de cadenas: `strcpy()` y la variante segura con límite de caracteres `strncpy()`.
@@ -247,7 +247,7 @@ El módulo de Programación en C contiene un plan curricular completo de **36 pr
    - Búsqueda: `strchr()` (primer carácter) y `strstr()` (primera ocurrencia de subcadena).
    - Prevención de desbordamiento de búfer y buenas prácticas defensivas.
 
-4. **[Unidad 04: Procesamiento y Algoritmos con Strings](programacion/2do-cuatrimestre/presentaciones/04-algoritmos-procesamiento-strings.html)**
+4. **[Unidad 04: Procesamiento y Algoritmos con Strings](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/04-algoritmos-procesamiento-strings.html)**
    - Conteo de frecuencias de un carácter específico.
    - Búsqueda manual de caracteres y subcadenas desde cero.
    - Detección de prefijos: comprobar si una cadena comienza con otra.
@@ -256,7 +256,7 @@ El módulo de Programación en C contiene un plan curricular completo de **36 pr
    - Algoritmo de inversión de cadenas con dos punteros/índices opuestos.
    - Algoritmo de detección de palíndromos paso a paso.
 
-5. **[Unidad 05: Introducción a los Punteros y Direcciones de Memoria](programacion/2do-cuatrimestre/presentaciones/05-introduccion-punteros-direcciones-memoria.html)**
+5. **[Unidad 05: Introducción a los Punteros y Direcciones de Memoria](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/05-introduccion-punteros-direcciones-memoria.html)**
    - Organización de la memoria RAM y concepto de dirección física.
    - Qué es un puntero: variable que almacena la dirección de otra variable.
    - Declaración de punteros (`int *p;`).
@@ -265,59 +265,86 @@ El módulo de Programación en C contiene un plan curricular completo de **36 pr
    - Impresión de direcciones en hexadecimal con `%p`.
    - Errores críticos: punteros no inicializados (salvajes), direcciones nulas y desreferenciación inválida.
 
-6. **[Unidad 06: Paso por Referencia, Punteros y Funciones](programacion/2do-cuatrimestre/presentaciones/06-paso-por-referencia-punteros-funciones.html)**
+6. **[Unidad 06: Paso por Referencia, Punteros y Funciones](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/06-paso-por-referencia-punteros-funciones.html)**
    - Modelo de paso por valor estricto de C.
    - Por qué modificar un parámetro regular no afecta a la variable del llamador.
    - Simulación de paso por referencia pasando la dirección con `&` y recibiendo con `*`.
    - Funciones que modifican variables originales (`incrementar`, `intercambiar`).
    - Retorno de múltiples resultados: función de división entera (cociente y resto) y mínimo/máximo simultáneo.
 
-7. **[Unidad 07: Relación entre Punteros y Arreglos](programacion/2do-cuatrimestre/presentaciones/07-punteros-y-arreglos.html)**
+7. **[Unidad 07: Relación entre Punteros y Arreglos](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/07-punteros-y-arreglos.html)**
    - Identidad entre el identificador de un arreglo y la dirección de su elemento 0 (`vec == &vec[0]`).
    - Aritmética de punteros: suma de enteros a punteros escalada por `sizeof(tipo)`.
    - Equivalencia fundamental: `*(p + i)` es idéntico a `p[i]` y `vec[i]`.
    - Recorridos eficientes de vectores mediante avance de puntero (`p++`).
    - Diferencias cruciales: los arreglos son constantes fijas no reasignables, los punteros son variables modificables.
 
-8. **[Unidad 08: Introducción a las Estructuras (`struct`)](programacion/2do-cuatrimestre/presentaciones/08-estructuras-struct-fundamentos.html)**
+8. **[Unidad 08: Introducción a las Estructuras (`struct`)](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/08-estructuras-struct-fundamentos.html)**
    - Limitaciones de variables sueltas y motivación para agrupar datos heterogéneos.
    - Definición de tipos estructurados (`struct Persona`, `struct Alumno`, `struct Empleado`).
    - Campos miembros, asignación e inicialización directa.
    - Acceso a campos mediante el operador punto (`.`).
    - Paso de estructuras completas por valor a funciones (copia defensiva en Stack).
 
-9. **[Unidad 09: Punteros a Estructuras y el Operador Flecha (`->`)](programacion/2do-cuatrimestre/presentaciones/09-punteros-a-estructuras-operador-flecha.html)**
+9. **[Unidad 09: Punteros a Estructuras y el Operador Flecha (`->`)](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/09-punteros-a-estructuras-operador-flecha.html)**
    - Declaración y asignación de punteros a estructuras (`struct Empleado *emp = &e;`).
    - El operador flecha `->`: azúcar sintáctico para `(*emp).campo`.
    - Eficiencia en el paso por referencia a funciones: evitar copias pesadas de memoria.
    - Modificación in-situ de registros: aumentos salariales y actualización de datos.
 
-10. **[Unidad 10: Arreglos de Estructuras](programacion/2do-cuatrimestre/presentaciones/10-arreglos-de-estructuras.html)**
+10. **[Unidad 10: Arreglos de Estructuras](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/10-arreglos-de-estructuras.html)**
     - Declaración de arreglos de registros (`struct Alumno curso[30];`).
     - Anatomía de memoria: bloques contiguos de registros completos.
     - Recorrido con bucles `for`, lectura de campos (`curso[i].promedio`) y carga de datos.
     - Envío de arreglos de structs a funciones.
     - Algoritmos sobre arreglos estructurados: búsqueda del mejor promedio, filtrado y modificación de registros.
 
-11. **[Unidad 11: Estructuras con Arreglos Internos y Estructuras Anidadas](programacion/2do-cuatrimestre/presentaciones/11-estructuras-arreglos-internos-anidadas.html)**
+11. **[Unidad 11: Estructuras con Arreglos Internos y Estructuras Anidadas](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/11-estructuras-arreglos-internos-anidadas.html)**
     - Estructuras con miembros de tipo arreglo (`float notas[3]`).
     - Acceso compuesto: `alumno.notas[i]` y cálculo modular del promedio de calificaciones.
     - Estructuras anidadas (composición de tipos): `struct Fecha` dentro de `struct Persona`.
     - Acceso en cadena: `persona.nacimiento.ano`.
     - Funciones que reciben y procesan estructuras jerárquicas complejas.
 
-12. **[Unidad 12: Integración: Estructuras, Punteros y Transferencia Bancaria](programacion/2do-cuatrimestre/presentaciones/12-integracion-transferencia-bancaria.html)**
+12. **[Unidad 12: Integración: Estructuras, Punteros y Transferencia Bancaria](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/12-integracion-transferencia-bancaria.html)**
     - Proyecto integrador: modelado del sistema `CuentaBancaria` (número, titular, saldo, estado activo/inactivo).
     - Función de transferencia bancaria con punteros de origen y destino (`origen`, `destino`, `monto`).
     - Programación defensiva y transaccionalidad: validación de cuentas activas, monto positivo y saldo disponible.
     - Atomicidad: si cualquier condición falla, ningún saldo se modifica.
     - Retorno de códigos de estado para informar éxito o causa del fallo.
 
-13. **[Unidad 13: Resumen de Símbolos y Repaso Integrador](programacion/2do-cuatrimestre/presentaciones/13-resumen-simbolos-repaso-integrador.html)**
+13. **[Unidad 13: Resumen de Símbolos y Repaso Integrador](programacion/2do-cuatrimestre/3er-bimestre/presentaciones/13-resumen-simbolos-repaso-integrador.html)**
     - Tabla comparativa definitiva de operadores de C: `&`, `*`, `int *p`, `[]`, `.`, `->`, `'\0'`, `return`.
     - Preguntas de autoevaluación conceptual con explicaciones.
     - Taller de ejercicios integradores guiados.
     - Errores típicos y trampas frecuentes de compilación y ejecución.
+
+---
+
+### 🐍 4to Bimestre: Programación en Python (18 Unidades)
+🔗 **Portal del Bimestre:** [programacion/2do-cuatrimestre/4to-bimestre/index.html](programacion/2do-cuatrimestre/4to-bimestre/index.html)
+📄 **Apunte Teórico Oficial:** [Apunte teorico - Lab. Algoritmos y Estructura de Datos p4.pdf](programacion/2do-cuatrimestre/4to-bimestre/Apunte%20teorico%20-%20Lab.%20Algoritmos%20y%20Estructura%20de%20Datos%20p4.pdf)
+
+Python enseñado desde cero, con explicaciones paso a paso, tablas de seguimiento, errores frecuentes con su mensaje real, comparaciones con C y ejercicios por unidad. **Todas las salidas mostradas en las clases se obtuvieron ejecutando el código con Python 3.14.**
+
+1. **[Unidad 01: Introducción a Python y Fundamentos del Lenguaje](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/01-introduccion-python.html)** — compilado vs interpretado, `print()`, comentarios, errores e indentación
+2. **[Unidad 02: Variables y Tipos de Datos](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/02-variables-y-tipos-de-datos.html)** — asignación, nombres, `int`/`float`/`str`/`bool`, `type()` y conversión
+3. **[Unidad 03: Entrada y Salida de Datos](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/03-entrada-salida-de-datos.html)** — `print()`, f-strings, `input()` siempre devuelve `str`, `int()`/`float()`
+4. **[Unidad 04: Operadores Aritméticos](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/04-operadores-aritmeticos.html)** — `/` vs `//`, `%`, `**`, precedencia, `+=`, contadores y acumuladores
+5. **[Unidad 05: Operadores de Comparación y Lógicos](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/05-operadores-comparacion-y-logicos.html)** — `==` vs `=`, `and`/`or`/`not`, tablas de verdad, cortocircuito
+6. **[Unidad 06: Estructuras Condicionales](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/06-estructuras-condicionales.html)** — `if`/`elif`/`else`, anidados y diagramas de flujo
+7. **[Unidad 07: Bucles while](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/07-bucles-while-control-repeticion.html)** — tres partes del bucle, bucles infinitos, `break`/`continue`, validación
+8. **[Unidad 08: Bucles for y range()](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/08-bucles-for-range-control-ciclos.html)** — `range(inicio, fin, paso)`, límite excluyente, `for` anidados
+9. **[Unidad 09: Funciones: Definición, Parámetros y return](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/09-funciones-definicion-parametros-return.html)** — `def`, parámetros vs argumentos, `return` vs `print`, `None`
+10. **[Unidad 10: Funciones: Alcance y Valores por Defecto](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/10-funciones-alcance-valores-por-defecto.html)** — argumentos con nombre, valores por defecto, variables locales y globales
+11. **[Unidad 11: Strings: Fundamentos, Índices y Slicing](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/11-strings-fundamentos-indices-slicing.html)** — índices positivos/negativos, `len()`, slicing e inmutabilidad
+12. **[Unidad 12: Strings: Métodos y Procesamiento de Texto](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/12-strings-metodos-y-procesamiento.html)** — `upper`, `strip`, `replace`, `find`, `split`, `join`, `isdigit`
+13. **[Unidad 13: Listas: Fundamentos y Operaciones](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/13-listas-fundamentos-y-operaciones.html)** — `append`, `insert`, `remove`, `pop`, `sort`, copias y referencias
+14. **[Unidad 14: Listas: Recorridos y Algoritmos](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/14-listas-recorridos-y-algoritmos.html)** — acumuladores, máximo, búsqueda, comprensiones, burbuja, búsqueda binaria
+15. **[Unidad 15: Listas Anidadas y Matrices](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/15-listas-anidadas-y-matrices.html)** — `m[i][j]`, `for` anidados, diagonales, transpuesta, `deepcopy`
+16. **[Unidad 16: Manejo de Archivos: Lectura y Escritura](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/16-manejo-de-archivos-lectura-escritura.html)** — `open()`, modos `r/w/a/x`, `read`, `readline`, `with open()`
+17. **[Unidad 17: Archivos: Procesamiento y Manejo de Errores](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/17-archivos-procesamiento-y-errores.html)** — `try/except`, CSV, actualizar y eliminar registros
+18. **[Unidad 18: Organización, Buenas Prácticas y Repaso Final](programacion/2do-cuatrimestre/4to-bimestre/presentaciones/18-organizacion-buenas-practicas-repaso.html)** — PEP 8, `main()`, módulos, 7 etapas para resolver problemas, `assert`
 
 ---
 

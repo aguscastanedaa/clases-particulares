@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 14: Listas: Recorridos y Algoritmos Clásicos | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 14</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 14</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Listas: Recorridos y Algoritmos Clásicos</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Resolver problemas con listas: acumuladores, contadores, máximo y mínimo, búsqueda, filtrado, comprensiones de listas, ordenamiento a mano y búsqueda binaria</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">Recorridos</span><span class="badge badge-indigo">Acumular y contar</span><span class="badge badge-emerald">Máximo y mínimo</span><span class="badge badge-amber">Búsqueda</span><span class="badge badge-purple">Filtrar y transformar</span><span class="badge badge-rose">Ordenar</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 37 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: Pensar Algoritmos sobre Listas</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya sabemos</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Crear, indexar y modificar listas; <code>append</code>, <code>remove</code>, <code>sort</code>...</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>for</code> y <code>while</code>, contadores y acumuladores.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>En C (2.º bimestre): recorridos, búsquedas y <b>ordenamiento</b> de vectores.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>El <b>patrón de recorrido</b> y sus variantes.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Acumular</b>, <b>contar</b> y <b>promediar</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Hallar el <b>máximo / mínimo</b> y su <b>posición</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Buscar</b> y <b>filtrar</b> elementos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Transformar</b> con <b>listas por comprensión</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Ordenar</b> (burbuja) y <b>búsqueda binaria</b>.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que puedas resolver un problema con listas <b>pensando el algoritmo</b> (qué recorrer, qué guardar, qué comparar) y traducirlo a Python.</p></div></section>
+<section><h2><span class="section-num">02</span> El Patrón de Recorrido</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Casi todos los algoritmos con listas son <b>variaciones de un recorrido</b>: <b>visitar cada elemento una vez</b> y <b>hacer algo</b> con él.</p></div><div class="code-window"><div class="code-header"><span class="code-title">patron_recorrido.py</span><span class="code-badge">Plantilla</span></div><div class="code-body"><span class="c-cmt"># Patrón general</span>
+resultado = valor_inicial          <span class="c-cmt"># 1) preparar lo que voy a acumular</span>
+<span class="c-kw">for</span> elemento <span class="c-kw">in</span> lista:             <span class="c-cmt"># 2) visitar cada elemento</span>
+    ...                            <span class="c-cmt"># 3) actualizar el resultado</span>
+<span class="c-fn">print</span>(resultado)                   <span class="c-cmt"># 4) usar el resultado</span></div></div><table class="trace-table"><thead><tr><th>Si querés...</th><th>Preparás...</th><th>En cada vuelta...</th></tr></thead><tbody><tr><td><b>Sumar</b></td><td><code>suma = 0</code></td><td><code>suma += x</code></td></tr><tr><td><b>Contar</b></td><td><code>cantidad = 0</code></td><td><code>if cumple: cantidad += 1</code></td></tr><tr><td><b>Máximo</b></td><td><code>mayor = lista[0]</code></td><td><code>if x &gt; mayor: mayor = x</code></td></tr><tr><td><b>Filtrar</b></td><td><code>resultado = []</code></td><td><code>if cumple: resultado.append(x)</code></td></tr><tr><td><b>Transformar</b></td><td><code>resultado = []</code></td><td><code>resultado.append(f(x))</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">03</span> Acumulador: Sumar los Elementos</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">sumar.py</span><span class="code-badge">Python</span></div><div class="code-body">notas = [<span class="c-num">8</span>, <span class="c-num">6</span>, <span class="c-num">9</span>, <span class="c-num">7</span>, <span class="c-num">10</span>]
+suma = <span class="c-num">0</span>
+
+<span class="c-kw">for</span> nota <span class="c-kw">in</span> notas:
+    suma += nota
+
+<span class="c-fn">print</span>(<span class="c-str">"Suma:"</span>, suma)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Suma: 40</div></div></div></div><table class="trace-table"><thead><tr><th>Vuelta</th><th><code>nota</code></th><th><code>suma</code> antes</th><th><code>suma</code> después</th></tr></thead><tbody><tr><td>1</td><td>8</td><td>0</td><td>8</td></tr><tr><td>2</td><td>6</td><td>8</td><td>14</td></tr><tr><td>3</td><td>9</td><td>14</td><td>23</td></tr><tr><td>4</td><td>7</td><td>23</td><td>30</td></tr><tr><td>5</td><td>10</td><td>30</td><td>40</td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Mismo patrón que en la unidad 07</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Inicializar <b>en 0 antes</b> del bucle y <b>sumar adentro</b>. (Python tiene <code>sum(notas)</code>, pero hay que <b>dominar la idea</b>.)</p></div></section>
+<section><h2><span class="section-num">04</span> Contador: ¿Cuántos Cumplen una Condición?</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">contar.py</span><span class="code-badge">Python</span></div><div class="code-body">notas = [<span class="c-num">8</span>, <span class="c-num">4</span>, <span class="c-num">9</span>, <span class="c-num">5</span>, <span class="c-num">10</span>, <span class="c-num">6</span>, <span class="c-num">3</span>]
+aprobados = <span class="c-num">0</span>
+
+<span class="c-kw">for</span> nota <span class="c-kw">in</span> notas:
+    <span class="c-kw">if</span> nota &gt;= <span class="c-num">6</span>:
+        aprobados += <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(<span class="c-str">f"Aprobados: {aprobados} de {len(notas)}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Aprobados: 4 de 7</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Estructura</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Un <b><code>if</code></b> dentro del <code>for</code>: el contador <b>solo aumenta</b> cuando se cumple la condición.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Variante con <code>count</code></h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><code>notas.count(10)</code> cuenta <b>un valor exacto</b>. Para condiciones como <code>&gt;= 6</code> hace falta el bucle.</p></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Podés combinar</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Cambiando la condición contás <b>pares</b> (<code>x % 2 == 0</code>), <b>positivos</b> (<code>x &gt; 0</code>), <b>textos largos</b> (<code>len(x) &gt; 5</code>), etc.</p></div></section>
+<section><h2><span class="section-num">05</span> Promedio y el Problema de la Lista Vacía</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">promedio_lista.py</span><span class="code-badge">Termina con error</span></div><div class="code-body">notas = [<span class="c-num">8</span>, <span class="c-num">6</span>, <span class="c-num">9</span>, <span class="c-num">7</span>]
+
+promedio = <span class="c-fn">sum</span>(notas) / <span class="c-fn">len</span>(notas)
+<span class="c-fn">print</span>(<span class="c-str">f"Promedio: {promedio:.2f}"</span>)
+
+vacia = []
+<span class="c-fn">print</span>(<span class="c-fn">sum</span>(vacia) / <span class="c-fn">len</span>(vacia))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Promedio: 7.50
+Traceback (most recent call last):
+  File "ejemplo.py", line 7, in &lt;module&gt;
+    print(sum(vacia) / len(vacia))
+          ~~~~~~~~~~~^~~~~~~~~~~~
+ZeroDivisionError: division by zero</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Con la lista vacía, <code>len</code> es 0 y se divide por cero: <code>ZeroDivisionError</code>. <b>Siempre hay que considerar el caso borde "lista vacía".</b></p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cómo protegerlo</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Preguntar antes: <code>if len(notas) &gt; 0:</code> calcular el promedio; <code>else:</code> mostrar <code>No hay datos</code>.</p></div></div></section>
+<section><h2><span class="section-num">06</span> Máximo: El Algoritmo Clásico</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Se supone que <b>el primer elemento es el mayor</b> (el "candidato") y se <b>compara con cada uno de los demás</b>: si aparece uno mayor, <b>pasa a ser el nuevo candidato</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">maximo.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">14</span>, <span class="c-num">7</span>, <span class="c-num">32</span>, <span class="c-num">5</span>, <span class="c-num">21</span>]
+mayor = numeros[<span class="c-num">0</span>]
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> numeros:
+    <span class="c-kw">if</span> n &gt; mayor:
+        mayor = n
+
+<span class="c-fn">print</span>(<span class="c-str">"El mayor es"</span>, mayor)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">El mayor es 32</div></div></div></div><table class="trace-table"><thead><tr><th><code>n</code></th><th>¿<code>n &gt; mayor</code>?</th><th><code>mayor</code> después</th></tr></thead><tbody><tr><td>14</td><td>No (14 &gt; 14 es falso)</td><td>14</td></tr><tr><td>7</td><td>No</td><td>14</td></tr><tr><td>32</td><td><b>Sí</b></td><td><b>32</b></td></tr><tr><td>5</td><td>No</td><td>32</td></tr><tr><td>21</td><td>No</td><td>32</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Por qué no empezar en 0</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si <code>mayor = 0</code> y <b>todos los números son negativos</b> (<code>[-5, -2, -9]</code>), el resultado sería <b>0</b>, que ni siquiera está en la lista. Por eso se parte <b>del primer elemento</b>.</p></div></section>
+<section><h2><span class="section-num">07</span> Mínimo y Posición del Mayor</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">minimo_posicion.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">14</span>, <span class="c-num">7</span>, <span class="c-num">32</span>, <span class="c-num">5</span>, <span class="c-num">21</span>]
+
+menor = numeros[<span class="c-num">0</span>]
+pos_mayor = <span class="c-num">0</span>
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(numeros)):
+    <span class="c-kw">if</span> numeros[i] &lt; menor:
+        menor = numeros[i]
+    <span class="c-kw">if</span> numeros[i] &gt; numeros[pos_mayor]:
+        pos_mayor = i
+
+<span class="c-fn">print</span>(<span class="c-str">"Menor:"</span>, menor)
+<span class="c-fn">print</span>(<span class="c-str">"El mayor está en la posición"</span>, pos_mayor)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Menor: 5
+El mayor está en la posición 2</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cuándo guardar la posición</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Si necesitás <b>saber dónde está</b> el máximo (no solo su valor), guardá <b>el índice</b> en lugar del valor. Con el índice se obtiene el valor: <code>numeros[pos_mayor]</code>. Se recorre con <b><code>range(len(...))</code></b> porque necesitamos <b><code>i</code></b>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Atajo</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>numeros.index(max(numeros))</code> devuelve la posición del <b>primer</b> mayor.</p></div></section>
+<section><h2><span class="section-num">08</span> Búsqueda Lineal: ¿Está el Elemento?</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">buscar_bandera.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">14</span>, <span class="c-num">7</span>, <span class="c-num">32</span>, <span class="c-num">5</span>, <span class="c-num">21</span>]
+buscado = <span class="c-num">5</span>
+encontrado = <span class="c-kw">False</span>
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> numeros:
+    <span class="c-kw">if</span> n == buscado:
+        encontrado = <span class="c-kw">True</span>
+        <span class="c-kw">break</span>
+
+<span class="c-fn">print</span>(<span class="c-str">"¿Está el"</span>, buscado, <span class="c-str">"?"</span>, encontrado)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">¿Está el 5 ? True</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">La "bandera"</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Una variable booleana que <b>empieza en <code>False</code></b> y pasa a <code>True</code> <b>cuando se encuentra</b> lo buscado. El <code>break</code> <b>evita seguir recorriendo</b> de más.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">El atajo</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>buscado in numeros</code> hace <b>exactamente lo mismo</b> por dentro. Conviene entender el algoritmo porque <b>sirve para condiciones más complejas</b>.</p></div></div></section>
+<section><h2><span class="section-num">09</span> Función de Búsqueda: Devolver la Posición</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">funcion_buscar.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">buscar</span>(lista, valor):
+    <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(lista)):
+        <span class="c-kw">if</span> lista[i] == valor:
+            <span class="c-kw">return</span> i
+    <span class="c-kw">return</span> -<span class="c-num">1</span>
+
+nombres = [<span class="c-str">"Ana"</span>, <span class="c-str">"Luis"</span>, <span class="c-str">"Marta"</span>, <span class="c-str">"Luis"</span>]
+<span class="c-fn">print</span>(buscar(nombres, <span class="c-str">"Marta"</span>))
+<span class="c-fn">print</span>(buscar(nombres, <span class="c-str">"Luis"</span>))
+<span class="c-fn">print</span>(buscar(nombres, <span class="c-str">"Pedro"</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">2
+1
+-1</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.84rem;">Se recorre con índices. Al <b>encontrar</b> el valor, <code>return i</code> <b>corta la función</b> y devuelve la posición.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.84rem;">Si el bucle <b>termina sin encontrar</b>, se llega al <code>return -1</code> (convención: <b>"no encontrado"</b>).</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.84rem;">Devuelve <b>la primera</b> aparición: <code>"Luis"</code> está en 1 y en 3, pero devuelve <code>1</code>.</div></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Es el mismo algoritmo de <b>búsqueda secuencial</b> que hicimos con vectores en el 2.º bimestre, con la misma convención de <code>-1</code>.</p></div></section>
+<section><h2><span class="section-num">10</span> Filtrar: Construir una Lista Nueva con los Que Cumplen</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">filtrar.py</span><span class="code-badge">Python</span></div><div class="code-body">notas = [<span class="c-num">8</span>, <span class="c-num">4</span>, <span class="c-num">9</span>, <span class="c-num">5</span>, <span class="c-num">10</span>, <span class="c-num">6</span>, <span class="c-num">3</span>]
+aprobadas = []
+
+<span class="c-kw">for</span> nota <span class="c-kw">in</span> notas:
+    <span class="c-kw">if</span> nota &gt;= <span class="c-num">6</span>:
+        aprobadas.append(nota)
+
+<span class="c-fn">print</span>(<span class="c-str">"Todas:"</span>, notas)
+<span class="c-fn">print</span>(<span class="c-str">"Aprobadas:"</span>, aprobadas)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Todas: [8, 4, 9, 5, 10, 6, 3]
+Aprobadas: [8, 9, 10, 6]</div></div></div></div><table class="trace-table"><thead><tr><th><code>nota</code></th><th>¿<code>&gt;= 6</code>?</th><th><code>aprobadas</code> después</th></tr></thead><tbody><tr><td>8</td><td>Sí</td><td><code>[8]</code></td></tr><tr><td>4</td><td>No</td><td><code>[8]</code></td></tr><tr><td>9</td><td>Sí</td><td><code>[8, 9]</code></td></tr><tr><td>5</td><td>No</td><td><code>[8, 9]</code></td></tr><tr><td>10</td><td>Sí</td><td><code>[8, 9, 10]</code></td></tr><tr><td>6</td><td>Sí</td><td><code>[8, 9, 10, 6]</code></td></tr><tr><td>3</td><td>No</td><td><code>[8, 9, 10, 6]</code></td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Patrón</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><b>Lista vacía + <code>if</code> + <code>append</code></b>. La lista <b>original no se modifica</b>: se <b>construye otra</b>.</p></div></section>
+<section><h2><span class="section-num">11</span> Transformar: Una Lista Nueva a Partir de Otra</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">transformar.py</span><span class="code-badge">Python</span></div><div class="code-body">precios = [<span class="c-num">100</span>, <span class="c-num">250</span>, <span class="c-num">80</span>]
+con_iva = []
+
+<span class="c-kw">for</span> precio <span class="c-kw">in</span> precios:
+    con_iva.append(precio * <span class="c-num">1.21</span>)
+
+<span class="c-fn">print</span>(precios)
+<span class="c-fn">print</span>(con_iva)
+
+nombres = [<span class="c-str">"ana"</span>, <span class="c-str">"luis"</span>, <span class="c-str">"marta"</span>]
+largos = []
+<span class="c-kw">for</span> n <span class="c-kw">in</span> nombres:
+    largos.append(<span class="c-fn">len</span>(n))
+<span class="c-fn">print</span>(largos)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[100, 250, 80]
+[121.0, 302.5, 96.8]
+[3, 4, 5]</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b>Filtrar</b> elige <b>cuáles</b> elementos pasan; <b>transformar</b> cambia <b>cómo es</b> cada elemento. Los dos usan el patrón <b>lista vacía + <code>append</code></b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Un atajo muy usado en Python</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Este patrón es tan común que existe una <b>forma abreviada</b>: la <b>lista por comprensión</b> (siguiente diapositiva).</p></div></section>
+<section><h2><span class="section-num">12</span> Listas por Comprensión (List Comprehension)</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Una <b>lista por comprensión</b> crea una lista <b>en una sola línea</b>, describiendo <b>qué elementos incluir</b> y <b>cómo transformarlos</b>.</p></div><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-amber);">[</span><span style="color:var(--accent-emerald);">expresion</span><span style="color:var(--accent-rose);"> for </span><span style="color:var(--accent-cyan);">x</span><span style="color:var(--accent-rose);"> in </span><span style="color:var(--accent-cyan);">lista</span><span style="color:var(--accent-rose);"> if </span><span style="color:var(--accent-amber);">condicion</span><span style="color:var(--accent-amber);">]</span></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">comprension.py</span><span class="code-badge">Python</span></div><div class="code-body">notas = [<span class="c-num">8</span>, <span class="c-num">4</span>, <span class="c-num">9</span>, <span class="c-num">5</span>, <span class="c-num">10</span>]
+
+dobles = [n * <span class="c-num">2</span> <span class="c-kw">for</span> n <span class="c-kw">in</span> notas]
+<span class="c-fn">print</span>(dobles)
+
+aprobadas = [n <span class="c-kw">for</span> n <span class="c-kw">in</span> notas <span class="c-kw">if</span> n &gt;= <span class="c-num">6</span>]
+<span class="c-fn">print</span>(aprobadas)
+
+textos = [<span class="c-fn">str</span>(n) <span class="c-kw">for</span> n <span class="c-kw">in</span> notas]
+<span class="c-fn">print</span>(textos)
+
+cuadrados = [i ** <span class="c-num">2</span> <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">6</span>)]
+<span class="c-fn">print</span>(cuadrados)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[16, 8, 18, 10, 20]
+[8, 9, 10]
+['8', '4', '9', '5', '10']
+[1, 4, 9, 16, 25]</div></div></div></div><table class="trace-table"><thead><tr><th>Parte</th><th>Qué es</th><th>Obligatoria</th></tr></thead><tbody><tr><td><code>expresion</code></td><td>Qué se guarda en la lista nueva (puede usar <code>x</code>)</td><td>Sí</td></tr><tr><td><code>for x in lista</code></td><td>El recorrido</td><td>Sí</td></tr><tr><td><code>if condicion</code></td><td>Filtro: solo entran los que cumplen</td><td>No</td></tr></tbody></table></section>
+<section><h2><span class="section-num">13</span> Comprensión vs. Bucle: La Misma Idea de Dos Formas</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Con bucle</h4><div class="code-window"><div class="code-header"><span class="code-title">bucle.py</span><span class="code-badge">4 líneas</span></div><div class="code-body">pares = []
+<span class="c-kw">for</span> n <span class="c-kw">in</span> numeros:
+    <span class="c-kw">if</span> n % <span class="c-num">2</span> == <span class="c-num">0</span>:
+        pares.append(n * <span class="c-num">10</span>)</div></div></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con comprensión</h4><div class="code-window"><div class="code-header"><span class="code-title">comprension.py</span><span class="code-badge">1 línea</span></div><div class="code-body">pares = [n * <span class="c-num">10</span> <span class="c-kw">for</span> n <span class="c-kw">in</span> numeros <span class="c-kw">if</span> n % <span class="c-num">2</span> == <span class="c-num">0</span>]</div></div></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">mismo_resultado.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>, <span class="c-num">4</span>, <span class="c-num">5</span>, <span class="c-num">6</span>]
+
+pares = []
+<span class="c-kw">for</span> n <span class="c-kw">in</span> numeros:
+    <span class="c-kw">if</span> n % <span class="c-num">2</span> == <span class="c-num">0</span>:
+        pares.append(n * <span class="c-num">10</span>)
+
+otra = [n * <span class="c-num">10</span> <span class="c-kw">for</span> n <span class="c-kw">in</span> numeros <span class="c-kw">if</span> n % <span class="c-num">2</span> == <span class="c-num">0</span>]
+<span class="c-fn">print</span>(pares, otra, pares == otra)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[20, 40, 60] [20, 40, 60] True</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cuándo conviene cada una</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Comprensión</b>: transformaciones y filtros <b>simples</b>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Bucle</b>: cuando hay <b>varias instrucciones</b>, <code>break</code>, o la lógica es <b>compleja</b> (se vuelve ilegible en una línea).</li></ul></div></section>
+<section><h2><span class="section-num">14</span> Modificar los Elementos en el Lugar</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">modificar_en_lugar.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>, <span class="c-num">4</span>]
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> numeros:
+    n = n * <span class="c-num">2</span>
+<span class="c-fn">print</span>(<span class="c-str">"Con for directo:"</span>, numeros)
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(numeros)):
+    numeros[i] = numeros[i] * <span class="c-num">2</span>
+<span class="c-fn">print</span>(<span class="c-str">"Con índices:"</span>, numeros)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Con for directo: [1, 2, 3, 4]
+Con índices: [2, 4, 6, 8]</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Por qué no cambió la primera vez</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">En <code>for n in numeros</code>, <b><code>n</code> es una variable aparte</b> que recibe cada valor. Hacer <code>n = n * 2</code> <b>reasigna <code>n</code></b>, no el elemento de la lista.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Para modificar la lista</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Hay que <b>asignar a la posición</b>: <code>numeros[i] = ...</code>. Por eso se recorre con <b><code>range(len(numeros))</code></b>.</p></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Regla</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;"><b>Para leer</b> → <code>for x in lista</code>. <b>Para modificar los elementos</b> → <code>for i in range(len(lista))</code>.</p></div></section>
+<section><h2><span class="section-num">15</span> Recorrer Dos Listas a la Vez: zip()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">zip.py</span><span class="code-badge">Python</span></div><div class="code-body">nombres = [<span class="c-str">"Ana"</span>, <span class="c-str">"Luis"</span>, <span class="c-str">"Marta"</span>]
+notas = [<span class="c-num">8</span>, <span class="c-num">6</span>, <span class="c-num">9.5</span>]
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(nombres)):
+    <span class="c-fn">print</span>(nombres[i], <span class="c-str">"-&gt;"</span>, notas[i])
+
+<span class="c-fn">print</span>(<span class="c-str">"---"</span>)
+
+<span class="c-kw">for</span> nombre, nota <span class="c-kw">in</span> <span class="c-fn">zip</span>(nombres, notas):
+    <span class="c-fn">print</span>(<span class="c-str">f"{nombre}: {nota}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Ana -&gt; 8
+Luis -&gt; 6
+Marta -&gt; 9.5
+---
+Ana: 8
+Luis: 6
+Marta: 9.5</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);"><code>zip(a, b)</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><b>Empareja</b> los elementos de <b>igual posición</b>: <code>(a[0], b[0])</code>, <code>(a[1], b[1])</code>... Se <b>desempaquetan</b> en el <code>for</code> (<code>nombre, nota</code>). Se detiene cuando <b>la lista más corta</b> termina.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Listas paralelas</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Cuando la información de una persona se reparte en <b>varias listas</b> del mismo largo (<code>nombres[i]</code> ↔ <code>notas[i]</code>), <code>zip</code> permite <b>recorrerlas juntas</b> sin manejar índices.</p></div></div></section>
+<section><h2><span class="section-num">16</span> Recorrer al Revés</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">al_reves.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">40</span>]
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> <span class="c-fn">reversed</span>(numeros):
+    <span class="c-fn">print</span>(n, end=<span class="c-str">" "</span>)
+<span class="c-fn">print</span>()
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(numeros) - <span class="c-num">1</span>, -<span class="c-num">1</span>, -<span class="c-num">1</span>):
+    <span class="c-fn">print</span>(numeros[i], end=<span class="c-str">" "</span>)
+<span class="c-fn">print</span>()
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> numeros[::-<span class="c-num">1</span>]:
+    <span class="c-fn">print</span>(n, end=<span class="c-str">" "</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">40 30 20 10 
+40 30 20 10 
+40 30 20 10 </div></div></div></div><table class="trace-table"><thead><tr><th>Forma</th><th>Característica</th></tr></thead><tbody><tr><td><code>reversed(lista)</code></td><td>Recorre al revés <b>sin copiar</b> ni modificar la lista</td></tr><tr><td><code>range(len - 1, -1, -1)</code></td><td>Da los <b>índices</b> al revés (útil para <b>modificar</b>)</td></tr><tr><td><code>lista[::-1]</code></td><td>Crea una <b>copia invertida</b> y la recorre</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Recordá</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>range(len(n) - 1, -1, -1)</code>: el <code>-1</code> del medio hace que <b>el 0 sí se incluya</b> (el límite final nunca se incluye).</p></div></section>
+<section><h2><span class="section-num">17</span> Ejemplo: Eliminar Duplicados</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">sin_duplicados.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">3</span>, <span class="c-num">7</span>, <span class="c-num">3</span>, <span class="c-num">9</span>, <span class="c-num">7</span>, <span class="c-num">1</span>, <span class="c-num">3</span>]
+sin_repetir = []
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> numeros:
+    <span class="c-kw">if</span> n <span class="c-kw">not</span> <span class="c-kw">in</span> sin_repetir:
+        sin_repetir.append(n)
+
+<span class="c-fn">print</span>(sin_repetir)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[3, 7, 9, 1]</div></div></div></div><table class="trace-table"><thead><tr><th><code>n</code></th><th>¿Ya está en <code>sin_repetir</code>?</th><th><code>sin_repetir</code> después</th></tr></thead><tbody><tr><td>3</td><td>No</td><td><code>[3]</code></td></tr><tr><td>7</td><td>No</td><td><code>[3, 7]</code></td></tr><tr><td>3</td><td><b>Sí</b> (se ignora)</td><td><code>[3, 7]</code></td></tr><tr><td>9</td><td>No</td><td><code>[3, 7, 9]</code></td></tr><tr><td>7</td><td><b>Sí</b></td><td><code>[3, 7, 9]</code></td></tr><tr><td>1</td><td>No</td><td><code>[3, 7, 9, 1]</code></td></tr><tr><td>3</td><td><b>Sí</b></td><td><code>[3, 7, 9, 1]</code></td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Conserva el orden</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Usa <code>not in</code> + <code>append</code>. (Python tiene otra estructura, el <b>conjunto</b> <code>set</code>, que elimina duplicados, pero <b>no conserva el orden</b>.)</p></div></section>
+<section><h2><span class="section-num">18</span> Ejemplo: Elemento Que Más Se Repite</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">mas_repetido.py</span><span class="code-badge">Python</span></div><div class="code-body">datos = [<span class="c-str">"rojo"</span>, <span class="c-str">"azul"</span>, <span class="c-str">"rojo"</span>, <span class="c-str">"verde"</span>, <span class="c-str">"azul"</span>, <span class="c-str">"rojo"</span>]
+
+mas_repetido = datos[<span class="c-num">0</span>]
+maximo = <span class="c-num">0</span>
+
+<span class="c-kw">for</span> dato <span class="c-kw">in</span> datos:
+    veces = datos.count(dato)
+    <span class="c-kw">if</span> veces &gt; maximo:
+        maximo = veces
+        mas_repetido = dato
+
+<span class="c-fn">print</span>(<span class="c-str">f"'{mas_repetido}' aparece {maximo} veces"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">'rojo' aparece 3 veces</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Algoritmo</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Para cada elemento se <b>cuenta</b> (<code>count</code>) y se <b>compara</b> con el <b>máximo parcial</b>, igual que en el algoritmo del mayor, pero el "valor" que se compara es <b>la cantidad de apariciones</b>.</p></div></section>
+<section><h2><span class="section-num">19</span> Ordenar a Mano: Método de la Burbuja</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Se recorre la lista <b>comparando pares de vecinos</b>: si están <b>en mal orden</b>, se <b>intercambian</b>. Después de cada pasada, <b>el mayor "sube" al final</b> como una burbuja.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">burbuja.py</span><span class="code-badge">Python</span></div><div class="code-body">a = [<span class="c-num">5</span>, <span class="c-num">3</span>, <span class="c-num">8</span>, <span class="c-num">1</span>]
+n = <span class="c-fn">len</span>(a)
+
+<span class="c-kw">for</span> pasada <span class="c-kw">in</span> <span class="c-fn">range</span>(n - <span class="c-num">1</span>):
+    <span class="c-kw">for</span> j <span class="c-kw">in</span> <span class="c-fn">range</span>(n - <span class="c-num">1</span> - pasada):
+        <span class="c-kw">if</span> a[j] &gt; a[j + <span class="c-num">1</span>]:
+            a[j], a[j + <span class="c-num">1</span>] = a[j + <span class="c-num">1</span>], a[j]
+
+<span class="c-fn">print</span>(a)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[1, 3, 5, 8]</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">El intercambio</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>a[j], a[j+1] = a[j+1], a[j]</code> usa la <b>asignación múltiple</b> (unidad 02): <b>no hace falta variable auxiliar</b>, como sí hacía en C.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Los límites</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">En cada pasada <b>hay un elemento más ya ubicado</b>, por eso el bucle interno es <code>range(n - 1 - pasada)</code>.</p></div></div></section>
+<section><h2><span class="section-num">20</span> Seguimiento de la Burbuja con [5, 3, 8, 1]</h2><table class="trace-table"><thead><tr><th>Pasada</th><th>Comparación</th><th>Acción</th><th>Lista después</th></tr></thead><tbody><tr><td>1</td><td>5 &gt; 3</td><td>Intercambia</td><td><code>[3, 5, 8, 1]</code></td></tr><tr><td>1</td><td>5 &gt; 8</td><td>No</td><td><code>[3, 5, 8, 1]</code></td></tr><tr><td>1</td><td>8 &gt; 1</td><td>Intercambia</td><td><code>[3, 5, 1, 8]</code> (8 ya está en su lugar)</td></tr><tr><td>2</td><td>3 &gt; 5</td><td>No</td><td><code>[3, 5, 1, 8]</code></td></tr><tr><td>2</td><td>5 &gt; 1</td><td>Intercambia</td><td><code>[3, 1, 5, 8]</code> (5 ubicado)</td></tr><tr><td>3</td><td>3 &gt; 1</td><td>Intercambia</td><td><code>[1, 3, 5, 8]</code> (<b>ordenada</b>)</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Y en la práctica...</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Entender la burbuja sirve para <b>aprender cómo se ordena</b>. Para trabajar, usá <b><code>sort()</code> / <code>sorted()</code></b>: es <b>mucho más rápido</b> y no tiene errores.</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Es el <b>mismo algoritmo</b> del 2.º bimestre. Cambia la sintaxis: sin <code>{ }</code>, sin variable auxiliar para intercambiar.</p></div></section>
+<section><h2><span class="section-num">21</span> Búsqueda Binaria (Sobre una Lista Ordenada)</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Si la lista <b>está ordenada</b>, no hace falta mirar todo: se mira <b>el elemento del medio</b> y se <b>descarta la mitad</b> donde seguro no está. Se repite hasta encontrarlo o quedarse sin elementos.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">busqueda_binaria.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">binaria</span>(lista, valor):
+    izq = <span class="c-num">0</span>
+    der = <span class="c-fn">len</span>(lista) - <span class="c-num">1</span>
+    <span class="c-kw">while</span> izq &lt;= der:
+        medio = (izq + der) // <span class="c-num">2</span>
+        <span class="c-kw">if</span> lista[medio] == valor:
+            <span class="c-kw">return</span> medio
+        <span class="c-kw">elif</span> lista[medio] &lt; valor:
+            izq = medio + <span class="c-num">1</span>
+        <span class="c-kw">else</span>:
+            der = medio - <span class="c-num">1</span>
+    <span class="c-kw">return</span> -<span class="c-num">1</span>
+
+datos = [<span class="c-num">2</span>, <span class="c-num">5</span>, <span class="c-num">8</span>, <span class="c-num">12</span>, <span class="c-num">16</span>, <span class="c-num">23</span>, <span class="c-num">38</span>, <span class="c-num">56</span>]
+<span class="c-fn">print</span>(binaria(datos, <span class="c-num">23</span>), binaria(datos, <span class="c-num">7</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">5 -1</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Ventaja</h4><p style="font-size:0.8rem; line-height:1.55; margin:4px 0;">Con <b>1000</b> elementos: la lineal puede hacer <b>1000</b> comparaciones; la binaria, <b>10 como mucho</b>. Pero <b>exige lista ordenada</b>.</p></div></section>
+<section><h2><span class="section-num">22</span> Seguimiento de la Búsqueda Binaria (valor = 23)</h2><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">0</div><div class="array-cell ">2</div></div><div class="array-cell-wrapper"><div class="array-index">1</div><div class="array-cell ">5</div></div><div class="array-cell-wrapper"><div class="array-index">2</div><div class="array-cell ">8</div></div><div class="array-cell-wrapper"><div class="array-index">3</div><div class="array-cell ">12</div></div><div class="array-cell-wrapper"><div class="array-index">4</div><div class="array-cell ">16</div></div><div class="array-cell-wrapper"><div class="array-index">5</div><div class="array-cell ">23</div></div><div class="array-cell-wrapper"><div class="array-index">6</div><div class="array-cell ">38</div></div><div class="array-cell-wrapper"><div class="array-index">7</div><div class="array-cell ">56</div></div></div><table class="trace-table"><thead><tr><th>Paso</th><th><code>izq</code></th><th><code>der</code></th><th><code>medio</code></th><th><code>lista[medio]</code></th><th>Decisión</th></tr></thead><tbody><tr><td>1</td><td>0</td><td>7</td><td>3</td><td>12</td><td><code>12 &lt; 23</code> → buscar a la <b>derecha</b>: <code>izq = 4</code></td></tr><tr><td>2</td><td>4</td><td>7</td><td>5</td><td><b>23</b></td><td><code>23 == 23</code> → <b>encontrado</b>: devuelve <b>5</b></td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cuando no está</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Con <code>7</code>: <code>medio = 3</code> (12 &gt; 7 → <code>der = 2</code>), <code>medio = 1</code> (5 &lt; 7 → <code>izq = 2</code>), <code>medio = 2</code> (8 &gt; 7 → <code>der = 1</code>). Ahora <code>izq &gt; der</code> y <b>el <code>while</code> termina</b>: devuelve <b><code>-1</code></b>.</p></div></section>
+<section><h2><span class="section-num">23</span> Ejemplo: Pares e Impares en Listas Separadas</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">pares_impares.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">12</span>, <span class="c-num">7</span>, <span class="c-num">4</span>, <span class="c-num">9</span>, <span class="c-num">20</span>, <span class="c-num">15</span>, <span class="c-num">8</span>]
+pares = []
+impares = []
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> numeros:
+    <span class="c-kw">if</span> n % <span class="c-num">2</span> == <span class="c-num">0</span>:
+        pares.append(n)
+    <span class="c-kw">else</span>:
+        impares.append(n)
+
+<span class="c-fn">print</span>(<span class="c-str">"Pares:"</span>, pares)
+<span class="c-fn">print</span>(<span class="c-str">"Impares:"</span>, impares)
+<span class="c-fn">print</span>(<span class="c-str">"Suma de pares:"</span>, <span class="c-fn">sum</span>(pares))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Pares: [12, 4, 20, 8]
+Impares: [7, 9, 15]
+Suma de pares: 44</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Idea</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Con <b><code>if / else</code></b> dentro del bucle, <b>cada elemento va a una de dos listas</b>. Ahora podés procesar cada grupo por separado.</p></div></section>
+<section><h2><span class="section-num">24</span> Ejemplo: Alumnos Aprobados con Listas Paralelas</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">alumnos.py</span><span class="code-badge">Python</span></div><div class="code-body">nombres = [<span class="c-str">"Ana"</span>, <span class="c-str">"Luis"</span>, <span class="c-str">"Marta"</span>, <span class="c-str">"Pedro"</span>]
+notas = [<span class="c-num">8</span>, <span class="c-num">4</span>, <span class="c-num">9.5</span>, <span class="c-num">5</span>]
+
+<span class="c-fn">print</span>(<span class="c-str">"Aprobados:"</span>)
+<span class="c-kw">for</span> nombre, nota <span class="c-kw">in</span> <span class="c-fn">zip</span>(nombres, notas):
+    <span class="c-kw">if</span> nota &gt;= <span class="c-num">6</span>:
+        <span class="c-fn">print</span>(<span class="c-str">f"  {nombre} ({nota})"</span>)
+
+mejor = notas.index(<span class="c-fn">max</span>(notas))
+<span class="c-fn">print</span>(<span class="c-str">f"Mejor nota: {nombres[mejor]} con {notas[mejor]}"</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Aprobados:
+  Ana (8)
+  Marta (9.5)
+Mejor nota: Marta con 9.5</div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Idea</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Las posiciones <b>relacionan</b> las listas: la nota de <code>nombres[i]</code> está en <code>notas[i]</code>. <code>notas.index(max(notas))</code> da <b>la posición del mejor</b>, y con ella se <b>recupera el nombre</b>.</p></div></section>
+<section><h2><span class="section-num">25</span> Ejemplo: Invertir una Lista a Mano (Intercambiando Extremos)</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">invertir_a_mano.py</span><span class="code-badge">Python</span></div><div class="code-body">lista = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>, <span class="c-num">4</span>, <span class="c-num">5</span>]
+izq = <span class="c-num">0</span>
+der = <span class="c-fn">len</span>(lista) - <span class="c-num">1</span>
+
+<span class="c-kw">while</span> izq &lt; der:
+    lista[izq], lista[der] = lista[der], lista[izq]
+    izq += <span class="c-num">1</span>
+    der -= <span class="c-num">1</span>
+
+<span class="c-fn">print</span>(lista)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[5, 4, 3, 2, 1]</div></div></div></div><table class="trace-table"><thead><tr><th>Paso</th><th><code>izq</code></th><th><code>der</code></th><th>Lista después</th></tr></thead><tbody><tr><td>1</td><td>0</td><td>4</td><td><code>[5, 2, 3, 4, 1]</code></td></tr><tr><td>2</td><td>1</td><td>3</td><td><code>[5, 4, 3, 2, 1]</code></td></tr><tr><td>—</td><td>2</td><td>2</td><td><code>izq &lt; der</code> es falso: termina</td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Técnica de dos índices</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Dos posiciones que <b>se acercan desde los extremos</b>. Se usa también para <b>palíndromos</b> y para <b>búsqueda binaria</b>.</p></div></section>
+<section><h2><span class="section-num">26</span> Error Frecuente #1: Valores Iniciales y Listas Vacías</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Máximo con valor inicial 0</div><div class="code-window"><div class="code-header"><span class="code-title">max_mal.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">numeros = [-<span class="c-num">5</span>, -<span class="c-num">2</span>, -<span class="c-num">9</span>]
+mayor = <span class="c-num">0</span>
+<span class="c-kw">for</span> n <span class="c-kw">in</span> numeros:
+    <span class="c-kw">if</span> n &gt; mayor:
+        mayor = n
+<span class="c-fn">print</span>(mayor)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">0</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Primer elemento de una lista vacía</div><div class="code-window"><div class="code-header"><span class="code-title">vacia.py</span><span class="code-badge">Con error</span></div><div class="code-body">numeros = []
+mayor = numeros[<span class="c-num">0</span>]</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2, in &lt;module&gt;
+    mayor = numeros[0]
+            ~~~~~~~^^^
+IndexError: list index out of range</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="correct-card"><div class="correct-title">✅ Soluciones</div><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Partir de <b><code>numeros[0]</code></b> (si la lista <b>no está vacía</b>).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>O verificar <code>if len(numeros) &gt; 0:</code> antes.</li></ul></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Con <code>max()</code></h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>max([])</code> también falla: <code>ValueError: max() arg is an empty sequence</code>. <b>Siempre pensá en la lista vacía.</b></p></div></div></section>
+<section><h2><span class="section-num">27</span> Error Frecuente #2: Índices en los Bucles</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ <code>range(len(...) + 1)</code></div><div class="code-window"><div class="code-header"><span class="code-title">mas_uno.py</span><span class="code-badge">Con error</span></div><div class="code-body">numeros = [<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>]
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(numeros) + <span class="c-num">1</span>):
+    <span class="c-fn">print</span>(numeros[i])</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">10
+20
+30
+Traceback (most recent call last):
+  File "ejemplo.py", line 3, in &lt;module&gt;
+    print(numeros[i])
+          ~~~~~~~^^^
+IndexError: list index out of range</div></div></div><div class="wrong-card"><div class="wrong-title">❌ Comparar con el vecino sin cuidar el final</div><div class="code-window"><div class="code-header"><span class="code-title">vecino.py</span><span class="code-badge">Con error</span></div><div class="code-body">numeros = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>]
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(numeros)):
+    <span class="c-kw">if</span> numeros[i] &lt; numeros[i + <span class="c-num">1</span>]:
+        <span class="c-fn">print</span>(<span class="c-str">"crece"</span>)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">crece
+crece
+Traceback (most recent call last):
+  File "ejemplo.py", line 3, in &lt;module&gt;
+    if numeros[i] &lt; numeros[i + 1]:
+                    ~~~~~~~^^^^^^^
+IndexError: list index out of range</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Corrección y regla</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Si en el bucle usás <b><code>lista[i + 1]</code></b>, el recorrido tiene que <b>frenar un elemento antes</b>: <code>for i in range(len(numeros) - 1):</code>.</p></div></section>
+<section><h2><span class="section-num">28</span> Error Frecuente #3: Mutar y Recorrer, y Usar el Resultado de un Método</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ <code>.append()</code> devuelve <code>None</code></div><div class="code-window"><div class="code-header"><span class="code-title">append_none.py</span><span class="code-badge">Con error</span></div><div class="code-body">resultado = []
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>):
+    resultado = resultado.append(i)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 3, in &lt;module&gt;
+    resultado = resultado.append(i)
+                ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'append'</div></div></div><div class="correct-card"><div class="correct-title">✅ Correcto</div><div class="code-window"><div class="code-header"><span class="code-title">append_ok.py</span><span class="code-badge">OK</span></div><div class="code-body">resultado = []
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">3</span>):
+    resultado.append(i)
+<span class="c-fn">print</span>(resultado)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[0, 1, 2]</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En la primera vuelta, <code>resultado.append(0)</code> devuelve <code>None</code> y se <b>asigna a <code>resultado</code></b>. En la segunda vuelta, <code>None.append(1)</code> → <code>AttributeError: 'NoneType' object has no attribute 'append'</code>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Y recordá</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">No agregues ni quites elementos de la lista <b>que estás recorriendo</b> (unidad 13).</p></div></section>
+<section><h2><span class="section-num">29</span> Comparación Final: Algoritmos con Vectores en C y Listas en Python</h2><table class="trace-table"><thead><tr><th>Tarea</th><th>C</th><th>Python</th></tr></thead><tbody><tr><td>Recorrer</td><td><code>for (i = 0; i &lt; n; i++)</code></td><td><code>for x in lista:</code></td></tr><tr><td>Cantidad de elementos</td><td>Variable <code>n</code> aparte</td><td><code>len(lista)</code></td></tr><tr><td>Sumar</td><td>Bucle con acumulador</td><td>Bucle o <code>sum(lista)</code></td></tr><tr><td>Máximo</td><td>Bucle con candidato</td><td>Bucle o <code>max(lista)</code></td></tr><tr><td>Buscar</td><td>Búsqueda secuencial</td><td><code>x in lista</code> / <code>lista.index(x)</code></td></tr><tr><td>Filtrar a otro vector</td><td>Otro vector + contador manual</td><td><code>[x for x in lista if ...]</code></td></tr><tr><td>Intercambiar dos elementos</td><td>Variable auxiliar</td><td><code>a[i], a[j] = a[j], a[i]</code></td></tr><tr><td>Ordenar</td><td>Burbuja / <code>qsort</code></td><td><code>sort()</code> / <code>sorted()</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">30</span> Buenas Prácticas al Resolver Problemas con Listas</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Planificá primero</b>: ¿qué recorro? ¿qué acumulo? ¿qué devuelvo?</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Probá con listas pequeñas</b> que puedas resolver a mano.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Pensá siempre en los <b>casos borde</b>: lista <b>vacía</b>, <b>un solo</b> elemento, <b>todos iguales</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b><code>for x in lista</code></b> salvo que necesites <b>índices</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b>comprensiones</b> para casos <b>simples</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá las funciones <b>incorporadas</b> (<code>sum</code>, <code>max</code>, <code>sorted</code>) en el código real.</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Inicializar el máximo en <b>0</b> o el mínimo en un número "grande" arbitrario.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Calcular <code>len()</code> y <code>sum()</code> <b>dentro</b> del bucle si no cambian.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Comprensiones <b>largas o anidadas</b> difíciles de leer.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Olvidar el <b><code>return -1</code></b> (o equivalente) cuando no se encuentra.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Confiar en que la lista <b>no está vacía</b>.</li></ul></div></div></section>
+<section><h2><span class="section-num">31</span> Ejercicio 1: ¿Qué Hace Este Algoritmo?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Predecí la salida</span></div><div class="code-body">datos = [<span class="c-num">4</span>, <span class="c-num">9</span>, <span class="c-num">2</span>, <span class="c-num">9</span>, <span class="c-num">7</span>]
+r = <span class="c-num">0</span>
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(datos)):
+    <span class="c-kw">if</span> datos[i] &gt; datos[r]:
+        r = i
+<span class="c-fn">print</span>(r)
+
+s = [x <span class="c-kw">for</span> x <span class="c-kw">in</span> datos <span class="c-kw">if</span> x &gt; <span class="c-num">5</span>]
+<span class="c-fn">print</span>(s)
+<span class="c-fn">print</span>(<span class="c-fn">sum</span>(s) // <span class="c-fn">len</span>(s))</div></div><details class="code-solution"><summary>👁️ Ver respuesta</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Python</span></div><div class="code-body">datos = [<span class="c-num">4</span>, <span class="c-num">9</span>, <span class="c-num">2</span>, <span class="c-num">9</span>, <span class="c-num">7</span>]
+r = <span class="c-num">0</span>
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(datos)):
+    <span class="c-kw">if</span> datos[i] &gt; datos[r]:
+        r = i
+<span class="c-fn">print</span>(r)
+
+s = [x <span class="c-kw">for</span> x <span class="c-kw">in</span> datos <span class="c-kw">if</span> x &gt; <span class="c-num">5</span>]
+<span class="c-fn">print</span>(s)
+<span class="c-fn">print</span>(<span class="c-fn">sum</span>(s) // <span class="c-fn">len</span>(s))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1
+[9, 9, 7]
+8</div></div></div></div><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>r</code> guarda la <b>posición del mayor</b>: como usa <code>&gt;</code> (no <code>&gt;=</code>), queda la <b>primera</b> aparición del 9 (posición 1).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>s</code> filtra los mayores que 5: <code>[9, 9, 7]</code>; la suma es 25 y <code>25 // 3</code> = 8.</li></ul></div></details></section>
+<section><h2><span class="section-num">32</span> Ejercicio 2: Escribí las Funciones</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Escribí <b>sin usar</b> <code>sum</code>, <code>max</code>, <code>min</code> ni <code>count</code>:</p><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>suma(lista)</code> → suma de los elementos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>mayor(lista)</code> → el mayor (devolver <code>None</code> si está vacía).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>contar(lista, valor)</code> → cuántas veces aparece.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>positivos(lista)</code> → nueva lista con solo los números <b>mayores que cero</b>.</li></ul></div><details class="code-solution"><summary>👁️ Ver soluciones</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">suma</span>(lista):
+    total = <span class="c-num">0</span>
+    <span class="c-kw">for</span> x <span class="c-kw">in</span> lista:
+        total += x
+    <span class="c-kw">return</span> total
+
+<span class="c-kw">def</span> <span class="c-fn">mayor</span>(lista):
+    <span class="c-kw">if</span> <span class="c-fn">len</span>(lista) == <span class="c-num">0</span>:
+        <span class="c-kw">return</span> <span class="c-kw">None</span>
+    m = lista[<span class="c-num">0</span>]
+    <span class="c-kw">for</span> x <span class="c-kw">in</span> lista:
+        <span class="c-kw">if</span> x &gt; m:
+            m = x
+    <span class="c-kw">return</span> m
+
+<span class="c-kw">def</span> <span class="c-fn">contar</span>(lista, valor):
+    c = <span class="c-num">0</span>
+    <span class="c-kw">for</span> x <span class="c-kw">in</span> lista:
+        <span class="c-kw">if</span> x == valor:
+            c += <span class="c-num">1</span>
+    <span class="c-kw">return</span> c
+
+<span class="c-kw">def</span> <span class="c-fn">positivos</span>(lista):
+    <span class="c-kw">return</span> [x <span class="c-kw">for</span> x <span class="c-kw">in</span> lista <span class="c-kw">if</span> x &gt; <span class="c-num">0</span>]
+
+datos = [<span class="c-num">3</span>, -<span class="c-num">1</span>, <span class="c-num">7</span>, <span class="c-num">3</span>, <span class="c-num">0</span>]
+<span class="c-fn">print</span>(suma(datos), mayor(datos), mayor([]), contar(datos, <span class="c-num">3</span>), positivos(datos))</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">12 7 None 2 [3, 7, 3]</div></div></div></details></section>
+<section><h2><span class="section-num">33</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body">numeros = [<span class="c-num">5</span>, <span class="c-num">12</span>, <span class="c-num">8</span>]
+mayor = <span class="c-num">0</span>
+<span class="c-kw">for</span> n <span class="c-kw">in</span> numeros:
+    <span class="c-kw">if</span> n &lt; mayor:
+        mayor = n
+
+total = <span class="c-num">0</span>
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-fn">len</span>(numeros)):
+    total += numeros[i]
+<span class="c-fn">print</span>(total / <span class="c-fn">len</span>(numeros))
+
+pares = []
+<span class="c-kw">for</span> n <span class="c-kw">in</span> numeros:
+    <span class="c-kw">if</span> n % <span class="c-num">2</span> == <span class="c-num">0</span>:
+        pares = pares.append(n)
+
+<span class="c-fn">print</span>(numeros[<span class="c-fn">len</span>(numeros)])</div></div><details class="code-solution"><summary>👁️ Ver errores y solución</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>mayor</code> debería partir de <code>numeros[0]</code> y comparar con <b><code>&gt;</code></b> (acá usa <code>&lt;</code> y parte de 0).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>range(1, len(numeros))</code> <b>se saltea el índice 0</b>: el total omite el primer elemento (error lógico).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>pares = pares.append(n)</code> deja <code>pares</code> en <code>None</code> → solo <code>pares.append(n)</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>numeros[len(numeros)]</code> es <code>IndexError</code>: el último índice es <code>len - 1</code> (o <code>-1</code>).</li></ul></div></details></section>
+<section><h2><span class="section-num">34</span> Ejercicio 4 (Reto): Análisis de Temperaturas</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Con <code>temps = [18.5, 21, 25.2, 19.8, 30.1, 22, 17.4]</code>, calculá y mostrá: el <b>promedio</b>, la <b>máxima</b> y <b>en qué posición</b> está, <b>cuántos días superaron el promedio</b>, y la lista de los <b>días (posiciones) con temperatura menor a 20</b>.</p></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio4.py</span><span class="code-badge">Python</span></div><div class="code-body">temps = [<span class="c-num">18.5</span>, <span class="c-num">21</span>, <span class="c-num">25.2</span>, <span class="c-num">19.8</span>, <span class="c-num">30.1</span>, <span class="c-num">22</span>, <span class="c-num">17.4</span>]
+
+promedio = <span class="c-fn">sum</span>(temps) / <span class="c-fn">len</span>(temps)
+posicion_max = temps.index(<span class="c-fn">max</span>(temps))
+sobre_promedio = <span class="c-fn">len</span>([t <span class="c-kw">for</span> t <span class="c-kw">in</span> temps <span class="c-kw">if</span> t &gt; promedio])
+frios = [i <span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(temps)) <span class="c-kw">if</span> temps[i] &lt; <span class="c-num">20</span>]
+
+<span class="c-fn">print</span>(<span class="c-str">f"Promedio: {promedio:.2f}"</span>)
+<span class="c-fn">print</span>(<span class="c-str">f"Máxima: {max(temps)} (día {posicion_max})"</span>)
+<span class="c-fn">print</span>(<span class="c-str">"Días sobre el promedio:"</span>, sobre_promedio)
+<span class="c-fn">print</span>(<span class="c-str">"Días fríos:"</span>, frios)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Promedio: 22.00
+Máxima: 30.1 (día 4)
+Días sobre el promedio: 2
+Días fríos: [0, 3, 6]</div></div></div></details></section>
+<section><h2><span class="section-num">35</span> Resumen de la Unidad 14</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Casi todo algoritmo es un <b>recorrido</b> + una <b>variable</b> que se actualiza.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Acumulador</b> (suma), <b>contador</b>, <b>candidato</b> (máximo/mínimo), <b>bandera</b> (búsqueda).</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Filtrar / transformar</b> → lista vacía + <code>append</code>, o <b>comprensión</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Modificar elementos exige <b>índices</b>: <code>lista[i] = ...</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>zip</code> recorre listas <b>en paralelo</b>; <code>reversed</code> al revés.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Burbuja</b> (ordenar) y <b>búsqueda binaria</b> (lista ordenada).</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Puedo escribir el algoritmo del máximo sin usar <code>max()</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé filtrar con un bucle y con una comprensión?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé cuándo necesito <code>range(len(lista))</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Tengo en cuenta la lista vacía?</div><div class="checklist-item"><span class="icon">✓</span> ¿Entiendo cómo funcionan la burbuja y la búsqueda binaria?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 14 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Listas: Recorridos y Algoritmos Clásicos</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="13-listas-fundamentos-y-operaciones.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Listas: Fundamentos y Operaciones</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="15-listas-anidadas-y-matrices.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Listas Anidadas y Matrices →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>

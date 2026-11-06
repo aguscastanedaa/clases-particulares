@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación 2C 4B - 13: Listas: Fundamentos y Operaciones | Clases Particulares</title>
+  <link rel="icon" type="image/jpeg" href="../../../../logo.jpeg">
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../../assets/css/presentation.css">
+</head>
+
+<body>
+  <!-- Top Global Bar -->
+  <div class="top-bar">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="../index.html">← Índice 4to Bimestre</a>
+      <a href="../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">2do Cuatrimestre</a>
+      <a href="../../../index.html" style="font-size: 0.8rem; color: var(--text-muted);">Programación</a>
+    </div>
+    <span class="plan-tag">2do Cuatrimestre • 4to Bimestre • Unidad 13</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- COVER -->
+      <section>
+        <div style="text-align: center; max-width: 960px; margin: 24px auto 0;">
+          <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+            <span class="badge badge-emerald">2do Cuatrimestre • 4to Bimestre • Unidad 13</span>
+            <span class="badge badge-cyan">🐍 Python</span>
+          </div>
+          <h1 style="font-size: 2.55rem; margin-bottom: 12px;">Listas: Fundamentos y Operaciones</h1>
+          <p style="color: #94a3b8; font-size: 1.15rem; font-weight: 500; margin-bottom: 24px;">Guardar muchos datos bajo un mismo nombre: crear listas, acceder por índice, modificar, agregar, eliminar, buscar, ordenar, copiar y usar listas en funciones</p>
+          <div style="display: inline-flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; justify-content: center;"><span class="badge badge-cyan">Qué es una lista</span><span class="badge badge-indigo">Índices y slicing</span><span class="badge badge-emerald">Mutabilidad</span><span class="badge badge-amber">append • insert • remove • pop</span><span class="badge badge-purple">sort y reverse</span><span class="badge badge-rose">Copias y referencias</span></div>
+          <div class="box box-cyan" style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <p style="margin: 0; font-size: 0.94rem; color: #cbd5e1;">
+              💡 <b>Guía de estudio:</b> Usá las <b>flechas del teclado</b> (→ / ←) o la <b>barra espaciadora</b> para avanzar paso a paso por las 40 diapositivas de esta clase.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section><h2><span class="section-num">01</span> Hoja de Ruta: De los Vectores de C a las Listas de Python</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Lo que ya conocemos de C (2.º bimestre)</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los <b>vectores</b> guardan <b>varios valores del mismo tipo</b>: <code>int edades[5];</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Tienen <b>tamaño fijo</b> y se accede con <b>índices desde 0</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Para cambiar el tamaño había que usar <b><code>malloc</code> / <code>realloc</code></b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Recorrer, buscar y ordenar exigían <b>escribir bucles</b> a mano.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Lo que vamos a aprender</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>La <b>lista</b> de Python: qué es y cómo se crea.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Índices</b> y <b>slicing</b> (igual que en strings).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Que las listas se <b>pueden modificar</b> (mutables).</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Agregar</b>, <b>insertar</b> y <b>eliminar</b> elementos.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Buscar</b>, <b>contar</b> y <b>ordenar</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Copiar</b> listas y pasarlas a funciones.</li></ul></div></div><div class="box box-amber"><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">🎯 <b>Meta:</b> que puedas armar y modificar colecciones de datos con soltura, y que entiendas <b>qué pasa realmente</b> cuando asignás o copiás una lista.</p></div></section>
+<section><h2><span class="section-num">02</span> El Problema: Muchos Datos Relacionados</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Queremos guardar las <b>5 notas</b> de un alumno y calcular el promedio. Con variables sueltas:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">variables_sueltas.py</span><span class="code-badge">Python</span></div><div class="code-body">nota1 = <span class="c-num">8</span>
+nota2 = <span class="c-num">6</span>
+nota3 = <span class="c-num">9</span>
+nota4 = <span class="c-num">7</span>
+nota5 = <span class="c-num">10</span>
+
+<span class="c-fn">print</span>((nota1 + nota2 + nota3 + nota4 + nota5) / <span class="c-num">5</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">8.0</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Problemas</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>¿Y si fueran <b>100</b> notas?</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>¿Y si la cantidad <b>cambia</b> durante el programa?</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>No se puede <b>recorrer</b> con un bucle: cada variable tiene otro nombre.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">La solución</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Guardar <b>todos los valores bajo un único nombre</b>, cada uno en una <b>posición numerada</b>. Eso es una <b>lista</b>.</p></div></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">con_lista.py</span><span class="code-badge">Python</span></div><div class="code-body">notas = [<span class="c-num">8</span>, <span class="c-num">6</span>, <span class="c-num">9</span>, <span class="c-num">7</span>, <span class="c-num">10</span>]
+<span class="c-fn">print</span>(<span class="c-fn">sum</span>(notas) / <span class="c-fn">len</span>(notas))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">8.0</div></div></div></div></section>
+<section><h2><span class="section-num">03</span> ¿Qué Es una Lista?</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Una <b>lista</b> es una <b>colección ordenada de elementos</b> guardados bajo <b>un mismo nombre</b>. Cada elemento ocupa una <b>posición</b> (índice, desde 0) y la lista <b>puede crecer, achicarse y modificarse</b> durante el programa.</p></div><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">0</div><div class="array-cell ">16</div></div><div class="array-cell-wrapper"><div class="array-index">1</div><div class="array-cell ">18</div></div><div class="array-cell-wrapper"><div class="array-index">2</div><div class="array-cell ">20</div></div><div class="array-cell-wrapper"><div class="array-index">3</div><div class="array-cell ">15</div></div><div class="array-cell-wrapper"><div class="array-index">4</div><div class="array-cell ">17</div></div></div><p style="text-align:center; font-size:0.78rem; color: var(--text-muted); margin:0 0 6px;"><code>edades = [16, 18, 20, 15, 17]</code> → una lista de 5 elementos con índices 0 a 4</p><div class="grid-3" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Ordenada</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Los elementos <b>conservan el orden</b> en que se agregaron.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Mutable</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Se pueden <b>cambiar, agregar y quitar</b> elementos (a diferencia de los strings).</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Flexible</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Tamaño <b>dinámico</b> y <b>tipos mezclados</b> en una misma lista.</p></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Una lista es como un <b>vector</b>, pero <b>sin tamaño fijo</b> (no hay <code>malloc</code>) y <b>sin obligación de que todos los elementos sean del mismo tipo</b>.</p></div></section>
+<section><h2><span class="section-num">04</span> Crear una Lista</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);"><span style="color:var(--accent-cyan);">nombre</span> = <span style="color:var(--accent-amber);">[</span><span style="color:var(--accent-emerald);">elemento_1</span>, <span style="color:var(--accent-emerald);">elemento_2</span>, ...<span style="color:var(--accent-amber);">]</span></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">crear_listas.py</span><span class="code-badge">Python</span></div><div class="code-body">edades = [<span class="c-num">16</span>, <span class="c-num">18</span>, <span class="c-num">20</span>, <span class="c-num">15</span>, <span class="c-num">17</span>]
+nombres = [<span class="c-str">"Ana"</span>, <span class="c-str">"Luis"</span>, <span class="c-str">"Marta"</span>]
+datos = [<span class="c-str">"Juan"</span>, <span class="c-num">18</span>, <span class="c-num">1.75</span>, <span class="c-kw">True</span>]
+vacia = []
+con_range = <span class="c-fn">list</span>(<span class="c-fn">range</span>(<span class="c-num">5</span>))
+letras = <span class="c-fn">list</span>(<span class="c-str">"hola"</span>)
+
+<span class="c-fn">print</span>(edades)
+<span class="c-fn">print</span>(datos)
+<span class="c-fn">print</span>(vacia, <span class="c-fn">len</span>(vacia))
+<span class="c-fn">print</span>(con_range)
+<span class="c-fn">print</span>(letras)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[16, 18, 20, 15, 17]
+['Juan', 18, 1.75, True]
+[] 0
+[0, 1, 2, 3, 4]
+['h', 'o', 'l', 'a']</div></div></div></div><div class="step-list"><div class="step-item"><span class="step-num">1</span><div class="step-content" style="font-size:0.82rem;">Se escribe entre <b>corchetes <code>[ ]</code></b>, con los elementos <b>separados por comas</b>.</div></div><div class="step-item"><span class="step-num">2</span><div class="step-content" style="font-size:0.82rem;">Puede tener <b>cualquier tipo</b> de elementos, incluso <b>mezclados</b> (<code>datos</code>).</div></div><div class="step-item"><span class="step-num">3</span><div class="step-content" style="font-size:0.82rem;"><code>[]</code> es la <b>lista vacía</b>: se usa para <b>empezar vacío</b> y agregar después.</div></div></div></section>
+<section><h2><span class="section-num">05</span> Tipo y Longitud de una Lista</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">tipo_longitud.py</span><span class="code-badge">Python</span></div><div class="code-body">notas = [<span class="c-num">8</span>, <span class="c-num">6</span>, <span class="c-num">9</span>, <span class="c-num">7</span>]
+
+<span class="c-fn">print</span>(notas)
+<span class="c-fn">print</span>(<span class="c-fn">type</span>(notas))
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(notas))
+<span class="c-fn">print</span>(<span class="c-fn">len</span>([]))
+<span class="c-fn">print</span>(<span class="c-fn">len</span>([[<span class="c-num">1</span>, <span class="c-num">2</span>], [<span class="c-num">3</span>, <span class="c-num">4</span>], [<span class="c-num">5</span>, <span class="c-num">6</span>]]))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[8, 6, 9, 7]
+&lt;class 'list'&gt;
+4
+0
+3</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);"><code>len(lista)</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Devuelve la <b>cantidad de elementos</b>. Igual que con strings. El último índice es <b><code>len(lista) - 1</code></b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Cuidado</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Una lista dentro de otra cuenta <b>como un solo elemento</b>: la lista de listas de arriba tiene <b>3</b> elementos (3 listas), aunque en total haya 6 números.</p></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Al mostrarla</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>print(lista)</code> la muestra <b>con corchetes y comas</b>. Los textos aparecen <b>con comillas</b> para distinguirlos de los números.</p></div></section>
+<section><h2><span class="section-num">06</span> Acceder a un Elemento: lista[indice]</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">acceso_lista.py</span><span class="code-badge">Python</span></div><div class="code-body">frutas = [<span class="c-str">"manzana"</span>, <span class="c-str">"pera"</span>, <span class="c-str">"uva"</span>, <span class="c-str">"kiwi"</span>]
+
+<span class="c-fn">print</span>(frutas[<span class="c-num">0</span>])
+<span class="c-fn">print</span>(frutas[<span class="c-num">2</span>])
+<span class="c-fn">print</span>(frutas[-<span class="c-num">1</span>])
+<span class="c-fn">print</span>(frutas[-<span class="c-num">2</span>])
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(frutas) - <span class="c-num">1</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">manzana
+uva
+kiwi
+uva
+3</div></div></div></div><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">0</div><div class="array-cell ">manzana</div></div><div class="array-cell-wrapper"><div class="array-index">1</div><div class="array-cell ">pera</div></div><div class="array-cell-wrapper"><div class="array-index">2</div><div class="array-cell ">uva</div></div><div class="array-cell-wrapper"><div class="array-index">3</div><div class="array-cell ">kiwi</div></div></div><p style="text-align:center; font-size:0.78rem; color: var(--text-muted); margin:0 0 6px;">Índices positivos</p><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">-4</div><div class="array-cell ">manzana</div></div><div class="array-cell-wrapper"><div class="array-index">-3</div><div class="array-cell ">pera</div></div><div class="array-cell-wrapper"><div class="array-index">-2</div><div class="array-cell ">uva</div></div><div class="array-cell-wrapper"><div class="array-index">-1</div><div class="array-cell match">kiwi</div></div></div><p style="text-align:center; font-size:0.78rem; color: var(--text-muted); margin:0 0 6px;">Índices negativos: <code>-1</code> es el último</p><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Igual que en strings y vectores de C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Primer elemento: <code>[0]</code>. Último: <code>[-1]</code> o <code>[len(lista) - 1]</code>. La diferencia con C: los <b>índices negativos</b>.</p></div></section>
+<section><h2><span class="section-num">07</span> Error: Índice Fuera de Rango</h2><div class="code-window"><div class="code-header"><span class="code-title">indice_error.py</span><span class="code-badge">Con error</span></div><div class="code-body">colores = [<span class="c-str">"rojo"</span>, <span class="c-str">"verde"</span>, <span class="c-str">"azul"</span>]
+<span class="c-fn">print</span>(colores[<span class="c-num">3</span>])</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Traceback (most recent call last):
+  File "ejemplo.py", line 2, in &lt;module&gt;
+    print(colores[3])
+          ~~~~~~~^^^
+IndexError: list index out of range</div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">La lista tiene <b>3</b> elementos: índices <b>0, 1, 2</b> (o −1, −2, −3). El <code>3</code> <b>no existe</b>: <code>IndexError: list index out of range</code>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Lista vacía</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En una lista <b>vacía</b> <b>ningún</b> índice es válido: <code>[][0]</code> también da <code>IndexError</code>. <b>Verificá <code>len</code></b> antes de acceder si no estás seguro.</p></div></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En C, salirse del vector <b>no avisaba</b> (comportamiento indefinido). Python <b>detiene el programa con un mensaje claro</b>.</p></div></section>
+<section><h2><span class="section-num">08</span> Slicing de Listas</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Igual que en strings</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">El slicing <code>lista[inicio:fin:paso]</code> funciona <b>exactamente igual</b> que en los strings: <code>fin</code> <b>no se incluye</b> y devuelve <b>una lista nueva</b>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">slicing_listas.py</span><span class="code-badge">Python</span></div><div class="code-body">n = [<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">40</span>, <span class="c-num">50</span>, <span class="c-num">60</span>]
+
+<span class="c-fn">print</span>(n[<span class="c-num">1</span>:<span class="c-num">4</span>])
+<span class="c-fn">print</span>(n[:<span class="c-num">3</span>])
+<span class="c-fn">print</span>(n[<span class="c-num">3</span>:])
+<span class="c-fn">print</span>(n[-<span class="c-num">2</span>:])
+<span class="c-fn">print</span>(n[::<span class="c-num">2</span>])
+<span class="c-fn">print</span>(n[::-<span class="c-num">1</span>])
+<span class="c-fn">print</span>(n)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[20, 30, 40]
+[10, 20, 30]
+[40, 50, 60]
+[50, 60]
+[10, 30, 50]
+[60, 50, 40, 30, 20, 10]
+[10, 20, 30, 40, 50, 60]</div></div></div></div><table class="trace-table"><thead><tr><th>Slice</th><th>Resultado</th><th>Explicación</th></tr></thead><tbody><tr><td><code>n[1:4]</code></td><td><code>[20, 30, 40]</code></td><td>Índices 1, 2 y 3</td></tr><tr><td><code>n[:3]</code></td><td><code>[10, 20, 30]</code></td><td>Los primeros 3</td></tr><tr><td><code>n[-2:]</code></td><td><code>[50, 60]</code></td><td>Los últimos 2</td></tr><tr><td><code>n[::2]</code></td><td><code>[10, 30, 50]</code></td><td>Uno sí, uno no</td></tr><tr><td><code>n[::-1]</code></td><td><code>[60, ..., 10]</code></td><td>Invertida (<b>original sin cambios</b>)</td></tr></tbody></table></section>
+<section><h2><span class="section-num">09</span> Las Listas Son Mutables: Modificar un Elemento</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Definición</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><b>Mutable</b> significa que se puede <b>modificar sin crear una lista nueva</b>. A diferencia de los strings, se puede <b>cambiar un elemento</b> asignándole un valor a su posición: <code>lista[i] = valor</code>.</p></div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">modificar_elemento.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>]
+<span class="c-fn">print</span>(numeros)
+
+numeros[<span class="c-num">1</span>] = <span class="c-num">100</span>
+<span class="c-fn">print</span>(numeros)
+
+numeros[-<span class="c-num">1</span>] = numeros[-<span class="c-num">1</span>] + <span class="c-num">5</span>
+<span class="c-fn">print</span>(numeros)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[10, 20, 30]
+[10, 100, 30]
+[10, 100, 35]</div></div></div></div><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">0</div><div class="array-cell ">10</div></div><div class="array-cell-wrapper"><div class="array-index">1</div><div class="array-cell highlight">100</div></div><div class="array-cell-wrapper"><div class="array-index">2</div><div class="array-cell highlight">35</div></div></div><p style="text-align:center; font-size:0.78rem; color: var(--text-muted); margin:0 0 6px;">Resultado final: cambiaron los índices 1 y 2 (antes: <code>[10, 20, 30]</code>)</p><div class="box box-amber"><h4 style="color:var(--accent-amber);">Contraste con los strings</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>"hola"[0] = "H"</code> daba <code>TypeError</code>. <code>lista[0] = valor</code> <b>funciona</b>: la lista es <b>mutable</b>, el string <b>inmutable</b>.</p></div></section>
+<section><h2><span class="section-num">10</span> Un Primo Inmutable: la Tupla (Adelanto)</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Ya vimos valores entre <b>paréntesis</b> al devolver varios resultados (unidad 10). Eso es una <b>tupla</b>: parecida a una lista pero <b>inmutable</b>.</p><div class="code-window"><div class="code-header"><span class="code-title">tupla.py</span><span class="code-badge">Termina con error</span></div><div class="code-body">lista = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>]
+tupla = (<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>)
+
+lista[<span class="c-num">0</span>] = <span class="c-num">99</span>
+<span class="c-fn">print</span>(lista)
+<span class="c-fn">print</span>(tupla[<span class="c-num">0</span>], <span class="c-fn">len</span>(tupla))
+tupla[<span class="c-num">0</span>] = <span class="c-num">99</span></div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[99, 2, 3]
+1 3
+Traceback (most recent call last):
+  File "ejemplo.py", line 7, in &lt;module&gt;
+    tupla[0] = 99
+    ~~~~~^^^
+TypeError: 'tuple' object does not support item assignment</div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cuándo usar cada una</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Lista <code>[ ]</code></b>: datos que <b>cambian</b> (agregar, quitar, modificar).</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Tupla <code>( )</code></b>: datos <b>fijos</b> que <b>no deben cambiar</b> (coordenadas, fechas).</li></ul><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Se pueden <b>leer</b> igual (índices, slicing, <code>for</code>, <code>len</code>).</p></div></section>
+<section><h2><span class="section-num">11</span> Agregar al Final: append()</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);">lista.<span style="color:var(--accent-indigo);">append</span>(<span style="color:var(--accent-emerald);">elemento</span>)</div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">append.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>]
+<span class="c-fn">print</span>(numeros)
+
+numeros.append(<span class="c-num">40</span>)
+<span class="c-fn">print</span>(numeros)
+
+numeros.append(<span class="c-num">50</span>)
+numeros.append(<span class="c-num">60</span>)
+<span class="c-fn">print</span>(numeros, <span class="c-fn">len</span>(numeros))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[10, 20, 30]
+[10, 20, 30, 40]
+[10, 20, 30, 40, 50, 60] 6</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cómo funciona</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>append</code> <b>agrega UN elemento al final</b> y la lista <b>crece automáticamente</b>. <b>Modifica la lista original</b> (no devuelve una nueva).</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Patrón muy común</h4><div class="code-window"><div class="code-header"><span class="code-title">patron_append.py</span><span class="code-badge">Armar una lista</span></div><div class="code-body">resultados = []
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-num">1</span>, <span class="c-num">4</span>):
+    resultados.append(i * i)
+<span class="c-fn">print</span>(resultados)   <span class="c-cmt"># [1, 4, 9]</span></div></div></div></div></section>
+<section><h2><span class="section-num">12</span> Insertar en una Posición: insert()</h2><div style="background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:12px; margin:8px 0; text-align:center; font-size:1.25rem; font-family: var(--font-mono);">lista.<span style="color:var(--accent-indigo);">insert</span>(<span style="color:var(--accent-amber);">posicion</span>, <span style="color:var(--accent-emerald);">elemento</span>)</div><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">insert.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>]
+
+numeros.insert(<span class="c-num">1</span>, <span class="c-num">15</span>)
+<span class="c-fn">print</span>(numeros)
+
+numeros.insert(<span class="c-num">0</span>, <span class="c-num">5</span>)
+<span class="c-fn">print</span>(numeros)
+
+numeros.insert(<span class="c-num">100</span>, <span class="c-num">99</span>)
+<span class="c-fn">print</span>(numeros)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[10, 15, 20, 30]
+[5, 10, 15, 20, 30]
+[5, 10, 15, 20, 30, 99]</div></div></div></div><div class="array-container" style="margin:10px 0 4px;"><div class="array-cell-wrapper"><div class="array-index">0</div><div class="array-cell ">10</div></div><div class="array-cell-wrapper"><div class="array-index">1</div><div class="array-cell match">15</div></div><div class="array-cell-wrapper"><div class="array-index">2</div><div class="array-cell ">20</div></div><div class="array-cell-wrapper"><div class="array-index">3</div><div class="array-cell ">30</div></div></div><p style="text-align:center; font-size:0.78rem; color: var(--text-muted); margin:0 0 6px;"><code>insert(1, 15)</code>: el 15 entra en el índice 1 y <b>los siguientes se desplazan</b> a la derecha</p><div class="box box-amber"><h4 style="color:var(--accent-amber);">Detalles</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>append(x)</code> equivale a insertar <b>al final</b>. Si la posición <b>supera</b> la longitud, el elemento se agrega <b>al final</b> (no da error).</p></div></section>
+<section><h2><span class="section-num">13</span> Agregar Varios: extend() y +</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">extend_vs_append.py</span><span class="code-badge">Python</span></div><div class="code-body">a = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>]
+a.extend([<span class="c-num">4</span>, <span class="c-num">5</span>])
+<span class="c-fn">print</span>(a)
+
+b = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>]
+b.append([<span class="c-num">4</span>, <span class="c-num">5</span>])
+<span class="c-fn">print</span>(b)
+
+c = [<span class="c-num">1</span>, <span class="c-num">2</span>] + [<span class="c-num">3</span>, <span class="c-num">4</span>]
+<span class="c-fn">print</span>(c)
+
+<span class="c-fn">print</span>([<span class="c-num">0</span>] * <span class="c-num">5</span>)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[1, 2, 3, 4, 5]
+[1, 2, 3, [4, 5]]
+[1, 2, 3, 4]
+[0, 0, 0, 0, 0]</div></div></div></div><table class="trace-table"><thead><tr><th></th><th>Qué agrega</th><th>Resultado con <code>[1, 2, 3]</code></th></tr></thead><tbody><tr><td><code>append([4, 5])</code></td><td><b>Un elemento</b>: la lista <code>[4, 5]</code> completa</td><td><code>[1, 2, 3, [4, 5]]</code> (4 elementos)</td></tr><tr><td><code>extend([4, 5])</code></td><td><b>Cada elemento</b> de la otra lista</td><td><code>[1, 2, 3, 4, 5]</code> (5 elementos)</td></tr><tr><td><code>lista1 + lista2</code></td><td>Crea una <b>lista nueva</b> con ambas</td><td>Las originales <b>no cambian</b></td></tr><tr><td><code>lista * n</code></td><td>Repite la lista <code>n</code> veces</td><td><code>[0] * 5</code> → <code>[0, 0, 0, 0, 0]</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">14</span> Eliminar por Valor: remove()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">remove.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">20</span>, <span class="c-num">40</span>]
+
+numeros.remove(<span class="c-num">20</span>)
+<span class="c-fn">print</span>(numeros)
+
+numeros.remove(<span class="c-num">20</span>)
+<span class="c-fn">print</span>(numeros)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[10, 30, 20, 40]
+[10, 30, 40]</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Cómo funciona</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>remove(valor)</code> elimina <b>la primera aparición</b> de ese valor. Los elementos siguientes <b>se corren</b> una posición a la izquierda.</p></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Si el valor no está</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>[1, 2].remove(5)</code> lanza <code>ValueError</code> (el 5 <b>no está en la lista</b>) y el programa se detiene.</p></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Cómo evitarlo</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Preguntar antes: <code>if 5 in numeros: numeros.remove(5)</code>.</p></div></section>
+<section><h2><span class="section-num">15</span> Eliminar por Posición: pop() y del</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">pop_del.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">40</span>]
+
+eliminado = numeros.pop(<span class="c-num">1</span>)
+<span class="c-fn">print</span>(eliminado, numeros)
+
+ultimo = numeros.pop()
+<span class="c-fn">print</span>(ultimo, numeros)
+
+<span class="c-kw">del</span> numeros[<span class="c-num">0</span>]
+<span class="c-fn">print</span>(numeros)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">20 [10, 30, 40]
+40 [10, 30]
+[30]</div></div></div></div><table class="trace-table"><thead><tr><th>Instrucción</th><th>Qué hace</th><th>¿Devuelve algo?</th></tr></thead><tbody><tr><td><code>lista.pop(i)</code></td><td>Elimina el elemento de la <b>posición <code>i</code></b></td><td><b>Sí</b>: el valor eliminado</td></tr><tr><td><code>lista.pop()</code></td><td>Elimina el <b>último</b></td><td><b>Sí</b>: el valor eliminado</td></tr><tr><td><code>del lista[i]</code></td><td>Elimina el elemento de la posición <code>i</code></td><td>No</td></tr><tr><td><code>lista.clear()</code></td><td>Elimina <b>todos</b> los elementos</td><td>No (queda <code>[]</code>)</td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">pop vs remove</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><b><code>pop</code></b> trabaja con la <b>posición</b>; <b><code>remove</code></b> con el <b>valor</b>. <code>pop</code> es ideal cuando <b>necesitás el valor</b> que sacás.</p></div></section>
+<section><h2><span class="section-num">16</span> Resumen: Agregar y Eliminar</h2><table class="trace-table"><thead><tr><th>Tarea</th><th>Instrucción</th><th>Ejemplo (<code>n = [1, 2, 3]</code>)</th></tr></thead><tbody><tr><td>Agregar <b>al final</b></td><td><code>append(x)</code></td><td><code>n.append(4)</code> → <code>[1, 2, 3, 4]</code></td></tr><tr><td>Agregar <b>en una posición</b></td><td><code>insert(i, x)</code></td><td><code>n.insert(1, 9)</code> → <code>[1, 9, 2, 3]</code></td></tr><tr><td>Agregar <b>varios</b></td><td><code>extend(otra)</code></td><td><code>n.extend([7, 8])</code></td></tr><tr><td>Eliminar por <b>valor</b></td><td><code>remove(x)</code></td><td><code>n.remove(2)</code> → <code>[1, 3]</code></td></tr><tr><td>Eliminar por <b>posición</b> (y obtenerlo)</td><td><code>pop(i)</code> / <code>pop()</code></td><td><code>n.pop()</code> → <code>3</code></td></tr><tr><td>Eliminar por <b>posición</b></td><td><code>del n[i]</code></td><td><code>del n[0]</code> → <code>[2, 3]</code></td></tr><tr><td>Vaciar</td><td><code>clear()</code></td><td><code>n.clear()</code> → <code>[]</code></td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Importante</h4><p style="font-size:0.88rem; line-height:1.55; margin:4px 0;">Todas estas operaciones <b>modifican la lista original</b> y <b>devuelven <code>None</code></b> (salvo <code>pop</code>). <b>No hace falta reasignar.</b></p></div></section>
+<section><h2><span class="section-num">17</span> Buscar: in, index() y count()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">buscar_lista.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">10</span>, <span class="c-num">20</span>, <span class="c-num">30</span>, <span class="c-num">20</span>, <span class="c-num">40</span>]
+
+<span class="c-fn">print</span>(<span class="c-num">20</span> <span class="c-kw">in</span> numeros)
+<span class="c-fn">print</span>(<span class="c-num">99</span> <span class="c-kw">in</span> numeros)
+<span class="c-fn">print</span>(<span class="c-num">99</span> <span class="c-kw">not</span> <span class="c-kw">in</span> numeros)
+<span class="c-fn">print</span>(numeros.index(<span class="c-num">20</span>))
+<span class="c-fn">print</span>(numeros.count(<span class="c-num">20</span>))
+<span class="c-fn">print</span>(numeros.count(<span class="c-num">99</span>))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">True
+False
+True
+1
+2
+0</div></div></div></div><table class="trace-table"><thead><tr><th>Herramienta</th><th>Qué hace</th><th>Si no está</th></tr></thead><tbody><tr><td><code>x in lista</code></td><td><code>True</code> si <code>x</code> <b>está</b> en la lista</td><td><code>False</code></td></tr><tr><td><code>lista.index(x)</code></td><td>Índice de la <b>primera</b> aparición</td><td><b><code>ValueError</code></b></td></tr><tr><td><code>lista.count(x)</code></td><td>Cuántas <b>veces</b> aparece</td><td><code>0</code></td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Diferencia con strings</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>str.find()</code> devolvía <code>-1</code>; <b><code>list.index()</code> lanza error</b> si no encuentra. Usá <b><code>in</code> primero</b> para evitarlo.</p></div></section>
+<section><h2><span class="section-num">18</span> Ordenar: sort() y sorted()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ordenar.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">8</span>, <span class="c-num">3</span>, <span class="c-num">10</span>, <span class="c-num">1</span>, <span class="c-num">5</span>]
+
+numeros.sort()
+<span class="c-fn">print</span>(numeros)
+
+numeros.sort(reverse=<span class="c-kw">True</span>)
+<span class="c-fn">print</span>(numeros)
+
+original = [<span class="c-num">4</span>, <span class="c-num">2</span>, <span class="c-num">9</span>]
+nueva = <span class="c-fn">sorted</span>(original)
+<span class="c-fn">print</span>(original, nueva)
+
+palabras = [<span class="c-str">"pera"</span>, <span class="c-str">"Manzana"</span>, <span class="c-str">"kiwi"</span>]
+<span class="c-fn">print</span>(<span class="c-fn">sorted</span>(palabras))</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[1, 3, 5, 8, 10]
+[10, 8, 5, 3, 1]
+[4, 2, 9] [2, 4, 9]
+['Manzana', 'kiwi', 'pera']</div></div></div></div><table class="trace-table"><thead><tr><th></th><th><code>lista.sort()</code></th><th><code>sorted(lista)</code></th></tr></thead><tbody><tr><td>Modifica la lista original</td><td><b>Sí</b> (la ordena "en el lugar")</td><td><b>No</b></td></tr><tr><td>Devuelve</td><td><code>None</code></td><td>Una <b>lista nueva</b> ordenada</td></tr><tr><td><code>reverse=True</code></td><td>Orden <b>descendente</b></td><td>Orden <b>descendente</b></td></tr></tbody></table><div class="box box-amber"><h4 style="color:var(--accent-amber);">Texto</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Los textos se ordenan por <b>código</b> de carácter: las <b>mayúsculas van antes</b> que las minúsculas (<code>"Manzana"</code> antes que <code>"kiwi"</code>).</p></div></section>
+<section><h2><span class="section-num">19</span> Invertir una Lista: reverse() y [::-1]</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">invertir_lista.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>, <span class="c-num">4</span>]
+
+copia_invertida = numeros[::-<span class="c-num">1</span>]
+<span class="c-fn">print</span>(copia_invertida, numeros)
+
+numeros.reverse()
+<span class="c-fn">print</span>(numeros)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[4, 3, 2, 1] [1, 2, 3, 4]
+[4, 3, 2, 1]</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);"><code>lista.reverse()</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><b>Modifica</b> la lista original (la deja al revés) y devuelve <code>None</code>. Invierte el <b>orden actual</b>, no ordena.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);"><code>lista[::-1]</code></h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Crea una <b>lista nueva</b> invertida y <b>deja la original igual</b>.</p></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">No confundir</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>reverse()</code> <b>invierte el orden</b>; <code>sort(reverse=True)</code> <b>ordena de mayor a menor</b>. Son cosas distintas.</p></div></section>
+<section><h2><span class="section-num">20</span> Funciones Útiles: len, sum, min, max</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">funciones_listas.py</span><span class="code-badge">Python</span></div><div class="code-body">notas = [<span class="c-num">8</span>, <span class="c-num">6</span>, <span class="c-num">9</span>, <span class="c-num">7</span>, <span class="c-num">10</span>]
+
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(notas))
+<span class="c-fn">print</span>(<span class="c-fn">sum</span>(notas))
+<span class="c-fn">print</span>(<span class="c-fn">min</span>(notas), <span class="c-fn">max</span>(notas))
+<span class="c-fn">print</span>(<span class="c-fn">sum</span>(notas) / <span class="c-fn">len</span>(notas))
+<span class="c-fn">print</span>(<span class="c-fn">sorted</span>(notas)[<span class="c-num">0</span>], <span class="c-fn">sorted</span>(notas)[-<span class="c-num">1</span>])</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">5
+40
+6 10
+8.0
+6 10</div></div></div></div><table class="trace-table"><thead><tr><th>Función</th><th>Devuelve</th></tr></thead><tbody><tr><td><code>len(lista)</code></td><td>Cantidad de elementos</td></tr><tr><td><code>sum(lista)</code></td><td>Suma (solo con <b>números</b>)</td></tr><tr><td><code>min(lista)</code></td><td>El <b>menor</b></td></tr><tr><td><code>max(lista)</code></td><td>El <b>mayor</b></td></tr></tbody></table><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Comparación con C</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">En C, cada una de estas tareas necesitaba <b>un bucle</b> con acumulador o comparación. En Python <b>ya vienen hechas</b> (aunque conviene practicar el bucle: unidad 14).</p></div></section>
+<section><h2><span class="section-num">21</span> Recorrer una Lista</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">recorrer_lista.py</span><span class="code-badge">Python</span></div><div class="code-body">frutas = [<span class="c-str">"manzana"</span>, <span class="c-str">"pera"</span>, <span class="c-str">"uva"</span>]
+
+<span class="c-kw">for</span> fruta <span class="c-kw">in</span> frutas:
+    <span class="c-fn">print</span>(fruta)
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(<span class="c-fn">len</span>(frutas)):
+    <span class="c-fn">print</span>(i, frutas[i])
+
+<span class="c-kw">for</span> i, fruta <span class="c-kw">in</span> <span class="c-fn">enumerate</span>(frutas):
+    <span class="c-fn">print</span>(i, fruta)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">manzana
+pera
+uva
+0 manzana
+1 pera
+2 uva
+0 manzana
+1 pera
+2 uva</div></div></div></div><table class="trace-table"><thead><tr><th>Forma</th><th>Cuándo usarla</th></tr></thead><tbody><tr><td><code>for elemento in lista:</code></td><td>Solo necesitás los <b>valores</b></td></tr><tr><td><code>for i in range(len(lista)):</code></td><td>Necesitás el <b>índice</b> (para <b>modificar</b> o comparar posiciones)</td></tr><tr><td><code>for i, x in enumerate(lista):</code></td><td>Necesitás <b>índice y valor</b> a la vez</td></tr></tbody></table><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Se profundiza en la unidad 14</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Allí armamos <b>algoritmos</b>: sumar, contar, buscar el mayor, filtrar y más.</p></div></section>
+<section><h2><span class="section-num">22</span> Modificar Una Lista vs. Crear Una Nueva</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Una diferencia fundamental: algunas operaciones <b>cambian la lista original</b> y otras <b>crean una nueva</b>:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">modificar_vs_nueva.py</span><span class="code-badge">Python</span></div><div class="code-body">a = [<span class="c-num">3</span>, <span class="c-num">1</span>, <span class="c-num">2</span>]
+
+a.append(<span class="c-num">4</span>)
+<span class="c-fn">print</span>(a)
+
+b = a + [<span class="c-num">5</span>]
+<span class="c-fn">print</span>(a, b)
+
+c = <span class="c-fn">sorted</span>(a)
+<span class="c-fn">print</span>(a, c)
+
+a.sort()
+<span class="c-fn">print</span>(a)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[3, 1, 2, 4]
+[3, 1, 2, 4] [3, 1, 2, 4, 5]
+[3, 1, 2, 4] [1, 2, 3, 4]
+[1, 2, 3, 4]</div></div></div></div><table class="trace-table"><thead><tr><th>Modifican la original</th><th>Crean una lista nueva</th></tr></thead><tbody><tr><td><code>append</code>, <code>insert</code>, <code>extend</code></td><td><code>+</code> (concatenar)</td></tr><tr><td><code>remove</code>, <code>pop</code>, <code>del</code>, <code>clear</code></td><td><code>sorted(lista)</code></td></tr><tr><td><code>sort()</code>, <code>reverse()</code></td><td><code>lista[::-1]</code> y todo slicing</td></tr><tr><td><code>lista[i] = valor</code></td><td><code>list(lista)</code>, <code>lista.copy()</code></td></tr></tbody></table><div class="box box-rose"><h4 style="color:var(--accent-rose);">Error típico</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>lista = lista.sort()</code> deja <code>lista</code> en <b><code>None</code></b>: <code>sort()</code> <b>devuelve <code>None</code></b>. Y <code>lista = lista.append(x)</code> hace lo mismo.</p></div></section>
+<section><h2><span class="section-num">23</span> ¿Qué Pasa al Asignar una Lista a Otra Variable?</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">referencia.py</span><span class="code-badge">Python</span></div><div class="code-body">a = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>]
+b = a
+
+b.append(<span class="c-num">4</span>)
+<span class="c-fn">print</span>(<span class="c-str">"a:"</span>, a)
+<span class="c-fn">print</span>(<span class="c-str">"b:"</span>, b)
+<span class="c-fn">print</span>(a <span class="c-kw">is</span> b)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">a: [1, 2, 3, 4]
+b: [1, 2, 3, 4]
+True</div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">¡Sorpresa!</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;"><code>b = a</code> <b>no copia la lista</b>: hace que <b><code>b</code> y <code>a</code> sean dos nombres de la MISMA lista</b>. Si modificás una, <b>se modifica "la otra"</b> porque es <b>la misma</b>.</p></div><div class="grid-2" style="margin-top:8px;"><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Con números era distinto</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Con <code>int</code>: <code>b = a</code> copiaba el <b>valor</b> y luego eran independientes (unidad 02). Los <code>int</code> son <b>inmutables</b>; las listas son <b>mutables</b>.</p></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Analogía</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Es como darle a un amigo <b>el link</b> de un documento compartido (no una fotocopia): lo que uno edite, <b>lo ve el otro</b>.</p></div></div></section>
+<section><h2><span class="section-num">24</span> Cómo Copiar una Lista de Verdad</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">copiar_lista.py</span><span class="code-badge">Python</span></div><div class="code-body">original = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>]
+
+copia1 = original.copy()
+copia2 = original[:]
+copia3 = <span class="c-fn">list</span>(original)
+
+copia1.append(<span class="c-num">99</span>)
+<span class="c-fn">print</span>(<span class="c-str">"original:"</span>, original)
+<span class="c-fn">print</span>(<span class="c-str">"copia1:"</span>, copia1)
+<span class="c-fn">print</span>(copia1 <span class="c-kw">is</span> original)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">original: [1, 2, 3]
+copia1: [1, 2, 3, 99]
+False</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Tres formas de copiar</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>lista.copy()</code></b></li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>lista[:]</code></b> (slicing completo)</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>list(lista)</code></b></li></ul><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Las tres crean <b>una lista nueva e independiente</b>.</p></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Para qué sirve</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Cuando querés <b>modificar sin perder el original</b>: por ejemplo, <b>ordenar una copia</b> y conservar el orden inicial.</p></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Dato</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><code>is</code> pregunta si <b>dos nombres son el mismo objeto</b>; <code>==</code> pregunta si <b>tienen el mismo contenido</b>.</p></div></section>
+<section><h2><span class="section-num">25</span> Listas y Funciones: La Función Puede Modificar la Original</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">lista_en_funcion.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">agregar_ceros</span>(lista):
+    lista.append(<span class="c-num">0</span>)
+    lista.append(<span class="c-num">0</span>)
+
+<span class="c-kw">def</span> <span class="c-fn">duplicar</span>(numero):
+    numero = numero * <span class="c-num">2</span>
+
+mi_lista = [<span class="c-num">1</span>, <span class="c-num">2</span>]
+agregar_ceros(mi_lista)
+<span class="c-fn">print</span>(mi_lista)
+
+n = <span class="c-num">5</span>
+duplicar(n)
+<span class="c-fn">print</span>(n)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[1, 2, 0, 0]
+5</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Con una lista</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">El parámetro <code>lista</code> y <code>mi_lista</code> son <b>la misma lista</b>. <code>append</code> la modifica <b>y el cambio se ve afuera</b>. (No hace falta <code>return</code>.)</p></div><div class="box box-cyan"><h4 style="color:var(--accent-cyan);">Con un número</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;"><code>numero</code> recibe una <b>copia del valor</b> y es <b>local</b>: <code>n</code> <b>sigue valiendo 5</b>. (Es lo que vimos en la unidad 10.)</p></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Regla práctica</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Una función que <b>recibe una lista</b> puede <b>modificarla</b>. Si <b>no querés</b> que lo haga, trabajá sobre <b>una copia</b> (<code>lista.copy()</code>).</p></div></section>
+<section><h2><span class="section-num">26</span> Reasignar vs. Modificar dentro de una Función</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">reasignar_vs_modificar.py</span><span class="code-badge">Python</span></div><div class="code-body"><span class="c-kw">def</span> <span class="c-fn">con_append</span>(lista):
+    lista.append(<span class="c-num">99</span>)
+
+<span class="c-kw">def</span> <span class="c-fn">con_reasignacion</span>(lista):
+    lista = lista + [<span class="c-num">99</span>]
+
+a = [<span class="c-num">1</span>, <span class="c-num">2</span>]
+con_append(a)
+<span class="c-fn">print</span>(a)
+
+b = [<span class="c-num">1</span>, <span class="c-num">2</span>]
+con_reasignacion(b)
+<span class="c-fn">print</span>(b)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[1, 2, 99]
+[1, 2]</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">La diferencia</h4><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>append</code></b> modifica <b>la lista compartida</b> → el cambio <b>se ve afuera</b>.</li></ul><ul style="font-size:0.84rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b><code>lista = lista + [99]</code></b> crea <b>una lista nueva</b> y la asigna a la <b>variable local</b> <code>lista</code>; la lista original <b>no cambia</b>.</li></ul></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Por eso</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><b>Modificar</b> y <b>reasignar</b> no son lo mismo. Para que el resultado de una reasignación llegue afuera hay que <b>devolverlo</b> con <code>return</code>.</p></div></section>
+<section><h2><span class="section-num">27</span> Ejemplo: Cargar una Lista con input()</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">cargar_lista.py</span><span class="code-badge">Python</span></div><div class="code-body">cantidad = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">"¿Cuántos números? "</span>))
+numeros = []
+
+<span class="c-kw">for</span> i <span class="c-kw">in</span> <span class="c-fn">range</span>(cantidad):
+    n = <span class="c-fn">int</span>(<span class="c-fn">input</span>(<span class="c-str">f"Número {i + 1}: "</span>))
+    numeros.append(n)
+
+<span class="c-fn">print</span>(<span class="c-str">"Lista cargada:"</span>, numeros)
+<span class="c-fn">print</span>(<span class="c-str">"Promedio:"</span>, <span class="c-fn">sum</span>(numeros) / cantidad)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">¿Cuántos números? <span class="terminal-user-input">4</span>
+Número 1: <span class="terminal-user-input">12</span>
+Número 2: <span class="terminal-user-input">7</span>
+Número 3: <span class="terminal-user-input">30</span>
+Número 4: <span class="terminal-user-input">5</span>
+Lista cargada: [12, 7, 30, 5]
+Promedio: 13.5</div></div></div></div><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Patrón fundamental</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;"><b>Empezar con <code>[]</code></b> + <b>bucle</b> + <b><code>append</code></b>. En C había que <b>reservar</b> un vector del tamaño máximo; acá <b>crece a medida que hace falta</b>.</p></div></section>
+<section><h2><span class="section-num">28</span> Ejemplo: Lista de Compras Interactiva</h2><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">lista_compras.py</span><span class="code-badge">Python</span></div><div class="code-body">compras = []
+opcion = <span class="c-str">""</span>
+
+<span class="c-kw">while</span> opcion != <span class="c-str">"4"</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"1) Agregar  2) Quitar  3) Ver  4) Salir"</span>)
+    opcion = <span class="c-fn">input</span>(<span class="c-str">"Opción: "</span>)
+    <span class="c-kw">if</span> opcion == <span class="c-str">"1"</span>:
+        compras.append(<span class="c-fn">input</span>(<span class="c-str">"Producto: "</span>))
+    <span class="c-kw">elif</span> opcion == <span class="c-str">"2"</span>:
+        producto = <span class="c-fn">input</span>(<span class="c-str">"¿Cuál quitar? "</span>)
+        <span class="c-kw">if</span> producto <span class="c-kw">in</span> compras:
+            compras.remove(producto)
+        <span class="c-kw">else</span>:
+            <span class="c-fn">print</span>(<span class="c-str">"No estaba en la lista"</span>)
+    <span class="c-kw">elif</span> opcion == <span class="c-str">"3"</span>:
+        <span class="c-fn">print</span>(compras)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">1) Agregar  2) Quitar  3) Ver  4) Salir
+Opción: <span class="terminal-user-input">1</span>
+Producto: <span class="terminal-user-input">leche</span>
+1) Agregar  2) Quitar  3) Ver  4) Salir
+Opción: <span class="terminal-user-input">1</span>
+Producto: <span class="terminal-user-input">pan</span>
+1) Agregar  2) Quitar  3) Ver  4) Salir
+Opción: <span class="terminal-user-input">2</span>
+¿Cuál quitar? <span class="terminal-user-input">queso</span>
+No estaba en la lista
+1) Agregar  2) Quitar  3) Ver  4) Salir
+Opción: <span class="terminal-user-input">3</span>
+['leche', 'pan']
+1) Agregar  2) Quitar  3) Ver  4) Salir
+Opción: <span class="terminal-user-input">4</span></div></div></div></div><div class="box box-amber"><h4 style="color:var(--accent-amber);">Integra</h4><p style="font-size:0.82rem; line-height:1.55; margin:4px 0;">Un <code>while</code> con menú, <code>append</code>, <code>remove</code>, <code>in</code> y listas. Fijate el <b><code>if producto in compras</code></b> antes de <code>remove</code> para <b>evitar <code>ValueError</code></b>.</p></div></section>
+<section><h2><span class="section-num">29</span> Error Frecuente #1: Asignar el Resultado de un Método de Lista</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ <code>sort()</code> devuelve <code>None</code></div><div class="code-window"><div class="code-header"><span class="code-title">sort_none.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">numeros = [<span class="c-num">3</span>, <span class="c-num">1</span>, <span class="c-num">2</span>]
+numeros = numeros.sort()
+<span class="c-fn">print</span>(numeros)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">None</div></div></div><div class="wrong-card"><div class="wrong-title">❌ <code>append()</code> devuelve <code>None</code></div><div class="code-window"><div class="code-header"><span class="code-title">append_none.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">lista = [<span class="c-num">1</span>, <span class="c-num">2</span>]
+lista = lista.append(<span class="c-num">3</span>)
+<span class="c-fn">print</span>(lista)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">None</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="correct-card"><div class="correct-title">✅ Correcto</div><div class="code-window"><div class="code-header"><span class="code-title">ok1.py</span><span class="code-badge">OK</span></div><div class="code-body">numeros.sort()                  <span class="c-cmt"># modifica</span>
+numeros = <span class="c-fn">sorted</span>(numeros)       <span class="c-cmt"># o nueva lista</span></div></div></div><div class="correct-card"><div class="correct-title">✅ Correcto</div><div class="code-window"><div class="code-header"><span class="code-title">ok2.py</span><span class="code-badge">OK</span></div><div class="code-body">lista.append(<span class="c-num">3</span>)       <span class="c-cmt"># basta con llamarlo</span></div></div></div></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Regla</h4><p style="font-size:0.86rem; line-height:1.55; margin:4px 0;">Los métodos que <b>modifican la lista</b> (<code>append</code>, <code>sort</code>, <code>remove</code>, <code>insert</code>, <code>reverse</code>...) <b>devuelven <code>None</code></b>. <b>Se llaman solos, sin asignar.</b></p></div></section>
+<section><h2><span class="section-num">30</span> Error Frecuente #2: Modificar una Lista Mientras la Recorrés</h2><p style="color: var(--text-muted); font-size: 0.92rem; margin: 4px 0 8px;">Queremos <b>eliminar todos los elementos</b> de <code>[2, 4, 6, 8]</code> recorriéndola:</p><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">modificar_recorriendo.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">pares = [<span class="c-num">2</span>, <span class="c-num">4</span>, <span class="c-num">6</span>, <span class="c-num">8</span>]
+
+<span class="c-kw">for</span> n <span class="c-kw">in</span> pares:
+    pares.remove(n)
+
+<span class="c-fn">print</span>(pares)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[4, 8]</div></div></div></div><table class="trace-table"><thead><tr><th>Vuelta</th><th>Posición que mira el <code>for</code></th><th><code>n</code></th><th>Lista después de <code>remove</code></th></tr></thead><tbody><tr><td>1</td><td>0</td><td><code>2</code></td><td><code>[4, 6, 8]</code></td></tr><tr><td>2</td><td>1</td><td><code>6</code></td><td><code>[4, 8]</code></td></tr><tr><td>3</td><td>2</td><td>(no hay posición 2)</td><td>El bucle <b>termina</b></td></tr></tbody></table><div class="box box-rose"><h4 style="color:var(--accent-rose);">Qué pasó</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Al <b>eliminar</b> un elemento, los que siguen <b>se corren una posición</b>, pero el <code>for</code> <b>sigue avanzando</b> de índice en índice: <b>se saltea</b> el elemento que ocupó el lugar. Por eso quedaron <code>4</code> y <code>8</code>.</p></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Solución</h4><p style="font-size:0.84rem; line-height:1.55; margin:4px 0;">Recorrer <b>una copia</b> (<code>for n in pares.copy():</code>) o <b>construir una lista nueva</b> con los elementos que <b>sí</b> querés conservar.</p></div></section>
+<section><h2><span class="section-num">31</span> Error Frecuente #3: Confusiones con Copias y Orden de Operaciones</h2><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Creer que <code>b = a</code> copia</div><div class="code-window"><div class="code-header"><span class="code-title">falsa_copia.py</span><span class="code-badge">Error lógico</span></div><div class="code-body">a = [<span class="c-num">1</span>, <span class="c-num">2</span>]
+b = a
+b[<span class="c-num">0</span>] = <span class="c-num">99</span>
+<span class="c-fn">print</span>(a)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[99, 2]</div></div></div><div class="correct-card"><div class="correct-title">✅ Copiar con <code>.copy()</code></div><div class="code-window"><div class="code-header"><span class="code-title">copia_real.py</span><span class="code-badge">OK</span></div><div class="code-body">a = [<span class="c-num">1</span>, <span class="c-num">2</span>]
+b = a.copy()
+b[<span class="c-num">0</span>] = <span class="c-num">99</span>
+<span class="c-fn">print</span>(a, b)</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">[1, 2] [99, 2]</div></div></div></div><div class="grid-2" style="margin-top:8px;"><div class="wrong-card"><div class="wrong-title">❌ Quitar un valor inexistente</div><div class="code-window"><div class="code-header"><span class="code-title">remove_error.py</span><span class="code-badge">Con error</span></div><div class="code-body">lista = [<span class="c-num">1</span>, <span class="c-num">2</span>]
+lista.remove(<span class="c-num">7</span>)      <span class="c-cmt"># ValueError</span></div></div></div><div class="wrong-card"><div class="wrong-title">❌ Índice igual a <code>len()</code></div><div class="code-window"><div class="code-header"><span class="code-title">index_error.py</span><span class="code-badge">Con error</span></div><div class="code-body">lista = [<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>]
+lista[<span class="c-fn">len</span>(lista)]    <span class="c-cmt"># IndexError</span></div></div></div></div></section>
+<section><h2><span class="section-num">32</span> Comparación Final: Vectores de C y Listas de Python</h2><table class="trace-table"><thead><tr><th>Aspecto</th><th>Vector en C</th><th>Lista en Python</th></tr></thead><tbody><tr><td>Declarar</td><td><code>int v[5];</code></td><td><code>v = [0, 0, 0, 0, 0]</code></td></tr><tr><td>Tamaño</td><td><b>Fijo</b> (o <code>malloc</code>/<code>realloc</code>)</td><td><b>Dinámico</b> (<code>append</code>, <code>remove</code>...)</td></tr><tr><td>Tipos</td><td>Todos <b>iguales</b></td><td>Pueden ser <b>distintos</b></td></tr><tr><td>Índices</td><td><code>0</code> a <code>n-1</code></td><td><code>0</code> a <code>n-1</code> y <code>-1</code> a <code>-n</code></td></tr><tr><td>Fuera de rango</td><td>Comportamiento indefinido</td><td><code>IndexError</code></td></tr><tr><td>Cantidad de elementos</td><td>Hay que <b>recordarla</b></td><td><code>len(v)</code></td></tr><tr><td>Agregar</td><td>Reservar más memoria</td><td><code>v.append(x)</code></td></tr><tr><td>Ordenar</td><td>Escribir el algoritmo</td><td><code>v.sort()</code></td></tr><tr><td>Pasar a una función</td><td>Se pasa <b>la dirección</b></td><td>Se pasa <b>la misma lista</b> (modificable)</td></tr><tr><td>Copiar</td><td><code>for</code> o <code>memcpy</code></td><td><code>v.copy()</code> o <code>v[:]</code></td></tr></tbody></table></section>
+<section><h2><span class="section-num">33</span> Buenas Prácticas con Listas</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Hacé</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b>nombres en plural</b>: <code>notas</code>, <code>nombres</code>, <code>edades</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Empezá con <code>[]</code> y <b><code>append</code></b> en un bucle.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Usá <b><code>in</code></b> para comprobar antes de <code>remove</code> o <code>index</code>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Trabajá sobre <b>una copia</b> si no querés perder el original.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Preferí <code>for elemento in lista</code> a los índices cuando puedas.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Recordá que <code>sort()</code> y <code>append()</code> <b>no devuelven nada</b>.</li></ul></div><div class="box box-rose"><h4 style="color:var(--accent-rose);">Evitá</h4><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Modificar</b> una lista <b>mientras la recorrés</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Creer que <code>b = a</code> <b>copia</b> la lista.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Guardar <b>tipos muy mezclados</b> sin necesidad.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Acceder <b>sin verificar</b> que el índice exista.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Escribir bucles propios para lo que ya hacen <code>sum</code>, <code>min</code>, <code>max</code>, <code>sorted</code>.</li></ul></div></div></section>
+<section><h2><span class="section-num">34</span> Ejercicio 1: ¿Cómo Queda la Lista?</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio1.py</span><span class="code-badge">Seguí paso a paso</span></div><div class="code-body">l = [<span class="c-num">5</span>, <span class="c-num">2</span>, <span class="c-num">8</span>]
+
+l.append(<span class="c-num">1</span>)
+l.insert(<span class="c-num">1</span>, <span class="c-num">9</span>)
+l.remove(<span class="c-num">2</span>)
+x = l.pop()
+l.sort()
+l.extend([<span class="c-num">7</span>, <span class="c-num">3</span>])
+<span class="c-fn">print</span>(l, x)</div></div><details class="code-solution"><summary>👁️ Ver tabla y respuesta</summary><div class="solution-content"><table class="trace-table"><thead><tr><th>Instrucción</th><th><code>l</code> después</th></tr></thead><tbody><tr><td><code>l = [5, 2, 8]</code></td><td><code>[5, 2, 8]</code></td></tr><tr><td><code>l.append(1)</code></td><td><code>[5, 2, 8, 1]</code></td></tr><tr><td><code>l.insert(1, 9)</code></td><td><code>[5, 9, 2, 8, 1]</code></td></tr><tr><td><code>l.remove(2)</code></td><td><code>[5, 9, 8, 1]</code></td></tr><tr><td><code>x = l.pop()</code></td><td><code>[5, 9, 8]</code> y <code>x = 1</code></td></tr><tr><td><code>l.sort()</code></td><td><code>[5, 8, 9]</code></td></tr><tr><td><code>l.extend([7, 3])</code></td><td><code>[5, 8, 9, 7, 3]</code></td></tr></tbody></table><p style="font-size:0.9rem; line-height:1.55; margin:4px 0;"><b>Salida:</b> <code>[5, 8, 9, 7, 3] 1</code></p></div></details></section>
+<section><h2><span class="section-num">35</span> Ejercicio 2: Escribí el Código</h2><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Dada <code>numeros = [4, 15, 8, 23, 16, 42]</code>:</p><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mostrá el <b>primero</b>, el <b>último</b> y los <b>tres del medio</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Agregá el <code>50</code> al final y el <code>0</code> al principio.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Eliminá el <code>23</code> <b>por valor</b> y el último elemento <b>por posición</b>.</li></ul><ul style="font-size:0.92rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Mostrá una <b>copia ordenada de mayor a menor</b> <b>sin alterar</b> la lista original.</li></ul></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="grid-2" style="margin-top:6px;"><div><div class="code-window"><div class="code-header"><span class="code-title">ejercicio2.py</span><span class="code-badge">Python</span></div><div class="code-body">numeros = [<span class="c-num">4</span>, <span class="c-num">15</span>, <span class="c-num">8</span>, <span class="c-num">23</span>, <span class="c-num">16</span>, <span class="c-num">42</span>]
+
+<span class="c-fn">print</span>(numeros[<span class="c-num">0</span>], numeros[-<span class="c-num">1</span>], numeros[<span class="c-num">1</span>:<span class="c-num">4</span>])
+
+numeros.append(<span class="c-num">50</span>)
+numeros.insert(<span class="c-num">0</span>, <span class="c-num">0</span>)
+numeros.remove(<span class="c-num">23</span>)
+numeros.pop()
+<span class="c-fn">print</span>(numeros)
+
+orden = <span class="c-fn">sorted</span>(numeros, reverse=<span class="c-kw">True</span>)
+<span class="c-fn">print</span>(orden)
+<span class="c-fn">print</span>(numeros)</div></div></div><div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">4 42 [15, 8, 23]
+[0, 4, 15, 8, 16, 42]
+[42, 16, 15, 8, 4, 0]
+[0, 4, 15, 8, 16, 42]</div></div></div></div></div></details></section>
+<section><h2><span class="section-num">36</span> Ejercicio 3: Encontrá los Errores</h2><div class="code-window"><div class="code-header"><span class="code-title">ejercicio3.py</span><span class="code-badge">Con errores</span></div><div class="code-body">notas = [<span class="c-num">7</span>, <span class="c-num">9</span>, <span class="c-num">6</span>]
+<span class="c-fn">print</span>(notas[<span class="c-num">3</span>])
+
+notas = notas.sort()
+copia = notas
+copia.append(<span class="c-num">10</span>)
+
+notas.remove(<span class="c-num">5</span>)
+nombres = [<span class="c-str">"Ana"</span>, <span class="c-str">"Luis"</span>]
+nombres.add(<span class="c-str">"Marta"</span>)
+<span class="c-fn">print</span>(<span class="c-fn">len</span>(notas) + nombres)</div></div><details class="code-solution"><summary>👁️ Ver errores y solución</summary><div class="solution-content"><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>notas[3]</code>: la lista tiene índices 0 a 2 → <code>IndexError</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>notas = notas.sort()</code> deja <code>notas</code> en <code>None</code>.</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>copia = notas</code> <b>no copia</b>: ambas son la misma lista (usar <code>.copy()</code>).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>notas.remove(5)</code>: el 5 <b>no está</b> → <code>ValueError</code> (verificar con <code>in</code>).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>nombres.add(...)</code>: las listas usan <b><code>append</code></b> (<code>add</code> es de otro tipo).</li></ul><ul style="font-size:0.9rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>len(notas) + nombres</code>: suma un <b>número</b> con una <b>lista</b> → <code>TypeError</code>.</li></ul></div></details></section>
+<section><h2><span class="section-num">37</span> Ejercicio 4 (Reto): Gestor de Notas</h2><div class="box box-purple"><h4 style="color:var(--accent-purple);">Consigna</h4><p style="font-size:0.92rem; line-height:1.55; margin:4px 0;">Armá un programa que <b>pida notas</b> (números) hasta que el usuario escriba <b>-1</b>. Al final, mostrá: la <b>lista ordenada</b>, la <b>cantidad</b> de notas, el <b>promedio</b>, la <b>mayor</b> y la <b>menor</b>, <b>sin usar <code>max</code>/<code>min</code>/<code>sum</code></b> (con un bucle sobre la lista). Si no cargó ninguna, mostrá <code>Sin datos</code>.</p></div><details class="code-solution"><summary>👁️ Ver solución</summary><div class="solution-content"><div class="code-window"><div class="code-header"><span class="code-title">ejercicio4.py</span><span class="code-badge">Python</span></div><div class="code-body">notas = []
+n = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Nota (-1 para terminar): "</span>))
+<span class="c-kw">while</span> n != -<span class="c-num">1</span>:
+    notas.append(n)
+    n = <span class="c-fn">float</span>(<span class="c-fn">input</span>(<span class="c-str">"Nota (-1 para terminar): "</span>))
+
+<span class="c-kw">if</span> <span class="c-fn">len</span>(notas) == <span class="c-num">0</span>:
+    <span class="c-fn">print</span>(<span class="c-str">"Sin datos"</span>)
+<span class="c-kw">else</span>:
+    notas.sort()
+    suma = <span class="c-num">0</span>
+    <span class="c-kw">for</span> x <span class="c-kw">in</span> notas:
+        suma += x
+    <span class="c-fn">print</span>(<span class="c-str">"Ordenadas:"</span>, notas)
+    <span class="c-fn">print</span>(<span class="c-str">f"Cantidad: {len(notas)} | Promedio: {suma / len(notas):.2f}"</span>)
+    <span class="c-fn">print</span>(<span class="c-str">"Menor:"</span>, notas[<span class="c-num">0</span>], <span class="c-str">"| Mayor:"</span>, notas[-<span class="c-num">1</span>])</div></div><div class="terminal-window"><div class="terminal-header"><span>Salida en consola</span><span>● ● ●</span></div><div class="terminal-body">Nota (-1 para terminar): <span class="terminal-user-input">7</span>
+Nota (-1 para terminar): <span class="terminal-user-input">9.5</span>
+Nota (-1 para terminar): <span class="terminal-user-input">6</span>
+Nota (-1 para terminar): <span class="terminal-user-input">-1</span>
+Ordenadas: [6.0, 7.0, 9.5]
+Cantidad: 3 | Promedio: 7.50
+Menor: 6.0 | Mayor: 9.5</div></div></div></details></section>
+<section><h2><span class="section-num">38</span> Resumen de la Unidad 13</h2><div class="grid-2" style="margin-top:8px;"><div class="box box-indigo"><h4 style="color:var(--accent-indigo);">Ideas clave</h4><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Una <b>lista</b> guarda varios elementos: <code>[ ]</code>, <b>ordenada</b>, <b>mutable</b>, de tamaño <b>dinámico</b>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><b>Índices</b> <code>0..n-1</code> y <code>-1..-n</code>; <b>slicing</b> igual que en strings.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Se modifica con <code>lista[i] = x</code>, <code>append</code>, <code>insert</code>, <code>extend</code>, <code>remove</code>, <code>pop</code>, <code>del</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>in</code>, <code>index</code>, <code>count</code> buscan; <code>sort</code>/<code>sorted</code>, <code>reverse</code> ordenan.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li><code>b = a</code> <b>no copia</b>: usá <code>.copy()</code>, <code>[:]</code> o <code>list()</code>.</li></ul><ul style="font-size:0.82rem; line-height:1.55; margin:4px 0; padding-left:22px;"><li>Los métodos que modifican devuelven <b><code>None</code></b>.</li></ul></div><div class="box box-emerald"><h4 style="color:var(--accent-emerald);">Checklist de autoevaluación</h4><div class="checklist-item"><span class="icon">✓</span> ¿Puedo seguir cómo cambia una lista tras varias operaciones?</div><div class="checklist-item"><span class="icon">✓</span> ¿Distingo <code>remove</code> de <code>pop</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé la diferencia entre <code>sort()</code> y <code>sorted()</code>?</div><div class="checklist-item"><span class="icon">✓</span> ¿Entiendo por qué <code>b = a</code> no copia?</div><div class="checklist-item"><span class="icon">✓</span> ¿Sé qué pasa al pasar una lista a una función?</div></div></div></section>
+      <section>
+        <div style="text-align: center; max-width: 900px; margin: 40px auto 0;">
+          <span class="badge badge-emerald">Unidad 13 completada</span>
+          <h2 style="font-size: 2.2rem; margin: 16px 0; justify-content:center; border:none;">¡Excelente trabajo!</h2>
+          <p style="color: #94a3b8; font-size: 1.08rem; line-height: 1.6; margin-bottom: 26px;">
+            Terminaste <b>Listas: Fundamentos y Operaciones</b>. Antes de pasar de unidad, escribí en tu computadora (no copies: tipeá) los ejemplos y resolvé los ejercicios propuestos.
+          </p>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+            <a href="12-strings-metodos-y-procesamiento.html" class="badge badge-indigo" style="font-size:0.9rem; text-decoration:none; padding:8px 20px;">← Anterior: Strings: Métodos y Procesamiento</a>
+            <a href="../index.html" class="badge badge-cyan" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">← Índice 4to Bimestre</a>
+            <a href="14-listas-recorridos-y-algoritmos.html" class="badge badge-emerald" style="font-size:0.9rem; text-decoration:none; padding:8px 20px; margin-left:8px;">Siguiente: Listas: Recorridos y Algoritmos →</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js & KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: false,
+      width: 1200,
+      height: 750,
+      margin: 0.05,
+      plugins: [RevealMath.KaTeX],
+      katex: {
+        version: 'latest',
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+</body>
+
+</html>
